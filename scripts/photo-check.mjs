@@ -10,7 +10,7 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 const results = {};
 
-async function audit(url, name) {
+async function audit(url) {
   await page.goto(`${BASE}${url}`, { waitUntil: "networkidle0" });
   await new Promise((r) => setTimeout(r, 800));
   return page.evaluate(() => {
@@ -29,15 +29,14 @@ async function audit(url, name) {
 
 // Desktop
 await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
-results.homeDesktop = await audit("/", "home");
-results.fleetDesktop = await audit("/fleet", "fleet");
+results.homeDesktop = await audit("/");
+results.fleetDesktop = await audit("/fleet");
 for (const slug of ["bees", "victory", "athena", "edpower"]) {
   results[`${slug}Desktop`] = await audit(`/fleet/${slug}`, slug);
 }
-results.superchargeDesktop = await audit("/supercharge", "supercharge");
+results.superchargeDesktop = await audit("/supercharge");
 results.bookResults = await audit(
-  "/book?pickup=canggu&return=canggu&startDate=2026-07-28&startTime=09%3A00&endDate=2026-07-31&endTime=09%3A00",
-  "book"
+  "/book?pickup=canggu&return=canggu&startDate=2026-07-28&startTime=09%3A00&endDate=2026-07-31&endTime=09%3A00"
 );
 
 // Screenshots desktop
@@ -54,8 +53,8 @@ for (const [name, url] of [
 
 // Mobile
 await page.setViewport({ width: 375, height: 812, deviceScaleFactor: 1 });
-results.homeMobile = await audit("/", "home-m");
-results.athenaMobile = await audit("/fleet/athena", "athena-m");
+results.homeMobile = await audit("/");
+results.athenaMobile = await audit("/fleet/athena");
 for (const [name, url] of [
   ["home-mobile", "/"],
   ["fleet-mobile", "/fleet"],
