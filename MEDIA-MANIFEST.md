@@ -40,14 +40,18 @@ Video takes precedence over the photo when both are available.
 
 For each of `bees`, `victory`, `athena`, `edpower`:
 
-| File | Dimensions | Ratio | Notes |
+| File | Dimensions | Ratio | Status |
 |---|---|---|---|
-| `public/media/fleet/<slug>/main.jpg` | 1600×1200 | 4:3 | Three-quarter front view, clean background |
-| `public/media/fleet/<slug>/side.jpg` | 1600×1200 | 4:3 | Full side profile |
-| `public/media/fleet/<slug>/detail.jpg` | 1600×1200 | 4:3 | Battery / dash / seat detail |
+| `public/media/fleet/<slug>/main.jpg` | 1920×1280 | 3:2 | ✅ **Delivered** — official Wedison studio photos (2026-07-26) |
+| `public/media/fleet/<slug>/side.jpg` | 1600×1200 | 4:3 | Awaiting — full side profile |
+| `public/media/fleet/<slug>/detail.jpg` | 1600×1200 | 4:3 | Awaiting — battery / dash / seat detail |
 
 Used on: homepage fleet cards, /fleet, vehicle detail galleries,
-booking search results.
+booking search results. The Victory photo serves both Victory
+variants; the Athena photo serves both Athena variants. Product
+photos render with `object-contain` — never cropped or stretched.
+Source masters live outside the repo (Downloads/Data Aset motor);
+web versions are downscale-only.
 
 ### 3. Customers riding in Bali
 
@@ -73,6 +77,7 @@ Delivery at a villa; helmet fitting / briefing moment.
 
 | File | Dimensions | Ratio | Notes |
 |---|---|---|---|
+| `public/media/supercharge/supercharge-unit.png` | 1200×1600 | 3:4 | ✅ **Delivered** — official Wedison Supercharge unit (transparent PNG) |
 | `public/media/supercharge/hero.jpg` | 2560×1440 | 16:9 | Motorcycle at a charging point |
 | `public/media/supercharge/supercharge.mp4` | 1920×1080 | 16:9 | H.264 MP4, 15–30 s, **≤ 15 MB** — full session arrival→ride-out |
 | `public/media/supercharge/supercharge-poster.jpg` | 1920×1080 | 16:9 | Video poster |

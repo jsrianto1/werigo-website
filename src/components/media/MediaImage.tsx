@@ -7,11 +7,16 @@ import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
  * Renders an optimized next/image once the asset is marked available
  * in src/data/media.ts; until then shows the labelled placeholder so
  * the layout never breaks and no image element 404s.
+ *
+ * fit="contain" is for studio product photography: the full vehicle
+ * is always visible (never cropped or stretched) on a clean white
+ * surface consistent with the design system.
  */
 export function MediaImage({
   id,
   fallbackLabel,
   ratio = "4/3",
+  fit = "cover",
   className = "",
   sizes = "(max-width: 768px) 100vw, 50vw",
   priority = false,
@@ -21,6 +26,8 @@ export function MediaImage({
   /** Placeholder label when the asset isn't in the manifest yet */
   fallbackLabel?: string;
   ratio?: "4/3" | "16/9" | "1/1" | "3/4" | "3/2";
+  /** contain-bare: uncropped with no background frame (transparent PNGs) */
+  fit?: "cover" | "contain" | "contain-bare";
   className?: string;
   sizes?: string;
   priority?: boolean;
@@ -47,7 +54,9 @@ export function MediaImage({
 
   return (
     <div
-      className={`relative ${ratios[ratio]} w-full overflow-hidden rounded-[14px] ${className}`}
+      className={`relative ${ratios[ratio]} w-full overflow-hidden ${
+        fit === "contain-bare" ? "" : "rounded-[14px]"
+      } ${fit === "contain" ? "bg-white" : ""} ${className}`}
     >
       <Image
         src={asset.src}
@@ -55,7 +64,7 @@ export function MediaImage({
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover"
+        className={fit === "cover" ? "object-cover" : "object-contain"}
       />
     </div>
   );

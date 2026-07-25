@@ -19,6 +19,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
           id={`fleet-${entry.modelSlug}-main`}
           fallbackLabel={`${entry.displayName} product photo`}
           ratio="4/3"
+          fit="contain"
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
         />
       </Link>

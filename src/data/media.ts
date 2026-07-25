@@ -58,16 +58,16 @@ export const media = {
   },
 
   // ---- Fleet (per model: main, side, detail) ----
-  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/main.jpg", alt: "Wedison Bees electric scooter available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/main.jpg", alt: "Wedison Bees electric scooter available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
   "fleet-bees-side": { kind: "image", src: "/media/fleet/bees/side.jpg", alt: "Wedison Bees — side view", width: 1600, height: 1200, available: false },
   "fleet-bees-detail": { kind: "image", src: "/media/fleet/bees/detail.jpg", alt: "Wedison Bees — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/main.jpg", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/main.jpg", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
   "fleet-victory-side": { kind: "image", src: "/media/fleet/victory/side.jpg", alt: "Wedison Victory — side view", width: 1600, height: 1200, available: false },
   "fleet-victory-detail": { kind: "image", src: "/media/fleet/victory/detail.jpg", alt: "Wedison Victory — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/main.jpg", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/main.jpg", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
   "fleet-athena-side": { kind: "image", src: "/media/fleet/athena/side.jpg", alt: "Wedison Athena — side view", width: 1600, height: 1200, available: false },
   "fleet-athena-detail": { kind: "image", src: "/media/fleet/athena/detail.jpg", alt: "Wedison Athena — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/main.jpg", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/main.jpg", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
   "fleet-edpower-side": { kind: "image", src: "/media/fleet/edpower/side.jpg", alt: "Wedison EdPower — side view", width: 1600, height: 1200, available: false },
   "fleet-edpower-detail": { kind: "image", src: "/media/fleet/edpower/detail.jpg", alt: "Wedison EdPower — detail shot", width: 1600, height: 1200, available: false },
 
@@ -81,6 +81,7 @@ export const media = {
   "delivery-02": { kind: "image", src: "/media/delivery/handover-02.jpg", alt: "Helmet fitting and riding briefing at a Werigo handover", width: 1920, height: 1280, available: false },
 
   // ---- Supercharge ----
+  "supercharge-unit": { kind: "image", src: "/media/supercharge/supercharge-unit.png", alt: "Official Wedison Supercharge fast-charging unit", width: 1200, height: 1600, available: true },
   "supercharge-hero": { kind: "image", src: "/media/supercharge/hero.jpg", alt: "Wedison electric motorcycle at a Wedison Supercharge fast-charging point", width: 2560, height: 1440, available: false },
   "supercharge-video": { kind: "video", src: "/media/supercharge/supercharge.mp4", poster: "/media/supercharge/supercharge-poster.jpg", label: "A Wedison Supercharge session from arrival to ride-out", width: 1920, height: 1080, available: false },
   "supercharge-process-01": { kind: "image", src: "/media/supercharge/process-01.jpg", alt: "Rider arriving at a Wedison Supercharge location", width: 1600, height: 1200, available: false },

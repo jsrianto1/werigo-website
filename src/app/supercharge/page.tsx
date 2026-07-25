@@ -88,11 +88,17 @@ export default function SuperchargePage() {
                 </a>
               </div>
             </div>
-            <div className="rise-in rise-in-delay-2">
+            <div className="rise-in rise-in-delay-2 mx-auto w-full max-w-sm lg:max-w-md">
               {findMedia("supercharge-video")?.available ? (
                 <MediaVideo id="supercharge-video" autoPlay />
               ) : (
-                <MediaImage id="supercharge-hero" ratio="16/9" priority />
+                <MediaImage
+                  id="supercharge-unit"
+                  ratio="3/4"
+                  fit="contain-bare"
+                  sizes="(max-width: 1024px) 384px, 448px"
+                  priority
+                />
               )}
             </div>
           </div>

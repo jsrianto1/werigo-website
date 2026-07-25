@@ -383,7 +383,7 @@ export default function HomePage() {
       <Section labelledBy="supercharge-heading">
         <div className="relative overflow-hidden rounded-[14px] bg-deep px-6 py-12 sm:px-10 md:py-16">
           <RouteLine className="absolute inset-x-0 bottom-4 opacity-30" />
-          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_auto]">
             <div>
               <p className="eyebrow mb-3 !text-accent">
                 <Zap className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
@@ -407,12 +407,20 @@ export default function HomePage() {
               <p className="mt-3 max-w-xl text-xs text-ink-inverse/50">
                 Applies to compatible Wedison electric motorcycle models.
               </p>
+              <div className="mt-7">
+                <ButtonLink href="/supercharge" variant="accent" size="lg">
+                  Explore Supercharge
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </ButtonLink>
+              </div>
             </div>
-            <div className="lg:justify-self-end">
-              <ButtonLink href="/supercharge" variant="accent" size="lg">
-                Explore Supercharge
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </ButtonLink>
+            <div className="mx-auto w-56 sm:w-64 lg:mx-0">
+              <MediaImage
+                id="supercharge-unit"
+                ratio="3/4"
+                fit="contain-bare"
+                sizes="256px"
+              />
             </div>
           </div>
         </div>

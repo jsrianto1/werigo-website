@@ -26,6 +26,7 @@ import {
 } from "@/data/vehicles";
 import { vehicleSchema, jsonLd } from "@/lib/schema";
 import { buildModelInquiryWhatsAppUrl } from "@/lib/whatsapp";
+import { findMedia } from "@/data/media";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -146,29 +147,38 @@ export default async function VehicleDetailPage({ params }: Props) {
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
-          {/* Gallery — driven by src/data/media.ts */}
+          {/* Gallery — driven by src/data/media.ts. Additional angles
+              appear automatically once marked available in the manifest. */}
           <div className="space-y-4">
             <MediaImage
               id={`fleet-${slug}-main`}
               fallbackLabel={`${entry.displayName} — main product photo`}
               ratio="4/3"
+              fit="contain"
               sizes="(max-width: 1024px) 100vw, 55vw"
               priority
             />
-            <div className="grid grid-cols-2 gap-4">
-              <MediaImage
-                id={`fleet-${slug}-side`}
-                fallbackLabel={`${entry.displayName} — side view`}
-                ratio="4/3"
-                sizes="(max-width: 1024px) 50vw, 27vw"
-              />
-              <MediaImage
-                id={`fleet-${slug}-detail`}
-                fallbackLabel={`${entry.displayName} — detail shot`}
-                ratio="4/3"
-                sizes="(max-width: 1024px) 50vw, 27vw"
-              />
-            </div>
+            {findMedia(`fleet-${slug}-side`)?.available ||
+            findMedia(`fleet-${slug}-detail`)?.available ? (
+              <div className="grid grid-cols-2 gap-4">
+                {findMedia(`fleet-${slug}-side`)?.available ? (
+                  <MediaImage
+                    id={`fleet-${slug}-side`}
+                    ratio="4/3"
+                    fit="contain"
+                    sizes="(max-width: 1024px) 50vw, 27vw"
+                  />
+                ) : null}
+                {findMedia(`fleet-${slug}-detail`)?.available ? (
+                  <MediaImage
+                    id={`fleet-${slug}-detail`}
+                    ratio="4/3"
+                    fit="contain"
+                    sizes="(max-width: 1024px) 50vw, 27vw"
+                  />
+                ) : null}
+              </div>
+            ) : null}
           </div>
 
           {/* Summary + booking */}

@@ -149,6 +149,7 @@ export function BookSearchResults() {
                   id={`fleet-${model.modelSlug}-main`}
                   fallbackLabel={`${model.displayName} photo`}
                   ratio="4/3"
+                  fit="contain"
                   sizes="(max-width: 768px) 100vw, 260px"
                 />
                 <div>
