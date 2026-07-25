@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Battery, Gauge, Route } from "lucide-react";
 import type { Vehicle } from "@/data/vehicles";
 import { formatIDR } from "@/lib/config";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { MediaImage } from "@/components/media/MediaImage";
 
 export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   return (
@@ -12,7 +12,12 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         aria-label={`${vehicle.name} — view details`}
         className="block p-3 pb-0"
       >
-        <PlaceholderImage label={`${vehicle.name} product photo`} ratio="4/3" />
+        <MediaImage
+          id={`fleet-${vehicle.slug}-main`}
+          fallbackLabel={`${vehicle.name} product photo`}
+          ratio="4/3"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+        />
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-baseline justify-between gap-2">
@@ -30,7 +35,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             </span>
           ) : (
             <span className="rounded-full bg-sunken px-2.5 py-0.5 text-xs font-medium text-ink-faint">
-              Coming soon
+              Unavailable
             </span>
           )}
         </div>

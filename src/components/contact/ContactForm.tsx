@@ -141,7 +141,8 @@ export function ContactForm() {
       </Button>
       <p className="mt-3 text-xs leading-relaxed text-ink-faint">
         The form opens WhatsApp with your message pre-filled — you stay in
-        control of what&apos;s sent. Direct email delivery arrives with our launch.
+        control of what&apos;s sent. Prefer email? Write to us directly at the
+        address above.
       </p>
     </form>
   );

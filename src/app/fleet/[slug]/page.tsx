@@ -11,7 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { Section } from "@/components/ui/Section";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { MediaImage } from "@/components/media/MediaImage";
 import { ButtonLink } from "@/components/ui/Button";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { vehicles, getVehicle } from "@/data/vehicles";
@@ -83,15 +83,28 @@ export default async function VehicleDetailPage({ params }: Props) {
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
-          {/* Gallery */}
+          {/* Gallery — driven by src/data/media.ts */}
           <div className="space-y-4">
-            <PlaceholderImage
-              label={`${vehicle.name} — main product photo`}
+            <MediaImage
+              id={`fleet-${vehicle.slug}-main`}
+              fallbackLabel={`${vehicle.name} — main product photo`}
               ratio="4/3"
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              priority
             />
             <div className="grid grid-cols-2 gap-4">
-              <PlaceholderImage label={`${vehicle.name} — side view`} ratio="4/3" />
-              <PlaceholderImage label={`${vehicle.name} — detail shot`} ratio="4/3" />
+              <MediaImage
+                id={`fleet-${vehicle.slug}-side`}
+                fallbackLabel={`${vehicle.name} — side view`}
+                ratio="4/3"
+                sizes="(max-width: 1024px) 50vw, 27vw"
+              />
+              <MediaImage
+                id={`fleet-${vehicle.slug}-detail`}
+                fallbackLabel={`${vehicle.name} — detail shot`}
+                ratio="4/3"
+                sizes="(max-width: 1024px) 50vw, 27vw"
+              />
             </div>
           </div>
 

@@ -40,7 +40,8 @@ export function ConfirmationView() {
         <h1 className="font-display text-3xl text-ink">Booking not found</h1>
         <p className="mt-3 text-ink-soft">
           We couldn&apos;t find a booking with this reference on this device.
-          Bookings are stored in your browser during our launch phase.
+          Booking requests are stored in the browser they were made in — if
+          you booked on another device, check WhatsApp for your confirmation.
         </p>
         <Link
           href="/book"

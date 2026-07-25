@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { ArrowRight, Battery, Gauge, Route, SearchX, Users } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { BookingStepper } from "@/components/booking/BookingStepper";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { MediaImage } from "@/components/media/MediaImage";
 import { getAvailableVehicles, vehicles } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { formatIDR } from "@/lib/config";
@@ -126,7 +126,12 @@ export function BookSearchResults() {
                   highlighted ? "border-primary shadow-[0_0_0_1px_var(--brand-primary)]" : "border-line"
                 }`}
               >
-                <PlaceholderImage label={`${vehicle.name} photo`} ratio="4/3" />
+                <MediaImage
+                  id={`fleet-${vehicle.slug}-main`}
+                  fallbackLabel={`${vehicle.name} photo`}
+                  ratio="4/3"
+                  sizes="(max-width: 768px) 100vw, 260px"
+                />
                 <div>
                   {highlighted ? (
                     <p className="eyebrow mb-1">Your pick</p>

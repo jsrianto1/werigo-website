@@ -51,7 +51,7 @@ export function PlaceholderImage({
           {label}
         </span>
         <span className="text-[10px] text-ink-faint/70">
-          Official photo coming soon
+          Official photography in production
         </span>
       </div>
     </div>

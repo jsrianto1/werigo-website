@@ -70,7 +70,8 @@ export default function ContactPage() {
             <span>
               <span className="block font-semibold text-ink">Base</span>
               <span className="mt-0.5 block text-sm text-ink-soft">
-                Canggu, Bali — exact address published at launch
+                Canggu, Bali — the exact address is shared with your booking
+                confirmation
               </span>
             </span>
           </div>

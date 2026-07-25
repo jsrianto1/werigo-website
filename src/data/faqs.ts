@@ -1,7 +1,8 @@
 /**
  * Help Center content — original Werigo answers.
- * All operational specifics marked [TBC] are placeholders to be
- * confirmed before launch.
+ * Answers directing customers to WhatsApp are interim wording for
+ * policies still being formalised in writing — replace them with the
+ * final policy text once legal review completes.
  */
 
 export interface FaqItem {
@@ -75,7 +76,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Do I need to leave a deposit?",
         answer:
-          "Deposit policy is being finalised and will be published here before launch. [TBC]",
+          "Deposit requirements depend on the model and rental length — our team confirms the exact amount, if any, on WhatsApp before you commit. The full written policy is being added to this page.",
       },
       {
         question: "Can someone else ride the motorcycle I rented?",
@@ -148,7 +149,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I swap batteries instead of waiting for a charge?",
         answer:
-          "Most fleet models have swappable batteries. Battery-swap service availability is being finalised and will be announced here. [TBC]",
+          "Most fleet models have swappable batteries. Ask our team on WhatsApp whether battery-swap service is available for your model and area — we'll tell you honestly what's possible for your dates.",
       },
     ],
   },
@@ -180,12 +181,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I pay for my rental?",
         answer:
-          "Accepted payment methods are being finalised and will be listed here before launch — online payment options for international cards are planned. [TBC]",
+          "Our team confirms current payment options with you on WhatsApp when your booking is confirmed. Online card payment for international visitors is being added — until then, nothing is charged before you approve the final quote.",
       },
       {
         question: "When am I charged?",
         answer:
-          "Payment timing (on booking vs. on delivery) will be confirmed together with the payment methods. Your booking summary always shows the full estimated total before you confirm. [TBC]",
+          "Payment timing is agreed with you on WhatsApp as part of your confirmation — your booking summary always shows the full estimated total first, and nothing is charged until you approve the final quote.",
       },
       {
         question: "Are there any hidden costs?",
@@ -201,7 +202,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I cancel my booking?",
         answer:
-          "Yes. The full cancellation policy, including any free-cancellation window, is being finalised and will be published here before launch. [TBC]",
+          "Yes. Message us on WhatsApp with your booking reference and we'll handle it — cancellation terms for your booking are confirmed with your quote before anything is charged. The full written policy is being added to this page.",
       },
       {
         question: "What if my flight is delayed?",
@@ -222,7 +223,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What am I liable for if the motorcycle is damaged?",
         answer:
-          "Liability terms and the optional damage protection plan are being finalised and will be published in full before launch. You will never be asked to accept terms that weren't shown at booking. [TBC]",
+          "Liability terms for your rental are confirmed in writing with your booking quote, and the optional damage protection plan is explained before you choose it. You will never be held to terms that weren't shown to you at booking.",
       },
       {
         question: "What about punctures and minor mechanical issues?",

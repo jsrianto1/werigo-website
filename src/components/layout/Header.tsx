@@ -11,6 +11,7 @@ import { site } from "@/lib/config";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/fleet", label: "Our Fleet" },
+  { href: "/supercharge", label: "Supercharge" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/delivery-areas", label: "Delivery Areas" },
   { href: "/about", label: "About Werigo" },

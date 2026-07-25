@@ -46,6 +46,7 @@ const companyLinks = [
   { href: "/about", label: "About Werigo" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/fleet", label: "Our Fleet" },
+  { href: "/supercharge", label: "Supercharge" },
   { href: "/help-center", label: "Help Center" },
   { href: "/contact", label: "Contact" },
 ];

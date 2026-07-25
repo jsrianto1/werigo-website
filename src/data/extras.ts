@@ -11,7 +11,7 @@ export interface RentalExtra {
   perDay: boolean;
   /** How many can be added (e.g. extra helmets) */
   maxQuantity: number;
-  /** Placeholder items are shown with a "coming soon" state */
+  /** Placeholder items are shown without a price until terms are published */
   placeholder?: boolean;
 }
 
@@ -36,7 +36,7 @@ export const rentalExtras: RentalExtra[] = [
     id: "protection",
     name: "Damage protection",
     description:
-      "Optional damage protection plan. Full terms and pricing will be published before launch.",
+      "Optional damage protection plan. Ask our team on WhatsApp for current terms and pricing — the full plan details are being added to this page.",
     price: 0,
     perDay: true,
     maxQuantity: 1,

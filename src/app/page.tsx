@@ -15,8 +15,12 @@ import {
   Wallet,
   ArrowRight,
   Star,
+  Zap,
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
+import { MediaImage } from "@/components/media/MediaImage";
+import { MediaVideo } from "@/components/media/MediaVideo";
+import { findMedia } from "@/data/media";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
@@ -156,6 +160,19 @@ export default function HomePage() {
         </Section>
         <RouteLine className="-mt-4" />
       </div>
+
+      {/* ================= HERO MEDIA BAND =================
+          Renders only once real hero photography/video is published
+          in src/data/media.ts — layout is unchanged until then. */}
+      {findMedia("hero-video")?.available || findMedia("hero-photo")?.available ? (
+        <Section className="!pb-0 !pt-10">
+          {findMedia("hero-video")?.available ? (
+            <MediaVideo id="hero-video" autoPlay />
+          ) : (
+            <MediaImage id="hero-photo" ratio="16/9" sizes="100vw" priority />
+          )}
+        </Section>
+      ) : null}
 
       {/* ================= TRUST STRIP ================= */}
       <Section labelledBy="trust-heading" className="!py-0">
@@ -360,6 +377,44 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* ================= SUPERCHARGE ================= */}
+      <Section labelledBy="supercharge-heading">
+        <div className="relative overflow-hidden rounded-[14px] bg-deep px-6 py-12 sm:px-10 md:py-16">
+          <RouteLine className="absolute inset-x-0 bottom-4 opacity-30" />
+          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+            <div>
+              <p className="eyebrow mb-3 !text-accent">
+                <Zap className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
+                Werigo Supercharge
+              </p>
+              <h2
+                id="supercharge-heading"
+                className="font-display text-3xl leading-tight text-ink-inverse md:text-4xl"
+              >
+                Charge Fast. Ride Farther.
+              </h2>
+              <p className="mt-3 font-display text-xl text-accent-soft">
+                Charge 15 Minutes. Ride 100+ KM.
+              </p>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-inverse/80">
+                For the biggest riding days, Supercharge gets compatible Werigo
+                models back to full riding range in roughly the time it takes
+                to order a coffee — handled by our team while you take a break.
+              </p>
+              <p className="mt-3 max-w-xl text-xs text-ink-inverse/50">
+                Applies to compatible Werigo electric motorcycle models.
+              </p>
+            </div>
+            <div className="lg:justify-self-end">
+              <ButtonLink href="/supercharge" variant="accent" size="lg">
+                Explore Supercharge
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </ButtonLink>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* ================= SUPPORT ================= */}
       <Section tone="deep" labelledBy="support-heading">
         <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
@@ -402,26 +457,49 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ================= REVIEWS (prepared for genuine data) ================= */}
-      <Section labelledBy="reviews-heading">
+      {/* ================= THE WERIGO STANDARD (service assurance) =================
+          Replace or extend with verified rider reviews once collected —
+          never invented or borrowed testimonials. */}
+      <Section labelledBy="standard-heading">
         <SectionHeading
-          eyebrow="Rider reviews"
-          title="What riders say"
-          id="reviews-heading"
+          eyebrow="The Werigo standard"
+          title="What every rider can hold us to"
+          lede="We'd rather make promises we control than borrow praise we haven't earned. These four are checked on every single rental."
+          id="standard-heading"
         />
-        {/* Reviews intentionally empty until genuine reviews exist.
-            Wire this block to a verified review source before launch. */}
-        <div className="rounded-[14px] border border-dashed border-line-strong bg-card p-10 text-center">
-          <Star className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />
-          <h3 className="mt-3 font-display text-xl text-ink">
-            Reviews arrive with our first riders
-          </h3>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
-            Werigo is launching soon in Bali. Genuine, verified rider reviews
-            will appear here — we don&apos;t publish placeholders or borrowed
-            testimonials.
-          </p>
-        </div>
+        <ul className="grid gap-6 sm:grid-cols-2">
+          {[
+            {
+              title: "Full charge at handover",
+              text: "Your motorcycle is delivered with a full battery and a condition walk-around you sign off together with us — no surprises mid-ride or at return.",
+            },
+            {
+              title: "The price you saw is the price",
+              text: "Rental, extras and delivery are itemised before you confirm. Nothing is added after checkout, and nothing is charged before you approve the quote.",
+            },
+            {
+              title: "Honest range figures",
+              text: "Every range number on this site is an estimate for two riders in real Bali traffic — never a brochure figure measured on a test bench.",
+            },
+            {
+              title: "A person answers",
+              text: "Your booking thread on WhatsApp is staffed by the same local team that delivers your ride — during riding hours, questions get answered by people, not bots.",
+            },
+          ].map((item) => (
+            <li
+              key={item.title}
+              className="rounded-[14px] border border-line bg-card p-6"
+            >
+              <Star className="h-5 w-5 text-accent" aria-hidden="true" />
+              <h3 className="mt-3 font-display text-xl text-ink">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{item.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-sm text-ink-faint">
+          Verified rider reviews will be published here as they come in — never
+          invented, never borrowed.
+        </p>
       </Section>
 
       {/* ================= FAQ ================= */}

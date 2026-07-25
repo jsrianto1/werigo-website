@@ -310,7 +310,7 @@ export function CheckoutFlow() {
                         {extra.name}
                         {extra.placeholder ? (
                           <span className="ml-2 rounded-full bg-sunken px-2 py-0.5 text-xs font-medium text-ink-faint">
-                            Details coming soon
+                            Terms on request
                           </span>
                         ) : null}
                       </h2>
@@ -371,8 +371,8 @@ export function CheckoutFlow() {
                   />
                 </div>
                 <p className="mt-1.5 text-xs text-ink-faint">
-                  Promotions launch with the site — codes entered now are saved
-                  with your booking.
+                  Have a code from our team or a partner? It&apos;s saved with
+                  your booking and applied to your final quote.
                 </p>
               </div>
 
@@ -687,13 +687,13 @@ export function CheckoutFlow() {
                   onClick={() => confirmBooking("payment")}
                 >
                   <CreditCard className="h-5 w-5" aria-hidden="true" />
-                  Continue to payment (soon)
+                  Save booking request
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                Online payment is coming soon — for now, every booking is
-                confirmed personally over WhatsApp with no obligation until you
-                approve the final quote.
+                Every booking is confirmed personally over WhatsApp, with no
+                obligation until you approve the final quote. Online card
+                payment is being added as an additional option.
               </p>
 
               <div className="mt-6">

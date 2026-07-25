@@ -49,7 +49,9 @@ locally or set in the hosting panel. Never commit real values.
 
 ## Status
 
-Launch-prep prototype: bookings persist in the browser and are confirmed
-manually over WhatsApp. Payment gateway, database, email and admin panel
-are structured to be connected later. Placeholder brand colors, photos
-and `[TBC]` policy answers are clearly marked throughout.
+Live site, first iteration: bookings persist in the browser and are
+confirmed personally over WhatsApp. Payment gateway, database, email and
+admin panel are structured to be connected later. Placeholder brand
+colors and photo slots are centrally managed — see `DESIGN-SYSTEM.md`
+and `MEDIA-MANIFEST.md`. Supercharge stations and model compatibility
+are published only from verified data in `src/data/supercharge.ts`.

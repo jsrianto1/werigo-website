@@ -3,7 +3,7 @@ import { Leaf, MapPin, ShieldCheck, Zap } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
 import { ButtonLink } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { MediaImage } from "@/components/media/MediaImage";
 
 export const metadata: Metadata = {
   title: "About Werigo — Electric Mobility for Bali",
@@ -49,8 +49,9 @@ export default function AboutPage() {
             <p className="max-w-xl leading-relaxed text-ink-soft">
               We&apos;re building a rental fleet that&apos;s electric from day one:
               premium machines, honest specs, delivered to your door and backed
-              by a local team on WhatsApp. Werigo is preparing to launch in
-              Bali — this site is where the journey starts.
+              by a local team on WhatsApp. Werigo is now live in Bali — book
+              your electric ride and explore the island with quiet, powerful
+              mobility.
             </p>
             <div className="mt-8">
               <ButtonLink href="/fleet" variant="primary" size="lg">
@@ -58,9 +59,11 @@ export default function AboutPage() {
               </ButtonLink>
             </div>
           </div>
-          <PlaceholderImage
-            label="Werigo team & fleet photo"
+          <MediaImage
+            id="about-team"
+            fallbackLabel="Werigo team & fleet photo"
             ratio="4/3"
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
       </Section>
@@ -104,7 +107,7 @@ export default function AboutPage() {
             </p>
             <p>
               Our answer is: anywhere, quietly. The company story — the
-              founders, the first bikes, the launch date — will be told here as
+              founders, the first bikes, the milestones — will be told here as
               it actually happens. We&apos;d rather leave this space honest
               than fill it with an invented history.
             </p>
