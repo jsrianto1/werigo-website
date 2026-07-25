@@ -14,8 +14,13 @@ That's it — the component swaps the placeholder for an optimized
 
 ## Ground rules
 
-- Only genuine Werigo photography/video — no Bikago assets, no random
-  copyrighted images, no misleading stock.
+- Only genuine Werigo/Wedison photography/video — no Bikago assets, no
+  random copyrighted images, no misleading stock.
+- **Motorcycle images must show the actual matching Wedison model** —
+  never substitute or generated motorcycle designs.
+- Products are always named "Wedison <Model>" in alt text (e.g.
+  "Wedison Athena electric motorcycle available for rent through
+  Werigo in Bali"), never "Werigo <Model>".
 - JPG for photos (quality ~80); Next.js serves WebP/AVIF automatically.
 - Keep individual photos under ~600 KB where possible.
 
@@ -25,7 +30,7 @@ That's it — the component swaps the placeholder for an optimized
 
 | File | Dimensions | Ratio | Notes |
 |---|---|---|---|
-| `public/media/hero/home-hero.jpg` | 2560×1440 | 16:9 | Rider + Werigo on a Bali coastal road, light/airy |
+| `public/media/hero/home-hero.jpg` | 2560×1440 | 16:9 | Rider on a Wedison motorcycle, Bali coastal road, light/airy |
 | `public/media/hero/home-hero.mp4` | 1920×1080 | 16:9 | H.264 MP4, 10–20 s loop, no audio needed, **≤ 12 MB** |
 | `public/media/hero/home-hero-poster.jpg` | 1920×1080 | 16:9 | First-frame poster for the video |
 

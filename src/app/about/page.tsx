@@ -8,7 +8,7 @@ import { MediaImage } from "@/components/media/MediaImage";
 export const metadata: Metadata = {
   title: "About Werigo — Electric Mobility for Bali",
   description:
-    "Werigo is a Bali-based electric motorcycle rental company built on a simple idea: exploring the island shouldn't cost the island. Meet the brand and its mission.",
+    "Werigo is Wedison's electric motorcycle rental and mobility service in Bali, built on a simple idea: exploring the island shouldn't cost the island. Meet the brand and its mission.",
   alternates: { canonical: "/about" },
 };
 
@@ -42,16 +42,16 @@ export default function AboutPage() {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
-              eyebrow="About Werigo"
+              eyebrow="About Werigo · Powered by Wedison"
               title="Exploring the island shouldn't cost the island"
               lede="Werigo exists because the way most people see Bali — from the seat of a petrol scooter — is also the thing slowly wearing it down. We think there's a better ride."
             />
             <p className="max-w-xl leading-relaxed text-ink-soft">
-              We&apos;re building a rental fleet that&apos;s electric from day one:
-              premium machines, honest specs, delivered to your door and backed
-              by a local team on WhatsApp. Werigo is now live in Bali — book
-              your electric ride and explore the island with quiet, powerful
-              mobility.
+              Werigo is Wedison&apos;s electric motorcycle rental and mobility
+              service in Bali — official Wedison electric motorcycles with
+              honest specs, delivered to your door and backed by a local team
+              on WhatsApp. Werigo is now live in Bali — book your electric
+              ride and explore the island with quiet, powerful mobility.
             </p>
             <div className="mt-8">
               <ButtonLink href="/fleet" variant="primary" size="lg">

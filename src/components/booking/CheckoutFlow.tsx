@@ -9,22 +9,16 @@ import {
   Minus,
   Plus,
   MessageCircle,
-  CreditCard,
+  Send,
   Tag,
 } from "lucide-react";
 import { BookingStepper } from "@/components/booking/BookingStepper";
-import { PriceSummary } from "@/components/booking/PriceSummary";
+import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
-import { getVehicle } from "@/data/vehicles";
+import { getEntry, getVariants } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { rentalExtras } from "@/data/extras";
-import { formatIDR } from "@/lib/config";
-import {
-  priceBreakdown,
-  isValidPeriod,
-  type RentalPeriod,
-  type SelectedExtra,
-} from "@/lib/pricing";
+import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
 import {
   emptyCustomer,
   generateReference,
@@ -49,7 +43,8 @@ export function CheckoutFlow() {
   const router = useRouter();
   const params = useSearchParams();
 
-  const vehicleSlug = params.get("vehicle") ?? "";
+  /** Entry id from src/data/vehicles.ts, e.g. "victory-extended" */
+  const entryId = params.get("vehicle") ?? "";
   const pickup = params.get("pickup") ?? "";
   const ret = params.get("return") ?? pickup;
   const period: RentalPeriod = useMemo(
@@ -62,7 +57,7 @@ export function CheckoutFlow() {
     [params]
   );
 
-  const vehicle = getVehicle(vehicleSlug);
+  const entry = getEntry(entryId);
   const area = getArea(pickup);
   const returnArea = getArea(ret);
 
@@ -75,14 +70,14 @@ export function CheckoutFlow() {
   const [submitting, setSubmitting] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
-  // Restore any saved draft for this vehicle/search (one-shot,
+  // Restore any saved draft for this entry (one-shot,
   // localStorage is an external system — sync setState is intentional)
   const restoredRef = useRef(false);
   useEffect(() => {
     if (restoredRef.current) return;
     restoredRef.current = true;
     const draft = loadDraft();
-    if (draft && draft.vehicleSlug === vehicleSlug) {
+    if (draft && draft.vehicleSlug === entryId) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuantity(draft.quantity);
       setExtraQty(
@@ -91,11 +86,11 @@ export function CheckoutFlow() {
       setPromoCode(draft.promoCode);
       setCustomer(draft.customer);
     }
-  }, [vehicleSlug]);
+  }, [entryId]);
 
   // Persist draft as user progresses
   useEffect(() => {
-    if (!vehicleSlug) return;
+    if (!entryId) return;
     saveDraft({
       search: {
         pickupSlug: pickup,
@@ -103,7 +98,7 @@ export function CheckoutFlow() {
         differentReturn: ret !== pickup,
         ...period,
       },
-      vehicleSlug,
+      vehicleSlug: entryId,
       quantity,
       extras: Object.entries(extraQty)
         .filter(([, q]) => q > 0)
@@ -111,38 +106,19 @@ export function CheckoutFlow() {
       promoCode,
       customer,
     });
-  }, [vehicleSlug, pickup, ret, period, quantity, extraQty, promoCode, customer]);
+  }, [entryId, pickup, ret, period, quantity, extraQty, promoCode, customer]);
 
   // Focus heading on phase change for keyboard/screen-reader users
   useEffect(() => {
     headingRef.current?.focus();
   }, [phase]);
 
-  const selectedExtras: SelectedExtra[] = useMemo(
-    () =>
-      rentalExtras
-        .filter((e) => (extraQty[e.id] ?? 0) > 0)
-        .map((e) => ({ extra: e, quantity: extraQty[e.id] })),
-    [extraQty]
-  );
+  const valid = entry && pickup && isValidPeriod(period);
+  const days = valid ? rentalDays(period) : 0;
+  const variants = entry ? getVariants(entry.modelSlug) : [];
+  const hasVariants = variants.length > 1;
 
-  const valid = vehicle && pickup && isValidPeriod(period);
-  const breakdown = useMemo(
-    () =>
-      valid
-        ? priceBreakdown({
-            vehicle: vehicle!,
-            period,
-            quantity,
-            extras: selectedExtras,
-            pickupSlug: pickup,
-            returnSlug: ret,
-          })
-        : null,
-    [valid, vehicle, period, quantity, selectedExtras, pickup, ret]
-  );
-
-  if (!valid || !breakdown) {
+  if (!valid) {
     return (
       <div className="mx-auto max-w-xl text-center">
         <h1 className="font-display text-3xl text-ink">
@@ -160,6 +136,28 @@ export function CheckoutFlow() {
         </Link>
       </div>
     );
+  }
+
+  const searchQs = new URLSearchParams({
+    pickup,
+    return: ret,
+    startDate: period.startDate,
+    startTime: period.startTime,
+    endDate: period.endDate,
+    endTime: period.endTime,
+  }).toString();
+
+  function switchVariant(newId: string) {
+    const qs = new URLSearchParams({
+      vehicle: newId,
+      pickup,
+      return: ret,
+      startDate: period.startDate,
+      startTime: period.startTime,
+      endDate: period.endDate,
+      endTime: period.endTime,
+    }).toString();
+    router.replace(`/book/checkout?${qs}`);
   }
 
   function setExtra(id: string, delta: number, max: number) {
@@ -191,19 +189,18 @@ export function CheckoutFlow() {
     return true;
   }
 
-  function confirmBooking(channel: "whatsapp" | "payment") {
+  function confirmBooking(channel: "whatsapp" | "save") {
     setSubmitting(true);
     const record: BookingRecord = {
       reference: generateReference(),
       createdAt: new Date().toISOString(),
-      totalIDR: breakdown!.total,
       search: {
         pickupSlug: pickup,
         returnSlug: ret,
         differentReturn: ret !== pickup,
         ...period,
       },
-      vehicleSlug,
+      vehicleSlug: entryId,
       quantity,
       extras: Object.entries(extraQty)
         .filter(([, q]) => q > 0)
@@ -233,19 +230,12 @@ export function CheckoutFlow() {
         <div>
           {/* Booking context line */}
           <p className="tnum mb-6 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-            <strong className="font-semibold text-ink">{vehicle!.name}</strong> ·{" "}
-            {area?.name}
+            <strong className="font-semibold text-ink">{entry!.displayName}</strong>{" "}
+            · {area?.name}
             {returnArea && ret !== pickup ? ` → ${returnArea.name}` : ""} ·{" "}
             {period.startDate} {period.startTime} → {period.endDate} {period.endTime}
             <Link
-              href={`/book?${new URLSearchParams({
-                pickup,
-                return: ret,
-                startDate: period.startDate,
-                startTime: period.startTime,
-                endDate: period.endDate,
-                endTime: period.endTime,
-              }).toString()}`}
+              href={`/book?${searchQs}`}
               className="ml-2 font-semibold text-primary hover:text-primary-strong"
             >
               Change
@@ -264,15 +254,47 @@ export function CheckoutFlow() {
               </h1>
               <p className="mt-2 text-ink-soft">
                 Two helmets and one phone holder are already included. Add
-                anything else you need.
+                anything else you need — extras are priced in your quote.
               </p>
 
+              {/* Variant selection (Victory / Athena) */}
+              {hasVariants ? (
+                <div className="mt-6 rounded-[14px] border border-line bg-card p-5">
+                  <h2 className="font-semibold text-ink">Variant</h2>
+                  <p className="mt-0.5 text-sm text-ink-soft">
+                    Choose between Standard and Extended battery configurations.
+                  </p>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {variants.map((v) => (
+                      <button
+                        key={v.id}
+                        onClick={() => v.id !== entryId && switchVariant(v.id)}
+                        aria-pressed={v.id === entryId}
+                        className={`cursor-pointer rounded-[10px] border p-4 text-left transition-colors ${
+                          v.id === entryId
+                            ? "border-primary bg-primary-faint"
+                            : "border-line-strong hover:border-primary"
+                        }`}
+                      >
+                        <span className="block font-semibold text-ink">
+                          {v.variant}
+                        </span>
+                        <span className="tnum mt-1 block text-sm text-ink-soft">
+                          LFP {v.batteryWh.toLocaleString("en-US")} Wh · up to{" "}
+                          {v.claimedRangeKm} km
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
               {/* Quantity */}
-              <div className="mt-6 flex items-center justify-between rounded-[14px] border border-line bg-card p-5">
+              <div className="mt-4 flex items-center justify-between rounded-[14px] border border-line bg-card p-5">
                 <div>
                   <h2 className="font-semibold text-ink">Number of motorcycles</h2>
                   <p className="mt-0.5 text-sm text-ink-soft">
-                    Riding as a group? Book up to 4 of the same model.
+                    Riding as a group? Request up to 4 of the same model.
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -315,14 +337,6 @@ export function CheckoutFlow() {
                         ) : null}
                       </h2>
                       <p className="mt-0.5 text-sm text-ink-soft">{extra.description}</p>
-                      {!extra.placeholder ? (
-                        <p className="tnum mt-1 text-sm font-semibold text-ink">
-                          {formatIDR(extra.price)}
-                          <span className="font-normal text-ink-faint">
-                            {extra.perDay ? " /day" : ""}
-                          </span>
-                        </p>
-                      ) : null}
                     </div>
                     {!extra.placeholder ? (
                       <div className="flex shrink-0 items-center gap-3">
@@ -378,15 +392,7 @@ export function CheckoutFlow() {
 
               <div className="mt-8 flex justify-between gap-3">
                 <Link
-                  href={`/book?${new URLSearchParams({
-                    pickup,
-                    return: ret,
-                    startDate: period.startDate,
-                    startTime: period.startTime,
-                    endDate: period.endDate,
-                    endTime: period.endTime,
-                    vehicle: vehicleSlug,
-                  }).toString()}`}
+                  href={`/book?${searchQs}&vehicle=${entryId}`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-4 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -431,7 +437,6 @@ export function CheckoutFlow() {
                       type: "text",
                       autoComplete: "name",
                       required: true,
-                      span: false,
                     },
                     {
                       key: "email",
@@ -439,7 +444,6 @@ export function CheckoutFlow() {
                       type: "email",
                       autoComplete: "email",
                       required: true,
-                      span: false,
                     },
                     {
                       key: "whatsapp",
@@ -447,7 +451,6 @@ export function CheckoutFlow() {
                       type: "tel",
                       autoComplete: "tel",
                       required: true,
-                      span: false,
                       hint: "Include your country code — we confirm bookings here.",
                     },
                     {
@@ -456,7 +459,6 @@ export function CheckoutFlow() {
                       type: "text",
                       autoComplete: "country-name",
                       required: true,
-                      span: false,
                     },
                     {
                       key: "hotelName",
@@ -464,7 +466,6 @@ export function CheckoutFlow() {
                       type: "text",
                       autoComplete: "off",
                       required: true,
-                      span: false,
                     },
                     {
                       key: "address",
@@ -472,7 +473,6 @@ export function CheckoutFlow() {
                       type: "text",
                       autoComplete: "street-address",
                       required: false,
-                      span: false,
                       hint: "Street, gang or Google Maps pin — anything that helps us find you.",
                     },
                     {
@@ -481,7 +481,6 @@ export function CheckoutFlow() {
                       type: "text",
                       autoComplete: "off",
                       required: false,
-                      span: false,
                       hint: "If you're booking for arrival day, we track delays.",
                     },
                   ] as const
@@ -621,16 +620,16 @@ export function CheckoutFlow() {
                 One last look
               </h1>
               <p className="mt-2 text-ink-soft">
-                Check everything below, then send your booking. We confirm
-                availability on WhatsApp — usually fast.
+                Check everything below, then send your request. We confirm
+                availability and your rate on WhatsApp — usually fast.
               </p>
 
               <dl className="mt-6 space-y-4 rounded-[14px] border border-line bg-card p-6">
                 {[
-                  { term: "Ride", detail: `${vehicle!.name} × ${quantity}` },
+                  { term: "Ride", detail: `${entry!.displayName} × ${quantity}` },
                   {
                     term: "Rental period",
-                    detail: `${period.startDate} ${period.startTime} → ${period.endDate} ${period.endTime} (${breakdown.days} day${breakdown.days === 1 ? "" : "s"})`,
+                    detail: `${period.startDate} ${period.startTime} → ${period.endDate} ${period.endTime} (${days} day${days === 1 ? "" : "s"})`,
                   },
                   {
                     term: "Delivery",
@@ -640,16 +639,22 @@ export function CheckoutFlow() {
                     term: "Return",
                     detail: ret !== pickup ? returnArea?.name ?? ret : "Same as delivery",
                   },
-                  ...(selectedExtras.length > 0
+                  ...(Object.values(extraQty).some((q) => q > 0)
                     ? [
                         {
                           term: "Extras",
-                          detail: selectedExtras
-                            .map((s) => `${s.extra.name} × ${s.quantity}`)
+                          detail: rentalExtras
+                            .filter((e) => (extraQty[e.id] ?? 0) > 0)
+                            .map((e) => `${e.name} × ${extraQty[e.id]}`)
                             .join(", "),
                         },
                       ]
                     : []),
+                  {
+                    term: "Rate",
+                    detail:
+                      "Available upon request — confirmed with your quote on WhatsApp",
+                  },
                   { term: "Name", detail: customer.fullName },
                   { term: "WhatsApp", detail: customer.whatsapp },
                   { term: "Email", detail: customer.email },
@@ -678,22 +683,22 @@ export function CheckoutFlow() {
                   onClick={() => confirmBooking("whatsapp")}
                 >
                   <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  {submitting ? "Opening WhatsApp…" : "Send booking via WhatsApp"}
+                  {submitting ? "Opening WhatsApp…" : "Check availability and rates"}
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
                   disabled={submitting}
-                  onClick={() => confirmBooking("payment")}
+                  onClick={() => confirmBooking("save")}
                 >
-                  <CreditCard className="h-5 w-5" aria-hidden="true" />
+                  <Send className="h-5 w-5" aria-hidden="true" />
                   Save booking request
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                Every booking is confirmed personally over WhatsApp, with no
-                obligation until you approve the final quote. Online card
-                payment is being added as an additional option.
+                The WhatsApp button opens a pre-filled message with your
+                selection — our team replies with your rate and availability.
+                Nothing is booked or charged until you approve the quote.
               </p>
 
               <div className="mt-6">
@@ -706,12 +711,18 @@ export function CheckoutFlow() {
           ) : null}
         </div>
 
-        {/* Sidebar price summary */}
-        <aside aria-label="Price summary" className="lg:sticky lg:top-24 lg:self-start">
-          <PriceSummary
-            breakdown={breakdown}
-            vehicleName={vehicle!.name}
+        {/* Sidebar selection summary */}
+        <aside aria-label="Booking summary" className="lg:sticky lg:top-24 lg:self-start">
+          <BookingSummary
+            vehicleName={entry!.displayName}
             quantity={quantity}
+            days={days}
+            extras={Object.entries(extraQty).map(([id, q]) => ({
+              id,
+              quantity: q,
+            }))}
+            pickupName={area?.name ?? pickup}
+            returnName={ret !== pickup ? returnArea?.name : undefined}
           />
         </aside>
       </div>

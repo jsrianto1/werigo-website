@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/config";
-import { vehicles } from "@/data/vehicles";
+import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -24,8 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       priority: page.priority,
     })),
-    ...vehicles.map((v) => ({
-      url: `${site.baseUrl}/fleet/${v.slug}`,
+    ...getPrimaryCards().map((v) => ({
+      url: `${site.baseUrl}/fleet/${v.modelSlug}`,
       lastModified: now,
       priority: 0.8,
     })),

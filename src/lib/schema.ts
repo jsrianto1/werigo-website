@@ -1,5 +1,5 @@
 import { site } from "@/lib/config";
-import type { Vehicle } from "@/data/vehicles";
+import type { WedisonEntry } from "@/data/vehicles";
 import type { FaqItem } from "@/data/faqs";
 
 /** LocalBusiness JSON-LD for Werigo */
@@ -25,24 +25,19 @@ export function localBusinessSchema() {
   };
 }
 
-/** Product schema for a fleet vehicle */
-export function vehicleSchema(vehicle: Vehicle) {
+/**
+ * Product schema for a Wedison fleet model.
+ * No price or availability claims — rates are provided on request
+ * and availability is confirmed by the team.
+ */
+export function vehicleSchema(entry: WedisonEntry) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${vehicle.name} — Electric Motorcycle Rental`,
-    description: vehicle.description,
-    brand: { "@type": "Brand", name: site.name },
-    url: `${site.baseUrl}/fleet/${vehicle.slug}`,
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "IDR",
-      price: vehicle.pricePerDay,
-      availability: vehicle.available
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
-      url: `${site.baseUrl}/fleet/${vehicle.slug}`,
-    },
+    name: `${entry.displayName} — Electric Motorcycle Rental in Bali`,
+    description: entry.description,
+    brand: { "@type": "Brand", name: entry.brand },
+    url: `${site.baseUrl}/fleet/${entry.modelSlug}`,
   };
 }
 

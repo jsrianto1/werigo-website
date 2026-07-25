@@ -26,7 +26,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/Button";
-import { getFeaturedVehicles } from "@/data/vehicles";
+import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 import { faqCategories } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
@@ -113,7 +113,7 @@ const faqPreview = [
 ];
 
 export default function HomePage() {
-  const featured = getFeaturedVehicles();
+  const featured = getPrimaryCards();
 
   return (
     <>
@@ -127,7 +127,9 @@ export default function HomePage() {
         <Section className="!py-0">
           <div className="grid items-center gap-10 pb-14 pt-12 md:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-20">
             <div className="rise-in">
-              <p className="eyebrow mb-4">Electric motorcycle rental · Bali</p>
+              <p className="eyebrow mb-4">
+                Electric motorcycle rental · Bali · Powered by Wedison
+              </p>
               <h1 className="font-display text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-[3.4rem]">
                 Ride Bali the quiet&nbsp;way.
               </h1>
@@ -194,9 +196,9 @@ export default function HomePage() {
       <Section labelledBy="fleet-heading">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading
-            eyebrow="The fleet"
-            title="Four electric rides, one for every kind of day"
-            lede="From nimble café hoppers to full-day cruisers — every Werigo model is maintained in-house and delivered fully charged."
+            eyebrow="The fleet · Powered by Wedison"
+            title="Official Wedison electric motorcycles, one for every kind of day"
+            lede="From the nimble Bees to the flagship EdPower — official Wedison electric motorcycles, maintained in-house and delivered fully charged through Werigo."
             id="fleet-heading"
           />
           <Link
@@ -208,8 +210,8 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {featured.map((vehicle) => (
-            <VehicleCard key={vehicle.slug} vehicle={vehicle} />
+          {featured.map((entry) => (
+            <VehicleCard key={entry.id} entry={entry} />
           ))}
         </div>
       </Section>
@@ -328,12 +330,12 @@ export default function HomePage() {
                 <BatteryCharging className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                 <div>
                   <h3 className="font-semibold text-ink">
-                    Real-world range, honestly stated
+                    Official Wedison specifications
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                    Our 65–120 km range figures are estimated for two riders in
-                    Bali traffic — not laboratory numbers. A typical exploring
-                    day uses half a charge.
+                    Specifications are based on official Wedison product
+                    information. Actual riding range varies depending on riding
+                    style, passenger load, terrain, traffic, and weather.
                   </p>
                 </div>
               </li>
@@ -385,7 +387,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow mb-3 !text-accent">
                 <Zap className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
-                Werigo Supercharge
+                Wedison Supercharge
               </p>
               <h2
                 id="supercharge-heading"
@@ -397,12 +399,13 @@ export default function HomePage() {
                 Charge 15 Minutes. Ride 100+ KM.
               </p>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-inverse/80">
-                For the biggest riding days, Supercharge gets compatible Werigo
-                models back to full riding range in roughly the time it takes
-                to order a coffee — handled by our team while you take a break.
+                Compatible Wedison models can recharge from approximately 10%
+                to 80% starting from 15 minutes at supported Wedison
+                Supercharge locations — handled by our team while you take a
+                break.
               </p>
               <p className="mt-3 max-w-xl text-xs text-ink-inverse/50">
-                Applies to compatible Werigo electric motorcycle models.
+                Applies to compatible Wedison electric motorcycle models.
               </p>
             </div>
             <div className="lg:justify-self-end">
@@ -478,8 +481,8 @@ export default function HomePage() {
               text: "Rental, extras and delivery are itemised before you confirm. Nothing is added after checkout, and nothing is charged before you approve the quote.",
             },
             {
-              title: "Honest range figures",
-              text: "Every range number on this site is an estimate for two riders in real Bali traffic — never a brochure figure measured on a test bench.",
+              title: "Honest numbers",
+              text: "Specifications come straight from official Wedison product information, always stated as 'up to'. Actual range varies with riding style, load, terrain, traffic and weather — we never guarantee it.",
             },
             {
               title: "A person answers",

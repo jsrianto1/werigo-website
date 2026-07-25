@@ -3,7 +3,6 @@ import Link from "next/link";
 import { MapPin, ArrowRight, Truck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { serviceAreas } from "@/data/locations";
-import { formatIDR } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Delivery Areas — Free Scooter Delivery Across South Bali",
@@ -34,8 +33,8 @@ export default function DeliveryAreasPage() {
                     Free delivery
                   </span>
                 ) : (
-                  <span className="tnum rounded-full bg-sunken px-2.5 py-0.5 text-xs font-medium text-ink-soft">
-                    {formatIDR(area.deliveryFee)}
+                  <span className="rounded-full bg-sunken px-2.5 py-0.5 text-xs font-medium text-ink-soft">
+                    Fee confirmed with quote
                   </span>
                 )}
               </div>

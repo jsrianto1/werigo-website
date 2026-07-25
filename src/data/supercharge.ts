@@ -1,12 +1,14 @@
 /**
- * Werigo Supercharge — fast-charging network data.
+ * Wedison Supercharge — fast-charging network data.
+ * (Werigo is the rental service; Supercharge is Wedison's charging
+ * technology, offered to Werigo riders on compatible models.)
  *
  * IMPORTANT: `stations` must contain ONLY verified, operational
  * charging points. Never publish planned or speculative locations.
  * Add a station by copying the template below with real details.
  *
- * `compatibleModelSlugs` is centrally editable — confirm each model's
- * fast-charge support with operations before adding it here.
+ * `compatibleModelSlugs` is centrally editable — only add entries
+ * confirmed by management.
  */
 
 export interface SuperchargeStation {
@@ -48,52 +50,62 @@ export interface SuperchargeStation {
 export const superchargeStations: SuperchargeStation[] = [];
 
 /**
- * Models confirmed compatible with Werigo Supercharge.
- * PLACEHOLDER — verify with operations before adding slugs.
- * Slugs must match src/data/vehicles.ts.
+ * Entries confirmed compatible with Wedison Supercharge
+ * (management-approved 2026-07-26). Ids must match
+ * src/data/vehicles.ts. Bees is NOT compatible until management
+ * confirms it — do not add it here without confirmation.
  */
-export const compatibleModelSlugs: string[] = [];
+export const compatibleModelSlugs: string[] = [
+  "victory",
+  "victory-extended",
+  "athena",
+  "athena-extended",
+  "edpower",
+];
 
-/** Headline performance message — applies to compatible models only. */
+/** Headline performance message — applies to compatible Wedison models only. */
 export const superchargePerformance = {
   headline: "Charge Fast. Ride Farther.",
   message: "Charge 15 Minutes. Ride 100+ KM.",
-  chargeMinutes: "approximately 15 minutes",
-  rangeBenefit: "100+ km of riding range",
+  chargeMinutes: "starting from 15 minutes",
+  rangeBenefit: "approximately 10% to 80% charge",
+  /** Mandated compatibility statement — use verbatim. */
+  statement:
+    "Compatible Wedison models can recharge from approximately 10% to 80% starting from 15 minutes at supported Wedison Supercharge locations.",
   caveat:
-    "Charging performance applies to compatible Werigo electric motorcycle models. Actual charge time and range vary with battery level, model, load and riding conditions.",
+    "Charging performance applies to compatible Wedison electric motorcycle models. Actual charge time and range vary with battery level, model, load and riding conditions.",
 };
 
 export const superchargeSteps = [
   {
     title: "Ride in",
-    text: "Bring your Werigo to any Supercharge point — no appointment needed. Your key tag identifies your motorcycle and rental.",
+    text: "Bring your Wedison to any supported Supercharge location — no appointment needed. Your key tag identifies your motorcycle and rental.",
   },
   {
-    title: "Plug in or swap",
-    text: "Our on-site team connects your motorcycle, or swaps the battery where your model supports it. You don't touch a cable unless you want to.",
+    title: "Plug in",
+    text: "Our on-site team connects your motorcycle to the Wedison Supercharge system. You don't touch a cable unless you want to.",
   },
   {
     title: "Ride out",
-    text: "In roughly the time it takes to order a coffee, you're back to full riding range. The session is logged to your rental — no payment at the point.",
+    text: "Compatible models recharge from approximately 10% to 80% starting from 15 minutes. The session is logged to your rental — no payment at the point.",
   },
 ];
 
 export const superchargeFaq = [
   {
-    question: "What is Werigo Supercharge?",
+    question: "What is Wedison Supercharge?",
     answer:
-      "Supercharge is Werigo's fast-charging service for compatible fleet models — dedicated points where your motorcycle gets back to full riding range in a fraction of standard overnight charging time, with our team handling the process.",
+      "Supercharge is Wedison's fast-charging technology, available to Werigo riders on compatible Wedison models — dedicated locations where your motorcycle recharges from approximately 10% to 80% starting from 15 minutes, with our team handling the process.",
   },
   {
     question: "Which motorcycles can use Supercharge?",
     answer:
-      "Fast-charge support depends on the model and battery configuration. We confirm your motorcycle's Supercharge compatibility when you book — ask on WhatsApp and we'll tell you exactly what your model supports.",
+      "Confirmed compatible models are the Wedison Victory, Victory Extended, Athena, Athena Extended and EdPower. The Wedison Bees uses standard home charging. We confirm your exact configuration when you book.",
   },
   {
     question: "How long does a Supercharge session take?",
     answer:
-      "Approximately 15 minutes for 100+ km of riding range on compatible models. Exact times vary with your battery level on arrival and your model's configuration.",
+      "Compatible Wedison models can recharge from approximately 10% to 80% starting from 15 minutes at supported Wedison Supercharge locations. Exact times vary with your battery level on arrival and your model's configuration.",
   },
   {
     question: "How much does Supercharge cost?",

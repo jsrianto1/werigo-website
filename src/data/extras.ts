@@ -1,17 +1,17 @@
 /**
  * Rental extras — options offered during booking step 4.
- * Prices in IDR. `perDay` items multiply by rental days.
+ * Extras carry no published prices: anything selected is added to the
+ * WhatsApp quote and priced there, so no unapproved figures appear
+ * on the site.
  */
 
 export interface RentalExtra {
   id: string;
   name: string;
   description: string;
-  price: number;
-  perDay: boolean;
   /** How many can be added (e.g. extra helmets) */
   maxQuantity: number;
-  /** Placeholder items are shown without a price until terms are published */
+  /** Placeholder items are shown without selection until terms are published */
   placeholder?: boolean;
 }
 
@@ -19,17 +19,15 @@ export const rentalExtras: RentalExtra[] = [
   {
     id: "extra-helmet",
     name: "Extra helmet",
-    description: "Two helmets are already included — add more for changing passengers.",
-    price: 15000,
-    perDay: true,
+    description:
+      "Two helmets are already included — add more for changing passengers. Priced in your quote.",
     maxQuantity: 2,
   },
   {
     id: "phone-holder",
     name: "Extra phone holder",
-    description: "One holder is included on every ride. Add a second for a passenger.",
-    price: 10000,
-    perDay: true,
+    description:
+      "One holder is included on every ride. Add a second for a passenger. Priced in your quote.",
     maxQuantity: 1,
   },
   {
@@ -37,8 +35,6 @@ export const rentalExtras: RentalExtra[] = [
     name: "Damage protection",
     description:
       "Optional damage protection plan. Ask our team on WhatsApp for current terms and pricing — the full plan details are being added to this page.",
-    price: 0,
-    perDay: true,
     maxQuantity: 1,
     placeholder: true,
   },

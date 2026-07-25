@@ -5,10 +5,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, MessageCircle, ArrowRight } from "lucide-react";
 import { getRecord, type BookingRecord } from "@/lib/booking";
-import { getVehicle } from "@/data/vehicles";
+import { getEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { getExtra } from "@/data/extras";
-import { formatIDR } from "@/lib/config";
 import { buildBookingWhatsAppUrl } from "@/lib/whatsapp";
 
 export function ConfirmationView() {
@@ -53,7 +52,7 @@ export function ConfirmationView() {
     );
   }
 
-  const vehicle = record.vehicleSlug ? getVehicle(record.vehicleSlug) : undefined;
+  const entry = record.vehicleSlug ? getEntry(record.vehicleSlug) : undefined;
   const area = getArea(record.search.pickupSlug);
   const returnArea = getArea(record.search.returnSlug);
 
@@ -76,7 +75,7 @@ export function ConfirmationView() {
 
       <dl className="mt-8 space-y-3 rounded-[14px] border border-line bg-card p-6">
         {[
-          { term: "Ride", detail: `${vehicle?.name ?? "—"} × ${record.quantity}` },
+          { term: "Ride", detail: `${entry?.displayName ?? "—"} × ${record.quantity}` },
           {
             term: "Period",
             detail: `${record.search.startDate} ${record.search.startTime} → ${record.search.endDate} ${record.search.endTime}`,
@@ -108,7 +107,11 @@ export function ConfirmationView() {
                 },
               ]
             : []),
-          { term: "Estimated total", detail: formatIDR(record.totalIDR) },
+          {
+            term: "Rate",
+            detail:
+              "Available upon request — confirmed with your quote on WhatsApp",
+          },
         ].map((row) => (
           <div
             key={row.term}

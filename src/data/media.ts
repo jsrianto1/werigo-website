@@ -42,7 +42,7 @@ export const media = {
   "hero-photo": {
     kind: "image",
     src: "/media/hero/home-hero.jpg",
-    alt: "Rider on a Werigo electric motorcycle on a Bali coastal road",
+    alt: "Rider on a Wedison electric motorcycle on a Bali coastal road, rented through Werigo",
     width: 2560,
     height: 1440,
     available: false,
@@ -51,44 +51,44 @@ export const media = {
     kind: "video",
     src: "/media/hero/home-hero.mp4",
     poster: "/media/hero/home-hero-poster.jpg",
-    label: "Werigo electric motorcycles riding through Bali",
+    label: "Wedison electric motorcycles from Werigo riding through Bali",
     width: 1920,
     height: 1080,
     available: false,
   },
 
   // ---- Fleet (per model: main, side, detail) ----
-  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/main.jpg", alt: "Werigo Bees electric scooter — main product photo", width: 1600, height: 1200, available: false },
-  "fleet-bees-side": { kind: "image", src: "/media/fleet/bees/side.jpg", alt: "Werigo Bees — side view", width: 1600, height: 1200, available: false },
-  "fleet-bees-detail": { kind: "image", src: "/media/fleet/bees/detail.jpg", alt: "Werigo Bees — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/main.jpg", alt: "Werigo Victory electric motorcycle — main product photo", width: 1600, height: 1200, available: false },
-  "fleet-victory-side": { kind: "image", src: "/media/fleet/victory/side.jpg", alt: "Werigo Victory — side view", width: 1600, height: 1200, available: false },
-  "fleet-victory-detail": { kind: "image", src: "/media/fleet/victory/detail.jpg", alt: "Werigo Victory — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/main.jpg", alt: "Werigo Athena electric motorcycle — main product photo", width: 1600, height: 1200, available: false },
-  "fleet-athena-side": { kind: "image", src: "/media/fleet/athena/side.jpg", alt: "Werigo Athena — side view", width: 1600, height: 1200, available: false },
-  "fleet-athena-detail": { kind: "image", src: "/media/fleet/athena/detail.jpg", alt: "Werigo Athena — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/main.jpg", alt: "Werigo EdPower electric motorcycle — main product photo", width: 1600, height: 1200, available: false },
-  "fleet-edpower-side": { kind: "image", src: "/media/fleet/edpower/side.jpg", alt: "Werigo EdPower — side view", width: 1600, height: 1200, available: false },
-  "fleet-edpower-detail": { kind: "image", src: "/media/fleet/edpower/detail.jpg", alt: "Werigo EdPower — detail shot", width: 1600, height: 1200, available: false },
+  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/main.jpg", alt: "Wedison Bees electric scooter available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-bees-side": { kind: "image", src: "/media/fleet/bees/side.jpg", alt: "Wedison Bees — side view", width: 1600, height: 1200, available: false },
+  "fleet-bees-detail": { kind: "image", src: "/media/fleet/bees/detail.jpg", alt: "Wedison Bees — detail shot", width: 1600, height: 1200, available: false },
+  "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/main.jpg", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-victory-side": { kind: "image", src: "/media/fleet/victory/side.jpg", alt: "Wedison Victory — side view", width: 1600, height: 1200, available: false },
+  "fleet-victory-detail": { kind: "image", src: "/media/fleet/victory/detail.jpg", alt: "Wedison Victory — detail shot", width: 1600, height: 1200, available: false },
+  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/main.jpg", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-athena-side": { kind: "image", src: "/media/fleet/athena/side.jpg", alt: "Wedison Athena — side view", width: 1600, height: 1200, available: false },
+  "fleet-athena-detail": { kind: "image", src: "/media/fleet/athena/detail.jpg", alt: "Wedison Athena — detail shot", width: 1600, height: 1200, available: false },
+  "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/main.jpg", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1600, height: 1200, available: false },
+  "fleet-edpower-side": { kind: "image", src: "/media/fleet/edpower/side.jpg", alt: "Wedison EdPower — side view", width: 1600, height: 1200, available: false },
+  "fleet-edpower-detail": { kind: "image", src: "/media/fleet/edpower/detail.jpg", alt: "Wedison EdPower — detail shot", width: 1600, height: 1200, available: false },
 
   // ---- Lifestyle: customers riding in Bali ----
-  "riding-01": { kind: "image", src: "/media/riding/riding-01.jpg", alt: "Customers riding Werigo electric motorcycles past Bali rice terraces", width: 1920, height: 1280, available: false },
-  "riding-02": { kind: "image", src: "/media/riding/riding-02.jpg", alt: "Rider on a Werigo electric motorcycle at a Bali beach at sunset", width: 1920, height: 1280, available: false },
-  "riding-03": { kind: "image", src: "/media/riding/riding-03.jpg", alt: "Two riders exploring Ubud on Werigo electric motorcycles", width: 1920, height: 1280, available: false },
+  "riding-01": { kind: "image", src: "/media/riding/riding-01.jpg", alt: "Customers riding Wedison electric motorcycles past Bali rice terraces", width: 1920, height: 1280, available: false },
+  "riding-02": { kind: "image", src: "/media/riding/riding-02.jpg", alt: "Rider on a Wedison electric motorcycle at a Bali beach at sunset", width: 1920, height: 1280, available: false },
+  "riding-03": { kind: "image", src: "/media/riding/riding-03.jpg", alt: "Two riders exploring Ubud on Wedison electric motorcycles", width: 1920, height: 1280, available: false },
 
   // ---- Delivery & handover ----
-  "delivery-01": { kind: "image", src: "/media/delivery/handover-01.jpg", alt: "Werigo team delivering an electric motorcycle to a Bali villa", width: 1920, height: 1280, available: false },
+  "delivery-01": { kind: "image", src: "/media/delivery/handover-01.jpg", alt: "Werigo team delivering a Wedison electric motorcycle to a Bali villa", width: 1920, height: 1280, available: false },
   "delivery-02": { kind: "image", src: "/media/delivery/handover-02.jpg", alt: "Helmet fitting and riding briefing at a Werigo handover", width: 1920, height: 1280, available: false },
 
   // ---- Supercharge ----
-  "supercharge-hero": { kind: "image", src: "/media/supercharge/hero.jpg", alt: "Werigo electric motorcycle at a Supercharge fast-charging point", width: 2560, height: 1440, available: false },
-  "supercharge-video": { kind: "video", src: "/media/supercharge/supercharge.mp4", poster: "/media/supercharge/supercharge-poster.jpg", label: "A Werigo Supercharge session from arrival to ride-out", width: 1920, height: 1080, available: false },
-  "supercharge-process-01": { kind: "image", src: "/media/supercharge/process-01.jpg", alt: "Rider arriving at a Werigo Supercharge point", width: 1600, height: 1200, available: false },
+  "supercharge-hero": { kind: "image", src: "/media/supercharge/hero.jpg", alt: "Wedison electric motorcycle at a Wedison Supercharge fast-charging point", width: 2560, height: 1440, available: false },
+  "supercharge-video": { kind: "video", src: "/media/supercharge/supercharge.mp4", poster: "/media/supercharge/supercharge-poster.jpg", label: "A Wedison Supercharge session from arrival to ride-out", width: 1920, height: 1080, available: false },
+  "supercharge-process-01": { kind: "image", src: "/media/supercharge/process-01.jpg", alt: "Rider arriving at a Wedison Supercharge location", width: 1600, height: 1200, available: false },
   "supercharge-process-02": { kind: "image", src: "/media/supercharge/process-02.jpg", alt: "Werigo team connecting a motorcycle to the fast charger", width: 1600, height: 1200, available: false },
   "supercharge-process-03": { kind: "image", src: "/media/supercharge/process-03.jpg", alt: "Rider leaving a Supercharge point with a full battery", width: 1600, height: 1200, available: false },
 
   // ---- About / team ----
-  "about-team": { kind: "image", src: "/media/about/team.jpg", alt: "The Werigo team with the fleet in Bali", width: 1920, height: 1440, available: false },
+  "about-team": { kind: "image", src: "/media/about/team.jpg", alt: "The Werigo team with the Wedison fleet in Bali", width: 1920, height: 1440, available: false },
 } as const satisfies Record<string, MediaAsset>;
 
 export type MediaId = keyof typeof media;

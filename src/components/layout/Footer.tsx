@@ -64,9 +64,13 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Logo inverse />
+            <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.14em] text-ink-inverse/50">
+              Powered by Wedison
+            </p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-inverse/70">
-              Premium electric motorcycle rental in Bali. Delivered to your
-              door, charged and ready to ride.
+              Werigo is Wedison&apos;s electric motorcycle rental and mobility
+              service in Bali. Official Wedison electric motorcycles, delivered
+              to your door, charged and ready to ride.
             </p>
             <div className="mt-5 flex gap-3">
               <a

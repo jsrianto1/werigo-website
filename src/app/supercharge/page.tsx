@@ -23,7 +23,7 @@ import {
   superchargeSteps,
   superchargeFaq,
 } from "@/data/supercharge";
-import { vehicles } from "@/data/vehicles";
+import { getEntry, specDisclaimer } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { findMedia } from "@/data/media";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
@@ -32,14 +32,14 @@ import { faqSchema, jsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Supercharge — Fast Charging for Electric Motorcycles in Bali",
   description:
-    "Werigo Supercharge: fast charging for compatible electric motorcycle rentals in Bali. Roughly 15 minutes for 100+ km of riding range, handled by our team while you grab a coffee.",
+    "Wedison Supercharge through Werigo: compatible Wedison electric motorcycles recharge from approximately 10% to 80% starting from 15 minutes at supported locations in Bali.",
   alternates: { canonical: "/supercharge" },
 };
 
 export default function SuperchargePage() {
-  const compatibleModels = vehicles.filter((v) =>
-    compatibleModelSlugs.includes(v.slug)
-  );
+  const compatibleModels = compatibleModelSlugs
+    .map((id) => getEntry(id))
+    .filter((e): e is NonNullable<typeof e> => Boolean(e));
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function SuperchargePage() {
             <div className="rise-in">
               <p className="eyebrow mb-4">
                 <Zap className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
-                Werigo Supercharge
+                Wedison Supercharge
               </p>
               <h1 className="font-display text-4xl leading-[1.08] text-ink sm:text-5xl">
                 {superchargePerformance.headline}
@@ -65,8 +65,8 @@ export default function SuperchargePage() {
               <p className="mt-5 max-w-xl leading-relaxed text-ink-soft">
                 Overnight charging at your villa covers most Bali days. For the
                 big ones — Uluwatu to Ubud and back, a full-island loop —
-                Supercharge gets compatible Werigo models back to full riding
-                range in roughly the time it takes to order a coffee.
+                there&apos;s Wedison Supercharge.{" "}
+                {superchargePerformance.statement}
               </p>
               <p className="mt-3 max-w-xl text-xs leading-relaxed text-ink-faint">
                 {superchargePerformance.caveat}
@@ -106,34 +106,35 @@ export default function SuperchargePage() {
           <div className="rounded-[14px] border border-line bg-card p-6">
             <Clock className="h-6 w-6 text-accent" aria-hidden="true" />
             <h2 className="mt-3 font-display text-xl text-ink">
-              ~15 minutes
+              From 15 minutes
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              A Supercharge session takes {superchargePerformance.chargeMinutes}{" "}
-              on compatible models — plan it around a coffee, not around your
-              day.
+              A Supercharge session starts from approximately 15 minutes on
+              compatible Wedison models — plan it around a coffee, not around
+              your day.
             </p>
           </div>
           <div className="rounded-[14px] border border-line bg-card p-6">
             <Route className="h-6 w-6 text-accent" aria-hidden="true" />
-            <h2 className="mt-3 font-display text-xl text-ink">100+ km back</h2>
+            <h2 className="mt-3 font-display text-xl text-ink">10% → 80%</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              One session restores {superchargePerformance.rangeBenefit} — from
-              the Bukit cliffs to the Ubud ridges without watching the gauge.
+              Compatible Wedison models recharge from approximately 10% to 80%
+              at supported Supercharge locations — from the Bukit cliffs to the
+              Ubud ridges without watching the gauge.
             </p>
           </div>
           <div className="rounded-[14px] border border-line bg-card p-6">
             <BatteryCharging className="h-6 w-6 text-accent" aria-hidden="true" />
             <h2 className="mt-3 font-display text-xl text-ink">We handle it</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              On-site staff connect your motorcycle or swap the battery where
-              supported. Sessions are logged to your rental — no payment at the
+              On-site staff connect your motorcycle to the Wedison Supercharge
+              system. Sessions are logged to your rental — no payment at the
               point.
             </p>
           </div>
         </div>
         <h2 id="what-heading" className="sr-only">
-          What Werigo Supercharge is
+          What Wedison Supercharge is
         </h2>
       </Section>
 
@@ -172,23 +173,24 @@ export default function SuperchargePage() {
         <SectionHeading
           eyebrow="Compatibility"
           title="Which rides can Supercharge?"
-          lede="Fast-charge support depends on the model and battery configuration. Every model still charges overnight from any standard outlet — Supercharge is the express lane."
+          lede="Confirmed compatible Wedison models are listed below. Every model still charges from a standard outlet at your accommodation — Supercharge is the express lane. The Wedison Bees uses home charging."
           id="compatible-heading"
         />
         {compatibleModels.length > 0 ? (
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {compatibleModels.map((v) => (
-              <li key={v.slug}>
+              <li key={v.id}>
                 <Link
-                  href={`/fleet/${v.slug}`}
+                  href={`/fleet/${v.modelSlug}`}
                   className="group flex h-full flex-col rounded-[14px] border border-line bg-card p-5 transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
                 >
                   <Zap className="h-4 w-4 text-accent" aria-hidden="true" />
                   <span className="mt-2.5 font-display text-lg text-ink group-hover:text-primary">
-                    {v.name}
+                    {v.displayName}
                   </span>
-                  <span className="mt-1 text-xs text-ink-soft">
-                    Supercharge ready
+                  <span className="tnum mt-1 text-xs text-ink-soft">
+                    LFP {v.batteryWh.toLocaleString("en-US")} Wh · 10–80% from
+                    15 min
                   </span>
                 </Link>
               </li>
@@ -196,7 +198,7 @@ export default function SuperchargePage() {
           </ul>
         ) : (
           <div className="rounded-[14px] border border-dashed border-line-strong bg-card p-8">
-            <Bike className="h-6 w-6 text-ink-faint" aria-hidden="true" />
+            <Bike className="h-6 w-6 text-ink-faint" aria-hidden="true" />{/* fallback if list is ever emptied */}
             <h3 className="mt-3 font-display text-xl text-ink">
               Confirmed per model, honestly
             </h3>
@@ -220,6 +222,9 @@ export default function SuperchargePage() {
             </a>
           </div>
         )}
+        <p className="mt-4 text-xs leading-relaxed text-ink-faint">
+          {specDisclaimer}
+        </p>
       </Section>
 
       {/* ===== Locations ===== */}

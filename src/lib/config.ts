@@ -7,9 +7,12 @@ export const site = {
   name: "Werigo",
   domain: "werigo.co",
   baseUrl: "https://werigo.co",
-  tagline: "Premium electric motorcycle rental in Bali",
+  tagline: "Werigo — Powered by Wedison",
   description:
-    "Rent a premium electric motorcycle or scooter in Bali. Free hotel delivery across Canggu, Seminyak, Ubud and more. Book online in minutes, ride silent, ride clean.",
+    "Official Wedison electric motorcycles, available for rent through Werigo in Bali. Hotel and villa delivery across Canggu, Seminyak, Ubud and more. Book online in minutes, ride silent, ride clean.",
+  /** Brand relationship line — use wherever the relationship is stated. */
+  brandRelationship:
+    "Werigo is Wedison's electric motorcycle rental and mobility service in Bali.",
 
   /**
    * Business WhatsApp number in international format, digits only.

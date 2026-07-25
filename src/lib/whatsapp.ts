@@ -1,6 +1,6 @@
-import { site, formatIDR } from "@/lib/config";
+import { site } from "@/lib/config";
 import type { BookingRecord } from "@/lib/booking";
-import { getVehicle } from "@/data/vehicles";
+import { getEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { getExtra } from "@/data/extras";
 
@@ -8,9 +8,12 @@ import { getExtra } from "@/data/extras";
  * Builds a wa.me deep link with a professionally formatted booking
  * summary. The business number lives in src/lib/config.ts
  * (NEXT_PUBLIC_WHATSAPP_NUMBER).
+ *
+ * No price figures are included — rates are quoted by the team in
+ * the WhatsApp conversation.
  */
 export function buildBookingWhatsAppUrl(record: BookingRecord): string {
-  const vehicle = record.vehicleSlug ? getVehicle(record.vehicleSlug) : undefined;
+  const entry = record.vehicleSlug ? getEntry(record.vehicleSlug) : undefined;
   const pickup = getArea(record.search.pickupSlug);
   const ret = getArea(record.search.returnSlug || record.search.pickupSlug);
 
@@ -24,12 +27,13 @@ export function buildBookingWhatsAppUrl(record: BookingRecord): string {
 
   const lines = [
     `*Werigo Booking Request*`,
+    `_Powered by Wedison_`,
     ``,
     `Reference: ${record.reference}`,
     `Name: ${record.customer.fullName}`,
     ``,
     `*Ride*`,
-    `${vehicle ? vehicle.name : "—"} × ${record.quantity}`,
+    `${entry ? entry.displayName : "—"} × ${record.quantity}`,
     ``,
     `*Rental period*`,
     `From: ${record.search.startDate} ${record.search.startTime}`,
@@ -43,14 +47,27 @@ export function buildBookingWhatsAppUrl(record: BookingRecord): string {
     `${ret ? ret.name : "Same as pick-up"}`,
     ...(extras ? [``, `*Extras*`, extras] : []),
     ``,
-    `*Estimated total*`,
-    formatIDR(record.totalIDR),
+    `*Rate*`,
+    `Please send me the rate and availability for these dates.`,
     ...(record.customer.specialRequest
       ? [``, `*Special request*`, record.customer.specialRequest]
       : []),
   ];
 
   const text = encodeURIComponent(lines.join("\n"));
+  return `https://wa.me/${site.whatsappNumber}?text=${text}`;
+}
+
+/**
+ * "Check availability and rates" link for a specific Wedison model —
+ * used on product pages before dates are known.
+ */
+export function buildModelInquiryWhatsAppUrl(entryId: string): string {
+  const entry = getEntry(entryId);
+  const name = entry ? entry.displayName : "a Wedison motorcycle";
+  const text = encodeURIComponent(
+    `Hi Werigo! I'd like to check availability and rates for the ${name}. My dates and delivery area are:`
+  );
   return `https://wa.me/${site.whatsappNumber}?text=${text}`;
 }
 

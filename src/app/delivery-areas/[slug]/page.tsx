@@ -6,8 +6,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { serviceAreas, getArea } from "@/data/locations";
-import { getFeaturedVehicles } from "@/data/vehicles";
-import { formatIDR } from "@/lib/config";
+import { getPrimaryCards } from "@/data/vehicles";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -35,7 +34,7 @@ export default async function AreaPage({ params }: Props) {
   const area = getArea(slug);
   if (!area) notFound();
 
-  const featured = getFeaturedVehicles().slice(0, 3);
+  const featured = getPrimaryCards().slice(0, 3);
 
   return (
     <>
@@ -97,7 +96,7 @@ export default async function AreaPage({ params }: Props) {
                     {area.deliveryFee === 0 ? (
                       <span className="text-ok">Free</span>
                     ) : (
-                      <span className="tnum">{formatIDR(area.deliveryFee)}</span>
+                      <span>Confirmed with your quote</span>
                     )}
                   </dd>
                 </div>
@@ -151,7 +150,7 @@ export default async function AreaPage({ params }: Props) {
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {featured.map((vehicle) => (
-            <VehicleCard key={vehicle.slug} vehicle={vehicle} />
+            <VehicleCard key={vehicle.id} entry={vehicle} />
           ))}
         </div>
       </Section>

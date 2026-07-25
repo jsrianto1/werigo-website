@@ -38,7 +38,6 @@ export interface BookingDraft {
 export interface BookingRecord extends BookingDraft {
   reference: string;
   createdAt: string;
-  totalIDR: number;
 }
 
 const DRAFT_KEY = "werigo.booking.draft";
