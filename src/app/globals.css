@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* ============================================================
+   WERIGO DESIGN TOKENS
+   ------------------------------------------------------------
+   Central source of truth for the brand. When the official
+   Werigo logo + palette arrive, update ONLY the :root values
+   below — every component reads from these tokens.
+   ============================================================ */
+
+:root {
+  /* Brand core — PLACEHOLDER palette (laguna teal + sunset orange).
+     Swap these when official brand colors are provided. */
+  --brand-primary: #0a5c55;        /* Laguna — deep reef teal */
+  --brand-primary-strong: #07443f; /* Laguna dark — hover / emphasis */
+  --brand-primary-soft: #e3f1ee;   /* Laguna wash — tinted section bg */
+  --brand-primary-faint: #f2f8f6;  /* Laguna mist — subtle tint */
+  --brand-accent: #c14a05;         /* Sunset — burnt CTA orange (AA with white text) */
+  --brand-accent-strong: #a83f04;  /* Sunset dark — CTA hover */
+  --brand-accent-soft: #fdeee2;    /* Sunset wash */
+
+  /* Neutrals — warm sand-based, never blue-gray */
+  --surface-page: #fbfaf7;         /* Sand white — page background */
+  --surface-card: #ffffff;         /* Card surface */
+  --surface-sunken: #f4f2ec;       /* Sunken wells / input bg */
+  --surface-deep: #0e2b27;         /* Deep laguna ink — footer / contrast band */
+
+  --ink: #182320;                  /* Primary text — green-black ink */
+  --ink-soft: #47554f;             /* Secondary text */
+  --ink-faint: #66736d;            /* Tertiary / captions */
+  --ink-inverse: #f5f8f6;          /* Text on deep surfaces */
+
+  --line: #e6e3d9;                 /* Hairline borders */
+  --line-strong: #cfcaba;          /* Input borders */
+
+  /* Semantic */
+  --ok: #177a4c;                   /* Available / success */
+  --ok-soft: #e5f3ec;
+  --warn: #a16207;
+  --warn-soft: #fbf3e0;
+  --danger: #c22f21;
+  --danger-soft: #fbeae8;
+
+  /* Focus ring */
+  --ring: #0a5c55;
+
+  /* Shape */
+  --radius-card: 14px;
+  --radius-control: 10px;
+  --radius-pill: 999px;
+}
+
+@theme inline {
+  --color-primary: var(--brand-primary);
+  --color-primary-strong: var(--brand-primary-strong);
+  --color-primary-soft: var(--brand-primary-soft);
+  --color-primary-faint: var(--brand-primary-faint);
+  --color-accent: var(--brand-accent);
+  --color-accent-strong: var(--brand-accent-strong);
+  --color-accent-soft: var(--brand-accent-soft);
+
+  --color-page: var(--surface-page);
+  --color-card: var(--surface-card);
+  --color-sunken: var(--surface-sunken);
+  --color-deep: var(--surface-deep);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-inverse: var(--ink-inverse);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --color-ring: var(--ring);
+
+  --radius-card: 14px;
+  --radius-control: 10px;
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --breakpoint-xs: 23.4375rem; /* 375px */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface-page);
+  color: var(--ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display face is used with restraint: page titles + section headings only */
+.font-display {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-variation-settings: "SOFT" 40, "WONK" 0;
+  letter-spacing: -0.01em;
+}
+
+/* Eyebrow label — structural device used across sections */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+
+/* Tabular numerals for prices, dates, durations */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Visible focus for keyboard users — never removed, only styled */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Signature motif: the route line. A dashed path that "rides"
+   slowly. Decorates section transitions; pauses for reduced motion. */
+.route-dash {
+  stroke-dasharray: 6 10;
+  animation: route-ride 24s linear infinite;
+}
+
+@keyframes route-ride {
+  to {
+    stroke-dashoffset: -320;
+  }
+}
+
+/* Gentle rise-in for above-the-fold content */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.rise-in-delay-1 { animation-delay: 0.08s; }
+.rise-in-delay-2 { animation-delay: 0.16s; }
+.rise-in-delay-3 { animation-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .route-dash {
+    animation: none;
+  }
+  .rise-in,
+  .rise-in-delay-1,
+  .rise-in-delay-2,
+  .rise-in-delay-3 {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
