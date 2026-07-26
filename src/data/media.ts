@@ -58,16 +58,16 @@ export const media = {
   },
 
   // ---- Fleet (per model: main, side, detail) ----
-  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/main.jpg", alt: "Wedison Bees electric scooter available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
+  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/main.webp", alt: "Wedison Bees electric scooter available for rent through Werigo in Bali — main product photo", width: 1537, height: 1023, available: true },
   "fleet-bees-side": { kind: "image", src: "/media/fleet/bees/side.jpg", alt: "Wedison Bees — side view", width: 1600, height: 1200, available: false },
   "fleet-bees-detail": { kind: "image", src: "/media/fleet/bees/detail.jpg", alt: "Wedison Bees — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/main.jpg", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
+  "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/main.webp", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1448, height: 1086, available: true },
   "fleet-victory-side": { kind: "image", src: "/media/fleet/victory/side.jpg", alt: "Wedison Victory — side view", width: 1600, height: 1200, available: false },
   "fleet-victory-detail": { kind: "image", src: "/media/fleet/victory/detail.jpg", alt: "Wedison Victory — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/main.jpg", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
+  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/main.webp", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1448, height: 1086, available: true },
   "fleet-athena-side": { kind: "image", src: "/media/fleet/athena/side.jpg", alt: "Wedison Athena — side view", width: 1600, height: 1200, available: false },
   "fleet-athena-detail": { kind: "image", src: "/media/fleet/athena/detail.jpg", alt: "Wedison Athena — detail shot", width: 1600, height: 1200, available: false },
-  "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/main.jpg", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1920, height: 1280, available: true },
+  "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/main.webp", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali — main product photo", width: 1536, height: 1024, available: true },
   "fleet-edpower-side": { kind: "image", src: "/media/fleet/edpower/side.jpg", alt: "Wedison EdPower — side view", width: 1600, height: 1200, available: false },
   "fleet-edpower-detail": { kind: "image", src: "/media/fleet/edpower/detail.jpg", alt: "Wedison EdPower — detail shot", width: 1600, height: 1200, available: false },
 

@@ -33,7 +33,14 @@ recoloring, redesign or distortion.
 
 ## Direct-from-management assets
 
-See `MEDIA-MANIFEST.md` — the four fleet `main.jpg` studio photos and
-the Supercharge unit PNG were supplied directly by management
-(2026-07-26) from `Data Aset motor`; they remain the preferred
-primary images.
+See `MEDIA-MANIFEST.md`. Supplied directly by management:
+
+- 2026-07-26: four fleet `main.webp` product photos with the official
+  Werigo watermark ("<Model> Werigo watermark.png") — the current
+  primary product images. Composition, watermark and shadow preserved;
+  WebP re-encode only.
+- 2026-07-26: Supercharge unit PNG from `Data Aset motor`.
+- 2026-07-26: official Werigo master logo ("Werigo Logo.png") —
+  derivatives in `public/brand/` (full, compact, symbol, OG banner)
+  and app icons in `src/app/` were produced by background removal and
+  cropping only; no redrawing, recoloring or rearrangement.

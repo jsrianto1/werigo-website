@@ -31,7 +31,7 @@ export function ProductGallery({
     <div className="space-y-4">
       {/* Main image */}
       {active ? (
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[14px] bg-white">
+        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[14px] bg-white">
           <Image
             key={active.name}
             src={active.image}
@@ -45,7 +45,7 @@ export function ProductGallery({
         <MediaImage
           id={`fleet-${modelSlug}-main`}
           fallbackLabel={`${displayName} — main product photo`}
-          ratio="4/3"
+          ratio="3/2"
           fit="contain"
           sizes="(max-width: 1024px) 100vw, 55vw"
           priority

@@ -42,7 +42,7 @@ For each of `bees`, `victory`, `athena`, `edpower`:
 
 | File | Dimensions | Ratio | Status |
 |---|---|---|---|
-| `public/media/fleet/<slug>/main.jpg` | 1920×1280 | 3:2 | ✅ **Delivered** — official Wedison studio photos (2026-07-26) |
+| `public/media/fleet/<slug>/main.webp` | ~1500×1050 | ~3:2 | ✅ **Delivered** — official watermarked Werigo product photos (2026-07-26, superseding the plain studio shots) |
 | `public/media/fleet/<slug>/side.jpg` | 1600×1200 | 4:3 | Awaiting — full side profile |
 | `public/media/fleet/<slug>/detail.jpg` | 1600×1200 | 4:3 | Awaiting — battery / dash / seat detail |
 

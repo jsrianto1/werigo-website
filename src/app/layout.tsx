@@ -32,11 +32,20 @@ export const metadata: Metadata = {
     title: `${site.name} — Electric Motorcycle Rental in Bali`,
     description: site.description,
     locale: "en_US",
+    images: [
+      {
+        url: "/brand/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Werigo — Move the Future",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — Electric Motorcycle Rental in Bali`,
     description: site.description,
+    images: ["/brand/og-image.png"],
   },
   robots: { index: true, follow: true },
 };

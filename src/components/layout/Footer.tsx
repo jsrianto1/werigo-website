@@ -63,7 +63,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Logo inverse />
+            <Logo variant="footer" />
             <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.14em] text-ink-inverse/50">
               Powered by Wedison
             </p>

@@ -18,7 +18,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
         <MediaImage
           id={`fleet-${entry.modelSlug}-main`}
           fallbackLabel={`${entry.displayName} product photo`}
-          ratio="4/3"
+          ratio="3/2"
           fit="contain"
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
         />

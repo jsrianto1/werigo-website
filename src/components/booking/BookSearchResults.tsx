@@ -148,7 +148,7 @@ export function BookSearchResults() {
                 <MediaImage
                   id={`fleet-${model.modelSlug}-main`}
                   fallbackLabel={`${model.displayName} photo`}
-                  ratio="4/3"
+                  ratio="3/2"
                   fit="contain"
                   sizes="(max-width: 768px) 100vw, 260px"
                 />

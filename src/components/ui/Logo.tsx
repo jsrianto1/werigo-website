@@ -1,33 +1,54 @@
 import Link from "next/link";
+import Image from "next/image";
 
 /**
- * PLACEHOLDER wordmark until the official Werigo logo arrives.
- * Swap the inner markup for the real SVG when provided — every
- * usage site references this component only.
+ * Official Werigo logo (master: public/brand/, derived unmodified
+ * from "Werigo Logo.png" — background removal only).
+ *
+ * - header: compact lockup (symbol + WERIGO wordmark) on light surfaces
+ * - footer: full lockup with "MOVE THE FUTURE." on a white plate so the
+ *   navy wordmark stays readable on the dark footer
  */
 export function Logo({
-  inverse = false,
+  variant = "header",
   className = "",
 }: {
-  inverse?: boolean;
+  variant?: "header" | "footer";
   className?: string;
 }) {
+  if (variant === "footer") {
+    return (
+      <Link
+        href="/"
+        aria-label="Werigo — home"
+        className={`inline-block rounded-[10px] bg-white px-4 py-3 ${className}`}
+      >
+        <Image
+          src="/brand/werigo-logo-full.png"
+          alt="Werigo — Move the Future"
+          width={1217}
+          height={560}
+          className="h-auto w-40"
+          sizes="160px"
+        />
+      </Link>
+    );
+  }
+
   return (
     <Link
       href="/"
       aria-label="Werigo — home"
-      className={`inline-flex items-baseline gap-0.5 ${className}`}
+      className={`inline-flex items-center ${className}`}
     >
-      <span
-        className={`font-display text-2xl font-semibold tracking-tight ${
-          inverse ? "text-ink-inverse" : "text-ink"
-        }`}
-      >
-        werigo
-      </span>
-      <span
-        aria-hidden="true"
-        className="inline-block h-2 w-2 translate-y-[-2px] rounded-full bg-accent"
+      <Image
+        src="/brand/werigo-logo-compact.png"
+        alt="Werigo — Move the Future"
+        width={1217}
+        height={482}
+        priority
+        className="h-10 w-auto"
+        sizes="104px"
       />
     </Link>
   );
