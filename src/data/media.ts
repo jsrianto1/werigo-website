@@ -103,4 +103,77 @@ export function findMedia(id: string): MediaAsset | undefined {
   return (media as Record<string, MediaAsset>)[id];
 }
 
+/* ============================================================
+   Colour variants — official Wedison colour photography only.
+   Sources documented in MEDIA-SOURCES.md. Only add a colour when
+   the model and colour are clearly confirmed by the official
+   wedison.co page or asset. Colour availability is subject to
+   confirmation — the selector states this to customers.
+   ============================================================ */
+
+export interface ColorVariant {
+  /** Customer-facing colour name, confirmed by the official source */
+  name: string;
+  /** Full product image under /public */
+  image: string;
+  /** Small swatch thumbnail under /public */
+  thumb: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+/** Keyed by model page slug. EdPower: colour naming awaiting
+    official confirmation — no variants published yet. */
+export const modelColors: Record<string, ColorVariant[]> = {
+  bees: [
+    {
+      name: "Red",
+      image: "/media/fleet/bees/colors/red.webp",
+      thumb: "/media/fleet/bees/colors/red-thumb.webp",
+      alt: "Red Wedison Bees electric scooter available for rent through Werigo in Bali",
+      width: 1920,
+      height: 706,
+    },
+    {
+      name: "White",
+      image: "/media/fleet/bees/colors/white.webp",
+      thumb: "/media/fleet/bees/colors/white-thumb.webp",
+      alt: "White Wedison Bees electric scooter available for rent through Werigo in Bali",
+      width: 1920,
+      height: 1080,
+    },
+  ],
+  victory: [
+    {
+      name: "Grey",
+      image: "/media/fleet/victory/colors/grey.webp",
+      thumb: "/media/fleet/victory/colors/grey-thumb.webp",
+      alt: "Grey Wedison Victory electric motorcycle available for rent through Werigo in Bali",
+      width: 1920,
+      height: 706,
+    },
+  ],
+  athena: [
+    {
+      name: "Green",
+      image: "/media/fleet/athena/colors/green.webp",
+      thumb: "/media/fleet/athena/colors/green-thumb.webp",
+      alt: "Green Wedison Athena electric motorcycle available for rent through Werigo in Bali",
+      width: 1920,
+      height: 706,
+    },
+    // Pink and Yellow are referenced on the official Athena page but
+    // have no downloadable official product images yet — do not add
+    // until official assets exist.
+  ],
+  edpower: [
+    // Colour naming awaiting official confirmation.
+  ],
+};
+
+export function getModelColors(modelSlug: string): ColorVariant[] {
+  return modelColors[modelSlug] ?? [];
+}
+
 /** Station photos follow /media/stations/<station-slug>.jpg — added per verified station. */

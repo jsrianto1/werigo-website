@@ -26,7 +26,8 @@ import {
 } from "@/data/vehicles";
 import { vehicleSchema, jsonLd } from "@/lib/schema";
 import { buildModelInquiryWhatsAppUrl } from "@/lib/whatsapp";
-import { findMedia } from "@/data/media";
+import { findMedia, getModelColors } from "@/data/media";
+import { ProductGallery } from "@/components/fleet/ProductGallery";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -148,15 +149,13 @@ export default async function VehicleDetailPage({ params }: Props) {
 
         <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
           {/* Gallery — driven by src/data/media.ts. Additional angles
-              appear automatically once marked available in the manifest. */}
+              appear automatically once marked available in the manifest.
+              Colour variants come from official Wedison assets only. */}
           <div className="space-y-4">
-            <MediaImage
-              id={`fleet-${slug}-main`}
-              fallbackLabel={`${entry.displayName} — main product photo`}
-              ratio="4/3"
-              fit="contain"
-              sizes="(max-width: 1024px) 100vw, 55vw"
-              priority
+            <ProductGallery
+              modelSlug={slug}
+              displayName={entry.displayName}
+              colors={getModelColors(slug)}
             />
             {findMedia(`fleet-${slug}-side`)?.available ||
             findMedia(`fleet-${slug}-detail`)?.available ? (
