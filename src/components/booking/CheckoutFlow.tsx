@@ -8,7 +8,6 @@ import {
   ArrowRight,
   Minus,
   Plus,
-  MessageCircle,
   Send,
   Tag,
 } from "lucide-react";
@@ -21,15 +20,12 @@ import { rentalExtras } from "@/data/extras";
 import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
 import {
   emptyCustomer,
-  generateReference,
   saveDraft,
   loadDraft,
   clearDraft,
-  saveRecord,
+  cacheConfirmation,
   type CustomerInfo,
-  type BookingRecord,
 } from "@/lib/booking";
-import { buildBookingWhatsAppUrl } from "@/lib/whatsapp";
 
 type Phase = "extras" | "details" | "review";
 
@@ -70,6 +66,12 @@ export function CheckoutFlow() {
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [consentError, setConsentError] = useState<string | null>(null);
+  // Stable per-checkout idempotency key — a double click or retry
+  // after a network error replays the same submission.
+  const [submissionId] = useState(() => crypto.randomUUID());
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // Restore any saved draft for this entry (one-shot,
@@ -177,32 +179,89 @@ export function CheckoutFlow() {
     return true;
   }
 
-  function confirmBooking(channel: "whatsapp" | "save") {
-    setSubmitting(true);
-    const record: BookingRecord = {
-      reference: generateReference(),
-      createdAt: new Date().toISOString(),
-      search: {
-        pickupSlug: pickup,
-        returnSlug: ret,
-        differentReturn: ret !== pickup,
-        ...period,
-      },
-      vehicleSlug: entryId,
-      quantity,
-      extras: Object.entries(extraQty)
-        .filter(([, q]) => q > 0)
-        .map(([id, q]) => ({ id, quantity: q })),
-      promoCode,
-      customer,
-    };
-    saveRecord(record);
-    clearDraft();
-
-    if (channel === "whatsapp") {
-      window.open(buildBookingWhatsAppUrl(record), "_blank", "noopener");
+  async function confirmBooking() {
+    if (!privacyConsent) {
+      setConsentError(
+        "Please confirm you agree to us using these details to handle your booking."
+      );
+      document.getElementById("field-privacyConsent")?.focus();
+      return;
     }
-    router.push(`/book/confirmation?ref=${record.reference}`);
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const extrasNote = rentalExtras
+      .filter((e) => (extraQty[e.id] ?? 0) > 0)
+      .map((e) => `${e.name} × ${extraQty[e.id]}`)
+      .join(", ");
+    const notes = [
+      customer.specialRequest.trim(),
+      extrasNote ? `Extras: ${extrasNote}` : "",
+      promoCode ? `Promo code: ${promoCode}` : "",
+      customer.flightNumber ? `Flight: ${customer.flightNumber}` : "",
+      customer.nationality ? `Nationality: ${customer.nationality}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clientSubmissionId: submissionId,
+          fullName: customer.fullName,
+          email: customer.email,
+          whatsapp: customer.whatsapp,
+          nationality: customer.nationality,
+          pickupArea: pickup,
+          pickupAddress: [customer.hotelName, customer.address]
+            .filter(Boolean)
+            .join(" — "),
+          returnArea: ret,
+          returnAddress: "",
+          startAt: `${period.startDate}T${period.startTime}:00+08:00`,
+          endAt: `${period.endDate}T${period.endTime}:00+08:00`,
+          vehicleModel: entry!.modelSlug,
+          quantity,
+          deliveryMethod: "delivery",
+          customerNotes: notes,
+          privacyConsent: true,
+          sourcePage: window.location.pathname,
+          utmSource: new URLSearchParams(window.location.search).get("utm_source") ?? "",
+          utmMedium: new URLSearchParams(window.location.search).get("utm_medium") ?? "",
+          utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") ?? "",
+          website: "", // honeypot — real users never fill this
+        }),
+      });
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.ok) {
+        // Database did NOT store the booking → never open WhatsApp.
+        setSubmitting(false);
+        setSubmitError(
+          data?.message ??
+            "We couldn't save your booking just now. Your details are still here — please try again."
+        );
+        return;
+      }
+
+      // Stored successfully — hand the confirmation to the next screen.
+      cacheConfirmation({
+        bookingCode: data.booking.bookingCode,
+        whatsappUrl: data.whatsappUrl,
+        booking: data.booking,
+      });
+      clearDraft();
+      router.push(
+        `/book/confirmation?code=${encodeURIComponent(data.booking.bookingCode)}`
+      );
+    } catch {
+      setSubmitting(false);
+      setSubmitError(
+        "We couldn't reach the booking service. Your details are still here — please check your connection and try again."
+      );
+    }
   }
 
   const inputClass = (hasError?: string) =>
@@ -632,29 +691,70 @@ export function CheckoutFlow() {
                 ))}
               </dl>
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {/* Privacy consent — required before submission */}
+              <div className="mt-6">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    id="field-privacyConsent"
+                    type="checkbox"
+                    checked={privacyConsent}
+                    aria-invalid={Boolean(consentError)}
+                    aria-describedby={consentError ? "error-privacyConsent" : undefined}
+                    onChange={(e) => {
+                      setPrivacyConsent(e.target.checked);
+                      setConsentError(null);
+                    }}
+                    className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
+                  />
+                  <span className="text-sm text-ink-soft">
+                    I agree that Werigo stores and uses these details to handle
+                    my booking and to communicate with me about it. See the{" "}
+                    <Link
+                      href="/privacy"
+                      target="_blank"
+                      className="font-medium text-primary underline underline-offset-2 hover:text-primary-strong"
+                    >
+                      privacy policy
+                    </Link>
+                    .
+                  </span>
+                </label>
+                {consentError ? (
+                  <p
+                    id="error-privacyConsent"
+                    role="alert"
+                    className="mt-1.5 text-xs font-medium text-danger"
+                  >
+                    {consentError}
+                  </p>
+                ) : null}
+              </div>
+
+              {submitError ? (
+                <div
+                  role="alert"
+                  className="mt-5 rounded-[10px] border border-danger/40 bg-danger-soft px-4 py-3 text-sm text-danger"
+                >
+                  {submitError}
+                </div>
+              ) : null}
+
+              <div className="mt-6">
                 <Button
                   variant="accent"
                   size="lg"
                   disabled={submitting}
-                  onClick={() => confirmBooking("whatsapp")}
-                >
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  {submitting ? "Opening WhatsApp…" : "Check availability and rates"}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  disabled={submitting}
-                  onClick={() => confirmBooking("save")}
+                  onClick={() => confirmBooking()}
+                  className="w-full sm:w-auto"
                 >
                   <Send className="h-5 w-5" aria-hidden="true" />
-                  Save booking request
+                  {submitting ? "Saving your booking…" : "Confirm booking request"}
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                The WhatsApp button opens a pre-filled message with your
-                selection — our team replies with your rate and availability.
+                Your booking is saved securely first — you&apos;ll get a
+                booking code on the next screen, then continue to WhatsApp
+                where our team replies with your rate and availability.
                 Nothing is booked or charged until you approve the quote.
               </p>
 

@@ -4,43 +4,45 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, MessageCircle, ArrowRight } from "lucide-react";
-import { getRecord, type BookingRecord } from "@/lib/booking";
+import { readConfirmation, type ConfirmationPayload } from "@/lib/booking";
 import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
-import { getExtra } from "@/data/extras";
-import { buildBookingWhatsAppUrl } from "@/lib/whatsapp";
 
+/**
+ * Step 8: confirmation. The booking is already stored in the
+ * database at this point — this screen shows the database booking
+ * code and offers the WhatsApp continuation (same code, same
+ * details, built server-side).
+ */
 export function ConfirmationView() {
   const params = useSearchParams();
-  const ref = params.get("ref") ?? "";
-  const [record, setRecord] = useState<BookingRecord | null>(null);
+  const code = params.get("code") ?? "";
+  const [payload, setPayload] = useState<ConfirmationPayload | null>(null);
   const [loaded, setLoaded] = useState(false);
 
-  // localStorage is client-only — read after mount to avoid SSR mismatch
+  // sessionStorage is client-only — read after mount
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRecord(getRecord(ref));
+    setPayload(readConfirmation(code));
     setLoaded(true);
-  }, [ref]);
+  }, [code]);
 
   if (!loaded) {
     return (
       <div
         className="mx-auto h-96 max-w-2xl animate-pulse rounded-[14px] bg-sunken"
         aria-busy="true"
-        aria-label="Loading booking"
+        aria-label="Loading confirmation"
       />
     );
   }
 
-  if (!record) {
+  if (!code) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="font-display text-3xl text-ink">Booking not found</h1>
+        <h1 className="font-display text-3xl text-ink">No booking to show</h1>
         <p className="mt-3 text-ink-soft">
-          We couldn&apos;t find a booking with this reference on this device.
-          Booking requests are stored in the browser they were made in — if
-          you booked on another device, check WhatsApp for your confirmation.
+          Start a booking and your confirmation will appear here.
         </p>
         <Link
           href="/book"
@@ -52,9 +54,17 @@ export function ConfirmationView() {
     );
   }
 
-  const entry = record.vehicleSlug ? toCustomerEntry(record.vehicleSlug) : undefined;
-  const area = getArea(record.search.pickupSlug);
-  const returnArea = getArea(record.search.returnSlug);
+  const b = payload?.booking;
+  const entry = b ? toCustomerEntry(b.vehicleModel) : undefined;
+  const fmt = (iso: string) =>
+    new Date(iso).toLocaleString("en-GB", {
+      timeZone: "Asia/Makassar",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -64,75 +74,81 @@ export function ConfirmationView() {
           Booking request received
         </h1>
         <p className="tnum mt-3 inline-block rounded-full bg-primary-faint px-4 py-1.5 text-sm font-semibold text-primary">
-          Reference: {record.reference}
+          Booking code: {code}
         </p>
         <p className="mx-auto mt-4 max-w-md text-ink-soft">
-          Our team will confirm availability and final details with{" "}
-          <strong className="font-semibold text-ink">{record.customer.fullName}</strong>{" "}
-          on WhatsApp. Nothing is charged until you approve the final quote.
+          Your booking is saved.{" "}
+          {b ? (
+            <>
+              Continue to WhatsApp and our team will confirm availability and
+              your rate with{" "}
+              <strong className="font-semibold text-ink">{b.fullName}</strong>.
+            </>
+          ) : (
+            "Quote your booking code in any conversation with our team."
+          )}{" "}
+          Nothing is charged until you approve the final quote.
         </p>
       </div>
 
-      <dl className="mt-8 space-y-3 rounded-[14px] border border-line bg-card p-6">
-        {[
-          { term: "Ride", detail: `${entry?.displayName ?? "—"} × ${record.quantity}` },
-          {
-            term: "Period",
-            detail: `${record.search.startDate} ${record.search.startTime} → ${record.search.endDate} ${record.search.endTime}`,
-          },
-          {
-            term: "Delivery",
-            detail: `${area?.name ?? "—"}${
-              record.customer.hotelName ? ` — ${record.customer.hotelName}` : ""
-            }`,
-          },
-          {
-            term: "Return",
-            detail:
-              record.search.returnSlug !== record.search.pickupSlug
-                ? returnArea?.name ?? "—"
-                : "Same as delivery",
-          },
-          ...(record.extras.length > 0
-            ? [
-                {
-                  term: "Extras",
-                  detail: record.extras
-                    .map((e) => {
-                      const def = getExtra(e.id);
-                      return def ? `${def.name} × ${e.quantity}` : null;
-                    })
-                    .filter(Boolean)
-                    .join(", "),
-                },
-              ]
-            : []),
-          {
-            term: "Rate",
-            detail:
-              "Available upon request — confirmed with your quote on WhatsApp",
-          },
-        ].map((row) => (
-          <div
-            key={row.term}
-            className="grid gap-1 border-b border-line pb-3 last:border-0 last:pb-0 sm:grid-cols-[160px_1fr]"
-          >
-            <dt className="text-sm font-semibold text-ink">{row.term}</dt>
-            <dd className="tnum text-sm text-ink-soft">{row.detail}</dd>
-          </div>
-        ))}
-      </dl>
+      {b ? (
+        <dl className="mt-8 space-y-3 rounded-[14px] border border-line bg-card p-6">
+          {[
+            {
+              term: "Ride",
+              detail: `${entry?.displayName ?? b.vehicleModel} × ${b.quantity}`,
+            },
+            {
+              term: "Period",
+              detail: `${fmt(b.startAt)} → ${fmt(b.endAt)}`,
+            },
+            {
+              term: "Delivery",
+              detail: `${getArea(b.pickupArea)?.name ?? b.pickupArea}${
+                b.pickupAddress ? ` — ${b.pickupAddress}` : ""
+              }`,
+            },
+            {
+              term: "Return",
+              detail:
+                b.returnArea !== b.pickupArea
+                  ? getArea(b.returnArea)?.name ?? b.returnArea
+                  : "Same as delivery",
+            },
+            ...(b.customerNotes
+              ? [{ term: "Notes", detail: b.customerNotes }]
+              : []),
+            {
+              term: "Rate",
+              detail:
+                "Available upon request — confirmed with your quote on WhatsApp",
+            },
+          ].map((row) => (
+            <div
+              key={row.term}
+              className="grid gap-1 border-b border-line pb-3 last:border-0 last:pb-0 sm:grid-cols-[160px_1fr]"
+            >
+              <dt className="text-sm font-semibold text-ink">{row.term}</dt>
+              <dd className="tnum whitespace-pre-line text-sm text-ink-soft">
+                {row.detail}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
-        <a
-          href={buildBookingWhatsAppUrl(record)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-6 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
-        >
-          <MessageCircle className="h-5 w-5" aria-hidden="true" />
-          Open WhatsApp summary
-        </a>
+        {payload ? (
+          <a
+            href={payload.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-6 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
+          >
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+            Continue to WhatsApp
+          </a>
+        ) : null}
         <Link
           href="/"
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[10px] border border-line-strong px-6 text-base font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
@@ -143,7 +159,7 @@ export function ConfirmationView() {
       </div>
 
       <p className="mt-6 text-center text-xs leading-relaxed text-ink-faint">
-        Keep your reference handy — it identifies your booking in every
+        Keep your booking code handy — it identifies your booking in every
         conversation with our team.
       </p>
     </div>

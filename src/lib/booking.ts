@@ -1,9 +1,12 @@
 "use client";
 
 /**
- * Booking draft + records, persisted in browser storage for the
- * prototype. The shape mirrors what a future API would accept, so
- * swapping localStorage for a database later only changes this file.
+ * Client-side booking helpers.
+ *
+ * localStorage is used ONLY for temporary form drafts — the booking
+ * database is Supabase, written exclusively through POST /api/bookings.
+ * sessionStorage briefly hands the server's confirmation payload
+ * (booking code + WhatsApp URL) to the confirmation screen.
  */
 
 import type { RentalPeriod } from "@/lib/pricing";
@@ -35,13 +38,9 @@ export interface BookingDraft {
   customer: CustomerInfo;
 }
 
-export interface BookingRecord extends BookingDraft {
-  reference: string;
-  createdAt: string;
-}
 
 const DRAFT_KEY = "werigo.booking.draft";
-const RECORDS_KEY = "werigo.booking.records";
+const CONFIRMATION_KEY = "werigo.booking.confirmation";
 
 export const emptyCustomer: CustomerInfo = {
   fullName: "",
@@ -102,35 +101,46 @@ export function clearDraft(): void {
   window.localStorage.removeItem(DRAFT_KEY);
 }
 
-export function saveRecord(record: BookingRecord): void {
+
+
+
+/* ---------- Confirmation handoff (sessionStorage, transient) ---------- */
+
+export interface ConfirmationPayload {
+  bookingCode: string;
+  whatsappUrl: string;
+  booking: {
+    bookingCode: string;
+    fullName: string;
+    vehicleModel: string;
+    quantity: number;
+    pickupArea: string;
+    pickupAddress: string | null;
+    returnArea: string;
+    returnAddress: string | null;
+    startAt: string;
+    endAt: string;
+    customerNotes: string | null;
+  };
+}
+
+export function cacheConfirmation(payload: ConfirmationPayload): void {
   if (typeof window === "undefined") return;
   try {
-    const raw = window.localStorage.getItem(RECORDS_KEY);
-    const records: BookingRecord[] = raw ? JSON.parse(raw) : [];
-    records.push(record);
-    window.localStorage.setItem(RECORDS_KEY, JSON.stringify(records));
+    window.sessionStorage.setItem(CONFIRMATION_KEY, JSON.stringify(payload));
   } catch {
-    // Non-fatal in prototype
+    // Confirmation still shows the code from the URL
   }
 }
 
-export function getRecord(reference: string): BookingRecord | null {
+export function readConfirmation(code: string): ConfirmationPayload | null {
   if (typeof window === "undefined") return null;
   try {
-    const raw = window.localStorage.getItem(RECORDS_KEY);
-    const records: BookingRecord[] = raw ? JSON.parse(raw) : [];
-    return records.find((r) => r.reference === reference) ?? null;
+    const raw = window.sessionStorage.getItem(CONFIRMATION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as ConfirmationPayload;
+    return parsed.bookingCode === code ? parsed : null;
   } catch {
     return null;
   }
-}
-
-/** WG-XXXXXX booking reference */
-export function generateReference(): string {
-  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  let ref = "";
-  for (let i = 0; i < 6; i++) {
-    ref += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return `WG-${ref}`;
 }

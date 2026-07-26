@@ -1,5 +1,6 @@
-/* Functional test: full booking journey with Extended variant on the
-   production build. Run `next start` first. */
+/* Functional test: full booking journey on the production build.
+   Requires BOOKING_STORE=memory ALLOW_MEMORY_STORE=1 (see
+   db-flow-test.mjs for the full database flow suite). */
 import puppeteer from "puppeteer-core";
 
 const BASE = process.env.TEST_BASE ?? "http://localhost:3001";
@@ -93,10 +94,11 @@ try {
     document.body.textContent.includes("Available upon request")
   );
 
-  // Step 6-8: confirm via save (avoid opening WhatsApp window)
+  // Step 6-8: consent + confirm (booking stored server-side first)
+  await page.click("#field-privacyConsent");
   await page.evaluate(() => {
     [...document.querySelectorAll("button")]
-      .find((b) => b.textContent.includes("Save booking request"))
+      .find((b) => b.textContent.includes("Confirm booking request"))
       .click();
   });
   await page.waitForFunction(
@@ -117,6 +119,7 @@ try {
     return a ? decodeURIComponent(a.href) : null;
   });
   results.waHasModel = waHref?.includes("Wedison Victory") ?? false;
+  results.waHasBookingCode = /WRG-\d{8}-[A-Z2-9]{4}/.test(waHref ?? "");
   results.waNoVariant = waHref ? !waHref.includes("Extended") : false;
   results.waHasNoTotal = waHref ? !/Rp\s?\d/.test(waHref) : false;
   results.waAsksForRate = waHref?.includes("rate and availability") ?? false;

@@ -1,62 +1,6 @@
 import { site } from "@/lib/config";
-import type { BookingRecord } from "@/lib/booking";
 import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
-import { getExtra } from "@/data/extras";
-
-/**
- * Builds a wa.me deep link with a professionally formatted booking
- * summary. The business number lives in src/lib/config.ts
- * (NEXT_PUBLIC_WHATSAPP_NUMBER).
- *
- * No price figures are included — rates are quoted by the team in
- * the WhatsApp conversation.
- */
-export function buildBookingWhatsAppUrl(record: BookingRecord): string {
-  const entry = record.vehicleSlug ? toCustomerEntry(record.vehicleSlug) : undefined;
-  const pickup = getArea(record.search.pickupSlug);
-  const ret = getArea(record.search.returnSlug || record.search.pickupSlug);
-
-  const extras = record.extras
-    .map((e) => {
-      const def = getExtra(e.id);
-      return def ? `• ${def.name} × ${e.quantity}` : null;
-    })
-    .filter(Boolean)
-    .join("\n");
-
-  const lines = [
-    `*Werigo Booking Request*`,
-    `_Powered by Wedison_`,
-    ``,
-    `Reference: ${record.reference}`,
-    `Name: ${record.customer.fullName}`,
-    ``,
-    `*Ride*`,
-    `${entry ? entry.displayName : "—"} × ${record.quantity}`,
-    ``,
-    `*Rental period*`,
-    `From: ${record.search.startDate} ${record.search.startTime}`,
-    `To: ${record.search.endDate} ${record.search.endTime}`,
-    ``,
-    `*Pick-up / delivery*`,
-    `${pickup ? pickup.name : record.search.pickupSlug}${
-      record.customer.hotelName ? ` — ${record.customer.hotelName}` : ""
-    }`,
-    `*Return*`,
-    `${ret ? ret.name : "Same as pick-up"}`,
-    ...(extras ? [``, `*Extras*`, extras] : []),
-    ``,
-    `*Rate*`,
-    `Please send me the rate and availability for these dates.`,
-    ...(record.customer.specialRequest
-      ? [``, `*Special request*`, record.customer.specialRequest]
-      : []),
-  ];
-
-  const text = encodeURIComponent(lines.join("\n"));
-  return `https://wa.me/${site.whatsappNumber}?text=${text}`;
-}
 
 /**
  * "Check availability and rates" link for a specific Wedison model —
@@ -68,6 +12,72 @@ export function buildModelInquiryWhatsAppUrl(entryId: string): string {
   const text = encodeURIComponent(
     `Hi Werigo! I'd like to check availability and rates for the ${name}. My dates and delivery area are:`
   );
+  return `https://wa.me/${site.whatsappNumber}?text=${text}`;
+}
+
+/**
+ * WhatsApp continuation link for a booking that has been successfully
+ * stored in the database. Includes the database booking code and the
+ * submitted details — built server-side, returned only after insert.
+ */
+export function buildStoredBookingWhatsAppUrl(booking: {
+  booking_code: string;
+  full_name: string;
+  vehicle_model: string;
+  quantity: number;
+  pickup_area: string;
+  pickup_address: string | null;
+  return_area: string;
+  return_address: string | null;
+  start_at: string;
+  end_at: string;
+  customer_notes: string | null;
+}): string {
+  const entry = toCustomerEntry(booking.vehicle_model);
+  const pickup = getArea(booking.pickup_area);
+  const ret = getArea(booking.return_area);
+  const fmt = (iso: string) =>
+    new Date(iso).toLocaleString("en-GB", {
+      timeZone: "Asia/Makassar",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+  const lines = [
+    `*Werigo Booking Request*`,
+    `_Powered by Wedison_`,
+    ``,
+    `Booking code: ${booking.booking_code}`,
+    `Name: ${booking.full_name}`,
+    ``,
+    `*Ride*`,
+    `${entry ? entry.displayName : booking.vehicle_model} × ${booking.quantity}`,
+    ``,
+    `*Rental period*`,
+    `From: ${fmt(booking.start_at)}`,
+    `To: ${fmt(booking.end_at)}`,
+    ``,
+    `*Pick-up / delivery*`,
+    `${pickup?.name ?? booking.pickup_area}${
+      booking.pickup_address ? ` — ${booking.pickup_address}` : ""
+    }`,
+    `*Return*`,
+    `${
+      booking.return_area !== booking.pickup_area
+        ? ret?.name ?? booking.return_area
+        : "Same as pick-up"
+    }${booking.return_address ? ` — ${booking.return_address}` : ""}`,
+    ``,
+    `*Rate*`,
+    `Please send me the rate and availability for these dates.`,
+    ...(booking.customer_notes
+      ? [``, `*Notes*`, booking.customer_notes]
+      : []),
+  ];
+  const text = encodeURIComponent(lines.join("\n"));
   return `https://wa.me/${site.whatsappNumber}?text=${text}`;
 }
 
