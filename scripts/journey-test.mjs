@@ -17,24 +17,23 @@ try {
     `${BASE}/book?pickup=canggu&return=ubud&startDate=2026-07-28&startTime=09%3A00&endDate=2026-07-31&endTime=09%3A00`,
     { waitUntil: "networkidle0" }
   );
-  await page.waitForSelector("#variant-victory", { timeout: 15000 });
+  await page.waitForFunction(
+    () => document.body.textContent.includes("Wedison models for"),
+    { timeout: 15000 }
+  );
   results.resultsRendered = true;
-
-  // Variant select → Extended
-  await page.select("#variant-victory", "victory-extended");
-  await new Promise((r) => setTimeout(r, 400));
-  results.headingAfterVariant = await page.$eval(
-    "#variant-victory",
-    (el) => el.closest("li").querySelector("h2").textContent
+  results.exactlyFourModels = await page.evaluate(
+    () => document.querySelectorAll("main ul > li h2").length === 4
   );
-  results.showsExtendedBattery = await page.$eval(
-    "#variant-victory",
-    (el) => el.closest("li").textContent.includes("3,456")
+  results.noVariantWording = await page.evaluate(
+    () => !/(Standard|Extended)/.test(document.querySelector("main").textContent)
   );
 
-  // Step 3: select → checkout
+  // Step 3: select Victory → checkout
   await page.evaluate(() => {
-    const row = document.getElementById("variant-victory").closest("li");
+    const row = [...document.querySelectorAll("main li")].find((li) =>
+      li.textContent.includes("Wedison Victory")
+    );
     [...row.querySelectorAll("button")]
       .find((b) => b.textContent.includes("Check availability"))
       .click();
@@ -43,13 +42,16 @@ try {
     () => location.pathname === "/book/checkout",
     { timeout: 15000 }
   );
-  results.checkoutUrlHasVariant = page.url().includes("vehicle=victory-extended");
+  results.checkoutUrlModel = page.url().includes("vehicle=victory");
   await page.waitForFunction(
     () => document.body.textContent.includes("Make it yours"),
     { timeout: 15000 }
   );
-  results.checkoutShowsVariantName = await page.evaluate(() =>
-    document.body.textContent.includes("Wedison Victory Extended")
+  results.checkoutShowsModelName = await page.evaluate(() =>
+    document.body.textContent.includes("Wedison Victory")
+  );
+  results.checkoutNoVariantWording = await page.evaluate(
+    () => !/(Standard|Extended)/.test(document.body.textContent)
   );
   results.checkoutHasNoPrices = await page.evaluate(
     () => !/Rp\s?\d{2,3}[.,]\d{3}/.test(document.body.textContent)
@@ -114,7 +116,8 @@ try {
     );
     return a ? decodeURIComponent(a.href) : null;
   });
-  results.waHasWedisonVariant = waHref?.includes("Wedison Victory Extended") ?? false;
+  results.waHasModel = waHref?.includes("Wedison Victory") ?? false;
+  results.waNoVariant = waHref ? !waHref.includes("Extended") : false;
   results.waHasNoTotal = waHref ? !/Rp\s?\d/.test(waHref) : false;
   results.waAsksForRate = waHref?.includes("rate and availability") ?? false;
 } catch (err) {

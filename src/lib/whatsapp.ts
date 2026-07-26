@@ -1,6 +1,6 @@
 import { site } from "@/lib/config";
 import type { BookingRecord } from "@/lib/booking";
-import { getEntry } from "@/data/vehicles";
+import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { getExtra } from "@/data/extras";
 
@@ -13,7 +13,7 @@ import { getExtra } from "@/data/extras";
  * the WhatsApp conversation.
  */
 export function buildBookingWhatsAppUrl(record: BookingRecord): string {
-  const entry = record.vehicleSlug ? getEntry(record.vehicleSlug) : undefined;
+  const entry = record.vehicleSlug ? toCustomerEntry(record.vehicleSlug) : undefined;
   const pickup = getArea(record.search.pickupSlug);
   const ret = getArea(record.search.returnSlug || record.search.pickupSlug);
 
@@ -63,7 +63,7 @@ export function buildBookingWhatsAppUrl(record: BookingRecord): string {
  * used on product pages before dates are known.
  */
 export function buildModelInquiryWhatsAppUrl(entryId: string): string {
-  const entry = getEntry(entryId);
+  const entry = toCustomerEntry(entryId);
   const name = entry ? entry.displayName : "a Wedison motorcycle";
   const text = encodeURIComponent(
     `Hi Werigo! I'd like to check availability and rates for the ${name}. My dates and delivery area are:`

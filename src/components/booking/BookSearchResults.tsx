@@ -1,24 +1,24 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowRight, Battery, Gauge, Route, SearchX, Zap } from "lucide-react";
+import { ArrowRight, Gauge, Route, SearchX, Zap } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { MediaImage } from "@/components/media/MediaImage";
 import {
   getListedModels,
-  getVariants,
-  getEntry,
+  toCustomerEntry,
+  sharedSpec,
   specDisclaimer,
 } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
 
 /**
- * Booking steps 1–3: search (if no params), then Wedison models with
- * variant selection, then selection → checkout. No rental prices are
+ * Booking steps 1–3: search (if no params), then the four Wedison
+ * rental models, then selection → checkout. No rental prices are
  * shown — rates are always provided on request.
  */
 export function BookSearchResults() {
@@ -37,9 +37,6 @@ export function BookSearchResults() {
     }),
     [params]
   );
-
-  // Variant choice per model page slug (entry id keyed by modelSlug)
-  const [variantChoice, setVariantChoice] = useState<Record<string, string>>({});
 
   const hasSearch =
     Boolean(pickup) &&
@@ -72,14 +69,9 @@ export function BookSearchResults() {
   const returnArea = getArea(ret);
   const days = rentalDays(period);
   const models = getListedModels();
-  const preselectedEntry = preselect ? getEntry(preselect) : undefined;
-
-  const selectedEntryId = (modelSlug: string): string => {
-    if (variantChoice[modelSlug]) return variantChoice[modelSlug];
-    if (preselectedEntry && preselectedEntry.modelSlug === modelSlug)
-      return preselectedEntry.id;
-    return getVariants(modelSlug)[0]?.id ?? modelSlug;
-  };
+  // Legacy links or drafts may reference variant ids — normalise to
+  // the customer-facing model.
+  const preselectedEntry = preselect ? toCustomerEntry(preselect) : undefined;
 
   const goToCheckout = (entryId: string) => {
     const qs = new URLSearchParams({
@@ -130,10 +122,7 @@ export function BookSearchResults() {
       ) : (
         <ul className="mt-8 space-y-5">
           {models.map((model) => {
-            const variants = getVariants(model.modelSlug);
-            const hasVariants = variants.length > 1;
-            const activeId = selectedEntryId(model.modelSlug);
-            const active = getEntry(activeId) ?? model;
+            const range = sharedSpec(model.modelSlug, "claimedRangeKm");
             const highlighted =
               preselectedEntry?.modelSlug === model.modelSlug;
             return (
@@ -155,59 +144,27 @@ export function BookSearchResults() {
                 <div>
                   {highlighted ? <p className="eyebrow mb-1">Your pick</p> : null}
                   <h2 className="font-display text-2xl text-ink">
-                    {active.displayName}
+                    {model.displayName}
                   </h2>
-                  <p className="mt-1 text-sm text-ink-soft">{active.positioning}</p>
+                  <p className="mt-1 text-sm text-ink-soft">{model.positioning}</p>
                   <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-ink-soft">
-                    <li className="flex items-center gap-1.5">
-                      <Route className="h-4 w-4 text-primary" aria-hidden="true" />
-                      <span className="tnum">up to {active.claimedRangeKm} km</span>
-                    </li>
+                    {range !== null ? (
+                      <li className="flex items-center gap-1.5">
+                        <Route className="h-4 w-4 text-primary" aria-hidden="true" />
+                        <span className="tnum">up to {range} km</span>
+                      </li>
+                    ) : null}
                     <li className="flex items-center gap-1.5">
                       <Gauge className="h-4 w-4 text-primary" aria-hidden="true" />
-                      <span className="tnum">up to {active.topSpeedKmh} km/h</span>
+                      <span className="tnum">up to {model.topSpeedKmh} km/h</span>
                     </li>
-                    <li className="flex items-center gap-1.5">
-                      <Battery className="h-4 w-4 text-primary" aria-hidden="true" />
-                      <span className="tnum">
-                        LFP {active.batteryWh.toLocaleString("en-US")} Wh
-                      </span>
-                    </li>
-                    {active.supercharge ? (
+                    {model.supercharge ? (
                       <li className="flex items-center gap-1.5">
                         <Zap className="h-4 w-4 text-primary" aria-hidden="true" />
-                        Supercharge
+                        SuperCharge
                       </li>
                     ) : null}
                   </ul>
-
-                  {hasVariants ? (
-                    <div className="mt-3">
-                      <label
-                        htmlFor={`variant-${model.modelSlug}`}
-                        className="mb-1 block text-xs font-semibold uppercase tracking-wider text-ink-soft"
-                      >
-                        Variant
-                      </label>
-                      <select
-                        id={`variant-${model.modelSlug}`}
-                        value={activeId}
-                        onChange={(e) =>
-                          setVariantChoice((prev) => ({
-                            ...prev,
-                            [model.modelSlug]: e.target.value,
-                          }))
-                        }
-                        className="min-h-11 cursor-pointer rounded-[10px] border border-line-strong bg-card px-3 text-sm text-ink"
-                      >
-                        {variants.map((v) => (
-                          <option key={v.id} value={v.id}>
-                            {v.variant} — up to {v.claimedRangeKm} km
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  ) : null}
                 </div>
                 <div className="flex flex-col items-stretch gap-3 md:items-end">
                   <p className="text-sm text-ink-soft md:max-w-[180px] md:text-right">
@@ -217,7 +174,7 @@ export function BookSearchResults() {
                     Rental rate available upon request
                   </p>
                   <button
-                    onClick={() => goToCheckout(activeId)}
+                    onClick={() => goToCheckout(model.id)}
                     className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
                   >
                     Check availability and rates

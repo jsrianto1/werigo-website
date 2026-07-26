@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Gauge, Route, Zap } from "lucide-react";
 import type { WedisonEntry } from "@/data/vehicles";
-import { getVariants } from "@/data/vehicles";
+import { sharedSpec } from "@/data/vehicles";
 import { MediaImage } from "@/components/media/MediaImage";
 
 export function VehicleCard({ entry }: { entry: WedisonEntry }) {
-  const variants = getVariants(entry.modelSlug);
-  const hasVariants = variants.length > 1;
+  // Range is shown only when identical across all configurations of
+  // the model — differing values are confirmed at booking instead.
+  const range = sharedSpec(entry.modelSlug, "claimedRangeKm");
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow duration-200 hover:shadow-[0_16px_40px_-20px_rgba(14,43,39,0.3)]">
@@ -33,11 +34,6 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
               {entry.displayName}
             </Link>
           </h3>
-          {hasVariants ? (
-            <span className="shrink-0 rounded-full bg-primary-faint px-2.5 py-0.5 text-xs font-medium text-primary">
-              2 variants
-            </span>
-          ) : null}
         </div>
         <p className="mt-1 text-sm text-ink-soft">{entry.positioning}</p>
 
@@ -48,7 +44,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
               Range
             </dt>
             <dd className="tnum text-sm font-semibold text-ink">
-              up to {entry.claimedRangeKm} km
+              {range !== null ? `up to ${range} km` : "At booking"}
             </dd>
           </div>
           <div className="flex flex-col items-start gap-0.5">

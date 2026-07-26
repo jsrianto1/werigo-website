@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, ArrowRight, Truck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
+import { AreaImage } from "@/components/areas/AreaImage";
 import { serviceAreas } from "@/data/locations";
 
 export const metadata: Metadata = {
@@ -24,8 +26,15 @@ export default function DeliveryAreasPage() {
           <li key={area.slug}>
             <Link
               href={`/delivery-areas/${area.slug}`}
-              className="group flex h-full flex-col rounded-[14px] border border-line bg-card p-6 transition-shadow hover:shadow-[0_16px_40px_-20px_rgba(14,43,39,0.3)]"
+              className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_16px_40px_-20px_rgba(14,43,39,0.3)]"
             >
+              <AreaImage
+                slug={area.slug}
+                variant="card"
+                className="h-40 w-full"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+              />
+              <div className="flex flex-1 flex-col p-6">
               <div className="flex items-center justify-between">
                 <MapPin className="h-5 w-5 text-primary" aria-hidden="true" />
                 {area.deliveryFee === 0 ? (
@@ -55,6 +64,7 @@ export default function DeliveryAreasPage() {
                   aria-hidden="true"
                 />
               </span>
+              </div>
             </Link>
           </li>
         ))}
@@ -70,6 +80,7 @@ export default function DeliveryAreasPage() {
         </Link>{" "}
         with your address and dates.
       </p>
+      <RidingMotorcycle className="mt-10" />
     </Section>
   );
 }

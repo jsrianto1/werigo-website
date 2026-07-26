@@ -21,9 +21,11 @@ import { SearchWidget } from "@/components/booking/SearchWidget";
 import { MediaImage } from "@/components/media/MediaImage";
 import { MediaVideo } from "@/components/media/MediaVideo";
 import { findMedia } from "@/data/media";
+import { AreaImage } from "@/components/areas/AreaImage";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
+import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
@@ -250,6 +252,8 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <RidingMotorcycle />
+
       {/* ================= ELECTRIC BENEFITS ================= */}
       <Section labelledBy="benefits-heading">
         <SectionHeading
@@ -291,14 +295,21 @@ export default function HomePage() {
             <li key={area.slug}>
               <Link
                 href={`/delivery-areas/${area.slug}`}
-                className="group flex h-full flex-col rounded-[14px] border border-line bg-card p-5 transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
+                className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
               >
-                <MapPin className="h-4 w-4 text-primary" aria-hidden="true" />
-                <span className="mt-2.5 font-display text-lg text-ink transition-colors group-hover:text-primary">
-                  {area.name}
-                </span>
-                <span className="mt-1 text-xs leading-relaxed text-ink-soft">
-                  {area.deliveryFee === 0 ? "Free delivery" : "Delivery available"}
+                <AreaImage
+                  slug={area.slug}
+                  variant="card"
+                  className="h-24 w-full sm:h-28"
+                  sizes="(max-width: 640px) 50vw, 300px"
+                />
+                <span className="flex flex-1 flex-col p-4">
+                  <span className="font-display text-lg text-ink transition-colors group-hover:text-primary">
+                    {area.name}
+                  </span>
+                  <span className="mt-0.5 text-xs leading-relaxed text-ink-soft">
+                    {area.deliveryFee === 0 ? "Free delivery" : "Delivery available"}
+                  </span>
                 </span>
               </Link>
             </li>
@@ -387,7 +398,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow mb-3 !text-accent">
                 <Zap className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
-                Wedison Supercharge
+                Wedison SuperCharge
               </p>
               <h2
                 id="supercharge-heading"
@@ -396,20 +407,29 @@ export default function HomePage() {
                 Charge Fast. Ride Farther.
               </h2>
               <p className="mt-3 font-display text-xl text-accent-soft">
-                Charge 15 Minutes. Ride 100+ KM.
+                30%–90% in approx. 10 min*
+              </p>
+              <p className="mt-1 font-display text-lg text-ink-inverse/90">
+                100+ km total range on selected models*
               </p>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-inverse/80">
-                Compatible Wedison models can recharge from approximately 10%
-                to 80% starting from 15 minutes at supported Wedison
-                Supercharge locations — handled by our team while you take a
-                break.
+                Compatible Wedison models have been tested to charge from 30%
+                to 90% in approximately 10 minutes at supported Wedison
+                SuperCharge locations — handled by our team while you take a
+                break. Selected Wedison models offer more than 100 km of total
+                claimed riding range.
               </p>
-              <p className="mt-3 max-w-xl text-xs text-ink-inverse/50">
-                Applies to compatible Wedison electric motorcycle models.
+              <p className="mt-3 max-w-xl text-xs leading-relaxed text-ink-inverse/50">
+                *Based on internal Wedison testing under specific conditions.
+                Actual charging time and riding range may vary depending on
+                model, battery condition, battery temperature, starting charge
+                level, load, riding style, charger availability, and operating
+                conditions. SuperCharge is available only for compatible
+                Wedison models at supported locations.
               </p>
               <div className="mt-7">
                 <ButtonLink href="/supercharge" variant="accent" size="lg">
-                  Explore Supercharge
+                  Explore SuperCharge
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </ButtonLink>
               </div>

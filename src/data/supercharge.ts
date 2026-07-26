@@ -63,17 +63,25 @@ export const compatibleModelSlugs: string[] = [
   "edpower",
 ];
 
-/** Headline performance message — applies to compatible Wedison models only. */
+/**
+ * Approved performance wording (management, 2026-07-26) — use these
+ * strings verbatim. Charging speed and total range are two SEPARATE
+ * facts: never combine them into one claim.
+ */
 export const superchargePerformance = {
   headline: "Charge Fast. Ride Farther.",
-  message: "Charge 15 Minutes. Ride 100+ KM.",
-  chargeMinutes: "starting from 15 minutes",
-  rangeBenefit: "approximately 10% to 80% charge",
-  /** Mandated compatibility statement — use verbatim. */
+  /** Primary charging statement */
   statement:
-    "Compatible Wedison models can recharge from approximately 10% to 80% starting from 15 minutes at supported Wedison Supercharge locations.",
-  caveat:
-    "Charging performance applies to compatible Wedison electric motorcycle models. Actual charge time and range vary with battery level, model, load and riding conditions.",
+    "Compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes at supported Wedison SuperCharge locations.",
+  /** Separate range statement */
+  rangeStatement:
+    "Selected Wedison models offer more than 100 km of total claimed riding range.",
+  /** Compact highlights (always shown with the disclosure) */
+  highlightCharge: "30%–90% in approx. 10 min*",
+  highlightRange: "100+ km total range on selected models*",
+  /** Readable disclosure — must accompany the highlights */
+  disclosure:
+    "*Based on internal Wedison testing under specific conditions. Actual charging time and riding range may vary depending on model, battery condition, battery temperature, starting charge level, load, riding style, charger availability, and operating conditions. SuperCharge is available only for compatible Wedison models at supported locations.",
 };
 
 export const superchargeSteps = [
@@ -87,25 +95,25 @@ export const superchargeSteps = [
   },
   {
     title: "Ride out",
-    text: "Compatible models recharge from approximately 10% to 80% starting from 15 minutes. The session is logged to your rental — no payment at the point.",
+    text: "Compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes. The session is logged to your rental — no payment at the point.",
   },
 ];
 
 export const superchargeFaq = [
   {
-    question: "What is Wedison Supercharge?",
+    question: "What is Wedison SuperCharge?",
     answer:
-      "Supercharge is Wedison's fast-charging technology, available to Werigo riders on compatible Wedison models — dedicated locations where your motorcycle recharges from approximately 10% to 80% starting from 15 minutes, with our team handling the process.",
+      "SuperCharge is Wedison's fast-charging technology, available to Werigo riders on compatible Wedison models at dedicated locations, with our team handling the process. Compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes at supported Wedison SuperCharge locations.",
   },
   {
-    question: "Which motorcycles can use Supercharge?",
+    question: "Which motorcycles can use SuperCharge?",
     answer:
-      "Confirmed compatible models are the Wedison Victory, Victory Extended, Athena, Athena Extended and EdPower. The Wedison Bees uses standard home charging. We confirm your exact configuration when you book.",
+      "Confirmed compatible models are the Wedison Victory, Athena and EdPower. The Wedison Bees uses standard home charging. We confirm your exact configuration when you book.",
   },
   {
-    question: "How long does a Supercharge session take?",
+    question: "How long does a SuperCharge session take?",
     answer:
-      "Compatible Wedison models can recharge from approximately 10% to 80% starting from 15 minutes at supported Wedison Supercharge locations. Exact times vary with your battery level on arrival and your model's configuration.",
+      "Compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes at supported Wedison SuperCharge locations. Actual charging time varies with your model, battery condition and starting charge level.",
   },
   {
     question: "How much does Supercharge cost?",

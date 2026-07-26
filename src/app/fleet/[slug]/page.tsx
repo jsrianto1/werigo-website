@@ -19,8 +19,8 @@ import { ButtonLink } from "@/components/ui/Button";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import {
   getModel,
-  getVariants,
   getPrimaryCards,
+  sharedSpec,
   specDisclaimer,
   type WedisonEntry,
 } from "@/data/vehicles";
@@ -41,26 +41,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const entry = getModel(slug);
   if (!entry) return {};
+  const range = sharedSpec(slug, "claimedRangeKm");
   return {
     title: `${entry.displayName} — Electric Motorcycle Rental in Bali`,
-    description: `Rent the ${entry.displayName} in Bali through Werigo. Official Wedison specifications: up to ${entry.claimedRangeKm} km claimed range, up to ${entry.topSpeedKmh} km/h. Rates available upon request.`,
+    description: `Rent the ${entry.displayName} in Bali through Werigo. Official Wedison specifications: ${
+      range !== null ? `up to ${range} km claimed range, ` : ""
+    }up to ${entry.topSpeedKmh} km/h. Rates available upon request.`,
     alternates: { canonical: `/fleet/${slug}` },
   };
 }
 
 function specRows(entry: WedisonEntry) {
+  // Battery and claimed range are shown only when identical across
+  // every configuration of the model — differing values are confirmed
+  // at booking (management: never surface variant options).
+  const battery = sharedSpec(entry.modelSlug, "batteryWh");
+  const range = sharedSpec(entry.modelSlug, "claimedRangeKm");
   return [
     { icon: Zap, label: "Motor", value: `${entry.motorW.toLocaleString("en-US")} W` },
     { icon: Gauge, label: "Top speed", value: `up to ${entry.topSpeedKmh} km/h` },
     {
       icon: Battery,
       label: "Battery",
-      value: `LFP, ${entry.batteryWh.toLocaleString("en-US")} Wh`,
+      value:
+        battery !== null
+          ? `LFP, ${battery.toLocaleString("en-US")} Wh`
+          : "LFP — configuration confirmed at booking",
     },
     {
       icon: Route,
       label: "Claimed range",
-      value: `up to ${entry.claimedRangeKm} km`,
+      value: range !== null ? `up to ${range} km` : "Confirmed at booking",
     },
     ...(entry.homeCharging
       ? [{ icon: BatteryCharging, label: "Home charging", value: entry.homeCharging }]
@@ -69,8 +80,8 @@ function specRows(entry: WedisonEntry) {
       ? [
           {
             icon: Zap,
-            label: "Wedison Supercharge",
-            value: "10–80% starting from 15 minutes",
+            label: "Wedison SuperCharge",
+            value: "Supported",
           },
         ]
       : []),
@@ -113,8 +124,6 @@ export default async function VehicleDetailPage({ params }: Props) {
   const entry = getModel(slug);
   if (!entry) notFound();
 
-  const variants = getVariants(slug);
-  const hasVariants = variants.length > 1;
   const others = getPrimaryCards()
     .filter((e) => e.modelSlug !== slug)
     .slice(0, 3);
@@ -235,78 +244,44 @@ export default async function VehicleDetailPage({ params }: Props) {
         </div>
       </Section>
 
-      {/* Specs per variant + equipment */}
+      {/* Specifications + equipment */}
       <Section tone="wash" labelledBy="specs-title" className="!pt-10">
         <h2 id="specs-title" className="mb-6 font-display text-2xl text-ink">
-          {hasVariants ? "Choose your configuration" : "Specifications"}
+          Specifications
         </h2>
-        <div
-          className={`grid gap-6 ${hasVariants ? "lg:grid-cols-2" : "lg:grid-cols-2"}`}
-        >
-          {variants.map((variant) => (
-            <div key={variant.id} className="rounded-[14px] border border-line bg-card p-6">
-              <div className="flex items-baseline justify-between gap-3">
-                <h3 className="font-display text-xl text-ink">
-                  {hasVariants ? variant.displayName : "Official specifications"}
-                </h3>
-                {hasVariants ? (
-                  <span className="rounded-full bg-primary-faint px-2.5 py-0.5 text-xs font-medium text-primary">
-                    {variant.variant}
-                  </span>
-                ) : null}
-              </div>
-              <dl className="mt-4 divide-y divide-line">
-                {specRows(variant).map((spec) => (
-                  <div
-                    key={spec.label}
-                    className="flex items-center justify-between gap-4 py-3"
-                  >
-                    <dt className="flex items-center gap-2.5 text-sm text-ink-soft">
-                      <spec.icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                      {spec.label}
-                    </dt>
-                    <dd className="tnum text-right text-sm font-semibold text-ink">
-                      {spec.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              <ButtonLink
-                href={`/book?vehicle=${variant.id}`}
-                variant={variant.primaryCard ? "accent" : "primary"}
-                className="mt-5 w-full"
-              >
-                Check availability and rates
-                {hasVariants ? ` — ${variant.variant}` : ""}
-              </ButtonLink>
-            </div>
-          ))}
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-[14px] border border-line bg-card p-6">
+            <h3 className="font-display text-xl text-ink">Official specifications</h3>
+            <dl className="mt-4 divide-y divide-line">
+              {specRows(entry).map((spec) => (
+                <div
+                  key={spec.label}
+                  className="flex items-center justify-between gap-4 py-3"
+                >
+                  <dt className="flex items-center gap-2.5 text-sm text-ink-soft">
+                    <spec.icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                    {spec.label}
+                  </dt>
+                  <dd className="tnum text-right text-sm font-semibold text-ink">
+                    {spec.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <ButtonLink
+              href={`/book?vehicle=${entry.id}`}
+              variant="accent"
+              className="mt-5 w-full"
+            >
+              Check availability and rates
+            </ButtonLink>
+          </div>
 
-          {!hasVariants ? (
-            <div className="rounded-[14px] border border-line bg-card p-6">
-              <h3 className="font-display text-xl text-ink">
-                Included with every rental
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {entry.includedEquipment.map((item) => (
-                  <li key={item} className="flex items-center gap-2.5 text-sm text-ink-soft">
-                    <Check className="h-4 w-4 shrink-0 text-ok" aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-ink-faint">
-                Delivery, a condition walk-around and a riding briefing are part
-                of every handover. Extras like additional helmets can be added
-                during booking.
-              </p>
-            </div>
-          ) : null}
-        </div>
-        {hasVariants ? (
-          <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
-            <h3 className="font-display text-xl text-ink">Included with every rental</h3>
-            <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
+          <div className="rounded-[14px] border border-line bg-card p-6">
+            <h3 className="font-display text-xl text-ink">
+              Included with every rental
+            </h3>
+            <ul className="mt-4 space-y-3">
               {entry.includedEquipment.map((item) => (
                 <li key={item} className="flex items-center gap-2.5 text-sm text-ink-soft">
                   <Check className="h-4 w-4 shrink-0 text-ok" aria-hidden="true" />
@@ -314,8 +289,13 @@ export default async function VehicleDetailPage({ params }: Props) {
                 </li>
               ))}
             </ul>
+            <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-ink-faint">
+              Delivery, a condition walk-around and a riding briefing are part
+              of every handover. Extras like additional helmets can be added
+              during booking.
+            </p>
           </div>
-        ) : null}
+        </div>
         <p className="mt-6 text-xs leading-relaxed text-ink-faint">{specDisclaimer}</p>
       </Section>
 

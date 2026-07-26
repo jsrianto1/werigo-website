@@ -254,3 +254,37 @@ export function getListedEntries(): WedisonEntry[] {
 export function getListedModels(): WedisonEntry[] {
   return wedisonFleet.filter((e) => e.listed && e.primaryCard);
 }
+
+/* ============================================================
+   CUSTOMER-FACING CONSOLIDATION (management, 2026-07-26):
+   exactly four rental models are shown — Bees, Victory, Athena,
+   EdPower. Variant entries stay in the data (their specs are
+   approved) but are never surfaced as separate rental options.
+   ============================================================ */
+
+/**
+ * Resolve any entry id (including legacy variant ids from old
+ * bookmarks or localStorage drafts) to the customer-facing model
+ * entry.
+ */
+export function toCustomerEntry(id: string): WedisonEntry | undefined {
+  const entry = getEntry(id);
+  if (!entry) return undefined;
+  return entry.primaryCard ? entry : getModel(entry.modelSlug);
+}
+
+/**
+ * Value of a spec if it is identical across all variants of a model;
+ * null when variants differ. Consolidated surfaces must hide
+ * differing values rather than pick one (management: do not invent
+ * replacement specifications).
+ */
+export function sharedSpec<K extends keyof WedisonEntry>(
+  modelSlug: string,
+  key: K
+): WedisonEntry[K] | null {
+  const variants = getVariants(modelSlug);
+  if (variants.length === 0) return null;
+  const first = variants[0][key];
+  return variants.every((v) => v[key] === first) ? first : null;
+}

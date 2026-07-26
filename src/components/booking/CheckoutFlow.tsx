@@ -15,7 +15,7 @@ import {
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
-import { getEntry, getVariants } from "@/data/vehicles";
+import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { rentalExtras } from "@/data/extras";
 import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
@@ -43,8 +43,9 @@ export function CheckoutFlow() {
   const router = useRouter();
   const params = useSearchParams();
 
-  /** Entry id from src/data/vehicles.ts, e.g. "victory-extended" */
-  const entryId = params.get("vehicle") ?? "";
+  /** Entry id from the URL; legacy variant ids are normalised to the
+      customer-facing model (four rental models only). */
+  const rawEntryId = params.get("vehicle") ?? "";
   const pickup = params.get("pickup") ?? "";
   const ret = params.get("return") ?? pickup;
   const period: RentalPeriod = useMemo(
@@ -57,7 +58,8 @@ export function CheckoutFlow() {
     [params]
   );
 
-  const entry = getEntry(entryId);
+  const entry = rawEntryId ? toCustomerEntry(rawEntryId) : undefined;
+  const entryId = entry?.id ?? "";
   const area = getArea(pickup);
   const returnArea = getArea(ret);
 
@@ -115,8 +117,6 @@ export function CheckoutFlow() {
 
   const valid = entry && pickup && isValidPeriod(period);
   const days = valid ? rentalDays(period) : 0;
-  const variants = entry ? getVariants(entry.modelSlug) : [];
-  const hasVariants = variants.length > 1;
 
   if (!valid) {
     return (
@@ -147,18 +147,6 @@ export function CheckoutFlow() {
     endTime: period.endTime,
   }).toString();
 
-  function switchVariant(newId: string) {
-    const qs = new URLSearchParams({
-      vehicle: newId,
-      pickup,
-      return: ret,
-      startDate: period.startDate,
-      startTime: period.startTime,
-      endDate: period.endDate,
-      endTime: period.endTime,
-    }).toString();
-    router.replace(`/book/checkout?${qs}`);
-  }
 
   function setExtra(id: string, delta: number, max: number) {
     setExtraQty((prev) => {
@@ -257,37 +245,6 @@ export function CheckoutFlow() {
                 anything else you need — extras are priced in your quote.
               </p>
 
-              {/* Variant selection (Victory / Athena) */}
-              {hasVariants ? (
-                <div className="mt-6 rounded-[14px] border border-line bg-card p-5">
-                  <h2 className="font-semibold text-ink">Variant</h2>
-                  <p className="mt-0.5 text-sm text-ink-soft">
-                    Choose between Standard and Extended battery configurations.
-                  </p>
-                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                    {variants.map((v) => (
-                      <button
-                        key={v.id}
-                        onClick={() => v.id !== entryId && switchVariant(v.id)}
-                        aria-pressed={v.id === entryId}
-                        className={`cursor-pointer rounded-[10px] border p-4 text-left transition-colors ${
-                          v.id === entryId
-                            ? "border-primary bg-primary-faint"
-                            : "border-line-strong hover:border-primary"
-                        }`}
-                      >
-                        <span className="block font-semibold text-ink">
-                          {v.variant}
-                        </span>
-                        <span className="tnum mt-1 block text-sm text-ink-soft">
-                          LFP {v.batteryWh.toLocaleString("en-US")} Wh · up to{" "}
-                          {v.claimedRangeKm} km
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
 
               {/* Quantity */}
               <div className="mt-4 flex items-center justify-between rounded-[14px] border border-line bg-card p-5">

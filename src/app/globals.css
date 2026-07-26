@@ -163,6 +163,63 @@ body {
 .rise-in-delay-2 { animation-delay: 0.16s; }
 .rise-in-delay-3 { animation-delay: 0.24s; }
 
+/* Mobile drawer slide-in */
+@keyframes drawer-in {
+  from { transform: translate3d(100%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.drawer-panel {
+  animation: drawer-in 0.25s ease-out both;
+}
+
+/* Riding motorcycle — travels once across its strip when the section
+   enters the viewport. Pure transforms; paused off-screen via the
+   [data-riding="paused"] state set by IntersectionObserver. */
+@keyframes ride-across {
+  from { transform: translate3d(-30vw, 0, 0); }
+  to { transform: translate3d(105vw, 0, 0); }
+}
+
+@keyframes ride-suspension {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -2.5px, 0); }
+}
+
+@keyframes shadow-breathe {
+  0%, 100% { transform: scaleX(1); opacity: 0.22; }
+  50% { transform: scaleX(0.94); opacity: 0.17; }
+}
+
+.ride-track[data-riding="playing"] .ride-mover {
+  animation: ride-across 13s linear both;
+}
+
+.ride-track[data-riding="paused"] .ride-mover,
+.ride-track[data-riding="paused"] .ride-body,
+.ride-track[data-riding="paused"] .ride-shadow {
+  animation-play-state: paused;
+}
+
+.ride-body {
+  animation: ride-suspension 0.9s ease-in-out infinite;
+}
+
+.ride-shadow {
+  animation: shadow-breathe 0.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-panel {
+    animation: none;
+  }
+  .ride-track .ride-mover,
+  .ride-track .ride-body,
+  .ride-track .ride-shadow {
+    animation: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

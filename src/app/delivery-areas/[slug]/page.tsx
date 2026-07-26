@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, MapPin, Truck, Compass, Bike } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
+import { AreaImage } from "@/components/areas/AreaImage";
+import { getAreaMedia } from "@/data/areaMedia";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { serviceAreas, getArea } from "@/data/locations";
@@ -26,6 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       area.deliveryFee === 0 ? "Free delivery" : "Delivery"
     } to your hotel or villa, ${area.deliveryWindow.toLowerCase()}. Book online.`,
     alternates: { canonical: `/delivery-areas/${slug}` },
+    openGraph: getAreaMedia(slug)
+      ? {
+          images: [
+            {
+              url: getAreaMedia(slug)!.src,
+              width: getAreaMedia(slug)!.width,
+              height: getAreaMedia(slug)!.height,
+              alt: getAreaMedia(slug)!.alt,
+            },
+          ],
+        }
+      : undefined,
   };
 }
 
@@ -66,13 +81,23 @@ export default async function AreaPage({ params }: Props) {
           </ol>
         </nav>
 
+        <AreaImage
+          slug={slug}
+          variant="hero"
+          priority
+          className="mb-10 h-64 sm:h-80 lg:h-96"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/80">
+            Electric scooter rental · Powered by Wedison
+          </p>
+          <h1 className="mt-1 font-display text-4xl leading-tight text-white md:text-5xl">
+            {area.name}
+          </h1>
+        </AreaImage>
+
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <p className="eyebrow mb-3">Electric scooter rental · {area.name}</p>
-            <h1 className="font-display text-4xl leading-tight text-ink md:text-5xl">
-              {area.name}
-            </h1>
-            <p className="mt-3 text-lg text-ink-soft">{area.vibe}</p>
+            <p className="text-lg font-medium text-ink">{area.vibe}</p>
             <p className="mt-5 max-w-2xl leading-relaxed text-ink-soft">
               {area.description}
             </p>
@@ -141,6 +166,8 @@ export default async function AreaPage({ params }: Props) {
           ))}
         </ul>
       </Section>
+
+      <RidingMotorcycle />
 
       <Section labelledBy="area-fleet-heading">
         <SectionHeading

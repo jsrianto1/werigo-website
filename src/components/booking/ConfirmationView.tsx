@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, MessageCircle, ArrowRight } from "lucide-react";
 import { getRecord, type BookingRecord } from "@/lib/booking";
-import { getEntry } from "@/data/vehicles";
+import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { getExtra } from "@/data/extras";
 import { buildBookingWhatsAppUrl } from "@/lib/whatsapp";
@@ -52,7 +52,7 @@ export function ConfirmationView() {
     );
   }
 
-  const entry = record.vehicleSlug ? getEntry(record.vehicleSlug) : undefined;
+  const entry = record.vehicleSlug ? toCustomerEntry(record.vehicleSlug) : undefined;
   const area = getArea(record.search.pickupSlug);
   const returnArea = getArea(record.search.returnSlug);
 
