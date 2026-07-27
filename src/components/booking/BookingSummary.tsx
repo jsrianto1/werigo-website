@@ -69,6 +69,20 @@ export function BookingSummary({
         WhatsApp before you commit to anything. No charges without your
         approval.
       </p>
+      <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-xs text-ink-soft">
+        {[
+          "Official Wedison motorcycles, maintained in-house",
+          "Fully charged handover",
+          "Transparent quote before confirmation",
+          "Booking reference stored before WhatsApp opens",
+          "A real local support team",
+        ].map((cue) => (
+          <li key={cue} className="flex items-start gap-1.5">
+            <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ok" />
+            {cue}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

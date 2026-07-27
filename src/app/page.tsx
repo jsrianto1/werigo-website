@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   BatteryCharging,
   CalendarCheck,
-  KeyRound,
   Leaf,
   MapPin,
   MessageCircle,
@@ -16,8 +15,11 @@ import {
   ArrowRight,
   Star,
   Zap,
+  Send,
+  Package,
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
+import { StickyBookCTA } from "@/components/booking/StickyBookCTA";
 import { MediaImage } from "@/components/media/MediaImage";
 import { MediaVideo } from "@/components/media/MediaVideo";
 import { findMedia } from "@/data/media";
@@ -90,18 +92,23 @@ const electricBenefits = [
 const steps = [
   {
     icon: CalendarCheck,
-    title: "Book online",
-    text: "Pick your area, dates and model. Confirm your details and get your booking reference in minutes.",
+    title: "Choose your ride",
+    text: "Pick your area, dates and Wedison model — rates are confirmed with your quote.",
+  },
+  {
+    icon: Send,
+    title: "Get your reference",
+    text: "Submit your details and receive a Werigo booking reference instantly.",
+  },
+  {
+    icon: MessageCircle,
+    title: "We confirm on WhatsApp",
+    text: "Our local team confirms availability, your rate and the delivery window with you.",
   },
   {
     icon: Truck,
-    title: "We deliver",
-    text: "Your motorcycle arrives at your accommodation fully charged, with helmets fitted and a quick riding briefing.",
-  },
-  {
-    icon: KeyRound,
-    title: "You ride",
-    text: "Explore the island on your schedule. Charge overnight, message us anytime, and we collect it when you're done.",
+    title: "Ride charged and ready",
+    text: "Your motorcycle arrives fully charged, with helmets fitted and a riding briefing.",
   },
 ];
 
@@ -156,7 +163,7 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <div className="rise-in rise-in-delay-2">
+            <div id="hero-booking" className="rise-in rise-in-delay-2">
               <h2 className="sr-only">Search rental availability</h2>
               <SearchWidget />
             </div>
@@ -194,6 +201,35 @@ export default function HomePage() {
         </ul>
       </Section>
 
+      {/* ================= EVERY RENTAL INCLUDES ================= */}
+      <Section labelledBy="includes-heading" className="!pt-14">
+        <div className="rounded-[14px] border border-line bg-primary-faint p-6 sm:p-8">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 id="includes-heading" className="font-display text-2xl text-ink">
+              Every rental includes
+            </h2>
+            <p className="text-xs text-ink-faint">
+              Included in every approved quote — no add-on surprises.
+            </p>
+          </div>
+          <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-ink-soft sm:grid-cols-3 lg:grid-cols-6">
+            {[
+              "Two helmets",
+              "Phone holder",
+              "Fully charged handover",
+              "Delivery to hotel or villa",
+              "Riding & charging briefing",
+              "Local WhatsApp support",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <Package className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
       {/* ================= FEATURED FLEET ================= */}
       <Section labelledBy="fleet-heading">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -225,7 +261,7 @@ export default function HomePage() {
           title="Three steps between you and the open road"
           id="how-heading"
         />
-        <ol className="grid gap-6 md:grid-cols-3">
+        <ol className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {steps.map((step, i) => (
             <li
               key={step.title}
@@ -293,25 +329,43 @@ export default function HomePage() {
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {serviceAreas.map((area) => (
             <li key={area.slug}>
-              <Link
-                href={`/delivery-areas/${area.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
-              >
-                <AreaImage
-                  slug={area.slug}
-                  variant="card"
-                  className="h-24 w-full sm:h-28"
-                  sizes="(max-width: 640px) 50vw, 300px"
-                />
-                <span className="flex flex-1 flex-col p-4">
-                  <span className="font-display text-lg text-ink transition-colors group-hover:text-primary">
-                    {area.name}
+              <div className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]">
+                <Link
+                  href={`/delivery-areas/${area.slug}`}
+                  aria-label={`Explore ${area.name}`}
+                  className="block"
+                >
+                  <AreaImage
+                    slug={area.slug}
+                    variant="card"
+                    className="h-24 w-full sm:h-28"
+                    sizes="(max-width: 640px) 50vw, 300px"
+                  />
+                </Link>
+                <div className="flex flex-1 flex-col p-4">
+                  <span className="font-display text-lg text-ink">{area.name}</span>
+                  <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-ink-soft">
+                    {area.vibe}
                   </span>
-                  <span className="mt-0.5 text-xs leading-relaxed text-ink-soft">
+                  <span className="mt-1 text-xs font-medium text-ok">
                     {area.deliveryFee === 0 ? "Free delivery" : "Delivery available"}
                   </span>
-                </span>
-              </Link>
+                  <span className="mt-3 flex items-center justify-between gap-2 border-t border-line pt-3 text-xs font-semibold">
+                    <Link
+                      href={`/delivery-areas/${area.slug}`}
+                      className="text-primary hover:text-primary-strong"
+                    >
+                      Explore area
+                    </Link>
+                    <Link
+                      href="/book"
+                      className="text-accent hover:text-accent-strong"
+                    >
+                      Check availability
+                    </Link>
+                  </span>
+                </div>
+              </div>
             </li>
           ))}
         </ul>
@@ -554,6 +608,8 @@ export default function HomePage() {
           dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema(faqPreview)) }}
         />
       </Section>
+
+      <StickyBookCTA targetId="hero-booking" />
 
       {/* ================= FINAL CTA ================= */}
       <Section labelledBy="cta-heading">

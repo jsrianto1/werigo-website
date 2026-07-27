@@ -32,6 +32,8 @@ export interface WedisonEntry {
   /** True for the four entries shown as primary fleet cards */
   primaryCard: boolean;
   positioning: string;
+  /** One-line "Best for" cue, derived only from the description */
+  bestFor: string;
   description: string;
   /** Motor power in watts */
   motorW: number;
@@ -72,6 +74,7 @@ export const wedisonFleet: WedisonEntry[] = [
     displayName: "Wedison Bees",
     primaryCard: true,
     positioning: "Compact and lightweight urban electric scooter",
+    bestFor: "Short hops between beach clubs, cafés and warungs",
     description:
       "The Wedison Bees is the light, nimble way around town — an urban electric scooter made for short hops between beach clubs, coworking spots and warungs. Easy to park, effortless in traffic, and quiet enough to hear the ocean on the way.",
     motorW: 1200,
@@ -94,6 +97,7 @@ export const wedisonFleet: WedisonEntry[] = [
     displayName: "Wedison Victory",
     primaryCard: true,
     positioning: "The everyday all-rounder with real highway pace",
+    bestFor: "Everyday exploring, Seminyak to Uluwatu",
     description:
       "The Wedison Victory balances comfort and punch — a relaxed riding position and confident acceleration that makes exploring from Seminyak to Uluwatu simple. Supports home charging and Wedison Supercharge for fast top-ups on big days.",
     motorW: 3000,
@@ -117,6 +121,7 @@ export const wedisonFleet: WedisonEntry[] = [
     displayName: "Wedison Victory Extended",
     primaryCard: false,
     positioning: "The Victory with a bigger battery for longer days",
+    bestFor: "Longer days on the same easy all-rounder",
     description:
       "The Victory Extended pairs the same 3,000 W drive with a larger 3,456 Wh battery — up to 120 km of claimed range for riders who want the whole coast in one charge. Supports home charging and Wedison Supercharge.",
     motorW: 3000,
@@ -140,6 +145,7 @@ export const wedisonFleet: WedisonEntry[] = [
     displayName: "Wedison Athena",
     primaryCard: true,
     positioning: "The refined cruiser for comfortable island days",
+    bestFor: "Comfortable full island days",
     description:
       "The Wedison Athena is the comfortable choice for full island days — a low 770 mm seat, front and rear disc brakes and a roughly 3-hour home charge. Supercharge support means a coffee stop is all it takes to keep going.",
     motorW: 2500,
@@ -168,6 +174,7 @@ export const wedisonFleet: WedisonEntry[] = [
     displayName: "Wedison Athena Extended",
     primaryCard: false,
     positioning: "The Athena with extended range for the long way home",
+    bestFor: "Comfortable touring the long way home",
     description:
       "The Athena Extended keeps the same comfortable chassis and adds a 3,456 Wh battery — up to 120 km of claimed range, roughly 3-hour home charging, and Wedison Supercharge support.",
     motorW: 2500,
@@ -196,6 +203,7 @@ export const wedisonFleet: WedisonEntry[] = [
     displayName: "Wedison EdPower",
     primaryCard: true,
     positioning: "Premium flagship with the longest range and most complete technology",
+    bestFor: "The longest rides with the most complete technology",
     description:
       "The Wedison EdPower is the flagship — up to 200 km of claimed range from a 5,068 Wh battery, a TFT display with Apple CarPlay and Android Auto, and Supercharge support. The most complete technology in the fleet, for riders who want the whole island.",
     motorW: 3000,

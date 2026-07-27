@@ -222,6 +222,10 @@ export function SearchWidget({
         </div>
       </div>
 
+      <p className="mt-3 text-center text-xs text-ink-faint">
+        Booking reference issued instantly. Availability confirmed by our team.
+      </p>
+
       {error ? (
         <p role="alert" className="mt-3 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
           {error}

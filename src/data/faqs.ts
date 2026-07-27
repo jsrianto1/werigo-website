@@ -249,3 +249,23 @@ export const faqCategories: FaqCategory[] = [
     ],
   },
 ];
+
+/**
+ * Help Center display groups — presentation-level regrouping of the
+ * existing categories. Answers are unchanged; only the navigation
+ * structure differs.
+ */
+export interface HelpGroup {
+  id: string;
+  title: string;
+  categoryIds: string[];
+}
+
+export const helpGroups: HelpGroup[] = [
+  { id: "booking", title: "Booking & availability", categoryIds: ["general", "reservations"] },
+  { id: "delivery-return", title: "Delivery & return", categoryIds: ["delivery"] },
+  { id: "licence-riding", title: "Licence & riding", categoryIds: ["requirements", "license", "operation"] },
+  { id: "charging", title: "Charging & SuperCharge", categoryIds: ["battery"] },
+  { id: "support", title: "Support", categoryIds: ["emergency", "damage"] },
+  { id: "terms-privacy", title: "Terms & privacy", categoryIds: ["payments", "cancellation"] },
+];

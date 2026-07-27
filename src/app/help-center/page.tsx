@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Accordion } from "@/components/ui/Accordion";
-import { faqCategories } from "@/data/faqs";
+import { faqCategories, helpGroups } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
@@ -25,16 +25,16 @@ export default function HelpCenterPage() {
         lede="Organised by topic, written plainly. If anything is missing, the team is one WhatsApp message away."
       />
 
-      {/* Category quick-nav */}
+      {/* Group quick-nav */}
       <nav aria-label="Help topics" className="mb-10">
         <ul className="flex flex-wrap gap-2">
-          {faqCategories.map((category) => (
-            <li key={category.id}>
+          {helpGroups.map((group) => (
+            <li key={group.id}>
               <a
-                href={`#${category.id}`}
+                href={`#${group.id}`}
                 className="inline-flex min-h-9 items-center rounded-full border border-line bg-card px-4 text-sm font-medium text-ink-soft transition-colors hover:border-primary hover:text-primary"
               >
-                {category.title}
+                {group.title}
               </a>
             </li>
           ))}
@@ -43,17 +43,22 @@ export default function HelpCenterPage() {
 
       <div className="grid gap-10 lg:grid-cols-[1fr_300px]">
         <div className="space-y-10">
-          {faqCategories.map((category) => (
-            <section key={category.id} id={category.id} aria-labelledby={`${category.id}-title`}>
-              <h2
-                id={`${category.id}-title`}
-                className="mb-4 font-display text-2xl text-ink"
-              >
-                {category.title}
-              </h2>
-              <Accordion items={category.items} />
-            </section>
-          ))}
+          {helpGroups.map((group) => {
+            const items = group.categoryIds.flatMap(
+              (id) => faqCategories.find((c) => c.id === id)?.items ?? []
+            );
+            return (
+              <section key={group.id} id={group.id} aria-labelledby={`${group.id}-title`}>
+                <h2
+                  id={`${group.id}-title`}
+                  className="mb-4 font-display text-2xl text-ink"
+                >
+                  {group.title}
+                </h2>
+                <Accordion items={items} />
+              </section>
+            );
+          })}
         </div>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
