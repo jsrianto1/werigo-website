@@ -258,7 +258,7 @@ export default function HomePage() {
       <Section tone="wash" labelledBy="how-heading">
         <SectionHeading
           eyebrow="How Werigo works"
-          title="Three steps between you and the open road"
+          title="Four steps between you and the open road"
           id="how-heading"
         />
         <ol className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
