@@ -20,7 +20,7 @@ export const rentalExtras: RentalExtra[] = [
     id: "extra-helmet",
     name: "Extra helmet",
     description:
-      "Two helmets are already included — add more for changing passengers. Priced in your quote.",
+      "Two helmets are already included. Add more for changing passengers. Priced in your quote.",
     maxQuantity: 2,
   },
   {
@@ -34,7 +34,7 @@ export const rentalExtras: RentalExtra[] = [
     id: "protection",
     name: "Damage protection",
     description:
-      "Optional damage protection plan. Ask our team on WhatsApp for current terms and pricing — the full plan details are being added to this page.",
+      "Optional damage protection plan. Ask our team on WhatsApp for current terms and pricing. The full plan details are being added to this page.",
     maxQuantity: 1,
     placeholder: true,
   },

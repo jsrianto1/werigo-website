@@ -13,7 +13,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
     <article className="group flex flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow duration-200 hover:shadow-[0_16px_40px_-20px_rgba(14,43,39,0.3)]">
       <Link
         href={`/fleet/${entry.modelSlug}`}
-        aria-label={`${entry.displayName} — view details`}
+        aria-label={`View details for the ${entry.displayName}`}
         className="block p-3 pb-0"
       >
         <MediaImage

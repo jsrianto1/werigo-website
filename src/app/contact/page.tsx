@@ -6,9 +6,9 @@ import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { ContactForm } from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Werigo — Bali Electric Motorcycle Rental",
+  title: "Contact Werigo, Bali Electric Motorcycle Rental",
   description:
-    "Get in touch with the Werigo team in Bali — WhatsApp, email or the contact form. Questions about bookings, custom deliveries or partnerships welcome.",
+    "Get in touch with the Werigo team in Bali by WhatsApp, email or the contact form. Questions about bookings, custom deliveries or partnerships are welcome.",
   alternates: { canonical: "/contact" },
 };
 
@@ -18,7 +18,7 @@ export default function ContactPage() {
       <SectionHeading
         eyebrow="Contact"
         title="Talk to a person, not a ticket queue"
-        lede="WhatsApp is fastest — it's the same thread we'll use for your booking. Email and the form below work too."
+        lede="WhatsApp is fastest, and it's the same thread we'll use for your booking. Email and the form below work too."
       />
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-4">
@@ -70,7 +70,7 @@ export default function ContactPage() {
             <span>
               <span className="block font-semibold text-ink">Base</span>
               <span className="mt-0.5 block text-sm text-ink-soft">
-                Canggu, Bali — the exact address is shared with your booking
+                Canggu, Bali. The exact address is shared with your booking
                 confirmation
               </span>
             </span>

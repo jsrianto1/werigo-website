@@ -37,7 +37,7 @@ import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Electric Scooter & Motorcycle Rental in Bali — Delivered to You",
+  title: "Electric Scooter and Motorcycle Rental in Bali, Delivered to You",
   description:
     "Rent a premium electric motorcycle in Bali with Werigo. Hotel and villa delivery in Canggu, Seminyak, Ubud, Uluwatu and beyond. Charged, helmeted and booked online in minutes.",
   alternates: { canonical: "/" },
@@ -47,7 +47,7 @@ const trustPoints = [
   {
     icon: Truck,
     title: "Delivered to your door",
-    text: "Hotel, villa or guesthouse — your ride arrives charged and ready.",
+    text: "We deliver to your hotel, villa or guesthouse. Your ride arrives fully charged.",
   },
   {
     icon: BatteryCharging,
@@ -70,7 +70,7 @@ const electricBenefits = [
   {
     icon: Volume2,
     title: "Silence is the luxury",
-    text: "Hear the rice fields, the waves, the gamelan — not an engine. Electric riding keeps Bali's soundtrack intact.",
+    text: "Hear the rice fields, the waves and the gamelan instead of an engine. Electric riding keeps Bali's soundtrack intact.",
   },
   {
     icon: Leaf,
@@ -93,7 +93,7 @@ const steps = [
   {
     icon: CalendarCheck,
     title: "Choose your ride",
-    text: "Pick your area, dates and Wedison model — rates are confirmed with your quote.",
+    text: "Choose your area, rental dates and preferred Wedison model. We confirm the rate with your quote.",
   },
   {
     icon: Send,
@@ -143,9 +143,9 @@ export default function HomePage() {
                 Ride Bali the quiet&nbsp;way.
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
-                Premium electric motorcycles delivered to your hotel or villa —
-                charged, helmeted and ready. No fuel stops, no engine noise, no
-                hassle. Just the island.
+                Ride Bali on a fully electric Wedison motorcycle. We deliver
+                it to your hotel or villa, fully charged and ready to go, with
+                helmets included.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
                 <li className="flex items-center gap-2">
@@ -209,7 +209,7 @@ export default function HomePage() {
               Every rental includes
             </h2>
             <p className="text-xs text-ink-faint">
-              Included in every approved quote — no add-on surprises.
+              Included in every approved quote, with no add-on surprises.
             </p>
           </div>
           <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-ink-soft sm:grid-cols-3 lg:grid-cols-6">
@@ -236,7 +236,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="The fleet · Powered by Wedison"
             title="Official Wedison electric motorcycles, one for every kind of day"
-            lede="From the nimble Bees to the flagship EdPower — official Wedison electric motorcycles, maintained in-house and delivered fully charged through Werigo."
+            lede="Choose from four official Wedison electric motorcycles. Every bike is maintained by our team and delivered fully charged."
             id="fleet-heading"
           />
           <Link
@@ -295,7 +295,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Why electric"
           title="The island sounds better without an engine"
-          lede="Electric riding isn't a compromise in Bali — it's the upgrade."
+          lede="Electric riding isn't a compromise in Bali. It's the upgrade."
           id="benefits-heading"
         />
         <div className="grid gap-6 sm:grid-cols-2">
@@ -323,7 +323,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Delivery areas"
           title="We come to you, across the south and centre"
-          lede="Free delivery in our home zones, small fees elsewhere — always shown before you book."
+          lede="Delivery is free in our home zones, with small fees elsewhere. Your quote always shows this before you book."
           id="areas-heading"
         />
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -420,9 +420,9 @@ export default function HomePage() {
             {/* Simple charge-day illustration */}
             <div className="space-y-4">
               {[
-                { label: "22:30 — plugged in at the villa", pct: 35 },
-                { label: "07:00 — full charge, coffee first", pct: 100 },
-                { label: "17:45 — back from Uluwatu loop", pct: 52 },
+                { label: "22:30, plugged in at the villa", pct: 35 },
+                { label: "07:00, full charge, coffee first", pct: 100 },
+                { label: "17:45, back from the Uluwatu loop", pct: 52 },
               ].map((row) => (
                 <div key={row.label}>
                   <p className="mb-1.5 text-xs font-medium text-ink-soft">{row.label}</p>
@@ -437,7 +437,7 @@ export default function HomePage() {
                 </div>
               ))}
               <p className="pt-2 text-xs text-ink-faint">
-                A typical Werigo day — overnight charging covers everything.
+                This is a typical Werigo day. Overnight charging covers everything.
               </p>
             </div>
           </div>
@@ -461,7 +461,7 @@ export default function HomePage() {
                 Charge Fast. Ride Farther.
               </h2>
               <p className="mt-3 font-display text-xl text-accent-soft">
-                30%–90% in approx. 10 min*
+                30% to 90% in approx. 10 min*
               </p>
               <p className="mt-1 font-display text-lg text-ink-inverse/90">
                 100+ km total range on selected models*
@@ -469,7 +469,7 @@ export default function HomePage() {
               <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-inverse/80">
                 Compatible Wedison models have been tested to charge from 30%
                 to 90% in approximately 10 minutes at supported Wedison
-                SuperCharge locations — handled by our team while you take a
+                SuperCharge locations, handled by our team while you take a
                 break. Selected Wedison models offer more than 100 km of total
                 claimed riding range.
               </p>
@@ -515,15 +515,16 @@ export default function HomePage() {
               <li className="rounded-[14px] border border-ink-inverse/15 p-4">
                 <h3 className="font-semibold text-ink-inverse">During riding hours</h3>
                 <p className="mt-1 leading-relaxed text-ink-inverse/70">
-                  Live WhatsApp support for anything — directions, charging,
-                  extensions, swaps.
+                  Need help during your rental? Message our local team on
+                  WhatsApp for charging questions, directions, extensions or
+                  motorcycle support.
                 </p>
               </li>
               <li className="rounded-[14px] border border-ink-inverse/15 p-4">
                 <h3 className="font-semibold text-ink-inverse">Emergencies</h3>
                 <p className="mt-1 leading-relaxed text-ink-inverse/70">
                   A dedicated emergency line comes with every booking
-                  confirmation — printed on the key tag too.
+                  confirmation, and it is printed on the key tag too.
                 </p>
               </li>
             </ul>
@@ -556,7 +557,7 @@ export default function HomePage() {
           {[
             {
               title: "Full charge at handover",
-              text: "Your motorcycle is delivered with a full battery and a condition walk-around you sign off together with us — no surprises mid-ride or at return.",
+              text: "Your motorcycle is delivered with a full battery, and we complete a condition walk-around together at handover. There are no surprises during the ride or at return.",
             },
             {
               title: "The price you saw is the price",
@@ -564,11 +565,11 @@ export default function HomePage() {
             },
             {
               title: "Honest numbers",
-              text: "Specifications come straight from official Wedison product information, always stated as 'up to'. Actual range varies with riding style, load, terrain, traffic and weather — we never guarantee it.",
+              text: "Specifications come straight from official Wedison product information, always stated as 'up to'. Actual range varies with riding style, load, terrain, traffic and weather, so we never guarantee it.",
             },
             {
               title: "A person answers",
-              text: "Your booking thread on WhatsApp is staffed by the same local team that delivers your ride — during riding hours, questions get answered by people, not bots.",
+              text: "Your booking thread on WhatsApp is staffed by the same local team that delivers your ride. During riding hours, real people answer your questions.",
             },
           ].map((item) => (
             <li
@@ -582,8 +583,8 @@ export default function HomePage() {
           ))}
         </ul>
         <p className="mt-6 text-sm text-ink-faint">
-          Verified rider reviews will be published here as they come in — never
-          invented, never borrowed.
+          Verified rider reviews will be published here as they come in. We
+          never invent or borrow reviews.
         </p>
       </Section>
 
@@ -622,7 +623,7 @@ export default function HomePage() {
             Your ride can be at the door tomorrow morning
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base text-white/85">
-            Check availability for your dates — booking takes a few minutes,
+            Check availability for your dates. Booking takes a few minutes,
             and delivery is free in Canggu and Seminyak.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

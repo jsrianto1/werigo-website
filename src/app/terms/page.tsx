@@ -5,7 +5,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Werigo rental terms and conditions. The full written terms are being added to this page — current terms are confirmed with every booking.",
+    "Werigo rental terms and conditions. The full written terms are being added to this page. Current terms are confirmed with every booking.",
   alternates: { canonical: "/terms" },
   robots: { index: false, follow: true },
 };
@@ -26,8 +26,8 @@ export default function TermsPage() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
             Until the full text is published here, the terms that apply to your
-            rental — rider requirements, liability, deposits, cancellation and
-            insurance conditions — are confirmed with you in writing before
+            rental (rider requirements, liability, deposits, cancellation and
+            insurance conditions) are confirmed with you in writing before
             you book. No booking is ever bound by terms that weren&apos;t
             visible at the time of booking.
           </p>

@@ -5,7 +5,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Werigo privacy policy. Booking details are used only for delivery and support, never sold — the formal policy text is being added to this page.",
+    "Werigo privacy policy. Booking details are used only for delivery and support, and never sold. The formal policy text is being added to this page.",
   alternates: { canonical: "/privacy" },
   robots: { index: false, follow: true },
 };
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         <SectionHeading
           eyebrow="Legal"
           title="Privacy Policy"
-          lede="How Werigo handles your data — the full policy is being prepared."
+          lede="How Werigo handles your data. The full policy is being prepared."
         />
         <div className="rounded-[14px] border border-dashed border-line-strong bg-card p-8 text-center">
           <ShieldCheck className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
             Booking details are used only for delivery and support, never
             sold, and stored no longer than operations require. The formal
-            policy text is being added to this page — questions in the
+            policy text is being added to this page. Questions in the
             meantime are welcome on WhatsApp or by email.
           </p>
         </div>

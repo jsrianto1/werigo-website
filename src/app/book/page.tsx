@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { BookSearchResults } from "@/components/booking/BookSearchResults";
 
 export const metadata: Metadata = {
-  title: "Book Your Electric Motorcycle — Bali Rental Search",
+  title: "Book Your Electric Motorcycle in Bali",
   description:
     "Search Werigo's electric motorcycle availability in Bali. Choose your delivery area and dates, compare models and book online in minutes.",
   alternates: { canonical: "/book" },

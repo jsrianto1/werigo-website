@@ -97,7 +97,7 @@ export function SearchWidget({
               {serviceAreas.map((area) => (
                 <option key={area.slug} value={area.slug}>
                   {area.name}
-                  {area.deliveryFee === 0 ? " — free delivery" : ""}
+                  {area.deliveryFee === 0 ? " (free delivery)" : ""}
                 </option>
               ))}
             </select>

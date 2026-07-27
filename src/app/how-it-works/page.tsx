@@ -14,7 +14,7 @@ import { RouteLine } from "@/components/ui/RouteLine";
 import { ButtonLink } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "How It Works — Electric Motorcycle Rental Made Simple",
+  title: "How It Works: Electric Motorcycle Rental Made Simple",
   description:
     "How renting an electric motorcycle with Werigo works: book online, get free hotel delivery in Bali, ride with overnight charging, and hand back at collection. Step by step.",
   alternates: { canonical: "/how-it-works" },
@@ -29,7 +29,7 @@ const journey = [
   {
     icon: FileCheck,
     title: "We confirm the details",
-    text: "A real person checks availability, your delivery window and any special requests — flight numbers, second riders, early starts. You approve the final quote before anything is fixed.",
+    text: "A real person checks availability, your delivery window and any special requests, such as flight numbers, second riders or early starts. You approve the final quote before anything is fixed.",
   },
   {
     icon: Truck,
@@ -44,12 +44,12 @@ const journey = [
   {
     icon: BatteryCharging,
     title: "Charge overnight",
-    text: "Plug into any standard outlet at your accommodation — same as your phone. A full overnight charge covers a typical exploring day twice over.",
+    text: "Plug into any standard outlet at your accommodation, the same way you charge your phone. A full overnight charge covers a typical exploring day twice over.",
   },
   {
     icon: MessageCircle,
     title: "Support while you ride",
-    text: "Questions, extensions, a puncture, a battery worry — message the team on WhatsApp. Emergencies get a dedicated line, printed on your key tag.",
+    text: "Questions, extensions, a puncture or a battery worry? Message the team on WhatsApp. Emergencies get a dedicated line, printed on your key tag.",
   },
   {
     icon: Undo2,

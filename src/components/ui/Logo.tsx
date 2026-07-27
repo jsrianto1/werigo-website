@@ -20,12 +20,12 @@ export function Logo({
     return (
       <Link
         href="/"
-        aria-label="Werigo — home"
+        aria-label="Werigo home"
         className={`inline-block rounded-[10px] bg-white px-4 py-3 ${className}`}
       >
         <Image
           src="/brand/werigo-logo-full.png"
-          alt="Werigo — Move the Future"
+          alt="Werigo. Move the Future."
           width={1217}
           height={560}
           className="h-auto w-40"
@@ -38,12 +38,12 @@ export function Logo({
   return (
     <Link
       href="/"
-      aria-label="Werigo — home"
+      aria-label="Werigo home"
       className={`inline-flex items-center ${className}`}
     >
       <Image
         src="/brand/werigo-logo-compact.png"
-        alt="Werigo — Move the Future"
+        alt="Werigo. Move the Future."
         width={1217}
         height={482}
         priority

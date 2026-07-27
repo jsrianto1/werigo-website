@@ -70,7 +70,7 @@ results.includesSection = body.includes("Every rental includes") && body.include
 results.fourStepProcess = ["Choose your ride", "Get your reference", "We confirm on WhatsApp", "Ride charged and ready"].every((t) => body.includes(t));
 results.areaCardsEnhanced = body.includes("Explore area");
 results.noFreeMisuse = !body.includes("Free helmet");
-results.reviewsEmptyStatePreserved = body.includes("never") && body.includes("borrowed");
+results.reviewsEmptyStatePreserved = body.includes("never invent or borrow reviews");
 
 // ---- Fleet cards (desktop) ----
 await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });

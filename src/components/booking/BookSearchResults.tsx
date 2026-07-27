@@ -53,7 +53,7 @@ export function BookSearchResults() {
           Where and when do you want to ride?
         </h1>
         <p className="mt-3 text-ink-soft">
-          Tell us your area and dates — we&apos;ll show you every Wedison model
+          Tell us your area and dates. We&apos;ll show you every Wedison model
           available by request for your trip.
           {preselect ? " Your chosen ride will be waiting at the next step." : ""}
         </p>
@@ -115,7 +115,7 @@ export function BookSearchResults() {
             No models listed right now
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
-            Message us on WhatsApp — we&apos;ll tell you what&apos;s possible
+            Message us on WhatsApp and we&apos;ll tell you what&apos;s possible
             for your dates.
           </p>
         </div>

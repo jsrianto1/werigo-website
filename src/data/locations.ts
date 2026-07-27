@@ -26,11 +26,11 @@ export const serviceAreas: ServiceArea[] = [
   {
     name: "Canggu",
     slug: "canggu",
-    vibe: "Surf mornings, laptop afternoons, sunset traffic — solved.",
+    vibe: "Surf mornings, laptop afternoons and an easy way through the sunset traffic.",
     description:
       "Canggu is Werigo's home turf. Between Batu Bolong, Berawa and Pererenan, an electric scooter is the difference between watching the shortcut jam and gliding through it. Charge at your villa overnight and the whole coast is yours.",
     deliveryFee: 0,
-    deliveryWindow: "Within 60 minutes, 08:00–20:00",
+    deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Batu Bolong Beach", "Berawa", "Pererenan", "La Brisa", "Tanah Lot (day trip)"],
     ridingNotes:
       "Short distances, heavy scooter traffic at peak hours. The quiet torque of an electric ride makes the shortcut lanes far more pleasant.",
@@ -40,9 +40,9 @@ export const serviceAreas: ServiceArea[] = [
     slug: "seminyak",
     vibe: "Boutiques, beach clubs and dinner reservations on time.",
     description:
-      "Seminyak rewards short, frequent rides — brunch to beach club to boutique. Werigo delivers to your hotel lobby, and the compact fleet fits the narrow gang lanes that cars simply cannot.",
+      "Seminyak rewards short, frequent rides between brunch spots, beach clubs and boutiques. Werigo delivers to your hotel lobby, and the compact fleet fits the narrow gang lanes that cars simply cannot.",
     deliveryFee: 0,
-    deliveryWindow: "Within 60 minutes, 08:00–20:00",
+    deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Seminyak Beach", "Petitenget", "Eat Street", "Potato Head", "Double Six"],
     ridingNotes:
       "Dense one-way streets and valet-only parking at clubs. A scooter parks anywhere; an electric one does it without waking the whole street.",
@@ -52,9 +52,9 @@ export const serviceAreas: ServiceArea[] = [
     slug: "kuta",
     vibe: "Airport-close and beach-ready within minutes.",
     description:
-      "Landing at DPS? Kuta is the fastest place to start riding. We deliver to hotels across Kuta and Legian, so you can skip taxi queues for the rest of your trip.",
+      "Landing at the airport? Kuta is the fastest place to start riding. We deliver to hotels across Kuta and Legian, so you can skip taxi queues for the rest of your trip.",
     deliveryFee: 50000,
-    deliveryWindow: "Within 90 minutes, 08:00–20:00",
+    deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Kuta Beach", "Legian", "Beachwalk Mall", "Waterbom Bali"],
     ridingNotes:
       "Busy arterials and confident local traffic. Stick to the beach roads early morning for the calmest riding.",
@@ -64,21 +64,21 @@ export const serviceAreas: ServiceArea[] = [
     slug: "ubud",
     vibe: "Jungle roads, rice terraces and temple mornings.",
     description:
-      "Ubud is made for slow exploring — and silent riding. Tegallalang at sunrise, Campuhan Ridge before the heat, a warung lunch in Penestanan. An electric motorcycle keeps the jungle soundtrack intact.",
+      "Ubud is made for slow exploring and silent riding. Visit Tegallalang at sunrise, walk Campuhan Ridge before the heat and stop for a warung lunch in Penestanan. An electric motorcycle keeps the jungle soundtrack intact.",
     deliveryFee: 100000,
-    deliveryWindow: "Within 2 hours, 08:00–18:00",
+    deliveryWindow: "Within 2 hours, 08:00 to 18:00",
     landmarks: ["Tegallalang Rice Terrace", "Campuhan Ridge Walk", "Monkey Forest", "Goa Gajah"],
     ridingNotes:
-      "Winding roads and short climbs — mid-fleet models and up recommended. Ranges shown comfortably cover a full Ubud day loop.",
+      "Expect winding roads and short climbs, so we recommend the larger fleet models. The ranges shown comfortably cover a full Ubud day loop.",
   },
   {
     name: "Uluwatu",
     slug: "uluwatu",
     vibe: "Clifftop surf breaks and golden-hour temple runs.",
     description:
-      "The Bukit's clifftop warungs, surf breaks and viewpoints spread out fast — exactly what a full battery is for. Ride Padang Padang to Melasti and still make the Kecak dance at sunset.",
+      "The Bukit's clifftop warungs, surf breaks and viewpoints spread out quickly, and that is exactly what a full battery is for. Ride Padang Padang to Melasti and still make the Kecak dance at sunset.",
     deliveryFee: 100000,
-    deliveryWindow: "Within 2 hours, 08:00–18:00",
+    deliveryWindow: "Within 2 hours, 08:00 to 18:00",
     landmarks: ["Uluwatu Temple", "Padang Padang", "Bingin", "Melasti Beach", "Suluban Cave"],
     ridingNotes:
       "Steep beach access roads. Athena or EdPower recommended for two riders with surfboards' worth of daypacks.",
@@ -88,9 +88,9 @@ export const serviceAreas: ServiceArea[] = [
     slug: "jimbaran",
     vibe: "Seafood sunsets and calm bay-side streets.",
     description:
-      "Jimbaran's wide, calm streets are some of Bali's easiest riding — perfect for first-time electric riders. Seafood dinner on the sand, then a quiet glide back along the bay.",
+      "Jimbaran's wide, calm streets are some of Bali's easiest riding, which makes them perfect for first-time electric riders. Have a seafood dinner on the sand, then glide quietly back along the bay.",
     deliveryFee: 75000,
-    deliveryWindow: "Within 90 minutes, 08:00–20:00",
+    deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Jimbaran Bay", "Seafood Cafés", "GWK Cultural Park", "Tegal Wangi Beach"],
     ridingNotes:
       "Relaxed traffic and good road surfaces. An easy area to get comfortable before exploring the Bukit.",
@@ -100,21 +100,21 @@ export const serviceAreas: ServiceArea[] = [
     slug: "sanur",
     vibe: "Flat seaside promenade and the gateway to the islands.",
     description:
-      "Sanur is flat, calm and organised — a gentle place to ride. Cruise the beach path neighbourhoods, catch a ferry to Nusa Penida, and come back to a fully charged ride waiting at your hotel.",
+      "Sanur is flat, calm and organised, and a gentle place to ride. Cruise the beach path neighbourhoods, catch a ferry to Nusa Penida, and come back to a fully charged ride waiting at your hotel.",
     deliveryFee: 75000,
-    deliveryWindow: "Within 90 minutes, 08:00–20:00",
+    deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Sanur Beach", "Sindhu Market", "Ferry Port", "Mertasari Beach"],
     ridingNotes:
-      "The flattest riding in Bali — maximum range from every charge. Ideal for the Bees.",
+      "This is the flattest riding in Bali, so you get maximum range from every charge. It is ideal for the Bees.",
   },
   {
     name: "Denpasar",
     slug: "denpasar",
-    vibe: "The real city — markets, temples and local flavour.",
+    vibe: "The real city, with markets, temples and local flavour.",
     description:
       "Bali's capital is where the island actually lives. Ride to Badung Market at dawn, explore temple courtyards without tour buses, and eat where the locals queue. Electric torque makes city traffic simple.",
     deliveryFee: 75000,
-    deliveryWindow: "Within 90 minutes, 08:00–20:00",
+    deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Badung Market", "Bajra Sandhi Monument", "Pura Jagatnatha", "Renon"],
     ridingNotes:
       "City traffic with plenty of charging opportunities. Great for longer stays based outside the tourist belt.",

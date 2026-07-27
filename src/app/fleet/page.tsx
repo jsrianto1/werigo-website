@@ -11,7 +11,7 @@ import {
 } from "@/data/vehicles";
 
 export const metadata: Metadata = {
-  title: "Our Fleet — Official Wedison Electric Motorcycles for Rent in Bali",
+  title: "Our Fleet of Official Wedison Electric Motorcycles for Rent in Bali",
   description:
     "Compare official Wedison electric motorcycles available for rent through Werigo in Bali: Bees, Victory, Athena and EdPower. Rates available upon request.",
   alternates: { canonical: "/fleet" },

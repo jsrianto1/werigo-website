@@ -7,7 +7,7 @@ import { AreaImage } from "@/components/areas/AreaImage";
 import { serviceAreas } from "@/data/locations";
 
 export const metadata: Metadata = {
-  title: "Delivery Areas — Free Scooter Delivery Across South Bali",
+  title: "Delivery Areas: Free Scooter Delivery Across South Bali",
   description:
     "Werigo delivers electric motorcycles across Bali: free in Canggu and Seminyak, plus Kuta, Ubud, Uluwatu, Jimbaran, Sanur and Denpasar. See delivery windows and fees.",
   alternates: { canonical: "/delivery-areas" },
@@ -19,7 +19,7 @@ export default function DeliveryAreasPage() {
       <SectionHeading
         eyebrow="Delivery areas"
         title="Wherever you're staying, we bring the ride"
-        lede="Every delivery includes a charged battery, fitted helmets and a riding briefing. Fees and windows are always shown before you book — no surprises at the door."
+        lede="Every delivery includes a charged battery, fitted helmets and a riding briefing. Fees and windows are always shown before you book, so there are no surprises at the door."
       />
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {serviceAreas.map((area) => (
@@ -71,12 +71,12 @@ export default function DeliveryAreasPage() {
       </ul>
       <p className="mt-10 rounded-[14px] border border-line bg-primary-faint p-5 text-sm leading-relaxed text-ink-soft">
         Staying somewhere else? We regularly arrange custom deliveries beyond
-        these zones —{" "}
+        these zones.{" "}
         <Link
           href="/contact"
           className="font-semibold text-primary underline underline-offset-2 hover:text-primary-strong"
         >
-          contact us
+          Contact us
         </Link>{" "}
         with your address and dates.
       </p>

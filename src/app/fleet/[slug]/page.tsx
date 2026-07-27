@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return {};
   const range = sharedSpec(slug, "claimedRangeKm");
   return {
-    title: `${entry.displayName} — Electric Motorcycle Rental in Bali`,
+    title: `${entry.displayName} Electric Motorcycle Rental in Bali`,
     description: `Rent the ${entry.displayName} in Bali through Werigo. Official Wedison specifications: ${
       range !== null ? `up to ${range} km claimed range, ` : ""
     }up to ${entry.topSpeedKmh} km/h. Rates available upon request.`,
@@ -66,7 +66,7 @@ function specRows(entry: WedisonEntry) {
       value:
         battery !== null
           ? `LFP, ${battery.toLocaleString("en-US")} Wh`
-          : "LFP — configuration confirmed at booking",
+          : "LFP, configuration confirmed at booking",
     },
     {
       icon: Route,
@@ -216,7 +216,7 @@ export default async function VehicleDetailPage({ params }: Props) {
                 Rental rate available upon request
               </p>
               <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                Tell us your dates and delivery area — we confirm your rate and
+                Tell us your dates and delivery area. We confirm your rate and
                 availability on WhatsApp before you commit to anything.
               </p>
             </div>

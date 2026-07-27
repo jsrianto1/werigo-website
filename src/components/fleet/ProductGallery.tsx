@@ -44,7 +44,7 @@ export function ProductGallery({
       ) : (
         <MediaImage
           id={`fleet-${modelSlug}-main`}
-          fallbackLabel={`${displayName} — main product photo`}
+          fallbackLabel={`${displayName} main product photo`}
           ratio="3/2"
           fit="contain"
           sizes="(max-width: 1024px) 100vw, 55vw"

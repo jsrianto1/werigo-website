@@ -34,7 +34,7 @@ export function vehicleSchema(entry: WedisonEntry) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${entry.displayName} — Electric Motorcycle Rental in Bali`,
+    name: `${entry.displayName} Electric Motorcycle Rental in Bali`,
     description: entry.description,
     brand: { "@type": "Brand", name: entry.brand },
     url: `${site.baseUrl}/fleet/${entry.modelSlug}`,

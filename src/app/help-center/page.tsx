@@ -8,7 +8,7 @@ import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Help Center — Rental Questions Answered",
+  title: "Help Center: Rental Questions Answered",
   description:
     "Everything about renting an electric motorcycle in Bali with Werigo: reservations, licences, charging, delivery, payments, cancellation and emergency support.",
   alternates: { canonical: "/help-center" },

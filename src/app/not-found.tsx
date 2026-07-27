@@ -8,7 +8,7 @@ export default function NotFound() {
     <Section>
       <div className="mx-auto max-w-xl text-center">
         <Compass className="mx-auto h-10 w-10 text-primary" aria-hidden="true" />
-        <p className="eyebrow mt-6">404 — wrong turn</p>
+        <p className="eyebrow mt-6">404, wrong turn</p>
         <h1 className="mt-3 font-display text-4xl text-ink">
           This road doesn&apos;t exist
         </h1>

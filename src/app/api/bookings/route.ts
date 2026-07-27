@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
   if (rateLimited(ip)) {
     return NextResponse.json(
-      { ok: false, error: "rate_limited", message: "Too many requests — please wait a moment and try again." },
+      { ok: false, error: "rate_limited", message: "Too many requests. Please wait a moment and try again." },
       { status: 429 }
     );
   }
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
         ok: false,
         error: "storage_failed",
         message:
-          "We couldn't save your booking just now. Your details are still on this page — please try again in a moment, or contact us directly on WhatsApp.",
+          "We couldn't save your booking just now. Your details are still on this page. Please try again in a moment, or contact us directly on WhatsApp.",
       },
       { status: 503 }
     );

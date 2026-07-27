@@ -105,7 +105,7 @@ export function ConfirmationView() {
             {
               term: "Delivery",
               detail: `${getArea(b.pickupArea)?.name ?? b.pickupArea}${
-                b.pickupAddress ? ` — ${b.pickupAddress}` : ""
+                b.pickupAddress ? `, ${b.pickupAddress}` : ""
               }`,
             },
             {
@@ -121,7 +121,7 @@ export function ConfirmationView() {
             {
               term: "Rate",
               detail:
-                "Available upon request — confirmed with your quote on WhatsApp",
+                "Available upon request and confirmed with your quote on WhatsApp",
             },
           ].map((row) => (
             <div
@@ -159,7 +159,7 @@ export function ConfirmationView() {
       </div>
 
       <p className="mt-6 text-center text-xs leading-relaxed text-ink-faint">
-        Keep your booking code handy — it identifies your booking in every
+        Keep your booking code handy. It identifies your booking in every
         conversation with our team.
       </p>
     </div>

@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { MediaImage } from "@/components/media/MediaImage";
 
 export const metadata: Metadata = {
-  title: "About Werigo — Electric Mobility for Bali",
+  title: "About Werigo, Electric Mobility for Bali",
   description:
     "Werigo is Wedison's electric motorcycle rental and mobility service in Bali, built on a simple idea: exploring the island shouldn't cost the island. Meet the brand and its mission.",
   alternates: { canonical: "/about" },
@@ -16,7 +16,7 @@ const values = [
   {
     icon: Leaf,
     title: "The island comes first",
-    text: "Bali gives its visitors everything. Electric riding is how we give something back — no exhaust in the rice fields, no engine noise over the temple bells.",
+    text: "Bali gives its visitors everything. Electric riding is how we give something back. It leaves no exhaust in the rice fields and no engine noise over the temple bells.",
   },
   {
     icon: ShieldCheck,
@@ -30,8 +30,8 @@ const values = [
   },
   {
     icon: Zap,
-    title: "Premium means effortless",
-    text: "Charged batteries, fitted helmets, one WhatsApp thread for everything. Premium isn't marble lobbies — it's never having to think about the machine.",
+    title: "Premium means taken care of",
+    text: "Charged batteries, fitted helmets and one WhatsApp thread for everything. For us, premium means you never have to think about the machine.",
   },
 ];
 
@@ -44,13 +44,13 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="About Werigo · Powered by Wedison"
               title="Exploring the island shouldn't cost the island"
-              lede="Werigo exists because the way most people see Bali — from the seat of a petrol scooter — is also the thing slowly wearing it down. We think there's a better ride."
+              lede="Most people see Bali from the seat of a petrol scooter, and that is also the thing slowly wearing the island down. We think there's a better ride."
             />
             <p className="max-w-xl leading-relaxed text-ink-soft">
               Werigo is Wedison&apos;s electric motorcycle rental and mobility
-              service in Bali — official Wedison electric motorcycles with
+              service in Bali. We rent official Wedison electric motorcycles with
               honest specs, delivered to your door and backed by a local team
-              on WhatsApp. Werigo is now live in Bali — book your electric
+              on WhatsApp. Werigo is now live in Bali. Book your electric
               ride and explore the island with quiet, powerful mobility.
             </p>
             <div className="mt-8">
@@ -102,12 +102,12 @@ export default function AboutPage() {
             <p>
               The name comes from the simplest travel sentence there is:{" "}
               <em className="font-medium text-ink">“where we go.”</em> It&apos;s the
-              question every good Bali morning starts with — coffee first, then
+              question every good Bali morning starts with. Coffee first, then
               a map, then the keys.
             </p>
             <p>
-              Our answer is: anywhere, quietly. The company story — the
-              founders, the first bikes, the milestones — will be told here as
+              Our answer is anywhere, quietly. The company story of the
+              founders, the first bikes and the milestones will be told here as
               it actually happens. We&apos;d rather leave this space honest
               than fill it with an invented history.
             </p>

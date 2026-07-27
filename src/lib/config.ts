@@ -7,7 +7,7 @@ export const site = {
   name: "Werigo",
   domain: "werigo.co",
   baseUrl: "https://werigo.co",
-  tagline: "Werigo — Powered by Wedison",
+  tagline: "Werigo, Powered by Wedison",
   description:
     "Official Wedison electric motorcycles, available for rent through Werigo in Bali. Hotel and villa delivery across Canggu, Seminyak, Ubud and more. Book online in minutes, ride silent, ride clean.",
   /** Brand relationship line — use wherever the relationship is stated. */
@@ -26,7 +26,7 @@ export const site = {
   contactEmail: "hello@werigo.co",
 
   /** Operating hours shown on contact surfaces (local Bali time, GMT+8). */
-  operatingHours: "Daily 08:00 – 20:00 WITA",
+  operatingHours: "Daily 08:00 to 20:00 WITA",
 
   /** Social profiles — PLACEHOLDER URLs, update when accounts exist. */
   social: {

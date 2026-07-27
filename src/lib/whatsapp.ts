@@ -62,14 +62,14 @@ export function buildStoredBookingWhatsAppUrl(booking: {
     ``,
     `*Pick-up / delivery*`,
     `${pickup?.name ?? booking.pickup_area}${
-      booking.pickup_address ? ` — ${booking.pickup_address}` : ""
+      booking.pickup_address ? `, ${booking.pickup_address}` : ""
     }`,
     `*Return*`,
     `${
       booking.return_area !== booking.pickup_area
         ? ret?.name ?? booking.return_area
         : "Same as pick-up"
-    }${booking.return_address ? ` — ${booking.return_address}` : ""}`,
+    }${booking.return_address ? `, ${booking.return_address}` : ""}`,
     ``,
     `*Rate*`,
     `Please send me the rate and availability for these dates.`,

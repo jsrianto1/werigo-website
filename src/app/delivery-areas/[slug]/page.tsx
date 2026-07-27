@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const area = getArea(slug);
   if (!area) return {};
   return {
-    title: `Scooter Rental ${area.name} — Electric Motorcycle Delivery`,
+    title: `Scooter Rental ${area.name} with Electric Motorcycle Delivery`,
     description: `Rent an electric scooter in ${area.name}, Bali with Werigo. ${
       area.deliveryFee === 0 ? "Free delivery" : "Delivery"
     } to your hotel or villa, ${area.deliveryWindow.toLowerCase()}. Book online.`,

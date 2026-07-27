@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { CheckoutFlow } from "@/components/booking/CheckoutFlow";
 
 export const metadata: Metadata = {
-  title: "Checkout — Complete Your Booking",
+  title: "Checkout: Complete Your Booking",
   description:
     "Add extras, enter your details and review your Werigo electric motorcycle booking.",
   alternates: { canonical: "/book/checkout" },

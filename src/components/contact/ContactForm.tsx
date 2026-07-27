@@ -23,7 +23,7 @@ export function ContactForm() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
       next.email = "Enter a valid email address.";
     if (message.trim().length < 10)
-      next.message = "Tell us a little more — at least 10 characters.";
+      next.message = "Please tell us a little more, at least 10 characters.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -38,7 +38,7 @@ export function ContactForm() {
         <CheckCircle2 className="h-10 w-10 text-ok" aria-hidden="true" />
         <h2 className="mt-4 font-display text-2xl text-ink">Message on its way</h2>
         <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
-          We opened WhatsApp with your message — hit send there and the team
+          We opened WhatsApp with your message. Hit send there and the team
           will get back to you during riding hours.
         </p>
         <Button variant="ghost" className="mt-6" onClick={() => setSent(false)}>
@@ -123,7 +123,7 @@ export function ContactForm() {
               setMessage(e.target.value);
               setErrors((prev) => ({ ...prev, message: undefined }));
             }}
-            placeholder="Booking dates, custom delivery, partnerships — anything."
+            placeholder="Booking dates, custom delivery, partnerships or anything else."
             className={`w-full rounded-[10px] border bg-card px-3 py-2.5 text-[15px] text-ink placeholder:text-ink-faint ${
               errors.message ? "border-danger" : "border-line-strong"
             }`}
@@ -140,7 +140,7 @@ export function ContactForm() {
         Send via WhatsApp
       </Button>
       <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-        The form opens WhatsApp with your message pre-filled — you stay in
+        The form opens WhatsApp with your message pre-filled, so you stay in
         control of what&apos;s sent. Prefer email? Write to us directly at the
         address above.
       </p>

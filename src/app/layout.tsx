@@ -20,7 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.baseUrl),
   title: {
-    default: `${site.name} — Electric Motorcycle Rental in Bali`,
+    default: `${site.name} Electric Motorcycle Rental in Bali`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: site.name,
     url: site.baseUrl,
-    title: `${site.name} — Electric Motorcycle Rental in Bali`,
+    title: `${site.name} Electric Motorcycle Rental in Bali`,
     description: site.description,
     locale: "en_US",
     images: [
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
         url: "/brand/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Werigo — Move the Future",
+        alt: "Werigo. Move the Future.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Electric Motorcycle Rental in Bali`,
+    title: `${site.name} Electric Motorcycle Rental in Bali`,
     description: site.description,
     images: ["/brand/og-image.png"],
   },

@@ -31,7 +31,7 @@ import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "SuperCharge — Fast Charging for Electric Motorcycles in Bali",
+  title: "SuperCharge Fast Charging for Electric Motorcycles in Bali",
   description:
     "Wedison SuperCharge through Werigo: compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes at supported locations in Bali.",
   alternates: { canonical: "/supercharge" },
@@ -75,7 +75,7 @@ export default function SuperchargePage() {
               </p>
               <p className="mt-5 max-w-xl leading-relaxed text-ink-soft">
                 Overnight charging at your villa covers most Bali days. For the
-                big ones — Uluwatu to Ubud and back, a full-island loop —
+                big days, like Uluwatu to Ubud and back,
                 there&apos;s Wedison SuperCharge.{" "}
                 {superchargePerformance.statement}
               </p>
@@ -130,7 +130,7 @@ export default function SuperchargePage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
               Compatible Wedison models have been tested to charge from 30% to
-              90% in approximately 10 minutes — plan a session around a coffee,
+              90% in approximately 10 minutes. Plan a session around a coffee,
               not around your day.
             </p>
           </div>
@@ -149,8 +149,8 @@ export default function SuperchargePage() {
             <h2 className="mt-3 font-display text-xl text-ink">We handle it</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
               On-site staff connect your motorcycle to the Wedison SuperCharge
-              system. Sessions are logged to your rental — no payment at the
-              point.
+              system. Sessions are logged to your rental, so there is no
+              payment at the point.
             </p>
           </div>
         </div>
@@ -194,7 +194,7 @@ export default function SuperchargePage() {
         <SectionHeading
           eyebrow="Compatibility"
           title="Which rides can SuperCharge?"
-          lede="Confirmed compatible Wedison models are listed below. Every model still charges from a standard outlet at your accommodation — SuperCharge is the express lane. The Wedison Bees uses home charging."
+          lede="Confirmed compatible Wedison models are listed below. Every model still charges from a standard outlet at your accommodation. SuperCharge is the express lane. The Wedison Bees uses home charging."
           id="compatible-heading"
         />
         {compatibleModels.length > 0 ? (
@@ -225,7 +225,7 @@ export default function SuperchargePage() {
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
               We publish per-model SuperCharge badges only after each
               configuration is verified by our operations team. Until your
-              model appears here, ask us on WhatsApp — we&apos;ll confirm
+              model appears here, ask us on WhatsApp. We&apos;ll confirm
               exactly what your motorcycle supports for your dates before you
               book.
             </p>
@@ -252,7 +252,7 @@ export default function SuperchargePage() {
         <SectionHeading
           eyebrow="Charging points"
           title="Where to SuperCharge"
-          lede="Only verified, operating locations are published here — never planned ones."
+          lede="We publish only verified, operating locations here, never planned ones."
           id="locations-heading"
         />
         {superchargeStations.length > 0 ? (
@@ -306,7 +306,7 @@ export default function SuperchargePage() {
               Location cards appear here as points are verified
             </h3>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
-              We list charging points only once they&apos;re operating — with
+              We list charging points only once they&apos;re operating, with
               address, hours, bays and a maps link on each card. For
               today&apos;s nearest charging option, message the team mid-ride
               and we&apos;ll route you live.
@@ -332,7 +332,7 @@ export default function SuperchargePage() {
           <SectionHeading
             eyebrow="While you charge"
             title="Supported from plug-in to ride-out"
-            lede="Every SuperCharge session is backed by the same WhatsApp thread as your rental. Busy point, battery question, anything unexpected — a local rider answers during all riding hours."
+            lede="Every SuperCharge session is backed by the same WhatsApp thread as your rental. If a point is busy or a battery question comes up, a local rider answers during all riding hours."
             id="support-charging-heading"
             inverse
           />

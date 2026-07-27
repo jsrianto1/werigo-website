@@ -128,7 +128,7 @@ export function CheckoutFlow() {
         </h1>
         <p className="mt-3 text-ink-soft">
           We couldn&apos;t find the ride or dates for this checkout. Start a
-          fresh search — it only takes a moment.
+          fresh search. It only takes a moment.
         </p>
         <Link
           href="/book"
@@ -217,7 +217,7 @@ export function CheckoutFlow() {
           pickupArea: pickup,
           pickupAddress: [customer.hotelName, customer.address]
             .filter(Boolean)
-            .join(" — "),
+            .join(", "),
           returnArea: ret,
           returnAddress: "",
           startAt: `${period.startDate}T${period.startTime}:00+08:00`,
@@ -241,7 +241,7 @@ export function CheckoutFlow() {
         setSubmitting(false);
         setSubmitError(
           data?.message ??
-            "We couldn't save your booking just now. Your details are still here — please try again."
+            "We couldn't save your booking just now. Your details are still here, so please try again."
         );
         return;
       }
@@ -259,7 +259,7 @@ export function CheckoutFlow() {
     } catch {
       setSubmitting(false);
       setSubmitError(
-        "We couldn't reach the booking service. Your details are still here — please check your connection and try again."
+        "We couldn't reach the booking service. Your details are still here. Please check your connection and try again."
       );
     }
   }
@@ -301,7 +301,7 @@ export function CheckoutFlow() {
               </h1>
               <p className="mt-2 text-ink-soft">
                 Two helmets and one phone holder are already included. Add
-                anything else you need — extras are priced in your quote.
+                anything else you need. Extras are priced in your quote.
               </p>
 
 
@@ -434,7 +434,7 @@ export function CheckoutFlow() {
               </h1>
               <p className="mt-2 text-ink-soft">
                 We use these details for delivery and your booking confirmation
-                — nothing else.
+                and for nothing else.
               </p>
 
               <form
@@ -467,7 +467,7 @@ export function CheckoutFlow() {
                       type: "tel",
                       autoComplete: "tel",
                       required: true,
-                      hint: "Include your country code — we confirm bookings here.",
+                      hint: "Include your country code. We confirm bookings here.",
                     },
                     {
                       key: "nationality",
@@ -489,7 +489,7 @@ export function CheckoutFlow() {
                       type: "text",
                       autoComplete: "street-address",
                       required: false,
-                      hint: "Street, gang or Google Maps pin — anything that helps us find you.",
+                      hint: "A street, gang or Google Maps pin. Anything that helps us find you.",
                     },
                     {
                       key: "flightNumber",
@@ -637,7 +637,7 @@ export function CheckoutFlow() {
               </h1>
               <p className="mt-2 text-ink-soft">
                 Check everything below, then send your request. We confirm
-                availability and your rate on WhatsApp — usually fast.
+                availability and your rate on WhatsApp, usually quickly.
               </p>
 
               <dl className="mt-6 space-y-4 rounded-[14px] border border-line bg-card p-6">
@@ -649,7 +649,7 @@ export function CheckoutFlow() {
                   },
                   {
                     term: "Delivery",
-                    detail: `${area?.name}${customer.hotelName ? ` — ${customer.hotelName}` : ""}`,
+                    detail: `${area?.name}${customer.hotelName ? `, ${customer.hotelName}` : ""}`,
                   },
                   {
                     term: "Return",
@@ -669,7 +669,7 @@ export function CheckoutFlow() {
                   {
                     term: "Rate",
                     detail:
-                      "Available upon request — confirmed with your quote on WhatsApp",
+                      "Available upon request and confirmed with your quote on WhatsApp",
                   },
                   { term: "Name", detail: customer.fullName },
                   { term: "WhatsApp", detail: customer.whatsapp },
@@ -752,7 +752,7 @@ export function CheckoutFlow() {
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                Your booking is saved securely first — you&apos;ll get a
+                Your booking is saved securely first. You&apos;ll get a
                 booking code on the next screen, then continue to WhatsApp
                 where our team replies with your rate and availability.
                 Nothing is booked or charged until you approve the quote.

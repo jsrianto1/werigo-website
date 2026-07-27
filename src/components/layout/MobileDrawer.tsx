@@ -207,7 +207,7 @@ export function MobileDrawer({
                 {i > 0 ? <span className="mr-2 text-ink-faint">·</span> : null}
                 <span className={l.active ? "font-medium text-ink" : "text-ink-faint"}>
                   {l.label}
-                  {!l.active ? " — soon" : ""}
+                  {!l.active ? " (soon)" : ""}
                 </span>
               </span>
             ))}

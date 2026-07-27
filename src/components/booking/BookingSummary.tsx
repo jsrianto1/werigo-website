@@ -65,9 +65,9 @@ export function BookingSummary({
         Rental rate available upon request
       </p>
       <p className="mt-2 text-xs leading-relaxed text-ink-faint">
-        We confirm your full quote — rental, extras and any delivery fees — on
-        WhatsApp before you commit to anything. No charges without your
-        approval.
+        We confirm your full quote on WhatsApp before you commit to
+        anything. It covers the rental, your extras and any delivery fees.
+        There are no charges without your approval.
       </p>
       <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-xs text-ink-soft">
         {[

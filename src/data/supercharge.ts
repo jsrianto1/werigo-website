@@ -77,7 +77,7 @@ export const superchargePerformance = {
   rangeStatement:
     "Selected Wedison models offer more than 100 km of total claimed riding range.",
   /** Compact highlights (always shown with the disclosure) */
-  highlightCharge: "30%–90% in approx. 10 min*",
+  highlightCharge: "30% to 90% in approx. 10 min*",
   highlightRange: "100+ km total range on selected models*",
   /** Readable disclosure — must accompany the highlights */
   disclosure:
@@ -87,7 +87,7 @@ export const superchargePerformance = {
 export const superchargeSteps = [
   {
     title: "Ride in",
-    text: "Bring your Wedison to any supported Supercharge location — no appointment needed. Your key tag identifies your motorcycle and rental.",
+    text: "Bring your Wedison to any supported SuperCharge location. No appointment is needed. Your key tag identifies your motorcycle and rental.",
   },
   {
     title: "Plug in",
@@ -95,7 +95,7 @@ export const superchargeSteps = [
   },
   {
     title: "Ride out",
-    text: "Compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes. The session is logged to your rental — no payment at the point.",
+    text: "Compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes. The session is logged to your rental, so there is no payment at the point.",
   },
 ];
 
@@ -118,16 +118,16 @@ export const superchargeFaq = [
   {
     question: "How much does Supercharge cost?",
     answer:
-      "Pricing is confirmed with your booking quote. Overnight charging at your accommodation always remains free — Supercharge is a convenience for big riding days, not a requirement.",
+      "Pricing is confirmed with your booking quote. Overnight charging at your accommodation always remains free. SuperCharge is a convenience for big riding days, not a requirement.",
   },
   {
     question: "How do I find the nearest charging point?",
     answer:
-      "Published locations are listed on this page with maps links. You can also message our team on WhatsApp mid-ride — we'll route you to the nearest available point in real time.",
+      "Published locations are listed on this page with maps links. You can also message our team on WhatsApp during your ride and we'll direct you to the nearest available point.",
   },
   {
     question: "What if something goes wrong while charging?",
     answer:
-      "Our support line is live during all riding hours. If a charging point is busy or your session has any issue, message us — we'll fix it or route you to an alternative straight away.",
+      "Our support line is live during all riding hours. If a charging point is busy or your session has any issue, message us. We'll fix it or direct you to an alternative straight away.",
   },
 ];

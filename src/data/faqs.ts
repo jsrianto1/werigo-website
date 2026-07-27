@@ -29,12 +29,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Why choose electric over a petrol scooter?",
         answer:
-          "No fuel stops, no engine heat in traffic, no noise — and smooth torque from a standstill that makes Bali traffic genuinely easier to ride in. You charge overnight at your accommodation the same way you charge your phone.",
+          "Electric riding suits Bali well. There are no fuel stops, no engine heat in traffic and no noise, and the smooth pull from a standstill makes busy roads easier to handle. You simply charge overnight at your accommodation, the same way you charge your phone.",
       },
       {
         question: "Where does Werigo operate?",
         answer:
-          "We currently serve Canggu, Seminyak, Kuta, Ubud, Uluwatu, Jimbaran, Sanur and Denpasar. More areas are planned — if your stay falls outside these zones, contact us and we will try to arrange delivery.",
+          "We currently serve Canggu, Seminyak, Kuta, Ubud, Uluwatu, Jimbaran, Sanur and Denpasar. More areas are planned. If your stay falls outside these zones, contact us and we will try to arrange delivery.",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How far in advance should I book?",
         answer:
-          "During high season (July–August and December–January) we recommend booking at least a few days ahead. Outside peak periods, same-day and next-day bookings are often possible.",
+          "During high season, which runs from July to August and December to January, we recommend booking at least a few days ahead. Outside peak periods, same-day and next-day bookings are often possible.",
       },
       {
         question: "Can I extend my rental while I'm still riding?",
@@ -60,7 +60,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I change the delivery location after booking?",
         answer:
-          "Yes — let us know via WhatsApp at least a few hours before your delivery window and we will update it. A different delivery fee may apply if the new address is in another zone.",
+          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. A different delivery fee may apply if the new address is in another zone.",
       },
     ],
   },
@@ -76,7 +76,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Do I need to leave a deposit?",
         answer:
-          "Deposit requirements depend on the model and rental length — our team confirms the exact amount, if any, on WhatsApp before you commit. The full written policy is being added to this page.",
+          "Deposit requirements depend on the model and rental length. Our team confirms the exact amount, if any, on WhatsApp before you commit. The full written policy is being added to this page.",
       },
       {
         question: "Can someone else ride the motorcycle I rented?",
@@ -95,7 +95,7 @@ export const faqCategories: FaqCategory[] = [
           "Indonesian law requires a motorcycle licence valid in Indonesia. For most visitors that means an International Driving Permit (IDP) with the motorcycle category (A) endorsed, carried together with your home licence.",
       },
       {
-        question: "My home licence covers scooters — is that enough?",
+        question: "My home licence covers scooters. Is that enough?",
         answer:
           "A home-country licence alone is generally not valid in Indonesia without an accompanying International Driving Permit. Police checks do occur in tourist areas, so we strongly recommend arranging an IDP before your trip.",
       },
@@ -113,7 +113,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "I've never ridden an electric motorcycle. Is it hard?",
         answer:
-          "If you can ride a scooter, you can ride electric — there are no gears and no clutch. The main difference is instant, smooth acceleration, so we walk every first-time rider through a short handover briefing at delivery.",
+          "If you can ride a scooter, you can ride electric. There are no gears and no clutch. The main difference is instant, smooth acceleration, so we walk every first-time rider through a short briefing at delivery.",
       },
       {
         question: "How does the throttle feel compared to petrol?",
@@ -123,7 +123,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Are the bikes quiet enough to be dangerous?",
         answer:
-          "Electric motorcycles are quiet, so ride assuming others haven't heard you. Use your horn proactively at blind corners — it's normal riding etiquette in Bali.",
+          "Electric motorcycles are quiet, so ride as if other people haven't heard you. Use your horn at blind corners. That is normal riding etiquette in Bali.",
       },
     ],
   },
@@ -134,7 +134,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I charge the motorcycle?",
         answer:
-          "Every Werigo ride charges from a standard Indonesian power outlet — the same socket that charges your laptop. Plug in overnight at your villa or hotel and wake up to a full battery.",
+          "Every Werigo ride charges from a standard Indonesian power outlet, the same socket that charges your laptop. Plug in overnight at your villa or hotel and wake up to a full battery.",
       },
       {
         question: "What range can I expect in real conditions?",
@@ -144,12 +144,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What if I run out of charge mid-ride?",
         answer:
-          "Contact our support line and we'll help — battery-swap or recovery options depend on your model and location. The battery indicator is generous with warnings, so you'll have plenty of notice.",
+          "Contact our support line and we'll help. Battery swap or recovery options depend on your model and location. The battery indicator gives generous warnings, so you'll have plenty of notice.",
       },
       {
         question: "Can I swap batteries instead of waiting for a charge?",
         answer:
-          "Most fleet models have swappable batteries. Ask our team on WhatsApp whether battery-swap service is available for your model and area — we'll tell you honestly what's possible for your dates.",
+          "Most fleet models have swappable batteries. Ask our team on WhatsApp whether battery swap service is available for your model and area. We'll tell you honestly what's possible for your dates.",
       },
     ],
   },
@@ -165,12 +165,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I return the motorcycle in a different area?",
         answer:
-          "Yes — choose a different return location during booking. Depending on the zones involved, a one-way fee may apply and is shown in your price summary before you confirm.",
+          "Yes. Choose a different return location during booking. Depending on the zones involved, a one-way fee may apply, and it is shown in your summary before you confirm.",
       },
       {
         question: "What happens at collection?",
         answer:
-          "We meet you at the agreed time and place, check the motorcycle together and confirm the return in writing on WhatsApp. No paperwork queues, no hidden checks after you leave.",
+          "We meet you at the agreed time and place, check the motorcycle together and confirm the return in writing on WhatsApp. There are no paperwork queues and no hidden checks after you leave.",
       },
     ],
   },
@@ -181,17 +181,17 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I pay for my rental?",
         answer:
-          "Our team confirms current payment options with you on WhatsApp when your booking is confirmed. Online card payment for international visitors is being added — until then, nothing is charged before you approve the final quote.",
+          "Our team confirms current payment options with you on WhatsApp when your booking is confirmed. Online card payment for international visitors is being added. Until then, nothing is charged before you approve the final quote.",
       },
       {
         question: "When am I charged?",
         answer:
-          "Payment timing is agreed with you on WhatsApp as part of your confirmation — your booking summary always shows the full estimated total first, and nothing is charged until you approve the final quote.",
+          "Payment timing is agreed with you on WhatsApp as part of your confirmation. Your booking summary always comes first, and nothing is charged until you approve the final quote.",
       },
       {
         question: "Are there any hidden costs?",
         answer:
-          "No. The price summary you see at checkout — rental, extras and any delivery or one-way fees — is the complete estimated total. Anything optional is clearly marked before you select it.",
+          "No. The quote our team confirms with you covers the rental, your extras and any delivery or one-way fees in full. Anything optional is clearly marked before you select it.",
       },
     ],
   },
@@ -202,12 +202,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I cancel my booking?",
         answer:
-          "Yes. Message us on WhatsApp with your booking reference and we'll handle it — cancellation terms for your booking are confirmed with your quote before anything is charged. The full written policy is being added to this page.",
+          "Yes. Message us on WhatsApp with your booking reference and we'll handle it. Cancellation terms for your booking are confirmed with your quote before anything is charged. The full written policy is being added to this page.",
       },
       {
         question: "What if my flight is delayed?",
         answer:
-          "Add your flight number during booking and message us when plans change — we'll move your delivery window to match your actual arrival.",
+          "Add your flight number during booking and message us when plans change. We'll move your delivery window to match your actual arrival.",
       },
     ],
   },
@@ -218,7 +218,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What should I do after an accident?",
         answer:
-          "Make sure everyone is safe first, then contact our emergency line immediately — it's staffed during all riding hours. We'll guide you through the next steps and arrange recovery if the motorcycle can't be ridden.",
+          "Make sure everyone is safe first, then contact our emergency line immediately. It is staffed during all riding hours. We'll guide you through the next steps and arrange recovery if the motorcycle can't be ridden.",
       },
       {
         question: "What am I liable for if the motorcycle is damaged?",
@@ -239,7 +239,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Who do I contact in an emergency?",
         answer:
-          "For medical emergencies in Bali call 112 first. Then contact the Werigo emergency line — the number is included in your booking confirmation and printed on the motorcycle's key tag.",
+          "For medical emergencies in Bali call 112 first. Then contact the Werigo emergency line. The number is included in your booking confirmation and printed on the motorcycle's key tag.",
       },
       {
         question: "What if the motorcycle breaks down at night?",
