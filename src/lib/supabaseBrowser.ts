@@ -9,8 +9,10 @@ import { createBrowserClient } from "@supabase/ssr";
  * the browser; RLS denies it regardless.
  */
 export function getSupabaseBrowser() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  // Only NEXT_PUBLIC_* values exist in the browser bundle; trim in
+  // case the deployed values carry stray whitespace.
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
   if (!url || !key) return null;
   return createBrowserClient(url, key);
 }

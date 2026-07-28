@@ -1,6 +1,7 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { resolveSupabaseServerConfig } from "@/lib/supabaseServer";
 
 /**
  * Admin authentication for /admin pages and /api/admin routes.
@@ -21,8 +22,9 @@ export function adminEmails(): string[] {
 }
 
 export async function getAdmin(): Promise<AdminIdentity | null> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  // Session verification uses the publishable key only — never the
+  // secret key, which plays no role in cookie auth.
+  const { url, publishableKey: key } = resolveSupabaseServerConfig();
   if (!url || !key) return null;
 
   const cookieStore = await cookies();

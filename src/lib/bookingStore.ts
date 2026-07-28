@@ -1,6 +1,13 @@
 import "server-only";
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import type { BookingSubmission } from "@/lib/bookingSchema";
+import {
+  createSupabaseAdminClient,
+  resolveSupabaseServerConfig,
+  StorageError,
+  storageErrorFrom,
+  storageErrorFromThrown,
+} from "@/lib/supabaseServer";
 
 /**
  * Server-side booking storage.
@@ -116,32 +123,50 @@ function submissionToRow(s: BookingSubmission) {
 class SupabaseBookingStore implements BookingStore {
   private client: SupabaseClient;
 
-  constructor(url: string, serviceRoleKey: string) {
-    this.client = createClient(url, serviceRoleKey, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
+  constructor() {
+    // Plain supabase-js client on the secret/service-role key with all
+    // session behavior disabled — never the SSR browser client, never
+    // the publishable key (createSupabaseAdminClient enforces both).
+    this.client = createSupabaseAdminClient();
   }
 
   async create(submission: BookingSubmission) {
     const row = submissionToRow(submission);
-    const { data, error } = await this.client
-      .from("bookings")
-      .insert(row)
-      .select()
-      .single();
+    let data: unknown;
+    let error: { code?: string; message?: string; details?: string | null; hint?: string | null } | null;
+    let status: number | undefined;
+    try {
+      ({ data, error, status } = await this.client
+        .from("bookings")
+        .insert(row)
+        .select()
+        .single());
+    } catch (err) {
+      throw storageErrorFromThrown("insert_booking", err);
+    }
 
     if (error) {
       // Unique violation on client_submission_id → idempotent replay
       if (error.code === "23505") {
-        const { data: existing, error: err2 } = await this.client
+        const {
+          data: existing,
+          error: err2,
+          status: status2,
+        } = await this.client
           .from("bookings")
           .select()
           .eq("client_submission_id", submission.clientSubmissionId)
           .single();
-        if (err2 || !existing) throw new Error("storage_unavailable");
+        if (err2 || !existing) {
+          throw storageErrorFrom(
+            "idempotent_replay",
+            err2 ?? { message: "duplicate row not found" },
+            status2
+          );
+        }
         return { booking: existing as StoredBooking, duplicate: true };
       }
-      throw new Error("storage_unavailable");
+      throw storageErrorFrom("insert_booking", error, status);
     }
 
     await this.client.from("booking_events").insert({
@@ -185,8 +210,8 @@ class SupabaseBookingStore implements BookingStore {
     builder = builder
       .order("created_at", { ascending: q.sort === "oldest" })
       .range((page - 1) * pageSize, page * pageSize - 1);
-    const { data, count, error } = await builder;
-    if (error) throw new Error("storage_unavailable");
+    const { data, count, error, status } = await builder;
+    if (error) throw storageErrorFrom("list_bookings", error, status);
 
     // status counts (unfiltered summary)
     const counts: Record<string, number> = {};
@@ -255,8 +280,8 @@ class SupabaseBookingStore implements BookingStore {
     let builder = this.client.from("bookings").select("*");
     builder = this.applyFilters(q, builder);
     builder = builder.order("created_at", { ascending: q.sort === "oldest" }).limit(5000);
-    const { data, error } = await builder;
-    if (error) throw new Error("storage_unavailable");
+    const { data, error, status } = await builder;
+    if (error) throw storageErrorFrom("export_bookings", error, status);
     return (data ?? []) as StoredBooking[];
   }
 }
@@ -279,7 +304,12 @@ class MemoryBookingStore implements BookingStore {
   }
 
   async create(s: BookingSubmission) {
-    if (process.env.SIMULATE_DB_FAILURE === "1") throw new Error("storage_unavailable");
+    if (process.env.SIMULATE_DB_FAILURE === "1") {
+      throw new StorageError("insert_failed", {
+        operation: "insert_booking",
+        message: "simulated database failure (test-only)",
+      });
+    }
     const existing = this.bookings.find((b) => b.client_submission_id === s.clientSubmissionId);
     if (existing) return { booking: existing, duplicate: true };
     const now = new Date().toISOString();
@@ -394,10 +424,12 @@ export function getBookingStore(): BookingStore {
       return globalThis.__werigoMemoryStore;
     }
   }
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) {
-    throw new Error("storage_not_configured");
+  const { url, secretKey } = resolveSupabaseServerConfig();
+  if (!url || !secretKey) {
+    throw new StorageError("configuration_missing", {
+      operation: "select_store",
+      message: "Supabase URL or server key is not set",
+    });
   }
-  return new SupabaseBookingStore(url, key);
+  return new SupabaseBookingStore();
 }

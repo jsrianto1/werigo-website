@@ -20,7 +20,7 @@ export const site = {
    * or by editing the fallback below.
    */
   whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "620000000000",
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "620000000000",
 
   /** PLACEHOLDER contact email until the official inbox exists. */
   contactEmail: "hello@werigo.co",

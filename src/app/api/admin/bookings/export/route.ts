@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdmin } from "@/lib/adminAuth";
 import { getBookingStore, type BookingListQuery, type StoredBooking } from "@/lib/bookingStore";
+import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
 
 export const runtime = "nodejs";
 
@@ -46,7 +47,8 @@ export async function GET(req: NextRequest) {
         "Content-Disposition": `attachment; filename="werigo-bookings-${new Date().toISOString().slice(0, 10)}.csv"`,
       },
     });
-  } catch {
+  } catch (err) {
+    logStorageError(storageErrorFromThrown("admin_export", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
   }
 }

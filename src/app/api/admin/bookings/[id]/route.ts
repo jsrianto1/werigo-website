@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAdmin } from "@/lib/adminAuth";
 import { getBookingStore } from "@/lib/bookingStore";
+import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
 
 export const runtime = "nodejs";
 
@@ -33,7 +34,8 @@ export async function GET(_req: NextRequest, ctx: Ctx) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
     }
     return NextResponse.json({ ok: true, ...result });
-  } catch {
+  } catch (err) {
+    logStorageError(storageErrorFromThrown("admin_get", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
   }
 }
@@ -54,7 +56,8 @@ export async function PATCH(req: NextRequest, ctx: Ctx) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
     }
     return NextResponse.json({ ok: true, booking });
-  } catch {
+  } catch (err) {
+    logStorageError(storageErrorFromThrown("admin_update", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
   }
 }

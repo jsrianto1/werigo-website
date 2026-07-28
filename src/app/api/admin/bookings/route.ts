@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdmin } from "@/lib/adminAuth";
 import { getBookingStore, type BookingListQuery } from "@/lib/bookingStore";
+import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
 
 export const runtime = "nodejs";
 
@@ -28,7 +29,8 @@ export async function GET(req: NextRequest) {
   try {
     const result = await getBookingStore().list(parseQuery(req));
     return NextResponse.json({ ok: true, ...result });
-  } catch {
+  } catch (err) {
+    logStorageError(storageErrorFromThrown("admin_list", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
   }
 }

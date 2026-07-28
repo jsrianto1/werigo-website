@@ -36,10 +36,19 @@ commit real values, and never put server-only keys in a
 | Variable | Scope | Purpose |
 |---|---|---|
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | public | Business WhatsApp number, international format, digits only |
-| `NEXT_PUBLIC_SUPABASE_URL` | public | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public | Supabase publishable/anon key (admin sign-in sessions only; RLS blocks all data access) |
-| `SUPABASE_SERVICE_ROLE_KEY` | **server-only** | Full-access key used exclusively by API routes |
+| `NEXT_PUBLIC_SUPABASE_URL` | public | Supabase project URL (server also accepts `SUPABASE_URL`, which takes priority) |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public | Supabase publishable/anon key, admin sign-in sessions only; RLS blocks all data access (server also accepts `SUPABASE_PUBLISHABLE_KEY`, which takes priority) |
+| `SUPABASE_SECRET_KEY` | **server-only** | New-format secret key (`sb_secret_...`) used exclusively by API routes; takes priority over the service-role key |
+| `SUPABASE_SERVICE_ROLE_KEY` | **server-only** | Legacy service-role JWT, used if `SUPABASE_SECRET_KEY` is not set |
 | `ADMIN_EMAILS` | **server-only** | Comma-separated allowlist for /admin/bookings |
+
+All values are trimmed before use. A publishable key placed in a
+server-key variable is rejected at startup, and server-side booking
+inserts never use the publishable key.
+
+`GET /api/health/db` returns a non-sensitive diagnostic —
+`{ configured, reachable, schemaReady }` booleans only — for checking
+the live database connection without exposing any configuration.
 
 ## Booking database (Supabase)
 

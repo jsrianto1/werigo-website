@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { bookingSubmissionSchema } from "@/lib/bookingSchema";
 import { getBookingStore } from "@/lib/bookingStore";
 import { buildStoredBookingWhatsAppUrl } from "@/lib/whatsapp";
+import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
 
 export const runtime = "nodejs";
 
@@ -109,12 +110,9 @@ export async function POST(req: NextRequest) {
       { status: duplicate ? 200 : 201 }
     );
   } catch (err) {
-    const notConfigured =
-      err instanceof Error && err.message === "storage_not_configured";
-    // No personal data in logs — only the error class.
-    console.error(
-      `[bookings] storage error: ${notConfigured ? "not configured" : "unavailable"}`
-    );
+    // Typed, categorized, redacted logging — never credentials,
+    // payloads, or personal data.
+    logStorageError(storageErrorFromThrown("create_booking", err));
     return NextResponse.json(
       {
         ok: false,
