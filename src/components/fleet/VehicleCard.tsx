@@ -14,7 +14,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
       <Link
         href={`/fleet/${entry.modelSlug}`}
         aria-label={`View details for the ${entry.displayName}`}
-        className="block p-3 pb-0"
+        className="block p-3 pb-0 xl:p-4 xl:pb-0"
       >
         <MediaImage
           id={`fleet-${entry.modelSlug}-main`}
@@ -24,7 +24,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
         />
       </Link>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-5 xl:p-6">
         <div className="flex items-baseline justify-between gap-2">
           <h3 className="font-display text-xl text-ink">
             <Link

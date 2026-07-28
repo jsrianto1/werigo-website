@@ -39,7 +39,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-page/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-10">
         <Logo />
 
         {/* Desktop nav */}

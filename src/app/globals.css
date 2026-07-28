@@ -94,6 +94,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fluid desktop scale: the whole rem-based system (type, spacing,
+   cards, buttons) grows gently on large displays. No zoom, no
+   transforms — just the root size. Mobile and tablet stay at 16px. */
+@media (min-width: 90rem) {
+  html {
+    font-size: 16.5px;
+  }
+}
+@media (min-width: 112.5rem) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
 body {
   background: var(--surface-page);
   color: var(--ink);

@@ -24,12 +24,12 @@ export function Section({
     card: "bg-card",
   };
   return (
-    <section
-      id={id}
-      aria-labelledby={labelledBy}
-      className={`${tones[tone]} ${className}`}
-    >
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
+    <section id={id} aria-labelledby={labelledBy} className={tones[tone]}>
+      {/* className merges here so padding overrides (e.g. !py-0) act on
+          the element that actually carries the section padding. */}
+      <div
+        className={`mx-auto w-full max-w-[1400px] px-4 py-16 sm:px-6 md:py-16 lg:px-8 lg:py-20 xl:px-10 ${className}`}
+      >
         {children}
       </div>
     </section>
@@ -54,7 +54,7 @@ export function SectionHeading({
 }) {
   return (
     <div
-      className={`mb-10 max-w-2xl md:mb-14 ${
+      className={`mb-10 max-w-2xl md:mb-12 ${
         align === "center" ? "mx-auto text-center" : ""
       }`}
     >

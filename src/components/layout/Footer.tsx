@@ -59,7 +59,7 @@ const legalLinks = [
 export function Footer() {
   return (
     <footer className="bg-deep text-ink-inverse">
-      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[1400px] px-4 py-14 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>

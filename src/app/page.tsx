@@ -194,7 +194,7 @@ export default function HomePage() {
         </h2>
         <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-[14px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {trustPoints.map((point) => (
-            <li key={point.title} className="bg-card p-5">
+            <li key={point.title} className="bg-card p-5 xl:p-6">
               <point.icon className="h-5 w-5 text-primary" aria-hidden="true" />
               <h3 className="mt-3 text-sm font-semibold text-ink">{point.title}</h3>
               <p className="mt-1 text-sm leading-relaxed text-ink-soft">{point.text}</p>
@@ -204,7 +204,7 @@ export default function HomePage() {
       </Section>
 
       {/* ================= EVERY RENTAL INCLUDES ================= */}
-      <Section labelledBy="includes-heading" className="!pt-14">
+      <Section labelledBy="includes-heading" className="!pb-0 !pt-8 md:!pt-10">
         <div className="rounded-[14px] border border-line bg-primary-faint p-6 sm:p-8">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id="includes-heading" className="font-display text-2xl text-ink">
@@ -243,13 +243,13 @@ export default function HomePage() {
           />
           <Link
             href="/fleet"
-            className="mb-10 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-strong md:mb-14"
+            className="mb-10 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-strong md:mb-12"
           >
             Compare all models
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-7">
           {featured.map((entry) => (
             <VehicleCard key={entry.id} entry={entry} />
           ))}
@@ -257,13 +257,13 @@ export default function HomePage() {
       </Section>
 
       {/* ================= HOW IT WORKS ================= */}
-      <Section tone="wash" labelledBy="how-heading">
+      <Section tone="wash" labelledBy="how-heading" className="md:!pb-12 lg:!pb-14">
         <SectionHeading
           eyebrow="How Werigo works"
           title="Four steps between you and the open road"
           id="how-heading"
         />
-        <ol className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <ol className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-7">
           {steps.map((step, i) => (
             <li
               key={step.title}
@@ -293,7 +293,7 @@ export default function HomePage() {
       <RidingMotorcycle />
 
       {/* ================= ELECTRIC BENEFITS ================= */}
-      <Section labelledBy="benefits-heading">
+      <Section labelledBy="benefits-heading" className="md:!pt-6 lg:!pt-8">
         <SectionHeading
           eyebrow="Why electric"
           title="The island sounds better without an engine"
@@ -340,11 +340,11 @@ export default function HomePage() {
                   <AreaImage
                     slug={area.slug}
                     variant="card"
-                    className="h-24 w-full sm:h-28"
+                    className="h-24 w-full sm:h-28 lg:h-32 xl:h-36"
                     sizes="(max-width: 640px) 50vw, 300px"
                   />
                 </Link>
-                <div className="flex flex-1 flex-col p-4">
+                <div className="flex flex-1 flex-col p-4 xl:p-5">
                   <span className="font-display text-lg text-ink">{area.name}</span>
                   <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-ink-soft">
                     {area.vibe}
@@ -374,8 +374,8 @@ export default function HomePage() {
       </Section>
 
       {/* ================= CHARGING & RANGE ================= */}
-      <Section labelledBy="charging-heading">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <Section labelledBy="charging-heading" className="lg:!py-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <SectionHeading
               eyebrow="Charging & range"
