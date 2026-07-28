@@ -19,6 +19,7 @@ import {
   Package,
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
+import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { StickyBookCTA } from "@/components/booking/StickyBookCTA";
 import { MediaImage } from "@/components/media/MediaImage";
 import { MediaVideo } from "@/components/media/MediaVideo";
@@ -128,11 +129,12 @@ export default function HomePage() {
     <>
       {/* ================= HERO + SEARCH ================= */}
       <div className="relative overflow-hidden">
-        {/* soft laguna wash behind hero */}
+        {/* soft laguna wash paints before the poster loads */}
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 -z-10 h-[520px] bg-gradient-to-b from-primary-soft/80 via-primary-faint to-page"
         />
+        <HeroBackdrop />
         <Section className="!py-0">
           <div className="grid items-center gap-10 pb-14 pt-12 md:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-20">
             <div className="rise-in">

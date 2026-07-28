@@ -28,6 +28,19 @@ That's it — the component swaps the placeholder for an optimized
 
 ### 1. Homepage hero
 
+**PUBLISHED** — the hero background video is live, rendered by
+`src/components/home/HeroBackdrop.tsx` (a dedicated component, not the
+manifest system):
+
+| File | Dimensions | Ratio | Notes |
+|---|---|---|---|
+| `public/media/hero/werigo-hero-canggu.mp4` | 1916×1080 | 16:9 | H.264, 15 s loop, no audio, faststart, 12.3 MB. Source master: `Downloads/werigo-hero-canggu.mp4.mp4` (never modify) |
+| `public/media/hero/werigo-hero-canggu-poster.webp` | 1916×1080 | 16:9 | Poster from the 3 s frame; shown below 640px, with reduced motion, and while the video loads |
+
+The legacy `home-hero.*` manifest slots below are unused; the inline
+hero media band renders only if their `available` flags are ever
+flipped:
+
 | File | Dimensions | Ratio | Notes |
 |---|---|---|---|
 | `public/media/hero/home-hero.jpg` | 2560×1440 | 16:9 | Rider on a Wedison motorcycle, Bali coastal road, light/airy |
