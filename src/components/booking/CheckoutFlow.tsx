@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
+  CheckCircle2,
+  MessageCircle,
   Minus,
   Plus,
-  Send,
   Tag,
 } from "lucide-react";
 import { BookingStepper } from "@/components/booking/BookingStepper";
@@ -18,25 +19,25 @@ import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { rentalExtras } from "@/data/extras";
 import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
+import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import {
   emptyCustomer,
   saveDraft,
   loadDraft,
   clearDraft,
-  cacheConfirmation,
   type CustomerInfo,
 } from "@/lib/booking";
 
-type Phase = "extras" | "details" | "review";
+type Phase = "extras" | "details" | "review" | "sent";
 
 const phaseToStep: Record<Phase, number> = {
   extras: 2,
   details: 3,
   review: 4,
+  sent: 5,
 };
 
 export function CheckoutFlow() {
-  const router = useRouter();
   const params = useSearchParams();
 
   /** Entry id from the URL; legacy variant ids are normalised to the
@@ -65,13 +66,9 @@ export function CheckoutFlow() {
   const [promoCode, setPromoCode] = useState("");
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
-  // Stable per-checkout idempotency key — a double click or retry
-  // after a network error replays the same submission.
-  const [submissionId] = useState(() => crypto.randomUUID());
+  const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // Restore any saved draft for this entry (one-shot,
@@ -179,89 +176,49 @@ export function CheckoutFlow() {
     return true;
   }
 
-  async function confirmBooking() {
+  /**
+   * TEMPORARY WhatsApp-first mode: the request goes straight to
+   * WhatsApp. No /api/bookings call, no database insert, no booking
+   * code. Nothing from this form is logged.
+   */
+  function sendToWhatsApp() {
     if (!privacyConsent) {
       setConsentError(
-        "Please confirm you agree to us using these details to handle your booking."
+        "Please confirm you agree to send these details to Werigo on WhatsApp."
       );
       document.getElementById("field-privacyConsent")?.focus();
       return;
     }
-    setSubmitting(true);
-    setSubmitError(null);
 
-    const extrasNote = rentalExtras
-      .filter((e) => (extraQty[e.id] ?? 0) > 0)
-      .map((e) => `${e.name} × ${extraQty[e.id]}`)
-      .join(", ");
-    const notes = [
-      customer.specialRequest.trim(),
-      extrasNote ? `Extras: ${extrasNote}` : "",
-      promoCode ? `Promo code: ${promoCode}` : "",
-      customer.flightNumber ? `Flight: ${customer.flightNumber}` : "",
-      customer.nationality ? `Nationality: ${customer.nationality}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    try {
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          clientSubmissionId: submissionId,
-          fullName: customer.fullName,
-          email: customer.email,
-          whatsapp: customer.whatsapp,
-          nationality: customer.nationality,
-          pickupArea: pickup,
-          pickupAddress: [customer.hotelName, customer.address]
-            .filter(Boolean)
-            .join(", "),
-          returnArea: ret,
-          returnAddress: "",
-          startAt: `${period.startDate}T${period.startTime}:00+08:00`,
-          endAt: `${period.endDate}T${period.endTime}:00+08:00`,
-          vehicleModel: entry!.modelSlug,
-          quantity,
-          deliveryMethod: "delivery",
-          customerNotes: notes,
-          privacyConsent: true,
-          sourcePage: window.location.pathname,
-          utmSource: new URLSearchParams(window.location.search).get("utm_source") ?? "",
-          utmMedium: new URLSearchParams(window.location.search).get("utm_medium") ?? "",
-          utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") ?? "",
-          website: "", // honeypot — real users never fill this
-        }),
-      });
-      const data = await res.json().catch(() => null);
-
-      if (!res.ok || !data?.ok) {
-        // Database did NOT store the booking → never open WhatsApp.
-        setSubmitting(false);
-        setSubmitError(
-          data?.message ??
-            "We couldn't save your booking just now. Your details are still here, so please try again."
-        );
-        return;
-      }
-
-      // Stored successfully — hand the confirmation to the next screen.
-      cacheConfirmation({
-        bookingCode: data.booking.bookingCode,
-        whatsappUrl: data.whatsappUrl,
-        booking: data.booking,
-      });
-      clearDraft();
-      router.push(
-        `/book/confirmation?code=${encodeURIComponent(data.booking.bookingCode)}`
-      );
-    } catch {
-      setSubmitting(false);
-      setSubmitError(
-        "We couldn't reach the booking service. Your details are still here. Please check your connection and try again."
-      );
-    }
+    const url = buildDirectBookingWhatsAppUrl({
+      modelName: entry!.displayName,
+      quantity,
+      pickupAreaName: area?.name ?? pickup,
+      pickupAddress: [customer.hotelName, customer.address]
+        .filter(Boolean)
+        .join(", "),
+      returnAreaName: returnArea?.name ?? ret,
+      sameReturn: ret === pickup,
+      startDate: period.startDate,
+      startTime: period.startTime,
+      endDate: period.endDate,
+      endTime: period.endTime,
+      days,
+      extras: rentalExtras
+        .filter((e) => (extraQty[e.id] ?? 0) > 0)
+        .map((e) => ({ name: e.name, quantity: extraQty[e.id] ?? 0 })),
+      fullName: customer.fullName,
+      whatsapp: customer.whatsapp,
+      email: customer.email,
+      nationality: customer.nationality || undefined,
+      flightNumber: customer.flightNumber || undefined,
+      promoCode: promoCode || undefined,
+      notes: customer.specialRequest.trim() || undefined,
+    });
+    setWhatsappUrl(url);
+    window.open(url, "_blank", "noopener,noreferrer");
+    clearDraft();
+    setPhase("sent");
   }
 
   const inputClass = (hasError?: string) =>
@@ -401,8 +358,8 @@ export function CheckoutFlow() {
                   />
                 </div>
                 <p className="mt-1.5 text-xs text-ink-faint">
-                  Have a code from our team or a partner? It&apos;s saved with
-                  your booking and applied to your final quote.
+                  Have a code from our team or a partner? It&apos;s included in
+                  your WhatsApp request and applied to your final quote.
                 </p>
               </div>
 
@@ -433,8 +390,8 @@ export function CheckoutFlow() {
                 Who&apos;s riding?
               </h1>
               <p className="mt-2 text-ink-soft">
-                We use these details for delivery and your booking confirmation
-                and for nothing else.
+                We use these details for delivery and to reply to your booking
+                request, and for nothing else.
               </p>
 
               <form
@@ -707,8 +664,8 @@ export function CheckoutFlow() {
                     className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                   />
                   <span className="text-sm text-ink-soft">
-                    I agree that Werigo stores and uses these details to handle
-                    my booking and to communicate with me about it. See the{" "}
+                    I agree to send these details to Werigo through WhatsApp so
+                    the team can respond to my booking request. See the{" "}
                     <Link
                       href="/privacy"
                       target="_blank"
@@ -730,32 +687,20 @@ export function CheckoutFlow() {
                 ) : null}
               </div>
 
-              {submitError ? (
-                <div
-                  role="alert"
-                  className="mt-5 rounded-[10px] border border-danger/40 bg-danger-soft px-4 py-3 text-sm text-danger"
-                >
-                  {submitError}
-                </div>
-              ) : null}
-
               <div className="mt-6">
                 <Button
                   variant="accent"
                   size="lg"
-                  disabled={submitting}
-                  onClick={() => confirmBooking()}
+                  onClick={() => sendToWhatsApp()}
                   className="w-full sm:w-auto"
                 >
-                  <Send className="h-5 w-5" aria-hidden="true" />
-                  {submitting ? "Saving your booking…" : "Confirm booking request"}
+                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                  Continue to WhatsApp
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                Your booking is saved securely first. You&apos;ll get a
-                booking code on the next screen, then continue to WhatsApp
-                where our team replies with your rate and availability.
-                Nothing is booked or charged until you approve the quote.
+                Your booking request will open in WhatsApp. Our team will
+                confirm availability and send your quote.
               </p>
 
               <div className="mt-6">
@@ -763,6 +708,49 @@ export function CheckoutFlow() {
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                   Edit details
                 </Button>
+              </div>
+            </div>
+          ) : null}
+          {/* ============ PHASE: SENT (WhatsApp handoff) ============ */}
+          {phase === "sent" ? (
+            <div>
+              <CheckCircle2 className="h-10 w-10 text-ok" aria-hidden="true" />
+              <h1
+                ref={headingRef}
+                tabIndex={-1}
+                className="mt-3 font-display text-3xl text-ink outline-none"
+              >
+                Your request is ready in WhatsApp
+              </h1>
+              <p className="mt-3 max-w-xl text-ink-soft">
+                WhatsApp should have opened with your booking request. Send the
+                message and our team will reply with availability and your
+                quote. If WhatsApp did not open, use the button below.
+              </p>
+              {whatsappUrl ? (
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-6 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
+                >
+                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                  Open WhatsApp
+                </a>
+              ) : null}
+              <p className="mt-5 text-xs leading-relaxed text-ink-faint">
+                Your rental stays a request until our team confirms
+                availability and you approve the quote. Nothing is booked or
+                charged before that.
+              </p>
+              <div className="mt-6">
+                <Link
+                  href="/"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-line-strong px-5 text-sm font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
+                >
+                  Back to home
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
               </div>
             </div>
           ) : null}

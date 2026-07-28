@@ -98,8 +98,8 @@ const steps = [
   },
   {
     icon: Send,
-    title: "Get your reference",
-    text: "Submit your details and receive a Werigo booking reference instantly.",
+    title: "Send your request",
+    text: "Review your details and send your booking request to our team on WhatsApp.",
   },
   {
     icon: MessageCircle,

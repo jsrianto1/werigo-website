@@ -4,6 +4,15 @@
    A second server with SIMULATE_DB_FAILURE=1 covers the failure path. */
 import puppeteer from "puppeteer-core";
 
+/* DORMANT while WHATSAPP_FIRST_BOOKING is active (src/lib/bookingMode.ts):
+   the public flow makes no database requests, so this suite only runs
+   with RUN_DB_FLOW=1 after storage is reactivated. */
+if (process.env.RUN_DB_FLOW !== "1") {
+  console.log("SKIPPED: WhatsApp-first booking mode active. Set RUN_DB_FLOW=1 after reactivating storage.");
+  process.exit(0);
+}
+
+
 const BASE = process.env.TEST_BASE ?? "http://localhost:3001";
 const FAIL_BASE = process.env.FAIL_BASE ?? "http://localhost:3002";
 const results = {};

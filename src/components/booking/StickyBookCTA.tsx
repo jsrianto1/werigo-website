@@ -36,7 +36,7 @@ export function StickyBookCTA({ targetId }: { targetId: string }) {
       <div className="flex items-center gap-3">
         <p className="min-w-0 flex-1 text-xs leading-snug text-ink-soft">
           <span className="block font-semibold text-ink">Ready to ride?</span>
-          Booking reference issued instantly.
+          Request in minutes, confirmed on WhatsApp.
         </p>
         <button
           onClick={() => {

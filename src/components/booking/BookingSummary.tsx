@@ -74,7 +74,7 @@ export function BookingSummary({
           "Official Wedison motorcycles, maintained in-house",
           "Fully charged handover",
           "Transparent quote before confirmation",
-          "Booking reference stored before WhatsApp opens",
+          "Your request goes straight to our WhatsApp team",
           "A real local support team",
         ].map((cue) => (
           <li key={cue} className="flex items-start gap-1.5">

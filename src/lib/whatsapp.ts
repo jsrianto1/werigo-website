@@ -81,6 +81,71 @@ export function buildStoredBookingWhatsAppUrl(booking: {
   return `https://wa.me/${site.whatsappNumber}?text=${text}`;
 }
 
+/**
+ * TEMPORARY WhatsApp-first booking handoff (database disconnected).
+ * Builds the full booking request as a wa.me URL entirely on the
+ * client: no database insert and no booking code. Field names mirror
+ * the checkout form; nothing here is logged or stored.
+ */
+export interface DirectBookingDetails {
+  modelName: string;
+  quantity: number;
+  pickupAreaName: string;
+  pickupAddress: string;
+  returnAreaName: string;
+  sameReturn: boolean;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+  days: number;
+  extras: { name: string; quantity: number }[];
+  fullName: string;
+  whatsapp: string;
+  email: string;
+  nationality?: string;
+  flightNumber?: string;
+  promoCode?: string;
+  notes?: string;
+}
+
+export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
+  const lines = [
+    `*Werigo Booking Request*`,
+    `_Powered by Wedison_`,
+    ``,
+    `*Ride*`,
+    `${d.modelName} × ${d.quantity}`,
+    ``,
+    `*Rental period*`,
+    `From: ${d.startDate} ${d.startTime}`,
+    `To: ${d.endDate} ${d.endTime}`,
+    `Duration: ${d.days} day${d.days === 1 ? "" : "s"}`,
+    ``,
+    `*Delivery*`,
+    `${d.pickupAreaName}${d.pickupAddress ? `, ${d.pickupAddress}` : ""}`,
+    `*Return*`,
+    d.sameReturn ? `Same as delivery` : d.returnAreaName,
+    ...(d.extras.length > 0
+      ? [``, `*Extras*`, ...d.extras.map((e) => `${e.name} × ${e.quantity}`)]
+      : []),
+    ``,
+    `*Contact*`,
+    `Name: ${d.fullName}`,
+    `WhatsApp: ${d.whatsapp}`,
+    `Email: ${d.email}`,
+    ...(d.nationality ? [`Nationality: ${d.nationality}`] : []),
+    ...(d.flightNumber ? [`Flight: ${d.flightNumber}`] : []),
+    ...(d.promoCode ? [`Promo code: ${d.promoCode}`] : []),
+    ...(d.notes ? [``, `*Notes*`, d.notes] : []),
+    ``,
+    `*Rate*`,
+    `Please send me availability and the rate for these dates.`,
+  ];
+  const text = encodeURIComponent(lines.join("\n"));
+  return `https://wa.me/${site.whatsappNumber}?text=${text}`;
+}
+
 /** Generic "chat with us" link for support surfaces. */
 export function buildSupportWhatsAppUrl(message?: string): string {
   const text = encodeURIComponent(

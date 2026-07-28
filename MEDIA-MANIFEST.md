@@ -34,8 +34,13 @@ manifest system):
 
 | File | Dimensions | Ratio | Notes |
 |---|---|---|---|
-| `public/media/hero/werigo-hero-canggu.mp4` | 1916×1080 | 16:9 | H.264, 15 s loop, no audio, faststart, 12.3 MB. Source master: `Downloads/werigo-hero-canggu.mp4.mp4` (never modify) |
-| `public/media/hero/werigo-hero-canggu-poster.webp` | 1916×1080 | 16:9 | Poster from the 3 s frame; shown below 640px, with reduced motion, and while the video loads |
+| `public/media/hero/werigo-athena-canggu-hero.mp4` | 1916×1080 | 16:9 | H.264 yuv420p + AAC nature audio, 15 s loop, faststart, 14.1 MB. Source master: `Downloads/werigo-athena-canggu-hero.mp4.mp4` (never modify) |
+| `public/media/hero/werigo-athena-canggu-hero.webm` | 1916×1080 | 16:9 | VP9 + Opus, 9.8 MB; served first, MP4 is the fallback |
+| `public/media/hero/werigo-athena-canggu-hero-poster.webp` | 1916×1080 | 16:9 | First-frame poster; shown with reduced motion and while the video loads |
+
+The video autoplays muted on desktop and mobile; a sound button in the
+hero lets visitors enable the nature audio. The previous no-audio hero
+(`werigo-hero-canggu.*`) has been removed.
 
 The legacy `home-hero.*` manifest slots below are unused; the inline
 hero media band renders only if their `available` flags are ever

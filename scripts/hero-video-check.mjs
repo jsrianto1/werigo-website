@@ -6,7 +6,11 @@ const CHROME =
   "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const outDir = "C:/Users/LOQ/Documents/werigo-website/screenshots";
 
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: "new" });
+const browser = await puppeteer.launch({
+  executablePath: CHROME,
+  headless: "new",
+  args: ["--autoplay-policy=no-user-gesture-required"],
+});
 const results = {};
 let failed = false;
 
@@ -32,9 +36,15 @@ async function checkViewport(width, height, name) {
     const h1Rect = h1?.getBoundingClientRect();
     const widget = document.getElementById("hero-booking");
     const pickup = document.getElementById("pickup-location");
+    const soundBtn = document.querySelector('button[aria-label*="nature sound"]');
+    const sources = video
+      ? [...video.querySelectorAll("source")].map((s) => s.src)
+      : [];
     return {
       hasBackdrop: !!backdrop,
-      backdropDecorative: backdrop?.getAttribute("role") === "img" && !!backdrop?.getAttribute("aria-label"),
+      backdropDecorative:
+        backdrop?.getAttribute("role") === "img" &&
+        !!backdrop?.getAttribute("aria-label"),
       posterRendered: !!poster && poster.getAttribute("aria-hidden") === "true",
       hasVideo: !!video,
       video: video
@@ -45,34 +55,76 @@ async function checkViewport(width, height, name) {
             playsInline: video.playsInline,
             controls: video.controls,
             preload: video.preload,
-            posterAttr: (video.getAttribute("poster") ?? "").includes("werigo-hero-canggu-poster.webp"),
-            src: (video.querySelector("source")?.src ?? "").includes("werigo-hero-canggu.mp4"),
+            posterAttr: (video.getAttribute("poster") ?? "").includes(
+              "werigo-athena-canggu-hero-poster.webp"
+            ),
+            hasWebm: sources.some((s) => s.includes("werigo-athena-canggu-hero.webm")),
+            hasMp4: sources.some((s) => s.includes("werigo-athena-canggu-hero.mp4")),
+            hasAudioTrack:
+              video.mozHasAudio ||
+              Boolean(video.webkitAudioDecodedByteCount) ||
+              Boolean(video.audioTracks && video.audioTracks.length > 0) ||
+              // Chromium fallback: the file has audio if decoded bytes grow
+              video.webkitAudioDecodedByteCount !== 0,
             ariaHidden: video.getAttribute("aria-hidden") === "true",
-            objectPosition: getComputedStyle(video).objectPosition,
           }
         : null,
-      headlineVisible: !!h1Rect && h1Rect.width > 0 && h1Rect.left >= 0 && h1Rect.right <= innerWidth,
-      headlineText: h1?.textContent?.trim(),
+      soundButton: soundBtn
+        ? { present: true, pressed: soundBtn.getAttribute("aria-pressed") }
+        : { present: false },
+      headlineVisible:
+        !!h1Rect && h1Rect.width > 0 && h1Rect.left >= 0 && h1Rect.right <= innerWidth,
       bookingFormUsable: !!widget && !!pickup && !pickup.disabled,
       noHorizontalOverflow: document.documentElement.scrollWidth <= innerWidth,
       cls: Math.round(window.__cls * 1000) / 1000,
     };
   });
 
+  // Sound toggle: off by default, on after click, off after second click
+  if (r.hasVideo && r.soundButton.present) {
+    r.soundToggle = await page.evaluate(async () => {
+      const btn = document.querySelector('button[aria-label*="nature sound"]');
+      const video = document.querySelector("video");
+      const before = { muted: video.muted, pressed: btn.getAttribute("aria-pressed") };
+      btn.click();
+      await new Promise((res) => setTimeout(res, 300));
+      const after = { muted: video.muted, pressed: btn.getAttribute("aria-pressed") };
+      btn.click();
+      await new Promise((res) => setTimeout(res, 300));
+      const restored = { muted: video.muted, pressed: btn.getAttribute("aria-pressed") };
+      return { before, after, restored };
+    });
+  }
+
   await page.screenshot({ path: `${outDir}/hero-${name}.png` });
   await page.close();
 
-  const expectVideo = width >= 640;
   r.pass =
     r.hasBackdrop &&
     r.backdropDecorative &&
     r.posterRendered &&
-    r.hasVideo === expectVideo &&
-    (!expectVideo ||
-      (r.video.playing && r.video.muted && r.video.loop && r.video.playsInline &&
-       !r.video.controls && r.video.preload === "metadata" && r.video.posterAttr &&
-       r.video.src && r.video.ariaHidden)) &&
-    r.headlineVisible && r.bookingFormUsable && r.noHorizontalOverflow && r.cls < 0.1;
+    r.hasVideo &&
+    r.video.playing &&
+    r.video.muted &&
+    r.video.loop &&
+    r.video.playsInline &&
+    !r.video.controls &&
+    r.video.preload === "metadata" &&
+    r.video.posterAttr &&
+    r.video.hasWebm &&
+    r.video.hasMp4 &&
+    r.video.ariaHidden &&
+    r.soundButton.present &&
+    r.soundButton.pressed === "false" &&
+    r.soundToggle &&
+    r.soundToggle.before.muted === true &&
+    r.soundToggle.after.muted === false &&
+    r.soundToggle.after.pressed === "true" &&
+    r.soundToggle.restored.muted === true &&
+    r.headlineVisible &&
+    r.bookingFormUsable &&
+    r.noHorizontalOverflow &&
+    r.cls < 0.1;
   if (!r.pass) failed = true;
   results[name] = r;
 }
@@ -82,14 +134,19 @@ await checkViewport(768, 1024, "768");
 await checkViewport(1440, 900, "1440");
 await checkViewport(1920, 1080, "1920");
 
-// Reduced motion at desktop width: poster only, no video download
+// Reduced motion: poster only, video never downloaded
 {
   const page = await browser.newPage();
   await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
-  await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+  await page.emulateMediaFeatures([
+    { name: "prefers-reduced-motion", value: "reduce" },
+  ]);
   const videoRequests = [];
   page.on("request", (req) => {
-    if (req.url().includes("werigo-hero-canggu.mp4")) videoRequests.push(req.url());
+    if (req.url().includes("werigo-athena-canggu-hero.mp4") ||
+        req.url().includes("werigo-athena-canggu-hero.webm")) {
+      videoRequests.push(req.url());
+    }
   });
   await page.goto(`${BASE}/`, { waitUntil: "networkidle0", timeout: 45000 });
   await new Promise((r) => setTimeout(r, 2000));

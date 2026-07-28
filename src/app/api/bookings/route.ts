@@ -3,6 +3,7 @@ import { bookingSubmissionSchema } from "@/lib/bookingSchema";
 import { getBookingStore } from "@/lib/bookingStore";
 import { buildStoredBookingWhatsAppUrl } from "@/lib/whatsapp";
 import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
+import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
 export const runtime = "nodejs";
 
@@ -40,6 +41,15 @@ function rateLimited(ip: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
+  // TEMPORARY: storage disconnected — the public flow never calls
+  // this route; direct calls are refused before any store access.
+  if (WHATSAPP_FIRST_BOOKING) {
+    return NextResponse.json(
+      { ok: false, error: "storage_disabled", message: "Booking storage is temporarily disabled. Please use the WhatsApp booking flow on the website." },
+      { status: 503 }
+    );
+  }
+
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     req.headers.get("x-real-ip") ??

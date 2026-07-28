@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const stepLabels = ["Search", "Choose ride", "Extras", "Your details", "Review", "Confirmed"];
+const stepLabels = ["Search", "Choose ride", "Extras", "Your details", "Review", "WhatsApp"];
 
 /**
  * Booking progress indicator. `current` is 0-based against stepLabels.

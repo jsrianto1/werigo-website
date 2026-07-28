@@ -223,7 +223,7 @@ export function SearchWidget({
       </div>
 
       <p className="mt-3 text-center text-xs text-ink-faint">
-        Booking reference issued instantly. Availability confirmed by our team.
+        Your request goes straight to our team on WhatsApp. Availability and your quote confirmed there.
       </p>
 
       {error ? (

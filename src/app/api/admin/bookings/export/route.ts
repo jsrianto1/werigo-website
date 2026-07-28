@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAdmin } from "@/lib/adminAuth";
 import { getBookingStore, type BookingListQuery, type StoredBooking } from "@/lib/bookingStore";
 import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
+import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
 export const runtime = "nodejs";
 
@@ -20,6 +21,9 @@ function csvEscape(v: unknown): string {
 }
 
 export async function GET(req: NextRequest) {
+  if (WHATSAPP_FIRST_BOOKING) {
+    return NextResponse.json({ ok: false, error: "storage_disabled" }, { status: 503 });
+  }
   const admin = await getAdmin();
   if (!admin) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });

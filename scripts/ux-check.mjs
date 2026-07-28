@@ -65,9 +65,9 @@ results.stickyAbsentOnCheckout = await page.evaluate(
 // ---- Homepage content checks (mobile) ----
 await page.goto(`${BASE}/`, { waitUntil: "networkidle0" });
 const body = await page.evaluate(() => document.body.textContent);
-results.reassuranceLine = body.includes("Booking reference issued instantly. Availability confirmed by our team.");
+results.reassuranceLine = body.includes("Your request goes straight to our team on WhatsApp. Availability and your quote confirmed there.");
 results.includesSection = body.includes("Every rental includes") && body.includes("Two helmets") && body.includes("Riding & charging briefing");
-results.fourStepProcess = ["Choose your ride", "Get your reference", "We confirm on WhatsApp", "Ride charged and ready"].every((t) => body.includes(t));
+results.fourStepProcess = ["Choose your ride", "Send your request", "We confirm on WhatsApp", "Ride charged and ready"].every((t) => body.includes(t));
 results.areaCardsEnhanced = body.includes("Explore area");
 results.noFreeMisuse = !body.includes("Free helmet");
 results.reviewsEmptyStatePreserved = body.includes("never invent or borrow reviews");

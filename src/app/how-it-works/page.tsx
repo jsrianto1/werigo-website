@@ -24,7 +24,7 @@ const journey = [
   {
     icon: CalendarCheck,
     title: "Book online in minutes",
-    text: "Choose your delivery area, dates and model. Add extras if you need them, tell us where you're staying, and send the booking. You get a reference immediately and a personal confirmation on WhatsApp.",
+    text: "Choose your delivery area, dates and model. Add extras if you need them, tell us where you're staying, and send your request. It opens in WhatsApp and our team replies with availability and your quote.",
   },
   {
     icon: FileCheck,

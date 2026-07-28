@@ -45,7 +45,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I book a Werigo ride?",
         answer:
-          "Choose your location and dates in the search, pick your model, add any extras and confirm your details. You'll receive a booking reference immediately, and our team confirms availability over WhatsApp shortly after.",
+          "Choose your location and dates in the search, pick your model, add any extras and confirm your details. Your request opens in WhatsApp, and our team confirms availability and your quote there.",
       },
       {
         question: "How far in advance should I book?",
@@ -202,7 +202,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I cancel my booking?",
         answer:
-          "Yes. Message us on WhatsApp with your booking reference and we'll handle it. Cancellation terms for your booking are confirmed with your quote before anything is charged. The full written policy is being added to this page.",
+          "Yes. Message us on WhatsApp with your name and rental dates and we'll handle it. Cancellation terms for your booking are confirmed with your quote before anything is charged. The full written policy is being added to this page.",
       },
       {
         question: "What if my flight is delayed?",

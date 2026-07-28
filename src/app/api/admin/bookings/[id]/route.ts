@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getAdmin } from "@/lib/adminAuth";
 import { getBookingStore } from "@/lib/bookingStore";
 import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
+import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
 export const runtime = "nodejs";
 
@@ -23,6 +24,9 @@ interface Ctx {
 }
 
 export async function GET(_req: NextRequest, ctx: Ctx) {
+  if (WHATSAPP_FIRST_BOOKING) {
+    return NextResponse.json({ ok: false, error: "storage_disabled" }, { status: 503 });
+  }
   const admin = await getAdmin();
   if (!admin) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
@@ -41,6 +45,9 @@ export async function GET(_req: NextRequest, ctx: Ctx) {
 }
 
 export async function PATCH(req: NextRequest, ctx: Ctx) {
+  if (WHATSAPP_FIRST_BOOKING) {
+    return NextResponse.json({ ok: false, error: "storage_disabled" }, { status: 503 });
+  }
   const admin = await getAdmin();
   if (!admin) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
