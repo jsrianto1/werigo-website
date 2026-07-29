@@ -695,12 +695,12 @@ export function CheckoutFlow() {
                   className="w-full sm:w-auto"
                 >
                   <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  Continue to WhatsApp
+                  Send booking request
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                Your booking request will open in WhatsApp. Our team will
-                confirm availability and send your quote.
+                We&apos;ll review your request and confirm the rate,
+                availability, and delivery details on WhatsApp.
               </p>
 
               <div className="mt-6">

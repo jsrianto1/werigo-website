@@ -66,8 +66,8 @@ results.stickyAbsentOnCheckout = await page.evaluate(
 await page.goto(`${BASE}/`, { waitUntil: "networkidle0" });
 const body = await page.evaluate(() => document.body.textContent);
 results.reassuranceLine = body.includes("Your request goes straight to our team on WhatsApp. Availability and your quote confirmed there.");
-results.includesSection = body.includes("Every rental includes") && body.includes("Two helmets") && body.includes("Riding & charging briefing");
-results.fourStepProcess = ["Choose your ride", "Send your request", "We confirm on WhatsApp", "Ride charged and ready"].every((t) => body.includes(t));
+results.includesSection = body.includes("A little more comes with every Werigo ride") && body.includes("Fully charged handover") && body.includes("Phone holder included");
+results.fourStepProcess = ["Choose your ride", "Review your request", "Send it on WhatsApp", "We confirm the details"].every((t) => body.includes(t));
 results.areaCardsEnhanced = body.includes("Explore area");
 results.noFreeMisuse = !body.includes("Free helmet");
 results.reviewsEmptyStatePreserved = body.includes("never invent or borrow reviews");
@@ -86,7 +86,15 @@ const fleetChecks = await page.evaluate(() => {
     allHaveViewDetails: cards.every((c) =>
       [...c.querySelectorAll("a")].some((a) => a.textContent.includes("View details"))
     ),
-    rateOnRequestKept: cards.every((c) => c.textContent.includes("Rental rate available upon request")),
+    rateOnRequestKept: cards.every((c) => c.textContent.includes("Rate available upon request")),
+    durationTiers: cards.every((c) =>
+      ["Daily", "Weekly", "Monthly"].every((d) => c.textContent.includes(d))
+    ),
+    noNumericPrices: cards.every((c) => !/\$\s?\d|Rp\s?\d/.test(c.textContent)),
+    benefitChips: cards.every((c) => c.textContent.includes("Helmet included")),
+    noUnapprovedPolicies: cards.every(
+      (c) => !/free cancellation|insurance/i.test(c.textContent)
+    ),
     noVariants: !/(Standard|Extended)\b/.test(document.querySelector("main").textContent),
   };
 });

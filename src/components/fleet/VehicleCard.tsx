@@ -3,6 +3,8 @@ import { ArrowRight, Gauge, Route, Zap } from "lucide-react";
 import type { WedisonEntry } from "@/data/vehicles";
 import { sharedSpec } from "@/data/vehicles";
 import { MediaImage } from "@/components/media/MediaImage";
+import { DurationOptions } from "@/components/fleet/DurationOptions";
+import { BenefitChips } from "@/components/fleet/BenefitChips";
 
 export function VehicleCard({ entry }: { entry: WedisonEntry }) {
   // Range is shown only when identical across all configurations of
@@ -71,8 +73,14 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
           </div>
         </dl>
 
+        <BenefitChips variant="card" className="mt-3" />
+
+        <DurationOptions modelSlug={entry.modelSlug} className="mt-4" />
+
         <div className="mt-4 flex flex-1 flex-col justify-end gap-3">
-          <p className="text-sm text-ink-soft">Rental rate available upon request</p>
+          <p className="text-xs text-ink-faint">
+            Final rate and availability confirmed on WhatsApp.
+          </p>
           <div className="flex items-center gap-2">
             <Link
               href={`/book?vehicle=${entry.id}`}

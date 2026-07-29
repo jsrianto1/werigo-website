@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   BatteryCharging,
   CalendarCheck,
+  CircleParking,
+  Coffee,
+  Fuel,
+  Gauge,
   Leaf,
   MapPin,
   MessageCircle,
   PlugZap,
+  Route,
   ShieldCheck,
   Sparkles,
   Truck,
@@ -16,7 +22,6 @@ import {
   Star,
   Zap,
   Send,
-  Package,
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
@@ -36,6 +41,8 @@ import { serviceAreas } from "@/data/locations";
 import { faqCategories } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
+import { confirmedBenefits } from "@/data/commercialTerms";
+import { coveragePoints } from "@/data/coverage";
 
 export const metadata: Metadata = {
   title: "Electric Scooter and Motorcycle Rental in Bali, Delivered to You",
@@ -67,49 +74,83 @@ const trustPoints = [
   },
 ];
 
-const electricBenefits = [
+const electricAdvantages = [
+  { icon: Volume2, text: "Quiet riding with no engine noise" },
+  { icon: Leaf, text: "No tailpipe emissions while riding" },
+  { icon: Fuel, text: "No petrol-station stops" },
+  { icon: PlugZap, text: "Charge overnight from a supported outlet" },
+  { icon: CircleParking, text: "Easier parking than a car" },
+  { icon: Route, text: "Smaller road footprint than a car" },
+  { icon: MapPin, text: "Well suited to short and medium Bali trips" },
+  { icon: Gauge, text: "Smooth electric acceleration" },
+  { icon: Wallet, text: "Lower day-to-day energy consumption" },
+  { icon: Sparkles, text: "Less disturbance around hotels, villas, and beaches" },
+];
+
+const rideComparison = [
   {
-    icon: Volume2,
-    title: "Silence is the luxury",
-    text: "Hear the rice fields, the waves and the gamelan instead of an engine. Electric riding keeps Bali's soundtrack intact.",
+    name: "Wedison electric",
+    highlight: true,
+    points: [
+      "Quiet motor, no exhaust while riding",
+      "Charges overnight where you stay",
+      "Slips into scooter parking anywhere",
+      "Smooth acceleration through town",
+    ],
   },
   {
-    icon: Leaf,
-    title: "Zero exhaust in paradise",
-    text: "No fumes at traffic lights, no oil drips at your villa. The island stays as clean as you found it.",
+    name: "Petrol scooter",
+    highlight: false,
+    points: [
+      "Engine noise and exhaust on every ride",
+      "Regular petrol-station stops",
+      "Similar parking footprint",
+      "Familiar, but rougher around villas",
+    ],
   },
   {
-    icon: Wallet,
-    title: "No fuel stops, no fuel costs",
-    text: "Skip the roadside petrol bottles. A full overnight charge costs a fraction of a tank and starts every day at 100%.",
+    name: "Car",
+    highlight: false,
+    points: [
+      "Comfortable in heavy rain",
+      "Needs a full parking space",
+      "Wide for Bali's narrow gang",
+      "Best when luggage comes along",
+    ],
   },
-  {
-    icon: Sparkles,
-    title: "Torque that tames traffic",
-    text: "Instant, smooth acceleration makes filtering through Bali traffic calmer and safer than any petrol scooter.",
-  },
+];
+
+const riderAppreciations = [
+  { icon: Volume2, title: "A quieter way to explore Bali", text: "Rice fields, waves, and temple bells instead of engine noise." },
+  { icon: Fuel, title: "No searching for petrol stations", text: "The roadside petrol bottles stay where they are. You just ride." },
+  { icon: BatteryCharging, title: "Delivered charged and ready", text: "The battery is full when the motorcycle reaches you." },
+  { icon: Coffee, title: "Easy stops along the way", text: "Beaches, cafes, and viewpoints are all easy to pull into and out of." },
+  { icon: ShieldCheck, title: "Official Wedison electric motorcycles", text: "Every ride in the fleet is official and maintained in-house." },
+  { icon: MessageCircle, title: "Local help through WhatsApp", text: "One thread with a team that lives and rides here." },
+  { icon: CalendarCheck, title: "Daily, Weekly, and Monthly rentals", text: "A duration for a weekend, a surf trip, or a long stay." },
+  { icon: Truck, title: "Delivery by arrangement", text: "Hotel or villa, tell us where you are staying and we come to you." },
 ];
 
 const steps = [
   {
     icon: CalendarCheck,
     title: "Choose your ride",
-    text: "Choose your area, rental dates and preferred Wedison model. We confirm the rate with your quote.",
+    text: "Select your area, dates, and preferred Wedison model.",
+  },
+  {
+    icon: Sparkles,
+    title: "Review your request",
+    text: "Check your rental duration, delivery location, extras, and contact details.",
   },
   {
     icon: Send,
-    title: "Send your request",
-    text: "Review your details and send your booking request to our team on WhatsApp.",
+    title: "Send it on WhatsApp",
+    text: "Send the completed request directly to the Werigo team.",
   },
   {
     icon: MessageCircle,
-    title: "We confirm on WhatsApp",
-    text: "Our local team confirms availability, your rate and the delivery window with you.",
-  },
-  {
-    icon: Truck,
-    title: "Ride charged and ready",
-    text: "Your motorcycle arrives fully charged, with helmets fitted and a riding briefing.",
+    title: "We confirm the details",
+    text: "Werigo confirms the rate, availability, delivery window, and next steps on WhatsApp.",
   },
 ];
 
@@ -203,29 +244,35 @@ export default function HomePage() {
         </ul>
       </Section>
 
-      {/* ================= EVERY RENTAL INCLUDES ================= */}
+      {/* ================= EVERY WERIGO RIDE INCLUDES ================= */}
       <Section labelledBy="includes-heading" className="!pb-0 !pt-8 md:!pt-10">
-        <div className="rounded-[14px] border border-line bg-primary-faint p-6 sm:p-8">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 id="includes-heading" className="font-display text-2xl text-ink">
-              Every rental includes
+        <div className="rounded-[18px] border border-line bg-primary-faint p-6 sm:p-10">
+          <div className="max-w-2xl">
+            <p className="eyebrow">Included with every rental</p>
+            <h2
+              id="includes-heading"
+              className="mt-3 font-display text-3xl leading-tight text-ink md:text-4xl"
+            >
+              A little more comes with every Werigo ride
             </h2>
-            <p className="text-xs text-ink-faint">
-              Included in every approved quote, with no add-on surprises.
+            <p className="mt-4 leading-relaxed text-ink-soft">
+              The useful details are already sorted, so you can spend less
+              time preparing and more time exploring Bali.
             </p>
           </div>
-          <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-ink-soft sm:grid-cols-3 lg:grid-cols-6">
-            {[
-              "Two helmets",
-              "Phone holder",
-              "Fully charged handover",
-              "Delivery to hotel or villa",
-              "Riding & charging briefing",
-              "Local WhatsApp support",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <Package className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                {item}
+          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {confirmedBenefits.map((benefit) => (
+              <li
+                key={benefit.id}
+                className="rounded-[14px] border border-line bg-card p-5"
+              >
+                <benefit.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                <h3 className="mt-3 text-sm font-semibold text-ink">
+                  {benefit.label}
+                </h3>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  {benefit.description}
+                </p>
               </li>
             ))}
           </ul>
@@ -256,78 +303,193 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ================= HOW IT WORKS ================= */}
+      {/* ================= HOW IT WORKS (feature) ================= */}
       <Section tone="wash" labelledBy="how-heading" className="md:!pb-12 lg:!pb-14">
-        <SectionHeading
-          eyebrow="How Werigo works"
-          title="Four steps between you and the open road"
-          id="how-heading"
-        />
-        <ol className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-7">
-          {steps.map((step, i) => (
-            <li
-              key={step.title}
-              className="relative rounded-[14px] border border-line bg-card p-6"
+        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+          {/* Featured motorcycle panel */}
+          <div className="relative overflow-hidden rounded-[18px] border border-line bg-card p-6 sm:p-10">
+            <p className="eyebrow">How Werigo works</p>
+            <h2
+              id="how-heading"
+              className="mt-3 font-display text-3xl leading-tight text-ink md:text-4xl xl:text-[2.6rem]"
             >
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white">
-                  <step.icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <span className="tnum text-sm font-semibold text-ink-faint">
-                  Step {i + 1}
-                </span>
-              </div>
-              <h3 className="mt-4 font-display text-xl text-ink">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.text}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-8">
-          <ButtonLink href="/how-it-works" variant="ghost">
-            See the full journey
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </ButtonLink>
+              Four steps between you and the open road
+            </h2>
+            <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
+              From first tap to riding out of your villa gate, the whole
+              request takes a few minutes on your phone.
+            </p>
+            <div className="mt-6">
+              <MediaImage
+                id="fleet-athena-main"
+                fallbackLabel="Wedison Athena product photo"
+                ratio="3/2"
+                fit="contain"
+                sizes="(max-width: 1024px) 100vw, 640px"
+              />
+            </div>
+            <RouteLine className="pointer-events-none absolute inset-x-0 bottom-3 opacity-40" />
+          </div>
+
+          {/* Connected step rail */}
+          <div>
+            <ol className="relative">
+              {steps.map((step, i) => (
+                <li key={step.title} className="relative flex gap-5 pb-9 last:pb-0">
+                  {i < steps.length - 1 ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute bottom-1 left-[21px] top-14 w-0 border-l-2 border-dashed border-primary/30"
+                    />
+                  ) : null}
+                  <span className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-[0_6px_16px_-8px_rgba(10,92,85,0.7)]">
+                    <step.icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="tnum text-xs font-semibold uppercase tracking-wider text-ink-faint">
+                      Step {i + 1}
+                    </p>
+                    <h3 className="mt-1 font-display text-xl text-ink md:text-2xl">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1.5 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
+                      {step.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-9 pl-16">
+              <ButtonLink href="/book" variant="accent" size="lg">
+                Start your booking request
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </ButtonLink>
+            </div>
+          </div>
         </div>
       </Section>
 
       <RidingMotorcycle />
 
-      {/* ================= ELECTRIC BENEFITS ================= */}
+      {/* ================= WHY ELECTRIC IN BALI ================= */}
       <Section labelledBy="benefits-heading" className="md:!pt-6 lg:!pt-8">
         <SectionHeading
           eyebrow="Why electric"
-          title="The island sounds better without an engine"
+          title="Why Bali works better on electric"
           lede="Electric riding isn't a compromise in Bali. It's the upgrade."
           id="benefits-heading"
         />
-        <div className="grid gap-6 sm:grid-cols-2">
-          {electricBenefits.map((benefit) => (
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+          {electricAdvantages.map((item) => (
+            <li key={item.text} className="flex items-center gap-3 text-sm text-ink-soft md:text-base">
+              <item.icon className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+              {item.text}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {rideComparison.map((option) => (
             <div
-              key={benefit.title}
-              className="flex gap-4 rounded-[14px] border border-line bg-card p-6"
+              key={option.name}
+              className={`rounded-[14px] border p-6 ${
+                option.highlight
+                  ? "border-primary bg-primary-faint shadow-[0_16px_40px_-24px_rgba(10,92,85,0.5)]"
+                  : "border-line bg-card"
+              }`}
             >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-                <benefit.icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className="font-semibold text-ink">{benefit.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                  {benefit.text}
-                </p>
-              </div>
+              <h3 className="flex items-center justify-between font-display text-xl text-ink">
+                {option.name}
+                {option.highlight ? (
+                  <span className="rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+                    Our pick
+                  </span>
+                ) : null}
+              </h3>
+              {option.highlight ? (
+                <div className="mt-3">
+                  <MediaImage
+                    id="fleet-victory-main"
+                    fallbackLabel="Wedison Victory product photo"
+                    ratio="3/2"
+                    fit="contain"
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                  />
+                </div>
+              ) : null}
+              <ul className="mt-4 space-y-2.5">
+                {option.points.map((point) => (
+                  <li key={point} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-soft">
+                    <span
+                      aria-hidden="true"
+                      className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
+                        option.highlight ? "bg-primary" : "bg-ink-faint"
+                      }`}
+                    />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
+        <p className="mt-6 text-sm font-medium text-ink-soft">
+          A valid licence, a properly fitted helmet, and responsible riding
+          are still essential.
+        </p>
       </Section>
 
       {/* ================= DELIVERY AREAS ================= */}
       <Section tone="wash" labelledBy="areas-heading">
         <SectionHeading
-          eyebrow="Delivery areas"
-          title="We come to you, across the south and centre"
-          lede="Delivery is free in our home zones, with small fees elsewhere. Your quote always shows this before you book."
+          eyebrow="Delivery coverage"
+          title="From touchdown to your villa, we bring the ride"
+          lede="Tell us where you're staying. We'll confirm the delivery time and any applicable fee on WhatsApp."
           id="areas-heading"
         />
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3 xl:gap-5">
+          {coveragePoints.map((point) => (
+            <li key={point.id}>
+              <div className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]">
+                <div className="relative h-40 w-full overflow-hidden lg:h-48 xl:h-56">
+                  <Image
+                    src={point.image.src}
+                    alt={point.image.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 440px"
+                    className="object-cover"
+                    style={{ objectPosition: point.image.focal }}
+                  />
+                  {point.image.credit ? (
+                    <span className="absolute bottom-1.5 right-1.5 rounded-full bg-ink/60 px-2 py-0.5 text-[10px] leading-tight text-white">
+                      {point.image.credit}
+                    </span>
+                  ) : null}
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-display text-xl text-ink">{point.name}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                    {point.description}
+                  </p>
+                  <p className="mt-2.5 text-xs font-medium text-ok">{point.status}</p>
+                  <div className="mt-4 flex flex-1 items-end">
+                    <Link
+                      href="/book"
+                      className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong"
+                    >
+                      Check availability
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="mb-4 mt-10 font-display text-2xl text-ink">
+          Eight service areas across the south and centre
+        </h3>
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {serviceAreas.map((area) => (
             <li key={area.slug}>
@@ -543,6 +705,32 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+      </Section>
+
+      {/* ================= WHAT RIDERS APPRECIATE ================= */}
+      <Section labelledBy="riders-heading">
+        <SectionHeading
+          eyebrow="The riding experience"
+          title="What riders appreciate about Werigo"
+          lede="No invented reviews here. This is what the experience is built around."
+          id="riders-heading"
+        />
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:gap-5">
+          {riderAppreciations.map((item) => (
+            <li
+              key={item.title}
+              className="rounded-[14px] border border-line bg-card p-5 transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
+                <item.icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <h3 className="mt-3.5 font-semibold text-ink">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                {item.text}
+              </p>
+            </li>
+          ))}
+        </ul>
       </Section>
 
       {/* ================= THE WERIGO STANDARD (service assurance) =================

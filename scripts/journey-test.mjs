@@ -112,12 +112,12 @@ try {
   );
   results.finalButtonIsWhatsApp = await page.evaluate(() =>
     [...document.querySelectorAll("button")].some((b) =>
-      b.textContent.includes("Continue to WhatsApp")
+      b.textContent.includes("Send booking request")
     )
   );
   results.helperTextPresent = await page.evaluate(() =>
     document.body.textContent.includes(
-      "Your booking request will open in WhatsApp. Our team will confirm availability and send your quote."
+      "We'll review your request and confirm the rate, availability, and delivery details on WhatsApp."
     )
   );
   results.consentWordingPresent = await page.evaluate(() =>
@@ -134,7 +134,7 @@ try {
       return null;
     };
     [...document.querySelectorAll("button")]
-      .find((b) => b.textContent.includes("Continue to WhatsApp"))
+      .find((b) => b.textContent.includes("Send booking request"))
       .click();
   });
   results.consentRequired = await page.evaluate(
@@ -146,7 +146,7 @@ try {
   await page.click("#field-privacyConsent");
   await page.evaluate(() => {
     [...document.querySelectorAll("button")]
-      .find((b) => b.textContent.includes("Continue to WhatsApp"))
+      .find((b) => b.textContent.includes("Send booking request"))
       .click();
   });
   await page.waitForFunction(

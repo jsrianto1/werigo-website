@@ -123,7 +123,9 @@ export default function FleetPage() {
           </table>
         </div>
         <p className="mt-4 text-xs leading-relaxed text-ink-faint">
-          {specDisclaimer} Rental rates available upon request.
+          {specDisclaimer} Every model rents Daily, Weekly, or Monthly.
+          Rate available upon request. Final rate and availability
+          confirmed on WhatsApp.
         </p>
         <div className="mt-8">
           <ButtonLink href="/book" variant="accent" size="lg">

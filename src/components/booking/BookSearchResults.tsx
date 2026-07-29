@@ -7,6 +7,7 @@ import { ArrowRight, Gauge, Route, SearchX, Zap } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { MediaImage } from "@/components/media/MediaImage";
+import { DurationOptions } from "@/components/fleet/DurationOptions";
 import {
   getListedModels,
   toCustomerEntry,
@@ -165,13 +166,17 @@ export function BookSearchResults() {
                       </li>
                     ) : null}
                   </ul>
+                  <DurationOptions
+                    modelSlug={model.modelSlug}
+                    className="mt-4 max-w-xs"
+                  />
                 </div>
                 <div className="flex flex-col items-stretch gap-3 md:items-end">
-                  <p className="text-sm text-ink-soft md:max-w-[180px] md:text-right">
+                  <p className="text-sm text-ink-soft md:max-w-[190px] md:text-right">
                     <span className="block font-semibold text-ink">
                       Available by request
                     </span>
-                    Rental rate available upon request
+                    Final rate and availability confirmed on WhatsApp.
                   </p>
                   <button
                     onClick={() => goToCheckout(model.id)}

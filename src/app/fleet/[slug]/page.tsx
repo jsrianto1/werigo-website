@@ -26,6 +26,8 @@ import {
 } from "@/data/vehicles";
 import { vehicleSchema, jsonLd } from "@/lib/schema";
 import { buildModelInquiryWhatsAppUrl } from "@/lib/whatsapp";
+import { DurationOptions } from "@/components/fleet/DurationOptions";
+import { BenefitChips } from "@/components/fleet/BenefitChips";
 import { findMedia, getModelColors } from "@/data/media";
 import { ProductGallery } from "@/components/fleet/ProductGallery";
 
@@ -210,12 +212,12 @@ export default async function VehicleDetailPage({ params }: Props) {
               </ul>
             ) : null}
 
-            {/* Rate */}
-            <div className="mt-8 rounded-[14px] border border-line bg-primary-faint p-5">
-              <p className="font-semibold text-ink">
-                Rental rate available upon request
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+            <BenefitChips variant="detail" className="mt-5" />
+
+            {/* Rental durations + rate */}
+            <div className="mt-8 rounded-[14px] border border-line bg-card p-5">
+              <DurationOptions modelSlug={entry.modelSlug} variant="full" />
+              <p className="mt-4 border-t border-line pt-4 text-sm leading-relaxed text-ink-soft">
                 Tell us your dates and delivery area. We confirm your rate and
                 availability on WhatsApp before you commit to anything.
               </p>
