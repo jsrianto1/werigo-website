@@ -44,7 +44,7 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="About Werigo · Powered by Wedison"
               title="Exploring the island shouldn't cost the island"
-              lede="Most people see Bali from the seat of a petrol scooter, and that is also the thing slowly wearing the island down. We think there's a better ride."
+              lede="Bali mostly gets explored with engines running, and the island feels it. We think it deserves a quieter ride."
             />
             <p className="max-w-xl leading-relaxed text-ink-soft">
               Werigo is Wedison&apos;s electric motorcycle rental and mobility

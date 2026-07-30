@@ -4,20 +4,15 @@ import Image from "next/image";
 import {
   BatteryCharging,
   CalendarCheck,
-  CircleParking,
   Coffee,
   Fuel,
-  Gauge,
-  Leaf,
   MapPin,
   MessageCircle,
   PlugZap,
-  Route,
   ShieldCheck,
   Sparkles,
   Truck,
   Volume2,
-  Wallet,
   ArrowRight,
   Star,
   Zap,
@@ -74,49 +69,21 @@ const trustPoints = [
   },
 ];
 
-const electricAdvantages = [
-  { icon: Volume2, text: "Quiet riding with no engine noise" },
-  { icon: Leaf, text: "No tailpipe emissions while riding" },
-  { icon: Fuel, text: "No petrol-station stops" },
-  { icon: PlugZap, text: "Charge overnight from a supported outlet" },
-  { icon: CircleParking, text: "Easier parking than a car" },
-  { icon: Route, text: "Smaller road footprint than a car" },
-  { icon: MapPin, text: "Well suited to short and medium Bali trips" },
-  { icon: Gauge, text: "Smooth electric acceleration" },
-  { icon: Wallet, text: "Lower day-to-day energy consumption" },
-  { icon: Sparkles, text: "Less disturbance around hotels, villas, and beaches" },
-];
-
-const rideComparison = [
+const baliDays = [
   {
-    name: "Wedison electric",
-    highlight: true,
-    points: [
-      "Quiet motor, no exhaust while riding",
-      "Charges overnight where you stay",
-      "Slips into scooter parking anywhere",
-      "Smooth acceleration through town",
-    ],
+    icon: Volume2,
+    title: "Quiet around villas",
+    text: "Head out early or come home late without bringing engine noise into the neighbourhood.",
   },
   {
-    name: "Petrol scooter",
-    highlight: false,
-    points: [
-      "Engine noise and exhaust on every ride",
-      "Regular petrol-station stops",
-      "Similar parking footprint",
-      "Familiar, but rougher around villas",
-    ],
+    icon: PlugZap,
+    title: "Charge where you stay",
+    text: "Plug in at your hotel or villa overnight and start the next day ready.",
   },
   {
-    name: "Car",
-    highlight: false,
-    points: [
-      "Comfortable in heavy rain",
-      "Needs a full parking space",
-      "Wide for Bali's narrow gang",
-      "Best when luggage comes along",
-    ],
+    icon: MapPin,
+    title: "Built for island plans",
+    text: "Comfortable for beach runs, caf\u00e9 stops and everyday trips across Bali.",
   },
 ];
 
@@ -371,72 +338,29 @@ export default function HomePage() {
 
       <RidingMotorcycle />
 
-      {/* ================= WHY ELECTRIC IN BALI ================= */}
+      {/* ================= MADE FOR BALI DAYS ================= */}
       <Section labelledBy="benefits-heading" className="md:!pt-6 lg:!pt-8">
         <SectionHeading
-          eyebrow="Why electric"
-          title="Why Bali works better on electric"
-          lede="Electric riding isn't a compromise in Bali. It's the upgrade."
+          eyebrow="Made for Bali days"
+          title="Everything you need for an easier ride"
           id="benefits-heading"
         />
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
-          {electricAdvantages.map((item) => (
-            <li key={item.text} className="flex items-center gap-3 text-sm text-ink-soft md:text-base">
-              <item.icon className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-              {item.text}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {rideComparison.map((option) => (
+        <div className="grid gap-4 sm:grid-cols-3 xl:gap-5">
+          {baliDays.map((card) => (
             <div
-              key={option.name}
-              className={`rounded-[14px] border p-6 ${
-                option.highlight
-                  ? "border-primary bg-primary-faint shadow-[0_16px_40px_-24px_rgba(10,92,85,0.5)]"
-                  : "border-line bg-card"
-              }`}
+              key={card.title}
+              className="rounded-[14px] border border-line bg-card p-6 transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
             >
-              <h3 className="flex items-center justify-between font-display text-xl text-ink">
-                {option.name}
-                {option.highlight ? (
-                  <span className="rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
-                    Our pick
-                  </span>
-                ) : null}
-              </h3>
-              {option.highlight ? (
-                <div className="mt-3">
-                  <MediaImage
-                    id="fleet-victory-main"
-                    fallbackLabel="Wedison Victory product photo"
-                    ratio="3/2"
-                    fit="contain"
-                    sizes="(max-width: 1024px) 100vw, 420px"
-                  />
-                </div>
-              ) : null}
-              <ul className="mt-4 space-y-2.5">
-                {option.points.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-soft">
-                    <span
-                      aria-hidden="true"
-                      className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
-                        option.highlight ? "bg-primary" : "bg-ink-faint"
-                      }`}
-                    />
-                    {point}
-                  </li>
-                ))}
-              </ul>
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-soft text-primary">
+                <card.icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <h3 className="mt-4 font-display text-xl text-ink">{card.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">
+                {card.text}
+              </p>
             </div>
           ))}
         </div>
-        <p className="mt-6 text-sm font-medium text-ink-soft">
-          A valid licence, a properly fitted helmet, and responsible riding
-          are still essential.
-        </p>
       </Section>
 
       {/* ================= DELIVERY AREAS ================= */}
@@ -669,29 +593,32 @@ export default function HomePage() {
         <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div>
             <SectionHeading
-              eyebrow="Local support"
-              title="A Bali team, one WhatsApp message away"
-              lede="Flat tyre in Pererenan? Battery question at midnight in Ubud? Our operations team lives here, rides here, and answers on the app you already use."
+              eyebrow="Rental support"
+              title="Help when you need it"
+              lede="Message the Werigo team on WhatsApp for charging questions, directions, rental extensions or motorcycle support."
               id="support-heading"
               inverse
             />
             <ul className="grid gap-4 text-sm sm:grid-cols-2">
               <li className="rounded-[14px] border border-ink-inverse/15 p-4">
-                <h3 className="font-semibold text-ink-inverse">During riding hours</h3>
+                <h3 className="font-semibold text-ink-inverse">WhatsApp support</h3>
                 <p className="mt-1 leading-relaxed text-ink-inverse/70">
-                  Need help during your rental? Message our local team on
-                  WhatsApp for charging questions, directions, extensions or
-                  motorcycle support.
+                  Contact us during our current support hours and our team
+                  will guide you through the next step.
                 </p>
               </li>
               <li className="rounded-[14px] border border-ink-inverse/15 p-4">
-                <h3 className="font-semibold text-ink-inverse">Emergencies</h3>
+                <h3 className="font-semibold text-ink-inverse">Urgent road issue?</h3>
                 <p className="mt-1 leading-relaxed text-ink-inverse/70">
-                  A dedicated emergency line comes with every booking
-                  confirmation, and it is printed on the key tag too.
+                  Move to a safe place, then message us on WhatsApp with your
+                  location and a short description of the issue.
                 </p>
               </li>
             </ul>
+            <p className="mt-5 text-xs leading-relaxed text-ink-inverse/60">
+              If anyone is in immediate danger, contact local emergency
+              services first.
+            </p>
           </div>
           <div className="lg:justify-self-end">
             <a

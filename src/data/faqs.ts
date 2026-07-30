@@ -27,7 +27,7 @@ export const faqCategories: FaqCategory[] = [
           "Werigo is a premium electric motorcycle rental service based in Bali. We deliver fully charged electric motorcycles and scooters to hotels and villas across the island's south and centre, so you can explore Bali quietly, cleanly and on your own schedule.",
       },
       {
-        question: "Why choose electric over a petrol scooter?",
+        question: "Why does electric riding suit Bali?",
         answer:
           "Electric riding suits Bali well. There are no fuel stops, no engine heat in traffic and no noise, and the smooth pull from a standstill makes busy roads easier to handle. You simply charge overnight at your accommodation, the same way you charge your phone.",
       },
@@ -144,7 +144,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What if I run out of charge mid-ride?",
         answer:
-          "Contact our support line and we'll help. Battery swap or recovery options depend on your model and location. The battery indicator gives generous warnings, so you'll have plenty of notice.",
+          "Message the Werigo team on WhatsApp and we'll help you work out the next step. The battery indicator gives generous warnings, so you'll have plenty of notice.",
       },
       {
         question: "Can I swap batteries instead of waiting for a charge?",
@@ -218,7 +218,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What should I do after an accident?",
         answer:
-          "Make sure everyone is safe first, then contact our emergency line immediately. It is staffed during all riding hours. We'll guide you through the next steps and arrange recovery if the motorcycle can't be ridden.",
+          "Make sure everyone is safe first. If anyone is hurt, contact local emergency services. Then message the Werigo team on WhatsApp and we'll guide you through the next steps.",
       },
       {
         question: "What am I liable for if the motorcycle is damaged?",
@@ -228,23 +228,23 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What about punctures and minor mechanical issues?",
         answer:
-          "Message support and we'll direct you to the nearest partner workshop or send assistance. Normal wear items are on us; damage from riding off sealed roads is not.",
+          "Message us on WhatsApp and we'll talk through the issue and the nearest workshop options with you. Normal wear items are on us; damage from riding off sealed roads is not.",
       },
     ],
   },
   {
     id: "emergency",
-    title: "Emergency support",
+    title: "Urgent help",
     items: [
       {
-        question: "Who do I contact in an emergency?",
+        question: "Who do I contact if something urgent happens on the road?",
         answer:
-          "For medical emergencies in Bali call 112 first. Then contact the Werigo emergency line. The number is included in your booking confirmation and printed on the motorcycle's key tag.",
+          "If anyone is in immediate danger, contact local emergency services first. For anything to do with the motorcycle, move to a safe place and message the Werigo team on WhatsApp with your location and a short description of the issue.",
       },
       {
-        question: "What if the motorcycle breaks down at night?",
+        question: "What if the motorcycle breaks down?",
         answer:
-          "Contact the emergency line. Depending on your location we'll talk you through a fix, send roadside help, or arrange recovery and a replacement ride for the morning.",
+          "Move it somewhere safe and message us on WhatsApp with your location. We'll guide you through the next step together.",
       },
     ],
   },

@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Volume2, VolumeX } from "lucide-react";
 
 const VIDEO_MP4 = "/media/hero/werigo-athena-canggu-hero.mp4";
 const VIDEO_WEBM = "/media/hero/werigo-athena-canggu-hero.webm";
@@ -16,16 +15,13 @@ const POSTER_SRC = "/media/hero/werigo-athena-canggu-hero-poster.webp";
  * the hero never waits on the video and never shifts layout. The
  * <video> element is mounted only when the visitor has no
  * reduced-motion preference; with reduced motion the poster stands in
- * and the video is never downloaded. Playback starts muted (required
- * for autoplay); the sound button lets the visitor enable the nature
- * audio manually. A light page-coloured scrim keeps the left side
- * clear for the headline.
+ * and the video is never downloaded. Playback is always muted with no
+ * controls. A light page-coloured scrim keeps the left side clear for
+ * the headline.
  */
 export function HeroBackdrop() {
   const [showVideo, setShowVideo] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const [soundOn, setSoundOn] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   // matchMedia is an external system — a one-shot sync read on mount
   // plus a change listener; SSR always renders the poster only.
@@ -38,18 +34,8 @@ export function HeroBackdrop() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  function toggleSound() {
-    const v = videoRef.current;
-    if (!v) return;
-    const next = !soundOn;
-    v.muted = !next;
-    if (next && v.paused) v.play().catch(() => undefined);
-    setSoundOn(next);
-  }
-
   return (
-    <>
-      <div
+    <div
         className="absolute inset-0 -z-10 overflow-hidden"
         role="img"
         aria-label="A rider on a white Wedison electric scooter passing rice fields and villas on a sunny Canggu road in Bali"
@@ -65,9 +51,8 @@ export function HeroBackdrop() {
         />
         {showVideo ? (
           <video
-            ref={videoRef}
             autoPlay
-            muted={!soundOn}
+            muted
             loop
             playsInline
             preload="metadata"
@@ -93,24 +78,6 @@ export function HeroBackdrop() {
           aria-hidden="true"
           className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-page"
         />
-      </div>
-      {showVideo && playing ? (
-        <button
-          type="button"
-          onClick={toggleSound}
-          aria-pressed={soundOn}
-          aria-label={
-            soundOn ? "Turn off nature sound" : "Turn on nature sound"
-          }
-          className="absolute bottom-10 right-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-line bg-page/80 text-ink shadow-sm backdrop-blur-sm transition-colors hover:border-primary hover:text-primary sm:bottom-12 sm:right-6"
-        >
-          {soundOn ? (
-            <Volume2 className="h-5 w-5" aria-hidden="true" />
-          ) : (
-            <VolumeX className="h-5 w-5" aria-hidden="true" />
-          )}
-        </button>
-      ) : null}
-    </>
+    </div>
   );
 }

@@ -332,7 +332,7 @@ export default function SuperchargePage() {
           <SectionHeading
             eyebrow="While you charge"
             title="Supported from plug-in to ride-out"
-            lede="Every SuperCharge session is backed by the same WhatsApp thread as your rental. If a point is busy or a battery question comes up, a local rider answers during all riding hours."
+            lede="Every SuperCharge session is backed by the same WhatsApp thread as your rental. If a point is busy or a battery question comes up, message us during our current support hours."
             id="support-charging-heading"
             inverse
           />

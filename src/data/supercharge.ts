@@ -128,6 +128,6 @@ export const superchargeFaq = [
   {
     question: "What if something goes wrong while charging?",
     answer:
-      "Our support line is live during all riding hours. If a charging point is busy or your session has any issue, message us. We'll fix it or direct you to an alternative straight away.",
+      "Message us on WhatsApp during our current support hours. If a charging point is busy or your session has any issue, we'll help you sort it or point you to an alternative.",
   },
 ];

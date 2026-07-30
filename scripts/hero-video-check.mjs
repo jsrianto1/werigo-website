@@ -69,9 +69,11 @@ async function checkViewport(width, height, name) {
             ariaHidden: video.getAttribute("aria-hidden") === "true",
           }
         : null,
-      soundButton: soundBtn
-        ? { present: true, pressed: soundBtn.getAttribute("aria-pressed") }
-        : { present: false },
+      noAudioControl:
+        !soundBtn &&
+        ![...document.querySelectorAll("button")].some((b) =>
+          /sound|audio|mute|volume/i.test(b.getAttribute("aria-label") ?? "")
+        ),
       headlineVisible:
         !!h1Rect && h1Rect.width > 0 && h1Rect.left >= 0 && h1Rect.right <= innerWidth,
       bookingFormUsable: !!widget && !!pickup && !pickup.disabled,
@@ -79,22 +81,6 @@ async function checkViewport(width, height, name) {
       cls: Math.round(window.__cls * 1000) / 1000,
     };
   });
-
-  // Sound toggle: off by default, on after click, off after second click
-  if (r.hasVideo && r.soundButton.present) {
-    r.soundToggle = await page.evaluate(async () => {
-      const btn = document.querySelector('button[aria-label*="nature sound"]');
-      const video = document.querySelector("video");
-      const before = { muted: video.muted, pressed: btn.getAttribute("aria-pressed") };
-      btn.click();
-      await new Promise((res) => setTimeout(res, 300));
-      const after = { muted: video.muted, pressed: btn.getAttribute("aria-pressed") };
-      btn.click();
-      await new Promise((res) => setTimeout(res, 300));
-      const restored = { muted: video.muted, pressed: btn.getAttribute("aria-pressed") };
-      return { before, after, restored };
-    });
-  }
 
   await page.screenshot({ path: `${outDir}/hero-${name}.png` });
   await page.close();
@@ -114,13 +100,7 @@ async function checkViewport(width, height, name) {
     r.video.hasWebm &&
     r.video.hasMp4 &&
     r.video.ariaHidden &&
-    r.soundButton.present &&
-    r.soundButton.pressed === "false" &&
-    r.soundToggle &&
-    r.soundToggle.before.muted === true &&
-    r.soundToggle.after.muted === false &&
-    r.soundToggle.after.pressed === "true" &&
-    r.soundToggle.restored.muted === true &&
+    r.noAudioControl &&
     r.headlineVisible &&
     r.bookingFormUsable &&
     r.noHorizontalOverflow &&
