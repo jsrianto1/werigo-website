@@ -1,3 +1,5 @@
+import { site } from "@/lib/config";
+
 /**
  * Wedison Supercharge — fast-charging network data.
  * (Werigo is the rental service; Supercharge is Wedison's charging
@@ -128,6 +130,6 @@ export const superchargeFaq = [
   {
     question: "What if something goes wrong while charging?",
     answer:
-      "Message us on WhatsApp during our current support hours. If a charging point is busy or your session has any issue, we'll help you sort it or point you to an alternative.",
+      "Message us on WhatsApp if a charging point is busy or your session has any issue, and we'll help you sort it or point you to an alternative. " + site.supportHoursSentence,
   },
 ];

@@ -38,8 +38,8 @@ export function ContactForm() {
         <CheckCircle2 className="h-10 w-10 text-ok" aria-hidden="true" />
         <h2 className="mt-4 font-display text-2xl text-ink">Message on its way</h2>
         <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
-          We opened WhatsApp with your message. Hit send there and the team
-          will get back to you during riding hours.
+          We opened WhatsApp with your message. Hit send there and the
+          team will reply between 08:00 and 20:00 WITA.
         </p>
         <Button variant="ghost" className="mt-6" onClick={() => setSent(false)}>
           Write another message

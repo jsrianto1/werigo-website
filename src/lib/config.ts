@@ -28,6 +28,12 @@ export const site = {
   /** Operating hours shown on contact surfaces (local Bali time, GMT+8). */
   operatingHours: "Daily 08:00 to 20:00 WITA",
 
+  /**
+   * Sentence form of operatingHours for support copy. Keep the two
+   * in sync: this is the only approved statement of reply hours.
+   */
+  supportHoursSentence: "Our team replies daily from 08:00 to 20:00 WITA.",
+
   /** Social profiles — PLACEHOLDER URLs, update when accounts exist. */
   social: {
     instagram: "https://instagram.com/werigo.bali",

@@ -34,7 +34,7 @@ export default function ContactPage() {
             <span>
               <span className="block font-semibold text-ink">WhatsApp</span>
               <span className="mt-0.5 block text-sm text-ink-soft">
-                Fastest replies during riding hours
+                Fastest replies, daily 08:00 to 20:00 WITA
               </span>
             </span>
           </a>

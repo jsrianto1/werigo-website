@@ -15,6 +15,7 @@ import { RouteLine } from "@/components/ui/RouteLine";
 import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import { ButtonLink } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
+import { site } from "@/lib/config";
 import { MediaImage } from "@/components/media/MediaImage";
 import { MediaVideo } from "@/components/media/MediaVideo";
 import {
@@ -332,7 +333,7 @@ export default function SuperchargePage() {
           <SectionHeading
             eyebrow="While you charge"
             title="Supported from plug-in to ride-out"
-            lede="Every SuperCharge session is backed by the same WhatsApp thread as your rental. If a point is busy or a battery question comes up, message us during our current support hours."
+            lede={`Every SuperCharge session is backed by the same WhatsApp thread as your rental. If a point is busy or a battery question comes up, message us. ${site.supportHoursSentence}`}
             id="support-charging-heading"
             inverse
           />

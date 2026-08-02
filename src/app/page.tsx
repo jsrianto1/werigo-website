@@ -5,6 +5,7 @@ import {
   BatteryCharging,
   CalendarCheck,
   Coffee,
+  Leaf,
   Fuel,
   MapPin,
   MessageCircle,
@@ -35,6 +36,7 @@ import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 import { faqCategories } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
+import { site } from "@/lib/config";
 import { faqSchema, jsonLd } from "@/lib/schema";
 import { confirmedBenefits } from "@/data/commercialTerms";
 import { coveragePoints } from "@/data/coverage";
@@ -72,18 +74,23 @@ const trustPoints = [
 const baliDays = [
   {
     icon: Volume2,
-    title: "Quiet around villas",
-    text: "Head out early or come home late without bringing engine noise into the neighbourhood.",
+    title: "Quiet electric riding",
+    text: "The motor hums instead of roars, so early starts and late returns stay peaceful.",
+  },
+  {
+    icon: Leaf,
+    title: "Zero tailpipe emissions",
+    text: "Nothing comes out of an exhaust while you ride.",
   },
   {
     icon: PlugZap,
-    title: "Charge where you stay",
-    text: "Plug in at your hotel or villa overnight and start the next day ready.",
+    title: "Charging from a standard outlet",
+    text: "Plug in at your hotel or villa overnight, the same way you charge your phone.",
   },
   {
     icon: MapPin,
-    title: "Built for island plans",
-    text: "Comfortable for beach runs, caf\u00e9 stops and everyday trips across Bali.",
+    title: "Comfortable for everyday Bali trips",
+    text: "Beaches, cafes, markets and everything in between, at an easy pace.",
   },
 ];
 
@@ -341,11 +348,12 @@ export default function HomePage() {
       {/* ================= MADE FOR BALI DAYS ================= */}
       <Section labelledBy="benefits-heading" className="md:!pt-6 lg:!pt-8">
         <SectionHeading
-          eyebrow="Made for Bali days"
-          title="Everything you need for an easier ride"
+          eyebrow="Made for Bali"
+          title="Electric riding that fits the island"
+          lede="Quiet, easy to charge and ready for everyday Bali journeys."
           id="benefits-heading"
         />
-        <div className="grid gap-4 sm:grid-cols-3 xl:gap-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:gap-5">
           {baliDays.map((card) => (
             <div
               key={card.title}
@@ -603,8 +611,8 @@ export default function HomePage() {
               <li className="rounded-[14px] border border-ink-inverse/15 p-4">
                 <h3 className="font-semibold text-ink-inverse">WhatsApp support</h3>
                 <p className="mt-1 leading-relaxed text-ink-inverse/70">
-                  Contact us during our current support hours and our team
-                  will guide you through the next step.
+                  Message us and our team will guide you through the next
+                  step. {site.supportHoursSentence}
                 </p>
               </li>
               <li className="rounded-[14px] border border-ink-inverse/15 p-4">
@@ -686,7 +694,7 @@ export default function HomePage() {
             },
             {
               title: "A person answers",
-              text: "Your booking thread on WhatsApp is staffed by the same local team that delivers your ride. During riding hours, real people answer your questions.",
+              text: "Your booking thread on WhatsApp is staffed by the same local team that delivers your ride. Real people answer your questions daily from 08:00 to 20:00 WITA.",
             },
           ].map((item) => (
             <li
