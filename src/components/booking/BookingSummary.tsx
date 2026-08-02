@@ -1,4 +1,5 @@
 import { rentalExtras } from "@/data/extras";
+import { formatIdr, type RentalQuoteEstimate } from "@/lib/pricing";
 
 /**
  * Selection summary shown throughout checkout.
@@ -12,6 +13,7 @@ export function BookingSummary({
   extras,
   pickupName,
   returnName,
+  estimate,
 }: {
   vehicleName: string;
   quantity: number;
@@ -19,6 +21,7 @@ export function BookingSummary({
   extras: { id: string; quantity: number }[];
   pickupName: string;
   returnName?: string;
+  estimate?: RentalQuoteEstimate | null;
 }) {
   const extraRows = extras
     .filter((e) => e.quantity > 0)
@@ -61,21 +64,38 @@ export function BookingSummary({
           </div>
         ))}
       </dl>
-      <p className="mt-4 text-sm font-semibold text-ink">
-        Rental rate available upon request
-      </p>
+      {estimate ? (
+        <div className="mt-4 space-y-1.5 text-sm">
+          <p className="flex items-baseline justify-between gap-3">
+            <span className="text-ink-soft">{estimate.tier.label} rate</span>
+            <span className="tnum font-semibold text-ink">
+              {formatIdr(estimate.ratePerDayIdr)}/day
+            </span>
+          </p>
+          <p className="flex items-baseline justify-between gap-3">
+            <span className="text-ink-soft">Estimated total</span>
+            <span className="tnum font-semibold text-ink">
+              {formatIdr(estimate.totalIdr * quantity)}
+            </span>
+          </p>
+        </div>
+      ) : (
+        <p className="mt-4 text-sm font-semibold text-ink">
+          Rates shown once dates are selected
+        </p>
+      )}
       <p className="mt-2 text-xs leading-relaxed text-ink-faint">
-        We confirm your full quote on WhatsApp before you commit to
-        anything. It covers the rental, your extras and any delivery fees.
-        There are no charges without your approval.
+        Estimate only. Availability, final pricing, delivery and add-ons
+        are confirmed by the Werigo team on WhatsApp. There are no charges
+        without your approval.
       </p>
       <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-xs text-ink-soft">
         {[
+          "2 sanitised helmets included",
+          "Installed premium phone holder",
           "Official Wedison motorcycles, maintained in-house",
           "Fully charged handover",
-          "Transparent quote before confirmation",
           "Your request goes straight to our WhatsApp team",
-          "A real local support team",
         ].map((cue) => (
           <li key={cue} className="flex items-start gap-1.5">
             <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ok" />

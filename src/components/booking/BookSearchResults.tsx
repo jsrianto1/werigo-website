@@ -7,7 +7,7 @@ import { ArrowRight, Gauge, Route, SearchX, Zap } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { MediaImage } from "@/components/media/MediaImage";
-import { DurationOptions } from "@/components/fleet/DurationOptions";
+import { estimateRental, formatIdr } from "@/lib/pricing";
 import {
   getListedModels,
   toCustomerEntry,
@@ -166,17 +166,28 @@ export function BookSearchResults() {
                       </li>
                     ) : null}
                   </ul>
-                  <DurationOptions
-                    modelSlug={model.modelSlug}
-                    className="mt-4 max-w-xs"
-                  />
+                  {(() => {
+                    const est = estimateRental(model.modelSlug, period);
+                    return est ? (
+                      <p className="tnum mt-4 text-sm text-ink-soft">
+                        <span className="font-semibold text-ink">
+                          {formatIdr(est.ratePerDayIdr)}/day
+                        </span>{" "}
+                        · {est.tier.label} rate ({est.tier.range}) · estimated{" "}
+                        <span className="font-semibold text-ink">
+                          {formatIdr(est.totalIdr)}
+                        </span>{" "}
+                        for {est.days} days
+                      </p>
+                    ) : null;
+                  })()}
                 </div>
                 <div className="flex flex-col items-stretch gap-3 md:items-end">
                   <p className="text-sm text-ink-soft md:max-w-[190px] md:text-right">
                     <span className="block font-semibold text-ink">
                       Available by request
                     </span>
-                    Final rate and availability confirmed on WhatsApp.
+                    Estimate confirmed with availability on WhatsApp.
                   </p>
                   <button
                     onClick={() => goToCheckout(model.id)}

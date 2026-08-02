@@ -18,15 +18,23 @@ export interface SearchState extends RentalPeriod {
 }
 
 export interface CustomerInfo {
-  fullName: string;
-  email: string;
+  firstName: string;
+  lastName: string;
+  /** Dialling code, e.g. "+62". */
+  countryCode: string;
+  /** WhatsApp number without the dialling code. */
   whatsapp: string;
-  nationality: string;
+  /** Optional. */
+  email: string;
   hotelName: string;
   address: string;
   flightNumber: string;
   specialRequest: string;
   termsAccepted: boolean;
+  /** Required 80% battery-return acknowledgement. */
+  batteryAck: boolean;
+  /** Required only when the selected model is the EdPower (age 25+). */
+  ageConfirmed: boolean;
 }
 
 export interface BookingDraft {
@@ -39,19 +47,22 @@ export interface BookingDraft {
 }
 
 
-const DRAFT_KEY = "werigo.booking.draft";
+const DRAFT_KEY = "werigo.booking.draft.v2";
 const CONFIRMATION_KEY = "werigo.booking.confirmation";
 
 export const emptyCustomer: CustomerInfo = {
-  fullName: "",
-  email: "",
+  firstName: "",
+  lastName: "",
+  countryCode: "+62",
   whatsapp: "",
-  nationality: "",
+  email: "",
   hotelName: "",
   address: "",
   flightNumber: "",
   specialRequest: "",
   termsAccepted: false,
+  batteryAck: false,
+  ageConfirmed: false,
 };
 
 export function defaultSearch(): SearchState {

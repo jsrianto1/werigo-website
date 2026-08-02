@@ -3,7 +3,7 @@ import { ArrowRight, Gauge, Route, Zap } from "lucide-react";
 import type { WedisonEntry } from "@/data/vehicles";
 import { sharedSpec } from "@/data/vehicles";
 import { MediaImage } from "@/components/media/MediaImage";
-import { DurationOptions } from "@/components/fleet/DurationOptions";
+import { RateTable } from "@/components/fleet/RateTable";
 import { BenefitChips } from "@/components/fleet/BenefitChips";
 
 export function VehicleCard({ entry }: { entry: WedisonEntry }) {
@@ -75,11 +75,16 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
 
         <BenefitChips variant="card" className="mt-3" />
 
-        <DurationOptions modelSlug={entry.modelSlug} className="mt-4" />
+        <RateTable modelSlug={entry.modelSlug} className="mt-4" />
+
+        <p className="mt-3 text-xs leading-relaxed text-ink-soft">
+          Rain poncho available on request. Optional bike damage
+          protection enquiry on WhatsApp.
+        </p>
 
         <div className="mt-4 flex flex-1 flex-col justify-end gap-3">
           <p className="text-xs text-ink-faint">
-            Final rate and availability confirmed on WhatsApp.
+            Estimated totals are confirmed with availability on WhatsApp.
           </p>
           <div className="flex items-center gap-2">
             <Link

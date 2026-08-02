@@ -9,6 +9,7 @@ import {
   sharedSpec,
   specDisclaimer,
 } from "@/data/vehicles";
+import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Our Fleet of Official Wedison Electric Motorcycles for Rent in Bali",
@@ -122,10 +123,50 @@ export default function FleetPage() {
             </tbody>
           </table>
         </div>
+        <h3 className="mb-4 mt-10 font-display text-2xl text-ink">
+          Rental rates per day
+        </h3>
+        <div className="overflow-x-auto rounded-[14px] border border-line bg-card">
+          <table className="w-full min-w-[720px] text-left text-sm">
+            <caption className="sr-only">
+              Approved rental rates per motorcycle per day by duration
+            </caption>
+            <thead>
+              <tr className="border-b border-line">
+                <th scope="col" className="px-5 py-4 font-semibold text-ink">
+                  Model
+                </th>
+                {pricingTiers.map((t) => (
+                  <th key={t.id} scope="col" className="px-5 py-4 font-semibold text-ink">
+                    {t.label}
+                    <span className="tnum block text-xs font-normal text-ink-faint">
+                      {t.range}
+                    </span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {cards.map((e) => (
+                <tr key={`rates-${e.id}`}>
+                  <th scope="row" className="px-5 py-4 font-display text-base text-ink">
+                    {e.displayName}
+                  </th>
+                  {pricingTiers.map((t) => (
+                    <td key={t.id} className="tnum px-5 py-4 text-ink-soft">
+                      {formatIdr(ratesIdrPerDay[e.modelSlug][t.id])}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <p className="mt-4 text-xs leading-relaxed text-ink-faint">
-          {specDisclaimer} Every model rents Daily, Weekly, or Monthly.
-          Rate available upon request. Final rate and availability
-          confirmed on WhatsApp.
+          {specDisclaimer} Rates are per motorcycle per day in IDR.
+          Minimum rental 2 days. Riders must be at least 25 years old for
+          the EdPower. Estimated totals are confirmed with availability
+          on WhatsApp.
         </p>
         <div className="mt-8">
           <ButtonLink href="/book" variant="accent" size="lg">

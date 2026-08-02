@@ -147,3 +147,27 @@ admin panel are structured to be connected later. Placeholder brand
 colors and photo slots are centrally managed — see `DESIGN-SYSTEM.md`
 and `MEDIA-MANIFEST.md`. Supercharge stations and model compatibility
 are published only from verified data in `src/data/supercharge.ts`.
+
+
+## [LEGAL REVIEW REQUIRED] checklist
+
+Items below still need management or legal approval before wording can
+be strengthened or published. Never invent these on the website.
+
+- [ ] Full Terms and Conditions text (`/terms`) — Indonesian counsel
+- [ ] Privacy policy full text (`/privacy`)
+- [ ] Cancellation policy (deadlines, refunds) — currently "confirmed
+      with your quote"; no deadlines or percentages published
+- [ ] Deposit policy — no deposit wording published
+- [ ] Bike damage protection — request-only; price, coverage,
+      exclusions, and liability cap all pending
+      (`src/data/extras.ts` `bikeDamageProtection`,
+      `coverageStatus: "pending-management-approval"`). The USD150 cap
+      seen in competitor material is a benchmark only, never publish it
+      without approval
+- [ ] KYC / identity workflow — public site must not collect passport,
+      ID, or licence images until secure storage, retention, access,
+      and deletion processes are approved
+- [ ] Liability wording anywhere on the site
+- [ ] Delivery fee policy (airport / hotel / villa remain
+      "by arrangement")

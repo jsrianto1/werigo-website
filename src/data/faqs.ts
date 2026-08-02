@@ -45,7 +45,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I book a Werigo ride?",
         answer:
-          "Choose your location and dates in the search, pick your model, add any extras and confirm your details. Your request opens in WhatsApp, and our team confirms availability and your quote there.",
+          "Choose your location and dates in the search, pick your model, review the estimated rate, and confirm your details. Your request opens in WhatsApp, and our team confirms availability and the final price there. Minimum rental is 2 days.",
       },
       {
         question: "How far in advance should I book?",
@@ -68,6 +68,16 @@ export const faqCategories: FaqCategory[] = [
     id: "requirements",
     title: "Rental requirements",
     items: [
+      {
+        question: "What is included with every rental?",
+        answer:
+          "Every rental includes two sanitised helmets and one premium phone holder already installed on the motorcycle. A rain poncho is available as an optional request, with availability and price confirmed on WhatsApp.",
+      },
+      {
+        question: "Is there a minimum age for the motorcycles?",
+        answer:
+          "Riders must be at least 25 years old for the Wedison EdPower. The other models have no extra Werigo age requirement beyond holding a licence that is valid for riding in Indonesia.",
+      },
       {
         question: "What do I need to rent with Werigo?",
         answer:
@@ -166,6 +176,11 @@ export const faqCategories: FaqCategory[] = [
         question: "Can I return the motorcycle in a different area?",
         answer:
           "Yes. Choose a different return location during booking. Depending on the zones involved, a one-way fee may apply, and it is shown in your summary before you confirm.",
+      },
+      {
+        question: "What battery level should the motorcycle have at return?",
+        answer:
+          "Please return the motorcycle with at least 80% battery unless another arrangement has been confirmed with our team on WhatsApp.",
       },
       {
         question: "What happens at collection?",

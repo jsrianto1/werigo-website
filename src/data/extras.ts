@@ -1,45 +1,50 @@
 /**
- * Rental extras — options offered during booking step 4.
- * Extras carry no published prices: anything selected is added to the
- * WhatsApp quote and priced there, so no unapproved figures appear
- * on the site.
+ * Optional add-ons: the management-approved, request-only list.
+ * Neither add-on has an approved public price; customers can request
+ * them and the price and availability are confirmed on WhatsApp.
+ * Do not add items or prices here without management approval.
  */
 
 export interface RentalExtra {
   id: string;
   name: string;
   description: string;
-  /** How many can be added (e.g. extra helmets) */
+  /** How many can be requested. */
   maxQuantity: number;
-  /** Placeholder items are shown without selection until terms are published */
-  placeholder?: boolean;
 }
 
 export const rentalExtras: RentalExtra[] = [
   {
-    id: "extra-helmet",
-    name: "Extra helmet",
+    id: "rain-poncho",
+    name: "Rain poncho",
     description:
-      "Two helmets are already included. Add more for changing passengers. Priced in your quote.",
+      "Optional rain poncho for wet-season rides. Not included automatically. Availability and price are confirmed on WhatsApp.",
     maxQuantity: 2,
   },
   {
-    id: "phone-holder",
-    name: "Extra phone holder",
+    id: "damage-protection",
+    name: "Bike damage protection",
     description:
-      "One holder is included on every ride. Add a second for a passenger. Priced in your quote.",
+      "Optional in-house bike damage protection. Availability, price, coverage and liability limit are confirmed by our team on WhatsApp.",
     maxQuantity: 1,
-  },
-  {
-    id: "protection",
-    name: "Damage protection",
-    description:
-      "Optional damage protection plan. Ask our team on WhatsApp for current terms and pricing. The full plan details are being added to this page.",
-    maxQuantity: 1,
-    placeholder: true,
   },
 ];
 
 export function getExtra(id: string): RentalExtra | undefined {
   return rentalExtras.find((e) => e.id === id);
 }
+
+/**
+ * In-house bike damage protection status. Pending management
+ * approval: it may be requested but must never be charged, priced,
+ * or described as active coverage. It is not third-party insurance
+ * and never covers personal injury, medical costs, belongings,
+ * third-party liability, or theft.
+ */
+export const bikeDamageProtection = {
+  enabled: false,
+  requestOnly: true,
+  priceIdr: null as number | null,
+  liabilityCapUsd: null as number | null,
+  coverageStatus: "pending-management-approval" as const,
+};

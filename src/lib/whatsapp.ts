@@ -99,15 +99,25 @@ export interface DirectBookingDetails {
   endDate: string;
   endTime: string;
   days: number;
-  extras: { name: string; quantity: number }[];
-  fullName: string;
+  /** Applied pricing tier label + range, e.g. "Weekly (7 to 13 days)". */
+  tierLabel: string;
+  /** Approved IDR per-day rate for the applied tier. */
+  ratePerDayIdr: number;
+  /** Estimated total: rate x actual days x quantity. */
+  estimatedTotalIdr: number;
+  addOns: { name: string; quantity: number }[];
+  firstName: string;
+  lastName: string;
+  countryCode: string;
   whatsapp: string;
-  email: string;
-  nationality?: string;
+  email?: string;
   flightNumber?: string;
-  promoCode?: string;
+  batteryAck: boolean;
+  ageConfirmed?: boolean;
   notes?: string;
 }
+
+const idr = (n: number) => `Rp ${n.toLocaleString("en-US")}`;
 
 export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
   const lines = [
@@ -122,25 +132,29 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
     `To: ${d.endDate} ${d.endTime}`,
     `Duration: ${d.days} day${d.days === 1 ? "" : "s"}`,
     ``,
+    `*Pricing estimate*`,
+    `Tier: ${d.tierLabel}`,
+    `Rate: ${idr(d.ratePerDayIdr)}/day`,
+    `Estimated total: ${idr(d.estimatedTotalIdr)}${d.quantity > 1 ? ` (${d.quantity} motorcycles)` : ""}`,
+    `Subject to availability and confirmation by Werigo.`,
+    ``,
     `*Delivery*`,
     `${d.pickupAreaName}${d.pickupAddress ? `, ${d.pickupAddress}` : ""}`,
     `*Return*`,
     d.sameReturn ? `Same as delivery` : d.returnAreaName,
-    ...(d.extras.length > 0
-      ? [``, `*Extras*`, ...d.extras.map((e) => `${e.name} × ${e.quantity}`)]
+    ...(d.addOns.length > 0
+      ? [``, `*Add-on requests* (price confirmed on WhatsApp)`, ...d.addOns.map((e) => `${e.name} × ${e.quantity}`)]
       : []),
     ``,
     `*Contact*`,
-    `Name: ${d.fullName}`,
-    `WhatsApp: ${d.whatsapp}`,
-    `Email: ${d.email}`,
-    ...(d.nationality ? [`Nationality: ${d.nationality}`] : []),
+    `Name: ${d.firstName} ${d.lastName}`,
+    `WhatsApp: ${d.countryCode} ${d.whatsapp}`,
+    ...(d.email ? [`Email: ${d.email}`] : []),
     ...(d.flightNumber ? [`Flight: ${d.flightNumber}`] : []),
-    ...(d.promoCode ? [`Promo code: ${d.promoCode}`] : []),
-    ...(d.notes ? [``, `*Notes*`, d.notes] : []),
     ``,
-    `*Rate*`,
-    `Please send me availability and the rate for these dates.`,
+    `Battery return: I will return the motorcycle with at least 80% battery, or arrange otherwise with the team.`,
+    ...(d.ageConfirmed ? [`Rider age: confirmed 25 or older.`] : []),
+    ...(d.notes ? [``, `*Notes*`, d.notes] : []),
   ];
   const text = encodeURIComponent(lines.join("\n"));
   return `https://wa.me/${site.whatsappNumber}?text=${text}`;

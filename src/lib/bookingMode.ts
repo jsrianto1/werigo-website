@@ -1,13 +1,22 @@
 /**
- * TEMPORARY booking mode switch.
+ * Booking mode configuration.
  *
- * While the Supabase booking database is disconnected, the public
- * booking flow hands the request straight to WhatsApp: no database
- * insert, no /api/bookings call, no booking code. The Supabase
- * schema, store, API routes, and admin dashboard are kept intact but
- * dormant.
+ * NEXT_PUBLIC_BOOKING_MODE controls how booking requests are handled:
+ *   "whatsapp"  (default) — the request goes straight to WhatsApp.
+ *                No database insert, no /api/bookings call, no
+ *                booking code, no storage errors. Safe default when
+ *                the variable is missing entirely.
+ *   "database"  — reserved for reactivating the dormant Supabase
+ *                flow later (also requires the Supabase environment
+ *                variables; see README "Booking database").
  *
- * To reactivate database storage, set this to false and restore the
- * Supabase environment variables (see README "Booking database").
+ * The Supabase schema, store, API routes, and admin dashboard are
+ * kept intact but dormant while WhatsApp mode is active.
  */
-export const WHATSAPP_FIRST_BOOKING: boolean = true;
+const mode = process.env.NEXT_PUBLIC_BOOKING_MODE?.trim().toLowerCase();
+
+export const BOOKING_MODE: "whatsapp" | "database" =
+  mode === "database" ? "database" : "whatsapp";
+
+/** True while booking requests bypass every database code path. */
+export const WHATSAPP_FIRST_BOOKING: boolean = BOOKING_MODE === "whatsapp";

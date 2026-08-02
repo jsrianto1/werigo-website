@@ -18,7 +18,16 @@ import { Button } from "@/components/ui/Button";
 import { toCustomerEntry } from "@/data/vehicles";
 import { getArea } from "@/data/locations";
 import { rentalExtras } from "@/data/extras";
-import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
+import {
+  rentalDays,
+  isValidPeriod,
+  estimateRental,
+  formatIdr,
+  MIN_RENTAL_MESSAGE,
+  minRiderAge,
+  type RentalPeriod,
+} from "@/lib/pricing";
+import { batteryReturnNote } from "@/data/commercialTerms";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import {
   emptyCustomer,
@@ -116,6 +125,8 @@ export function CheckoutFlow() {
 
   const valid = entry && pickup && isValidPeriod(period);
   const days = valid ? rentalDays(period) : 0;
+  const estimate = valid ? estimateRental(entry!.modelSlug, period) : null;
+  const needsAgeCheck = Boolean(entry && minRiderAge[entry.modelSlug]);
 
   if (!valid) {
     return (
@@ -124,8 +135,9 @@ export function CheckoutFlow() {
           Your booking session is incomplete
         </h1>
         <p className="mt-3 text-ink-soft">
-          We couldn&apos;t find the ride or dates for this checkout. Start a
-          fresh search. It only takes a moment.
+          We couldn&apos;t find the ride or dates for this checkout.
+          {" "}{MIN_RENTAL_MESSAGE} Start a fresh search. It only takes a
+          moment.
         </p>
         <Link
           href="/book"
@@ -156,19 +168,22 @@ export function CheckoutFlow() {
 
   function validateDetails(): boolean {
     const next: Partial<Record<keyof CustomerInfo, string>> = {};
-    if (!customer.fullName.trim()) next.fullName = "Enter your full name.";
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(customer.email))
-      next.email = "Enter a valid email address.";
-    if (!/^\+?[0-9\s-]{8,}$/.test(customer.whatsapp))
-      next.whatsapp = "Enter a WhatsApp number with country code, e.g. +61…";
-    if (!customer.nationality.trim()) next.nationality = "Enter your nationality.";
+    if (!customer.firstName.trim()) next.firstName = "Enter your first name.";
+    if (!customer.lastName.trim()) next.lastName = "Enter your last name.";
+    if (!/^\+[0-9]{1,4}$/.test(customer.countryCode.trim()))
+      next.countryCode = "Enter a country code such as +62.";
+    if (!/^[0-9][0-9\s-]{5,}$/.test(customer.whatsapp.trim()))
+      next.whatsapp = "Enter your WhatsApp number without the country code.";
+    if (customer.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(customer.email))
+      next.email = "Enter a valid email address, or leave it empty.";
     if (!customer.hotelName.trim())
       next.hotelName = "Enter your hotel or villa name so we can deliver.";
     if (!customer.termsAccepted)
       next.termsAccepted = "Please accept the terms to continue.";
+    if (needsAgeCheck && !customer.ageConfirmed)
+      next.ageConfirmed = "The EdPower requires a rider aged 25 or older.";
     setErrors(next);
     if (Object.keys(next).length > 0) {
-      // Focus first invalid field
       const first = Object.keys(next)[0];
       document.getElementById(`field-${first}`)?.focus();
       return false;
@@ -182,6 +197,13 @@ export function CheckoutFlow() {
    * code. Nothing from this form is logged.
    */
   function sendToWhatsApp() {
+    if (!customer.batteryAck) {
+      setConsentError(
+        "Please acknowledge the 80% battery-return arrangement first."
+      );
+      document.getElementById("field-batteryAck")?.focus();
+      return;
+    }
     if (!privacyConsent) {
       setConsentError(
         "Please confirm you agree to send these details to Werigo on WhatsApp."
@@ -189,6 +211,7 @@ export function CheckoutFlow() {
       document.getElementById("field-privacyConsent")?.focus();
       return;
     }
+    if (!estimate) return;
 
     const url = buildDirectBookingWhatsAppUrl({
       modelName: entry!.displayName,
@@ -204,16 +227,23 @@ export function CheckoutFlow() {
       endDate: period.endDate,
       endTime: period.endTime,
       days,
-      extras: rentalExtras
+      tierLabel: `${estimate.tier.label} (${estimate.tier.range})`,
+      ratePerDayIdr: estimate.ratePerDayIdr,
+      estimatedTotalIdr: estimate.totalIdr * quantity,
+      addOns: rentalExtras
         .filter((e) => (extraQty[e.id] ?? 0) > 0)
         .map((e) => ({ name: e.name, quantity: extraQty[e.id] ?? 0 })),
-      fullName: customer.fullName,
-      whatsapp: customer.whatsapp,
-      email: customer.email,
-      nationality: customer.nationality || undefined,
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      countryCode: customer.countryCode.trim(),
+      whatsapp: customer.whatsapp.trim(),
+      email: customer.email.trim() || undefined,
       flightNumber: customer.flightNumber || undefined,
-      promoCode: promoCode || undefined,
-      notes: customer.specialRequest.trim() || undefined,
+      batteryAck: customer.batteryAck,
+      ageConfirmed: needsAgeCheck ? customer.ageConfirmed : undefined,
+      notes: [customer.specialRequest.trim(), promoCode ? `Promo code: ${promoCode}` : ""]
+        .filter(Boolean)
+        .join("\n") || undefined,
     });
     setWhatsappUrl(url);
     window.open(url, "_blank", "noopener,noreferrer");
@@ -257,8 +287,9 @@ export function CheckoutFlow() {
                 Make it yours
               </h1>
               <p className="mt-2 text-ink-soft">
-                Two helmets and one phone holder are already included. Add
-                anything else you need. Extras are priced in your quote.
+                Two sanitised helmets and one installed phone holder are
+                already included. Add-on requests below are optional, and
+                their price and availability are confirmed on WhatsApp.
               </p>
 
 
@@ -303,15 +334,13 @@ export function CheckoutFlow() {
                     <div>
                       <h2 className="font-semibold text-ink">
                         {extra.name}
-                        {extra.placeholder ? (
-                          <span className="ml-2 rounded-full bg-sunken px-2 py-0.5 text-xs font-medium text-ink-faint">
-                            Terms on request
-                          </span>
-                        ) : null}
+                        <span className="ml-2 rounded-full bg-sunken px-2 py-0.5 text-xs font-medium text-ink-faint">
+                          Price on request
+                        </span>
                       </h2>
                       <p className="mt-0.5 text-sm text-ink-soft">{extra.description}</p>
                     </div>
-                    {!extra.placeholder ? (
+                    {(
                       <div className="flex shrink-0 items-center gap-3">
                         <button
                           aria-label={`Remove one ${extra.name}`}
@@ -333,7 +362,7 @@ export function CheckoutFlow() {
                           <Plus className="h-4 w-4" aria-hidden="true" />
                         </button>
                       </div>
-                    ) : null}
+                    )}
                   </li>
                 ))}
               </ul>
@@ -393,6 +422,12 @@ export function CheckoutFlow() {
                 We use these details for delivery and to reply to your booking
                 request, and for nothing else.
               </p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-faint">
+                What to prepare: after availability is confirmed, Werigo may
+                request a valid driving licence and identification through a
+                separately approved secure process. Please don&apos;t send
+                document photos through this form.
+              </p>
 
               <form
                 className="mt-6 grid gap-5 sm:grid-cols-2"
@@ -405,33 +440,41 @@ export function CheckoutFlow() {
                 {(
                   [
                     {
-                      key: "fullName",
-                      label: "Full name",
+                      key: "firstName",
+                      label: "First name",
                       type: "text",
-                      autoComplete: "name",
+                      autoComplete: "given-name",
                       required: true,
                     },
                     {
-                      key: "email",
-                      label: "Email",
-                      type: "email",
-                      autoComplete: "email",
+                      key: "lastName",
+                      label: "Last name",
+                      type: "text",
+                      autoComplete: "family-name",
                       required: true,
+                    },
+                    {
+                      key: "countryCode",
+                      label: "Country code",
+                      type: "tel",
+                      autoComplete: "tel-country-code",
+                      required: true,
+                      hint: "For example +62 or +61.",
                     },
                     {
                       key: "whatsapp",
                       label: "WhatsApp number",
                       type: "tel",
-                      autoComplete: "tel",
+                      autoComplete: "tel-national",
                       required: true,
-                      hint: "Include your country code. We confirm bookings here.",
+                      hint: "Number only, without the country code.",
                     },
                     {
-                      key: "nationality",
-                      label: "Nationality",
-                      type: "text",
-                      autoComplete: "country-name",
-                      required: true,
+                      key: "email",
+                      label: "Email (optional)",
+                      type: "email",
+                      autoComplete: "email",
+                      required: false,
                     },
                     {
                       key: "hotelName",
@@ -564,6 +607,43 @@ export function CheckoutFlow() {
                   ) : null}
                 </div>
 
+                {needsAgeCheck ? (
+                  <div className="sm:col-span-2">
+                    <label className="flex cursor-pointer items-start gap-3">
+                      <input
+                        id="field-ageConfirmed"
+                        type="checkbox"
+                        checked={customer.ageConfirmed}
+                        aria-invalid={Boolean(errors.ageConfirmed)}
+                        aria-describedby={
+                          errors.ageConfirmed ? "error-ageConfirmed" : undefined
+                        }
+                        onChange={(e) => {
+                          setCustomer((c) => ({
+                            ...c,
+                            ageConfirmed: e.target.checked,
+                          }));
+                          setErrors((prev) => ({ ...prev, ageConfirmed: undefined }));
+                        }}
+                        className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
+                      />
+                      <span className="text-sm text-ink-soft">
+                        I confirm the rider is at least 25 years old, as
+                        required for the Wedison EdPower.
+                      </span>
+                    </label>
+                    {errors.ageConfirmed ? (
+                      <p
+                        id="error-ageConfirmed"
+                        role="alert"
+                        className="mt-1.5 text-xs font-medium text-danger"
+                      >
+                        {errors.ageConfirmed}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+
                 <div className="flex justify-between gap-3 sm:col-span-2">
                   <Button
                     type="button"
@@ -623,14 +703,25 @@ export function CheckoutFlow() {
                         },
                       ]
                     : []),
-                  {
-                    term: "Rate",
-                    detail:
-                      "Available upon request and confirmed with your quote on WhatsApp",
-                  },
-                  { term: "Name", detail: customer.fullName },
-                  { term: "WhatsApp", detail: customer.whatsapp },
-                  { term: "Email", detail: customer.email },
+                  ...(estimate
+                    ? [
+                        {
+                          term: "Pricing tier",
+                          detail: `${estimate.tier.label} (${estimate.tier.range})`,
+                        },
+                        {
+                          term: "Rate",
+                          detail: `${formatIdr(estimate.ratePerDayIdr)} per day`,
+                        },
+                        {
+                          term: "Estimated total",
+                          detail: `${formatIdr(estimate.totalIdr * quantity)} for ${days} day${days === 1 ? "" : "s"}${quantity > 1 ? ` × ${quantity} motorcycles` : ""}. Confirmed with availability on WhatsApp.`,
+                        },
+                      ]
+                    : []),
+                  { term: "Name", detail: `${customer.firstName} ${customer.lastName}` },
+                  { term: "WhatsApp", detail: `${customer.countryCode} ${customer.whatsapp}` },
+                  ...(customer.email ? [{ term: "Email", detail: customer.email }] : []),
                   ...(customer.flightNumber
                     ? [{ term: "Flight", detail: customer.flightNumber }]
                     : []),
@@ -647,6 +738,29 @@ export function CheckoutFlow() {
                   </div>
                 ))}
               </dl>
+
+              {/* Battery-return acknowledgement — required */}
+              <div className="mt-6 rounded-[10px] border border-line bg-primary-faint p-4">
+                <p className="text-sm leading-relaxed text-ink">
+                  {batteryReturnNote}
+                </p>
+                <label className="mt-3 flex cursor-pointer items-start gap-3">
+                  <input
+                    id="field-batteryAck"
+                    type="checkbox"
+                    checked={customer.batteryAck}
+                    onChange={(e) => {
+                      setCustomer((c) => ({ ...c, batteryAck: e.target.checked }));
+                      setConsentError(null);
+                    }}
+                    className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
+                  />
+                  <span className="text-sm text-ink-soft">
+                    I understand, and I&apos;ll arrange anything different with
+                    the team on WhatsApp.
+                  </span>
+                </label>
+              </div>
 
               {/* Privacy consent — required before submission */}
               <div className="mt-6">
@@ -695,12 +809,13 @@ export function CheckoutFlow() {
                   className="w-full sm:w-auto"
                 >
                   <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  Send booking request
+                  Send booking request on WhatsApp
                 </Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                We&apos;ll review your request and confirm the rate,
-                availability, and delivery details on WhatsApp.
+                Availability, final pricing, delivery, add-ons and your
+                booking are confirmed by the Werigo team on WhatsApp. Nothing
+                is charged before that.
               </p>
 
               <div className="mt-6">
@@ -768,6 +883,7 @@ export function CheckoutFlow() {
             }))}
             pickupName={area?.name ?? pickup}
             returnName={ret !== pickup ? returnArea?.name : undefined}
+            estimate={estimate}
           />
         </aside>
       </div>

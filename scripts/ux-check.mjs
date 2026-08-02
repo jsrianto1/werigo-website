@@ -66,8 +66,8 @@ results.stickyAbsentOnCheckout = await page.evaluate(
 await page.goto(`${BASE}/`, { waitUntil: "networkidle0" });
 const body = await page.evaluate(() => document.body.textContent);
 results.reassuranceLine = body.includes("Your request goes straight to our team on WhatsApp. Availability and your quote confirmed there.");
-results.includesSection = body.includes("A little more comes with every Werigo ride") && body.includes("Fully charged handover") && body.includes("Phone holder included");
-results.fourStepProcess = ["Choose your ride", "Review your request", "Send it on WhatsApp", "We confirm the details"].every((t) => body.includes(t));
+results.includesSection = body.includes("What comes with your Werigo rental") && body.includes("Fully charged handover") && body.includes("2 sanitised helmets");
+results.fourStepProcess = ["Choose your ride", "Review your estimate", "We confirm on WhatsApp", "Ride out ready"].every((t) => body.includes(t));
 results.areaCardsEnhanced = body.includes("Explore area");
 results.noFreeMisuse = !body.includes("Free helmet");
 results.reviewsEmptyStatePreserved = body.includes("never invent or borrow reviews");
@@ -86,12 +86,13 @@ const fleetChecks = await page.evaluate(() => {
     allHaveViewDetails: cards.every((c) =>
       [...c.querySelectorAll("a")].some((a) => a.textContent.includes("View details"))
     ),
-    rateOnRequestKept: cards.every((c) => c.textContent.includes("Rate available upon request")),
+    idrRatesShown: cards.every((c) => /Rp\s?[\d,]+\/day/.test(c.textContent)),
+    minTwoDayNote: cards.every((c) => c.textContent.includes("Minimum rental 2 days")),
     durationTiers: cards.every((c) =>
-      ["Daily", "Weekly", "Monthly"].every((d) => c.textContent.includes(d))
+      ["Daily", "Weekly", "2 Weeks", "3 Weeks", "Monthly"].every((d) => c.textContent.includes(d))
     ),
-    noNumericPrices: cards.every((c) => !/\$\s?\d|Rp\s?\d/.test(c.textContent)),
-    benefitChips: cards.every((c) => c.textContent.includes("Helmet included")),
+    noUsdPrices: cards.every((c) => !/\$\s?\d/.test(c.textContent)),
+    benefitChips: cards.every((c) => c.textContent.includes("2 sanitised helmets")),
     noUnapprovedPolicies: cards.every(
       (c) => !/free cancellation|insurance/i.test(c.textContent)
     ),

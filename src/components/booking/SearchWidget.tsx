@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { MapPin, CalendarDays, Search, ArrowRight, CornerDownRight } from "lucide-react";
 import { serviceAreas } from "@/data/locations";
 import { defaultSearch, toDateInput, type SearchState } from "@/lib/booking";
-import { isValidPeriod, MIN_RENTAL_HOURS } from "@/lib/pricing";
+import { isValidPeriod, MIN_RENTAL_MESSAGE } from "@/lib/pricing";
 import { Button } from "@/components/ui/Button";
 
 const timeOptions = Array.from({ length: 25 }, (_, i) => {
@@ -52,7 +52,7 @@ export function SearchWidget({
     }
     if (!isValidPeriod(state)) {
       setError(
-        `The minimum rental is ${MIN_RENTAL_HOURS} hours. Adjust your dates or times.`
+        `${MIN_RENTAL_MESSAGE} Adjust your dates and try again.`
       );
       return;
     }

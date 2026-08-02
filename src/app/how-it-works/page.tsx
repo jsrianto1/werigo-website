@@ -39,7 +39,7 @@ const journey = [
   {
     icon: KeyRound,
     title: "Ride the island",
-    text: "Explore on your own schedule. Two helmets, a phone holder and a rain poncho are always included; the range figures we quote are honest Bali numbers, not brochure optimism.",
+    text: "Explore on your own schedule. Two sanitised helmets and an installed phone holder are always included; the range figures we quote are honest Bali numbers, not brochure optimism.",
   },
   {
     icon: BatteryCharging,

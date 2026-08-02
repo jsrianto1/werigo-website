@@ -1,77 +1,28 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BatteryCharging,
+  CloudRain,
   HardHat,
   MapPin,
   MessageCircle,
   ShieldCheck,
   Smartphone,
-  Sparkles,
   Truck,
+  Umbrella,
 } from "lucide-react";
 
 /**
- * Central commercial data for the rental offer.
+ * Central commercial configuration for the rental offer.
  *
- * Everything customer-facing that depends on management approval
- * lives here: rental pricing, benefit availability, cancellation and
- * insurance policies. Components read this file and hide anything
- * that is not approved, so activating a rate or a policy later is an
- * edit to THIS file only. Never hard-code prices or policy claims in
- * components.
+ * Approved IDR pricing lives in src/lib/pricing.ts (single source of
+ * truth for rates, tiers, minimum rental, and the EdPower age rule).
+ * This file holds the approved inclusions, request-only add-on
+ * presentation, and policy placeholders. Components read this file
+ * and hide anything unapproved; changing an inclusion or activating
+ * a policy later is an edit here only.
  */
 
-/* ================= Rental durations & pricing ================= */
-
-export type RentalDurationId = "daily" | "weekly" | "monthly";
-
-export interface RentalDuration {
-  id: RentalDurationId;
-  label: string;
-  /** Short qualifier shown under the label, e.g. minimum period. */
-  detail: string;
-}
-
-/** The three rental tiers offered on every model. */
-export const rentalDurations: RentalDuration[] = [
-  { id: "daily", label: "Daily", detail: "1 to 6 days" },
-  { id: "weekly", label: "Weekly", detail: "7 to 29 days" },
-  { id: "monthly", label: "Monthly", detail: "30 days and up" },
-];
-
-export type RentalPricing = {
-  dailyUsdPerDay?: number;
-  weeklyUsdPerDay?: number;
-  monthlyUsdPerDay?: number;
-  /** Numeric prices render ONLY when this is true. */
-  pricingApproved: boolean;
-  pricingUpdatedAt?: string;
-};
-
-/**
- * Pricing per customer-facing model. Rates are not approved yet:
- * every entry keeps pricingApproved false and no numeric amounts.
- * When management approves rates, fill the numbers, set
- * pricingApproved true, and stamp pricingUpdatedAt.
- */
-export const rentalPricing: Record<string, RentalPricing> = {
-  bees: { pricingApproved: false },
-  victory: { pricingApproved: false },
-  athena: { pricingApproved: false },
-  edpower: { pricingApproved: false },
-};
-
-/** Copy used wherever a rate would appear while unapproved. */
-export const rateFallback = {
-  label: "Rate available upon request",
-  support: "Final rate and availability confirmed on WhatsApp.",
-};
-
-export function getPricing(modelSlug: string): RentalPricing {
-  return rentalPricing[modelSlug] ?? { pricingApproved: false };
-}
-
-/* ================= Verified rental benefits ================= */
+/* ================= Approved standard inclusions ================= */
 
 export interface RentalBenefit {
   id: string;
@@ -86,35 +37,28 @@ export interface RentalBenefit {
 }
 
 /**
- * Operationally confirmed inclusions. Set confirmed to false to pull
- * a benefit from the whole site without touching components. Do NOT
- * add unverified benefits (raincoats, USB ports, POS payment,
- * roadside or 24/7 assistance) without management confirmation.
+ * Every rental includes exactly two sanitised helmets and one
+ * premium phone holder already installed. Do not add unverified
+ * items (hairnets, raincoats, insurance, roadside or 24-hour
+ * assistance) without management confirmation.
  */
 export const rentalBenefits: RentalBenefit[] = [
   {
-    id: "helmet",
-    label: "Helmet included",
-    description: "A clean, properly sized helmet comes with every motorcycle.",
+    id: "helmets",
+    label: "2 sanitised helmets",
+    description: "Two sanitised helmets come with every motorcycle.",
     icon: HardHat,
     confirmed: true,
     chip: true,
   },
   {
     id: "phone-holder",
-    label: "Phone holder included",
-    description: "Navigate with your phone mounted, not balanced on your lap.",
+    label: "Installed phone holder",
+    description:
+      "One premium phone holder, already installed on the motorcycle.",
     icon: Smartphone,
     confirmed: true,
     chip: true,
-  },
-  {
-    id: "hairnet",
-    label: "Fresh hairnet included",
-    description: "A fresh hairnet for every rider, every rental.",
-    icon: Sparkles,
-    confirmed: true,
-    chip: false,
   },
   {
     id: "charged",
@@ -125,10 +69,10 @@ export const rentalBenefits: RentalBenefit[] = [
     chip: true,
   },
   {
-    id: "whatsapp-support",
-    label: "Local WhatsApp support",
-    description: "A local team answers on the app you already use.",
-    icon: MessageCircle,
+    id: "handover-briefing",
+    label: "Riding and charging briefing",
+    description: "A quick, practical briefing before you ride off.",
+    icon: MapPin,
     confirmed: true,
     chip: false,
   },
@@ -141,6 +85,14 @@ export const rentalBenefits: RentalBenefit[] = [
     chip: false,
   },
   {
+    id: "whatsapp-support",
+    label: "WhatsApp support in operating hours",
+    description: "Local WhatsApp support during operating hours.",
+    icon: MessageCircle,
+    confirmed: true,
+    chip: false,
+  },
+  {
     id: "official",
     label: "Official Wedison motorcycle",
     description: "Every ride is an official Wedison, maintained in-house.",
@@ -148,18 +100,37 @@ export const rentalBenefits: RentalBenefit[] = [
     confirmed: true,
     chip: false,
   },
-  {
-    id: "handover-briefing",
-    label: "Basic riding and charging handover",
-    description: "A quick, practical briefing before you ride off.",
-    icon: MapPin,
-    confirmed: true,
-    chip: false,
-  },
 ];
 
 export const confirmedBenefits = rentalBenefits.filter((b) => b.confirmed);
 export const chipBenefits = confirmedBenefits.filter((b) => b.chip);
+
+/**
+ * Request-only add-ons shown in the benefits section. These are not
+ * included and carry no public price; wording must stay qualified.
+ */
+export const requestOnlyBenefits: { id: string; label: string; description: string; icon: LucideIcon }[] = [
+  {
+    id: "rain-poncho",
+    label: "Rain poncho on request",
+    description:
+      "Available as an optional request. Availability and price confirmed on WhatsApp.",
+    icon: CloudRain,
+  },
+  {
+    id: "damage-protection",
+    label: "Bike damage protection enquiry",
+    description:
+      "Optional in-house bike damage protection. Details pending confirmation on WhatsApp.",
+    icon: Umbrella,
+  },
+];
+
+/* ================= Battery return requirement ================= */
+
+/** Approved battery-return wording, used verbatim across surfaces. */
+export const batteryReturnNote =
+  "Please return the motorcycle with at least 80% battery unless another arrangement has been confirmed with our team on WhatsApp.";
 
 /* ================= Policies awaiting approval ================= */
 
@@ -183,9 +154,9 @@ export const cancellationPolicy: PolicyConfig = {
 };
 
 /**
- * Insurance. NOT approved: no insurance badge, coverage claim,
- * excess, or liability wording may render anywhere until management
- * approves the policy and this entry is filled in.
+ * Insurance. NOT approved and add-on protection is in-house, never
+ * third-party: no insurance badge, coverage claim, excess, or
+ * liability wording may render anywhere until management approval.
  */
 export const insurancePolicy: PolicyConfig = {
   approved: false as boolean,

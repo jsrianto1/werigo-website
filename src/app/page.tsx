@@ -2,22 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
+  ArrowRight,
   BatteryCharging,
   CalendarCheck,
+  CircleParking,
   Coffee,
-  Leaf,
   Fuel,
+  Gauge,
+  Leaf,
   MapPin,
   MessageCircle,
   PlugZap,
+  Send,
   ShieldCheck,
   Sparkles,
+  Star,
   Truck,
   Volume2,
-  ArrowRight,
-  Star,
+  Wallet,
   Zap,
-  Send,
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
@@ -38,7 +41,7 @@ import { faqCategories } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { site } from "@/lib/config";
 import { faqSchema, jsonLd } from "@/lib/schema";
-import { confirmedBenefits } from "@/data/commercialTerms";
+import { confirmedBenefits, requestOnlyBenefits } from "@/data/commercialTerms";
 import { coveragePoints } from "@/data/coverage";
 
 export const metadata: Metadata = {
@@ -62,7 +65,7 @@ const trustPoints = [
   {
     icon: ShieldCheck,
     title: "Helmets & briefing included",
-    text: "Two helmets, a phone holder and a proper handover on every rental.",
+    text: "Two sanitised helmets, an installed phone holder and a proper handover on every rental.",
   },
   {
     icon: MessageCircle,
@@ -74,23 +77,33 @@ const trustPoints = [
 const baliDays = [
   {
     icon: Volume2,
-    title: "Quiet electric riding",
-    text: "The motor hums instead of roars, so early starts and late returns stay peaceful.",
+    title: "Quiet riding",
+    text: "The motor hums instead of roars, so you hear more of Bali and less engine.",
   },
   {
     icon: Leaf,
-    title: "Zero tailpipe emissions",
+    title: "No tailpipe exhaust",
     text: "Nothing comes out of an exhaust while you ride.",
   },
   {
     icon: PlugZap,
-    title: "Charging from a standard outlet",
+    title: "Charge from a standard outlet",
     text: "Plug in at your hotel or villa overnight, the same way you charge your phone.",
   },
   {
-    icon: MapPin,
-    title: "Comfortable for everyday Bali trips",
-    text: "Beaches, cafes, markets and everything in between, at an easy pace.",
+    icon: Gauge,
+    title: "Smooth electric response",
+    text: "Power arrives gently and immediately, which makes town riding calmer.",
+  },
+  {
+    icon: CircleParking,
+    title: "Compact for Bali roads",
+    text: "Sized for narrow gang and easy parking near beaches and cafes.",
+  },
+  {
+    icon: Wallet,
+    title: "Lower day-to-day energy use",
+    text: "An overnight charge costs less to run than a day of fuel stops.",
   },
 ];
 
@@ -101,7 +114,7 @@ const riderAppreciations = [
   { icon: Coffee, title: "Easy stops along the way", text: "Beaches, cafes, and viewpoints are all easy to pull into and out of." },
   { icon: ShieldCheck, title: "Official Wedison electric motorcycles", text: "Every ride in the fleet is official and maintained in-house." },
   { icon: MessageCircle, title: "Local help through WhatsApp", text: "One thread with a team that lives and rides here." },
-  { icon: CalendarCheck, title: "Daily, Weekly, and Monthly rentals", text: "A duration for a weekend, a surf trip, or a long stay." },
+  { icon: CalendarCheck, title: "Flexible rental durations", text: "Daily to Monthly rates for a weekend, a surf trip, or a long stay." },
   { icon: Truck, title: "Delivery by arrangement", text: "Hotel or villa, tell us where you are staying and we come to you." },
 ];
 
@@ -109,22 +122,22 @@ const steps = [
   {
     icon: CalendarCheck,
     title: "Choose your ride",
-    text: "Select your area, dates, and preferred Wedison model.",
+    text: "Pick your motorcycle, dates and delivery area.",
   },
   {
     icon: Sparkles,
-    title: "Review your request",
-    text: "Check your rental duration, delivery location, extras, and contact details.",
+    title: "Review your estimate",
+    text: "Check the estimated rate for your dates and send the request.",
   },
   {
     icon: Send,
-    title: "Send it on WhatsApp",
-    text: "Send the completed request directly to the Werigo team.",
+    title: "We confirm on WhatsApp",
+    text: "Werigo confirms availability, the final price and the arrangements with you.",
   },
   {
     icon: MessageCircle,
-    title: "We confirm the details",
-    text: "Werigo confirms the rate, availability, delivery window, and next steps on WhatsApp.",
+    title: "Ride out ready",
+    text: "The motorcycle is handed over with two sanitised helmets, an installed phone holder, and a basic riding and charging briefing.",
   },
 ];
 
@@ -227,7 +240,7 @@ export default function HomePage() {
               id="includes-heading"
               className="mt-3 font-display text-3xl leading-tight text-ink md:text-4xl"
             >
-              A little more comes with every Werigo ride
+              What comes with your Werigo rental
             </h2>
             <p className="mt-4 leading-relaxed text-ink-soft">
               The useful details are already sorted, so you can spend less
@@ -241,6 +254,20 @@ export default function HomePage() {
                 className="rounded-[14px] border border-line bg-card p-5"
               >
                 <benefit.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                <h3 className="mt-3 text-sm font-semibold text-ink">
+                  {benefit.label}
+                </h3>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  {benefit.description}
+                </p>
+              </li>
+            ))}
+            {requestOnlyBenefits.map((benefit) => (
+              <li
+                key={benefit.id}
+                className="rounded-[14px] border border-dashed border-line-strong bg-card p-5"
+              >
+                <benefit.icon className="h-5 w-5 text-ink-faint" aria-hidden="true" />
                 <h3 className="mt-3 text-sm font-semibold text-ink">
                   {benefit.label}
                 </h3>
@@ -349,11 +376,11 @@ export default function HomePage() {
       <Section labelledBy="benefits-heading" className="md:!pt-6 lg:!pt-8">
         <SectionHeading
           eyebrow="Made for Bali"
-          title="Electric riding that fits the island"
+          title="Why electric works so well in Bali"
           lede="Quiet, easy to charge and ready for everyday Bali journeys."
           id="benefits-heading"
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:gap-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-5">
           {baliDays.map((card) => (
             <div
               key={card.title}
