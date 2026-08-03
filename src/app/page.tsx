@@ -304,9 +304,9 @@ export default function HomePage() {
         </div>
         <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint">
           Minimum rental 2 days. Rates are per motorcycle per day in IDR;
-          US dollar amounts are estimates. A rain poncho and in-house bike
-          damage protection can be requested, with price and availability
-          confirmed on WhatsApp along with your final quote.
+          US dollar amounts are estimates. A rain poncho can be requested
+          and optional protection can be added at checkout. Availability
+          and your final quote are confirmed on WhatsApp.
         </p>
       </Section>
 

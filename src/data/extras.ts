@@ -21,13 +21,6 @@ export const rentalExtras: RentalExtra[] = [
       "Optional rain poncho for wet-season rides. Not included automatically. Availability and price are confirmed on WhatsApp.",
     maxQuantity: 2,
   },
-  {
-    id: "damage-protection",
-    name: "Bike damage protection",
-    description:
-      "Optional in-house bike damage protection. Availability, price, coverage and liability limit are confirmed by our team on WhatsApp.",
-    maxQuantity: 1,
-  },
 ];
 
 export function getExtra(id: string): RentalExtra | undefined {

@@ -35,4 +35,4 @@ jobs:
         env:
           # Placeholder for CI validation only — real value is set in the
           # hosting panel at deploy time, never committed.
-          NEXT_PUBLIC_WHATSAPP_NUMBER: "620000000000"
+          NEXT_PUBLIC_WHATSAPP_NUMBER: "6282187441628"

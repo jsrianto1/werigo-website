@@ -39,11 +39,23 @@ export default function TermsPage() {
               WhatsApp before anything is charged.
             </li>
             <li>
-              Optional in-house bike damage protection can be requested.
-              Availability, price, coverage and liability limit are
-              confirmed by our team on WhatsApp. It is provided in-house by
-              Werigo, not by an insurer, and does not cover personal injury,
-              medical costs, personal belongings or liability to others.
+              Protection is provided in-house by Werigo, not by an insurer,
+              and does not cover personal injury, medical costs, personal
+              belongings or liability to others.
+            </li>
+            <li>
+              Airport handover at Ngurah Rai Airport carries a US$1.00
+              delivery fee and a US$1.00 collection fee, each applied once
+              per booking. If both pickup and return are at the airport,
+              both fees apply for US$2.00 in total.
+            </li>
+            <li>
+              Optional protection is added only when you select it.
+              Cancellation Protection is US$0.50 per rental day and
+              Motorcycle Protection is US$4.95 per motorcycle per rental
+              day. Eligibility, coverage, exclusions, refunds and any
+              applicable excess are confirmed with you before you approve
+              your quote.
             </li>
             <li>
               Riders must hold a licence valid for riding in Indonesia and

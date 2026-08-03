@@ -103,8 +103,21 @@ export interface DirectBookingDetails {
   tierLabel: string;
   /** Approved IDR per-day rate for the applied tier. */
   ratePerDayIdr: number;
-  /** Estimated total: rate x actual days x quantity. */
+  /** Base rental estimate: rate x actual days x quantity, IDR. */
   estimatedTotalIdr: number;
+  /** Approximate USD for the base estimate; null when no rate. */
+  baseUsdApprox?: string | null;
+  /** Airport fees and optional protection, USD amounts (0 = none). */
+  airportDeliveryUsd: number;
+  airportCollectionUsd: number;
+  cancellationProtectionUsd: number;
+  motorcycleProtectionUsd: number;
+  addOnsTotalUsd: number;
+  /** Approximate IDR for the add-on total; null when no rate. */
+  addOnsIdrApprox: number | null;
+  /** Grand estimated total in IDR; null when no rate to convert. */
+  grandTotalIdr: number | null;
+  grandTotalUsdApprox?: string | null;
   addOns: { name: string; quantity: number }[];
   firstName: string;
   lastName: string;
@@ -135,8 +148,33 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
     `*Pricing estimate*`,
     `Tier: ${d.tierLabel}`,
     `Rate: ${idr(d.ratePerDayIdr)}/day`,
-    `Estimated total: ${idr(d.estimatedTotalIdr)}${d.quantity > 1 ? ` (${d.quantity} motorcycles)` : ""}`,
-    `Subject to availability and confirmation by Werigo.`,
+    `Base rental: ${idr(d.estimatedTotalIdr)}${d.baseUsdApprox ? ` (${d.baseUsdApprox})` : ""}${d.quantity > 1 ? ` for ${d.quantity} motorcycles` : ""}`,
+    ...(d.addOnsTotalUsd > 0
+      ? [
+          ``,
+          `*Add-ons*`,
+          ...(d.airportDeliveryUsd > 0
+            ? [`Airport delivery fee: US$${d.airportDeliveryUsd.toFixed(2)}`]
+            : []),
+          ...(d.airportCollectionUsd > 0
+            ? [`Airport collection fee: US$${d.airportCollectionUsd.toFixed(2)}`]
+            : []),
+          ...(d.cancellationProtectionUsd > 0
+            ? [`Cancellation Protection (${d.days} days): US$${d.cancellationProtectionUsd.toFixed(2)}`]
+            : []),
+          ...(d.motorcycleProtectionUsd > 0
+            ? [`Motorcycle Protection (${d.quantity} × ${d.days} days): US$${d.motorcycleProtectionUsd.toFixed(2)}`]
+            : []),
+          `Add-on total: US$${d.addOnsTotalUsd.toFixed(2)}${d.addOnsIdrApprox ? ` (≈ ${idr(d.addOnsIdrApprox)})` : ""}`,
+        ]
+      : []),
+    ``,
+    d.grandTotalIdr !== null
+      ? `*Estimated total: ${idr(d.grandTotalIdr)}${d.grandTotalUsdApprox ? ` (${d.grandTotalUsdApprox})` : ""}*`
+      : d.addOnsTotalUsd > 0
+        ? `*Estimated total: ${idr(d.estimatedTotalIdr)} plus US$${d.addOnsTotalUsd.toFixed(2)} add-ons*`
+        : `*Estimated total: ${idr(d.estimatedTotalIdr)}*`,
+    `Availability, final price, protection conditions and payment are confirmed by the Werigo team.`,
     ``,
     `*Delivery*`,
     `${d.pickupAreaName}${d.pickupAddress ? `, ${d.pickupAddress}` : ""}`,

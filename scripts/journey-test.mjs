@@ -80,6 +80,16 @@ try {
     )
   );
 
+  results.protectionsDefaultOff = await page.evaluate(
+    () =>
+      [...document.querySelectorAll('button[aria-pressed]')].filter(
+        (b) => b.textContent.trim() === "Add"
+      ).length === 2 &&
+      ![...document.querySelectorAll('button[aria-pressed="true"]')].some((b) =>
+        /remove/i.test(b.textContent)
+      )
+  );
+
   // Add-ons: request a rain poncho
   await page.evaluate(() => {
     [...document.querySelectorAll("button")]
@@ -252,11 +262,12 @@ try {
   const wa = await page.evaluate(() => window.__waUrl && decodeURIComponent(window.__waUrl));
   results.waOpened = Boolean(wa);
   results.waIsWaMe = wa?.startsWith("https://wa.me/") ?? false;
+  results.waUsesAdminNumber = wa?.startsWith("https://wa.me/6282187441628") ?? false;
   results.waHasModelAndQty = wa?.includes("Wedison Victory × 1") ?? false;
   results.waHasTier = wa?.includes("Tier: Daily (2 to 6 days)") ?? false;
   results.waHasRate = wa?.includes("Rate: Rp 90,000/day") ?? false;
   results.waHasTotal = wa?.includes("Estimated total: Rp 270,000") ?? false;
-  results.waHasEstimateCaveat = wa?.includes("Subject to availability and confirmation by Werigo.") ?? false;
+  results.waHasEstimateCaveat = wa?.includes("Availability, final price, protection conditions and payment are confirmed by the Werigo team.") ?? false;
   results.waHasDeliveryAreaAndAddress = (wa?.includes("Canggu") && wa?.includes("Villa Test Canggu")) ?? false;
   results.waHasReturnArea = wa?.includes("Ubud") ?? false;
   results.waHasStart = wa?.includes("From: 2026-07-28 09:00") ?? false;
@@ -345,6 +356,129 @@ try {
   results.beesHasNoAgeCheckbox = await page.evaluate(() =>
     !document.getElementById("field-ageConfirmed")
   );
+
+  // ---- Airport terminals + optional protection scenario
+  await page.goto(
+    `${BASE}/book/checkout?vehicle=bees&pickup=airport-domestic&return=airport-international&startDate=2026-07-28&startTime=09%3A00&endDate=2026-07-31&endTime=09%3A00`,
+    { waitUntil: "domcontentloaded", timeout: 60000 }
+  );
+  await page.waitForFunction(
+    () => document.body.textContent.includes("Make it yours"),
+    { timeout: 20000 }
+  );
+  results.airportFeeNoteShown = await page.evaluate(() => {
+    const t = document.body.textContent;
+    return t.includes("delivery fee US$1.00") && t.includes("collection fee US$1.00");
+  });
+  // add both protections
+  await page.evaluate(() => {
+    [...document.querySelectorAll('button[aria-pressed="false"]')]
+      .filter((b) => b.textContent.trim() === "Add")
+      .forEach((b) => b.click());
+  });
+  await new Promise((r) => setTimeout(r, 300));
+  results.protectionAddsComputed = await page.evaluate(() => {
+    const t = document.body.textContent;
+    return t.includes("Added: US$1.50") && t.includes("Added: US$14.85");
+  });
+  // toggling quantity must never duplicate the airport fee
+  await page.evaluate(() => {
+    [...document.querySelectorAll("button")]
+      .find((b) => b.getAttribute("aria-label") === "Add one motorcycle")
+      ?.click();
+  });
+  await new Promise((r) => setTimeout(r, 300));
+  await page.evaluate(() => {
+    [...document.querySelectorAll("button")]
+      .find((b) => b.getAttribute("aria-label") === "Remove one motorcycle")
+      ?.click();
+  });
+  await new Promise((r) => setTimeout(r, 300));
+  results.airportFeeNotDuplicated = await page.evaluate(() => {
+    const aside = document.querySelector("aside")?.textContent ?? "";
+    return (aside.match(/Airport delivery fee/g) ?? []).length === 1 &&
+           (aside.match(/Airport collection fee/g) ?? []).length === 1;
+  });
+  results.summaryShowsAddOns = await page.evaluate(() => {
+    const aside = document.querySelector("aside")?.textContent ?? "";
+    return aside.includes("US$1.00") && aside.includes("US$1.50") &&
+           aside.includes("US$14.85") && aside.includes("Estimated total");
+  });
+  // remove works too
+  await page.evaluate(() => {
+    [...document.querySelectorAll('button[aria-pressed="true"]')]
+      .find((b) => b.textContent.trim() === "Remove")
+      ?.click();
+  });
+  await new Promise((r) => setTimeout(r, 300));
+  results.protectionRemovable = await page.evaluate(
+    () => !document.body.textContent.includes("Added: US$1.50")
+  );
+  // re-add cancellation for the message
+  await page.evaluate(() => {
+    [...document.querySelectorAll('button[aria-pressed="false"]')]
+      .find((b) => b.textContent.trim() === "Add")
+      ?.click();
+  });
+
+  // continue to details and send
+  await new Promise((r) => setTimeout(r, 300));
+  await page.evaluate(() => {
+    [...document.querySelectorAll("button")]
+      .find((b) => b.textContent.includes("Continue to your details"))
+      .click();
+  });
+  await page.waitForFunction(
+    () => document.body.textContent.includes("Who's riding?"),
+    { timeout: 20000 }
+  );
+  results.airportDetailsReached = true;
+  await page.type("#field-firstName", "Air");
+  await page.type("#field-lastName", "Port");
+  await page.evaluate(() => { document.getElementById("field-countryCode").value = ""; });
+  await page.type("#field-countryCode", "+62");
+  await page.type("#field-whatsapp", "82187441000");
+  await page.type("#field-hotelName", "Arriving at DPS");
+  await page.click("#field-termsAccepted");
+  await page.evaluate(() => {
+    [...document.querySelectorAll('button[type="submit"]')]
+      .find((b) => b.textContent.includes("Review booking"))
+      .click();
+  });
+  await page.waitForFunction(
+    () => document.body.textContent.includes("One last look"),
+    { timeout: 20000 }
+  );
+  results.airportReviewReached = true;
+  await page.evaluate(() => {
+    window.__waUrl = null;
+    window.open = (u) => { window.__waUrl = u; return null; };
+  });
+  // DOM-level clicks: coordinate clicks can race React re-renders
+  await page.evaluate(() => document.getElementById("field-batteryAck").click());
+  await new Promise((r) => setTimeout(r, 250));
+  await page.evaluate(() => document.getElementById("field-privacyConsent").click());
+  await new Promise((r) => setTimeout(r, 250));
+  await page.evaluate(() => {
+    [...document.querySelectorAll("button")]
+      .find((b) => b.textContent.includes("Send booking request on WhatsApp"))
+      .click();
+  });
+  await page.waitForFunction(
+    () => document.body.textContent.includes("Your request is ready in WhatsApp"),
+    { timeout: 20000 }
+  );
+  const wa2 = await page.evaluate(() => window.__waUrl && decodeURIComponent(window.__waUrl));
+  results.wa2AdminNumber = wa2?.startsWith("https://wa.me/6282187441628") ?? false;
+  results.wa2PickupTerminal = wa2?.includes("Ngurah Rai Airport, Domestic Terminal") ?? false;
+  results.wa2ReturnTerminal = wa2?.includes("Ngurah Rai Airport, International Terminal") ?? false;
+  results.wa2DeliveryFee = wa2?.includes("Airport delivery fee: US$1.00") ?? false;
+  results.wa2CollectionFee = wa2?.includes("Airport collection fee: US$1.00") ?? false;
+  results.wa2Cancellation = wa2?.includes("Cancellation Protection (3 days): US$1.50") ?? false;
+  results.wa2MotorcycleProtection = wa2?.includes("Motorcycle Protection (1 × 3 days): US$14.85") ?? false;
+  results.wa2AddOnTotal = wa2?.includes("Add-on total: US$18.35") ?? false;
+  results.wa2EstimatedTotal = wa2?.includes("Estimated total: Rp") ?? false;
+  results.wa2ConfirmNote = wa2?.includes("Availability, final price, protection conditions and payment are confirmed by the Werigo team.") ?? false;
 
   // Zero database traffic in the whole journey
   results.noApiBookingsRequests = apiRequests.length === 0;

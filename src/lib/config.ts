@@ -15,12 +15,14 @@ export const site = {
     "Werigo is Wedison's electric motorcycle rental and mobility service in Bali.",
 
   /**
-   * Business WhatsApp number in international format, digits only.
-   * PLACEHOLDER — replace via env var NEXT_PUBLIC_WHATSAPP_NUMBER
-   * or by editing the fallback below.
+   * Werigo Admin WhatsApp number, international format, digits only.
+   * Overridable via NEXT_PUBLIC_WHATSAPP_NUMBER.
    */
   whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "620000000000",
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "6282187441628",
+
+  /** Human-readable form of whatsappNumber for display surfaces. */
+  whatsappDisplay: "+62 821-8744-1628",
 
   /** PLACEHOLDER contact email until the official inbox exists. */
   contactEmail: "hello@werigo.co",

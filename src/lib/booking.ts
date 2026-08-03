@@ -42,6 +42,8 @@ export interface BookingDraft {
   vehicleSlug: string | null;
   quantity: number;
   extras: { id: string; quantity: number }[];
+  /** Optional protection choices; always false unless opted in. */
+  protection?: { cancellation: boolean; motorcycle: boolean };
   promoCode: string;
   customer: CustomerInfo;
 }

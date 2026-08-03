@@ -118,10 +118,10 @@ export const requestOnlyBenefits: { id: string; label: string; description: stri
     icon: CloudRain,
   },
   {
-    id: "damage-protection",
-    label: "Bike damage protection enquiry",
+    id: "protection",
+    label: "Optional protection at checkout",
     description:
-      "Optional in-house bike damage protection. Details pending confirmation on WhatsApp.",
+      "Cancellation and Motorcycle Protection can be added to your request. Conditions confirmed before you approve your quote.",
     icon: Umbrella,
   },
 ];

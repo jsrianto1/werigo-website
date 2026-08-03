@@ -9,14 +9,17 @@ import {
   CheckCircle2,
   MessageCircle,
   Minus,
+  Plane,
   Plus,
+  ShieldCheck,
   Tag,
 } from "lucide-react";
+import { confirmedBenefits } from "@/data/commercialTerms";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
 import { toCustomerEntry } from "@/data/vehicles";
-import { getArea } from "@/data/locations";
+import { getPickupPoint } from "@/data/locations";
 import { rentalExtras } from "@/data/extras";
 import {
   rentalDays,
@@ -31,6 +34,12 @@ import { batteryReturnNote } from "@/data/commercialTerms";
 import { normalizePhone } from "@/lib/phone";
 import { useUsdRate } from "@/lib/useUsdRate";
 import { formatUsdApprox } from "@/lib/currency";
+import {
+  computeAddOns,
+  formatUsdFee,
+  usdToIdr,
+  protectionCopy,
+} from "@/lib/addons";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import {
   emptyCustomer,
@@ -69,12 +78,17 @@ export function CheckoutFlow() {
 
   const entry = rawEntryId ? toCustomerEntry(rawEntryId) : undefined;
   const entryId = entry?.id ?? "";
-  const area = getArea(pickup);
-  const returnArea = getArea(ret);
+  const area = getPickupPoint(pickup);
+  const returnArea = getPickupPoint(ret);
 
   const [phase, setPhase] = useState<Phase>("extras");
   const [quantity, setQuantity] = useState(1);
   const [extraQty, setExtraQty] = useState<Record<string, number>>({});
+  // Optional protection: never preselected. The customer opts in.
+  const [protection, setProtection] = useState({
+    cancellation: false,
+    motorcycle: false,
+  });
   const [promoCode, setPromoCode] = useState("");
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
@@ -99,6 +113,7 @@ export function CheckoutFlow() {
       );
       setPromoCode(draft.promoCode);
       setCustomer(draft.customer);
+      if (draft.protection) setProtection(draft.protection);
     }
   }, [entryId]);
 
@@ -117,10 +132,11 @@ export function CheckoutFlow() {
       extras: Object.entries(extraQty)
         .filter(([, q]) => q > 0)
         .map(([id, q]) => ({ id, quantity: q })),
+      protection,
       promoCode,
       customer,
     });
-  }, [entryId, pickup, ret, period, quantity, extraQty, promoCode, customer]);
+  }, [entryId, pickup, ret, period, quantity, extraQty, protection, promoCode, customer]);
 
   // Focus heading on phase change for keyboard/screen-reader users
   useEffect(() => {
@@ -131,6 +147,27 @@ export function CheckoutFlow() {
   const days = valid ? rentalDays(period) : 0;
   const estimate = valid ? estimateRental(entry!.modelSlug, period) : null;
   const needsAgeCheck = Boolean(entry && minRiderAge[entry.modelSlug]);
+  const addOnBreakdown = valid
+    ? computeAddOns({
+        pickupIsAirport: Boolean(area?.isAirport),
+        returnIsAirport: Boolean(returnArea?.isAirport ?? area?.isAirport),
+        days,
+        quantity,
+        cancellationProtection: protection.cancellation,
+        motorcycleProtection: protection.motorcycle,
+      })
+    : null;
+  const addOnsIdr = addOnBreakdown
+    ? usdToIdr(addOnBreakdown.totalUsd, usdRate)
+    : null;
+  const grandTotalIdr =
+    estimate && addOnBreakdown
+      ? addOnBreakdown.totalUsd > 0
+        ? addOnsIdr !== null
+          ? estimate.totalIdr * quantity + addOnsIdr
+          : null
+        : estimate.totalIdr * quantity
+      : null;
 
   if (!valid) {
     return (
@@ -236,6 +273,16 @@ export function CheckoutFlow() {
       tierLabel: `${estimate.tier.label} (${estimate.tier.range})`,
       ratePerDayIdr: estimate.ratePerDayIdr,
       estimatedTotalIdr: estimate.totalIdr * quantity,
+      baseUsdApprox: formatUsdApprox(estimate.totalIdr * quantity, usdRate),
+      airportDeliveryUsd: addOnBreakdown?.airportDeliveryUsd ?? 0,
+      airportCollectionUsd: addOnBreakdown?.airportCollectionUsd ?? 0,
+      cancellationProtectionUsd: addOnBreakdown?.cancellationProtectionUsd ?? 0,
+      motorcycleProtectionUsd: addOnBreakdown?.motorcycleProtectionUsd ?? 0,
+      addOnsTotalUsd: addOnBreakdown?.totalUsd ?? 0,
+      addOnsIdrApprox: addOnsIdr,
+      grandTotalIdr,
+      grandTotalUsdApprox:
+        grandTotalIdr !== null ? formatUsdApprox(grandTotalIdr, usdRate) : null,
       addOns: rentalExtras
         .filter((e) => (extraQty[e.id] ?? 0) > 0)
         .map((e) => ({ name: e.name, quantity: extraQty[e.id] ?? 0 })),
@@ -271,7 +318,11 @@ export function CheckoutFlow() {
           {/* Booking context line */}
           <p className="tnum mb-6 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
             <strong className="font-semibold text-ink">{entry!.displayName}</strong>{" "}
-            · {area?.name}
+            ·{" "}
+            {area?.isAirport ? (
+              <Plane className="inline h-3.5 w-3.5 text-primary" aria-hidden="true" />
+            ) : null}{" "}
+            {area?.name}
             {returnArea && ret !== pickup ? ` → ${returnArea.name}` : ""} ·{" "}
             {period.startDate} {period.startTime} → {period.endDate} {period.endTime}
             <Link
@@ -373,6 +424,104 @@ export function CheckoutFlow() {
                 ))}
               </ul>
 
+              {/* Optional protection — unchecked by default */}
+              <h2 className="mt-8 font-display text-2xl text-ink">
+                Optional protection
+              </h2>
+              <ul className="mt-3 space-y-4">
+                {[
+                  {
+                    key: "cancellation" as const,
+                    name: "Cancellation Protection",
+                    price: `${formatUsdFee(0.5)} per rental day`,
+                    amount: addOnBreakdown?.cancellationProtectionUsd ?? 0,
+                    computed: formatUsdFee(0.5 * days),
+                    copy: protectionCopy.cancellation,
+                  },
+                  {
+                    key: "motorcycle" as const,
+                    name: "Motorcycle Protection",
+                    price: `${formatUsdFee(4.95)} per motorcycle, per rental day`,
+                    amount: addOnBreakdown?.motorcycleProtectionUsd ?? 0,
+                    computed: formatUsdFee(4.95 * days * quantity),
+                    copy: protectionCopy.motorcycle,
+                  },
+                ].map((item) => {
+                  const selected = protection[item.key];
+                  return (
+                    <li
+                      key={item.key}
+                      className={`rounded-[14px] border bg-card p-5 transition-colors ${
+                        selected ? "border-primary" : "border-line"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="flex items-center gap-2 font-semibold text-ink">
+                            <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
+                            {item.name}
+                          </h3>
+                          <p className="tnum mt-0.5 text-sm font-medium text-ink-soft">
+                            {item.price}
+                          </p>
+                          <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                            {item.copy}
+                          </p>
+                          {selected ? (
+                            <p className="tnum mt-2 text-sm font-semibold text-primary">
+                              Added: {item.computed} for this booking
+                            </p>
+                          ) : null}
+                        </div>
+                        <button
+                          type="button"
+                          aria-pressed={selected}
+                          onClick={() =>
+                            setProtection((prev) => ({
+                              ...prev,
+                              [item.key]: !prev[item.key],
+                            }))
+                          }
+                          className={`min-h-11 shrink-0 cursor-pointer rounded-[10px] border px-4 text-sm font-semibold transition-colors ${
+                            selected
+                              ? "border-line-strong text-ink hover:border-danger hover:text-danger"
+                              : "border-primary text-primary hover:bg-primary-faint"
+                          }`}
+                        >
+                          {selected ? "Remove" : "Add"}
+                        </button>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {(area?.isAirport || returnArea?.isAirport) && addOnBreakdown ? (
+                <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
+                  <Plane className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
+                  Airport handover: {area?.isAirport ? `delivery fee ${formatUsdFee(1)}` : ""}
+                  {area?.isAirport && returnArea?.isAirport ? " and " : ""}
+                  {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}, once per
+                  booking.
+                </p>
+              ) : null}
+
+              {/* Included with every rental */}
+              <h2 className="mt-8 font-display text-2xl text-ink">
+                Included with every rental
+              </h2>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {confirmedBenefits.map((b) => (
+                  <li
+                    key={b.id}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary-faint px-3 py-1.5 text-sm font-medium text-primary"
+                  >
+                    <b.icon className="h-4 w-4" aria-hidden="true" />
+                    {b.label}
+                  </li>
+                ))}
+              </ul>
+
               {/* Promo code placeholder */}
               <div className="mt-4 rounded-[14px] border border-line bg-card p-5">
                 <label
@@ -398,7 +547,7 @@ export function CheckoutFlow() {
                 </p>
               </div>
 
-              <div className="mt-8 flex justify-between gap-3">
+              <div className="mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
                 <Link
                   href={`/book?${searchQs}&vehicle=${entryId}`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-4 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
@@ -410,6 +559,29 @@ export function CheckoutFlow() {
                   Continue to your details
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Button>
+              </div>
+
+              {/* Compact mobile summary bar (services step only) */}
+              <div
+                className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-page/95 px-4 py-3 backdrop-blur-sm lg:hidden"
+                style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))" }}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="tnum min-w-0 text-sm leading-snug text-ink-soft">
+                    <span className="block text-xs">Estimated total</span>
+                    <span className="font-bold text-ink">
+                      {grandTotalIdr !== null
+                        ? formatIdr(grandTotalIdr)
+                        : estimate
+                          ? `${formatIdr(estimate.totalIdr * quantity)} + ${formatUsdFee(addOnBreakdown?.totalUsd ?? 0)}`
+                          : ""}
+                    </span>
+                  </p>
+                  <Button variant="accent" onClick={() => setPhase("details")}>
+                    Continue
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </div>
               </div>
             </div>
           ) : null}
@@ -744,6 +916,40 @@ export function CheckoutFlow() {
                         },
                       ]
                     : []),
+                  ...(addOnBreakdown && addOnBreakdown.totalUsd > 0
+                    ? [
+                        {
+                          term: "Add-ons",
+                          detail: [
+                            addOnBreakdown.airportDeliveryUsd > 0
+                              ? `Airport delivery fee ${formatUsdFee(addOnBreakdown.airportDeliveryUsd)}`
+                              : "",
+                            addOnBreakdown.airportCollectionUsd > 0
+                              ? `Airport collection fee ${formatUsdFee(addOnBreakdown.airportCollectionUsd)}`
+                              : "",
+                            addOnBreakdown.cancellationProtectionUsd > 0
+                              ? `Cancellation Protection ${formatUsdFee(addOnBreakdown.cancellationProtectionUsd)}`
+                              : "",
+                            addOnBreakdown.motorcycleProtectionUsd > 0
+                              ? `Motorcycle Protection ${formatUsdFee(addOnBreakdown.motorcycleProtectionUsd)}`
+                              : "",
+                          ]
+                            .filter(Boolean)
+                            .join("\n"),
+                        },
+                        {
+                          term: "Estimated grand total",
+                          detail:
+                            grandTotalIdr !== null
+                              ? `${formatIdr(grandTotalIdr)}${
+                                  formatUsdApprox(grandTotalIdr, usdRate)
+                                    ? ` (${formatUsdApprox(grandTotalIdr, usdRate)})`
+                                    : ""
+                                }. Confirmed with availability on WhatsApp.`
+                              : `${formatIdr((estimate?.totalIdr ?? 0) * quantity)} plus ${formatUsdFee(addOnBreakdown.totalUsd)} add-ons. Confirmed with availability on WhatsApp.`,
+                        },
+                      ]
+                    : []),
                   { term: "Name", detail: `${customer.firstName} ${customer.lastName}` },
                   {
                     term: "WhatsApp",
@@ -915,6 +1121,7 @@ export function CheckoutFlow() {
             pickupName={area?.name ?? pickup}
             returnName={ret !== pickup ? returnArea?.name : undefined}
             estimate={estimate}
+            addOnBreakdown={addOnBreakdown}
           />
         </aside>
       </div>

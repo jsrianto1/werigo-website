@@ -4,6 +4,7 @@ import { rentalExtras } from "@/data/extras";
 import { formatIdr, type RentalQuoteEstimate } from "@/lib/pricing";
 import { formatUsdApprox } from "@/lib/currency";
 import { useUsdRate } from "@/lib/useUsdRate";
+import { formatUsdFee, usdToIdr, type AddOnBreakdown } from "@/lib/addons";
 
 /**
  * Selection summary shown throughout checkout.
@@ -18,6 +19,7 @@ export function BookingSummary({
   pickupName,
   returnName,
   estimate,
+  addOnBreakdown,
 }: {
   vehicleName: string;
   quantity: number;
@@ -26,6 +28,7 @@ export function BookingSummary({
   pickupName: string;
   returnName?: string;
   estimate?: RentalQuoteEstimate | null;
+  addOnBreakdown?: AddOnBreakdown | null;
 }) {
   const usdRate = useUsdRate();
   const extraRows = extras
@@ -99,6 +102,46 @@ export function BookingSummary({
           Rates shown once dates are selected
         </p>
       )}
+      {addOnBreakdown && addOnBreakdown.totalUsd > 0 ? (
+        <div className="mt-2 space-y-1.5 border-t border-line pt-2 text-sm">
+          {[
+            { label: "Airport delivery fee", usd: addOnBreakdown.airportDeliveryUsd },
+            { label: "Airport collection fee", usd: addOnBreakdown.airportCollectionUsd },
+            { label: "Cancellation Protection", usd: addOnBreakdown.cancellationProtectionUsd },
+            { label: "Motorcycle Protection", usd: addOnBreakdown.motorcycleProtectionUsd },
+          ]
+            .filter((row) => row.usd > 0)
+            .map((row) => (
+              <p key={row.label} className="flex items-baseline justify-between gap-3">
+                <span className="text-ink-soft">{row.label}</span>
+                <span className="tnum font-medium text-ink">{formatUsdFee(row.usd)}</span>
+              </p>
+            ))}
+        </div>
+      ) : null}
+      {estimate ? (
+        <div className="mt-2 border-t border-line-strong pt-2">
+          {(() => {
+            const baseIdr = estimate.totalIdr * quantity;
+            const addUsd = addOnBreakdown?.totalUsd ?? 0;
+            const addIdr = usdToIdr(addUsd, usdRate);
+            const grandIdr = addUsd > 0 ? (addIdr !== null ? baseIdr + addIdr : null) : baseIdr;
+            return (
+              <p className="flex items-baseline justify-between gap-3 text-sm">
+                <span className="font-semibold text-ink">Estimated total</span>
+                <span className="tnum text-right font-bold text-ink">
+                  {grandIdr !== null ? formatIdr(grandIdr) : `${formatIdr(baseIdr)} + ${formatUsdFee(addUsd)}`}
+                  {grandIdr !== null && formatUsdApprox(grandIdr, usdRate) ? (
+                    <span className="tnum block text-xs font-normal text-ink-faint">
+                      {formatUsdApprox(grandIdr, usdRate)}
+                    </span>
+                  ) : null}
+                </span>
+              </p>
+            );
+          })()}
+        </div>
+      ) : null}
       <p className="mt-2 text-xs leading-relaxed text-ink-faint">
         Estimate only. Availability, final pricing, delivery and add-ons
         are confirmed by the Werigo team on WhatsApp. There are no charges

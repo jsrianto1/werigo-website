@@ -124,3 +124,48 @@ export const serviceAreas: ServiceArea[] = [
 export function getArea(slug: string): ServiceArea | undefined {
   return serviceAreas.find((a) => a.slug === slug);
 }
+
+/* ================= Airport pickup points ================= */
+
+/**
+ * Ngurah Rai International Airport terminals: selectable pickup and
+ * return points (handover by arrangement). They are pickup points,
+ * not service areas, so they get no area page, no card on the
+ * delivery-areas grid, and no delivery-fee field here; the approved
+ * airport fees live in src/lib/addons.ts.
+ */
+export interface AirportPoint {
+  slug: string;
+  name: string;
+  terminal: "domestic" | "international";
+  isAirport: true;
+}
+
+export const airportPoints: AirportPoint[] = [
+  {
+    slug: "airport-domestic",
+    name: "Ngurah Rai Airport, Domestic Terminal",
+    terminal: "domestic",
+    isAirport: true,
+  },
+  {
+    slug: "airport-international",
+    name: "Ngurah Rai Airport, International Terminal",
+    terminal: "international",
+    isAirport: true,
+  },
+];
+
+export function isAirportSlug(slug: string): boolean {
+  return airportPoints.some((a) => a.slug === slug);
+}
+
+/** Resolve any selectable pickup/return point (area or airport). */
+export function getPickupPoint(
+  slug: string
+): { slug: string; name: string; isAirport: boolean } | undefined {
+  const airport = airportPoints.find((a) => a.slug === slug);
+  if (airport) return { slug: airport.slug, name: airport.name, isAirport: true };
+  const area = getArea(slug);
+  return area ? { slug: area.slug, name: area.name, isAirport: false } : undefined;
+}

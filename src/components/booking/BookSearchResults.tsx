@@ -16,7 +16,7 @@ import {
   sharedSpec,
   specDisclaimer,
 } from "@/data/vehicles";
-import { getArea } from "@/data/locations";
+import { getPickupPoint } from "@/data/locations";
 import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
 
 /**
@@ -69,8 +69,8 @@ export function BookSearchResults() {
   }
 
   // ---- Step 2: results ----
-  const area = getArea(pickup);
-  const returnArea = getArea(ret);
+  const area = getPickupPoint(pickup);
+  const returnArea = getPickupPoint(ret);
   const days = rentalDays(period);
   const models = getListedModels();
   // Legacy links or drafts may reference variant ids — normalise to

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MapPin, CalendarDays, Search, ArrowRight, CornerDownRight } from "lucide-react";
-import { serviceAreas } from "@/data/locations";
+import { serviceAreas, airportPoints } from "@/data/locations";
 import { defaultSearch, toDateInput, type SearchState } from "@/lib/booking";
 import { isValidPeriod, MIN_RENTAL_MESSAGE } from "@/lib/pricing";
 import { Button } from "@/components/ui/Button";
@@ -94,12 +94,21 @@ export function SearchWidget({
               className="min-h-11 w-full cursor-pointer rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink"
             >
               <option value="">Choose an area…</option>
-              {serviceAreas.map((area) => (
-                <option key={area.slug} value={area.slug}>
-                  {area.name}
-                  {area.deliveryFee === 0 ? " (free delivery)" : ""}
-                </option>
-              ))}
+              <optgroup label="Ngurah Rai Airport">
+                {airportPoints.map((a) => (
+                  <option key={a.slug} value={a.slug}>
+                    {a.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Bali areas">
+                {serviceAreas.map((area) => (
+                  <option key={area.slug} value={area.slug}>
+                    {area.name}
+                    {area.deliveryFee === 0 ? " (free delivery)" : ""}
+                  </option>
+                ))}
+              </optgroup>
             </select>
           </div>
 
@@ -131,11 +140,20 @@ export function SearchWidget({
               <option value="">
                 {state.differentReturn ? "Choose return area…" : "Same as pick-up"}
               </option>
-              {serviceAreas.map((area) => (
-                <option key={area.slug} value={area.slug}>
-                  {area.name}
-                </option>
-              ))}
+              <optgroup label="Ngurah Rai Airport">
+                {airportPoints.map((a) => (
+                  <option key={a.slug} value={a.slug}>
+                    {a.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Bali areas">
+                {serviceAreas.map((area) => (
+                  <option key={area.slug} value={area.slug}>
+                    {area.name}
+                  </option>
+                ))}
+              </optgroup>
             </select>
           </div>
         </div>
