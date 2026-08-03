@@ -109,6 +109,58 @@ try {
     document.body.textContent.includes("Enter your first name.")
   );
 
+  // Paste scenario A: full international number into the NUMBER field
+  await page.evaluate(() => {
+    const set = (id, v) => {
+      const el = document.getElementById(id);
+      const proto = Object.getPrototypeOf(el);
+      Object.getOwnPropertyDescriptor(proto, "value").set.call(el, v);
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+    set("field-countryCode", "+62");
+    set("field-whatsapp", "+628121311712");
+  });
+  await page.focus("#field-whatsapp");
+  await page.focus("#field-firstName"); // blur triggers normalization
+  await new Promise((r) => setTimeout(r, 200));
+  results.pasteFullNumberNormalized = await page.evaluate(
+    () =>
+      document.getElementById("field-countryCode").value === "+62" &&
+      document.getElementById("field-whatsapp").value === "8121311712"
+  );
+
+  // Paste scenario B: full number into the COUNTRY-CODE field
+  await page.evaluate(() => {
+    const set = (id, v) => {
+      const el = document.getElementById(id);
+      const proto = Object.getPrototypeOf(el);
+      Object.getOwnPropertyDescriptor(proto, "value").set.call(el, v);
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+    set("field-countryCode", "+618121311712");
+    set("field-whatsapp", "");
+  });
+  await page.focus("#field-countryCode");
+  await page.focus("#field-firstName");
+  await new Promise((r) => setTimeout(r, 200));
+  results.pasteIntoCcFieldNormalized = await page.evaluate(
+    () =>
+      document.getElementById("field-countryCode").value === "+61" &&
+      document.getElementById("field-whatsapp").value === "8121311712"
+  );
+
+  // Reset phone fields for the real run
+  await page.evaluate(() => {
+    const set = (id, v) => {
+      const el = document.getElementById(id);
+      const proto = Object.getPrototypeOf(el);
+      Object.getOwnPropertyDescriptor(proto, "value").set.call(el, v);
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+    set("field-countryCode", "");
+    set("field-whatsapp", "");
+  });
+
   // Fill details (email left empty: optional)
   await page.type("#field-firstName", "Test");
   await page.type("#field-lastName", "Rider");
@@ -139,9 +191,10 @@ try {
   results.reviewShowsRate = await page.evaluate(() =>
     document.body.textContent.includes("Rp 90,000 per day")
   );
-  results.reviewShowsTotal = await page.evaluate(() =>
-    document.body.textContent.includes("Rp 270,000 for 3 days")
-  );
+  results.reviewShowsTotal = await page.evaluate(() => {
+    const t = document.body.textContent;
+    return t.includes("Rp 270,000") && t.includes("for 3 days");
+  });
   results.summaryShowsEstimate = await page.evaluate(() => {
     const aside = document.querySelector("aside");
     return aside?.textContent.includes("Rp 90,000/day") && aside?.textContent.includes("Rp 270,000");
@@ -211,7 +264,7 @@ try {
   results.waHasDuration = wa?.includes("Duration: 3 days") ?? false;
   results.waHasAddOn = wa?.includes("Rain poncho × 1") ?? false;
   results.waHasName = wa?.includes("Name: Test Rider") ?? false;
-  results.waHasCountryCodeAndNumber = wa?.includes("WhatsApp: +61 400 000 000") ?? false;
+  results.waHasCountryCodeAndNumber = wa?.includes("WhatsApp: +61 400000000") ?? false;
   results.waOmitsEmptyEmail = wa ? !wa.includes("Email:") : false;
   results.waHasFlight = wa?.includes("GA715") ?? false;
   results.waHasBatteryAck = wa?.includes("Battery return: I will return the motorcycle with at least 80% battery") ?? false;
@@ -274,7 +327,11 @@ try {
   // Bees checkout must NOT show an age checkbox (no invented restrictions)
   await page.goto(
     `${BASE}/book/checkout?vehicle=bees&pickup=canggu&return=canggu&startDate=2026-07-28&startTime=09%3A00&endDate=2026-07-31&endTime=09%3A00`,
-    { waitUntil: "networkidle0" }
+    { waitUntil: "domcontentloaded", timeout: 60000 }
+  );
+  await page.waitForFunction(
+    () => document.body.textContent.includes("Make it yours"),
+    { timeout: 20000 }
   );
   await page.evaluate(() => {
     [...document.querySelectorAll("button")]

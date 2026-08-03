@@ -9,7 +9,6 @@ import {
   resolveTier,
   estimateRental,
   minRiderAge,
-  usdDisplay,
   ratesIdrPerDay,
 } from "../src/lib/pricing.ts";
 
@@ -91,7 +90,6 @@ check("exactly four models priced", Object.keys(ratesIdrPerDay).sort(), ["athena
 // ---- Age + USD policy ----
 check("EdPower minimum age is 25", minRiderAge.edpower, 25);
 check("no other model has an age restriction", Object.keys(minRiderAge), ["edpower"]);
-check("USD hidden until a documented rate exists", usdDisplay.idrPerUsd, null);
 
 console.log(failures === 0 ? "PRICING TESTS PASS" : `PRICING TESTS FAIL (${failures})`);
 process.exit(failures === 0 ? 0 : 1);

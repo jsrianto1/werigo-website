@@ -8,6 +8,8 @@ import { SearchWidget } from "@/components/booking/SearchWidget";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { MediaImage } from "@/components/media/MediaImage";
 import { estimateRental, formatIdr } from "@/lib/pricing";
+import { formatUsdApprox } from "@/lib/currency";
+import { useUsdRate } from "@/lib/useUsdRate";
 import {
   getListedModels,
   toCustomerEntry,
@@ -23,6 +25,7 @@ import { rentalDays, isValidPeriod, type RentalPeriod } from "@/lib/pricing";
  * shown — rates are always provided on request.
  */
 export function BookSearchResults() {
+  const usdRate = useUsdRate();
   const params = useSearchParams();
   const router = useRouter();
 
@@ -172,11 +175,17 @@ export function BookSearchResults() {
                       <p className="tnum mt-4 text-sm text-ink-soft">
                         <span className="font-semibold text-ink">
                           {formatIdr(est.ratePerDayIdr)}/day
-                        </span>{" "}
+                        </span>
+                        {formatUsdApprox(est.ratePerDayIdr, usdRate)
+                          ? ` (${formatUsdApprox(est.ratePerDayIdr, usdRate)})`
+                          : ""}{" "}
                         · {est.tier.label} rate ({est.tier.range}) · estimated{" "}
                         <span className="font-semibold text-ink">
                           {formatIdr(est.totalIdr)}
-                        </span>{" "}
+                        </span>
+                        {formatUsdApprox(est.totalIdr, usdRate)
+                          ? ` (${formatUsdApprox(est.totalIdr, usdRate)})`
+                          : ""}{" "}
                         for {est.days} days
                       </p>
                     ) : null;

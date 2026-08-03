@@ -77,15 +77,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
 
         <RateTable modelSlug={entry.modelSlug} className="mt-4" />
 
-        <p className="mt-3 text-xs leading-relaxed text-ink-soft">
-          Rain poncho available on request. Optional bike damage
-          protection enquiry on WhatsApp.
-        </p>
-
         <div className="mt-4 flex flex-1 flex-col justify-end gap-3">
-          <p className="text-xs text-ink-faint">
-            Estimated totals are confirmed with availability on WhatsApp.
-          </p>
           <div className="flex items-center gap-2">
             <Link
               href={`/book?vehicle=${entry.id}`}

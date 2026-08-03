@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { FileText } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
@@ -17,13 +16,10 @@ export default function TermsPage() {
         <SectionHeading
           eyebrow="Legal"
           title="Terms & Conditions"
-          lede="The complete written rental agreement is being finalised with Indonesian legal counsel and will be published on this page."
+          lede="These are the current Werigo rental terms used for every booking request. Your final quote, delivery arrangements and any optional protection are confirmed with you on WhatsApp before anything is charged."
         />
-        <div className="mb-8 rounded-[14px] border border-line bg-card p-6">
-          <h2 className="font-display text-xl text-ink">
-            Confirmed rental terms
-          </h2>
-          <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-ink-soft">
+        <div className="rounded-[14px] border border-line bg-card p-6 sm:p-8">
+          <ul className="space-y-3 text-sm leading-relaxed text-ink-soft">
             <li>Minimum rental period is 2 days.</li>
             <li>
               Every rental includes two sanitised helmets and one premium
@@ -49,20 +45,18 @@ export default function TermsPage() {
               Werigo, not by an insurer, and does not cover personal injury,
               medical costs, personal belongings or liability to others.
             </li>
+            <li>
+              Riders must hold a licence valid for riding in Indonesia and
+              follow local traffic law. A properly fitted helmet is
+              essential on every ride.
+            </li>
+            <li>
+              Rider requirements, liability, deposits and cancellation
+              conditions that are not listed here are confirmed with you in
+              writing with your quote. No booking is ever bound by terms
+              that weren&apos;t visible to you at the time of booking.
+            </li>
           </ul>
-        </div>
-        <div className="rounded-[14px] border border-dashed border-line-strong bg-card p-8 text-center">
-          <FileText className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />
-          <h2 className="mt-3 font-display text-xl text-ink">
-            Your terms come with your booking
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
-            Until the full text is published here, the remaining terms that
-            apply to your rental (rider requirements, liability, deposits and
-            cancellation conditions) are confirmed with you in writing before
-            you book. No booking is ever bound by terms that weren&apos;t
-            visible at the time of booking.
-          </p>
         </div>
       </div>
     </Section>

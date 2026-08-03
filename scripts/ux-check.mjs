@@ -87,11 +87,14 @@ const fleetChecks = await page.evaluate(() => {
       [...c.querySelectorAll("a")].some((a) => a.textContent.includes("View details"))
     ),
     idrRatesShown: cards.every((c) => /Rp\s?[\d,]+\/day/.test(c.textContent)),
-    minTwoDayNote: cards.every((c) => c.textContent.includes("Minimum rental 2 days")),
+    minTwoDayNoteOnceBelowGrid: !cards.some((c) => c.textContent.includes("Minimum rental 2 days")) && document.body.textContent.includes("Minimum rental 2 days"),
+    compactStripTiers: cards.every((c) => c.textContent.includes("Best rate") && c.textContent.includes("View all duration rates")),
     durationTiers: cards.every((c) =>
       ["Daily", "Weekly", "2 Weeks", "3 Weeks", "Monthly"].every((d) => c.textContent.includes(d))
     ),
-    noUsdPrices: cards.every((c) => !/\$\s?\d/.test(c.textContent)),
+    usdEstimateFormatOk: cards.every(
+      (c) => !c.textContent.includes("US$") || c.textContent.includes("≈ US$")
+    ),
     benefitChips: cards.every((c) => c.textContent.includes("2 sanitised helmets")),
     noUnapprovedPolicies: cards.every(
       (c) => !/free cancellation|insurance/i.test(c.textContent)

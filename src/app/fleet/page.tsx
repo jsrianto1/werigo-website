@@ -10,6 +10,8 @@ import {
   specDisclaimer,
 } from "@/data/vehicles";
 import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
+import { formatUsdApprox, usdEstimateNote } from "@/lib/currency";
+import { getUsdIdrRate } from "@/lib/exchangeRate";
 
 export const metadata: Metadata = {
   title: "Our Fleet of Official Wedison Electric Motorcycles for Rent in Bali",
@@ -18,8 +20,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/fleet" },
 };
 
-export default function FleetPage() {
+export default async function FleetPage() {
   const cards = getPrimaryCards();
+  const fx = await getUsdIdrRate();
 
   return (
     <>
@@ -35,6 +38,12 @@ export default function FleetPage() {
             <VehicleCard key={entry.id} entry={entry} />
           ))}
         </div>
+        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint">
+          Minimum rental 2 days. Rates are per motorcycle per day in IDR;
+          US dollar amounts are estimates. A rain poncho and in-house bike
+          damage protection can be requested, with price and availability
+          confirmed on WhatsApp along with your final quote.
+        </p>
       </Section>
 
       <RidingMotorcycle />
@@ -155,6 +164,14 @@ export default function FleetPage() {
                   {pricingTiers.map((t) => (
                     <td key={t.id} className="tnum px-5 py-4 text-ink-soft">
                       {formatIdr(ratesIdrPerDay[e.modelSlug][t.id])}
+                      {formatUsdApprox(ratesIdrPerDay[e.modelSlug][t.id], fx?.rate) ? (
+                        <span
+                          title={usdEstimateNote}
+                          className="block text-xs text-ink-faint"
+                        >
+                          {formatUsdApprox(ratesIdrPerDay[e.modelSlug][t.id], fx?.rate)}
+                        </span>
+                      ) : null}
                     </td>
                   ))}
                 </tr>

@@ -1,5 +1,9 @@
+"use client";
+
 import { rentalExtras } from "@/data/extras";
 import { formatIdr, type RentalQuoteEstimate } from "@/lib/pricing";
+import { formatUsdApprox } from "@/lib/currency";
+import { useUsdRate } from "@/lib/useUsdRate";
 
 /**
  * Selection summary shown throughout checkout.
@@ -23,6 +27,7 @@ export function BookingSummary({
   returnName?: string;
   estimate?: RentalQuoteEstimate | null;
 }) {
+  const usdRate = useUsdRate();
   const extraRows = extras
     .filter((e) => e.quantity > 0)
     .map((e) => {
@@ -68,14 +73,24 @@ export function BookingSummary({
         <div className="mt-4 space-y-1.5 text-sm">
           <p className="flex items-baseline justify-between gap-3">
             <span className="text-ink-soft">{estimate.tier.label} rate</span>
-            <span className="tnum font-semibold text-ink">
+            <span className="tnum text-right font-semibold text-ink">
               {formatIdr(estimate.ratePerDayIdr)}/day
+              {formatUsdApprox(estimate.ratePerDayIdr, usdRate) ? (
+                <span className="tnum block text-xs font-normal text-ink-faint">
+                  {formatUsdApprox(estimate.ratePerDayIdr, usdRate)}/day
+                </span>
+              ) : null}
             </span>
           </p>
           <p className="flex items-baseline justify-between gap-3">
             <span className="text-ink-soft">Estimated total</span>
-            <span className="tnum font-semibold text-ink">
+            <span className="tnum text-right font-semibold text-ink">
               {formatIdr(estimate.totalIdr * quantity)}
+              {formatUsdApprox(estimate.totalIdr * quantity, usdRate) ? (
+                <span className="tnum block text-xs font-normal text-ink-faint">
+                  {formatUsdApprox(estimate.totalIdr * quantity, usdRate)}
+                </span>
+              ) : null}
             </span>
           </p>
         </div>

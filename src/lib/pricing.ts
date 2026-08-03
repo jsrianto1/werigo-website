@@ -82,16 +82,6 @@ export const pricingApproved = true;
 export const pricingUpdatedAt = "2026-07-30";
 
 /**
- * Optional USD display. IDR is the source of truth; approximate USD
- * renders ONLY when a documented rate and its update date are set
- * here. Leave null to hide USD entirely (never invent a conversion).
- */
-export const usdDisplay: { idrPerUsd: number | null; updatedAt: string | null } = {
-  idrPerUsd: null,
-  updatedAt: null,
-};
-
-/**
  * Minimum rider age by model. Only EdPower has an approved
  * restriction; do not invent restrictions for other models.
  */

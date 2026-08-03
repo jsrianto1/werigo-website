@@ -28,6 +28,9 @@ import {
   type RentalPeriod,
 } from "@/lib/pricing";
 import { batteryReturnNote } from "@/data/commercialTerms";
+import { normalizePhone } from "@/lib/phone";
+import { useUsdRate } from "@/lib/useUsdRate";
+import { formatUsdApprox } from "@/lib/currency";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import {
   emptyCustomer,
@@ -78,6 +81,7 @@ export function CheckoutFlow() {
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
   const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
+  const usdRate = useUsdRate();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // Restore any saved draft for this entry (one-shot,
@@ -170,10 +174,10 @@ export function CheckoutFlow() {
     const next: Partial<Record<keyof CustomerInfo, string>> = {};
     if (!customer.firstName.trim()) next.firstName = "Enter your first name.";
     if (!customer.lastName.trim()) next.lastName = "Enter your last name.";
-    if (!/^\+[0-9]{1,4}$/.test(customer.countryCode.trim()))
-      next.countryCode = "Enter a country code such as +62.";
-    if (!/^[0-9][0-9\s-]{5,}$/.test(customer.whatsapp.trim()))
-      next.whatsapp = "Enter your WhatsApp number without the country code.";
+    const phone = normalizePhone(customer.countryCode, customer.whatsapp);
+    if (!phone) {
+      next.whatsapp = "Check the WhatsApp number. For example +62 812 3456 789.";
+    }
     if (customer.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(customer.email))
       next.email = "Enter a valid email address, or leave it empty.";
     if (!customer.hotelName.trim())
@@ -212,6 +216,8 @@ export function CheckoutFlow() {
       return;
     }
     if (!estimate) return;
+    const phone = normalizePhone(customer.countryCode, customer.whatsapp);
+    if (!phone) return;
 
     const url = buildDirectBookingWhatsAppUrl({
       modelName: entry!.displayName,
@@ -235,8 +241,8 @@ export function CheckoutFlow() {
         .map((e) => ({ name: e.name, quantity: extraQty[e.id] ?? 0 })),
       firstName: customer.firstName,
       lastName: customer.lastName,
-      countryCode: customer.countryCode.trim(),
-      whatsapp: customer.whatsapp.trim(),
+      countryCode: phone.countryCode,
+      whatsapp: phone.national,
       email: customer.email.trim() || undefined,
       flightNumber: customer.flightNumber || undefined,
       batteryAck: customer.batteryAck,
@@ -459,7 +465,7 @@ export function CheckoutFlow() {
                       type: "tel",
                       autoComplete: "tel-country-code",
                       required: true,
-                      hint: "For example +62 or +61.",
+                      hint: "For example, +62",
                     },
                     {
                       key: "whatsapp",
@@ -467,7 +473,7 @@ export function CheckoutFlow() {
                       type: "tel",
                       autoComplete: "tel-national",
                       required: true,
-                      hint: "Number only, without the country code.",
+                      hint: "Your number without the country code",
                     },
                     {
                       key: "email",
@@ -527,6 +533,17 @@ export function CheckoutFlow() {
                       onChange={(e) => {
                         setCustomer((c) => ({ ...c, [field.key]: e.target.value }));
                         setErrors((prev) => ({ ...prev, [field.key]: undefined }));
+                      }}
+                      onBlur={() => {
+                        if (field.key !== "countryCode" && field.key !== "whatsapp") return;
+                        const p = normalizePhone(customer.countryCode, customer.whatsapp);
+                        if (p) {
+                          setCustomer((c) => ({
+                            ...c,
+                            countryCode: p.countryCode,
+                            whatsapp: p.national,
+                          }));
+                        }
                       }}
                       className={inputClass(errors[field.key])}
                     />
@@ -711,16 +728,30 @@ export function CheckoutFlow() {
                         },
                         {
                           term: "Rate",
-                          detail: `${formatIdr(estimate.ratePerDayIdr)} per day`,
+                          detail: `${formatIdr(estimate.ratePerDayIdr)} per day${
+                            formatUsdApprox(estimate.ratePerDayIdr, usdRate)
+                              ? ` (${formatUsdApprox(estimate.ratePerDayIdr, usdRate)})`
+                              : ""
+                          }`,
                         },
                         {
                           term: "Estimated total",
-                          detail: `${formatIdr(estimate.totalIdr * quantity)} for ${days} day${days === 1 ? "" : "s"}${quantity > 1 ? ` × ${quantity} motorcycles` : ""}. Confirmed with availability on WhatsApp.`,
+                          detail: `${formatIdr(estimate.totalIdr * quantity)}${
+                            formatUsdApprox(estimate.totalIdr * quantity, usdRate)
+                              ? ` (${formatUsdApprox(estimate.totalIdr * quantity, usdRate)})`
+                              : ""
+                          } for ${days} day${days === 1 ? "" : "s"}${quantity > 1 ? ` × ${quantity} motorcycles` : ""}. Confirmed with availability on WhatsApp.`,
                         },
                       ]
                     : []),
                   { term: "Name", detail: `${customer.firstName} ${customer.lastName}` },
-                  { term: "WhatsApp", detail: `${customer.countryCode} ${customer.whatsapp}` },
+                  {
+                    term: "WhatsApp",
+                    detail: (() => {
+                      const p = normalizePhone(customer.countryCode, customer.whatsapp);
+                      return p ? `${p.countryCode} ${p.national}` : `${customer.countryCode} ${customer.whatsapp}`;
+                    })(),
+                  },
                   ...(customer.email ? [{ term: "Email", detail: customer.email }] : []),
                   ...(customer.flightNumber
                     ? [{ term: "Flight", detail: customer.flightNumber }]

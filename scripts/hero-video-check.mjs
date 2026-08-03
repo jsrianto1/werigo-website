@@ -25,8 +25,8 @@ async function checkViewport(width, height, name) {
       }
     }).observe({ type: "layout-shift", buffered: true });
   });
-  await page.goto(`${BASE}/`, { waitUntil: "networkidle0", timeout: 45000 });
-  await new Promise((r) => setTimeout(r, 2500));
+  await page.goto(`${BASE}/`, { waitUntil: "load", timeout: 45000 });
+  await new Promise((r) => setTimeout(r, 3000));
 
   const r = await page.evaluate(() => {
     const video = document.querySelector("video");
@@ -128,7 +128,7 @@ await checkViewport(1920, 1080, "1920");
       videoRequests.push(req.url());
     }
   });
-  await page.goto(`${BASE}/`, { waitUntil: "networkidle0", timeout: 45000 });
+  await page.goto(`${BASE}/`, { waitUntil: "load", timeout: 45000 });
   await new Promise((r) => setTimeout(r, 2000));
   const rm = await page.evaluate(() => ({
     hasVideo: !!document.querySelector("video"),
