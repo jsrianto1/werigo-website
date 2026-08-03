@@ -16,10 +16,12 @@ export const site = {
 
   /**
    * Werigo Admin WhatsApp number, international format, digits only.
-   * Overridable via NEXT_PUBLIC_WHATSAPP_NUMBER.
+   * Hardcoded on purpose: a stale NEXT_PUBLIC_WHATSAPP_NUMBER in the
+   * hosting environment previously overrode the approved number at
+   * build time and sent bookings to a dead number. The env var is
+   * intentionally ignored; change the number here only.
    */
-  whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "6282187441628",
+  whatsappNumber: "6282187441628",
 
   /** Human-readable form of whatsappNumber for display surfaces. */
   whatsappDisplay: "+62 821-8744-1628",

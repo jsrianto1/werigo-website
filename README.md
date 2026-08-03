@@ -35,7 +35,6 @@ commit real values, and never put server-only keys in a
 
 | Variable | Scope | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | public | Business WhatsApp number, international format, digits only |
 | `NEXT_PUBLIC_SUPABASE_URL` | public | Supabase project URL (server also accepts `SUPABASE_URL`, which takes priority) |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public | Supabase publishable/anon key, admin sign-in sessions only; RLS blocks all data access (server also accepts `SUPABASE_PUBLISHABLE_KEY`, which takes priority) |
 | `SUPABASE_SECRET_KEY` | **server-only** | New-format secret key (`sb_secret_...`) used exclusively by API routes; takes priority over the service-role key |
