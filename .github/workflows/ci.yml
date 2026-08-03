@@ -32,6 +32,3 @@ jobs:
 
       - name: Production build
         run: npm run build
-        env:
-          # Placeholder for CI validation only — real value is set in the
-          # hosting panel at deploy time, never committed.
