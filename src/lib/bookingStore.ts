@@ -175,7 +175,44 @@ class SupabaseBookingStore implements BookingStore {
       new_status: "new",
       actor: "customer",
     });
+    await this.linkCustomer(data as StoredBooking);
     return { booking: data as StoredBooking, duplicate: false };
+  }
+
+  /**
+   * Point the booking at the person's row in the customer database,
+   * when one already exists. Best effort by design: the customer
+   * record is created by the capture API (POST /api/leads), and a
+   * missing link must never fail a stored booking.
+   */
+  private async linkCustomer(booking: StoredBooking): Promise<void> {
+    try {
+      let customerId: string | null = null;
+      const byPhone = await this.client
+        .from("customers")
+        .select("id")
+        .eq("whatsapp_number", booking.whatsapp_number)
+        .limit(1)
+        .maybeSingle();
+      customerId = (byPhone.data as { id: string } | null)?.id ?? null;
+      if (!customerId && booking.email) {
+        const byEmail = await this.client
+          .from("customers")
+          .select("id")
+          .ilike("email", booking.email)
+          .limit(1)
+          .maybeSingle();
+        customerId = (byEmail.data as { id: string } | null)?.id ?? null;
+      }
+      if (customerId) {
+        await this.client
+          .from("bookings")
+          .update({ customer_id: customerId })
+          .eq("id", booking.id);
+      }
+    } catch {
+      /* linking is optional; the booking itself is already stored */
+    }
   }
 
   private applyFilters<

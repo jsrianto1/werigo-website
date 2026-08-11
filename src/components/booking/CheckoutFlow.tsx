@@ -29,6 +29,7 @@ import {
 } from "@/lib/pricing";
 import { batteryReturnNote } from "@/data/commercialTerms";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
+import { captureLead, newSubmissionId } from "@/lib/leadCapture";
 import {
   emptyCustomer,
   saveDraft,
@@ -79,6 +80,14 @@ export function CheckoutFlow() {
   const [consentError, setConsentError] = useState<string | null>(null);
   const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // One id per checkout, created on the first send: a second click
+  // replays the same submission instead of storing a duplicate.
+  const submissionIdRef = useRef<string>("");
+  function submissionId(): string {
+    submissionIdRef.current ||= newSubmissionId();
+    return submissionIdRef.current;
+  }
 
   // Restore any saved draft for this entry (one-shot,
   // localStorage is an external system — sync setState is intentional)
@@ -192,9 +201,11 @@ export function CheckoutFlow() {
   }
 
   /**
-   * TEMPORARY WhatsApp-first mode: the request goes straight to
-   * WhatsApp. No /api/bookings call, no database insert, no booking
-   * code. Nothing from this form is logged.
+   * WhatsApp-first mode: the request itself goes straight to WhatsApp,
+   * with no /api/bookings call and no booking code. The details are
+   * still recorded in the customer database first (POST /api/leads,
+   * fire and forget), so a request is never lost when the visitor
+   * closes WhatsApp without sending. Capture never blocks the handoff.
    */
   function sendToWhatsApp() {
     if (!customer.batteryAck) {
@@ -206,12 +217,42 @@ export function CheckoutFlow() {
     }
     if (!privacyConsent) {
       setConsentError(
-        "Please confirm you agree to send these details to Werigo on WhatsApp."
+        "Please confirm you agree to Werigo keeping these details and replying on WhatsApp."
       );
       document.getElementById("field-privacyConsent")?.focus();
       return;
     }
     if (!estimate) return;
+
+    captureLead({
+      formType: "booking_request",
+      clientSubmissionId: submissionId(),
+      firstName: customer.firstName.trim(),
+      lastName: customer.lastName.trim(),
+      countryCode: customer.countryCode.trim(),
+      whatsapp: customer.whatsapp.trim(),
+      email: customer.email.trim(),
+      hotelName: customer.hotelName.trim(),
+      address: customer.address.trim(),
+      flightNumber: customer.flightNumber.trim(),
+      specialRequest: customer.specialRequest.trim(),
+      vehicleModel: entry!.modelSlug,
+      quantity,
+      pickupArea: pickup,
+      returnArea: ret,
+      startDate: period.startDate,
+      startTime: period.startTime,
+      endDate: period.endDate,
+      endTime: period.endTime,
+      promoCode: promoCode.trim(),
+      extras: Object.entries(extraQty)
+        .filter(([, q]) => q > 0)
+        .map(([id, q]) => ({ id, quantity: q })),
+      termsAccepted: customer.termsAccepted,
+      batteryAck: customer.batteryAck,
+      ageConfirmed: needsAgeCheck ? customer.ageConfirmed : undefined,
+      privacyConsent: true,
+    });
 
     const url = buildDirectBookingWhatsAppUrl({
       modelName: entry!.displayName,
@@ -778,8 +819,8 @@ export function CheckoutFlow() {
                     className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                   />
                   <span className="text-sm text-ink-soft">
-                    I agree to send these details to Werigo through WhatsApp so
-                    the team can respond to my booking request. See the{" "}
+                    I agree to Werigo keeping these details and contacting me
+                    on WhatsApp about this booking request. See the{" "}
                     <Link
                       href="/privacy"
                       target="_blank"

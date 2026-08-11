@@ -4,10 +4,13 @@ import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
+import { captureLead, newSubmissionId } from "@/lib/leadCapture";
 
 /**
- * Contact form — prototype behaviour opens WhatsApp with the message.
- * Swap the submit handler for an API route when the email system exists.
+ * Contact form. The message is stored in the customer database
+ * (POST /api/leads, fire and forget) and WhatsApp is opened with the
+ * same text, so a lead is never lost when the visitor closes WhatsApp
+ * without sending.
  */
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -26,6 +29,17 @@ export function ContactForm() {
       next.message = "Please tell us a little more, at least 10 characters.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
+
+    // Stored first, so the enquiry survives even if WhatsApp is never
+    // sent. This does not block the handoff below.
+    captureLead({
+      formType: "contact_message",
+      clientSubmissionId: newSubmissionId(),
+      fullName: name.trim(),
+      email: email.trim(),
+      message: message.trim(),
+      privacyConsent: true,
+    });
 
     const text = `Hi Werigo! I'm ${name} (${email}).\n\n${message}`;
     window.open(buildSupportWhatsAppUrl(text), "_blank", "noopener");
@@ -140,9 +154,10 @@ export function ContactForm() {
         Send via WhatsApp
       </Button>
       <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-        The form opens WhatsApp with your message pre-filled, so you stay in
-        control of what&apos;s sent. Prefer email? Write to us directly at the
-        address above.
+        Your name, email and message are saved with Werigo so the team can
+        reply, and the form opens WhatsApp with the same message ready to
+        send. We use these details to answer you, and we never sell them.
+        Prefer email? Write to us directly at the address above.
       </p>
     </form>
   );
