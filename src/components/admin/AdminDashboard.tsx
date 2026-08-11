@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Download,
   LogOut,
@@ -215,6 +216,12 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
         </div>
         <div className="flex items-center gap-2">
           <span className="hidden text-sm text-ink-soft sm:inline">{adminEmail}</span>
+          <Link
+            href="/admin/customers"
+            className="inline-flex min-h-9 items-center gap-2 rounded-[10px] border border-line-strong px-3.5 text-sm font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
+          >
+            Customers
+          </Link>
           <Button variant="outline" size="sm" onClick={() => void load()}>
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
             Refresh
