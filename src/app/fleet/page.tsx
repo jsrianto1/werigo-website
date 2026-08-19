@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import {
   getPrimaryCards,
-  sharedSpec,
+  getVariants,
   specDisclaimer,
 } from "@/data/vehicles";
 import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
@@ -89,8 +89,22 @@ export default async function FleetPage() {
             </thead>
             <tbody className="divide-y divide-line">
               {cards.map((e) => {
-                const battery = sharedSpec(e.modelSlug, "batteryWh");
-                const range = sharedSpec(e.modelSlug, "claimedRangeKm");
+                // Standard and Extended variants can carry different
+                // approved battery/range figures. Show the exact value
+                // when every variant matches, otherwise show the full
+                // Standard to Extended range (real approved numbers
+                // only, never a single invented figure).
+                const variants = getVariants(e.modelSlug);
+                const batteries = [...new Set(variants.map((v) => v.batteryWh))];
+                const ranges = [...new Set(variants.map((v) => v.claimedRangeKm))];
+                const battery =
+                  batteries.length === 1
+                    ? `${batteries[0].toLocaleString("en-US")} Wh`
+                    : `${Math.min(...batteries).toLocaleString("en-US")} to ${Math.max(...batteries).toLocaleString("en-US")} Wh`;
+                const range =
+                  ranges.length === 1
+                    ? `${ranges[0]} km`
+                    : `${Math.min(...ranges)} to ${Math.max(...ranges)} km`;
                 return (
                   <tr key={e.id}>
                     <th scope="row" className="px-5 py-4 font-display text-base text-ink">
@@ -102,14 +116,8 @@ export default async function FleetPage() {
                     <td className="tnum px-5 py-4 text-ink-soft">
                       up to {e.topSpeedKmh} km/h
                     </td>
-                    <td className="tnum px-5 py-4 text-ink-soft">
-                      {battery !== null
-                        ? `${battery.toLocaleString("en-US")} Wh`
-                        : "Confirmed at booking"}
-                    </td>
-                    <td className="tnum px-5 py-4 text-ink-soft">
-                      {range !== null ? `up to ${range} km` : "Confirmed at booking"}
-                    </td>
+                    <td className="tnum px-5 py-4 text-ink-soft">{battery}</td>
+                    <td className="tnum px-5 py-4 text-ink-soft">{range}</td>
                     <td className="px-5 py-4 text-ink-soft">
                       {e.homeCharging ?? "Supported"}
                     </td>

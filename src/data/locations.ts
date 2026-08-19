@@ -12,7 +12,15 @@ export interface ServiceArea {
   vibe: string;
   /** Longer intro for the area detail page */
   description: string;
-  /** Delivery fee in IDR — 0 renders as free delivery */
+  /**
+   * Delivery & collection fee in IDR, approved 2026-08-19: a single
+   * Rp 75,000 per booking covering both delivery and collection
+   * ("antar jemput"), the same in every service area. The fee is
+   * waived only when the address is within 5 km of the Wedison
+   * showroom on Jl. Gatot Subroto Tengah, Denpasar — that is
+   * distance-based, so the waiver is confirmed by the team on
+   * WhatsApp, never assumed by the site. 0 renders as free delivery.
+   */
   deliveryFee: number;
   /** Typical delivery window shown to customers */
   deliveryWindow: string;
@@ -29,7 +37,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Surf mornings, laptop afternoons and an easy way through the sunset traffic.",
     description:
       "Canggu is Werigo's home turf. Between Batu Bolong, Berawa and Pererenan, an electric scooter is the difference between watching the shortcut jam and gliding through it. Charge at your villa overnight and the whole coast is yours.",
-    deliveryFee: 0,
+    deliveryFee: 75000,
     deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Batu Bolong Beach", "Berawa", "Pererenan", "La Brisa", "Tanah Lot (day trip)"],
     ridingNotes:
@@ -41,7 +49,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Boutiques, beach clubs and dinner reservations on time.",
     description:
       "Seminyak rewards short, frequent rides between brunch spots, beach clubs and boutiques. Werigo delivers to your hotel lobby, and the compact fleet fits the narrow gang lanes that cars simply cannot.",
-    deliveryFee: 0,
+    deliveryFee: 75000,
     deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Seminyak Beach", "Petitenget", "Eat Street", "Potato Head", "Double Six"],
     ridingNotes:
@@ -53,7 +61,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Airport-close and beach-ready within minutes.",
     description:
       "Landing at the airport? Kuta is the fastest place to start riding. We deliver to hotels across Kuta and Legian, so you can skip taxi queues for the rest of your trip.",
-    deliveryFee: 50000,
+    deliveryFee: 75000,
     deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Kuta Beach", "Legian", "Beachwalk Mall", "Waterbom Bali"],
     ridingNotes:
@@ -65,7 +73,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Jungle roads, rice terraces and temple mornings.",
     description:
       "Ubud is made for slow exploring and silent riding. Visit Tegallalang at sunrise, walk Campuhan Ridge before the heat and stop for a warung lunch in Penestanan. An electric motorcycle keeps the jungle soundtrack intact.",
-    deliveryFee: 100000,
+    deliveryFee: 75000,
     deliveryWindow: "Within 2 hours, 08:00 to 18:00",
     landmarks: ["Tegallalang Rice Terrace", "Campuhan Ridge Walk", "Monkey Forest", "Goa Gajah"],
     ridingNotes:
@@ -77,7 +85,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Clifftop surf breaks and golden-hour temple runs.",
     description:
       "The Bukit's clifftop warungs, surf breaks and viewpoints spread out quickly, and that is exactly what a full battery is for. Ride Padang Padang to Melasti and still make the Kecak dance at sunset.",
-    deliveryFee: 100000,
+    deliveryFee: 75000,
     deliveryWindow: "Within 2 hours, 08:00 to 18:00",
     landmarks: ["Uluwatu Temple", "Padang Padang", "Bingin", "Melasti Beach", "Suluban Cave"],
     ridingNotes:
@@ -124,6 +132,14 @@ export const serviceAreas: ServiceArea[] = [
 export function getArea(slug: string): ServiceArea | undefined {
   return serviceAreas.find((a) => a.slug === slug);
 }
+
+/**
+ * Approved wording for the delivery-fee waiver, used verbatim across
+ * surfaces. The waiver is distance-based (5 km radius from the
+ * showroom), so it is always confirmed by the team on WhatsApp.
+ */
+export const deliveryFeeWaiverNote =
+  "Free within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, confirmed with your quote on WhatsApp.";
 
 /* ================= Airport pickup points ================= */
 

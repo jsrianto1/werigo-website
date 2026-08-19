@@ -33,7 +33,7 @@ Used by the homepage delivery-coverage section
 
 | Card | Local file | Source page | Photographer | Verified location | Licence | Downloaded |
 |---|---|---|---|---|---|---|
-| Ngurah Rai Airport | `coverage/ngurah-rai-airport.webp` | https://commons.wikimedia.org/wiki/File:Bali_Airport_(DPS)_I_Gusti_Ngurah_Rai_International_Airport.jpg | Pinterpandai (Wikimedia Commons) | File title and description: I Gusti Ngurah Rai International Airport (DPS), Bali; recognisable candi bentar gateway of the international terminal | CC BY-SA 3.0 (credit shown on card; ShareAlike applies to derivatives) | 2026-07-29 |
+| Ngurah Rai Airport | `coverage/ngurah-rai-airport.webp` | https://unsplash.com/photos/a-couple-of-gates-that-are-next-to-a-runway-NooiiPQWlWA | Harfian Ananta Daffa | Page location: "I Gusti Ngurah Rai Bali International Airport, Badung, Indonesia"; candi bentar gateway framing the tarmac and aircraft | Unsplash License | 2026-08-19 |
 | Hotel delivery | `coverage/bali-hotel.webp` | https://unsplash.com/photos/coconut-palms-and-swimming-pool-facing-ocean-bUvmhwQ-gsw | Ern Gan | Page location: "Seminyak Beach, Bali, Indonesia" (Potato Head Beach Club, per photographer description) | Unsplash License | 2026-07-29 |
 | Villa delivery | `coverage/bali-villa.webp` | https://unsplash.com/photos/a-large-pool-with-a-lounge-chair-next-to-it-qawgWgMATzQ | Nerissa J | Page location: "Ubud, Gianyar Regency, Bali, Indonesia"; description "Balinese private villa and pool" | Unsplash License | 2026-07-29 |
 
@@ -41,3 +41,9 @@ All three were downloaded locally, converted to WebP, and are served
 with `next/image`. No hotlinking. A Lombok villa candidate
 (FRMKzS3t4u8) was rejected during sourcing because its verified
 location is not Bali.
+
+The Ngurah Rai Airport photo was replaced on 2026-08-19 (management
+feedback: the original Pinterpandai gate photo was cluttered by a
+dead tree branch and construction netting in the foreground). The
+new Unsplash photo is a cleaner, verified shot of the same candi
+bentar gateway.

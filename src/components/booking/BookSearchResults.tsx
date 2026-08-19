@@ -32,6 +32,10 @@ export function BookSearchResults() {
   const pickup = params.get("pickup") ?? "";
   const ret = params.get("return") ?? pickup;
   const preselect = params.get("vehicle") ?? "";
+  // Partner referral code, e.g. from a personal link shared by a
+  // hotel or villa partner. Carried through to checkout so it can
+  // pre-fill the promo code field the WhatsApp message already reads.
+  const ref = params.get("ref") ?? "";
   const period: RentalPeriod = useMemo(
     () => ({
       startDate: params.get("startDate") ?? "",
@@ -62,7 +66,7 @@ export function BookSearchResults() {
           {preselect ? " Your chosen ride will be waiting at the next step." : ""}
         </p>
         <div className="mt-8">
-          <SearchWidget />
+          <SearchWidget referralCode={ref} />
         </div>
       </div>
     );
@@ -86,6 +90,7 @@ export function BookSearchResults() {
       startTime: period.startTime,
       endDate: period.endDate,
       endTime: period.endTime,
+      ...(ref ? { ref } : {}),
     }).toString();
     router.push(`/book/checkout?${qs}`);
   };

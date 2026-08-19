@@ -34,7 +34,7 @@ const journey = [
   {
     icon: Truck,
     title: "Delivery to your door",
-    text: "Your motorcycle arrives at your hotel, villa or guesthouse fully charged. We do a condition walk-around together, fit your helmets, and run through the controls until you're comfortable.",
+    text: "Your motorcycle arrives at your hotel, villa or guesthouse with at least 80% battery. We do a condition walk-around together, fit your helmets, and run through the controls until you're comfortable.",
   },
   {
     icon: KeyRound,

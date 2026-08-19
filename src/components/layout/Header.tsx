@@ -16,6 +16,7 @@ const navItems = [
   { href: "/how-it-works", label: "How It Works" },
   { href: "/delivery-areas", label: "Delivery Areas" },
   { href: "/about", label: "About Werigo" },
+  { href: "/partners", label: "Partners" },
   { href: "/help-center", label: "Help Center" },
   { href: "/contact", label: "Contact" },
 ];

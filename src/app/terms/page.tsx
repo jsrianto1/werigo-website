@@ -50,6 +50,13 @@ export default function TermsPage() {
               both fees apply for US$2.00 in total.
             </li>
             <li>
+              Delivery and collection carry a single Rp 75,000 fee per
+              booking, covering both the drop-off and the pick-up in any
+              Werigo service area. The fee is waived when the address is
+              within 5 km of the Wedison showroom on Jl. Gatot Subroto
+              Tengah, Denpasar, confirmed with your quote.
+            </li>
+            <li>
               Optional protection is added only when you select it.
               Cancellation Protection is US$0.50 per rental day and
               Motorcycle Protection is US$4.95 per motorcycle per rental

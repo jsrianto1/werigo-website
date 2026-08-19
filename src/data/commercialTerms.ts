@@ -62,8 +62,8 @@ export const rentalBenefits: RentalBenefit[] = [
   },
   {
     id: "charged",
-    label: "Fully charged handover",
-    description: "Your motorcycle arrives with a full battery, ready to ride.",
+    label: "Delivered with at least 80% battery",
+    description: "Your motorcycle arrives with at least 80% battery, ready to ride.",
     icon: BatteryCharging,
     confirmed: true,
     chip: true,

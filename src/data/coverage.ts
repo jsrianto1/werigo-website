@@ -34,9 +34,9 @@ export const coveragePoints: CoveragePoint[] = [
     status: "Airport handover available by arrangement",
     image: {
       src: "/media/coverage/ngurah-rai-airport.webp",
-      alt: "The Balinese stone gateway at the international terminal of I Gusti Ngurah Rai International Airport in Bali",
-      focal: "50% 40%",
-      credit: "Photo: Pinterpandai, Wikimedia Commons, CC BY-SA 3.0",
+      alt: "The traditional Balinese candi bentar gate framing the tarmac and aircraft at Ngurah Rai International Airport in Bali",
+      focal: "50% 45%",
+      credit: "Photo: Harfian Ananta Daffa, Unsplash License",
     },
   },
   {

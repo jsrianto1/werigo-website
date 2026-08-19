@@ -24,7 +24,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What is Werigo?",
         answer:
-          "Werigo is a premium electric motorcycle rental service based in Bali. We deliver fully charged electric motorcycles and scooters to hotels and villas across the island's south and centre, so you can explore Bali quietly, cleanly and on your own schedule.",
+          "Werigo is a premium electric motorcycle rental service based in Bali. We deliver electric motorcycles and scooters with at least 80% battery to hotels and villas across the island's south and centre, so you can explore Bali quietly, cleanly and on your own schedule.",
       },
       {
         question: "Why does electric riding suit Bali?",
@@ -60,7 +60,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I change the delivery location after booking?",
         answer:
-          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. A different delivery fee may apply if the new address is in another zone.",
+          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. The delivery and collection fee stays the same across our service areas.",
       },
     ],
   },
@@ -91,7 +91,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can someone else ride the motorcycle I rented?",
         answer:
-          "Only riders named on the booking who meet the licence requirements are covered to ride. Add a second rider's details in the special requests field when booking.",
+          "Only riders named on the booking may ride, and each named rider must meet the licence requirements above. If someone else will also ride, add their details in the special requests field when booking.",
       },
     ],
   },
@@ -144,7 +144,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How do I charge the motorcycle?",
         answer:
-          "Every Werigo ride charges from a standard Indonesian power outlet, the same socket that charges your laptop. Plug in overnight at your villa or hotel and wake up to a full battery.",
+          "Every Werigo ride charges from a standard Indonesian power outlet, the same socket that charges your laptop. Plug in overnight at your villa or hotel and wake up to a full battery. On the Victory, Athena and EdPower, you can also top up at a Wedison SuperCharge station for a fast charge on bigger riding days.",
       },
       {
         question: "What range can I expect in real conditions?",
@@ -170,12 +170,17 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How does hotel delivery work?",
         answer:
-          "Pick a delivery window during booking and we bring the motorcycle to your hotel, villa or guesthouse, fully charged. The handover includes a condition walk-around, a riding briefing and helmet fitting.",
+          "Pick a delivery window during booking and we bring the motorcycle to your hotel, villa or guesthouse with at least 80% battery. The handover includes a condition walk-around, a riding briefing and helmet fitting.",
+      },
+      {
+        question: "Is delivery free?",
+        answer:
+          "Delivery and collection cost Rp 75,000 per booking, covering both the drop-off and the pick-up. It is free if your address is within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, and our team confirms that with your quote on WhatsApp.",
       },
       {
         question: "Can I return the motorcycle in a different area?",
         answer:
-          "Yes. Choose a different return location during booking. Depending on the zones involved, a one-way fee may apply, and it is shown in your summary before you confirm.",
+          "Yes. Choose a different return location during booking. The Rp 75,000 delivery and collection fee already covers both legs, even when they are in different areas.",
       },
       {
         question: "What battery level should the motorcycle have at return?",

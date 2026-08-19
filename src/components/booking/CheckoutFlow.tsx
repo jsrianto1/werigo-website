@@ -13,13 +13,14 @@ import {
   Plus,
   ShieldCheck,
   Tag,
+  Truck,
 } from "lucide-react";
 import { confirmedBenefits } from "@/data/commercialTerms";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
 import { toCustomerEntry } from "@/data/vehicles";
-import { getPickupPoint } from "@/data/locations";
+import { getPickupPoint, getArea, deliveryFeeWaiverNote } from "@/data/locations";
 import { rentalExtras } from "@/data/extras";
 import {
   rentalDays,
@@ -66,6 +67,10 @@ export function CheckoutFlow() {
   const rawEntryId = params.get("vehicle") ?? "";
   const pickup = params.get("pickup") ?? "";
   const ret = params.get("return") ?? pickup;
+  // Partner referral code carried through from /book. Pre-fills the
+  // promo code field below so the team can attribute the booking to
+  // the referring partner.
+  const referralCode = params.get("ref") ?? "";
   const period: RentalPeriod = useMemo(
     () => ({
       startDate: params.get("startDate") ?? "",
@@ -89,7 +94,7 @@ export function CheckoutFlow() {
     cancellation: false,
     motorcycle: false,
   });
-  const [promoCode, setPromoCode] = useState("");
+  const [promoCode, setPromoCode] = useState(referralCode);
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
   const [privacyConsent, setPrivacyConsent] = useState(false);
@@ -157,6 +162,14 @@ export function CheckoutFlow() {
         motorcycleProtection: protection.motorcycle,
       })
     : null;
+  // Area delivery & collection fee: one Rp 75,000 per booking covering
+  // both legs ("antar jemput"), waived only within 5 km of the Wedison
+  // showroom (confirmed on WhatsApp, never assumed here). Airport
+  // terminals use their own USD fee above, so this applies when either
+  // point resolves to a service area.
+  const areaFeesIdr = valid
+    ? Math.max(getArea(pickup)?.deliveryFee ?? 0, getArea(ret)?.deliveryFee ?? 0)
+    : 0;
   const addOnsIdr = addOnBreakdown
     ? usdToIdr(addOnBreakdown.totalUsd, usdRate)
     : null;
@@ -164,9 +177,9 @@ export function CheckoutFlow() {
     estimate && addOnBreakdown
       ? addOnBreakdown.totalUsd > 0
         ? addOnsIdr !== null
-          ? estimate.totalIdr * quantity + addOnsIdr
+          ? estimate.totalIdr * quantity + addOnsIdr + areaFeesIdr
           : null
-        : estimate.totalIdr * quantity
+        : estimate.totalIdr * quantity + areaFeesIdr
       : null;
 
   if (!valid) {
@@ -274,6 +287,7 @@ export function CheckoutFlow() {
       ratePerDayIdr: estimate.ratePerDayIdr,
       estimatedTotalIdr: estimate.totalIdr * quantity,
       baseUsdApprox: formatUsdApprox(estimate.totalIdr * quantity, usdRate),
+      areaFeeIdr: areaFeesIdr,
       airportDeliveryUsd: addOnBreakdown?.airportDeliveryUsd ?? 0,
       airportCollectionUsd: addOnBreakdown?.airportCollectionUsd ?? 0,
       cancellationProtectionUsd: addOnBreakdown?.cancellationProtectionUsd ?? 0,
@@ -503,6 +517,14 @@ export function CheckoutFlow() {
                   {area?.isAirport && returnArea?.isAirport ? " and " : ""}
                   {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}, once per
                   booking.
+                </p>
+              ) : null}
+
+              {areaFeesIdr > 0 ? (
+                <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
+                  Delivery & collection: {formatIdr(areaFeesIdr)}, once per
+                  booking. {deliveryFeeWaiverNote}
                 </p>
               ) : null}
 
@@ -916,6 +938,14 @@ export function CheckoutFlow() {
                         },
                       ]
                     : []),
+                  ...(areaFeesIdr > 0
+                    ? [
+                        {
+                          term: "Delivery & collection",
+                          detail: `${formatIdr(areaFeesIdr)} once per booking. ${deliveryFeeWaiverNote}`,
+                        },
+                      ]
+                    : []),
                   ...(addOnBreakdown && addOnBreakdown.totalUsd > 0
                     ? [
                         {
@@ -937,6 +967,10 @@ export function CheckoutFlow() {
                             .filter(Boolean)
                             .join("\n"),
                         },
+                      ]
+                    : []),
+                  ...(addOnBreakdown && (addOnBreakdown.totalUsd > 0 || areaFeesIdr > 0)
+                    ? [
                         {
                           term: "Estimated grand total",
                           detail:
@@ -946,7 +980,7 @@ export function CheckoutFlow() {
                                     ? ` (${formatUsdApprox(grandTotalIdr, usdRate)})`
                                     : ""
                                 }. Confirmed with availability on WhatsApp.`
-                              : `${formatIdr((estimate?.totalIdr ?? 0) * quantity)} plus ${formatUsdFee(addOnBreakdown.totalUsd)} add-ons. Confirmed with availability on WhatsApp.`,
+                              : `${formatIdr((estimate?.totalIdr ?? 0) * quantity + areaFeesIdr)} plus ${formatUsdFee(addOnBreakdown.totalUsd)} add-ons. Confirmed with availability on WhatsApp.`,
                         },
                       ]
                     : []),
@@ -1122,6 +1156,7 @@ export function CheckoutFlow() {
             returnName={ret !== pickup ? returnArea?.name : undefined}
             estimate={estimate}
             addOnBreakdown={addOnBreakdown}
+            areaFeeIdr={areaFeesIdr}
           />
         </aside>
       </div>

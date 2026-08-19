@@ -266,7 +266,12 @@ try {
   results.waHasModelAndQty = wa?.includes("Wedison Victory × 1") ?? false;
   results.waHasTier = wa?.includes("Tier: Daily (2 to 6 days)") ?? false;
   results.waHasRate = wa?.includes("Rate: Rp 90,000/day") ?? false;
-  results.waHasTotal = wa?.includes("Estimated total: Rp 270,000") ?? false;
+  results.waHasBaseRental = wa?.includes("Base rental: Rp 270,000") ?? false;
+  results.waHasAreaFee = wa?.includes("Fee: Rp 75,000") ?? false;
+  results.waHasWaiverNote = wa?.includes("free within 5 km of the Wedison showroom") ?? false;
+  // Rp 270,000 base rental + Rp 75,000 delivery & collection fee
+  // (one per booking, covering both legs), approved 2026-08-19.
+  results.waHasTotal = wa?.includes("Estimated total: Rp 345,000") ?? false;
   results.waHasEstimateCaveat = wa?.includes("Availability, final price, protection conditions and payment are confirmed by the Werigo team.") ?? false;
   results.waHasDeliveryAreaAndAddress = (wa?.includes("Canggu") && wa?.includes("Villa Test Canggu")) ?? false;
   results.waHasReturnArea = wa?.includes("Ubud") ?? false;

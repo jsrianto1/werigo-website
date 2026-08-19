@@ -47,6 +47,7 @@ const companyLinks = [
   { href: "/how-it-works", label: "How It Works" },
   { href: "/fleet", label: "Our Fleet" },
   { href: "/supercharge", label: "Supercharge" },
+  { href: "/partners", label: "Partners" },
   { href: "/help-center", label: "Help Center" },
   { href: "/contact", label: "Contact" },
 ];
@@ -70,7 +71,7 @@ export function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-inverse/70">
               Werigo is Wedison&apos;s electric motorcycle rental and mobility
               service in Bali. Official Wedison electric motorcycles, delivered
-              to your door, charged and ready to ride.
+              to your door with at least 80% battery, ready to ride.
             </p>
             <div className="mt-5 flex gap-3">
               <a

@@ -4,12 +4,13 @@ import { MapPin, ArrowRight, Truck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import { AreaImage } from "@/components/areas/AreaImage";
-import { serviceAreas } from "@/data/locations";
+import { serviceAreas, deliveryFeeWaiverNote } from "@/data/locations";
+import { formatIdr } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Delivery Areas: Free Scooter Delivery Across South Bali",
+  title: "Delivery Areas: Electric Scooter Delivery Across South Bali",
   description:
-    "Werigo delivers electric motorcycles across Bali: free in Canggu and Seminyak, plus Kuta, Ubud, Uluwatu, Jimbaran, Sanur and Denpasar. See delivery windows and fees.",
+    "Werigo delivers electric motorcycles across Bali: Canggu, Seminyak, Kuta, Ubud, Uluwatu, Jimbaran, Sanur and Denpasar. One flat delivery and collection fee per booking.",
   alternates: { canonical: "/delivery-areas" },
 };
 
@@ -43,7 +44,7 @@ export default function DeliveryAreasPage() {
                   </span>
                 ) : (
                   <span className="rounded-full bg-sunken px-2.5 py-0.5 text-xs font-medium text-ink-soft">
-                    Fee confirmed with quote
+                    {formatIdr(area.deliveryFee)} delivery & collection
                   </span>
                 )}
               </div>
@@ -70,8 +71,9 @@ export default function DeliveryAreasPage() {
         ))}
       </ul>
       <p className="mt-10 rounded-[14px] border border-line bg-primary-faint p-5 text-sm leading-relaxed text-ink-soft">
-        Staying somewhere else? We regularly arrange custom deliveries beyond
-        these zones.{" "}
+        The Rp 75,000 fee covers both delivery and collection, once per
+        booking. {deliveryFeeWaiverNote} Staying somewhere else? We
+        regularly arrange custom deliveries beyond these zones.{" "}
         <Link
           href="/contact"
           className="font-semibold text-primary underline underline-offset-2 hover:text-primary-strong"

@@ -107,6 +107,12 @@ export interface DirectBookingDetails {
   estimatedTotalIdr: number;
   /** Approximate USD for the base estimate; null when no rate. */
   baseUsdApprox?: string | null;
+  /**
+   * Area delivery & collection fee, IDR: one amount per booking
+   * covering both legs (0 = none, e.g. airport-only bookings). The
+   * 5 km showroom waiver is applied by the team on WhatsApp.
+   */
+  areaFeeIdr: number;
   /** Airport fees and optional protection, USD amounts (0 = none). */
   airportDeliveryUsd: number;
   airportCollectionUsd: number;
@@ -149,6 +155,13 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
     `Tier: ${d.tierLabel}`,
     `Rate: ${idr(d.ratePerDayIdr)}/day`,
     `Base rental: ${idr(d.estimatedTotalIdr)}${d.baseUsdApprox ? ` (${d.baseUsdApprox})` : ""}${d.quantity > 1 ? ` for ${d.quantity} motorcycles` : ""}`,
+    ...(d.areaFeeIdr > 0
+      ? [
+          ``,
+          `*Delivery & collection*`,
+          `Fee: ${idr(d.areaFeeIdr)} (once per booking; free within 5 km of the Wedison showroom, Jl. Gatot Subroto Tengah, Denpasar)`,
+        ]
+      : []),
     ...(d.addOnsTotalUsd > 0
       ? [
           ``,
@@ -172,8 +185,8 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
     d.grandTotalIdr !== null
       ? `*Estimated total: ${idr(d.grandTotalIdr)}${d.grandTotalUsdApprox ? ` (${d.grandTotalUsdApprox})` : ""}*`
       : d.addOnsTotalUsd > 0
-        ? `*Estimated total: ${idr(d.estimatedTotalIdr)} plus US$${d.addOnsTotalUsd.toFixed(2)} add-ons*`
-        : `*Estimated total: ${idr(d.estimatedTotalIdr)}*`,
+        ? `*Estimated total: ${idr(d.estimatedTotalIdr + d.areaFeeIdr)} plus US$${d.addOnsTotalUsd.toFixed(2)} add-ons*`
+        : `*Estimated total: ${idr(d.estimatedTotalIdr + d.areaFeeIdr)}*`,
     `Availability, final price, protection conditions and payment are confirmed by the Werigo team.`,
     ``,
     `*Delivery*`,
@@ -202,6 +215,14 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
 export function buildSupportWhatsAppUrl(message?: string): string {
   const text = encodeURIComponent(
     message ?? "Hi Werigo! I have a question about renting an electric motorcycle in Bali."
+  );
+  return `https://wa.me/${site.whatsappNumber}?text=${text}`;
+}
+
+/** Partner Program application link. */
+export function buildPartnerApplicationWhatsAppUrl(): string {
+  const text = encodeURIComponent(
+    "Hi Werigo! I'd like to apply for the Partner Program. My property or business name is:"
   );
   return `https://wa.me/${site.whatsappNumber}?text=${text}`;
 }

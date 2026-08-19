@@ -5,11 +5,6 @@ import {
   ArrowRight,
   BatteryCharging,
   CalendarCheck,
-  CircleParking,
-  Coffee,
-  Fuel,
-  Gauge,
-  Leaf,
   MapPin,
   MessageCircle,
   PlugZap,
@@ -18,8 +13,6 @@ import {
   Sparkles,
   Star,
   Truck,
-  Volume2,
-  Wallet,
   Zap,
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
@@ -32,14 +25,11 @@ import { AreaImage } from "@/components/areas/AreaImage";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
-import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 import { faqCategories } from "@/data/faqs";
-import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
-import { site } from "@/lib/config";
 import { faqSchema, jsonLd } from "@/lib/schema";
 import { confirmedBenefits, requestOnlyBenefits } from "@/data/commercialTerms";
 import { coveragePoints } from "@/data/coverage";
@@ -55,7 +45,7 @@ const trustPoints = [
   {
     icon: Truck,
     title: "Delivered to your door",
-    text: "We deliver to your hotel, villa or guesthouse. Your ride arrives fully charged.",
+    text: "We deliver to your hotel, villa or guesthouse. Your ride arrives with at least 80% battery.",
   },
   {
     icon: BatteryCharging,
@@ -72,50 +62,6 @@ const trustPoints = [
     title: "WhatsApp support",
     text: "A real local team on the number you already use.",
   },
-];
-
-const baliDays = [
-  {
-    icon: Volume2,
-    title: "Quiet riding",
-    text: "The motor hums instead of roars, so you hear more of Bali and less engine.",
-  },
-  {
-    icon: Leaf,
-    title: "No tailpipe exhaust",
-    text: "Nothing comes out of an exhaust while you ride.",
-  },
-  {
-    icon: PlugZap,
-    title: "Charge from a standard outlet",
-    text: "Plug in at your hotel or villa overnight, the same way you charge your phone.",
-  },
-  {
-    icon: Gauge,
-    title: "Smooth electric response",
-    text: "Power arrives gently and immediately, which makes town riding calmer.",
-  },
-  {
-    icon: CircleParking,
-    title: "Compact for Bali roads",
-    text: "Sized for narrow gang and easy parking near beaches and cafes.",
-  },
-  {
-    icon: Wallet,
-    title: "Lower day-to-day energy use",
-    text: "An overnight charge costs less to run than a day of fuel stops.",
-  },
-];
-
-const riderAppreciations = [
-  { icon: Volume2, title: "A quieter way to explore Bali", text: "Rice fields, waves, and temple bells instead of engine noise." },
-  { icon: Fuel, title: "No searching for petrol stations", text: "The roadside petrol bottles stay where they are. You just ride." },
-  { icon: BatteryCharging, title: "Delivered charged and ready", text: "The battery is full when the motorcycle reaches you." },
-  { icon: Coffee, title: "Easy stops along the way", text: "Beaches, cafes, and viewpoints are all easy to pull into and out of." },
-  { icon: ShieldCheck, title: "Official Wedison electric motorcycles", text: "Every ride in the fleet is official and maintained in-house." },
-  { icon: MessageCircle, title: "Local help through WhatsApp", text: "One thread with a team that lives and rides here." },
-  { icon: CalendarCheck, title: "Flexible rental durations", text: "Daily to Monthly rates for a weekend, a surf trip, or a long stay." },
-  { icon: Truck, title: "Delivery by arrangement", text: "Hotel or villa, tell us where you are staying and we come to you." },
 ];
 
 const steps = [
@@ -174,8 +120,8 @@ export default function HomePage() {
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
                 Ride Bali on a fully electric Wedison motorcycle. We deliver
-                it to your hotel or villa, fully charged and ready to go, with
-                helmets included.
+                it to your hotel or villa with at least 80% battery and ready
+                to go, with helmets included.
               </p>
               <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
                 <li className="flex items-center gap-2">
@@ -286,7 +232,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="The fleet · Powered by Wedison"
             title="Official Wedison electric motorcycles, one for every kind of day"
-            lede="Choose from four official Wedison electric motorcycles. Every bike is maintained by our team and delivered fully charged."
+            lede="Choose from four official Wedison electric motorcycles. Every bike is maintained by our team and delivered with at least 80% battery."
             id="fleet-heading"
           />
           <Link
@@ -376,36 +322,8 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <RidingMotorcycle />
-
-      {/* ================= MADE FOR BALI DAYS ================= */}
-      <Section labelledBy="benefits-heading" className="md:!pt-6 lg:!pt-8">
-        <SectionHeading
-          eyebrow="Made for Bali"
-          title="Why electric works so well in Bali"
-          lede="Quiet, easy to charge and ready for everyday Bali journeys."
-          id="benefits-heading"
-        />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-5">
-          {baliDays.map((card) => (
-            <div
-              key={card.title}
-              className="rounded-[14px] border border-line bg-card p-6 transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
-            >
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-soft text-primary">
-                <card.icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-4 font-display text-xl text-ink">{card.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">
-                {card.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
       {/* ================= DELIVERY AREAS ================= */}
-      <Section tone="wash" labelledBy="areas-heading">
+      <Section tone="wash" labelledBy="areas-heading" className="md:!pt-6 lg:!pt-8">
         <SectionHeading
           eyebrow="Delivery coverage"
           title="From touchdown to your villa, we bring the ride"
@@ -500,79 +418,6 @@ export default function HomePage() {
         </ul>
       </Section>
 
-      {/* ================= CHARGING & RANGE ================= */}
-      <Section labelledBy="charging-heading" className="lg:!py-16">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <SectionHeading
-              eyebrow="Charging & range"
-              title="If you can charge a phone, you can charge a Werigo"
-              id="charging-heading"
-            />
-            <ul className="space-y-5">
-              <li className="flex gap-4">
-                <PlugZap className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <div>
-                  <h3 className="font-semibold text-ink">Any standard outlet works</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                    Every model charges from the normal wall sockets in your
-                    hotel or villa. Plug in when you get home, wake up full.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <BatteryCharging className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <div>
-                  <h3 className="font-semibold text-ink">
-                    Official Wedison specifications
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                    Specifications are based on official Wedison product
-                    information. Actual riding range varies depending on riding
-                    style, passenger load, terrain, traffic, and weather.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <div>
-                  <h3 className="font-semibold text-ink">Never stranded</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                    Generous low-battery warnings, and our support team one
-                    message away if you misjudge a mountain road.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div aria-hidden="true" className="rounded-[14px] border border-line bg-sunken p-8">
-            {/* Simple charge-day illustration */}
-            <div className="space-y-4">
-              {[
-                { label: "22:30, plugged in at the villa", pct: 35 },
-                { label: "07:00, full charge, coffee first", pct: 100 },
-                { label: "17:45, back from the Uluwatu loop", pct: 52 },
-              ].map((row) => (
-                <div key={row.label}>
-                  <p className="mb-1.5 text-xs font-medium text-ink-soft">{row.label}</p>
-                  <div className="h-3 overflow-hidden rounded-full bg-card">
-                    <div
-                      className={`h-full rounded-full ${
-                        row.pct === 100 ? "bg-ok" : "bg-primary"
-                      }`}
-                      style={{ width: `${row.pct}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-              <p className="pt-2 text-xs text-ink-faint">
-                This is a typical Werigo day. Overnight charging covers everything.
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
       {/* ================= SUPERCHARGE ================= */}
       <Section labelledBy="supercharge-heading">
         <div className="relative overflow-hidden rounded-[14px] bg-deep px-6 py-12 sm:px-10 md:py-16">
@@ -617,88 +462,16 @@ export default function HomePage() {
                 </ButtonLink>
               </div>
             </div>
-            <div className="mx-auto w-56 sm:w-64 lg:mx-0">
+            <div className="mx-auto w-72 sm:w-80 lg:mx-0 lg:w-[26rem]">
               <MediaImage
                 id="supercharge-unit"
                 ratio="3/4"
                 fit="contain-bare"
-                sizes="256px"
+                sizes="(max-width: 1024px) 320px, 416px"
               />
             </div>
           </div>
         </div>
-      </Section>
-
-      {/* ================= SUPPORT ================= */}
-      <Section tone="deep" labelledBy="support-heading">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <div>
-            <SectionHeading
-              eyebrow="Rental support"
-              title="Help when you need it"
-              lede="Message the Werigo team on WhatsApp for charging questions, directions, rental extensions or motorcycle support."
-              id="support-heading"
-              inverse
-            />
-            <ul className="grid gap-4 text-sm sm:grid-cols-2">
-              <li className="rounded-[14px] border border-ink-inverse/15 p-4">
-                <h3 className="font-semibold text-ink-inverse">WhatsApp support</h3>
-                <p className="mt-1 leading-relaxed text-ink-inverse/70">
-                  Message us and our team will guide you through the next
-                  step. {site.supportHoursSentence}
-                </p>
-              </li>
-              <li className="rounded-[14px] border border-ink-inverse/15 p-4">
-                <h3 className="font-semibold text-ink-inverse">Urgent road issue?</h3>
-                <p className="mt-1 leading-relaxed text-ink-inverse/70">
-                  Move to a safe place, then message us on WhatsApp with your
-                  location and a short description of the issue.
-                </p>
-              </li>
-            </ul>
-            <p className="mt-5 text-xs leading-relaxed text-ink-inverse/60">
-              If anyone is in immediate danger, contact local emergency
-              services first.
-            </p>
-          </div>
-          <div className="lg:justify-self-end">
-            <a
-              href={buildSupportWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-[10px] bg-accent px-7 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
-            >
-              <MessageCircle className="h-5 w-5" aria-hidden="true" />
-              Chat with the team
-            </a>
-          </div>
-        </div>
-      </Section>
-
-      {/* ================= WHAT RIDERS APPRECIATE ================= */}
-      <Section labelledBy="riders-heading">
-        <SectionHeading
-          eyebrow="The riding experience"
-          title="What riders appreciate about Werigo"
-          lede="No invented reviews here. This is what the experience is built around."
-          id="riders-heading"
-        />
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:gap-5">
-          {riderAppreciations.map((item) => (
-            <li
-              key={item.title}
-              className="rounded-[14px] border border-line bg-card p-5 transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
-                <item.icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-3.5 font-semibold text-ink">{item.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                {item.text}
-              </p>
-            </li>
-          ))}
-        </ul>
       </Section>
 
       {/* ================= THE WERIGO STANDARD (service assurance) =================
@@ -714,8 +487,8 @@ export default function HomePage() {
         <ul className="grid gap-6 sm:grid-cols-2">
           {[
             {
-              title: "Full charge at handover",
-              text: "Your motorcycle is delivered with a full battery, and we complete a condition walk-around together at handover. There are no surprises during the ride or at return.",
+              title: "At least 80% battery at handover",
+              text: "Your motorcycle is delivered with at least 80% battery, and we complete a condition walk-around together at handover. There are no surprises during the ride or at return.",
             },
             {
               title: "The price you saw is the price",
@@ -782,7 +555,7 @@ export default function HomePage() {
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base text-white/85">
             Check availability for your dates. Booking takes a few minutes,
-            and delivery is free in Canggu and Seminyak.
+            and one flat fee covers both delivery and collection.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <ButtonLink href="/book" variant="accent" size="lg">

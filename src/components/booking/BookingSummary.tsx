@@ -20,6 +20,7 @@ export function BookingSummary({
   returnName,
   estimate,
   addOnBreakdown,
+  areaFeeIdr = 0,
 }: {
   vehicleName: string;
   quantity: number;
@@ -29,6 +30,12 @@ export function BookingSummary({
   returnName?: string;
   estimate?: RentalQuoteEstimate | null;
   addOnBreakdown?: AddOnBreakdown | null;
+  /**
+   * Area delivery & collection fee, IDR: one amount per booking
+   * covering both legs (0 = none). The 5 km showroom waiver is
+   * confirmed on WhatsApp.
+   */
+  areaFeeIdr?: number;
 }) {
   const usdRate = useUsdRate();
   const extraRows = extras
@@ -102,6 +109,14 @@ export function BookingSummary({
           Rates shown once dates are selected
         </p>
       )}
+      {areaFeeIdr > 0 ? (
+        <div className="mt-2 space-y-1.5 border-t border-line pt-2 text-sm">
+          <p className="flex items-baseline justify-between gap-3">
+            <span className="text-ink-soft">Delivery & collection</span>
+            <span className="tnum font-medium text-ink">{formatIdr(areaFeeIdr)}</span>
+          </p>
+        </div>
+      ) : null}
       {addOnBreakdown && addOnBreakdown.totalUsd > 0 ? (
         <div className="mt-2 space-y-1.5 border-t border-line pt-2 text-sm">
           {[
@@ -122,7 +137,7 @@ export function BookingSummary({
       {estimate ? (
         <div className="mt-2 border-t border-line-strong pt-2">
           {(() => {
-            const baseIdr = estimate.totalIdr * quantity;
+            const baseIdr = estimate.totalIdr * quantity + areaFeeIdr;
             const addUsd = addOnBreakdown?.totalUsd ?? 0;
             const addIdr = usdToIdr(addUsd, usdRate);
             const grandIdr = addUsd > 0 ? (addIdr !== null ? baseIdr + addIdr : null) : baseIdr;
@@ -152,7 +167,7 @@ export function BookingSummary({
           "2 sanitised helmets included",
           "Installed premium phone holder",
           "Official Wedison motorcycles, maintained in-house",
-          "Fully charged handover",
+          "Delivered with at least 80% battery",
           "Your request goes straight to our WhatsApp team",
         ].map((cue) => (
           <li key={cue} className="flex items-start gap-1.5">

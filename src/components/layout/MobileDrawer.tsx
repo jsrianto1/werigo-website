@@ -88,6 +88,7 @@ export function MobileDrawer({
   ];
   const navItemsAfterAreas = [
     { href: "/about", label: "About Werigo" },
+    { href: "/partners", label: "Partners" },
     { href: "/help-center", label: "Help Center" },
     { href: "/contact", label: "Contact" },
   ];

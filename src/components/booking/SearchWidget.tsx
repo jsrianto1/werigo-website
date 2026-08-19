@@ -21,9 +21,13 @@ const timeOptions = Array.from({ length: 25 }, (_, i) => {
 export function SearchWidget({
   compact = false,
   initial,
+  referralCode = "",
 }: {
   compact?: boolean;
   initial?: Partial<SearchState>;
+  /** Partner referral code to carry through to the search results and
+      checkout, where it pre-fills the existing promo code field. */
+  referralCode?: string;
 }) {
   const router = useRouter();
   const [state, setState] = useState<SearchState>({
@@ -64,6 +68,7 @@ export function SearchWidget({
       startTime: state.startTime,
       endDate: state.endDate,
       endTime: state.endTime,
+      ...(referralCode ? { ref: referralCode } : {}),
     });
     router.push(`/book?${params.toString()}`);
   }
