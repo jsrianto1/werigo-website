@@ -126,17 +126,17 @@ export const requestOnlyBenefits: { id: string; label: string; description: stri
   },
 ];
 
-/* ================= Card payment processing fee ================= */
+/* ================= Card payment fee: none shown ================= */
 
 /**
- * Approved 2026-08-19: credit card payments carry a processing fee,
- * 3% of the amount, or 3.5% for American Express. Payment happens on
- * WhatsApp (no online checkout), so the site only discloses the fee;
- * the team applies it to the quote. Wording is deliberately
- * "processing fee", not "surcharge". Used verbatim across surfaces.
+ * Decision 2026-08-19 after competitor research: no card fee is shown
+ * to customers, matching every professional Bali rental site checked
+ * (Cinchy, Bikago, Bali Scootr, GFS-Bike all show none; Cinchy even
+ * advertises "no hidden fees") and Bank Indonesia rules that keep the
+ * MDR a merchant cost. Card processing costs are absorbed into the
+ * rental rates. Do not reintroduce a customer-facing card surcharge
+ * without management approval.
  */
-export const cardPaymentFeeNote =
-  "Credit card payments carry a processing fee: 3% of the amount, or 3.5% for American Express. Our team includes it in your quote before you approve anything.";
 
 /* ================= Battery return requirement ================= */
 

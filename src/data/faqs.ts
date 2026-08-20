@@ -209,14 +209,9 @@ export const faqCategories: FaqCategory[] = [
           "Payment timing is agreed with you on WhatsApp as part of your confirmation. Your booking summary always comes first, and nothing is charged until you approve the final quote.",
       },
       {
-        question: "Is there a fee for paying by credit card?",
-        answer:
-          "Yes. Credit card payments carry a processing fee: 3% of the amount, or 3.5% for American Express. Our team includes it in your quote on WhatsApp before you approve anything, so there are no surprises at payment.",
-      },
-      {
         question: "Are there any hidden costs?",
         answer:
-          "No. The quote our team confirms with you covers the rental, your extras and the delivery and collection fee in full. If you pay by credit card, the card processing fee is shown in that same quote. Anything optional is clearly marked before you select it.",
+          "No. The quote our team confirms with you covers the rental, your extras and the delivery and collection fee in full. Anything optional is clearly marked before you select it.",
       },
     ],
   },

@@ -15,7 +15,7 @@ import {
   Tag,
   Truck,
 } from "lucide-react";
-import { confirmedBenefits, cardPaymentFeeNote } from "@/data/commercialTerms";
+import { confirmedBenefits } from "@/data/commercialTerms";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
@@ -1086,7 +1086,7 @@ export function CheckoutFlow() {
               <p className="mt-3 text-xs leading-relaxed text-ink-faint">
                 Availability, final pricing, delivery, add-ons and your
                 booking are confirmed by the Werigo team on WhatsApp. Nothing
-                is charged before that. {cardPaymentFeeNote}
+                is charged before that.
               </p>
 
               <div className="mt-6">
