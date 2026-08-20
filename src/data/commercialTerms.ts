@@ -126,6 +126,18 @@ export const requestOnlyBenefits: { id: string; label: string; description: stri
   },
 ];
 
+/* ================= Card payment processing fee ================= */
+
+/**
+ * Approved 2026-08-19: credit card payments carry a processing fee,
+ * 3% of the amount, or 3.5% for American Express. Payment happens on
+ * WhatsApp (no online checkout), so the site only discloses the fee;
+ * the team applies it to the quote. Wording is deliberately
+ * "processing fee", not "surcharge". Used verbatim across surfaces.
+ */
+export const cardPaymentFeeNote =
+  "Credit card payments carry a processing fee: 3% of the amount, or 3.5% for American Express. Our team includes it in your quote before you approve anything.";
+
 /* ================= Battery return requirement ================= */
 
 /** Approved battery-return wording, used verbatim across surfaces. */

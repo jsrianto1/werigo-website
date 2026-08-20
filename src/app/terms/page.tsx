@@ -57,6 +57,12 @@ export default function TermsPage() {
               Tengah, Denpasar, confirmed with your quote.
             </li>
             <li>
+              Credit card payments carry a processing fee: 3% of the
+              amount, or 3.5% for American Express. The fee is included
+              in your quote before you approve it. Payment methods and
+              timing are agreed with you on WhatsApp.
+            </li>
+            <li>
               Optional protection is added only when you select it.
               Cancellation Protection is US$0.50 per rental day and
               Motorcycle Protection is US$4.95 per motorcycle per rental
