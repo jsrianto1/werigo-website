@@ -21,10 +21,10 @@ export const site = {
    * build time and sent bookings to a dead number. The env var is
    * intentionally ignored; change the number here only.
    */
-  whatsappNumber: "6282187441628",
+  whatsappNumber: "6285113593630",
 
   /** Human-readable form of whatsappNumber for display surfaces. */
-  whatsappDisplay: "+62 821-8744-1628",
+  whatsappDisplay: "+62 851-1359-3630",
 
   /** PLACEHOLDER contact email until the official inbox exists. */
   contactEmail: "hello@werigo.co",

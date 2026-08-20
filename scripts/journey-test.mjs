@@ -262,7 +262,7 @@ try {
   const wa = await page.evaluate(() => window.__waUrl && decodeURIComponent(window.__waUrl));
   results.waOpened = Boolean(wa);
   results.waIsWaMe = wa?.startsWith("https://wa.me/") ?? false;
-  results.waUsesAdminNumber = wa?.startsWith("https://wa.me/6282187441628") ?? false;
+  results.waUsesAdminNumber = wa?.startsWith("https://wa.me/6285113593630") ?? false;
   results.waHasModelAndQty = wa?.includes("Wedison Victory × 1") ?? false;
   results.waHasTier = wa?.includes("Tier: Daily (2 to 6 days)") ?? false;
   results.waHasRate = wa?.includes("Rate: Rp 90,000/day") ?? false;
@@ -474,7 +474,7 @@ try {
     { timeout: 20000 }
   );
   const wa2 = await page.evaluate(() => window.__waUrl && decodeURIComponent(window.__waUrl));
-  results.wa2AdminNumber = wa2?.startsWith("https://wa.me/6282187441628") ?? false;
+  results.wa2AdminNumber = wa2?.startsWith("https://wa.me/6285113593630") ?? false;
   results.wa2PickupTerminal = wa2?.includes("Ngurah Rai Airport, Domestic Terminal") ?? false;
   results.wa2ReturnTerminal = wa2?.includes("Ngurah Rai Airport, International Terminal") ?? false;
   results.wa2DeliveryFee = wa2?.includes("Airport delivery fee: US$1.00") ?? false;

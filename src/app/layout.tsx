@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { site } from "@/lib/config";
 import { localBusinessSchema, jsonLd } from "@/lib/schema";
 import "./globals.css";
@@ -71,6 +72,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <FloatingWhatsApp />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(localBusinessSchema()) }}

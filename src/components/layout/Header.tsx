@@ -9,13 +9,15 @@ import { ButtonLink } from "@/components/ui/Button";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { site } from "@/lib/config";
 
+// The logo links home, so the desktop nav starts at Our Fleet: nine
+// items no longer fit beside the logo at the xl breakpoint without
+// crowding into the language selector. Home stays in the drawer.
 const navItems = [
-  { href: "/", label: "Home" },
   { href: "/fleet", label: "Our Fleet" },
   { href: "/supercharge", label: "SuperCharge" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/delivery-areas", label: "Delivery Areas" },
-  { href: "/about", label: "About Werigo" },
+  { href: "/about", label: "About" },
   { href: "/partners", label: "Partners" },
   { href: "/help-center", label: "Help Center" },
   { href: "/contact", label: "Contact" },
@@ -51,7 +53,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`whitespace-nowrap rounded-md px-2.5 py-2 text-sm font-medium transition-colors ${
                     isActive(item.href)
                       ? "text-primary"
                       : "text-ink-soft hover:text-ink"
