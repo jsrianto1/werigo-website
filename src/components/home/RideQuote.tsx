@@ -7,8 +7,11 @@ import Image from "next/image";
  * JavaScript; under prefers-reduced-motion a single motorcycle stands
  * still in the middle. The same artwork is rendered to video for
  * Instagram from werigo-ink-animation/ride.html; keep the two in step.
- * Cutouts are the approved studio photos with the background removed
- * (public/media/fleet/<model>/cutout.webp).
+ *
+ * Cutouts are the approved studio photos with the background, floor
+ * shadow and centre stand removed and the wheels spin-blurred
+ * (public/media/fleet/<model>/cutout.webp). The riders sit directly in
+ * the full-bleed section so their parked position is always off screen.
  */
 
 const riders = [
@@ -20,7 +23,10 @@ const riders = [
 
 export function RideQuote() {
   return (
-    <section aria-label="Ride Bali on electric, the quiet way" className="relative overflow-hidden bg-white">
+    <section
+      aria-label="Ride Bali on electric, the quiet way"
+      className="ride-section relative overflow-hidden bg-white"
+    >
       <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="ride-stage relative">
           <p className="absolute inset-0">
@@ -35,27 +41,27 @@ export function RideQuote() {
               way.
             </span>
           </p>
-
-          <div className="ride-road" aria-hidden="true" />
-          {riders.map((r, i) => (
-            <div
-              key={r.slug}
-              className="ride-rider"
-              aria-hidden="true"
-              style={{ "--k": `${i * 3}s` } as React.CSSProperties}
-            >
-              <Image
-                src={`/media/fleet/${r.slug}/cutout.webp`}
-                alt=""
-                width={r.width}
-                height={r.height}
-                sizes="(max-width: 640px) 45vw, 420px"
-                className="h-full w-auto"
-              />
-            </div>
-          ))}
         </div>
       </div>
+
+      <div className="ride-road" aria-hidden="true" />
+      {riders.map((r, i) => (
+        <div
+          key={r.slug}
+          className="ride-rider"
+          aria-hidden="true"
+          style={{ "--k": `${i * 3}s` } as React.CSSProperties}
+        >
+          <Image
+            src={`/media/fleet/${r.slug}/cutout.webp`}
+            alt=""
+            width={r.width}
+            height={r.height}
+            sizes="(max-width: 640px) 45vw, 420px"
+            className="h-full w-auto"
+          />
+        </div>
+      ))}
     </section>
   );
 }

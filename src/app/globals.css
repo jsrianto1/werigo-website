@@ -257,12 +257,17 @@ body {
 }
 
 /* ================= Ride-by interlude (RideQuote.tsx) ================= */
-/* The four Wedison models ride across the band one after another.
-   Period 12s, each rider owns a 3s slot and crosses in 2.64s; the bob
-   cycle (1s) divides the period so the loop never jumps. Reduced
+/* The four Wedison models ride across the full section width one after
+   another at constant speed. Period 12s: a rider enters every 3s and
+   takes 4.3s to cross, so the next is entering as the previous leaves.
+   Riders are positioned against the section (full bleed), never the
+   padded container, so the parked position is always off screen. The
+   bob cycle (1s) divides the period so the loop never jumps. Reduced
    motion parks the first motorcycle in the middle and hides the rest. */
 .ride-stage {
   height: clamp(420px, 60vw, 760px);
+}
+.ride-section {
   --ride-road: 66%;
   --ride-h: clamp(110px, 20vw, 280px);
 }
@@ -284,20 +289,30 @@ body {
   animation: ride-by 12s linear infinite;
   animation-delay: var(--k);
 }
+.ride-rider::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -2%;
+  height: 8%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(24, 35, 32, 0.22), rgba(24, 35, 32, 0) 70%);
+}
 .ride-rider img {
+  position: relative;
   height: 100%;
   width: auto;
-  transform-origin: 50% 100%;
-  animation: ride-bob 0.5s ease-in-out infinite alternate;
+  animation: ride-bob 1s ease-in-out infinite alternate;
 }
 @keyframes ride-by {
   0% { transform: translateX(-110%); }
-  22% { transform: translateX(100vw); }
-  22.001%, 100% { transform: translateX(-110%); }
+  36% { transform: translateX(100vw); }
+  36.001%, 100% { transform: translateX(-110%); }
 }
 @keyframes ride-bob {
-  from { transform: translateY(-2px) rotate(-0.6deg); }
-  to { transform: translateY(2px) rotate(0.4deg); }
+  from { transform: translateY(-1.5px); }
+  to { transform: translateY(1.5px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ride-rider,
