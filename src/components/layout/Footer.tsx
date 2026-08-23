@@ -21,19 +21,15 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-function FacebookIcon({ className }: { className?: string }) {
+function TikTokIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      fill="currentColor"
       aria-hidden="true"
     >
-      <path d="M14 8h2.5V4.5H14A4.5 4.5 0 0 0 9.5 9v2.5H7V15h2.5v5.5H13V15h2.5l.5-3.5h-3V9a1 1 0 0 1 1-1Z" />
+      <path d="M16.5 3c.3 2.1 1.6 3.6 3.7 3.8v3.1c-1.4 0-2.6-.4-3.7-1.1v6.4c0 3.2-2.6 5.8-5.8 5.8S4.9 18.4 4.9 15.2s2.6-5.8 5.8-5.8c.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.7s1.2 2.7 2.7 2.7 2.7-1.2 2.7-2.7V3h3.1Z" />
     </svg>
   );
 }
@@ -84,14 +80,17 @@ export function Footer() {
                 <InstagramIcon className="h-4 w-4" />
               </a>
               <a
-                href={site.social.facebook}
+                href={site.social.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Werigo on Facebook"
+                aria-label="Werigo on TikTok"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-inverse/20 text-ink-inverse/80 transition-colors hover:border-ink-inverse/60 hover:text-ink-inverse"
               >
-                <FacebookIcon className="h-4 w-4" />
+                <TikTokIcon className="h-4 w-4" />
               </a>
+              <span className="self-center text-sm text-ink-inverse/60">
+                {site.social.handle}
+              </span>
             </div>
           </div>
 

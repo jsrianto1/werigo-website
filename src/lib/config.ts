@@ -38,10 +38,11 @@ export const site = {
    */
   supportHoursSentence: "Our team replies daily from 08:00 to 20:00 WITA.",
 
-  /** Social profiles — PLACEHOLDER URLs, update when accounts exist. */
+  /** Social profiles, confirmed by management 2026-08-23: @werigo.official. */
   social: {
-    instagram: "https://instagram.com/werigo.bali",
-    facebook: "https://facebook.com/werigo.bali",
+    instagram: "https://instagram.com/werigo.official",
+    tiktok: "https://www.tiktok.com/@werigo.official",
+    handle: "@werigo.official",
   },
 
   /** Languages prepared for the language selector. */
