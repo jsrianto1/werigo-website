@@ -175,7 +175,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Is delivery free?",
         answer:
-          "Delivery and collection cost Rp 75,000 per booking, covering both the drop-off and the pick-up. It is free if your address is within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, and our team confirms that with your quote on WhatsApp.",
+          "Delivery and collection are free on rentals of one month or longer. For shorter rentals the fee is Rp 75,000 per booking, covering both the drop-off and the pick-up, and it is waived if your address is within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar. Our team confirms the waiver with your quote on WhatsApp.",
       },
       {
         question: "Can I return the motorcycle in a different area?",

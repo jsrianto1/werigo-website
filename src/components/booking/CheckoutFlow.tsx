@@ -163,13 +163,18 @@ export function CheckoutFlow() {
       })
     : null;
   // Area delivery & collection fee: one Rp 75,000 per booking covering
-  // both legs ("antar jemput"), waived only within 5 km of the Wedison
-  // showroom (confirmed on WhatsApp, never assumed here). Airport
-  // terminals use their own USD fee above, so this applies when either
-  // point resolves to a service area.
-  const areaFeesIdr = valid
-    ? Math.max(getArea(pickup)?.deliveryFee ?? 0, getArea(ret)?.deliveryFee ?? 0)
-    : 0;
+  // both legs ("antar jemput"). Waived automatically on rentals of one
+  // month or longer (monthly tier), and by the team within 5 km of the
+  // Wedison showroom (confirmed on WhatsApp, never assumed here).
+  // Airport terminals use their own USD fee above, so this applies
+  // when either point resolves to a service area.
+  const touchesServiceArea = Boolean(getArea(pickup) || getArea(ret));
+  const monthlyRental = estimate?.tier.id === "monthly";
+  const areaFeeWaivedMonthly = Boolean(valid && monthlyRental && touchesServiceArea);
+  const areaFeesIdr =
+    valid && !monthlyRental
+      ? Math.max(getArea(pickup)?.deliveryFee ?? 0, getArea(ret)?.deliveryFee ?? 0)
+      : 0;
   const addOnsIdr = addOnBreakdown
     ? usdToIdr(addOnBreakdown.totalUsd, usdRate)
     : null;
@@ -288,6 +293,7 @@ export function CheckoutFlow() {
       estimatedTotalIdr: estimate.totalIdr * quantity,
       baseUsdApprox: formatUsdApprox(estimate.totalIdr * quantity, usdRate),
       areaFeeIdr: areaFeesIdr,
+      areaFeeWaivedMonthly,
       airportDeliveryUsd: addOnBreakdown?.airportDeliveryUsd ?? 0,
       airportCollectionUsd: addOnBreakdown?.airportCollectionUsd ?? 0,
       cancellationProtectionUsd: addOnBreakdown?.cancellationProtectionUsd ?? 0,
@@ -525,6 +531,12 @@ export function CheckoutFlow() {
                   <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
                   Delivery & collection: {formatIdr(areaFeesIdr)}, once per
                   booking. {deliveryFeeWaiverNote}
+                </p>
+              ) : areaFeeWaivedMonthly ? (
+                <p className="mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
+                  Delivery and collection are free on this rental because it
+                  is one month or longer.
                 </p>
               ) : null}
 
@@ -945,7 +957,14 @@ export function CheckoutFlow() {
                           detail: `${formatIdr(areaFeesIdr)} once per booking. ${deliveryFeeWaiverNote}`,
                         },
                       ]
-                    : []),
+                    : areaFeeWaivedMonthly
+                      ? [
+                          {
+                            term: "Delivery & collection",
+                            detail: "Free, because this rental is one month or longer.",
+                          },
+                        ]
+                      : []),
                   ...(addOnBreakdown && addOnBreakdown.totalUsd > 0
                     ? [
                         {
@@ -1157,6 +1176,7 @@ export function CheckoutFlow() {
             estimate={estimate}
             addOnBreakdown={addOnBreakdown}
             areaFeeIdr={areaFeesIdr}
+            areaFeeWaived={areaFeeWaivedMonthly}
           />
         </aside>
       </div>

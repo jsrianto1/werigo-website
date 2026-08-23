@@ -21,6 +21,7 @@ export function BookingSummary({
   estimate,
   addOnBreakdown,
   areaFeeIdr = 0,
+  areaFeeWaived = false,
 }: {
   vehicleName: string;
   quantity: number;
@@ -36,6 +37,8 @@ export function BookingSummary({
    * confirmed on WhatsApp.
    */
   areaFeeIdr?: number;
+  /** True when the fee is waived because the rental is one month or longer. */
+  areaFeeWaived?: boolean;
 }) {
   const usdRate = useUsdRate();
   const extraRows = extras
@@ -109,11 +112,13 @@ export function BookingSummary({
           Rates shown once dates are selected
         </p>
       )}
-      {areaFeeIdr > 0 ? (
+      {areaFeeIdr > 0 || areaFeeWaived ? (
         <div className="mt-2 space-y-1.5 border-t border-line pt-2 text-sm">
           <p className="flex items-baseline justify-between gap-3">
             <span className="text-ink-soft">Delivery & collection</span>
-            <span className="tnum font-medium text-ink">{formatIdr(areaFeeIdr)}</span>
+            <span className="tnum font-medium text-ink">
+              {areaFeeIdr > 0 ? formatIdr(areaFeeIdr) : <span className="text-ok">Free</span>}
+            </span>
           </p>
         </div>
       ) : null}

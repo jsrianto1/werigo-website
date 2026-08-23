@@ -113,6 +113,8 @@ export interface DirectBookingDetails {
    * 5 km showroom waiver is applied by the team on WhatsApp.
    */
   areaFeeIdr: number;
+  /** True when the area fee is waived because the rental is one month or longer. */
+  areaFeeWaivedMonthly?: boolean;
   /** Airport fees and optional protection, USD amounts (0 = none). */
   airportDeliveryUsd: number;
   airportCollectionUsd: number;
@@ -161,7 +163,9 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
           `*Delivery & collection*`,
           `Fee: ${idr(d.areaFeeIdr)} (once per booking; free within 5 km of the Wedison showroom, Jl. Gatot Subroto Tengah, Denpasar)`,
         ]
-      : []),
+      : d.areaFeeWaivedMonthly
+        ? [``, `*Delivery & collection*`, `Free (rental of one month or longer)`]
+        : []),
     ...(d.addOnsTotalUsd > 0
       ? [
           ``,

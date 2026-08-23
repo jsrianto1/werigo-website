@@ -139,7 +139,7 @@ export function getArea(slug: string): ServiceArea | undefined {
  * showroom), so it is always confirmed by the team on WhatsApp.
  */
 export const deliveryFeeWaiverNote =
-  "Free within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, confirmed with your quote on WhatsApp.";
+  "Free on rentals of one month or longer. Also free within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, confirmed with your quote on WhatsApp.";
 
 /* ================= Airport pickup points ================= */
 

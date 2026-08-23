@@ -485,6 +485,28 @@ try {
   results.wa2EstimatedTotal = wa2?.includes("Estimated total: Rp") ?? false;
   results.wa2ConfirmNote = wa2?.includes("Availability, final price, protection conditions and payment are confirmed by the Werigo team.") ?? false;
 
+  // ---- Monthly rental: delivery & collection fee waived automatically
+  await page.goto(
+    `${BASE}/book/checkout?vehicle=victory&pickup=canggu&return=canggu&startDate=2026-09-01&startTime=09%3A00&endDate=2026-10-01&endTime=09%3A00`,
+    { waitUntil: "domcontentloaded", timeout: 60000 }
+  );
+  await page.waitForFunction(
+    () => document.body.textContent.includes("Make it yours"),
+    { timeout: 20000 }
+  );
+  results.monthlyFeeWaivedNote = await page.evaluate(() =>
+    document.body.textContent.includes(
+      "Delivery and collection are free on this rental because it is one month or longer."
+    )
+  );
+  results.monthlyNoAreaFee = await page.evaluate(() =>
+    !document.querySelector("aside")?.textContent.includes("Rp 75,000")
+  );
+  results.monthlySummaryShowsFree = await page.evaluate(() => {
+    const t = document.querySelector("aside")?.textContent ?? "";
+    return t.includes("Delivery & collection") && t.includes("Free");
+  });
+
   // Zero database traffic in the whole journey
   results.noApiBookingsRequests = apiRequests.length === 0;
 } catch (err) {

@@ -50,7 +50,8 @@ export default function TermsPage() {
               both fees apply for US$2.00 in total.
             </li>
             <li>
-              Delivery and collection carry a single Rp 75,000 fee per
+              Delivery and collection are free on rentals of one month or
+              longer. Shorter rentals carry a single Rp 75,000 fee per
               booking, covering both the drop-off and the pick-up in any
               Werigo service area. The fee is waived when the address is
               within 5 km of the Wedison showroom on Jl. Gatot Subroto
