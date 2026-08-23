@@ -256,51 +256,60 @@ body {
   }
 }
 
-/* ================= Ink quote interlude (InkQuote.tsx) ================= */
-/* Drops of brand ink drift across the quote band. Period 12s; the bob
-   durations divide it so the loop never jumps. Reduced motion pins
-   each drop at its --x resting spot instead. */
-.ink-layer {
-  position: absolute;
-  inset: 0;
-  filter: url(#werigo-goo);
-  pointer-events: none;
+/* ================= Ride-by interlude (RideQuote.tsx) ================= */
+/* The four Wedison models ride across the band one after another.
+   Period 12s, each rider owns a 3s slot and crosses in 2.64s; the bob
+   cycle (1s) divides the period so the loop never jumps. Reduced
+   motion parks the first motorcycle in the middle and hides the rest. */
+.ride-stage {
+  height: clamp(420px, 60vw, 760px);
+  --ride-road: 66%;
+  --ride-h: clamp(110px, 20vw, 280px);
 }
-.ink-blob {
+.ride-road {
   position: absolute;
-  top: var(--y);
-  left: -16%;
-  width: 0;
-  height: 0;
+  left: 0;
+  right: 0;
+  top: var(--ride-road);
+  height: 2px;
+  background: #e3ebe8;
+}
+.ride-rider {
+  position: absolute;
+  left: 0;
+  top: calc(var(--ride-road) - var(--ride-h));
+  height: var(--ride-h);
+  transform: translateX(-110%);
   will-change: transform;
-  animation: ink-drift 12s linear infinite;
-  animation-delay: var(--d);
+  animation: ride-by 12s linear infinite;
+  animation-delay: var(--k);
 }
-.ink-blob::before {
-  content: "";
-  display: block;
-  width: var(--s);
-  height: var(--s);
-  border-radius: 50%;
-  background: var(--brand-primary);
-  opacity: 0.94;
-  animation: ink-bob var(--bt) ease-in-out infinite alternate;
-  animation-delay: var(--d);
+.ride-rider img {
+  height: 100%;
+  width: auto;
+  transform-origin: 50% 100%;
+  animation: ride-bob 0.5s ease-in-out infinite alternate;
 }
-@keyframes ink-drift {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(100vw + 320px)); }
+@keyframes ride-by {
+  0% { transform: translateX(-110%); }
+  22% { transform: translateX(100vw); }
+  22.001%, 100% { transform: translateX(-110%); }
 }
-@keyframes ink-bob {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(var(--b)) scale(0.88); }
+@keyframes ride-bob {
+  from { transform: translateY(-2px) rotate(-0.6deg); }
+  to { transform: translateY(2px) rotate(0.4deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ink-blob,
-  .ink-blob::before {
+  .ride-rider,
+  .ride-rider img {
     animation: none;
   }
-  .ink-blob {
-    left: var(--x);
+  .ride-rider {
+    display: none;
+  }
+  .ride-rider:first-of-type {
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

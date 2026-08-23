@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
-import { InkQuote } from "@/components/home/InkQuote";
+import { RideQuote } from "@/components/home/RideQuote";
 import { StickyBookCTA } from "@/components/booking/StickyBookCTA";
 import { MediaImage } from "@/components/media/MediaImage";
 import { MediaVideo } from "@/components/media/MediaVideo";
@@ -475,8 +475,8 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ================= INK QUOTE (typographic interlude) ================= */}
-      <InkQuote />
+      {/* ================= RIDE-BY QUOTE (typographic interlude) ================= */}
+      <RideQuote />
 
       {/* ================= THE WERIGO STANDARD (service assurance) =================
           Replace or extend with verified rider reviews once collected —
