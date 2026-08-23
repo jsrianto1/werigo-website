@@ -73,18 +73,18 @@ check("Feb 1 to Mar 1 is Monthly", resolveTier(span("2027-02-01", "2027-03-01"))
 check("Jan 31 to Feb 28 is Monthly (clamped month end)", resolveTier(span("2027-01-31", "2027-02-28"))?.label, "Monthly");
 
 // ---- Estimated totals: rate x actual days ----
-check("Bees 2 days total", estimateRental("bees", periodOfDays(2)).totalIdr, 140000);
-check("Bees 6 days total", estimateRental("bees", periodOfDays(6)).totalIdr, 420000);
-check("Victory 7 days total", estimateRental("victory", periodOfDays(7)).totalIdr, 560000);
-check("Athena 14 days total", estimateRental("athena", periodOfDays(14)).totalIdr, 1190000);
-check("EdPower 21 days total", estimateRental("edpower", periodOfDays(21)).totalIdr, 1995000);
+check("Bees 2 days total", estimateRental("bees", periodOfDays(2)).totalIdr, 180000);
+check("Bees 6 days total", estimateRental("bees", periodOfDays(6)).totalIdr, 540000);
+check("Victory 7 days total", estimateRental("victory", periodOfDays(7)).totalIdr, 700000);
+check("Athena 14 days total", estimateRental("athena", periodOfDays(14)).totalIdr, 1400000);
+check("EdPower 21 days total", estimateRental("edpower", periodOfDays(21)).totalIdr, 2100000);
 const monthly = estimateRental("victory", span("2026-08-01", "2026-09-01"));
-check("Victory monthly rate", monthly.ratePerDayIdr, 46667);
-check("Victory monthly total = rate x 31 days", monthly.totalIdr, 46667 * 31);
+check("Victory monthly rate", monthly.ratePerDayIdr, 60000);
+check("Victory monthly total = rate x 31 days", monthly.totalIdr, 60000 * 31);
 
 // ---- Approved rate table integrity ----
-check("Bees daily rate", ratesIdrPerDay.bees.daily, 70000);
-check("EdPower monthly rate", ratesIdrPerDay.edpower.monthly, 73333);
+check("Bees daily rate", ratesIdrPerDay.bees.daily, 90000);
+check("EdPower monthly rate", ratesIdrPerDay.edpower.monthly, 93333);
 check("exactly four models priced", Object.keys(ratesIdrPerDay).sort(), ["athena", "bees", "edpower", "victory"]);
 
 // ---- Age + USD policy ----

@@ -226,3 +226,11 @@ export function buildPartnerApplicationWhatsAppUrl(): string {
   );
   return `https://wa.me/${site.whatsappNumber}?text=${text}`;
 }
+
+/** Fleet partner (rental company, monthly, 3+ units) enquiry link. */
+export function buildFleetPartnerWhatsAppUrl(): string {
+  const text = encodeURIComponent(
+    "Hi Werigo! I run a rental company and I'm interested in the fleet partner monthly rate. Company name, models and number of units:"
+  );
+  return `https://wa.me/${site.whatsappNumber}?text=${text}`;
+}

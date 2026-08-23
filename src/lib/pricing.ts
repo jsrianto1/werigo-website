@@ -70,16 +70,54 @@ export const pricingTiers: PricingTier[] = [
 /**
  * Approved IDR per-day rates by customer-facing model slug.
  * Do not edit without management approval.
+ *
+ * 2026-08-19 rate card (from the published price flyer, totals
+ * divided by duration: 2, 7, 14, 21 and 30 days):
+ *   Bees    180k / 560k / 980k / 1,260k / 1,500k
+ *   Victory 240k / 700k / 1,190k / 1,470k / 1,800k
+ *   Athena  280k / 840k / 1,400k / 1,680k / 2,100k
+ *   EdPower 380k / 1,050k / 1,750k / 2,100k / 2,800k
  */
 export const ratesIdrPerDay: Record<string, Record<PricingTierId, number>> = {
-  bees: { daily: 70000, weekly: 60000, twoWeeks: 55000, threeWeeks: 50000, monthly: 40000 },
-  victory: { daily: 90000, weekly: 80000, twoWeeks: 65000, threeWeeks: 60000, monthly: 46667 },
-  athena: { daily: 120000, weekly: 100000, twoWeeks: 85000, threeWeeks: 70000, monthly: 55000 },
-  edpower: { daily: 150000, weekly: 130000, twoWeeks: 115000, threeWeeks: 95000, monthly: 73333 },
+  bees: { daily: 90000, weekly: 80000, twoWeeks: 70000, threeWeeks: 60000, monthly: 50000 },
+  victory: { daily: 120000, weekly: 100000, twoWeeks: 85000, threeWeeks: 70000, monthly: 60000 },
+  athena: { daily: 140000, weekly: 120000, twoWeeks: 100000, threeWeeks: 80000, monthly: 70000 },
+  edpower: { daily: 190000, weekly: 150000, twoWeeks: 125000, threeWeeks: 100000, monthly: 93333 },
 };
 
 export const pricingApproved = true;
-export const pricingUpdatedAt = "2026-07-30";
+export const pricingUpdatedAt = "2026-08-19";
+
+/**
+ * Retail one-month totals exactly as printed on the 2026-08-19 flyer.
+ * The booking flow prices monthly rentals per actual day (rate above
+ * times calendar days), so these totals are for display comparisons
+ * only, such as the fleet partner table on /partners.
+ */
+export const retailMonthlyIdr: Record<string, number> = {
+  bees: 1500000,
+  victory: 1800000,
+  athena: 2100000,
+  edpower: 2800000,
+};
+
+/* ================= Fleet partner (B2B) monthly rates ================= */
+
+/**
+ * Approved 2026-08-19: the previous retail monthly rates become the
+ * fleet partner rate for rental companies that rent from Werigo on a
+ * monthly basis. Conditions: minimum one month, minimum three units
+ * taken together. Quoted per motorcycle per month in IDR; shown on
+ * /partners only, never in the retail booking flow.
+ */
+export const FLEET_PARTNER_MIN_UNITS = 3;
+
+export const fleetPartnerMonthlyIdr: Record<string, number> = {
+  bees: 1200000,
+  victory: 1400000,
+  athena: 1650000,
+  edpower: 2200000,
+};
 
 /**
  * Minimum rider age by model. Only EdPower has an approved

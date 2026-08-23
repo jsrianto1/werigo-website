@@ -35,7 +35,7 @@ try {
     document.body.textContent.includes("Minimum rental is 2 days.")
   );
 
-  // ---- Full journey: Victory, 3 days (Daily tier: 90,000/day, 270,000)
+  // ---- Full journey: Victory, 3 days (Daily tier: 120,000/day, 360,000)
   await page.goto(
     `${BASE}/book?pickup=canggu&return=ubud&startDate=2026-07-28&startTime=09%3A00&endDate=2026-07-31&endTime=09%3A00`,
     { waitUntil: "networkidle0" }
@@ -55,7 +55,7 @@ try {
     const row = [...document.querySelectorAll("main li")].find((li) =>
       li.textContent.includes("Wedison Victory")
     );
-    return row?.textContent.includes("Rp 90,000/day") && row?.textContent.includes("Rp 270,000");
+    return row?.textContent.includes("Rp 120,000/day") && row?.textContent.includes("Rp 360,000");
   });
 
   await page.evaluate(() => {
@@ -199,15 +199,15 @@ try {
     document.body.textContent.includes("Daily (2 to 6 days)")
   );
   results.reviewShowsRate = await page.evaluate(() =>
-    document.body.textContent.includes("Rp 90,000 per day")
+    document.body.textContent.includes("Rp 120,000 per day")
   );
   results.reviewShowsTotal = await page.evaluate(() => {
     const t = document.body.textContent;
-    return t.includes("Rp 270,000") && t.includes("for 3 days");
+    return t.includes("Rp 360,000") && t.includes("for 3 days");
   });
   results.summaryShowsEstimate = await page.evaluate(() => {
     const aside = document.querySelector("aside");
-    return aside?.textContent.includes("Rp 90,000/day") && aside?.textContent.includes("Rp 270,000");
+    return aside?.textContent.includes("Rp 120,000/day") && aside?.textContent.includes("Rp 360,000");
   });
   results.batteryNoteShown = await page.evaluate(() =>
     document.body.textContent.includes(
@@ -265,13 +265,13 @@ try {
   results.waUsesAdminNumber = wa?.startsWith("https://wa.me/6285113593630") ?? false;
   results.waHasModelAndQty = wa?.includes("Wedison Victory × 1") ?? false;
   results.waHasTier = wa?.includes("Tier: Daily (2 to 6 days)") ?? false;
-  results.waHasRate = wa?.includes("Rate: Rp 90,000/day") ?? false;
-  results.waHasBaseRental = wa?.includes("Base rental: Rp 270,000") ?? false;
+  results.waHasRate = wa?.includes("Rate: Rp 120,000/day") ?? false;
+  results.waHasBaseRental = wa?.includes("Base rental: Rp 360,000") ?? false;
   results.waHasAreaFee = wa?.includes("Fee: Rp 75,000") ?? false;
   results.waHasWaiverNote = wa?.includes("free within 5 km of the Wedison showroom") ?? false;
-  // Rp 270,000 base rental + Rp 75,000 delivery & collection fee
+  // Rp 360,000 base rental + Rp 75,000 delivery & collection fee
   // (one per booking, covering both legs), approved 2026-08-19.
-  results.waHasTotal = wa?.includes("Estimated total: Rp 345,000") ?? false;
+  results.waHasTotal = wa?.includes("Estimated total: Rp 435,000") ?? false;
   results.waHasEstimateCaveat = wa?.includes("Availability, final price, protection conditions and payment are confirmed by the Werigo team.") ?? false;
   results.waHasDeliveryAreaAndAddress = (wa?.includes("Canggu") && wa?.includes("Villa Test Canggu")) ?? false;
   results.waHasReturnArea = wa?.includes("Ubud") ?? false;

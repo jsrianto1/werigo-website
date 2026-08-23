@@ -10,14 +10,25 @@ import {
   partnerTypes,
   partnerSteps,
   partnerBenefits,
+  fleetPartnerConditions,
 } from "@/data/partners";
-import { buildPartnerApplicationWhatsAppUrl } from "@/lib/whatsapp";
+import { getPrimaryCards } from "@/data/vehicles";
+import {
+  fleetPartnerMonthlyIdr,
+  FLEET_PARTNER_MIN_UNITS,
+  retailMonthlyIdr,
+  formatIdr,
+} from "@/lib/pricing";
+import {
+  buildPartnerApplicationWhatsAppUrl,
+  buildFleetPartnerWhatsAppUrl,
+} from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Partner Program for Hotels, Villas and Tour Operators",
+  title: "Partner Program for Hotels, Villas, Tour Operators and Rental Companies",
   description:
-    "Refer your guests to Werigo electric motorcycle rental in Bali and earn a 10% commission on every completed rental. Apply on WhatsApp in a few minutes.",
+    "Refer your guests to Werigo electric motorcycle rental in Bali and earn a 10% commission on every completed rental, or rent a fleet monthly at partner rates. Apply on WhatsApp.",
   alternates: { canonical: "/partners" },
 };
 
@@ -46,9 +57,24 @@ const partnerFaq = [
     answer:
       "Payout details are confirmed with you directly on WhatsApp once you're approved as a partner.",
   },
+  {
+    question: "I run a rental company. Can I rent a fleet from Werigo?",
+    answer: `Yes. Rental companies can rent Werigo motorcycles at a discounted monthly fleet partner rate, with a minimum of one month and at least ${FLEET_PARTNER_MIN_UNITS} motorcycles taken together. The rates are listed on this page, and our team confirms availability and contract details with you on WhatsApp.`,
+  },
 ];
 
 export default function PartnersPage() {
+  // Retail monthly total (as printed on the flyer) is shown beside the
+  // partner rate so the discount is visible.
+  const fleetRows = getPrimaryCards()
+    .filter((e) => fleetPartnerMonthlyIdr[e.modelSlug] !== undefined)
+    .map((e) => ({
+      slug: e.modelSlug,
+      name: e.displayName,
+      partnerIdr: fleetPartnerMonthlyIdr[e.modelSlug],
+      retailIdr: retailMonthlyIdr[e.modelSlug],
+    }));
+
   return (
     <>
       {/* ===== Hero ===== */}
@@ -88,6 +114,15 @@ export default function PartnersPage() {
                 See how it works
               </a>
             </div>
+            <p className="mt-6 text-sm text-ink-soft">
+              Run a rental company?{" "}
+              <a
+                href="#fleet-partners"
+                className="font-semibold text-primary underline underline-offset-2 hover:text-primary-strong"
+              >
+                See the monthly fleet partner rates
+              </a>
+            </p>
           </div>
         </Section>
         <RouteLine className="-mt-2" />
@@ -177,6 +212,79 @@ export default function PartnersPage() {
             </li>
           ))}
         </ul>
+      </Section>
+
+      {/* ===== Fleet partners (rental companies) ===== */}
+      <Section tone="wash" labelledBy="fleet-partners-heading" id="fleet-partners">
+        <SectionHeading
+          eyebrow="Fleet partners"
+          title="Monthly fleet rates for rental companies"
+          lede={`Rent Werigo electric motorcycles for your own rental business at a discounted monthly rate. Minimum one month, minimum ${FLEET_PARTNER_MIN_UNITS} motorcycles.`}
+          id="fleet-partners-heading"
+        />
+        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+          <div className="overflow-x-auto rounded-[14px] border border-line bg-card">
+            <table className="w-full text-left text-sm">
+              <caption className="sr-only">
+                Fleet partner monthly rates per motorcycle by model
+              </caption>
+              <thead>
+                <tr className="border-b border-line">
+                  <th scope="col" className="px-5 py-4 font-semibold text-ink">
+                    Model
+                  </th>
+                  <th scope="col" className="px-5 py-4 font-semibold text-ink">
+                    Fleet partner rate
+                  </th>
+                  <th scope="col" className="px-5 py-4 font-semibold text-ink">
+                    Retail monthly rate
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {fleetRows.map((row) => (
+                  <tr key={row.slug}>
+                    <th scope="row" className="px-5 py-4 font-display text-base text-ink">
+                      {row.name}
+                    </th>
+                    <td className="tnum px-5 py-4 font-semibold text-primary">
+                      {formatIdr(row.partnerIdr)}
+                      <span className="block text-xs font-normal text-ink-faint">
+                        per motorcycle per month
+                      </span>
+                    </td>
+                    <td className="tnum px-5 py-4 text-ink-soft">
+                      {formatIdr(row.retailIdr)}
+                      <span className="block text-xs text-ink-faint">
+                        per motorcycle per month
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="rounded-[14px] border border-line bg-card p-6">
+            <h3 className="font-display text-xl text-ink">How it works</h3>
+            <ul className="mt-4 space-y-3">
+              {fleetPartnerConditions.map((c) => (
+                <li key={c} className="flex items-start gap-2.5 text-sm leading-relaxed text-ink-soft">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  {c}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={buildFleetPartnerWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-6 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
+            >
+              <MessageCircle className="h-5 w-5" aria-hidden="true" />
+              Ask about fleet rates
+            </a>
+          </div>
+        </div>
       </Section>
 
       <RidingMotorcycle />

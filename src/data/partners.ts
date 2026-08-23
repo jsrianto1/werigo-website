@@ -29,6 +29,22 @@ import {
 
 export const partnerCommissionRate = "10%";
 
+/**
+ * Fleet partner program for rental companies, approved 2026-08-19:
+ * rental companies rent Werigo motorcycles at a discounted monthly
+ * rate (the rate card lives in src/lib/pricing.ts as
+ * fleetPartnerMonthlyIdr) on two conditions: minimum one month and
+ * minimum three units taken together. Anything beyond these two
+ * conditions (contract length, deposits, swap terms) is confirmed on
+ * WhatsApp, not written here.
+ */
+export const fleetPartnerConditions = [
+  "Minimum rental of one month per motorcycle.",
+  "Minimum of three motorcycles taken together.",
+  "Rates are per motorcycle per month in IDR. Models can be mixed.",
+  "Availability, delivery and contract details are confirmed with you on WhatsApp.",
+];
+
 export interface PartnerType {
   id: string;
   label: string;
