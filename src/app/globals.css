@@ -255,3 +255,52 @@ body {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ================= Ink quote interlude (InkQuote.tsx) ================= */
+/* Drops of brand ink drift across the quote band. Period 12s; the bob
+   durations divide it so the loop never jumps. Reduced motion pins
+   each drop at its --x resting spot instead. */
+.ink-layer {
+  position: absolute;
+  inset: 0;
+  filter: url(#werigo-goo);
+  pointer-events: none;
+}
+.ink-blob {
+  position: absolute;
+  top: var(--y);
+  left: -16%;
+  width: 0;
+  height: 0;
+  will-change: transform;
+  animation: ink-drift 12s linear infinite;
+  animation-delay: var(--d);
+}
+.ink-blob::before {
+  content: "";
+  display: block;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--brand-primary);
+  opacity: 0.94;
+  animation: ink-bob var(--bt) ease-in-out infinite alternate;
+  animation-delay: var(--d);
+}
+@keyframes ink-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 320px)); }
+}
+@keyframes ink-bob {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(var(--b)) scale(0.88); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ink-blob,
+  .ink-blob::before {
+    animation: none;
+  }
+  .ink-blob {
+    left: var(--x);
+  }
+}
