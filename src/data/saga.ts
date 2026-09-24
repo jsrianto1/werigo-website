@@ -109,6 +109,18 @@ const allEpisodes: SagaEpisode[] = [
     featuredModels: ["bees", "victory", "athena", "edpower"],
     published: true,
   },
+  {
+    number: 5,
+    slug: "episode-5",
+    title: "The Visitor",
+    titleId: "Sang Pengunjung",
+    logline:
+      "A burnt-out designer from Melbourne lands in Bali with a cursed petrol scooter and a forty minute fuel queue. Then two riders glide past without a sound, and the island makes her an offer.",
+    loglineId:
+      "Seorang desainer dari Melbourne yang kelelahan tiba di Bali dengan motor bensin terkutuk dan antrean bensin empat puluh menit. Lalu dua pengendara lewat tanpa suara, dan pulau ini memberinya sebuah tawaran.",
+    featuredModels: ["athena", "edpower"],
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
@@ -152,12 +164,23 @@ export const characters: SagaCharacter[] = [
     id: "chloe",
     name: "Chloe",
     role: "The Visitor",
-    about: "Designer from Melbourne on her first Bali trip. Right now she is sunburnt and stuck in a petrol queue.",
+    about: "Designer from Melbourne on her first Bali trip. Burnt out, sunburnt and done with petrol queues. The island has other plans.",
     roleId: "Sang Pengunjung",
-    aboutId: "Desainer dari Melbourne yang pertama kali ke Bali. Saat ini dia gosong kepanasan dan terjebak di antrean bensin.",
+    aboutId: "Desainer dari Melbourne yang pertama kali ke Bali. Kelelahan, gosong kepanasan dan kapok antre bensin. Pulau ini punya rencana lain.",
     model: null,
-    modelNote: "Her ride arrives in Episode 5",
-    modelNoteId: "Motornya datang di Episode 5",
+    modelNote: "Picked a yellow Athena. It arrives in Episode 6",
+    modelNoteId: "Memilih Athena kuning. Motornya datang di Episode 6",
+  },
+  {
+    id: "jake",
+    name: "Jake",
+    role: "The Surfer",
+    roleId: "Sang Peselancar",
+    about: "Chloe's partner. Twenty nine, board under his arm, and finally old enough for the bike he wants.",
+    aboutId: "Pasangan Chloe. Umur dua puluh sembilan, papan selancar di tangan, dan akhirnya cukup umur untuk motor yang dia mau.",
+    model: null,
+    modelNote: "Picked a navy EdPower. It arrives in Episode 6",
+    modelNoteId: "Memilih EdPower navy. Motornya datang di Episode 6",
   },
   {
     id: "bayu",

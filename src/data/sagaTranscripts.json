@@ -1002,7 +1002,7 @@
   },
   {
    "label": "PANEL 8",
-   "text": "Close-up from the seat. Arya pushes the white charging gun into the charging port on the LEFT side of his Athena's inner front panel, low under the handlebar by his left knee. (Athena and Victory: port on the left inner front panel. EdPower: port on top of the centre tunnel in front of the seat, like the fuel lid on an NMAX.)",
+   "text": "Close-up from the seat. Arya pushes the white charging gun into the charging port on the LEFT side of his Athena's inner front panel, low under the handlebar by his left knee. (Athena and Victory: port on the left inner front panel. EdPower: port on top of the centre tunnel in front of the seat, where a petrol scooter would have its fuel lid.)",
    "lines": [
     {
      "who": "CAPTION",
@@ -1020,7 +1020,7 @@
   },
   {
    "label": "PANEL 8b",
-   "text": "Close-up from above. Dewa flips open the small lid on top of his EdPower's centre tunnel, in front of the seat (where the fuel lid sits on an NMAX), and pushes the gun in.",
+   "text": "Close-up from above. Dewa flips open the small lid on top of his EdPower's centre tunnel, in front of the seat (where a petrol scooter would have its fuel lid), and pushes the gun in.",
    "lines": [
     {
      "who": "DEWA",
@@ -1696,6 +1696,411 @@
   {
    "label": "Closing",
    "text": "To be continued... NEXT EPISODE: EP.5 · THE VISITOR. Tell us your worst scooter story from Bali.",
+   "lines": []
+  }
+ ],
+ "5": [
+  {
+   "label": "COLD OPEN",
+   "text": "Canggu, tonight. A colossal pillar of golden light rises over the rice fields, golden rings across the sky.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "DOOOON."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "! WORLD ANNOUNCEMENT · A VISITOR HAS ENTERED THE ISLAND."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 1",
+   "text": "Four close-ups, four places, the same light.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "A visitor. First one in three years."
+    },
+    {
+     "who": "SEKAR",
+     "text": "Then someone has to find her before the petrol queue does."
+    },
+    {
+     "who": "KOMANG (shouting)",
+     "text": "What's a visitor?!"
+    },
+    {
+     "who": "ARYA (thought)",
+     "text": "...Who is she?"
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "EPISODE 5 · THE VISITOR.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Melbourne. Eleven days earlier."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "2 AM, grey rain on the window. Chloe at a glowing monitor, empty coffee cups, a dusty sketchbook.",
+   "lines": [
+    {
+     "who": "CHLOE (thought)",
+     "text": "When did I last draw something just for fun?"
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (grey, unseen): STATUS · Fatigue: MAX · Fun: 0"
+    },
+    {
+     "who": "CAPTION",
+     "text": "Something was already watching. She just couldn't see it yet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "Jake holds up two boarding passes.",
+   "lines": [
+    {
+     "who": "JAKE",
+     "text": "Bali. Seven days. No laptops."
+    },
+    {
+     "who": "CHLOE",
+     "text": "...Deal."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "Arrival at the airport. A wall of heat.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "FWUMP!!"
+    },
+    {
+     "who": "CHLOE",
+     "text": "It's like opening an oven."
+    },
+    {
+     "who": "SYSTEM (grey)",
+     "text": "DEBUFF · Tropical heat"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "The villa pool. Chloe floats, eyes closed.",
+   "lines": [
+    {
+     "who": "CHLOE (thought)",
+     "text": "Okay. This I can do."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "Day one. A roadside stall with a row of tired petrol scooters.",
+   "lines": [
+    {
+     "who": "STALL OWNER",
+     "text": "Scooter? Cheap cheap! Full tank!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "Close-up. The fuel needle on E, a faint cursed glow.",
+   "lines": [
+    {
+     "who": "SYSTEM (grey)",
+     "text": "ITEM: RENTED SCOOTER · Rarity: CURSED · Fuel: LIES"
+    },
+    {
+     "who": "JAKE",
+     "text": "\"Full tank,\" he said."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "Chloe's scooter dies in the middle of a busy intersection. A truck bears down.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "PUTT... PUTT... PFFT. / HOOONK!!"
+    },
+    {
+     "who": "CHLOE (shouting)",
+     "text": "No no no, not in the middle of the road!"
+    },
+    {
+     "who": "SYSTEM (grey)",
+     "text": "DEBUFF · Stalled"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "The endless petrol queue, framed like a dungeon gate.",
+   "lines": [
+    {
+     "who": "SYSTEM (grey)",
+     "text": "DUNGEON: THE PETROL QUEUE · Wait: 40 min · Boss: The heat"
+    },
+    {
+     "who": "CHLOE (thought)",
+     "text": "Nobody told me holidays had queues."
+    },
+    {
+     "who": "ATTENDANT",
+     "text": "Regular or premium?"
+    },
+    {
+     "who": "CHLOE",
+     "text": "...Yes?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "A cloud of exhaust in Chloe's face.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "KOFF KOFF!!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "Jake pushes his dead scooter along the kerb, surfboard strapped on.",
+   "lines": [
+    {
+     "who": "JAKE",
+     "text": "I came here to surf, not to do cardio."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "Evening, both sunburnt on the villa steps.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Day one. Zero beaches."
+    },
+    {
+     "who": "JAKE",
+     "text": "One petrol station. Twice."
+    },
+    {
+     "who": "SYSTEM (grey)",
+     "text": "DEBUFF · Sunburn LV.3"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "Day two, 8:40 AM. A Canggu cafe. Chloe with an iced latte, defeated.",
+   "lines": [
+    {
+     "who": "CHLOE (thought)",
+     "text": "Maybe we just... stay in the villa."
+    },
+    {
+     "who": "CAPTION",
+     "text": "Then the street went quiet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14 · FULL PAGE",
+   "text": "Slow motion. Arya on his olive Athena and Sekar on her pink Athena glide past. No sound. The latte doesn't even ripple.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "...Did those just go past? I didn't hear a thing."
+    },
+    {
+     "who": "SFX",
+     "text": "TING."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[SIGNAL DETECTED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "Sekar glances back with a knowing smile.",
+   "lines": [
+    {
+     "who": "SEKAR",
+     "text": "Ride Bali the quiet way."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "Chloe's phone on werigo.co (real site copy): Ride Bali the quiet way · Choose your bike and dates · Review your estimate · Confirm on WhatsApp · Ride out ready.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Jake. Jake. Look at this."
+    },
+    {
+     "who": "CHLOE",
+     "text": "We can rent the quiet ones. They bring them to us."
+    },
+    {
+     "who": "JAKE",
+     "text": "...I'm listening."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17 · CLASS SELECT",
+   "text": "The booking becomes a character-select screen.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "! CLASS SELECT · Choose your ride for the island."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "WEDISON ATHENA · YELLOW · Quiet · Compact · Easy to ride"
+    },
+    {
+     "who": "CHLOE",
+     "text": "This one. It's small, it's cute, and it's yellow. I'm done choosing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "Jake and the navy EdPower, lightning aura.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "WEDISON EDPOWER · NAVY · Level requirement: AGE 25+"
+    },
+    {
+     "who": "JAKE",
+     "text": "I'm 29. Finally, being old pays off."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[REQUIREMENT MET]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "The booking request: Athena yellow, EdPower navy, 7 days at the weekly rate, delivery to the villa in Canggu. \"Weekly rate estimate. Final price confirmed on WhatsApp.\"",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Seven days. Let's actually have a holiday."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "WhatsApp with Werigo.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Hi! Can we get 2 bikes for 7 days from tomorrow? We're staying in Canggu. My boyfriend wants the big one."
+    },
+    {
+     "who": "WERIGO",
+     "text": "Hi Chloe! Both bikes are free. We'll bring them to your villa tomorrow at 9, charged and ready. Helmets and phone holders are included."
+    },
+    {
+     "who": "CHLOE",
+     "text": "Do we need to find a charging station?"
+    },
+    {
+     "who": "WERIGO",
+     "text": "We'll show you tomorrow. Mostly you just charge at the villa while you sleep."
+    },
+    {
+     "who": "CHLOE",
+     "text": "...While we SLEEP??"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "They hand the petrol scooters back.",
+   "lines": [
+    {
+     "who": "STALL OWNER",
+     "text": "No refund for petrol!"
+    },
+    {
+     "who": "JAKE",
+     "text": "What petrol?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22 · CLIFFHANGER",
+   "text": "That night. Chloe in bed. A golden window appears above her phone, not on it.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "! VISITOR DETECTED · Name: CHLOE · Pass: 7 DAYS · Activation: TOMORROW, 09:00"
+    },
+    {
+     "who": "CHLOE",
+     "text": "...What app is this?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "A rooftop in Canggu. The guild watches the pillar of light.",
+   "lines": [
+    {
+     "who": "KOMANG (shouting)",
+     "text": "It's her?! The sunburnt one?!"
+    },
+    {
+     "who": "DEWA",
+     "text": "The island chose her."
+    },
+    {
+     "who": "ARYA",
+     "text": "So who's delivering tomorrow?"
+    },
+    {
+     "who": "DEWA",
+     "text": "You are."
+    },
+    {
+     "who": "SFX",
+     "text": "DOOOON."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "VISITOR PASS · Activating..."
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT EPISODE: EP.6 · THE HANDOVER. Which bike would you pick for your Bali trip?",
    "lines": []
   }
  ]
