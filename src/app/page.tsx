@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
-import { RideQuote } from "@/components/home/RideQuote";
 import { SagaTeaser } from "@/components/home/SagaTeaser";
 import { StickyBookCTA } from "@/components/booking/StickyBookCTA";
 import { MediaImage } from "@/components/media/MediaImage";
@@ -475,9 +474,6 @@ export default function HomePage() {
           </div>
         </div>
       </Section>
-
-      {/* ================= RIDE-BY QUOTE (typographic interlude) ================= */}
-      <RideQuote />
 
       {/* ================= WERIGO SAGA (webtoon teaser) ================= */}
       <SagaTeaser />
