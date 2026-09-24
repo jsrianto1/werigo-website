@@ -16,11 +16,16 @@ import {
 } from "lucide-react";
 import { saveProgress } from "@/lib/sagaProgress";
 import { notifySagaProgress, useSagaProgress } from "@/lib/useSagaProgress";
+import { useSagaLang } from "@/lib/useSagaLang";
+import { recordShare, recordView } from "@/lib/useSagaStats";
+import { sagaUi } from "@/data/sagaUi";
+import { LangToggle, ReactionBar, ShareBar, StatLine } from "@/components/saga/SagaSocial";
 
 export interface ReaderEpisodeRef {
   number: number;
   slug: string;
   title: string;
+  titleId: string;
   cover: string;
 }
 
@@ -46,6 +51,10 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
   const [dismissed, setDismissed] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const saved = useSagaProgress();
+  const lang = useSagaLang();
+  const t = sagaUi[lang];
+  const titleOf = (e: ReaderEpisodeRef) => (lang === "id" ? e.titleId : e.title);
+  const pageSrc = (src: string) => (lang === "id" ? src.replace("/media/saga/ep-", "/media/saga/id/ep-") : src);
   const savedPos = saved?.pos[episode.slug] ?? 0;
   const showResume = !dismissed && progress < 0.03 && savedPos > 0.04 && savedPos < 0.95;
 
@@ -92,6 +101,12 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
     };
   }, [episode.slug]);
 
+  // Count a view once the reader has stayed a few seconds.
+  useEffect(() => {
+    const id = setTimeout(() => recordView(episode.slug), 3000);
+    return () => clearTimeout(id);
+  }, [episode.slug]);
+
   // Arrow keys move between episodes (ignored while typing or choosing).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -112,15 +127,17 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
   }, [toast]);
 
   const share = async () => {
-    const url = window.location.href.split("#")[0];
-    const title = `WERIGO SAGA Episode ${episode.number}: ${episode.title}`;
+    const url = `${window.location.origin}/saga/${episode.slug}${lang === "id" ? "?lang=id" : ""}`;
+    const title = `WERIGO SAGA Episode ${episode.number}: ${titleOf(episode)}`;
     try {
       if (navigator.share) {
         await navigator.share({ title, url });
+        recordShare(episode.slug, "native");
         return;
       }
       await navigator.clipboard.writeText(url);
-      setToast("Link copied");
+      recordShare(episode.slug, "copy");
+      setToast(t.linkCopied);
     } catch {
       /* share sheet closed */
     }
@@ -151,12 +168,12 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
             className="flex min-h-11 items-center gap-1 rounded-md pr-2 text-sm font-semibold text-white/80 hover:text-white"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-            <span className="hidden sm:inline">WERIGO SAGA</span>
-            <span className="sm:hidden">Saga</span>
+            <span className="hidden md:inline">WERIGO SAGA</span>
+            <span className="md:hidden">Saga</span>
           </Link>
           <div className="mx-1 hidden h-6 w-px bg-white/15 sm:block" aria-hidden="true" />
           <label className="sr-only" htmlFor="saga-episode-select">
-            Choose an episode
+            {t.chooseEpisode}
           </label>
           <select
             id="saga-episode-select"
@@ -166,21 +183,25 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           >
             {episodes.map((e) => (
               <option key={e.slug} value={e.slug} className="bg-[#0b100f]">
-                Episode {e.number}: {e.title}
+                {t.episode} {e.number}: {titleOf(e)}
               </option>
             ))}
           </select>
+          <div className="hidden shrink-0 lg:block">
+            <StatLine slug={episode.slug} />
+          </div>
           <div className="ml-auto flex items-center gap-1">
-            <NavButton href={prev ? `/saga/${prev.slug}` : null} label="Previous episode">
+            <LangToggle className="mr-1" />
+            <NavButton href={prev ? `/saga/${prev.slug}` : null} label={t.prevEp}>
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
             </NavButton>
-            <NavButton href={next ? `/saga/${next.slug}` : null} label="Next episode">
+            <NavButton href={next ? `/saga/${next.slug}` : null} label={t.nextEp}>
               <ChevronRight className="h-5 w-5" aria-hidden="true" />
             </NavButton>
             <button
               type="button"
               onClick={share}
-              aria-label="Share this episode"
+              aria-label={t.shareEp}
               className="hidden min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md text-white/80 hover:bg-white/10 hover:text-white sm:flex"
             >
               <Share2 className="h-5 w-5" aria-hidden="true" />
@@ -199,11 +220,11 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           // Pages are pre-sized WebP slices of one strip; plain img keeps them seamless and lazy.
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            key={p.src}
-            src={p.src}
+            key={pageSrc(p.src)}
+            src={pageSrc(p.src)}
             width={p.width}
             height={p.height}
-            alt={`WERIGO SAGA Episode ${episode.number}, page ${i + 1} of ${pages.length}`}
+            alt={`WERIGO SAGA ${t.episode} ${episode.number}, ${lang === "id" ? "halaman" : "page"} ${i + 1} / ${pages.length}`}
             loading={i < 2 ? "eager" : "lazy"}
             fetchPriority={i === 0 ? "high" : "auto"}
             decoding="async"
@@ -216,7 +237,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
       {/* End of episode */}
       <div className="mx-auto max-w-[800px] px-4 pb-16 pt-12 sm:px-6">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-white/50">
-          End of Episode {episode.number}
+          {t.endOf(episode.number)}
         </p>
 
         {next ? (
@@ -233,10 +254,10 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
             />
             <div className="min-w-0 flex-1">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2ee0b0]">
-                Next episode
+                {t.nextEpisode}
               </p>
               <p className="mt-1 font-display text-xl text-white sm:text-2xl">
-                Episode {next.number}: {next.title}
+                {t.episode} {next.number}: {titleOf(next)}
               </p>
             </div>
             <ArrowRight
@@ -246,9 +267,9 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           </Link>
         ) : (
           <div className="mt-6 rounded-[14px] border border-white/15 bg-white/5 p-5 text-center">
-            <p className="font-display text-2xl text-white">You are all caught up</p>
+            <p className="font-display text-2xl text-white">{t.caughtUp}</p>
             <p className="mt-2 text-sm text-white/70">
-              Follow @werigo.official on Instagram to hear when the next episode is out.
+              {t.caughtUpBody}
             </p>
             <a
               href="https://www.instagram.com/werigo.official/"
@@ -256,26 +277,21 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
               rel="noopener noreferrer"
               className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-white/25 px-5 text-sm font-semibold text-white hover:border-[#2ee0b0] hover:text-[#2ee0b0]"
             >
-              Follow @werigo.official
+              {t.follow}
             </a>
           </div>
         )}
 
+        <ReactionBar slug={episode.slug} />
+        <ShareBar slug={episode.slug} title={`${t.episode} ${episode.number}: ${titleOf(episode)}`} />
+
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            type="button"
-            onClick={share}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border border-white/20 px-4 text-sm font-semibold text-white/90 hover:border-white/40"
-          >
-            <Share2 className="h-4 w-4" aria-hidden="true" />
-            Share this episode
-          </button>
           <Link
             href="/saga#episodes"
             className="inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-white/20 px-4 text-sm font-semibold text-white/90 hover:border-white/40"
           >
             <LayoutList className="h-4 w-4" aria-hidden="true" />
-            All episodes
+            {t.allEpisodes}
           </Link>
           <button
             type="button"
@@ -283,15 +299,15 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
             className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border border-white/20 px-4 text-sm font-semibold text-white/90 hover:border-white/40"
           >
             <ArrowUp className="h-4 w-4" aria-hidden="true" />
-            Back to top
+            {t.backToTop}
           </button>
         </div>
 
         {children}
 
         {/* Episode rail */}
-        <nav aria-label="All episodes" className="mt-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">Episodes</p>
+        <nav aria-label={t.allEpisodes} className="mt-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">{t.episodes}</p>
           <ul className="-mx-4 mt-3 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
             {episodes.map((e) => {
               const current = e.slug === episode.slug;
@@ -313,10 +329,10 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
                       className="aspect-square w-full rounded-[8px] object-cover"
                     />
                     <p className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-white/55">
-                      Episode {e.number}
-                      {done ? " · Read" : ""}
+                      {t.episode} {e.number}
+                      {done ? ` · ${t.read}` : ""}
                     </p>
-                    <p className="line-clamp-2 text-sm font-medium text-white">{e.title}</p>
+                    <p className="line-clamp-2 text-sm font-medium text-white">{titleOf(e)}</p>
                   </Link>
                 </li>
               );
@@ -331,7 +347,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           role="status"
           className="fixed inset-x-0 bottom-24 z-50 mx-auto flex w-[calc(100%-2rem)] max-w-md items-center gap-2 rounded-full border border-white/15 bg-[#132a25] py-1.5 pl-4 pr-1.5 text-sm text-white shadow-2xl lg:bottom-8"
         >
-          <span className="flex-1">You stopped at {Math.round(savedPos * 100)}% last time.</span>
+          <span className="flex-1">{t.resumeAt(Math.round(savedPos * 100))}</span>
           <button
             type="button"
             onClick={() => {
@@ -341,12 +357,12 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
             className="inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-full bg-[#2ee0b0] px-4 font-semibold text-[#06201a]"
           >
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
-            Resume
+            {t.resume}
           </button>
           <button
             type="button"
             onClick={() => setDismissed(true)}
-            aria-label="Start from the top instead"
+            aria-label={t.startOver}
             className="flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-full text-white/70 hover:text-white"
           >
             <X className="h-4 w-4" aria-hidden="true" />

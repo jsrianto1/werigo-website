@@ -9,7 +9,6 @@
  * published: false; it disappears from every surface and its route 404s.
  */
 import pages from "./sagaPages.json";
-import transcripts from "./sagaTranscripts.json";
 
 export type SagaModel = "athena" | "victory" | "edpower" | "bees";
 
@@ -17,7 +16,9 @@ export interface SagaEpisode {
   number: number;
   slug: string;
   title: string;
+  titleId: string;
   logline: string;
+  loglineId: string;
   featuredModels: SagaModel[];
   published: boolean;
 }
@@ -28,31 +29,35 @@ export interface SagaPageImage {
   height: number;
 }
 
-export interface SagaTranscriptBeat {
-  label: string;
-  text: string;
-  lines: { who: string; text: string }[];
-}
-
 export interface SagaCharacter {
   id: string;
   name: string;
   role: string;
+  roleId: string;
   about: string;
+  aboutId: string;
   model: SagaModel | null;
   modelNote?: string;
+  modelNoteId?: string;
 }
 
 export const saga = {
   title: "WERIGO SAGA",
   tagline: "A Bali webtoon about the day the ride changed.",
+  taglineId: "Webtoon dari Bali tentang hari ketika perjalanan berubah.",
   synopsis: [
     "Arya delivers food across Denpasar on a petrol bike that barely starts. The night he switches to an olive Wedison Athena, a System only he can see starts handing him quests.",
     "It turns out he is not the only one. There is a guild of riders, a storm that shuts the island's petrol stations, and a best friend who wants in. Every bike you see in the story is a real Wedison you can rent from us.",
   ],
+  synopsisId: [
+    "Arya mengantar makanan keliling Denpasar dengan motor bensin yang susah dinyalakan. Malam ketika dia beralih ke Wedison Athena hijau zaitun, sebuah System yang hanya bisa dia lihat mulai memberinya quest.",
+    "Ternyata dia bukan satu-satunya. Ada guild para pengendara, badai yang menutup SPBU di seluruh pulau, dan sahabat yang ingin ikut. Setiap motor di cerita ini adalah Wedison asli yang bisa kamu sewa di Werigo.",
+  ],
   instagram: "https://www.instagram.com/werigo.official/",
   disclaimer:
     "WERIGO SAGA is fiction. The System, the auras and the flood scenes are made up. The bikes, the charging and the rental service are real. Always wear a helmet, ride within your licence and never ride through floodwater.",
+  disclaimerId:
+    "WERIGO SAGA adalah fiksi. System, aura dan adegan banjir hanyalah karangan. Motor, cara mengisi daya dan layanan sewanya nyata. Selalu pakai helm, berkendara sesuai SIM kamu dan jangan pernah menerobos banjir.",
 };
 
 const allEpisodes: SagaEpisode[] = [
@@ -60,8 +65,11 @@ const allEpisodes: SagaEpisode[] = [
     number: 1,
     slug: "episode-1",
     title: "The Weakest Rider",
+    titleId: "Pengendara Terlemah",
     logline:
       "Arya starts his day at 4:58 AM on a petrol bike that will not start. By midnight he has a new ride and a System only he can see.",
+    loglineId:
+      "Hari Arya dimulai pukul 04.58 dengan motor bensin yang tidak mau menyala. Tengah malam, dia punya motor baru dan System yang hanya bisa dia lihat.",
     featuredModels: ["athena"],
     published: true,
   },
@@ -69,8 +77,11 @@ const allEpisodes: SagaEpisode[] = [
     number: 2,
     slug: "episode-2",
     title: "The First Quest",
+    titleId: "Quest Pertama",
     logline:
       "One working day on the Athena: thirty five orders, a sick child on the other side of town, a grandmother's blessing and a rival on a loud sportbike.",
+    loglineId:
+      "Satu hari kerja dengan Athena: tiga puluh lima orderan, anak yang sakit di ujung kota, restu seorang nenek dan rival dengan motor sport yang berisik.",
     featuredModels: ["athena"],
     published: true,
   },
@@ -78,8 +89,11 @@ const allEpisodes: SagaEpisode[] = [
     number: 3,
     slug: "episode-3",
     title: "The Raid",
+    titleId: "Raid",
     logline:
       "A storm shuts every petrol station on the Bukit. Forty medical kits, one clinic, forty five minutes, and Komang is stuck in the flood.",
+    loglineId:
+      "Badai menutup semua SPBU di Bukit. Empat puluh kit medis, satu klinik, empat puluh lima menit, dan Komang terjebak banjir.",
     featuredModels: ["athena", "edpower"],
     published: true,
   },
@@ -87,8 +101,11 @@ const allEpisodes: SagaEpisode[] = [
     number: 4,
     slug: "episode-4",
     title: "The Second Awakening",
+    titleId: "Kebangkitan Kedua",
     logline:
       "Komang finds the guild, and the guild has a day job. Three rental deliveries before 10:00 decide whether he awakens.",
+    loglineId:
+      "Komang menemukan guild, dan guild itu punya pekerjaan sehari-hari. Tiga antaran sewa sebelum jam 10.00 menentukan apakah dia bangkit.",
     featuredModels: ["bees", "victory", "athena", "edpower"],
     published: true,
   },
@@ -100,6 +117,8 @@ export const characters: SagaCharacter[] = [
     name: "Arya",
     role: "The Silent Rider",
     about: "Delivery rider from Denpasar. Tired, broke and kind. The first one to awaken.",
+    roleId: "The Silent Rider",
+    aboutId: "Kurir dari Denpasar. Lelah, bokek dan baik hati. Orang pertama yang bangkit.",
     model: "athena",
   },
   {
@@ -107,6 +126,8 @@ export const characters: SagaCharacter[] = [
     name: "Komang",
     role: "Pathfinder",
     about: "Arya's best friend since primary school. Loud, loyal and done pushing his late father's petrol bike.",
+    roleId: "Pathfinder",
+    aboutId: "Sahabat Arya sejak SD. Berisik, setia dan sudah capek mendorong motor bensin peninggalan almarhum bapaknya.",
     model: "victory",
   },
   {
@@ -114,6 +135,8 @@ export const characters: SagaCharacter[] = [
     name: "Sekar",
     role: "Rank C",
     about: "Calm, sharp and quietly soft. She saw something in Arya before anyone else did.",
+    roleId: "Rank C",
+    aboutId: "Tenang, tajam dan diam-diam lembut. Dia melihat sesuatu dalam diri Arya sebelum orang lain.",
     model: "athena",
   },
   {
@@ -121,6 +144,8 @@ export const characters: SagaCharacter[] = [
     name: "Dewa",
     role: "Rank A, guild master",
     about: "Gruff and fair. Runs the guild, and the guild runs a rental crew in Canggu.",
+    roleId: "Rank A, guild master",
+    aboutId: "Galak tapi adil. Memimpin guild, dan guild itu menjalankan kru rental di Canggu.",
     model: "edpower",
   },
   {
@@ -128,16 +153,22 @@ export const characters: SagaCharacter[] = [
     name: "Chloe",
     role: "The Visitor",
     about: "Designer from Melbourne on her first Bali trip. Right now she is sunburnt and stuck in a petrol queue.",
+    roleId: "Sang Pengunjung",
+    aboutId: "Desainer dari Melbourne yang pertama kali ke Bali. Saat ini dia gosong kepanasan dan terjebak di antrean bensin.",
     model: null,
     modelNote: "Her ride arrives in Episode 5",
+    modelNoteId: "Motornya datang di Episode 5",
   },
   {
     id: "bayu",
     name: "Bayu",
     role: "The Rival",
     about: "Fast, loud and always one fuel stop away from trouble.",
+    roleId: "Sang Rival",
+    aboutId: "Cepat, berisik dan selalu nyaris kehabisan bensin di saat genting.",
     model: null,
     modelNote: "Still on petrol",
+    modelNoteId: "Masih pakai bensin",
   },
 ];
 
@@ -161,7 +192,6 @@ export function bikeImage(model: SagaModel) {
 }
 
 type PagesManifest = Record<string, { pages: number; width: number; heights: number[] }>;
-type TranscriptManifest = Record<string, SagaTranscriptBeat[]>;
 
 export function getEpisodes(): SagaEpisode[] {
   return allEpisodes.filter((e) => e.published);
@@ -187,9 +217,6 @@ export function getPages(episode: SagaEpisode): SagaPageImage[] {
   }));
 }
 
-export function getTranscript(episode: SagaEpisode): SagaTranscriptBeat[] {
-  return (transcripts as TranscriptManifest)[String(episode.number)] ?? [];
-}
 
 export function coverSrc(episode: SagaEpisode) {
   return `/media/saga/covers/ep-${episode.number}.webp`;

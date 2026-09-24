@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { BookOpen, Check } from "lucide-react";
 import { useSagaProgress } from "@/lib/useSagaProgress";
+import { useSagaLang } from "@/lib/useSagaLang";
+import { sagaUi } from "@/data/sagaUi";
 
 interface EpisodeLite {
   number: number;
@@ -13,9 +15,10 @@ interface EpisodeLite {
 /** "Start Episode 1", or "Continue Episode N" once this browser has progress. */
 export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
   const progress = useSagaProgress();
+  const t = sagaUi[useSagaLang()];
   const first = episodes[0];
   let target = first;
-  let label = `Start Episode ${first.number}`;
+  let label = t.startEp(first.number);
   if (progress?.last) {
     const last = episodes.find((e) => e.slug === progress.last);
     if (last) {
@@ -24,7 +27,7 @@ export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
       const nextUp = finished ? episodes[idx + 1] : last;
       if (nextUp) {
         target = nextUp;
-        label = finished ? `Read Episode ${nextUp.number}` : `Continue Episode ${nextUp.number}`;
+        label = finished ? t.readEp(nextUp.number) : t.continueEp(nextUp.number);
       }
     }
   }
@@ -42,12 +45,13 @@ export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
 /** Small status line on an episode card: Read / percentage / nothing. */
 export function EpisodeStatus({ slug }: { slug: string }) {
   const progress = useSagaProgress();
+  const t = sagaUi[useSagaLang()];
   if (!progress) return null;
   if (progress.done.includes(slug)) {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-[#2ee0b0]/15 px-2.5 py-1 text-xs font-semibold text-[#2ee0b0]">
         <Check className="h-3.5 w-3.5" aria-hidden="true" />
-        Read
+        {t.read}
       </span>
     );
   }
@@ -58,7 +62,7 @@ export function EpisodeStatus({ slug }: { slug: string }) {
         <span className="relative h-1.5 w-16 overflow-hidden rounded-full bg-white/15" aria-hidden="true">
           <span className="absolute inset-y-0 left-0 bg-[#2ee0b0]" style={{ width: `${Math.round(pos * 100)}%` }} />
         </span>
-        {Math.round(pos * 100)}% read
+        {t.pctRead(Math.round(pos * 100))}
       </span>
     );
   }

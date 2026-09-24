@@ -1,20 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import { SagaReader, type ReaderEpisodeRef } from "@/components/saga/SagaReader";
-import { SagaBikeCard } from "@/components/saga/SagaBikeCard";
+import { EpisodeExtras } from "@/components/saga/EpisodeExtras";
 import {
   coverSrc,
   getEpisode,
   getEpisodes,
   getNeighbours,
   getPages,
-  getTranscript,
   ogSrc,
   saga,
   type SagaEpisode,
 } from "@/data/saga";
+import { getTranscript } from "@/data/sagaTranscript";
 import { site } from "@/lib/config";
 import { jsonLd } from "@/lib/schema";
 
@@ -52,6 +50,7 @@ const toRef = (e: SagaEpisode): ReaderEpisodeRef => ({
   number: e.number,
   slug: e.slug,
   title: e.title,
+  titleId: e.titleId,
   cover: coverSrc(e),
 });
 
@@ -60,7 +59,6 @@ export default async function EpisodePage({ params }: Props) {
   const ep = getEpisode(slug);
   if (!ep) notFound();
   const { prev, next } = getNeighbours(ep);
-  const transcript = getTranscript(ep);
 
   const schema = {
     "@context": "https://schema.org",
@@ -70,7 +68,7 @@ export default async function EpisodePage({ params }: Props) {
     description: ep.logline,
     url: `${site.baseUrl}/saga/${ep.slug}`,
     image: `${site.baseUrl}${ogSrc(ep)}`,
-    inLanguage: "en",
+    inLanguage: ["en", "id"],
     isAccessibleForFree: true,
     isPartOf: { "@type": "ComicSeries", name: saga.title, url: `${site.baseUrl}/saga` },
     publisher: { "@type": "Organization", name: site.name, url: site.baseUrl },
@@ -89,66 +87,7 @@ export default async function EpisodePage({ params }: Props) {
         next={next ? toRef(next) : null}
         episodes={getEpisodes().map(toRef)}
       >
-        {/* Ride what you just read */}
-        <section aria-labelledby="ride-heading" className="mt-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]">
-            The bikes are real
-          </p>
-          <h2 id="ride-heading" className="mt-2 font-display text-2xl text-white sm:text-3xl">
-            Ride what you just read
-          </h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70">
-            Every bike in this episode is a Wedison you can rent from Werigo in Bali. We deliver it to your hotel or
-            villa with at least 80% battery, two helmets and a phone holder fitted.
-          </p>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {ep.featuredModels.map((m) => (
-              <li key={m}>
-                <SagaBikeCard model={m} compact />
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/book"
-            className="mt-5 inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-accent px-7 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
-          >
-            Book your ride
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </section>
-
-        {/* Transcript */}
-        {transcript.length ? (
-          <details className="group mt-12 rounded-[14px] border border-white/10 bg-white/[0.03]">
-            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between px-4 text-sm font-semibold text-white/85 sm:px-5">
-              Read the transcript
-              <span className="text-white/50 transition-transform group-open:rotate-45" aria-hidden="true">
-                +
-              </span>
-            </summary>
-            <div className="border-t border-white/10 px-4 pb-6 pt-4 text-sm leading-relaxed text-white/75 sm:px-5">
-              {transcript.map((beat, i) => (
-                <div key={i} className="mt-4 first:mt-0">
-                  <p>
-                    <span className="font-semibold text-white">{beat.label}.</span> {beat.text}
-                  </p>
-                  {beat.lines.length ? (
-                    <ul className="mt-1.5 space-y-1 border-l border-white/15 pl-3">
-                      {beat.lines.map((l, j) => (
-                        <li key={j}>
-                          {l.who ? <span className="font-semibold text-[#9ff0d6]">{l.who}: </span> : null}
-                          {l.text}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </details>
-        ) : null}
-
-        <p className="mt-8 text-xs leading-relaxed text-white/45">{saga.disclaimer}</p>
+        <EpisodeExtras models={ep.featuredModels} transcript={getTranscript(ep)} />
       </SagaReader>
     </>
   );

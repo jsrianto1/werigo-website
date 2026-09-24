@@ -9,7 +9,15 @@ import { bikeImage, modelNames, type SagaModel } from "@/data/saga";
  * card with a soft glow and floor shadow. Never the spin-blurred
  * fleet/<model>/cutout.webp, which is animation artwork.
  */
-export function SagaBikeCard({ model, compact = false }: { model: SagaModel; compact?: boolean }) {
+export function SagaBikeCard({
+  model,
+  compact = false,
+  sub = "See rates and details",
+}: {
+  model: SagaModel;
+  compact?: boolean;
+  sub?: string;
+}) {
   const img = bikeImage(model);
 
   if (compact) {
@@ -29,7 +37,7 @@ export function SagaBikeCard({ model, compact = false }: { model: SagaModel; com
         </div>
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-white">{modelNames[model]}</p>
-          <p className="mt-0.5 text-sm text-white/60">See rates and details</p>
+          <p className="mt-0.5 text-sm text-white/60">{sub}</p>
         </div>
         <ArrowRight
           className="h-5 w-5 shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-[#2ee0b0]"
