@@ -87,6 +87,7 @@ export function MobileDrawer({
     { href: "/how-it-works", label: "How It Works" },
   ];
   const navItemsAfterAreas = [
+    { href: "/saga", label: "WERIGO SAGA (webtoon)" },
     { href: "/about", label: "About Werigo" },
     { href: "/partners", label: "Partners" },
     { href: "/help-center", label: "Help Center" },

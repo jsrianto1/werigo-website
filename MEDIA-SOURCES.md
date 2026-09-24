@@ -44,3 +44,20 @@ See `MEDIA-MANIFEST.md`. Supplied directly by management:
   derivatives in `public/brand/` (full, compact, symbol, OG banner)
   and app icons in `src/app/` were produced by background removal and
   cropping only; no redrawing, recoloring or rearrangement.
+
+## WERIGO SAGA (webtoon) assets
+
+`public/media/saga/` holds the Werigo webtoon produced by the Werigo team
+(Higgsfield AI illustration, lettering and layout by Werigo). Bike designs are
+drawn from the official Wedison reference photos; dashboard screens are the
+official wedison.co product photos placed into the art, never AI-drawn.
+
+- `ep-<n>/p<NN>.webp`: 800 px wide page slices of each episode strip.
+- `covers/`, `characters/`, `keyart-*.webp`: crops of the same artwork.
+- `trailer/`: Episode 1 motion comic (the same strip, animated camera, no audio).
+
+Source files and export scripts live in the Werigo OneDrive workspace
+(`instagram/source-html/export-saga-web.py`, `export-saga-transcripts.py`,
+`saga-motion.py`). Page counts and transcripts are generated into
+`src/data/sagaPages.json` and `src/data/sagaTranscripts.json`; do not edit
+those by hand.

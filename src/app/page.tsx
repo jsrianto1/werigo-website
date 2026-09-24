@@ -18,6 +18,7 @@ import {
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { RideQuote } from "@/components/home/RideQuote";
+import { SagaTeaser } from "@/components/home/SagaTeaser";
 import { StickyBookCTA } from "@/components/booking/StickyBookCTA";
 import { MediaImage } from "@/components/media/MediaImage";
 import { MediaVideo } from "@/components/media/MediaVideo";
@@ -477,6 +478,9 @@ export default function HomePage() {
 
       {/* ================= RIDE-BY QUOTE (typographic interlude) ================= */}
       <RideQuote />
+
+      {/* ================= WERIGO SAGA (webtoon teaser) ================= */}
+      <SagaTeaser />
 
       {/* ================= THE WERIGO STANDARD (service assurance) =================
           Replace or extend with verified rider reviews once collected —

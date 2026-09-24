@@ -17,6 +17,7 @@ const routes = [
   "/delivery-areas/uluwatu", "/delivery-areas/jimbaran",
   "/delivery-areas/sanur", "/delivery-areas/denpasar",
   "/about", "/partners", "/help-center", "/contact", "/terms", "/privacy", "/book",
+  "/saga", "/saga/episode-1", "/saga/episode-2", "/saga/episode-3", "/saga/episode-4",
   "/book/checkout?vehicle=victory&pickup=canggu&return=canggu&startDate=2099-08-01&startTime=09%3A00&endDate=2099-08-04&endTime=09%3A00",
   "/does-not-exist-404",
 ];

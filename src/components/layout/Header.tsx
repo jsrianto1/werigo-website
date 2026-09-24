@@ -17,6 +17,7 @@ const navItems = [
   { href: "/supercharge", label: "SuperCharge" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/delivery-areas", label: "Delivery Areas" },
+  { href: "/saga", label: "Saga" },
   { href: "/about", label: "About" },
   { href: "/partners", label: "Partners" },
   { href: "/help-center", label: "Help Center" },
@@ -40,8 +41,14 @@ export function Header() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // The episode reader has its own sticky toolbar, so the site header
+  // scrolls away there instead of stacking two sticky bars.
+  const inReader = pathname.startsWith("/saga/");
+
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-page/95 backdrop-blur-sm">
+    <header
+      className={`${inReader ? "relative" : "sticky top-0"} z-50 border-b border-line bg-page/95 backdrop-blur-sm`}
+    >
       <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-10">
         <Logo />
 

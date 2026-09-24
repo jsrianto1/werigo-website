@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/config";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
+import { getEpisodes } from "@/data/saga";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.6 },
     { path: "/help-center", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
+    { path: "/saga", priority: 0.6 },
   ];
 
   return [
@@ -28,6 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${site.baseUrl}/fleet/${v.modelSlug}`,
       lastModified: now,
       priority: 0.8,
+    })),
+    ...getEpisodes().map((e) => ({
+      url: `${site.baseUrl}/saga/${e.slug}`,
+      lastModified: now,
+      priority: 0.5,
     })),
     ...serviceAreas.map((a) => ({
       url: `${site.baseUrl}/delivery-areas/${a.slug}`,

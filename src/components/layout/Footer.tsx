@@ -43,6 +43,7 @@ const companyLinks = [
   { href: "/how-it-works", label: "How It Works" },
   { href: "/fleet", label: "Our Fleet" },
   { href: "/supercharge", label: "Supercharge" },
+  { href: "/saga", label: "WERIGO SAGA webtoon" },
   { href: "/partners", label: "Partners" },
   { href: "/help-center", label: "Help Center" },
   { href: "/contact", label: "Contact" },
