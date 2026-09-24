@@ -148,6 +148,18 @@ export const modelNames: Record<SagaModel, string> = {
   bees: "Wedison Bees",
 };
 
+/** Clean official transparent cutouts for the dark saga surfaces. */
+const bikeImages: Record<SagaModel, { src: string; width: number; height: number }> = {
+  athena: { src: "/media/saga/bikes/athena.webp", width: 900, height: 758 },
+  edpower: { src: "/media/saga/bikes/edpower.webp", width: 900, height: 757 },
+  victory: { src: "/media/saga/bikes/victory.webp", width: 792, height: 751 },
+  bees: { src: "/media/saga/bikes/bees.webp", width: 900, height: 823 },
+};
+
+export function bikeImage(model: SagaModel) {
+  return bikeImages[model];
+}
+
 type PagesManifest = Record<string, { pages: number; width: number; heights: number[] }>;
 type TranscriptManifest = Record<string, SagaTranscriptBeat[]>;
 

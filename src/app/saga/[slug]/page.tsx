@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { SagaReader, type ReaderEpisodeRef } from "@/components/saga/SagaReader";
+import { SagaBikeCard } from "@/components/saga/SagaBikeCard";
 import {
   coverSrc,
   getEpisode,
@@ -11,7 +11,6 @@ import {
   getNeighbours,
   getPages,
   getTranscript,
-  modelNames,
   ogSrc,
   saga,
   type SagaEpisode,
@@ -105,28 +104,7 @@ export default async function EpisodePage({ params }: Props) {
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {ep.featuredModels.map((m) => (
               <li key={m}>
-                <Link
-                  href={`/fleet/${m}`}
-                  className="group flex items-center gap-4 rounded-[14px] border border-white/10 bg-white/[0.04] p-3 transition-colors hover:border-white/25 hover:bg-white/[0.07]"
-                >
-                  <div className="relative h-20 w-28 shrink-0 rounded-[10px] bg-white/90">
-                    <Image
-                      src={`/media/fleet/${m}/cutout.webp`}
-                      alt={modelNames[m]}
-                      fill
-                      sizes="112px"
-                      className="object-contain p-1.5"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-semibold text-white">{modelNames[m]}</p>
-                    <p className="mt-0.5 text-sm text-white/60">See rates and details</p>
-                  </div>
-                  <ArrowRight
-                    className="h-5 w-5 shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                    aria-hidden="true"
-                  />
-                </Link>
+                <SagaBikeCard model={m} compact />
               </li>
             ))}
           </ul>

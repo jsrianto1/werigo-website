@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Film } from "lucide-react";
 import { ContinueButton, EpisodeStatus } from "@/components/saga/SagaProgressUI";
+import { SagaBikeCard } from "@/components/saga/SagaBikeCard";
 import {
   characters,
   coverSrc,
@@ -310,18 +311,10 @@ export default function SagaPage() {
                 </Link>
               </div>
             </div>
-            <ul className="grid grid-cols-2 gap-3">
+            <ul className="grid grid-cols-2 gap-3 sm:gap-4">
               {(["athena", "edpower", "victory", "bees"] as const).map((m) => (
                 <li key={m}>
-                  <Link
-                    href={`/fleet/${m}`}
-                    className="block rounded-[14px] bg-white/95 p-3 transition-transform hover:-translate-y-0.5"
-                  >
-                    <div className="relative aspect-[4/3]">
-                      <Image src={`/media/fleet/${m}/cutout.webp`} alt="" fill sizes="(min-width: 1024px) 260px, 45vw" className="object-contain" />
-                    </div>
-                    <p className="mt-2 text-center text-sm font-semibold text-ink">{modelNames[m]}</p>
-                  </Link>
+                  <SagaBikeCard model={m} />
                 </li>
               ))}
             </ul>
