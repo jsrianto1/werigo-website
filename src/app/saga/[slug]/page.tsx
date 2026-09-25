@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SagaReader, type ReaderEpisodeRef } from "@/components/saga/SagaReader";
 import { EpisodeExtras } from "@/components/saga/EpisodeExtras";
+import { SagaComments } from "@/components/saga/SagaComments";
 import {
   coverSrc,
   getEpisode,
@@ -88,6 +89,7 @@ export default async function EpisodePage({ params }: Props) {
         episodes={getEpisodes().map(toRef)}
       >
         <EpisodeExtras models={ep.featuredModels} transcript={getTranscript(ep)} />
+        <SagaComments episode={ep.number} prompt={ep.commentPrompt} />
       </SagaReader>
     </>
   );

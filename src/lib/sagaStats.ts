@@ -107,6 +107,11 @@ function publicCounts(rec: EpisodeRecord): EpisodeCounts {
   return { views: rec.views, shares: rec.shares, reactions: { ...rec.reactions } };
 }
 
+/** The shared saga data folder (the comments store keeps its own file here too). */
+export function sagaDataDir(): string {
+  return resolveDir();
+}
+
 export function storageInfo() {
   resolveDir();
   return { persistent };

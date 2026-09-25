@@ -40,6 +40,8 @@ commit real values, and never put server-only keys in a
 | `SUPABASE_SECRET_KEY` | **server-only** | New-format secret key (`sb_secret_...`) used exclusively by API routes; takes priority over the service-role key |
 | `SUPABASE_SERVICE_ROLE_KEY` | **server-only** | Legacy service-role JWT, used if `SUPABASE_SECRET_KEY` is not set |
 | `ADMIN_EMAILS` | **server-only** | Comma-separated allowlist for /admin/bookings |
+| `SAGA_DATA_DIR` | **server-only** | Optional folder for the WERIGO SAGA counters and comments (default `~/.werigo-data`, outside the app folder) |
+| `SAGA_COMMENTS_ADMIN_KEY` | **server-only** | Long random secret for moderating saga comments; comment moderation is disabled while unset |
 
 All values are trimmed before use. A publishable key placed in a
 server-key variable is rejected at startup, and server-side booking
@@ -48,6 +50,43 @@ inserts never use the publishable key.
 `GET /api/health/db` returns a non-sensitive diagnostic —
 `{ configured, reachable, schemaReady }` booleans only — for checking
 the live database connection without exposing any configuration.
+
+## WERIGO SAGA comments
+
+Every episode page (`/saga/episode-N`) ends with a comment section.
+Comments go through `/api/saga/comments` and are stored in
+`saga-comments.json` in the same folder as the saga counters
+(`SAGA_DATA_DIR`, else `~/.werigo-data`). That folder is outside the
+repo and the app folder, so deploys never wipe it and it is never
+committed. Writes are atomic (temp file + rename).
+
+- `GET /api/saga/comments?episode=N&limit=50&offset=0`: visible
+  comments, newest first (limit up to 200).
+- `POST /api/saga/comments` with `{ episode, name, text, lang }`:
+  name 1 to 40 characters, text 1 to 600. Links and a short
+  profanity list (`src/lib/sagaCommentFilter.ts`) are rejected, HTML
+  is stripped, and each IP may post once every 30 seconds and 10
+  times an hour. The hidden `website` field is a honeypot.
+- Only name, text, language and time are stored. No IP or email.
+
+Moderation needs `SAGA_COMMENTS_ADMIN_KEY` set on the server (while
+it is unset, moderation calls are refused). Send it as the
+`x-admin-key` header:
+
+```bash
+KEY=your-secret; URL=https://werigo.co/api/saga/comments
+# list every comment of episode 3, hidden ones included (shows ids)
+curl -H "x-admin-key: $KEY" "$URL?episode=3&all=1&limit=200"
+# hide (kept on disk, no longer shown) or unhide
+curl -X POST -H "x-admin-key: $KEY" -H "Content-Type: application/json" \
+  -d '{"action":"hide","id":"COMMENT_ID"}' $URL
+# delete permanently
+curl -X DELETE -H "x-admin-key: $KEY" "$URL?id=COMMENT_ID"
+```
+
+Editing `saga-comments.json` by hand also works (set `"hidden": true`
+or remove the entry); the server notices the newer file on the next
+request.
 
 ## Booking database (Supabase)
 

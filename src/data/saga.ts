@@ -21,6 +21,8 @@ export interface SagaEpisode {
   loglineId: string;
   featuredModels: SagaModel[];
   published: boolean;
+  /** The end-card question, shown above the episode's comments. */
+  commentPrompt?: { en: string; id: string };
 }
 
 export interface SagaPageImage {
@@ -71,6 +73,10 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Hari Arya dimulai pukul 04.58 dengan motor bensin yang tidak mau menyala. Tengah malam, dia punya motor baru dan System yang hanya bisa dia lihat.",
     featuredModels: ["athena"],
+    commentPrompt: {
+      en: "Where should Arya ride first? Tell us in the comments.",
+      id: "Ke mana Arya harus pergi duluan? Tulis di kolom komentar.",
+    },
     published: true,
   },
   {
@@ -83,6 +89,10 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Satu hari kerja dengan Athena: tiga puluh lima orderan, anak yang sakit di ujung kota, restu seorang nenek dan rival dengan motor sport yang berisik.",
     featuredModels: ["athena"],
+    commentPrompt: {
+      en: "Should Arya show up at Uluwatu? And who is she? Tell us in the comments.",
+      id: "Perlukah Arya datang ke Uluwatu? Dan siapa sebenarnya dia? Tulis di kolom komentar.",
+    },
     published: true,
   },
   {
@@ -95,6 +105,10 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Badai menutup semua SPBU di Bukit. Empat puluh kit medis, satu klinik, empat puluh lima menit, dan Komang terjebak banjir.",
     featuredModels: ["athena", "edpower"],
+    commentPrompt: {
+      en: "Which Wedison should Komang awaken with? Vote in the comments.",
+      id: "Wedison mana yang cocok untuk kebangkitan Komang? Pilih di kolom komentar.",
+    },
     published: true,
   },
   {
@@ -107,6 +121,10 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Komang menemukan guild, dan guild itu punya pekerjaan sehari-hari. Tiga antaran sewa sebelum jam 10.00 menentukan apakah dia bangkit.",
     featuredModels: ["bees", "victory", "athena", "edpower"],
+    commentPrompt: {
+      en: "Tell us your worst scooter story from Bali.",
+      id: "Ceritakan pengalaman naik motor paling apes kamu di Bali.",
+    },
     published: true,
   },
   {
@@ -119,6 +137,10 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Seorang desainer dari Melbourne yang kelelahan tiba di Bali dengan motor bensin terkutuk dan antrean bensin empat puluh menit. Lalu dua pengendara lewat tanpa suara, dan pulau ini memberinya sebuah tawaran.",
     featuredModels: ["athena", "edpower"],
+    commentPrompt: {
+      en: "Which bike would you pick for your Bali trip?",
+      id: "Motor mana yang kamu pilih untuk liburan ke Bali?",
+    },
     published: true,
   },
   {
@@ -131,6 +153,10 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Arya bertemu ODY, sang Operator yang membangun jaringan pulau ini dari nol, lalu menyerahkan motor untuk Chloe dan Jake. Malam itu, the Board mendarat di Bali.",
     featuredModels: ["athena", "edpower"],
+    commentPrompt: {
+      en: "Would you survive an audit from Pak Remy? Tell us in the comments.",
+      id: "Kamu bakal lolos audit Pak Remy nggak? Tulis di kolom komentar.",
+    },
     published: true,
   },
   {
@@ -143,6 +169,26 @@ const allEpisodes: SagaEpisode[] = [
     loglineId:
       "Tujuh hari Bali untuk Chloe dan Jake: Ubud saat fajar, ban bocor di tengah hujan, cas saat senja di Uluwatu. Tujuh hari audit untuk guild, dan Pak Remy punya rahasia.",
     featuredModels: ["athena", "edpower", "victory"],
+    commentPrompt: {
+      en: "Should the Board shut the island down? Vote in the comments.",
+      id: "Haruskah the Board menutup pulau ini? Vote di kolom komentar.",
+    },
+    published: true,
+  },
+  {
+    number: 8,
+    slug: "episode-8",
+    title: "The Verdict",
+    titleId: "Putusan",
+    logline:
+      "The Board lets the island stay, then sends Yoko, a loud senior advisor who wants ODY's seat. Thirty days, a Tumpek Landep blessing and one appraisal later, the System shows who really carried the guild.",
+    loglineId:
+      "The Board membiarkan pulau ini tetap jalan, lalu mengirim Yoko, penasihat senior yang berisik dan mengincar kursi ODY. Tiga puluh hari, satu berkat Tumpek Landep dan satu appraisal kemudian, System menunjukkan siapa yang sebenarnya memikul guild.",
+    featuredModels: ["athena", "victory", "edpower"],
+    commentPrompt: {
+      en: "Who should join Arya's squad first? Tell us in the comments.",
+      id: "Siapa yang harus gabung ke squad Arya duluan? Tulis di kolom komentar.",
+    },
     published: true,
   },
 ];

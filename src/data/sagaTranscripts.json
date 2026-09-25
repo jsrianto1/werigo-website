@@ -2887,5 +2887,673 @@
    "text": "To be continued... NEXT EPISODE: EP.8 · THE VERDICT. Should the Board shut the island down? Vote in the comments.",
    "lines": []
   }
+ ],
+ "8": [
+  {
+   "label": "PART 1 · THE VERDICT",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1",
+   "text": "The Werigo shop, day 7, 10 AM (continues from EP.7). Pak Chan and Pak Remy on one side of the table, ODY alone on the other. The crew watches through the glass.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "Seven days. Fleet cost, charging, staff, helmets, one flat tyre."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "What price are you suggesting for all of this?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "ODY doesn't open his laptop.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I'm not going to show you a spreadsheet. I'm going to show you who we ride for."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "The door opens. Chloe and Jake walk in, helmets in hand, the yellow Athena and the navy EdPower parked outside the glass.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Sorry, are we interrupting?"
+    },
+    {
+     "who": "PAK REMY",
+     "text": "Rate it. One to ten."
+    },
+    {
+     "who": "JAKE",
+     "text": "Eleven. We never looked for a petrol station once."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "Chloe opens her sketchbook on the table: seven days in drawings.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "I started drawing again. I haven't drawn for fun in two years."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[VISITOR PASS: COMPLETE] [ISLAND BOND: MAX]"
+    },
+    {
+     "who": "CHLOE",
+     "text": "We're coming back in March. For a month."
+    },
+    {
+     "who": "JAKE",
+     "text": "And I want to know what it costs to buy one."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "Close-up. Pak Remy's pen moves. For the first time, he writes something down.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "...Repeat customer. Monthly. A buyer."
+    },
+    {
+     "who": "SYSTEM (red turning green)",
+     "text": "[AUDIT RESULT UPDATING...]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "Pak Chan stands. His red aura fades to green.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "The island stays."
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (green, huge): [AUDIT PASSED] [THE GUILD SURVIVES]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "Behind the glass, Komang explodes. Dewa clamps a hand over his mouth.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "YESSS!!"
+    },
+    {
+     "who": "DEWA",
+     "text": "Quiet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "Chloe tears a page from her sketchbook for Arya: Arya riding in the rain.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "For the guy who delivered our holiday."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9 · THE TWIST",
+   "text": "Pak Chan at the door, not turning around.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "But the island does not run on one man. So I brought you another one."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10 · SPLASH",
+   "text": "The door swings open. A man in a tight pastel polo steps in with a golden aura blazing behind him like a raid boss.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (gold, flickering): [NEW PARTY MEMBER] [YOKO · SENIOR OPERATIONS ADVISOR] [EXPERIENCE: \"TWENTY YEARS\" (SELF-DECLARED)] [RANK: ???]"
+    },
+    {
+     "who": "YOKO",
+     "text": "Relax, bro. I've been doing this since you were in school."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "Pak Chan leaves.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Yoko reports to me. Thirty days. Then I decide who runs Bali."
+    },
+    {
+     "who": "ODY (thought)",
+     "text": "...Of course."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11B",
+   "text": "Yoko's eyes slide to the green OPERATOR lanyard on ODY's chest. A hidden window only the reader can see. Title card: EP.8 · THE VERDICT",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (purple, hidden): [HIDDEN QUEST: TAKE THE OPERATOR'S SEAT]"
+    },
+    {
+     "who": "YOKO (thought)",
+     "text": "Jakarta boy. Two years on the island and they give him Bali? Thirty days. That seat is mine."
+    }
+   ]
+  },
+  {
+   "label": "PART 2 · THIRTY DAYS",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 12",
+   "text": "DAY 1, 8:00 AM. Komang sets the morning canang sari at the shop door and lights the incense.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "In Bali there are two worlds. Sekala, the one you can see. Niskala, the one you can't."
+    },
+    {
+     "who": "CAPTION",
+     "text": "The System lives in the second one. And it remembers everything."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "11:40 AM. Yoko arrives and nudges the canang aside with his loafer. Komang freezes.",
+   "lines": [
+    {
+     "who": "SEKAR",
+     "text": "You just kicked today's offering."
+    },
+    {
+     "who": "YOKO",
+     "text": "It's a leaf, relax."
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (grey, faint): [NISKALA: RECORDED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "Yoko takes the only good chair, feet on the desk, AC on full, iced coffee.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "I'm strategizing."
+    },
+    {
+     "who": "SYSTEM (over Yoko)",
+     "text": "[QUEST LOG: EMPTY] [STATUS: \"STRATEGIZING\"]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "Yoko on the phone. ODY stands behind the half-open door, hearing everything.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Honestly, Pak? ODY's too soft with the tourists. Numbers are... worrying. Give me Bali, Pak. I'll run it properly."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16 · MONTAGE: THE WHISPERS",
+   "text": "Yoko at a charging site with a landlord, laughing too loud.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "ODY? Nice guy. Jakarta boy. Doesn't understand Bali like we do."
+    },
+    {
+     "who": "YOKO (to a hotel manager)",
+     "text": "Between us, the rental thing is his hobby."
+    },
+    {
+     "who": "",
+     "text": "WHATSAPP (crew group, from Yoko): \"Guys, from today all SOPs go through me 🙏\""
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "Yoko prints ODY's weekly report and covers it in red pen.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Amateur. Font too small. Numbers too honest."
+    },
+    {
+     "who": "KOMANG (whisper)",
+     "text": "Numbers can be too honest?"
+    },
+    {
+     "who": "DEWA",
+     "text": "Only for him."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "Board video call. Yoko presents a deck: \"ECOSYSTEM 360°\", slide 47 of 60, a stock photo of a handshake.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Synergy, Pak. Holistic. Three-sixty."
+    },
+    {
+     "who": "PAK REMY (on screen)",
+     "text": "What price are you suggesting?"
+    },
+    {
+     "who": "YOKO",
+     "text": "...Price is a mindset, Pak."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "Night, rain. Arya hands keys to a family at a villa gate for a monthly rental, olive Athena between them.",
+   "lines": [
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[QUEST COMPLETE: MONTHLY RENTAL · ARYA]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "Yoko in the dry shop, posting Arya's photo to the Board chat.",
+   "lines": [
+    {
+     "who": "YOKO (message)",
+     "text": "\"Closed a monthly today. Leadership 💪\""
+    },
+    {
+     "who": "SYSTEM (glitching)",
+     "text": "[TRANSFER CREDIT: ARYA → YOKO?] [ERROR] [CREDIT CANNOT BE TRANSFERRED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20B",
+   "text": "Night. The shop is empty. Yoko sits in ODY's chair, wearing ODY's OPERATOR lanyard, practising in the dark window reflection.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Good morning, team. I'm your Operator now. ...No. Bigger. I AM THE OPERATOR."
+    },
+    {
+     "who": "SYSTEM (purple)",
+     "text": "[HIDDEN QUEST PROGRESS: 40%]"
+    },
+    {
+     "who": "",
+     "text": "Outside the glass, unseen, Komang holding two late-night coffees. His jaw drops."
+    }
+   ]
+  },
+  {
+   "label": "PART 3 · TUMPEK LANDEP",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 21 · WIDE",
+   "text": "DAY 15. The whole fleet lined up in front of the shop, every bike wearing a round woven palm-leaf tamiang on its handlebar. A pemangku in white sprinkles holy water. The crew in temple dress, udeng and kamen.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Tumpek Landep. The day Bali blesses everything made of metal. Tools, keris, cars. And bikes."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22 · VFX",
+   "text": "The drops of tirta hit the bikes and turn into light. Every headlamp flickers on by itself.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[BLESSING RECEIVED] [FLEET: PROTECTED]"
+    },
+    {
+     "who": "ARYA",
+     "text": "...Did the bikes just light up?"
+    },
+    {
+     "who": "DEWA",
+     "text": "Every year."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "The grandmother from EP.2 now makes the shop's offerings. Yoko, in a polo, filming for social media.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "They're blessing scooters, Pak. So cute."
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "Karma phala, nak. What you plant, you will eat."
+    },
+    {
+     "who": "SYSTEM (old gold letters)",
+     "text": "[KARMA PHALA · ACTIVE]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24 · STORY",
+   "text": "That night, in the style of a Kamasan painting. The grandmother tells Arya and Komang an old story.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Two farmers shared one subak. One opened the water every dawn. The other told the whole village how hard he worked."
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "At harvest the gods did not count words. They counted rice."
+    }
+   ]
+  },
+  {
+   "label": "PART 4 · NOBODY",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 25",
+   "text": "DAY 24. Arya comes back soaked from a delivery, arms full of helmets. Customers in the shop. Yoko, loud.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Look at him. A delivery boy. You're nobody, Arya."
+    },
+    {
+     "who": "YOKO",
+     "text": "In ten years you'll still be carrying helmets for tourists. People like you don't get opinions."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "Komang lunges. Dewa holds him back with one arm.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "SAY THAT AGAIN!"
+    },
+    {
+     "who": "DEWA",
+     "text": "Not here."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27 · VFX",
+   "text": "Arya walks out into the rain. His status window cracks like glass.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (grey, shattering): [ARYA · MORALE 12%]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "Night, the beach. Arya sits in the sand beside his olive Athena.",
+   "lines": [
+    {
+     "who": "ARYA (thought)",
+     "text": "He's not wrong. A year ago I was nobody."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "Two headlights. Sekar on the pink Athena, Komang on the red Victory.",
+   "lines": [
+    {
+     "who": "SEKAR",
+     "text": "You were nobody. Then you rode forty medical kits through a storm. Nobody doesn't do that."
+    },
+    {
+     "who": "KOMANG",
+     "text": "You didn't leave me in the flood, bro. I'm not leaving you on a beach."
+    }
+   ]
+  },
+  {
+   "label": "PART 5 · APPRAISAL",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 30",
+   "text": "DAY 30. The bypass, midday heat. Yoko pushes his petrol maxi scooter, dry tank, loafers melting. Beside him, pushing his sportbike: Bayu. They look at each other.",
+   "lines": [
+    {
+     "who": "BAYU",
+     "text": "...You too?"
+    },
+    {
+     "who": "YOKO",
+     "text": "Don't."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "The shop. The Board is already seated. Yoko bursts in 40 minutes late, sweating.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Pak! Traffic, ceremony, crazy day. Anyway: thirty days of transformation."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "Sit down."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32 · SKILL",
+   "text": "Pak Remy takes off his glasses. His eyes glow blue.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "APPRAISAL."
+    },
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[APPRAISAL: YOKO] [QUESTS COMPLETED IN 30 DAYS: 0] [DELIVERIES: 0] [PARTNERS SIGNED: 0] [HOURS IN THE AC CHAIR: 212] [TIMES HE SAID \"ODY IS THE PROBLEM\": 47] [HIDDEN QUEST: TAKE THE OPERATOR'S SEAT · FAILED] [REAL RANK: E]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "Arya. 212 deliveries. Zero complaints. The monthly you posted? He closed it. In the rain."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "And these. Nine messages asking the Chairman for ODY's job. While ODY was out opening gates."
+    },
+    {
+     "who": "KOMANG (at the door)",
+     "text": "And he practises in the window at night. \"I AM THE OPERATOR.\""
+    },
+    {
+     "who": "YOKO",
+     "text": "Pak, the system is wrong..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "Pak Chan, red aura, glasses flashing.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "The system is never wrong. You were."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "I brought you. That makes you my mistake. I don't keep mistakes."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35 · VFX",
+   "text": "Yoko's golden aura cracks and falls off him like broken glass. Underneath, a small tired man.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[ILLUSION BROKEN] [KARMA PHALA · RESOLVED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "Yoko leaves. At the door, for the first time, he steps around the canang.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 37",
+   "text": "Pak Chan to ODY, still not smiling.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "The island does not run on one man. I was right about that."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "I was wrong about the man. Find the one who actually carried it."
+    },
+    {
+     "who": "ODY",
+     "text": "I know where he is."
+    }
+   ]
+  },
+  {
+   "label": "PART 6 · NGAYAH",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 38 · WIDE",
+   "text": "Dawn at Arya's banjar. Men weave a tall bamboo penjor for the temple anniversary. Arya among them in his udeng, hands full of palm leaf. ODY walks in.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "In my village we call this ngayah. You work because the village needs it. Not because someone's watching."
+    },
+    {
+     "who": "ODY",
+     "text": "That's exactly why they want you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Squad Leader. Your own crew."
+    },
+    {
+     "who": "ARYA",
+     "text": "He said I'm nobody."
+    },
+    {
+     "who": "ODY",
+     "text": "He also said he had twenty years of experience. Remy checked. Eight months."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40 · CLASS CHANGE SPLASH",
+   "text": "Arya beside the olive Athena, blue lightning, the penjor behind him like a banner.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (blue, enormous): [CLASS CHANGE] [SILENT RIDER → SQUAD LEADER]"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[NEW SKILL: RALLY · Every rider who rides with you rides better]"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[GUILD FUNCTION UNLOCKED: RECRUITMENT]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "Arya and Komang pin a poster on the banjar notice board.",
+   "lines": [
+    {
+     "who": "POSTER",
+     "text": "WERIGO IS RECRUITING. RIDERS WHO SHOW UP."
+    },
+    {
+     "who": "KOMANG",
+     "text": "So... who do we recruit first?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42 · CLIFFHANGER",
+   "text": "Five silhouettes walk toward them out of the morning light.",
+   "lines": [
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[RECRUITMENT QUEST: BUILD YOUR SQUAD · 0 / 5]"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT EPISODE: EP.9 · THE RECRUITS. Who should join Arya's squad first? Tell us in the comments.",
+   "lines": []
+  }
  ]
 }
