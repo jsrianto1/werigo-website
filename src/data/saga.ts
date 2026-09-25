@@ -133,6 +133,18 @@ const allEpisodes: SagaEpisode[] = [
     featuredModels: ["athena", "edpower"],
     published: true,
   },
+  {
+    number: 7,
+    slug: "episode-7",
+    title: "Seven Days",
+    titleId: "Tujuh Hari",
+    logline:
+      "Seven days of Bali for Chloe and Jake: Ubud at dawn, a flat tyre in the rain, a sunset charge at Uluwatu. Seven days of audit for the guild, and Pak Remy has a secret.",
+    loglineId:
+      "Tujuh hari Bali untuk Chloe dan Jake: Ubud saat fajar, ban bocor di tengah hujan, cas saat senja di Uluwatu. Tujuh hari audit untuk guild, dan Pak Remy punya rahasia.",
+    featuredModels: ["athena", "edpower", "victory"],
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [

@@ -2461,5 +2461,431 @@
    "text": "To be continued... NEXT EPISODE: EP.7 · SEVEN DAYS. Would you survive an audit from Pak Remy? Tell us in the comments.",
    "lines": []
   }
+ ],
+ "7": [
+  {
+   "label": "COLD OPEN",
+   "text": "5:58 AM. The Werigo shop, still dark. Komang unlocks the shutter, yawning, coffee in hand.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Day 2. 5:58 AM."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 1",
+   "text": "The shutter rises. Someone is already sitting inside in the dark, face lit only by a tablet. Rimless glasses flash. Pak Remy.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "KRRRRAK."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "You open at eight."
+    },
+    {
+     "who": "KOMANG",
+     "text": "...We open at eight?!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "Komang's coffee hits the floor.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "SPLAT."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[AUDIT: DAY 2 / 7]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "ODY arrives, still in yesterday's shirt, two phones in his hands.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "Your fleet is at ninety five percent. Why not one hundred?"
+    },
+    {
+     "who": "ODY",
+     "text": "Because we stop at ninety five. It keeps the batteries healthy for years."
+    },
+    {
+     "who": "PAK REMY (writing)",
+     "text": "...Noted."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "EPISODE 7 · SEVEN DAYS.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 4 · DAY 2, UBUD",
+   "text": "Dawn. Chloe and Jake glide through a waking village. A grandmother sweeping, a rooster, offerings on a step. Nobody looks up.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Day 2. Ubud."
+    },
+    {
+     "who": "CHLOE (thought)",
+     "text": "Nobody even turns around. We're just part of the morning."
+    },
+    {
+     "who": "SYSTEM (yellow)",
+     "text": "[VISITOR QUEST: SEE THE ISLAND · 2 / 7]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "Tegallalang rice terraces, full page. Chloe sketching on a bench, Jake taking photos, the two bikes parked on the lane.",
+   "lines": [
+    {
+     "who": "JAKE",
+     "text": "Battery?"
+    },
+    {
+     "who": "CHLOE",
+     "text": "More than half. We could go all the way back and do it again."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6 · THE AUDITOR FOLLOWS",
+   "text": "A black car idles on the road above the terraces. Pak Remy in the back seat, tablet up, filming them.",
+   "lines": [
+    {
+     "who": "PAK REMY (on the phone)",
+     "text": "They have not stopped once for fuel."
+    },
+    {
+     "who": "PAK CHAN (phone)",
+     "text": "Numbers, Remy. Not stories."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7 · DAY 3",
+   "text": "Rain. A flat tyre near Tabanan. Chloe and Jake under a warung roof.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DAY 3 / 7]"
+    },
+    {
+     "who": "CHLOE",
+     "text": "Okay. This is where holidays go wrong."
+    },
+    {
+     "who": "JAKE",
+     "text": "WhatsApp them?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "Phone close-up, WhatsApp.",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Hi, flat tyre near Tabanan, sorry!!"
+    },
+    {
+     "who": "WERIGO",
+     "text": "No worries, share your location. Komang is on his way."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9 · PATHFINDER",
+   "text": "Komang on the red Victory tears through a narrow gang no map shows, orange light trail, chickens scattering.",
+   "lines": [
+    {
+     "who": "SYSTEM (orange)",
+     "text": "[PATHFINDER: SHORTCUT FOUND · ETA 11 MIN]"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Every gang on the island, baby!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10 · THE CHAIRMAN WATCHES",
+   "text": "Across the road, a black car. The window slides down a few centimetres. Pak Chan watches Komang sort the tyre in under ten minutes. The window slides back up.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[THE BOARD IS WATCHING]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "The warung owner brings hot tea. Chloe laughs, soaked.",
+   "lines": [
+    {
+     "who": "WARUNG OWNER",
+     "text": "Tea while you wait."
+    },
+    {
+     "who": "CHLOE (thought)",
+     "text": "Best bad day I've ever had."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12 · THE HELMET TRIAL",
+   "text": "The Werigo shop. Pak Remy walks the helmet shelf. The crew stands very straight.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "Two helmets per rider. One is cheaper."
+    },
+    {
+     "who": "ODY",
+     "text": "Two is the standard. The second one is for the person they fall in love with on the trip."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "...That is not a number."
+    },
+    {
+     "who": "ODY",
+     "text": "Give it seven days."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13 · DAY 4, ULUWATU",
+   "text": "Sunset. The Wedison SuperCharge canopy on the cliff. Sekar and Dewa charging. Chloe and Jake pull in.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DAY 4 / 7]"
+    },
+    {
+     "who": "SEKAR",
+     "text": "Visitors, huh? How's the island treating you?"
+    },
+    {
+     "who": "CHLOE",
+     "text": "I haven't opened my laptop in four days."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "Dewa shows Jake the steps on the pile and the app.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Gun in the port. Scan the QR on the pile with the Wedison SuperCharge app. Pay, and it starts by itself. Ten to eighty in about fifteen minutes."
+    },
+    {
+     "who": "SEKAR",
+     "text": "You two are fine though. You charge at the villa every night."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15 · BAYU",
+   "text": "A loud engine dies right at the canopy entrance. Bayu, pushing his sportbike again.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "PUTT... PUTT... PFFT."
+    },
+    {
+     "who": "BAYU",
+     "text": "Don't. Say. Anything."
+    },
+    {
+     "who": "JAKE",
+     "text": "...Is he okay?"
+    },
+    {
+     "who": "SEKAR",
+     "text": "He's been \"okay\" since episode two."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "From the edge of the car park, Pak Remy watches Dewa's app screen over his shoulder. For the first time, he stops typing.",
+   "lines": [
+    {
+     "who": "PAK REMY (thought)",
+     "text": "Fifteen minutes..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17 · DAY 5",
+   "text": "Dawn. Chloe and Jake stop respectfully for a temple procession, offerings on women's heads, the bikes silent at the roadside.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DAY 5 / 7]"
+    },
+    {
+     "who": "CAPTION",
+     "text": "Some mornings, you just pull over and watch."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18 · MIDNIGHT",
+   "text": "The Werigo shop. ODY alone at the whiteboard. A red window over his head.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[AUDIT: 2 DAYS LEFT] [PROJECTED VERDICT: SHUT DOWN]"
+    },
+    {
+     "who": "PAK CHAN (voice message)",
+     "text": "Numbers don't lie, ODY."
+    },
+    {
+     "who": "ODY (thought)",
+     "text": "Numbers alone won't save us. Let them see who we ride for."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19 · DAY 6",
+   "text": "Seminyak at night. Street food, the bikes parked outside, fairy lights.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DAY 6 / 7]"
+    },
+    {
+     "who": "JAKE",
+     "text": "Home, plug in, sleep. I'm going to miss this routine."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20 · THE TWIST",
+   "text": "Same night, 1 AM. An empty coastal road. A lone rider on a black Wedison Athena, helmet visor down, rimless glasses under it. Pak Remy, riding alone, testing it himself.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Nobody was supposed to see this."
+    },
+    {
+     "who": "PAK REMY (thought)",
+     "text": "No vibration. No noise. No fuel receipt."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "A faint grey dashed window flickers beside him, then disappears.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (grey, glitching): [PLAYER DETECT... ERROR]"
+    },
+    {
+     "who": "PAK REMY",
+     "text": "...What was that?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "Last night at the villa. Charging lights glow in the courtyard. Chloe finishes her sketchbook. The cover reads THE QUIET WAY.",
+   "lines": [
+    {
+     "who": "CHLOE (thought)",
+     "text": "Seven days. One sketchbook. I forgot I could do this."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23 · DAY 7",
+   "text": "Arya and Komang arrive for the pickup.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DAY 7 / 7]"
+    },
+    {
+     "who": "CHLOE",
+     "text": "Is it weird to be sad about a scooter?"
+    },
+    {
+     "who": "ARYA",
+     "text": "Everyone says that."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "CHLOE",
+     "text": "Can we just... extend? Or come back?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Monthly is cheaper. Just saying."
+    },
+    {
+     "who": "JAKE",
+     "text": "Chloe. We have jobs."
+    },
+    {
+     "who": "CHLOE",
+     "text": "For now."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "Their windows fade.",
+   "lines": [
+    {
+     "who": "SYSTEM (yellow)",
+     "text": "[VISITOR PASS EXPIRED]"
+    },
+    {
+     "who": "SYSTEM (yellow)",
+     "text": "[RETURN QUEST UNLOCKED: COME BACK SOON]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26 · CLIFFHANGER",
+   "text": "The Werigo shop. The door opens. Pak Chan and Pak Remy walk in and sit down across from ODY. Nobody speaks. Pak Remy's helmet hair is still a little flat.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (red, enormous): [AUDIT: DAY 7 / 7] [VERDICT PENDING]"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Well, Operator?"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT EPISODE: EP.8 · THE VERDICT. Should the Board shut the island down? Vote in the comments.",
+   "lines": []
+  }
  ]
 }
