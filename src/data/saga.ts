@@ -121,6 +121,18 @@ const allEpisodes: SagaEpisode[] = [
     featuredModels: ["athena", "edpower"],
     published: true,
   },
+  {
+    number: 6,
+    slug: "episode-6",
+    title: "The Handover",
+    titleId: "Serah Terima",
+    logline:
+      "Arya meets ODY, the Operator who built the island's network from zero, then hands Chloe and Jake their bikes. That night, the Board lands in Bali.",
+    loglineId:
+      "Arya bertemu ODY, sang Operator yang membangun jaringan pulau ini dari nol, lalu menyerahkan motor untuk Chloe dan Jake. Malam itu, the Board mendarat di Bali.",
+    featuredModels: ["athena", "edpower"],
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
@@ -167,9 +179,7 @@ export const characters: SagaCharacter[] = [
     about: "Designer from Melbourne on her first Bali trip. Burnt out, sunburnt and done with petrol queues. The island has other plans.",
     roleId: "Sang Pengunjung",
     aboutId: "Desainer dari Melbourne yang pertama kali ke Bali. Kelelahan, gosong kepanasan dan kapok antre bensin. Pulau ini punya rencana lain.",
-    model: null,
-    modelNote: "Picked a yellow Athena. It arrives in Episode 6",
-    modelNoteId: "Memilih Athena kuning. Motornya datang di Episode 6",
+    model: "athena",
   },
   {
     id: "jake",
@@ -178,9 +188,40 @@ export const characters: SagaCharacter[] = [
     roleId: "Sang Peselancar",
     about: "Chloe's partner. Twenty nine, board under his arm, and finally old enough for the bike he wants.",
     aboutId: "Pasangan Chloe. Umur dua puluh sembilan, papan selancar di tangan, dan akhirnya cukup umur untuk motor yang dia mau.",
+    model: "edpower",
+  },
+  {
+    id: "ody",
+    name: "ODY",
+    role: "The Operator",
+    roleId: "The Operator",
+    about: "Sent from Singapore to build Wedison Bali from zero. Every SuperCharge station he opens is a gate. Never sleeps, always on WhatsApp.",
+    aboutId: "Dikirim dari Singapura untuk membangun Wedison Bali dari nol. Setiap stasiun SuperCharge yang dia buka adalah gerbang. Tidak pernah tidur, selalu di WhatsApp.",
     model: null,
-    modelNote: "Picked a navy EdPower. It arrives in Episode 6",
-    modelNoteId: "Memilih EdPower navy. Motornya datang di Episode 6",
+    modelNote: "Rides whatever needs testing",
+    modelNoteId: "Mengendarai motor apa pun yang perlu diuji",
+  },
+  {
+    id: "chan",
+    name: "Pak Chan",
+    role: "Chairman of the Board",
+    roleId: "Ketua the Board",
+    about: "Cold, strict and almost never smiles. Every time a quest is cleared, he drops a bigger one.",
+    aboutId: "Dingin, tegas dan hampir tidak pernah tersenyum. Setiap quest selesai, dia memberi yang lebih besar.",
+    model: null,
+    modelNote: "The Board",
+    modelNoteId: "The Board",
+  },
+  {
+    id: "remy",
+    name: "Pak Remy",
+    role: "The Board's numbers man",
+    roleId: "Ahli angka the Board",
+    about: "Twenty nine and the youngest on the Board. One question ends most ideas: what price are you suggesting?",
+    aboutId: "Dua puluh sembilan tahun dan termuda di the Board. Satu pertanyaan mengakhiri banyak ide: berapa harga yang kamu ajukan?",
+    model: null,
+    modelNote: "The Board",
+    modelNoteId: "The Board",
   },
   {
     id: "bayu",

@@ -2103,5 +2103,363 @@
    "text": "To be continued... NEXT EPISODE: EP.6 · THE HANDOVER. Which bike would you pick for your Bali trip?",
    "lines": []
   }
+ ],
+ "6": [
+  {
+   "label": "COLD OPEN",
+   "text": "Black.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "18 May 2026. Singapore."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 1",
+   "text": "A dark boardroom at the top of a tower, the city glowing far below. Two men sit at the far end of a long black table, lit from behind so their glasses flash white. PAK CHAN, mid 50s, the chairman, still as a statue. PAK REMY, 29, the youngest numbers man the Board has ever had, tablet glowing in front of him. At the near end, a young man with his back to us: ODY.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Bali. No showroom. No network. No team."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "You will build all of it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "Close-up. Pak Remy slides the tablet across the table without looking up.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "The budget is fixed. It will not move."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "So. What price are you suggesting?"
+    },
+    {
+     "who": "ODY",
+     "text": "For what?"
+    },
+    {
+     "who": "PAK REMY",
+     "text": "For your survival."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "Pak Chan leans into the light for the first time. No smile.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Fail, and you never sit at this table again."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "ODY's face for the first time. He is not scared. A small, stubborn smile.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Then give me the island."
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (gold, huge, only the reader sees it): [CONTRACT ACCEPTED] [HIDDEN CLASS: THE OPERATOR]"
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "EPISODE 6 · THE HANDOVER.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 5",
+   "text": "Present day. Night. The Werigo shop in Canggu, shutters half down. Dewa walks Arya in.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Present day. Werigo, Canggu. 10:48 PM."
+    },
+    {
+     "who": "DEWA",
+     "text": "Before you deliver to the Visitor, you report to the Operator."
+    },
+    {
+     "who": "ARYA",
+     "text": "I thought you were the guild master."
+    },
+    {
+     "who": "DEWA",
+     "text": "I run the guild. He runs the island."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "The back office. A desk buried under two laptops, three buzzing phones and sticky notes, a whiteboard map of Bali full of pins. Tiny quest windows float around the man at the desk, stacked like browser tabs.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "BZZT. BZZT. BZZT."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[ACTIVE QUESTS: 47]"
+    },
+    {
+     "who": "",
+     "text": "PHONE (WhatsApp pop-up): Pak, any update on the payment? 🙏"
+    },
+    {
+     "who": "",
+     "text": "ODY (on the phone, not looking up): Yes Pak, today. ...Probably."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "ODY looks up. Arya's System tries to read him and glitches.",
+   "lines": [
+    {
+     "who": "SYSTEM (Arya's view)",
+     "text": "[PLAYER: ODY] [CLASS: THE OPERATOR] [RANK: ???] [ERROR: STATS TOO HIGH TO DISPLAY]"
+    },
+    {
+     "who": "ARYA (thought)",
+     "text": "Question marks...?"
+    },
+    {
+     "who": "ODY",
+     "text": "You're the Silent Rider. Sit. The coffee's cold, sorry."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8 · FLASHBACK, THREE PANELS",
+   "text": "",
+   "lines": [
+    {
+     "who": "",
+     "text": "(a) May 2026. An empty building in Denpasar, bare concrete, wires hanging, one plastic chair. A storm of quest windows flies at ODY. SYSTEM: ! MAIN QUEST: BUILD WEDISON BALI · Sub-quests: 214. ODY: \"...Two hundred and fourteen.\""
+    },
+    {
+     "who": "",
+     "text": "(b) Night. The first Wedison SuperCharge canopy. ODY plugs a gun into a bike. SFX: KLIK. CAPTION: \"The first three stations. Denpasar. Sunset Road. Tohpati.\""
+    },
+    {
+     "who": "",
+     "text": "(c) A map of Bali from the sky. Three green points flare and lines of light race between them under the island. SYSTEM (world): [ISLAND NETWORK: ONLINE] [SYSTEM AWAKENING IN LINKED BIKES...]"
+    },
+    {
+     "who": "",
+     "text": "ODY (voice-over): Every station I open is a gate. The night the first three opened, your Athena woke up."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "Back in the office. Arya, stunned.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "So the powers. The guild. Werigo..."
+    },
+    {
+     "who": "ODY",
+     "text": "Werigo is how the visitors get in. I built the Visitor Pass so tourists could ride Bali the quiet way."
+    },
+    {
+     "who": "ODY",
+     "text": "Your Chloe just got one."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "ODY slides a delivery card across the desk: Chloe & Jake · 9:00 AM · yellow Athena · navy EdPower.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Nine sharp. Eighty percent battery minimum. Two clean helmets each. Phone holder on. Full briefing. And show them how to charge at the villa."
+    },
+    {
+     "who": "ARYA",
+     "text": "Yes, boss."
+    },
+    {
+     "who": "ODY",
+     "text": "Don't call me boss. My bosses are much scarier."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "8:59 AM. The villa gate. Chloe with a coffee, listening for engines. Nothing.",
+   "lines": [
+    {
+     "who": "CHLOE (thought)",
+     "text": "I'll hear them coming. Scooters are loud."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "Behind her, a polite knock. Arya and Komang are already there with a yellow Athena and a navy EdPower.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "TOK TOK."
+    },
+    {
+     "who": "CHLOE (shouting)",
+     "text": "How long have you been standing there?!"
+    },
+    {
+     "who": "KOMANG",
+     "text": "About a minute. They're quiet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13 · HANDOVER CHECKLIST",
+   "text": "Four panels, each with a small green window.",
+   "lines": [
+    {
+     "who": "",
+     "text": "(a) Close-up of the dash: 94%. ARYA: \"Delivered at 94. You'll never get one under 80.\" SYSTEM: [BATTERY ✓]"
+    },
+    {
+     "who": "",
+     "text": "(b) Komang hands over two helmets each. KOMANG: \"Two each. Cleaned this morning.\" SYSTEM: [HELMETS ✓]"
+    },
+    {
+     "who": "",
+     "text": "(c) Komang clicks Chloe's phone into the holder. CHLOE: \"Oh, that's clever.\" SYSTEM: [PHONE HOLDER ✓]"
+    },
+    {
+     "who": "",
+     "text": "(d) The briefing. ARYA: \"It's quiet, so people won't hear you. Tap the horn at corners. And keep left.\" JAKE: \"Left. Left. Left.\" SYSTEM: [BRIEFING ✓]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14 · HOME CHARGING",
+   "text": "Arya lifts the Wedison charging adapter out of the bag: plug into a normal wall socket on the villa terrace, connector into the charging port on the LEFT side of the Athena's inner front panel, low under the handlebar. Jake's EdPower: the port on top of the centre tunnel in front of the seat.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "One end in the wall, one end in the bike. Plug in when you get home, like your phone. By breakfast it's full."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[NEW SKILL: OVERNIGHT CHARGE]"
+    },
+    {
+     "who": "CHLOE",
+     "text": "That's... it?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "That's it. Normal socket. Anything happens, WhatsApp us, eight to eight. We come to you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "The keys change hands. Two windows burst open, yellow for Chloe, navy for Jake.",
+   "lines": [
+    {
+     "who": "SYSTEM (yellow)",
+     "text": "[VISITOR PASS ACTIVATED · 7 DAYS] [CLASS: WANDERER]"
+    },
+    {
+     "who": "SYSTEM (navy)",
+     "text": "[VISITOR PASS ACTIVATED · 7 DAYS] [CLASS: TORQUE HUNTER]"
+    },
+    {
+     "who": "JAKE",
+     "text": "Did your phone just..."
+    },
+    {
+     "who": "CHLOE",
+     "text": "Yours too?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16 · FULL PAGE",
+   "text": "Chloe's first ride on the yellow Athena through the Canggu rice fields, laughing, Jake beside her on the EdPower.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "VMMM..."
+    },
+    {
+     "who": "CHLOE (thought)",
+     "text": "I can hear the birds. On a scooter. I can hear the birds."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "Night. The dark villa courtyard, a small green charging light on each bike. Chloe and Jake asleep inside.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "While they slept, the bikes filled up."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18 · CLIFFHANGER",
+   "text": "The same night. The arrivals hall at the airport, almost empty. Two men walk out of the glass doors, suits dark, glasses flashing under the lights. Pak Chan. Pak Remy.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (red, enormous): ! WORLD EVENT: THE AUDIT · The Board has landed."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "ODY's phone lights up on his desk. A voice message from Pak Chan.",
+   "lines": [
+    {
+     "who": "PAK CHAN (voice message)",
+     "text": "Seven days, ODY. Show me this island can stand on its own."
+    },
+    {
+     "who": "PAK REMY (voice message)",
+     "text": "Or we switch it off. All of it."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[AUDIT: 7 DAYS] [FAIL CONDITION: THE GUILD IS DISBANDED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "ODY stares at the screen, then at the whiteboard, then laughs once, tired.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Seven days. Same as the visitors."
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT EPISODE: EP.7 · SEVEN DAYS. Would you survive an audit from Pak Remy? Tell us in the comments.",
+   "lines": []
+  }
  ]
 }
