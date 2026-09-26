@@ -3600,10 +3600,6 @@
    "text": "Morning, the banjar hall. A trestle table with a basket of croissants and sourdough, Komang already eating one.",
    "lines": [
     {
-     "who": "CAPTION (badge)",
-     "text": "Recruitment snacks: croissants from JOSE BAKERY, Bali."
-    },
-    {
      "who": "KOMANG",
      "text": "If nobody comes, at least we have croissants."
     }
@@ -3694,10 +3690,6 @@
    "label": "PANEL 10",
    "text": "Break under the warung roof. Sekar eats a browkies from a paper bag.",
    "lines": [
-    {
-     "who": "CAPTION (badge)",
-     "text": "Sekar's browkies: JOSE BAKERY, Bali."
-    },
     {
      "who": "SEKAR",
      "text": "Don't tell Dewa I'm sharing."
@@ -3895,12 +3887,8 @@
   },
   {
    "label": "PANEL 24",
-   "text": "The banjar, morning. Five chairs, five people. Dewa hands out Jose Bakery sourdough for breakfast.",
+   "text": "The banjar, morning. Five chairs, five people. Dewa hands out sourdough for breakfast.",
    "lines": [
-    {
-     "who": "CAPTION (badge)",
-     "text": "Dewa's sourdough: 100% natural levain, JOSE BAKERY, Bali."
-    },
     {
      "who": "DEWA",
      "text": "Squad Leader. Your squad."
@@ -3934,12 +3922,8 @@
   },
   {
    "label": "PANEL 27",
-   "text": "Evening. Arya brings a box of Jose Bakery donuts to the grandmother from EP.2 to say thank you for the blessing. She is making canang on her porch.",
+   "text": "Evening. Arya brings a box of donuts (Jose Bakery logo on the box) to the grandmother from EP.2 to say thank you for the blessing. She is making canang on her porch.",
    "lines": [
-    {
-     "who": "CAPTION (badge)",
-     "text": "Thank-you donuts: JOSE BAKERY, Bali."
-    },
     {
      "who": "ARYA",
      "text": "Nenek, your blessing worked. I have a squad now. Five."
