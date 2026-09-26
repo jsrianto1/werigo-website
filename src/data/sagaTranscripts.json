@@ -4565,5 +4565,618 @@
    "text": "To be continued... NEXT CHAPTER: CH.11 · THE BACKDROP WAR. Would you pass Pak Liam's test? Tell us in the comments.",
    "lines": []
   }
+ ],
+ "11": [
+  {
+   "label": "PART 1 · WORLD EVENT (cold open)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1 · SPLASH",
+   "text": "Night, the whole island of Bali seen from high above. One hundred faint pillars of light are pinned across the island like stars. Only seven are lit green.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (gold, enormous): [WORLD EVENT: THE HUNDRED GATES] [100 GATES · 100 DAYS] [REWARD: ???]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "Pak Chan on a video call from his tower, ODY on the other end in the Werigo office.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Pak Liam said \"He will do.\" Now do. One hundred gates. One hundred days."
+    },
+    {
+     "who": "ODY",
+     "text": "Pak... we have seven."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Then you have ninety-three to go."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3 · COMEDY",
+   "text": "Pak Chan holds up a mockup: a gigantic green WEDISON backdrop, six metres tall, dwarfing a tiny shop. Title card: CH.11 · THE BACKDROP WAR",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "And every gate gets THIS."
+    },
+    {
+     "who": "ODY",
+     "text": "Pak, it's bigger than the shop."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Good."
+    }
+   ]
+  },
+  {
+   "label": "PART 2 · THE PARTY",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 4",
+   "text": "Morning at the Werigo base. ODY introduces CINTA, a rolled map under her arm. Sekar leans on her pink Athena, Dewa sits on his grey EdPower.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Escort? Since when do I escort?"
+    },
+    {
+     "who": "SEKAR",
+     "text": "Since the Board pays for fuel. Oh wait. We don't use fuel."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5 · VFX",
+   "text": "Cinta kneels and lays her palm on the asphalt. Glowing green heat lines spread across the road, brightest in front of a warung.",
+   "lines": [
+    {
+     "who": "SYSTEM (green)",
+     "text": "[CINTA · CLASS: SITE SEER] [SKILL: GROUND SENSE]"
+    },
+    {
+     "who": "CINTA",
+     "text": "Riders stop where the coffee is. Put the gate where the coffee is."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6 · VFX",
+   "text": "The paper map on the table unfolds into a glowing fantasy map of Bali with seven regions like dungeons.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DUNGEONS UNLOCKED: DENPASAR · SEMINYAK · KUTA · CANGGU · UBUD · JIMBARAN · ULUWATU]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7 · COMEDY",
+   "text": "RION arrives, laptop open, dark circles under his eyes. On the screen, backdrop version twelve covers an entire street.",
+   "lines": [
+    {
+     "who": "RION",
+     "text": "Pak Chan sent version twelve. At 3am."
+    },
+    {
+     "who": "KOMANG",
+     "text": "Is that a backdrop or a new island?"
+    }
+   ]
+  },
+  {
+   "label": "PART 3 · THE HUNT",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 8 · SEMINYAK",
+   "text": "A stylish café owner loves the charger, then sees the backdrop mockup and faints backwards onto a daybed.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[SITE LOST]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9 · KUTA",
+   "text": "A surf shop owner stands in front of his board rack.",
+   "lines": [
+    {
+     "who": "SURF SHOP OWNER",
+     "text": "Your sign goes where? In front of my boards?"
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[SITE LOST]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10 · ULUWATU, MINI BOSS",
+   "text": "On a temple wall above the cliff, a big monkey wears Dewa's sunglasses and holds Cinta's measuring tape. Behind him, a troop of monkeys.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[MINI BOSS: KING OF THE CLIFF]"
+    },
+    {
+     "who": "DEWA",
+     "text": "Give. Them. Back."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "Sekar holds up a banana. The monkey king drops the sunglasses and the tape instantly.",
+   "lines": [
+    {
+     "who": "SEKAR",
+     "text": "Rule one in Uluwatu. Always bring a banana."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[ITEMS RECOVERED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12 · UBUD",
+   "text": "A homestay owner among rice terraces, holding a red envelope.",
+   "lines": [
+    {
+     "who": "HOMESTAY OWNER",
+     "text": "A foreign company came yesterday. Double rent. A man in loafers."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[RIVAL DETECTED: TURNCOAT]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "Evening. The fantasy map again: seven dungeons, all marked with red crosses.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[GATES SECURED: 0 / 93]"
+    },
+    {
+     "who": "DEWA",
+     "text": "Seven dungeons. Zero loot."
+    }
+   ]
+  },
+  {
+   "label": "PART 4 · THE COUNCIL",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 14",
+   "text": "Cinta shows a photo on her tablet.",
+   "lines": [
+    {
+     "who": "CINTA",
+     "text": "Every landlord on this island answers to one man."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15 · SPLASH",
+   "text": "A grand open bale in Denpasar, drawn like a throne hall: landlords seated along both sides like lords of a court, carved pillars, incense. At the head, PAK NYOMAN, fanning himself.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[PAK NYOMAN · LORD OF THE LANDLORDS' COUNCIL]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK NYOMAN",
+     "text": "I like your chargers. A rider who charges, sits. A rider who sits, eats. A rider who eats pays my tenants."
+    },
+    {
+     "who": "PAK NYOMAN",
+     "text": "But your boss's backdrop? It eats my tenants' shopfronts."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17 · VFX",
+   "text": "Yoko sweeps in, arms wide. Red envelopes rain from the air over the council.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Double rent. Triple backdrop."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[TURNCOAT · SKILL: GOLD RAIN]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "Landlords catch envelopes. Some waver. Pak Nyoman does not move.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 19 · COMEDY",
+   "text": "Pak Chan arrives with Pak Remy. Pak Chan points at Yoko.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Our backdrop will be bigger than his."
+    },
+    {
+     "who": "ODY",
+     "text": "(face in his palm) Pak..."
+    },
+    {
+     "who": "PAK REMY (to Yoko)",
+     "text": "And what price are you suggesting?"
+    },
+    {
+     "who": "",
+     "text": "(Yoko sweats.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20 · VFX",
+   "text": "Pak Nyoman snaps his fan shut. Red and gold light cracks across the hall.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (red and gold, enormous): [WORLD EVENT UPDATE: THE BACKDROP WAR]"
+    },
+    {
+     "who": "PAK NYOMAN",
+     "text": "Seven days. Whoever wins my last corner wins the council."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "On the tablet: a crossroads in Canggu where every rider passes.",
+   "lines": [
+    {
+     "who": "CINTA",
+     "text": "The last corner belongs to Ibu Sari. No phone. No email. Nobody has found her house in ten years."
+    }
+   ]
+  },
+  {
+   "label": "PART 5 · THE GANG NO MAP SHOWS",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 22",
+   "text": "Everyone's phone map shows the same thing: a patch of grey fog where the gang should be.",
+   "lines": [
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[UNMAPPED AREA]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23 · VFX",
+   "text": "Komang grins. Glowing blue footprints appear on the ground and lead into a tiny gap between two walls.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "No map? Good. I don't use maps."
+    },
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[PATHFINDER · HIDDEN ROUTE DETECTED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24 · COMEDY",
+   "text": "The gang entrance is barely wider than a handlebar. Komang's Victory and Sekar's Athena slip in. Dewa's big EdPower stops at the mouth of the gang.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "My bike is too handsome for this gang. I'll guard the entrance."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25 · MINI BOSS",
+   "text": "Three Bali street dogs block the path, eyes glowing, growling.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[MINI BOSS: THREE GUARDIANS OF THE GANG]"
+    },
+    {
+     "who": "CINTA",
+     "text": "...Komang?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26 · COMEDY",
+   "text": "Komang crouches and speaks softly in Balinese. The three dogs roll over for belly rubs.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Kenken, cicing? Tiang Komang."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[GUARDIANS: BEFRIENDED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27 · VFX",
+   "text": "Deeper in, the gang becomes a labyrinth: floating lanterns, canang on every step, glowing blue footprints turning corners that should not exist.",
+   "lines": [
+    {
+     "who": "CINTA",
+     "text": "How do you know all this?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "My father delivered gas here for twenty years. On foot."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "The end of the gang. A small house under a big frangipani. IBU SARI sits weaving canang. She doesn't look up.",
+   "lines": [
+    {
+     "who": "IBU SARI",
+     "text": "Ten years, nobody found this door. You came with a Pathfinder. Sit."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU SARI",
+     "text": "Everybody wants my corner. Nobody asks what my corner wants."
+    },
+    {
+     "who": "ODY",
+     "text": "What does it want?"
+    },
+    {
+     "who": "IBU SARI",
+     "text": "Come at six tomorrow. Look."
+    }
+   ]
+  },
+  {
+   "label": "PART 6 · THE CORNER",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 30",
+   "text": "06:00. The Canggu crossroads at sunrise. Ibu Sari's warung and, next door, a small bakery with a big shop window. Riders stop for coffee and bread. Cinta's Ground Sense lights the whole corner gold.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[SITE RANK: S]"
+    },
+    {
+     "who": "CINTA",
+     "text": "Everyone stops here. Everyone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31 · VFX",
+   "text": "Yoko arrives first with workers raising a giant red backdrop that covers the bakery window and the warung. The backdrop comes alive: a monstrous golem wall with glowing red eyes, its shadow swallowing the shops.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[TURNCOAT · SUMMON: BACKDROP GOLEM]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "In the shadow, customers walk straight past the hidden warung. Ibu Sari's face turns to stone.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 33 · COMEDY",
+   "text": "Pak Chan arrives with Rion carrying an even bigger green backdrop.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Ours is bigger. Put it up."
+    },
+    {
+     "who": "ODY",
+     "text": "(hand up) Pak. Trust me. Once."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34 · COMEDY",
+   "text": "Close-up of Pak Chan's face, frozen.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[PAK CHAN · TRUST: LOADING...]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35 · VFX",
+   "text": "ODY raises one hand. Green blueprint lines draw themselves in the air: one slim white pile at the kerb, a small WEDISON logo, every shopfront open.",
+   "lines": [
+    {
+     "who": "SYSTEM (green)",
+     "text": "[OPERATOR · SKILL: BLUEPRINT] [SMALL BRAND · STRONG MACHINE · BLOCK NOBODY]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36 · SPLASH, BATTLE",
+   "text": "The green blueprint light strikes the red golem. The backdrop tears apart into falling red fabric. Sunlight pours back onto the warung and the bakery window.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "KRRRAAASH!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "Riders pull in, plug in at the new pile and walk into the warung and bakery. Arya plugs the gun into his olive Athena.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Fifteen minutes. One coffee. Back on the road."
+    },
+    {
+     "who": "SYSTEM (green)",
+     "text": "[SUPERCHARGE · 10% → 80% IN ABOUT 15 MIN] [TENANT HAPPINESS +100]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "Ibu Sari signs ODY's tablet with a smile.",
+   "lines": [
+    {
+     "who": "IBU SARI",
+     "text": "A gate that lets my corner breathe. Yes."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39 · VFX",
+   "text": "Pak Nyoman arrives, fanning, laughing. A golden seal opens in the sky.",
+   "lines": [
+    {
+     "who": "PAK NYOMAN",
+     "text": "Small brand, strong machine, block nobody. That is the council's rule now."
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (gold, enormous): [COUNCIL VOTE: WEDISON] [NEW WORLD RULE: BLOCK NOBODY]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40 · COMEDY",
+   "text": "Yoko lies wrapped in his own fallen red backdrop like a burrito. Only his loafers stick out.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[QUEST FAILED ×2] [TURNCOAT · REPUTATION -100]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41 · VFX",
+   "text": "The fantasy map again: all seven dungeons light up green, one by one.",
+   "lines": [
+    {
+     "who": "SYSTEM (green)",
+     "text": "[GATES SECURED: 30 / 100]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42 · COMEDY",
+   "text": "Pak Chan reads a message from Pak Liam on his phone.",
+   "lines": [
+    {
+     "who": "PAK LIAM (message)",
+     "text": "Block nobody. Good."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "...I also said that."
+    },
+    {
+     "who": "ODY",
+     "text": "Of course, Pak."
+    },
+    {
+     "who": "",
+     "text": "(Sekar and Dewa, behind them, trying very hard not to laugh.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 43 · COMEDY",
+   "text": "",
+   "lines": [
+    {
+     "who": "RION",
+     "text": "Pak, should I delete version twelve?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "...Keep it. For my office wall."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 44 · SPLASH",
+   "text": "Sunset ride along the Canggu coast: Sekar on the pink Athena, Dewa on the grey EdPower, Komang on the red Victory with Cinta behind him, ODY in front. Across the island, green pillars rise into the sky.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (green, enormous): [WORLD EVENT: THE HUNDRED GATES · 30 / 100]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 45 · CLIFFHANGER",
+   "text": "Night, the ojol base under the banyan tree. The new gate by the market glows. Made and the drivers look at it. A young driver shakes his head.",
+   "lines": [
+    {
+     "who": "YOUNG DRIVER",
+     "text": "Nice gate. But we can't buy the bike."
+    },
+    {
+     "who": "",
+     "text": "(Arya, listening.)"
+    },
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[NEW QUEST: RENT TO OWN]"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT CHAPTER: CH.12 · RENT TO OWN. Where should the next gate go? Tell us your spot in the comments.",
+   "lines": []
+  }
  ]
 }

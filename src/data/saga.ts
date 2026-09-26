@@ -241,6 +241,23 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 11,
+    slug: "chapter-11",
+    key: "chapter-11",
+    title: "The Backdrop War",
+    titleId: "Perang Backdrop",
+    logline:
+      "One hundred gates in one hundred days. ODY and Cinta hunt sites across seven dungeons of Bali, the landlords hate giant backdrops, Yoko summons a Backdrop Golem, and only Komang can find the last corner.",
+    loglineId:
+      "Seratus gate dalam seratus hari. ODY dan Cinta berburu lokasi di tujuh dungeon Bali, para tuan tanah benci backdrop raksasa, Yoko memanggil Golem Backdrop, dan hanya Komang yang bisa menemukan pojok terakhir.",
+    featuredModels: ["athena", "edpower", "victory"],
+    commentPrompt: {
+      en: "Where should the next gate go? Tell us your spot in the comments.",
+      id: "Gate berikutnya harus di mana? Tulis spot favoritmu di kolom komentar.",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
