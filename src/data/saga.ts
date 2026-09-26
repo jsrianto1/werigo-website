@@ -207,6 +207,22 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 10,
+    slug: "episode-10",
+    title: "The Owner",
+    titleId: "Sang Pemilik",
+    logline:
+      "Pak Liam, the owner of WEDISON, gives ODY three days: a dawn golf test, the street, and a night at a dark gate beside a cemetery. No slides allowed.",
+    loglineId:
+      "Pak Liam, pemilik WEDISON, memberi ODY tiga hari: ujian golf subuh, jalanan, dan satu malam di gate yang padam di samping setra. Tanpa slide.",
+    featuredModels: ["edpower", "athena", "victory"],
+    commentPrompt: {
+      en: "Would you pass Pak Liam's test? Tell us in the comments.",
+      id: "Kamu bakal lulus ujian Pak Liam? Tulis di kolom komentar.",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [

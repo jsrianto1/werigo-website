@@ -3992,5 +3992,578 @@
    "text": "To be continued... NEXT EPISODE: EP.10 · THE OWNER. Which recruit is your favourite? Tell us in the comments.",
    "lines": []
   }
+ ],
+ "10": [
+  {
+   "label": "PART 1 · THE DARK GATE (cold open, flash-forward)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1",
+   "text": "Night on the Bukit. A lonely Wedison SuperCharge pile beside a foggy road, frangipani trees and an old setra (cemetery) behind a low wall. The pile screen flickers and dies.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (grey, glitching): [GATE 07 · OFFLINE]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "ODY's phone: the gate map of Bali. Green dots turning red, one after another.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[GATE 08 · OFFLINE] [GATE 09 · OFFLINE]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "In the fog, a figure in white stands beside the dead pile, its back to us. Faint gamelan in the dark. ODY's torch shakes. PAK CHAN hides behind PAK LIAM. Title card: EP.10 · THE OWNER",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "...ding... dung..."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Pak Liam, please... stay behind me."
+    },
+    {
+     "who": "CAPTION",
+     "text": "Forty-eight hours earlier."
+    }
+   ]
+  },
+  {
+   "label": "PART 2 · DAY 1 · THE GREEN",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 4",
+   "text": "05:30. A clifftop golf course above the ocean, first light. Pak Liam drives a perfect ball. ODY, half asleep, carries the golf bag. Pak Chan holds an umbrella over Pak Liam. It is not raining.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "DAY 1 · 05:30"
+    },
+    {
+     "who": "ODY",
+     "text": "...It's not raining, Pak."
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "The sun is also weather, Ody."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "The System tries to read Pak Liam and breaks.",
+   "lines": [
+    {
+     "who": "SYSTEM (static)",
+     "text": "[PLAYER: ???] [RANK: ???] [LEVEL: ERROR]"
+    },
+    {
+     "who": "ODY (thought)",
+     "text": "Even the System is scared of him."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "Between swings, without looking up.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "How many ojol drivers ride in Denpasar every day?"
+    },
+    {
+     "who": "ODY",
+     "text": "...A lot?"
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[OWNER'S TEST · WRONG ANSWER]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "What does one of them spend on petrol in a day?"
+    },
+    {
+     "who": "ODY",
+     "text": "It depends on..."
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "Not enough."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[OWNER'S TEST · 0 / 3]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8 · COMEDY",
+   "text": "Pak Chan laughs loudly. Pak Liam stares at him.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "HA HA HA, very good, Pak!"
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "I haven't finished the joke."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[PAK CHAN · FEAR +300]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "ODY holds up a tablet with his deck. Pak Liam pushes it down with one finger.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "Where do the next twenty gates go?"
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "No slides. Slides don't ride."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "At the golf buggy, Pak Liam takes a slice of sourdough from a paper bakery bag.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "Sourdough. No butter. Tomorrow, you show me the street. Not the office."
+    },
+    {
+     "who": "PAK CHAN (whispering to ODY)",
+     "text": "If he leaves unhappy, I leave with him. And you leave before me."
+    }
+   ]
+  },
+  {
+   "label": "PART 3 · DAY 2 · THE STREET",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 11",
+   "text": "Morning. An ojol base under a giant banyan tree in Denpasar: drivers in plain jackets, petrol bikes, kopi in glasses. A black car stops. Pak Liam steps out in his polo and cap. Pak Chan follows in a full navy suit, already sweating. Arya and Komang wait on the olive Athena and the red Victory.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "DAY 2 · THE STREET"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG (whisper)",
+     "text": "Who's the grandpa?"
+    },
+    {
+     "who": "ARYA (whisper)",
+     "text": "The System just says... question marks."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "Pak Liam sits on a tiny plastic stool among the drivers, a glass of kopi in his hand. Made (IRONWILL, from EP.9) sits next to him.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "What does your bike cost you every day?"
+    },
+    {
+     "who": "MADE",
+     "text": "Petrol, forty, fifty thousand. Oil. Chain. Something breaks every month."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "",
+   "lines": [
+    {
+     "who": "MADE",
+     "text": "The day I rode a Wedison, I paid nothing for fuel. I charged at home, at night."
+    },
+    {
+     "who": "OLD DRIVER",
+     "text": "And if the battery dies in the middle of an order?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "ODY shows the gate map on his phone.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "SuperCharge. Ten to eighty percent in about fifteen minutes. Open twenty-four hours."
+    },
+    {
+     "who": "OLD DRIVER",
+     "text": "Where?"
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "(looking at the map) Not enough of them."
+    },
+    {
+     "who": "ODY",
+     "text": "...Not yet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16 · COMEDY",
+   "text": "Pak Chan tries to sit on a plastic stool in his suit. KRAK. The drivers roar. Pak Liam laughs for the first time.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "KRAK!"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[PAK CHAN · DIGNITY -50]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "Pak Liam writes in a small notebook. He closes it.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "They know more than your deck."
+    }
+   ]
+  },
+  {
+   "label": "PART 4 · NIGHT 2 · THE DARK GATE",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 18",
+   "text": "23:40. ODY's phone lights up in the dark hotel room.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[WARNING: GATE 07 OFFLINE]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "The car on a black road across the Bukit. ODY drives. Pak Liam in front, calm. Pak Chan in the back seat, clutching the headrest.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Pak, we can send a technician tomorrow morn..."
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "Tonight. The gate is ours. We go."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "They arrive. Fog, frangipani trees, the low wall of the setra, the split gate of an old temple in the mist. The pile is dark.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "...ding... dung..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21 · HORROR",
+   "text": "A figure in white with a grey bun stands beside the pile, back turned, incense smoke curling around her. Pak Chan grabs Pak Liam's arm with both hands.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "...Pak. Pak. PAK."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "She turns. It is the grandmother, the GATEKEEPER from EP.9. Her eyes glow gold. She holds an offering tray. Pak Chan's soul (tiny, comic) floats out of his mouth.",
+   "lines": [
+    {
+     "who": "SYSTEM (old gold)",
+     "text": "[GATEKEEPER · RANK S]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "Around them, in the fog, faint golden shapes of the island's ancestors watch in silence. Peaceful, not evil.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "You built a gate on land that has owners you cannot see, nak. You forgot to ask."
+    },
+    {
+     "who": "ODY",
+     "text": "...Nobody told us."
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "Sekala, you ask the landlord. Niskala, you ask the land."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "Pak Liam takes a stick of incense and kneels to place the offering beside the pile.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "In Hong Kong, we also ask the land before we build."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25 · VFX",
+   "text": "Two unreadable players face each other. His window of static and her ancient gold window touch, and sparks fly.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[??? · MEETS · GATEKEEPER]"
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "(smiling) This one is old too."
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "Not as old as you, madam."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "Arya and Kadek arrive on the olive Athena, headlight cutting the fog. Kadek lays his palm on the pile, then points at its base.",
+   "lines": [
+    {
+     "who": "SYSTEM (flickering)",
+     "text": "[KADEK · ???] [SABOTAGE DETECTED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "ODY opens the base cover: the power cable is cut clean.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "This wasn't the spirits."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "Torchlight on the mud: the print of a loafer. Next to it, an iced coffee cup with a straw.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Who wears loafers to a cemetery?"
+    },
+    {
+     "who": "",
+     "text": "(Nobody answers. Everybody knows.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29 · SPLASH, VFX",
+   "text": "Kadek and ODY splice the cable. The pile screen glows green. A pillar of green light rises from the gate into the sky, and the ancestral shapes bow and fade. On ODY's phone, the red dots turn green one by one.",
+   "lines": [
+    {
+     "who": "SYSTEM (green)",
+     "text": "[GATE 07 · ONLINE] [BLESSED BY THE LAND]"
+    }
+   ]
+  },
+  {
+   "label": "PART 5 · DAY 3 · THE RIDE",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 30",
+   "text": "Morning. No deck. ODY rolls up on a grey EdPower with a second one, black, beside it.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "Where is your presentation?"
+    },
+    {
+     "who": "ODY",
+     "text": "Today, you are the presentation. Get on."
+    },
+    {
+     "who": "",
+     "text": "(Pak Chan chokes on his coffee.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "Pak Liam on the black EdPower, helmet on. He twists the throttle. No sound. Instant torque. His eyes go wide.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "..."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[INSTANT TORQUE]"
+    },
+    {
+     "who": "PAK CHAN (from the car window)",
+     "text": "PAK! SLOWER!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "Riding side by side through Denpasar, past a long petrol queue. Pak Liam looks at the queue as they glide by.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 33",
+   "text": "A SuperCharge station, close-up. ODY plugs the gun into the port on the EdPower's centre tunnel, in front of the seat (drawn from the real port reference). Behind him, Pak Liam scans the QR on the pile screen with his own phone and pays with QRIS.",
+   "lines": [
+    {
+     "who": "SYSTEM (green)",
+     "text": "[SUPERCHARGE · 10% TO 80% IN ABOUT 15 MIN · OPEN 24 HOURS]"
+    },
+    {
+     "who": "ODY",
+     "text": "Plug, scan, pay. It stops at ninety-five to protect the battery."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "Back at the banyan tree. This time the drivers talk first, and ODY answers every question from the green.",
+   "lines": [
+    {
+     "who": "MADE",
+     "text": "The station by the market is full every night."
+    },
+    {
+     "who": "ODY",
+     "text": "The gates by the market fill up every night. That's where gate twenty-one goes. And the next twenty follow the drivers, not the map."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[OWNER'S TEST · 3 / 3]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "Pak Liam walks away with Pak Chan, not looking back.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "He will do."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36 · SPLASH, VFX",
+   "text": "A colossal white-gold window opens across the sky over Denpasar, and for the first time the System can read him.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (white gold, enormous): [SOVEREIGN'S APPROVAL] [PLAYER: LIAM · RANK: SOVEREIGN] [OPERATOR · LEVEL UP]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37 · COMEDY",
+   "text": "Pak Chan exhales for the first time in three days and slides down the car door.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Are you okay, Pak?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "...Never tell anyone about the stool."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "The private jet at dawn. Pak Liam hands ODY a golf ball.",
+   "lines": [
+    {
+     "who": "PAK LIAM",
+     "text": "Next time, you don't carry the bag. You play."
+    },
+    {
+     "who": "ODY",
+     "text": "I don't play golf."
+    },
+    {
+     "who": "PAK LIAM",
+     "text": "You will."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39 · CLIFFHANGER",
+   "text": "A dark room. Muddy loafers on a desk. Yoko on the phone, a map of Bali on the wall with a hundred red pins.",
+   "lines": [
+    {
+     "who": "CEO (phone)",
+     "text": "And the gates?"
+    },
+    {
+     "who": "YOKO",
+     "text": "That was one. Next time, all hundred of them."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[TURNCOAT · NEW QUEST: THE BACKDROP WAR]"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT EPISODE: EP.11 · THE BACKDROP WAR. Would you pass Pak Liam's test? Tell us in the comments.",
+   "lines": []
+  }
  ]
 }
