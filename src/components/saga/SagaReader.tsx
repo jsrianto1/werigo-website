@@ -24,6 +24,7 @@ import { LangToggle, ReactionBar, ShareBar, StatLine } from "@/components/saga/S
 export interface ReaderEpisodeRef {
   number: number;
   slug: string;
+  key: string; // stable stats/progress id ("episode-N")
   title: string;
   titleId: string;
   cover: string;
@@ -55,7 +56,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
   const t = sagaUi[lang];
   const titleOf = (e: ReaderEpisodeRef) => (lang === "id" ? e.titleId : e.title);
   const pageSrc = (src: string) => (lang === "id" ? src.replace("/media/saga/ep-", "/media/saga/id/ep-") : src);
-  const savedPos = saved?.pos[episode.slug] ?? 0;
+  const savedPos = saved?.pos[episode.key] ?? 0;
   const showResume = !dismissed && progress < 0.03 && savedPos > 0.04 && savedPos < 0.95;
 
   const fractionToTop = useCallback((f: number) => {
@@ -87,7 +88,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
         clearTimeout(saveTimer);
         saveTimer = setTimeout(() => {
           if (f > 0.01) {
-            saveProgress(episode.slug, f);
+            saveProgress(episode.key, f);
             notifySagaProgress();
           }
         }, 600);
@@ -99,13 +100,13 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
       cancelAnimationFrame(frame);
       clearTimeout(saveTimer);
     };
-  }, [episode.slug]);
+  }, [episode.key]);
 
   // Count a view once the reader has stayed a few seconds.
   useEffect(() => {
-    const id = setTimeout(() => recordView(episode.slug), 3000);
+    const id = setTimeout(() => recordView(episode.key), 3000);
     return () => clearTimeout(id);
-  }, [episode.slug]);
+  }, [episode.key]);
 
   // Arrow keys move between episodes (ignored while typing or choosing).
   useEffect(() => {
@@ -128,15 +129,15 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
 
   const share = async () => {
     const url = `${window.location.origin}/saga/${episode.slug}${lang === "id" ? "?lang=id" : ""}`;
-    const title = `WERIGO SAGA Episode ${episode.number}: ${titleOf(episode)}`;
+    const title = `WERIGO SAGA Chapter ${episode.number}: ${titleOf(episode)}`;
     try {
       if (navigator.share) {
         await navigator.share({ title, url });
-        recordShare(episode.slug, "native");
+        recordShare(episode.key, "native");
         return;
       }
       await navigator.clipboard.writeText(url);
-      recordShare(episode.slug, "copy");
+      recordShare(episode.key, "copy");
       setToast(t.linkCopied);
     } catch {
       /* share sheet closed */
@@ -188,7 +189,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
             ))}
           </select>
           <div className="hidden shrink-0 lg:block">
-            <StatLine slug={episode.slug} />
+            <StatLine slug={episode.key} />
           </div>
           <div className="ml-auto flex items-center gap-1">
             <LangToggle className="mr-1" />
@@ -214,7 +215,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
       <div
         ref={stripRef}
         className="mx-auto w-full max-w-[800px] bg-white shadow-[0_0_80px_rgba(0,0,0,0.6)]"
-        aria-label={`Episode ${episode.number} comic pages`}
+        aria-label={`${t.episode} ${episode.number} comic pages`}
       >
         {pages.map((p, i) => (
           // Pages are pre-sized WebP slices of one strip; plain img keeps them seamless and lazy.
@@ -282,12 +283,12 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           </div>
         )}
 
-        <ReactionBar slug={episode.slug} />
-        <ShareBar slug={episode.slug} title={`${t.episode} ${episode.number}: ${titleOf(episode)}`} />
+        <ReactionBar slug={episode.key} />
+        <ShareBar slug={episode.key} path={episode.slug} title={`${t.episode} ${episode.number}: ${titleOf(episode)}`} />
 
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <Link
-            href="/saga#episodes"
+            href="/saga#chapters"
             className="inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-white/20 px-4 text-sm font-semibold text-white/90 hover:border-white/40"
           >
             <LayoutList className="h-4 w-4" aria-hidden="true" />
@@ -311,7 +312,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           <ul className="-mx-4 mt-3 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
             {episodes.map((e) => {
               const current = e.slug === episode.slug;
-              const done = saved?.done.includes(e.slug);
+              const done = saved?.done.includes(e.key);
               return (
                 <li key={e.slug} className="w-32 shrink-0 snap-start sm:w-36">
                   <Link

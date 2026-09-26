@@ -31,7 +31,7 @@ export function SagaSeries() {
   const stats = useSagaStats();
   const episodes = getEpisodes();
   const latest = episodes[episodes.length - 1];
-  const lite = episodes.map((e) => ({ number: e.number, slug: e.slug, title: e.title, titleId: e.titleId }));
+  const lite = episodes.map((e) => ({ number: e.number, slug: e.slug, key: e.key, title: e.title, titleId: e.titleId }));
   const title = (e: SagaEpisode) => (id ? e.titleId : e.title);
   const totalViews = Object.values(stats.episodes).reduce((a, c) => a + c.views, 0);
 
@@ -65,7 +65,7 @@ export function SagaSeries() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ContinueButton episodes={lite} />
               <a
-                href="#episodes"
+                href="#chapters"
                 className="inline-flex min-h-12 items-center gap-2 rounded-[10px] border border-white/25 px-6 text-base font-semibold text-white hover:border-white/50"
               >
                 {t.allEpisodes}
@@ -156,7 +156,7 @@ export function SagaSeries() {
                 width={trailer.width}
                 height={trailer.height}
                 className="block aspect-[9/16] h-auto w-full"
-                aria-label="WERIGO SAGA Episode 1 motion comic"
+                aria-label="WERIGO SAGA Chapter 1 motion comic"
               >
                 <source src={trailer.mp4} type="video/mp4" />
               </video>
@@ -165,13 +165,13 @@ export function SagaSeries() {
         </section>
       ) : null}
 
-      {/* ================= EPISODES ================= */}
-      <section id="episodes" aria-labelledby="episodes-heading" className="scroll-mt-20 border-t border-white/10">
+      {/* ================= CHAPTERS ================= */}
+      <section id="chapters" aria-labelledby="chapters-heading" className="scroll-mt-20 border-t border-white/10">
         <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 md:py-20 lg:px-8 xl:px-10">
           <p className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: ACCENT }}>
             {t.season1}
           </p>
-          <h2 id="episodes-heading" className="mt-3 font-display text-3xl text-white md:text-4xl">
+          <h2 id="chapters-heading" className="mt-3 font-display text-3xl text-white md:text-4xl">
             {t.allEpisodes}
           </h2>
           <ol className="mt-10 grid gap-4 lg:grid-cols-2">
@@ -202,14 +202,14 @@ export function SagaSeries() {
                     </p>
                     <h3 className="mt-1 font-display text-xl text-white sm:text-2xl">{title(e)}</h3>
                     <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/65">{id ? e.loglineId : e.logline}</p>
-                    <StatLine slug={e.slug} className="mt-2" />
+                    <StatLine slug={e.key} className="mt-2" />
                     <div className="mt-auto flex flex-wrap items-center gap-2 pt-3">
                       {e.featuredModels.map((m) => (
                         <span key={m} className="rounded-full border border-white/15 px-2.5 py-1 text-[11px] font-medium text-white/70">
                           {modelNames[m]}
                         </span>
                       ))}
-                      <EpisodeStatus slug={e.slug} />
+                      <EpisodeStatus slug={e.key} />
                     </div>
                   </div>
                 </Link>

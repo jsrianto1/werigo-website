@@ -152,8 +152,8 @@ function XGlyph() {
   );
 }
 
-/** Share buttons with a live share count. */
-export function ShareBar({ slug, title }: { slug: string; title: string }) {
+/** Share buttons with a live share count. `slug` is the stats key, `path` the URL segment. */
+export function ShareBar({ slug, path, title }: { slug: string; path: string; title: string }) {
   const lang = useSagaLang();
   const t = sagaUi[lang];
   const stats = useSagaStats();
@@ -171,7 +171,7 @@ export function ShareBar({ slug, title }: { slug: string; title: string }) {
     return () => clearTimeout(id);
   }, [toast]);
 
-  const url = () => `${window.location.origin}/saga/${slug}${lang === "id" ? "?lang=id" : ""}`;
+  const url = () => `${window.location.origin}/saga/${path}${lang === "id" ? "?lang=id" : ""}`;
   const text = lang === "id" ? `Baca ${title} di WERIGO SAGA, webtoon dari Bali` : `Read ${title} of WERIGO SAGA, a Bali webtoon`;
 
   const go = (channel: ShareChannel) => {

@@ -17,7 +17,7 @@ const routes = [
   "/delivery-areas/uluwatu", "/delivery-areas/jimbaran",
   "/delivery-areas/sanur", "/delivery-areas/denpasar",
   "/about", "/partners", "/help-center", "/contact", "/terms", "/privacy", "/book",
-  "/saga", "/saga/episode-1", "/saga/episode-2", "/saga/episode-3", "/saga/episode-4", "/saga/episode-5", "/saga/episode-6", "/saga/episode-7", "/saga/episode-8", "/saga/episode-9", "/saga/episode-10",
+  "/saga", "/saga/chapter-1", "/saga/chapter-2", "/saga/chapter-3", "/saga/chapter-4", "/saga/chapter-5", "/saga/chapter-6", "/saga/chapter-7", "/saga/chapter-8", "/saga/chapter-9", "/saga/chapter-10",
   "/book/checkout?vehicle=victory&pickup=canggu&return=canggu&startDate=2099-08-01&startTime=09%3A00&endDate=2099-08-04&endTime=09%3A00",
   "/does-not-exist-404",
 ];

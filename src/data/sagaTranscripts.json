@@ -2,7 +2,7 @@
  "1": [
   {
    "label": "Title card",
-   "text": "WERIGO SAGA · A BALI WEBTOON · EPISODE 1 · THE WEAKEST RIDER.",
+   "text": "WERIGO SAGA · A BALI WEBTOON · CHAPTER 1 · THE WEAKEST RIDER.",
    "lines": [
     {
      "who": "CAPTION",
@@ -292,8 +292,8 @@
      "text": "To be continued..."
     },
     {
-     "who": "NEXT EPISODE",
-     "text": "EP.2 · THE FIRST QUEST. Where should Arya ride first? Tell us in the comments."
+     "who": "NEXT CHAPTER",
+     "text": "CH.2 · THE FIRST QUEST. Where should Arya ride first? Tell us in the comments."
     },
     {
      "who": "",
@@ -337,7 +337,7 @@
   },
   {
    "label": "Title card",
-   "text": "EPISODE 2 · THE FIRST QUEST.",
+   "text": "CHAPTER 2 · THE FIRST QUEST.",
    "lines": [
     {
      "who": "CAPTION",
@@ -853,7 +853,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.3 · THE RAID. Should Arya show up at Uluwatu? And who is she? Tell us in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.3 · THE RAID. Should Arya show up at Uluwatu? And who is she? Tell us in the comments.",
    "lines": []
   }
  ],
@@ -878,7 +878,7 @@
   },
   {
    "label": "Title card",
-   "text": "EPISODE 3 · THE RAID.",
+   "text": "CHAPTER 3 · THE RAID.",
    "lines": [
     {
      "who": "CAPTION",
@@ -1348,7 +1348,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.4 · THE SECOND AWAKENING. Which Wedison should Komang awaken with? Vote in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.4 · THE SECOND AWAKENING. Which Wedison should Komang awaken with? Vote in the comments.",
    "lines": []
   }
  ],
@@ -1393,7 +1393,7 @@
   },
   {
    "label": "Title card",
-   "text": "EPISODE 4 · THE SECOND AWAKENING.",
+   "text": "CHAPTER 4 · THE SECOND AWAKENING.",
    "lines": [
     {
      "who": "CAPTION",
@@ -1695,7 +1695,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.5 · THE VISITOR. Tell us your worst scooter story from Bali.",
+   "text": "To be continued... NEXT CHAPTER: CH.5 · THE VISITOR. Tell us your worst scooter story from Bali.",
    "lines": []
   }
  ],
@@ -1738,7 +1738,7 @@
   },
   {
    "label": "Title card",
-   "text": "EPISODE 5 · THE VISITOR.",
+   "text": "CHAPTER 5 · THE VISITOR.",
    "lines": [
     {
      "who": "CAPTION",
@@ -2100,7 +2100,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.6 · THE HANDOVER. Which bike would you pick for your Bali trip?",
+   "text": "To be continued... NEXT CHAPTER: CH.6 · THE HANDOVER. Which bike would you pick for your Bali trip?",
    "lines": []
   }
  ],
@@ -2177,7 +2177,7 @@
   },
   {
    "label": "Title card",
-   "text": "EPISODE 6 · THE HANDOVER.",
+   "text": "CHAPTER 6 · THE HANDOVER.",
    "lines": []
   },
   {
@@ -2458,7 +2458,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.7 · SEVEN DAYS. Would you survive an audit from Pak Remy? Tell us in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.7 · SEVEN DAYS. Would you survive an audit from Pak Remy? Tell us in the comments.",
    "lines": []
   }
  ],
@@ -2525,7 +2525,7 @@
   },
   {
    "label": "Title card",
-   "text": "EPISODE 7 · SEVEN DAYS.",
+   "text": "CHAPTER 7 · SEVEN DAYS.",
    "lines": []
   },
   {
@@ -2716,7 +2716,7 @@
     },
     {
      "who": "SEKAR",
-     "text": "He's been \"okay\" since episode two."
+     "text": "He's been \"okay\" since chapter two."
     }
    ]
   },
@@ -2884,7 +2884,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.8 · THE VERDICT. Should the Board shut the island down? Vote in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.8 · THE VERDICT. Should the Board shut the island down? Vote in the comments.",
    "lines": []
   }
  ],
@@ -2896,7 +2896,7 @@
   },
   {
    "label": "PANEL 1",
-   "text": "The Werigo shop, day 7, 10 AM (continues from EP.7). Pak Chan and Pak Remy on one side of the table, ODY alone on the other. The crew watches through the glass.",
+   "text": "The Werigo shop, day 7, 10 AM (continues from CH.7). Pak Chan and Pak Remy on one side of the table, ODY alone on the other. The crew watches through the glass.",
    "lines": [
     {
      "who": "PAK REMY",
@@ -3050,7 +3050,7 @@
   },
   {
    "label": "PANEL 11B",
-   "text": "Yoko's eyes slide to the green OPERATOR lanyard on ODY's chest. A hidden window only the reader can see. Title card: EP.8 · THE VERDICT",
+   "text": "Yoko's eyes slide to the green OPERATOR lanyard on ODY's chest. A hidden window only the reader can see. Title card: CH.8 · THE VERDICT",
    "lines": [
     {
      "who": "",
@@ -3258,7 +3258,7 @@
   },
   {
    "label": "PANEL 23",
-   "text": "The grandmother from EP.2 now makes the shop's offerings. Yoko, in a polo, filming for social media.",
+   "text": "The grandmother from CH.2 now makes the shop's offerings. Yoko, in a polo, filming for social media.",
    "lines": [
     {
      "who": "YOKO",
@@ -3552,7 +3552,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.9 · THE RECRUITS. Who should join Arya's squad first? Tell us in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.9 · THE RECRUITS. Who should join Arya's squad first? Tell us in the comments.",
    "lines": []
   }
  ],
@@ -3578,7 +3578,7 @@
   },
   {
    "label": "PANEL 2",
-   "text": "A red contract glows on the desk. Yoko signs. Title card: EP.9 · THE RECRUITS",
+   "text": "A red contract glows on the desk. Yoko signs. Title card: CH.9 · THE RECRUITS",
    "lines": [
     {
      "who": "CEO",
@@ -3922,7 +3922,7 @@
   },
   {
    "label": "PANEL 27",
-   "text": "Evening. Arya brings a box of donuts (Jose Bakery logo on the box) to the grandmother from EP.2 to say thank you for the blessing. She is making canang on her porch.",
+   "text": "Evening. Arya brings a box of donuts (Jose Bakery logo on the box) to the grandmother from CH.2 to say thank you for the blessing. She is making canang on her porch.",
    "lines": [
     {
      "who": "ARYA",
@@ -3989,7 +3989,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.10 · THE OWNER. Which recruit is your favourite? Tell us in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.10 · THE OWNER. Which recruit is your favourite? Tell us in the comments.",
    "lines": []
   }
  ],
@@ -4021,7 +4021,7 @@
   },
   {
    "label": "PANEL 3",
-   "text": "In the fog, a figure in white stands beside the dead pile, its back to us. Faint gamelan in the dark. ODY's torch shakes. PAK CHAN hides behind PAK LIAM. Title card: EP.10 · THE OWNER",
+   "text": "In the fog, a figure in white stands beside the dead pile, its back to us. Faint gamelan in the dark. ODY's torch shakes. PAK CHAN hides behind PAK LIAM. Title card: CH.10 · THE OWNER",
    "lines": [
     {
      "who": "SFX",
@@ -4191,7 +4191,7 @@
   },
   {
    "label": "PANEL 13",
-   "text": "Pak Liam sits on a tiny plastic stool among the drivers, a glass of kopi in his hand. Made (IRONWILL, from EP.9) sits next to him.",
+   "text": "Pak Liam sits on a tiny plastic stool among the drivers, a glass of kopi in his hand. Made (IRONWILL, from CH.9) sits next to him.",
    "lines": [
     {
      "who": "PAK LIAM",
@@ -4314,7 +4314,7 @@
   },
   {
    "label": "PANEL 22",
-   "text": "She turns. It is the grandmother, the GATEKEEPER from EP.9. Her eyes glow gold. She holds an offering tray. Pak Chan's soul (tiny, comic) floats out of his mouth.",
+   "text": "She turns. It is the grandmother, the GATEKEEPER from CH.9. Her eyes glow gold. She holds an offering tray. Pak Chan's soul (tiny, comic) floats out of his mouth.",
    "lines": [
     {
      "who": "SYSTEM (old gold)",
@@ -4562,7 +4562,7 @@
   },
   {
    "label": "Closing",
-   "text": "To be continued... NEXT EPISODE: EP.11 · THE BACKDROP WAR. Would you pass Pak Liam's test? Tell us in the comments.",
+   "text": "To be continued... NEXT CHAPTER: CH.11 · THE BACKDROP WAR. Would you pass Pak Liam's test? Tell us in the comments.",
    "lines": []
   }
  ]

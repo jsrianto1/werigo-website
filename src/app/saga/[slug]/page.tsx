@@ -31,17 +31,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const ep = getEpisode(slug);
   if (!ep) return {};
-  const title = `WERIGO SAGA Episode ${ep.number}: ${ep.title}`;
+  const title = `WERIGO SAGA Chapter ${ep.number}: ${ep.title}`;
   return {
     title,
-    description: `${ep.logline} Read Episode ${ep.number} of WERIGO SAGA, the Werigo webtoon set in Bali, free on werigo.co.`,
+    description: `${ep.logline} Read Chapter ${ep.number} of WERIGO SAGA, the Werigo webtoon set in Bali, free on werigo.co.`,
     alternates: { canonical: `/saga/${ep.slug}` },
     openGraph: {
       type: "article",
       title,
       description: ep.logline,
       url: `${site.baseUrl}/saga/${ep.slug}`,
-      images: [{ url: ogSrc(ep), width: 1200, height: 630, alt: `${saga.title} Episode ${ep.number} cover art` }],
+      images: [{ url: ogSrc(ep), width: 1200, height: 630, alt: `${saga.title} Chapter ${ep.number} cover art` }],
     },
     twitter: { card: "summary_large_image", title, description: ep.logline, images: [ogSrc(ep)] },
   };
@@ -50,12 +50,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const toRef = (e: SagaEpisode): ReaderEpisodeRef => ({
   number: e.number,
   slug: e.slug,
+  key: e.key,
   title: e.title,
   titleId: e.titleId,
   cover: coverSrc(e),
 });
 
-export default async function EpisodePage({ params }: Props) {
+export default async function ChapterPage({ params }: Props) {
   const { slug } = await params;
   const ep = getEpisode(slug);
   if (!ep) notFound();
@@ -64,7 +65,7 @@ export default async function EpisodePage({ params }: Props) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ComicIssue",
-    name: `Episode ${ep.number}: ${ep.title}`,
+    name: `Chapter ${ep.number}: ${ep.title}`,
     issueNumber: ep.number,
     description: ep.logline,
     url: `${site.baseUrl}/saga/${ep.slug}`,
@@ -79,7 +80,7 @@ export default async function EpisodePage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
       <h1 className="sr-only">
-        {saga.title} Episode {ep.number}: {ep.title}
+        {saga.title} Chapter {ep.number}: {ep.title}
       </h1>
       <SagaReader
         episode={toRef(ep)}

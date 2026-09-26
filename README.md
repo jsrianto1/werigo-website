@@ -53,7 +53,9 @@ the live database connection without exposing any configuration.
 
 ## WERIGO SAGA comments
 
-Every episode page (`/saga/episode-N`) ends with a comment section.
+Every chapter page (`/saga/chapter-N`; old `/saga/episode-N` links 308 to it)
+ends with a comment section. Comments are keyed by the chapter number and
+view/reaction counts by the stable key `episode-N`, so the URL change kept them.
 Comments go through `/api/saga/comments` and are stored in
 `saga-comments.json` in the same folder as the saga counters
 (`SAGA_DATA_DIR`, else `~/.werigo-data`). That folder is outside the

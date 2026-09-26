@@ -32,7 +32,7 @@ export default function SagaPage() {
     hasPart: episodes.map((e) => ({
       "@type": "ComicIssue",
       issueNumber: e.number,
-      name: `Episode ${e.number}: ${e.title}`,
+      name: `Chapter ${e.number}: ${e.title}`,
       url: `${site.baseUrl}/saga/${e.slug}`,
     })),
   };

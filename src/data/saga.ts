@@ -1,6 +1,7 @@
 /**
  * WERIGO SAGA, the Werigo webtoon. Single source for the series page,
- * the episode reader, the homepage teaser, the sitemap and JSON-LD.
+ * the chapter reader, the homepage teaser, the sitemap and JSON-LD.
+ * Each installment is a "Chapter" on the site (it is a comic, not a series).
  *
  * Page images live in public/media/saga/ep-<n>/p<NN>.webp and are
  * exported (with sagaPages.json and sagaTranscripts.json) by
@@ -14,7 +15,14 @@ export type SagaModel = "athena" | "victory" | "edpower" | "bees";
 
 export interface SagaEpisode {
   number: number;
+  /** Public URL segment: /saga/chapter-N. Old /saga/episode-N links redirect (next.config.ts). */
   slug: string;
+  /**
+   * Stable storage id ("episode-N") for view/share/reaction counts and
+   * browser reading progress. Never change it: the stats file and readers'
+   * localStorage are keyed by it. Comments are keyed by `number`.
+   */
+  key: string;
   title: string;
   titleId: string;
   logline: string;
@@ -65,7 +73,8 @@ export const saga = {
 const allEpisodes: SagaEpisode[] = [
   {
     number: 1,
-    slug: "episode-1",
+    slug: "chapter-1",
+    key: "episode-1",
     title: "The Weakest Rider",
     titleId: "Pengendara Terlemah",
     logline:
@@ -81,7 +90,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 2,
-    slug: "episode-2",
+    slug: "chapter-2",
+    key: "episode-2",
     title: "The First Quest",
     titleId: "Quest Pertama",
     logline:
@@ -97,7 +107,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 3,
-    slug: "episode-3",
+    slug: "chapter-3",
+    key: "episode-3",
     title: "The Raid",
     titleId: "Raid",
     logline:
@@ -113,7 +124,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 4,
-    slug: "episode-4",
+    slug: "chapter-4",
+    key: "episode-4",
     title: "The Second Awakening",
     titleId: "Kebangkitan Kedua",
     logline:
@@ -129,7 +141,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 5,
-    slug: "episode-5",
+    slug: "chapter-5",
+    key: "episode-5",
     title: "The Visitor",
     titleId: "Sang Pengunjung",
     logline:
@@ -145,7 +158,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 6,
-    slug: "episode-6",
+    slug: "chapter-6",
+    key: "episode-6",
     title: "The Handover",
     titleId: "Serah Terima",
     logline:
@@ -161,7 +175,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 7,
-    slug: "episode-7",
+    slug: "chapter-7",
+    key: "episode-7",
     title: "Seven Days",
     titleId: "Tujuh Hari",
     logline:
@@ -177,7 +192,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 8,
-    slug: "episode-8",
+    slug: "chapter-8",
+    key: "episode-8",
     title: "The Verdict",
     titleId: "Putusan",
     logline:
@@ -193,7 +209,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 9,
-    slug: "episode-9",
+    slug: "chapter-9",
+    key: "episode-9",
     title: "The Recruits",
     titleId: "Para Rekrut",
     logline:
@@ -209,7 +226,8 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 10,
-    slug: "episode-10",
+    slug: "chapter-10",
+    key: "episode-10",
     title: "The Owner",
     titleId: "Sang Pemilik",
     logline:

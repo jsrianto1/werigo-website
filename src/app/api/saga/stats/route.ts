@@ -30,9 +30,10 @@ function rateLimited(ip: string): boolean {
   return false;
 }
 
-const slugs = () => getEpisodes().map((e) => e.slug);
+// Counts are stored under each chapter's stable key ("episode-N"), not its URL slug.
+const slugs = () => getEpisodes().map((e) => e.key);
 
-/** GET /api/saga/stats?cid=... : counts for every published episode (+ this browser's reactions). */
+/** GET /api/saga/stats?cid=... : counts for every published chapter (+ this browser's reactions). */
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   if (url.searchParams.get("health") === "1") {

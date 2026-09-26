@@ -9,10 +9,11 @@ import { sagaUi } from "@/data/sagaUi";
 interface EpisodeLite {
   number: number;
   slug: string;
+  key: string;
   title: string;
 }
 
-/** "Start Episode 1", or "Continue Episode N" once this browser has progress. */
+/** "Start Chapter 1", or "Continue Chapter N" once this browser has progress. */
 export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
   const progress = useSagaProgress();
   const t = sagaUi[useSagaLang()];
@@ -20,9 +21,9 @@ export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
   let target = first;
   let label = t.startEp(first.number);
   if (progress?.last) {
-    const last = episodes.find((e) => e.slug === progress.last);
+    const last = episodes.find((e) => e.key === progress.last);
     if (last) {
-      const finished = progress.done.includes(last.slug);
+      const finished = progress.done.includes(last.key);
       const idx = episodes.indexOf(last);
       const nextUp = finished ? episodes[idx + 1] : last;
       if (nextUp) {
@@ -42,7 +43,7 @@ export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
   );
 }
 
-/** Small status line on an episode card: Read / percentage / nothing. */
+/** Small status line on a chapter card: Read / percentage / nothing. */
 export function EpisodeStatus({ slug }: { slug: string }) {
   const progress = useSagaProgress();
   const t = sagaUi[useSagaLang()];

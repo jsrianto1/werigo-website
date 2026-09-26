@@ -6,7 +6,7 @@ import { coverSrc, getEpisodes, saga } from "@/data/saga";
 
 /**
  * Homepage teaser for WERIGO SAGA, the Werigo webtoon. A dark card with
- * fanned episode covers; the reading CTA is teal so the page keeps a
+ * fanned chapter covers; the reading CTA is teal so the page keeps a
  * single orange booking action per view.
  */
 export function SagaTeaser() {
@@ -30,7 +30,7 @@ export function SagaTeaser() {
             </h2>
             <p className="mt-4 max-w-lg leading-relaxed text-white/75">
               A delivery rider in Denpasar, a bike that changes everything and a System only he can see. Free to read
-              here, one episode at a time, and every bike in it is one you can rent from us.
+              here, one chapter at a time, and every bike in it is one you can rent from us.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
@@ -38,13 +38,13 @@ export function SagaTeaser() {
                 className="inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-[#2ee0b0] px-6 text-base font-semibold text-[#06201a] transition-colors hover:bg-[#5ff0c8]"
               >
                 <BookOpen className="h-5 w-5" aria-hidden="true" />
-                Read Episode 1
+                Read Chapter 1
               </Link>
               <Link
                 href="/saga"
                 className="inline-flex min-h-12 items-center gap-2 rounded-[10px] border border-white/25 px-6 text-base font-semibold text-white hover:border-white/50"
               >
-                All {episodes.length} episodes
+                All {episodes.length} chapters
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
@@ -52,7 +52,7 @@ export function SagaTeaser() {
 
           <Link
             href={`/saga/${latest.slug}`}
-            aria-label={`Read the newest episode, Episode ${latest.number}: ${latest.title}`}
+            aria-label={`Read the newest chapter, Chapter ${latest.number}: ${latest.title}`}
             className="group relative mx-auto block h-[260px] w-full max-w-[420px] sm:h-[320px]"
           >
             {fan.map((e, i) => {
@@ -75,7 +75,7 @@ export function SagaTeaser() {
                     className="aspect-[3/4] h-auto w-full object-cover"
                   />
                   <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pb-2 pt-6 text-xs font-semibold text-white">
-                    Episode {e.number}
+                    Chapter {e.number}
                   </p>
                 </div>
               );
