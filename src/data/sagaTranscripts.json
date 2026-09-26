@@ -5178,5 +5178,680 @@
    "text": "To be continued... NEXT CHAPTER: CH.12 · RENT TO OWN. Where should the next gate go? Tell us your spot in the comments.",
    "lines": []
   }
+ ],
+ "12": [
+  {
+   "label": "PART 1 · BEFORE THE GATES (cold open)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1 · SPLASH, warm gold flashback",
+   "text": "Years ago. A wedding reception in Bali at night: flower arches, four hundred guests, fairy lights. A younger ODY with a headset and a clipboard runs the whole night from behind a pillar.",
+   "lines": [
+    {
+     "who": "SYSTEM (old gold)",
+     "text": "[CLASS: WEDDING MAGE] [WEDDINGS CLEARED: 300+]"
+    },
+    {
+     "who": "CAPTION",
+     "text": "Before he was the Operator, he made other people's best day happen. Every weekend."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2 · MONTAGE",
+   "text": "ODY designing invitations at 3am. ODY in the small kitchen of his own restaurant, tasting a sauce.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[SUB-CLASSES: DESIGNER · RESTAURATEUR]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3 · VFX",
+   "text": "A later night, at his restaurant counter. ODY doodles on a napkin: a W made of a road and two wheels. He writes one word. The napkin glows green. Title card: CH.12 · RENT TO OWN",
+   "lines": [
+    {
+     "who": "ODY (thought)",
+     "text": "Rent. Ride. Go. We... ri... go."
+    },
+    {
+     "who": "SYSTEM (green)",
+     "text": "[UNIQUE BRAND CREATED: WERIGO] [CREATOR: ODY]"
+    }
+   ]
+  },
+  {
+   "label": "PART 2 · FOURTEEN QUESTS",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 4",
+   "text": "Present day, the Werigo base. Arya brings Made and the young driver from CH.11.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "They can't buy a bike. But they can pay a little every day."
+    },
+    {
+     "who": "ODY",
+     "text": "Then they rent it until it's theirs."
+    },
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[QUEST: RENT TO OWN] [REQUIRES: BOARD · LEGAL · UNITS · FINANCE]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5 · COMEDY, VFX",
+   "text": "ODY's phone erupts: fourteen floating quest bars, each with a countdown. Pak Chan's messages: \"Update?\" \"In parallel.\" \"By end of day, Singapore time.\"",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[PARALLEL QUESTS: 14]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6 · COMEDY",
+   "text": "Split panel. Left: a Singapore clock spinning like a jet turbine. Right: a Balinese clock melting slowly over a hammock under a coconut tree.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Singapore time. Bali time."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "Komang in the hammock, eyes closed.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Bro, in Bali even the roosters wake up late."
+    },
+    {
+     "who": "ODY (walking fast)",
+     "text": "Then I run on both clocks."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[SKILL LEARNED: DUAL CLOCK]"
+    }
+   ]
+  },
+  {
+   "label": "PART 3 · THE FIRST PARTY",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 8",
+   "text": "ODY stands in front of three new faces at the Werigo base.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Finally. My own party."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[HEREL · DEALMAKER] [WAYU · BRIDGEBUILDER] [IDY · SCRIBE (TRAINEE)]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "Herel shakes hands with a villa owner and turns to ODY with a fist pump.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[HEREL · FIRST DEAL +1]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10 · COMEDY",
+   "text": "Idy, at the desk with a pen in each hand.",
+   "lines": [
+    {
+     "who": "IDY",
+     "text": "Pak Ody, blue pen or black pen?"
+    },
+    {
+     "who": "ODY (on another call)",
+     "text": "...Any pen."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11 · COMEDY, VFX",
+   "text": "ODY's phone, messages from Idy stacking up to the ceiling: \"Pak, staple or clip?\" \"Pak, the printer is blinking.\" \"Pak, can I open the window?\"",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (red, repeating): [ODY · FOCUS -10] [-10] [-10] [-10]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "ODY, head in his hands, a grey stamina bar over him.",
+   "lines": [
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[OPERATOR · STAMINA 3%] [STATUS: BURNOUT]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "A week later. Herel hands ODY a letter, eyes down.",
+   "lines": [
+    {
+     "who": "HEREL",
+     "text": "Another company offered me more. I'm sorry, Pak."
+    },
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[HEREL HAS LEFT THE PARTY]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "Wayu, helmet under his arm, waves goodbye at the gate.",
+   "lines": [
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[WAYU HAS LEFT THE PARTY]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "ODY and Idy, quietly.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Idy... I think you need a place where someone can guide every step. I can't be that here."
+    },
+    {
+     "who": "IDY",
+     "text": "...Okay, Pak. Thank you for asking me first."
+    },
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[IDY HAS LEFT THE PARTY]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "Night. Three empty desks. ODY alone. His party list shows one name.",
+   "lines": [
+    {
+     "who": "ODY (thought)",
+     "text": "Everyone I train, I lose."
+    }
+   ]
+  },
+  {
+   "label": "PART 4 · THE LEDGER",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 17 · VFX",
+   "text": "A video call with Jakarta. IBU INIA scrolls a glowing golden ledger of the guild's stipends. One line flashes past.",
+   "lines": [
+    {
+     "who": "IBU INIA",
+     "text": "Sorry, Pak Ody, wrong page. That's the old advisory stipend."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[STIPEND · YOKO (FORMER): 17 GOLD] [STIPEND · ODY: 9.5 GOLD]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18 · VFX",
+   "text": "ODY's face. A crack runs across the air in front of him.",
+   "lines": [
+    {
+     "who": "ODY (thought)",
+     "text": "The man who built nothing was paid almost double the man who built everything."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19 · SPLASH",
+   "text": "Night on an empty beach. ODY sits on his Athena. A huge System window glows over the dark sea, his finger hovering over YES.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[SIGN OUT OF THE GUILD?] [YES] [NO]"
+    },
+    {
+     "who": "CAPTION",
+     "text": "For the first time, the Operator thought about logging out."
+    }
+   ]
+  },
+  {
+   "label": "PART 5 · TUMPEK WARIGA",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 20",
+   "text": "Morning in a village. Families tie small offerings to fruit trees and tap the trunks. The grandmother (the Gatekeeper) taps a mango tree. ODY watches from the road.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Nged... nged... nged."
+    },
+    {
+     "who": "CAPTION",
+     "text": "Tumpek Wariga. Twenty-five days before Galungan, the Balinese bless the trees and ask them to bear fruit."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "We don't ask the tree for fruit tomorrow, nak. We ask for Galungan. A rushed tree drops its fruit green."
+    },
+    {
+     "who": "ODY",
+     "text": "And a tree that feels nobody values it?"
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "Then somebody has to come and tap it. (She taps his chest.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22 · VFX",
+   "text": "Golden leaves swirl around them.",
+   "lines": [
+    {
+     "who": "SYSTEM (old gold)",
+     "text": "[GATEKEEPER · BLESSING: PATIENCE]"
+    }
+   ]
+  },
+  {
+   "label": "PART 6 · THE CHAIRMAN'S CALL",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 23",
+   "text": "ODY's phone rings. PAK CHAN, on video, in his tower at night.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Ibu Inia told me what you saw."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Yoko's gold was my mistake. I paid for a mask. You are the face."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "Pak Chan lifts a small cup of tea to the camera.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "In Singapore we say the first cup of tea goes to the one who built the house. Werigo is your house, Ody. Whatever you build, I stand behind it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25 · VFX, callback",
+   "text": "The purple loading bar from CH.11 fills: 27%... 64%... 100%.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[PAK CHAN · TRUST 100%] [ODY · MORALE RESTORED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26 · VFX",
+   "text": "ODY presses NO. The logout window shatters into green light.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Not yet. I still have seventy gates to open."
+    }
+   ]
+  },
+  {
+   "label": "PART 7 · THE TOWER IN JAKARTA",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 27 · SPLASH",
+   "text": "Jakarta at sunrise, a glass tower among the skyscrapers.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DUNGEON: JAKARTA HQ]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "The boardroom. Pak Chan and Pak Remy on one side. On the other, PAK WRENCE with PAK RIMAN beside him, IBU ATEM with her folders and IBU INIA with her ledger.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[PAK WRENCE · BOARD · STRATEGIST] [PAK RIMAN · GM · FORGEMASTER] [IBU ATEM · LEGAL · SEALKEEPER] [IBU INIA · FINANCE · TREASURER]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29 · COMEDY",
+   "text": "Pak Wrence checks his watch.",
+   "lines": [
+    {
+     "who": "PAK WRENCE",
+     "text": "We begin at 8:08. Eight is a lucky number."
+    },
+    {
+     "who": "",
+     "text": "(ODY pulls a small Balinese calendar out of his bag. Pak Wrence leans in, fascinated.)"
+    },
+    {
+     "who": "PAK WRENCE",
+     "text": "You also have lucky days?"
+    },
+    {
+     "who": "ODY",
+     "text": "In Bali every day is good for something. The calendar tells you what."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30 · VFX",
+   "text": "ODY's pitch as a hologram: a driver paying a small coin each day, a progress bar under a Wedison filling up to OWNED.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "A driver pays a little every day, rides a Wedison from day one, and one day the bike is his."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31 · COMEDY",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "What price are you suggesting?"
+    },
+    {
+     "who": "ODY",
+     "text": "Less than they spend on petrol."
+    },
+    {
+     "who": "",
+     "text": "(Pak Remy almost smiles. Pak Chan notices.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32 · VFX",
+   "text": "A vault of golden light behind Ibu Inia.",
+   "lines": [
+    {
+     "who": "IBU INIA",
+     "text": "Every rupiah that leaves this company passes my desk. Show me the first hundred riders."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[TREASURER · APPRAISING...]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK RIMAN",
+     "text": "Units, I can make. Tell me which model and how many."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34 · SPLASH, VFX",
+   "text": "Pak Riman's vision: the Wedison factory drawn as a fantasy forge, sparks and blue light, rows of Athena, Victory, EdPower and Bees Pro rolling off the line.",
+   "lines": [
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[FORGEMASTER · PRODUCTION LINE ONLINE]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35 · PRODUCT",
+   "text": "Pak Riman sets two blue water gallons on the flat footboard of a Bees Pro. They fit perfectly.",
+   "lines": [
+    {
+     "who": "PAK RIMAN",
+     "text": "For drivers with a side job: the Bees Pro. Two gallons at your feet. Boxes, crates, anything."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "IBU ATEM stands up, folders glowing with red seals.",
+   "lines": [
+    {
+     "who": "IBU ATEM",
+     "text": "Stop. Nothing launches in Bali until the contracts and the local permits are done. Done, not \"almost\"."
+    },
+    {
+     "who": "ODY",
+     "text": "Bali doesn't wait, Bu. The drivers need it now."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37 · VFX, COMEDY",
+   "text": "Two System windows clash across the table: [LAW: ALL SEALS FIRST] vs [OPERATOR: RIDERS FIRST]. Sparks fly. Pak Chan and Pak Wrence turn their heads left and right like spectators at a tennis match.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 38 · FLASHBACK",
+   "text": "The first weeks of Wedison Bali. Ibu Atem on the phone in Jakarta, papers everywhere.",
+   "lines": [
+    {
+     "who": "IBU ATEM (phone)",
+     "text": "Pak Ody, I can't get one stamp in Bali. Can you help?"
+    },
+    {
+     "who": "",
+     "text": "(ODY sits in a village office with the perbekel and the bendesa adat, a canang and a stack of papers on the mat between them.)"
+    },
+    {
+     "who": "CAPTION",
+     "text": "Jakarta sent the papers. Bali needed a person."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "Back in the boardroom.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Remember our first permit? You sent the law. I brought the canang. We need both again."
+    },
+    {
+     "who": "IBU ATEM",
+     "text": "...You sat three hours with the bendesa. I remember."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40 · VFX",
+   "text": "Ibu Atem slides one folder across the table. The two windows merge into one.",
+   "lines": [
+    {
+     "who": "IBU ATEM",
+     "text": "Contracts first. In Bali we go through the desa adat and the banjar together. You bring the canang, I bring the seals."
+    },
+    {
+     "who": "IBU ATEM",
+     "text": "And after Bali, Surabaya. I'm already packing."
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[ALLIANCE FORMED: SEALKEEPER + OPERATOR]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "Pak Wrence turns his jade beads, speaking to Pak Chan.",
+   "lines": [
+    {
+     "who": "PAK WRENCE",
+     "text": "Your operator argues like a lawyer and prays like a priest."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "That's why I keep him."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42 · VFX",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK WRENCE",
+     "text": "Launch on the eighth."
+    },
+    {
+     "who": "ODY",
+     "text": "I asked our pemangku. The eighth is a good day to begin."
+    },
+    {
+     "who": "",
+     "text": "(A golden Chinese eight and a Balinese calendar glyph meet in the air and lock together.)"
+    },
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[AUSPICIOUS DAY: CONFIRMED BY BOTH CALENDARS] [QUEST APPROVED: RENT TO OWN]"
+    }
+   ]
+  },
+  {
+   "label": "PART 8 · THE EIGHTH",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 43 · SPLASH",
+   "text": "The eighth. The ojol base under the banyan tree. A pemangku sprinkles tirta over a row of new Wedison bikes (Athena, Victory, Bees Pro), a canang on every seat. Drivers in a line. The gate by the market glows green.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 44 · PRODUCT",
+   "text": "Made signs first. His wife stands beside a Bees Pro with two blue gallons on its footboard.",
+   "lines": [
+    {
+     "who": "MADE",
+     "text": "My wife runs a galon refill shop. Two gallons at her feet. No petrol."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[MADE · RENT TO OWN · DAY 1]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 45 · COMEDY",
+   "text": "Komang tries to squeeze a third gallon onto the Bees Pro. It rolls off.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Three! ...No. Two. Two is the number."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 46",
+   "text": "ODY hands a key to the young driver from CH.11.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Day one. It's already yours in every way that matters."
+    },
+    {
+     "who": "YOUNG DRIVER",
+     "text": "Then I'll ride it like it's mine, Pak."
+    },
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[QUEST COMPLETE: RENT TO OWN]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 47 · SPLASH, VFX",
+   "text": "The drivers ride out from under the banyan into the city, green light trails behind every bike. A huge window opens over Denpasar.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (green, enormous): [OPERATOR · LEVEL UP] [TITLE UNLOCKED: FOUNDER OF WERIGO]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 48",
+   "text": "Later, alone at the base, ODY writes on a napkin again: a party list with empty slots.",
+   "lines": [
+    {
+     "who": "ODY (thought)",
+     "text": "Next time I build a party that stays."
+    },
+    {
+     "who": "SYSTEM (green)",
+     "text": "[PARTY SLOTS OPEN: 4]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 49 · CLIFFHANGER",
+   "text": "The Werigo WhatsApp lights up. A new message from a long-stay guest, DENISA: \"Hi! Can I rent two bikes for a month? And if I love them... can I buy one?\"",
+   "lines": [
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[NEW QUEST: THE NOMAD]"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT CHAPTER: CH.13 · THE NOMAD. Would you rent to own your first Wedison? Tell us in the comments.",
+   "lines": []
+  }
  ]
 }
