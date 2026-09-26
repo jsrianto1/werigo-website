@@ -3555,5 +3555,458 @@
    "text": "To be continued... NEXT EPISODE: EP.9 · THE RECRUITS. Who should join Arya's squad first? Tell us in the comments.",
    "lines": []
   }
+ ],
+ "9": [
+  {
+   "label": "PART 1 · THE TURNCOAT (cold open)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1",
+   "text": "Night. The top floor of a glass tower in Jakarta. A foreign EV giant's office: a faceless CEO silhouette in a high-backed chair, red city lights. Yoko sits across, sweating, grinning.",
+   "lines": [
+    {
+     "who": "CEO",
+     "text": "You worked inside their guild."
+    },
+    {
+     "who": "YOKO",
+     "text": "Thirty days. I know every weakness they have."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "A red contract glows on the desk. Yoko signs. Title card: EP.9 · THE RECRUITS",
+   "lines": [
+    {
+     "who": "CEO",
+     "text": "Then bring me their people. Every rider they recruit, you buy."
+    },
+    {
+     "who": "SYSTEM (red)",
+     "text": "[CONTRACT SIGNED] [NEW CLASS: TURNCOAT] [QUEST: EMPTY THE GUILD]"
+    }
+   ]
+  },
+  {
+   "label": "PART 2 · RECRUITMENT DAY",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 3",
+   "text": "Morning, the banjar hall. A trestle table with a basket of croissants and sourdough, Komang already eating one.",
+   "lines": [
+    {
+     "who": "CAPTION (badge)",
+     "text": "Recruitment snacks: croissants from JOSE BAKERY, Bali."
+    },
+    {
+     "who": "KOMANG",
+     "text": "If nobody comes, at least we have croissants."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "Nobody comes. One hour. Two. Komang eats his third croissant.",
+   "lines": [
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[RECRUITMENT QUEST: 0 / 5]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5 · SPLASH",
+   "text": "Five people walk in at once: Putu with paint on his hands, Ayu in dance costume, Ketut smelling of the sea, Made on a coughing petrol bike, Kadek silent with a toolbox.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "...Five."
+    },
+    {
+     "who": "KOMANG",
+     "text": "(mouth full) Five!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6 · RALLY",
+   "text": "Arya activates his new skill. Five blue windows open over the five heads.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[PUTU · ARTISAN] [AYU · SPOTLIGHT] [KETUT · TIDECALLER] [MADE · IRONWILL] [KADEK · ??? UNREADABLE]"
+    },
+    {
+     "who": "ARYA (thought)",
+     "text": "The System can't read him?"
+    }
+   ]
+  },
+  {
+   "label": "PART 3 · THE TRIALS",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 7",
+   "text": "Arya's rules on a whiteboard, pinned beside the WERIGO poster: battery over 80% at every handover, two clean helmets, phone holder installed, charging briefing, smile.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "One day. Real jobs. Real guests."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8 · AYU",
+   "text": "A villa in Canggu. Ayu gives the charging briefing to a Korean family in fluent Korean, then French to the neighbours.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[SPOTLIGHT: GUEST TRUST +40]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9 · KETUT",
+   "text": "Midday sun. Ketut stops the squad and looks at the sky.",
+   "lines": [
+    {
+     "who": "KETUT",
+     "text": "Rain in forty minutes. Take the inland road."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[TIDECALLER: STORM PREDICTED · 40 MIN]"
+    },
+    {
+     "who": "",
+     "text": "(Forty minutes later the squad is dry under a warung roof as the sky opens.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "Break under the warung roof. Sekar eats a browkies from a paper bag.",
+   "lines": [
+    {
+     "who": "CAPTION (badge)",
+     "text": "Sekar's browkies: JOSE BAKERY, Bali."
+    },
+    {
+     "who": "SEKAR",
+     "text": "Don't tell Dewa I'm sharing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11 · PUTU",
+   "text": "Putu repaints a scratched helmet into a work of art. The guest wants to buy it.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[ARTISAN: ITEM UPGRADED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12 · KADEK",
+   "text": "A bike in the line-up. Kadek lays his palm on the battery case, frowns, points at the charging port. Dewa checks: a loose connector nobody else noticed.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "...How did you know?"
+    },
+    {
+     "who": "",
+     "text": "KADEK (signs, subtitled): It told me."
+    },
+    {
+     "who": "SYSTEM (flickering)",
+     "text": "[KADEK · ??? ] [SKILL DETECTED: ???]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13 · MADE",
+   "text": "Made on a borrowed Wedison for the day: ten deliveries, no petrol stop, and he's home in time to pick up his kids.",
+   "lines": [
+    {
+     "who": "MADE",
+     "text": "I didn't pay for fuel today. First time in eight years."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[IRONWILL: 10 / 10]"
+    }
+   ]
+  },
+  {
+   "label": "PART 4 · THE ENVELOPES",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 14",
+   "text": "That night, five doors. At each one, a man in loafers holding a fat envelope.",
+   "lines": [
+    {
+     "who": "YOKO",
+     "text": "Double salary. A foreign company. No more helmets for tourists."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15 · MONTAGE",
+   "text": "Putu staring at the envelope beside an unfinished ogoh-ogoh. Ayu at the dressing mirror. Ketut on his father's leaking boat. Made at the kitchen table with a pile of bills and two sleeping kids.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (red, over each): [TEMPTATION]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "Next morning, the banjar. Empty. Five chairs.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[RECRUITMENT QUEST: 0 / 5]"
+    },
+    {
+     "who": "KOMANG",
+     "text": "He bought them. Yoko bought all of them."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "Arya looks at the empty chairs.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "No. We go to them."
+    }
+   ]
+  },
+  {
+   "label": "PART 5 · FIVE HOUSES",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 18",
+   "text": "Putu's banjar workshop. A half-built ogoh-ogoh demon, three metres tall.",
+   "lines": [
+    {
+     "who": "PUTU",
+     "text": "The money would finish my ogoh-ogoh."
+    },
+    {
+     "who": "ARYA",
+     "text": "Then the whole banjar parades something you sold yourself for. Is that the demon you want to burn?"
+    },
+    {
+     "who": "",
+     "text": "(Putu tears the envelope in half.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "Uluwatu at sunset. Ayu in the kecak circle, the chanting \"cak-cak-cak\" rising, the fire behind her.",
+   "lines": [
+    {
+     "who": "AYU",
+     "text": "In kecak, nobody dances alone. Seventy voices keep one story alive."
+    },
+    {
+     "who": "AYU",
+     "text": "His money wanted me to dance alone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "Jimbaran. Ketut and his father patching the boat.",
+   "lines": [
+    {
+     "who": "KETUT'S FATHER",
+     "text": "The sea pays late but it pays honest. Go with the one who asked you first."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "Made's kitchen. The envelope is still sealed on the table, next to the bills.",
+   "lines": [
+    {
+     "who": "MADE",
+     "text": "I didn't open it. I just... didn't know how to say no to money."
+    },
+    {
+     "who": "ARYA",
+     "text": "You said it yesterday, ten times. On ten deliveries. No petrol."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "The mechanic's garage. Kadek is fixing a neighbour's bike. The envelope is on the floor, stepped on, unopened. Yoko's pitch was all words.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "...He never heard a word Yoko said."
+    },
+    {
+     "who": "",
+     "text": "KADEK (signs, subtitled): Who?"
+    },
+    {
+     "who": "",
+     "text": "(Komang laughs so hard he cries.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "Yoko, outside in the rain, envelopes soaked, phone ringing: the CEO.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[QUEST FAILED: EMPTY THE GUILD] [TURNCOAT · REPUTATION -50]"
+    },
+    {
+     "who": "YOKO",
+     "text": "...Next time."
+    }
+   ]
+  },
+  {
+   "label": "PART 6 · THE SQUAD",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 24",
+   "text": "The banjar, morning. Five chairs, five people. Dewa hands out Jose Bakery sourdough for breakfast.",
+   "lines": [
+    {
+     "who": "CAPTION (badge)",
+     "text": "Dewa's sourdough: 100% natural levain, JOSE BAKERY, Bali."
+    },
+    {
+     "who": "DEWA",
+     "text": "Squad Leader. Your squad."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25 · SPLASH, VFX",
+   "text": "Sunset ride along the coast: Arya in front on the olive Athena, five recruits on five Wedison bikes behind him. Blue light lines connect all six riders into a glowing emblem in the sky.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (blue, enormous): [RALLY · FULL SQUAD] [RECRUITMENT QUEST: 5 / 5] [SQUAD REGISTERED: ARYA'S SQUAD]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "The windows flicker. A new window, gold and ancient, opens over all of them.",
+   "lines": [
+    {
+     "who": "SYSTEM (old gold)",
+     "text": "[NOTICE: A HIGHER AUTHORITY HAS OBSERVED THIS SQUAD]"
+    }
+   ]
+  },
+  {
+   "label": "PART 7 · THE FIRST PLAYER (the mind-blowing ending)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 27",
+   "text": "Evening. Arya brings a box of Jose Bakery donuts to the grandmother from EP.2 to say thank you for the blessing. She is making canang on her porch.",
+   "lines": [
+    {
+     "who": "CAPTION (badge)",
+     "text": "Thank-you donuts: JOSE BAKERY, Bali."
+    },
+    {
+     "who": "ARYA",
+     "text": "Nenek, your blessing worked. I have a squad now. Five."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Five is a good number, nak. In my time, we were five too."
+    },
+    {
+     "who": "ARYA",
+     "text": "...Your time?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29 · FLASHBACK, sepia",
+   "text": "1963. Five young Balinese riders on old bicycles and a motorbike on an empty dirt road, a volcano smoking in the distance. Above each of them, the same blue System windows. In front, a young woman with a frangipani in her hair.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 30 · REVEAL, full page",
+   "text": "The present. The grandmother looks up. Her eyes glow gold. Behind her, a colossal golden window unfolds across the night sky.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (gold, enormous): [GATEKEEPER · RANK S] [THE FIRST PLAYER OF THE ISLAND] [ACTIVE SINCE 1963]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "The System is not new, nak. Only the bikes are."
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "Your Operator thinks he opens the gates. The island only lends them."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32 · CLIFFHANGER",
+   "text": "Far away, a private jet lands at night. An old man in a golf polo steps down, followed by Pak Chan carrying his golf bag.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (unreadable, static): [PLAYER: ???] [RANK: ???]"
+    },
+    {
+     "who": "",
+     "text": "PAK CHAN (phone, to ODY): He's early. Three days. Don't be late."
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT EPISODE: EP.10 · THE OWNER. Which recruit is your favourite? Tell us in the comments.",
+   "lines": []
+  }
  ]
 }

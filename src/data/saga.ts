@@ -191,6 +191,22 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 9,
+    slug: "episode-9",
+    title: "The Recruits",
+    titleId: "Para Rekrut",
+    logline:
+      "Arya opens recruitment and five locals show up. Yoko, now working for a foreign rival, tries to buy every one of them. Then the grandmother who blessed Arya reveals she has been playing since 1963.",
+    loglineId:
+      "Arya membuka rekrutmen dan lima anak lokal datang. Yoko, kini bekerja untuk pesaing asing, mencoba membeli mereka semua. Lalu nenek yang dulu memberkati Arya mengungkap bahwa dia sudah bermain sejak 1963.",
+    featuredModels: ["athena", "victory", "edpower"],
+    commentPrompt: {
+      en: "Which recruit is your favourite? Tell us in the comments.",
+      id: "Rekrut mana favoritmu? Tulis di kolom komentar.",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
