@@ -365,6 +365,23 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true
   },
+  {
+    number: 18,
+    slug: "chapter-18",
+    key: "episode-18",
+    title: "One Good Day",
+    titleId: "Satu Hari yang Cukup",
+    logline: "An impossible office offers Arya the perfect day he once wished for. Komang must find a real way home before the price erases them.",
+    loglineId: "Kantor yang mustahil menawarkan hari sempurna yang pernah Arya minta. Komang harus menemukan jalan pulang sebelum harganya menghapus mereka.",
+    featuredModels: [
+      "edpower"
+    ],
+    commentPrompt: {
+      en: "Would you notice the hidden price of your perfect day?",
+      id: "Kalau ditawari hari yang sempurna, apa lo bakal membaca syaratnya?"
+    },
+    published: true
+  },
 ];
 
 export const characters: SagaCharacter[] = [

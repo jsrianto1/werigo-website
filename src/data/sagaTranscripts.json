@@ -9079,5 +9079,484 @@
     }
    ]
   }
+ ],
+ "18": [
+  {
+   "label": "PANEL 1",
+   "text": "",
+   "lines": [
+    {
+     "who": "COPY",
+     "text": "You wanted a break. Let me take over."
+    },
+    {
+     "who": "ODY",
+     "text": "Arya. I am still in Sanur."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "The clock stops. The door stays shut.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "We did not open it."
+    },
+    {
+     "who": "ARYA",
+     "text": "I know. Stay beside me."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA CHAPTER 18: One Good Day",
+   "lines": []
+  },
+  {
+   "label": "Part 1",
+   "text": "THE FREE TRIAL",
+   "lines": []
+  },
+  {
+   "label": "PANEL 3",
+   "text": "",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "TRIAL SPACE|Manifestation active. Replacement requires your consent."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "That corridor was six steps long."
+    },
+    {
+     "who": "ARYA",
+     "text": "Do not follow anything with my face. Ask me first."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Relax. I know every alley on this island."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "PATHFINDER|Route search active."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Correction. This is no longer the island."
+    },
+    {
+     "who": "ARYA",
+     "text": "You made that mark?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Three wrong turns ago."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "",
+   "lines": [
+    {
+     "who": "COPY",
+     "text": "One perfect day. No complaints. No one disappointed in you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "All three routes end at the same button."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ONE GOOD DAY|Accept your replacement. Your duties will be completed perfectly."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "Sanur. The same morning.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Bram… you can see that too?"
+    },
+    {
+     "who": "BRAM",
+     "text": "The floating door above the water? Unfortunately."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Screen is off. It is still there."
+    },
+    {
+     "who": "ODY",
+     "text": "Keep my call with Arya connected. We are not leaving them."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "The front entrance still opens onto the real street.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Arya! I am outside the front entrance. Can you hear me?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Red strap. I have secured this end outside. Follow its pull."
+    },
+    {
+     "who": "KOMANG",
+     "text": "Got it!"
+    }
+   ]
+  },
+  {
+   "label": "Part 2",
+   "text": "THE HIDDEN PRICE",
+   "lines": []
+  },
+  {
+   "label": "PANEL 13",
+   "text": "Once, all Arya had asked for was one good day.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 14",
+   "text": "The offer knows exactly where to hurt.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "No one waiting. No one angry. Nothing left to fix."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Wait. There is another line underneath."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "TRANSFER TERMS|Your replacement keeps your memories. Everyone you love forgets you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "A day off… where nobody remembers us?"
+    },
+    {
+     "who": "JULES",
+     "text": "I almost pressed it. I thought nobody would have to fix my mistakes again."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "You found the catch. That is why we need you here."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "RALLY|Stay together. No one takes the next step alone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "The orange routes follow the offer. The strap follows Dewa."
+    },
+    {
+     "who": "ARYA",
+     "text": "Which one would you trust with your bike?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Dewa. He would complain all day, but it would still be there."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "Pathfinder finds the gap between what is offered and what is real.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "There. The map ends, but the strap keeps going."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Arya!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "Some choices do not need a button.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "I have you. Look at me."
+    }
+   ]
+  },
+  {
+   "label": "Part 3",
+   "text": "THE WAY HOME",
+   "lines": []
+  },
+  {
+   "label": "PANEL 23",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Keep looking at the red strap. Not the doors!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "One more step. All three of you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I am tired. But my friends do not need a perfect version of me."
+    },
+    {
+     "who": "BRAM",
+     "text": "The real one is irritating enough."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Arya, if you can still hear me—come back as yourself."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "Three people cross the real threshold. None has accepted.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "TRIAL ENDED|Replacement declined. Perfect-day reward forfeited."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Next time I say I want a holiday, please specify the location."
+    },
+    {
+     "who": "DEWA",
+     "text": "Outside. For a start."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "I will call the waiting guests. Explain the delay. Let them choose a new time."
+    },
+    {
+     "who": "DEWA",
+     "text": "Good. Close the office until we have checked it together."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30",
+   "text": "No reward screen fixes the damage.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Your phone made it back too."
+    },
+    {
+     "who": "ARYA",
+     "text": "Its screen did not."
+    }
+   ]
+  },
+  {
+   "label": "Part 4",
+   "text": "ENOUGH FOR TODAY",
+   "lines": []
+  },
+  {
+   "label": "PANEL 31",
+   "text": "Later. Ody and Bram return, park, and take off their helmets.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 32",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "You got each other out. Thank you."
+    },
+    {
+     "who": "JULES",
+     "text": "We still have the key. Sealed."
+    },
+    {
+     "who": "ODY",
+     "text": "Then we stop guessing. We ask someone who has seen this before."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "After the checks and the guest calls. Rice, hot tea, and somewhere to sit.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "That thing offered a perfect day and did not even include lunch."
+    },
+    {
+     "who": "JULES",
+     "text": "You would have read the food section before the terms."
+    },
+    {
+     "who": "KOMANG",
+     "text": "I have priorities."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Phone broken. Work late. Rice on my shirt."
+    },
+    {
+     "who": "ARYA",
+     "text": "But we all came home. Today… that is enough."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "The envelope is still sealed. Something inside it remembers.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "KEY RECORD RECOVERED|First activation: 1963. Gatekeeper required."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "Elsewhere in Bali.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "So. The door we closed has learned to knock."
+    }
+   ]
+  },
+  {
+   "label": "Next chapter",
+   "text": "CH.19 · The Small Yes",
+   "lines": [
+    {
+     "who": "QUESTION",
+     "text": "In 1963, who closed the first door—and who was left on the other side?"
+    }
+   ]
+  }
  ]
 }
