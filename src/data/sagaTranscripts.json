@@ -7307,16 +7307,6 @@
  ],
  "15": [
   {
-   "label": "Title card",
-   "text": "WERIGO SAGA · CHAPTER 15 · THE CITADEL.",
-   "lines": [
-    {
-     "who": "CAPTION",
-     "text": "Ride Bali the quiet way."
-    }
-   ]
-  },
-  {
    "label": "PANEL 1",
    "text": "Bali bay. A new world event begins.",
    "lines": [
@@ -7333,6 +7323,16 @@
     {
      "who": "PAK CHAN",
      "text": "Three days. One building. No excuses."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA · CHAPTER 15 · THE CITADEL.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "A BALI WEBTOON. Story & Art: Werigo Studio."
     }
    ]
   },

@@ -27,6 +27,8 @@ export interface SagaEpisode {
   titleId: string;
   logline: string;
   loglineId: string;
+  /** Versioned media URLs keep revised artwork fresh in browser and CDN caches. */
+  assetVersion?: string;
   featuredModels: SagaModel[];
   published: boolean;
   /** The end-card question, shown above the episode's comments. */
@@ -311,6 +313,7 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 15,
+    assetVersion: "series-v2",
     slug: "chapter-15",
     key: "chapter-15",
     title: "The Citadel",
@@ -468,7 +471,7 @@ export function getPages(episode: SagaEpisode): SagaPageImage[] {
   const entry = (pages as PagesManifest)[String(episode.number)];
   if (!entry) return [];
   return entry.heights.map((height, i) => ({
-    src: `/media/saga/ep-${episode.number}/p${String(i + 1).padStart(2, "0")}.webp`,
+    src: `/media/saga/ep-${episode.number}/p${String(i + 1).padStart(2, "0")}${episode.assetVersion ? `-${episode.assetVersion}` : ""}.webp`,
     width: entry.width,
     height,
   }));
@@ -476,11 +479,11 @@ export function getPages(episode: SagaEpisode): SagaPageImage[] {
 
 
 export function coverSrc(episode: SagaEpisode) {
-  return `/media/saga/covers/ep-${episode.number}.webp`;
+  return `/media/saga/covers/ep-${episode.number}${episode.assetVersion ? `-${episode.assetVersion}` : ""}.webp`;
 }
 
 export function ogSrc(episode: SagaEpisode) {
-  return `/media/saga/covers/ep-${episode.number}-og.jpg`;
+  return `/media/saga/covers/ep-${episode.number}${episode.assetVersion ? `-${episode.assetVersion}` : ""}-og.jpg`;
 }
 
 export function totalPages(): number {
