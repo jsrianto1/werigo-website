@@ -5857,5 +5857,670 @@
    "text": "To be continued... NEXT CHAPTER: CH.13 · THE NOMAD. Would you rent to own your first Wedison? Tell us in the comments.",
    "lines": []
   }
+ ],
+ "13": [
+  {
+   "label": "PART 1 · THE WANDERER (cold open)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1 · SPLASH, VFX",
+   "text": "A glowing world map floats in the dark, covered in thirty pins of light. In the middle, DENISA with one backpack, eyes closed.",
+   "lines": [
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[PLAYER: DENISA · CLASS: WANDERER] [COUNTRIES CLEARED: 30]"
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (red, small): [CURSE: NOMAD'S CURSE · NEVER STAY MORE THAN 90 DAYS]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2 · COMEDY",
+   "text": "Her whole life laid out on an airport floor like a game inventory: one backpack, one laptop, three shirts, one cold brew bottle, one tiny cactus.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[INVENTORY: 7 ITEMS · FURNITURE: 0 · REGRETS: 0]"
+    },
+    {
+     "who": "DENISA",
+     "text": "...One regret. I left a cactus in Lisbon."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "She lands in Bali at night. The heat hits her. Frangipani, incense, scooters. Title card: CH.13 · THE NOMAD",
+   "lines": [
+    {
+     "who": "DENISA (thought)",
+     "text": "Country thirty-one. Three months. Then I go."
+    },
+    {
+     "who": "SYSTEM (grey)",
+     "text": "[DAYS REMAINING: 90]"
+    }
+   ]
+  },
+  {
+   "label": "PART 2 · THE ORDER",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 4",
+   "text": "The Werigo base at night. ODY reads Denisa's WhatsApp from CH.12 again and grins.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Two bikes, one month, and she's already asking about buying."
+    },
+    {
+     "who": "KOMANG",
+     "text": "Nobody asks that on day one."
+    },
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[HIDDEN QUEST DETECTED: THE SETTLER]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "Morning in Pererenan. Arya and Komang ride up to a small coliving villa: Arya on his olive Athena, Komang leading a white Wedison Victory and a red Bees Pro.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "A month's rental. Delivery included."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6 · PRODUCT",
+   "text": "The Werigo handover at the gate. Two clean helmets, a phone holder already fixed on the handlebar. Arya shows her the battery on the display.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Over eighty percent. At night you plug it in at home, like your phone."
+    },
+    {
+     "who": "DENISA",
+     "text": "I've never had anything to plug in at home."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7 · VFX",
+   "text": "A gold window opens over her, the same kind Chloe got in CH.5.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[NOMAD PASS · 30 DAYS]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8 · PRODUCT, COMEDY",
+   "text": "Denisa loads two crates of cold brew bottles onto the Bees Pro's flat footboard. They fit perfectly.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "It fits two gallons too!"
+    },
+    {
+     "who": "DENISA",
+     "text": "It fits twenty-four bottles. That's better than gallons."
+    },
+    {
+     "who": "KOMANG",
+     "text": "...Nothing is better than gallons."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "",
+   "lines": [
+    {
+     "who": "DENISA",
+     "text": "The Victory is for me. The Bees Pro is for the business. Coworking spaces pay well for cold brew at 3pm."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "[DENISA · SIDE QUEST: COLD BREW ROUTE]"
+    }
+   ]
+  },
+  {
+   "label": "PART 3 · THIRTY DAYS",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 10 · MONTAGE",
+   "text": "DAY 2: Denisa rides the white Victory along the Canggu coast at sunrise, hair flying, no helmet off, grinning.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[DAY 2 / 30]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11 · MONTAGE",
+   "text": "DAY 6: A coworking space. She hands out cold brew from the Bees Pro crates.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[COLD BREW ROUTE · LEVEL 2]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12 · MONTAGE, PRODUCT",
+   "text": "DAY 9: She plugs the Victory into a Wedison SuperCharge pile outside a café while she answers emails with a coffee.",
+   "lines": [
+    {
+     "who": "DENISA (thought)",
+     "text": "Fifteen minutes. One email. Full enough to ride home."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13 · MONTAGE, COMEDY",
+   "text": "DAY 12: Komang teaches her Balinese words at a warung.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "\"Suksma\" is thank you."
+    },
+    {
+     "who": "DENISA",
+     "text": "Suksma!"
+    },
+    {
+     "who": "KOMANG",
+     "text": "And \"Komang ganteng\" means... also thank you."
+    },
+    {
+     "who": "",
+     "text": "(Arya, drinking kopi, chokes.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "DAY 14: Her neighbour, the old woman next door, puts a small offering at the villa gate and a second one at Denisa's gate.",
+   "lines": [
+    {
+     "who": "NEIGHBOUR",
+     "text": "Tonight is Kajeng Kliwon. Come home before midnight, nak."
+    }
+   ]
+  },
+  {
+   "label": "PART 4 · KAJENG KLIWON",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 15",
+   "text": "23:40. Denisa is still at a sunset party in Canggu, laughing, phone buzzing with orders.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "She did not come home before midnight."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "00:10. She rides home alone on the white Victory through dark rice fields. No engine sound at all. Only crickets.",
+   "lines": [
+    {
+     "who": "SFX",
+     "text": "..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17 · HORROR",
+   "text": "In the rice fields, small floating lights appear, one by one, drifting toward the road. No sound.",
+   "lines": [
+    {
+     "who": "DENISA (thought)",
+     "text": "Fireflies. They're fireflies. Fireflies don't... float that high."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18 · HORROR",
+   "text": "She stops. The lights hang in the air around her. Somewhere far away, a slow gamelan. Her phone rings: KOMANG.",
+   "lines": [
+    {
+     "who": "KOMANG (phone)",
+     "text": "Where are you?! Don't stop! Don't look at the lights!"
+    },
+    {
+     "who": "DENISA",
+     "text": "I already stopped. And I'm already looking."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19 · COMEDY",
+   "text": "Split: Komang at home under his blanket, only his eyes showing, phone glowing.",
+   "lines": [
+    {
+     "who": "KOMANG (phone)",
+     "text": "Say \"nunas lugra\". Say it!"
+    },
+    {
+     "who": "DENISA",
+     "text": "Noonas... loogra?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20 · VFX",
+   "text": "At the crossroads there is a small offering on the ground, the same kind her neighbour made. Denisa takes the little canang her neighbour tucked into her bag that afternoon and places it beside the other one, hands together, head bowed.",
+   "lines": [
+    {
+     "who": "DENISA",
+     "text": "Nunas lugra. I'm just passing. I'm... a guest."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21 · VFX",
+   "text": "The lights circle her once, slowly, then drift back into the rice fields and fade. The silent Victory glides on.",
+   "lines": [
+    {
+     "who": "",
+     "text": "SYSTEM (old gold, faint): [THE ISLAND IS WATCHING]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "At her gate, the neighbour is waiting in the dark with a lamp.",
+   "lines": [
+    {
+     "who": "NEIGHBOUR",
+     "text": "Late."
+    },
+    {
+     "who": "DENISA",
+     "text": "I said nunas lugra."
+    },
+    {
+     "who": "NEIGHBOUR",
+     "text": "(smiling) Then they know your name now."
+    }
+   ]
+  },
+  {
+   "label": "PART 5 · TWO ISLANDS, SAME GHOSTS",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 23",
+   "text": "Video call. ODY in Bali, Pak Chan and Pak Remy in Singapore.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Every renter is a future owner. Denisa asked on day one. Give me a program: rent first, buy later."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24 · VFX",
+   "text": "Pak Remy's APPRAISAL: numbers orbit a small figure of Denisa on a bike.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "One nomad is a story, not a funnel."
+    },
+    {
+     "who": "ODY",
+     "text": "Then let me show you the funnel."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25 · COMEDY",
+   "text": "Pak Remy places a small orange on his desk, next to a tiny cup of tea, very seriously.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "But nothing is signed this month."
+    },
+    {
+     "who": "ODY",
+     "text": "...Why is there an orange?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "It's the seventh month. Hungry Ghost Month. Nobody buys a new vehicle now. Not in Singapore."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26 · SPLASH, FANTASY",
+   "text": "Split page. Left: a Singapore street at night, joss paper burning in metal bins, oranges and incense, an empty front row of red chairs before a getai stage \"for the guests you can't see\". Right: a Bali gate on Kajeng Kliwon, canang on the ground, incense smoke. Faint spirit shapes in both halves.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Two islands. Same rule: feed the unseen before you ask for anything."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27 · COMEDY",
+   "text": "Night at the Werigo base. Komang, fixing a helmet, starts whistling. On the laptop, Pak Chan and Pak Remy lean into the camera at the same time.",
+   "lines": [
+    {
+     "who": "",
+     "text": "PAK CHAN & PAK REMY: DON'T WHISTLE AT NIGHT!"
+    },
+    {
+     "who": "KOMANG",
+     "text": "...In Bali also, actually."
+    },
+    {
+     "who": "",
+     "text": "(Komang stops whistling.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Fine. The gates of the underworld close at the end of the month. If your nomad still wants to buy then, we make it a program."
+    },
+    {
+     "who": "ODY",
+     "text": "She rents until then. That's exactly the point."
+    }
+   ]
+  },
+  {
+   "label": "PART 6 · DAY 89",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 29",
+   "text": "Day 29 of her pass. Denisa's laptop: a flight to another country, already booked. Her System window turns red.",
+   "lines": [
+    {
+     "who": "SYSTEM (red)",
+     "text": "[NOMAD'S CURSE · DAY 89 OF 90] [NEXT COUNTRY?]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30",
+   "text": "She stares at the white Victory parked in her garden, charging cable plugged in for the night.",
+   "lines": [
+    {
+     "who": "DENISA (thought)",
+     "text": "I've never been sad to give something back before."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "The Werigo base. A postcard arrives from Melbourne: a hand-drawn yellow Athena on a Bali road, signed \"Chloe\". Arya reads it aloud.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "\"March is booked. Save the yellow one. Jake says hi.\""
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "Arya shows the postcard to Denisa at the base.",
+   "lines": [
+    {
+     "who": "DENISA",
+     "text": "She's coming back?"
+    },
+    {
+     "who": "ARYA",
+     "text": "Many come back. Some never leave."
+    },
+    {
+     "who": "DENISA",
+     "text": "Everybody says Bali keeps you or spits you out."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "The grandmother (the Gatekeeper), passing with canang, stops.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "The island doesn't keep anyone, nak. People decide to stay. The island only notices."
+    },
+    {
+     "who": "DENISA",
+     "text": "...How do I know it noticed me?"
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "It sent you lights on Kajeng Kliwon and let you go home. That's noticing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34 · SPLASH, VFX",
+   "text": "Denisa opens her laptop and cancels the flight. Her red curse window cracks, then shatters into gold.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[NOMAD'S CURSE: BROKEN] [CLASS CHANGE: WANDERER → SETTLER]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35 · COMEDY",
+   "text": "",
+   "lines": [
+    {
+     "who": "DENISA",
+     "text": "I just cancelled a flight for a scooter."
+    },
+    {
+     "who": "KOMANG",
+     "text": "For an electric scooter. Big difference."
+    }
+   ]
+  },
+  {
+   "label": "PART 7 · THE GATES CLOSE",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 36 · FANTASY",
+   "text": "Singapore, the last night of the seventh month. Joss paper embers rise, and a huge ghostly gate in the sky slowly closes.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "[HUNGRY GHOST MONTH · ENDED]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37 · COMEDY",
+   "text": "Pak Remy removes the orange from his desk and eats it.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "Now we can sign."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38 · SPLASH",
+   "text": "Morning at the Wedison showroom in Denpasar: glass front, a row of Wedison bikes inside, the WEDISON sign above. Denisa rides up on the white Victory with Arya and Komang behind her.",
+   "lines": [
+    {
+     "who": "SYSTEM (blue)",
+     "text": "[LOCATION: WEDISON SHOWROOM · DENPASAR]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39 · PRODUCT",
+   "text": "Inside, ODY and Denisa at a desk with papers, the white Victory beside them.",
+   "lines": [
+    {
+     "who": "DENISA",
+     "text": "I rented it to find out if I'd stay. Now I know. I want to own this one."
+    },
+    {
+     "who": "ODY",
+     "text": "Then from today, it's yours."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40 · COMEDY",
+   "text": "Pak Remy on a tablet video call propped on the desk.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "What price are you suggesting?"
+    },
+    {
+     "who": "ODY",
+     "text": "Nothing. She sold it to herself."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "...Then she is our first data point."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41 · VFX",
+   "text": "A blue funnel of light: many small rental keys at the top, one golden key at the bottom landing in Denisa's hand.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[RENTER → OWNER: 1] [FUNNEL CONFIRMED] [QUEST COMPLETE: THE SETTLER]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42 · PRODUCT",
+   "text": "",
+   "lines": [
+    {
+     "who": "DENISA",
+     "text": "And the Bees Pro stays a rental. The business rents. I own."
+    },
+    {
+     "who": "ODY",
+     "text": "Monthly again?"
+    },
+    {
+     "who": "DENISA",
+     "text": "Monthly forever. The cold brew doesn't carry itself."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 43 · COMEDY",
+   "text": "Komang holds out his hand to Denisa.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Payment for the Balinese lessons: one free cold brew a day."
+    },
+    {
+     "who": "DENISA",
+     "text": "Suksma, Komang ganteng."
+    },
+    {
+     "who": "",
+     "text": "(Komang freezes. Arya laughs so hard he has to sit down.)"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 44 · SPLASH, VFX",
+   "text": "Sunset. Denisa rides the white Victory along the coast, the red Bees Pro following with Arya. Her world map glows in the sky: thirty pins, and on Bali a small golden house.",
+   "lines": [
+    {
+     "who": "SYSTEM (gold)",
+     "text": "[INVENTORY: 8 ITEMS · FURNITURE: 0 · WEDISON: 1]"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 45",
+   "text": "Back at the villa, she writes a new cactus tag and plants a frangipani cutting by her gate. Her neighbour nods.",
+   "lines": [
+    {
+     "who": "NEIGHBOUR",
+     "text": "This one will stay."
+    }
+   ]
+  },
+  {
+   "label": "PART 8 · THE SILENCE IS COMING (cliffhanger)",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 46",
+   "text": "The Werigo base. Putu drags in a half-finished ogoh-ogoh head, grinning. Behind him the calendar shows a red circle.",
+   "lines": [
+    {
+     "who": "PUTU",
+     "text": "Nyepi is coming. The whole island turns off for a day."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 47 · VFX, COMEDY",
+   "text": "On a video call, Pak Chan's face.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "What do you mean the airport closes?"
+    },
+    {
+     "who": "ODY",
+     "text": "Everything closes, Pak. No lights. No roads. No work. For twenty-four hours."
+    },
+    {
+     "who": "",
+     "text": "(Pak Chan's glasses crack.)"
+    },
+    {
+     "who": "",
+     "text": "SYSTEM (grey, glitching): [WORLD EVENT INCOMING: THE DAY OF SILENCE]"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued... NEXT CHAPTER: CH.14 · NYEPI. Did Bali keep you, or did it let you go? Tell us in the comments.",
+   "lines": []
+  }
  ]
 }

@@ -275,6 +275,23 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 13,
+    slug: "chapter-13",
+    key: "chapter-13",
+    title: "The Nomad",
+    titleId: "Sang Nomad",
+    logline:
+      "Denisa has lived in thirty countries and never stayed longer than ninety days. One Werigo month, a white Victory, a red Bees Pro full of cold brew and a night of floating lights on Kajeng Kliwon later, Bali has other plans.",
+    loglineId:
+      "Denisa sudah tinggal di tiga puluh negara dan tak pernah bertahan lebih dari sembilan puluh hari. Satu bulan Werigo, Victory putih, Bees Pro merah penuh cold brew, dan satu malam cahaya melayang saat Kajeng Kliwon kemudian, Bali punya rencana lain.",
+    featuredModels: ["victory", "bees", "athena"],
+    commentPrompt: {
+      en: "Did Bali keep you, or did it let you go? Tell us in the comments.",
+      id: "Bali menahanmu, atau melepasmu pergi? Tulis di kolom komentar.",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
