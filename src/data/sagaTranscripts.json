@@ -7978,5 +7978,618 @@
     }
    ]
   }
+ ],
+ "16": [
+  {
+   "label": "PANEL 1",
+   "text": "19:47. The night before the first handover.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "RETURN REQUEST|NO ACTIVE RENTAL"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "Three knocks. Then a key turned from the outside.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "We have not even opened."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA CHAPTER 16: Werigo Must Stand Alone",
+   "lines": []
+  },
+  {
+   "label": "PANEL 3",
+   "text": "That morning. One bike. Two promises.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "This key is allocated to tomorrow’s guest."
+    },
+    {
+     "who": "ODY",
+     "text": "Then why is it on the showroom test-ride list?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Two calendars. Nobody owns the handover."
+    },
+    {
+     "who": "ODY",
+     "text": "The team is doing two jobs. Both need their full attention."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "One supervised trial. A separate rental allocation. Your own crew."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "Show us who is responsible when the plan changes."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "And a place that is ours."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Earn it. Without doing every job yourself."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "MAIN QUEST|WERIGO MUST STAND ALONE"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "One booking. One assigned bike. One person checking the handover."
+    },
+    {
+     "who": "ODY",
+     "text": "You make that sound very simple."
+    },
+    {
+     "who": "JULES",
+     "text": "It should be. For the guest."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "You run the bookings. I run the riders. Arya checks the delivery."
+    },
+    {
+     "who": "JULES",
+     "text": "And if I get it wrong?"
+    },
+    {
+     "who": "DEWA",
+     "text": "Tell us while we can still fix it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "Bram Ardan. Hospitality beverage sales. Old friend.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "You look like a spreadsheet learned to suffer."
+    },
+    {
+     "who": "ODY",
+     "text": "Good morning to you too, Bram."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Still hiring people who can survive you?"
+    },
+    {
+     "who": "ODY",
+     "text": "You survived your first sales visit."
+    },
+    {
+     "who": "BRAM",
+     "text": "I came to sell bottles. I left with a friend and cold sushi."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "2025. Ody’s sushi restaurant and bar.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Ten minutes. Let me show you the range."
+    },
+    {
+     "who": "ODY",
+     "text": "Ten. The kitchen is still open."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "The pitch became a friendship. At parties, they were usually the last two still up. That night, a hired car took them home.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "You said ten minutes."
+    },
+    {
+     "who": "ODY",
+     "text": "You said the last story. Three stories ago."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "Present day. A saved message from Selin, Jakarta.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "SELIN|I miss us. I cannot keep living between visits."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "You do not have to explain it today."
+    },
+    {
+     "who": "ODY",
+     "text": "Then ask me about the shop."
+    },
+    {
+     "who": "BRAM",
+     "text": "Fine. Have you eaten?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "A few Sundays earlier. After church. No targets. Just people who noticed when Ody went quiet.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 16",
+   "text": "He believed meeting Pak Chan and Remy, and building Werigo, was part of that path. It did not mean walking it alone.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "God, thank You for the people You put beside me. Help me trust them."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "A restaurant contact has an empty unit. Easy access. Room for handovers."
+    },
+    {
+     "who": "CINTA",
+     "text": "We check the access, permission and power before we promise anything."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "A trial space. Small enough to run properly.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "You used to worry about empty tables."
+    },
+    {
+     "who": "ODY",
+     "text": "Now I worry about missing helmets. Progress."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Ask the owner. Greet the neighbours. Leave the little shrine its space."
+    },
+    {
+     "who": "JULES",
+     "text": "And this old key?"
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "Find out which door it belongs to."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "In Singapore, I would choose an auspicious opening time."
+    },
+    {
+     "who": "JULES",
+     "text": "Will that move the guest’s flight?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "No. Be ready earlier."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Bike assigned. Battery checked. Both helmets clean."
+    },
+    {
+     "who": "JULES",
+     "text": "And the right address?"
+    },
+    {
+     "who": "ARYA",
+     "text": "Checked with the guest. Not just the pin."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "HANDOVER CHECK|80%+ BATTERY · 2 HELMETS · PHONE HOLDER · BRIEFING"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "A proper roster. Does that mean I get a title?"
+    },
+    {
+     "who": "ARYA",
+     "text": "On time would be a good start."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "The EdPower’s SuperCharge port sits ahead of the closed seat, on the centre tunnel.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Ten to eighty percent in fifteen minutes. Enough time to check the next handover."
+    },
+    {
+     "who": "JULES",
+     "text": "One charging slot. One updated delivery time."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "If a guest changes hotels, who updates the rider?"
+    },
+    {
+     "who": "ARYA",
+     "text": "Me, after you confirm it."
+    },
+    {
+     "who": "JULES",
+     "text": "Good. They should not have to tell three people."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Tomorrow, you make the call. I am here if you need me."
+    },
+    {
+     "who": "JULES",
+     "text": "That is somehow reassuring and terrifying."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "19:47. Three knocks. We are back at the door.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "RETURN REQUEST|GUEST NAME: UNASSIGNED"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "Ody lowers his phone. The reflection does not.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Why does your shadow look better rested than you?"
+    },
+    {
+     "who": "ODY",
+     "text": "It has fewer responsibilities."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Open up. Your dinner is getting cold."
+    },
+    {
+     "who": "KOMANG",
+     "text": "I knew it. Food delivery. Very normal."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "Behind them, the brass key turns once on its hook.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Did you put a key through the door?"
+    },
+    {
+     "who": "BRAM",
+     "text": "No. Both hands were full."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30",
+   "text": "The next morning. The first real change to the plan.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "The guest moved hotels. I confirmed the new address and a revised arrival time."
+    },
+    {
+     "who": "ODY",
+     "text": "Send me the number. I will..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Already done. Arya has the address. Dewa checked the route."
+    },
+    {
+     "who": "ODY",
+     "text": "Right. What do you need from me?"
+    },
+    {
+     "who": "JULES",
+     "text": "Let us finish it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "He will not learn while you keep taking the handlebar."
+    },
+    {
+     "who": "ODY",
+     "text": "I am trying to let go."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "For once, Ody puts his phone face down before it stops ringing. The task stays with its owner.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "SKILL UNLOCKED|TRUST THE PARTY"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "We checked the condition together. Now the controls and charging."
+    },
+    {
+     "who": "GUEST",
+     "text": "You found the new place without me chasing anyone."
+    },
+    {
+     "who": "ARYA",
+     "text": "You have a holiday to get on with."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Address changed. Guest informed. Bike delivered. Briefing complete."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "And who solved it?"
+    },
+    {
+     "who": "JULES",
+     "text": "We did. Each person knew their part."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "A separate rental team. A protected fleet allocation. This place is yours to run."
+    },
+    {
+     "who": "ODY",
+     "text": "Jules leads the desk. Dewa leads the field."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "And everyone still reports their costs."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "A guild house. Finally. Where is my throne?"
+    },
+    {
+     "who": "JULES",
+     "text": "The helmet-cleaning stool."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "GUILD HOME UNLOCKED|A PLACE. A TEAM. A PROMISE KEPT."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Want to celebrate like the old days?"
+    },
+    {
+     "who": "ODY",
+     "text": "Dinner first. Then I am going home."
+    },
+    {
+     "who": "BRAM",
+     "text": "Look at that. Character development."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "A message from his church group: We saved you a seat for Sunday.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Thanks for showing up."
+    },
+    {
+     "who": "BRAM",
+     "text": "You do not have to be entertaining to get a friend to stay."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40",
+   "text": "That evening, Jules counts the keys. Every assigned key is there.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "INVENTORY|ONE EXTRA KEY"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "In the glass, Ody’s reflection smiles first.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Ody... this one has your name on it."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "UNCLAIMED QUEST|RETURN THE OPERATOR"
+    }
+   ]
+  },
+  {
+   "label": "Closing",
+   "text": "To be continued. Next chapter: Too Many Hats. Would you open the door, or leave the key where it was?",
+   "lines": []
+  }
  ]
 }

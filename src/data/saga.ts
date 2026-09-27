@@ -329,6 +329,21 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 16,
+    slug: "chapter-16",
+    key: "chapter-16",
+    title: "Werigo Must Stand Alone",
+    titleId: "Werigo Harus Berdiri Sendiri",
+    logline: "One bike, two promises, and a trial the team must finish without Ody taking over. Then someone returns a key before the doors have opened.",
+    loglineId: "Satu motor, dua janji, dan uji coba yang harus tim selesaikan tanpa diambil alih Ody. Lalu seseorang mengembalikan kunci sebelum kantor dibuka.",
+    featuredModels: ["athena", "victory", "edpower"],
+    commentPrompt: {
+      en: "Would you open the door, or leave the key where it was?",
+      id: "Kamu akan buka pintunya, atau biarkan kunci itu di tempatnya?",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
