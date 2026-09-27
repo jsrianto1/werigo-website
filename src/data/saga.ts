@@ -309,6 +309,23 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 15,
+    slug: "chapter-15",
+    key: "chapter-15",
+    title: "The Citadel",
+    titleId: "The Citadel",
+    logline:
+      "Three days to find a home for the Wedison Experience Centre. Pak Chan has a long list of demands, Dewa has an EdPower, and the land has a guardian. But where does Werigo belong?",
+    loglineId:
+      "Tiga hari untuk mencari tempat bagi Wedison Experience Centre. Pak Chan membawa daftar syarat panjang, Dewa membawa EdPower, dan lahan itu punya penjaga. Lalu, di mana tempat Werigo?",
+    featuredModels: ["edpower", "athena", "bees"],
+    commentPrompt: {
+      en: "If you could design one corner of a Wedison Experience Centre, what would it be?",
+      id: "Kalau kamu bisa merancang satu sudut Wedison Experience Centre, kamu ingin membuat apa?",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [

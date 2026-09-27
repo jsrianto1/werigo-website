@@ -7304,5 +7304,679 @@
    "text": "To be continued... NEXT CHAPTER: CH.15 · THE CITADEL. What would you do with one day of total silence? Tell us in the comments.",
    "lines": []
   }
+ ],
+ "15": [
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA · CHAPTER 15 · THE CITADEL.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Ride Bali the quiet way."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 1",
+   "text": "Bali bay. A new world event begins.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "WORLD EVENT: THE CITADEL. OBJECTIVE: FIND THE LAND"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "Pak Chan and Pak Remy arrive in Bali.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Three days. One building. No excuses."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "Arya hands over a ready-to-ride scooter at the airport.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Your ride, Pak. Delivered to the airport, charged and ready."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "I don't ride."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "I do."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "Arya hands over a ready-to-ride scooter at the airport.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Remy takes the helmet. Chan chooses the car."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "PAK REMY. NEW SKILL: RIDER"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "The riders begin the search along the coast.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Jimbaran to Tanjung Benoa. The search begins."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "CONVOY LEADER: DEWA. RANK A"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "The riders wait under a tree.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "The Board wants the building by Friday."
+    },
+    {
+     "who": "DEWA",
+     "text": "Buildings don't care about Friday."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "Pak Chan checks his compass from inside the car.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Water in front. A mountain behind. No T-junction at the door. No number four."
+    },
+    {
+     "who": "DRIVER",
+     "text": "That's quite a list, Pak."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Then we had better start."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "The team inspects prospective buildings.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "CANDIDATE 1: REJECTED. TIME: 2 SECONDS"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "T-junction. No."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "The team inspects prospective buildings.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Number fourteen. Contains a four. No."
+    },
+    {
+     "who": "ODY",
+     "text": "Pak, the address is fourteen, not four."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "It contains a four."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "The team inspects prospective buildings.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "REJECTED: 3. TIMES CHAN LEFT THE CAR: 0"
+    },
+    {
+     "who": "PAK REMY",
+     "text": "Six hundred square metres. Price per metre..."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Too expensive for a building I haven't left my car for."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "The riders wait under a tree.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "He's looking for the right building from inside a box."
+    },
+    {
+     "who": "ARYA",
+     "text": "Then he'll never find it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "Pak Chan remains stuck in traffic.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "HOOONK"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "TRAFFIC. BOSS LEVEL"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "Pak Chan remains stuck in traffic.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Twelve minutes. Same view."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "..."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "Dewa offers Pak Chan a helmet and a seat on the EdPower.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Is it... comfortable? For two."
+    },
+    {
+     "who": "DEWA",
+     "text": "It's an EdPower, Pak. It's comfortable for two."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "Dewa takes Pak Chan on his first EdPower ride.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "FIRST RIDE. THE CHAIRMAN FEELS THE WIND"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "...Oh."
+    }
+   ]
+  },
+  {
+   "label": "Pause page",
+   "text": "No engine roar. Just the wind.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 16",
+   "text": "The EdPower charges through its centre-tunnel hatch ahead of the closed seat.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Ten to eighty percent in about fifteen minutes. One coffee."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "I have never waited fifteen minutes for anything."
+    },
+    {
+     "who": "ODY",
+     "text": "You waited twelve in the car. For nothing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "The group stops for coffee while charging.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "How many of them have never had a chance to try these bikes?"
+    },
+    {
+     "who": "ODY",
+     "text": "That's why we need the Citadel. Let them ride. Then decide."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "Cinta finds a promising plot of land.",
+   "lines": [
+    {
+     "who": "CINTA",
+     "text": "My ground sense says this one. Water in front. Room to breathe."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "...Hm."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "Cinta introduces Jero Undagi.",
+   "lines": [
+    {
+     "who": "CINTA",
+     "text": "This is Jero Undagi. He knows this land better than any of us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "Jero Undagi and Pak Remy measure the land.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "Forty point two metres."
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "Twenty-three depa and a musti."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "...Is that a lot?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "Jero Undagi and Pak Remy measure the land.",
+   "lines": [
+    {
+     "who": "JERO UNDAGI",
+     "text": "We measure with the body of the person who will use it. A house should fit its owner."
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "Who are you building this for?"
+    },
+    {
+     "who": "ODY",
+     "text": "Everyone who has never ridden one yet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "The System reveals a blueprint.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "ASTA KOSALA KOSALI. MEASUREMENT ACCEPTED"
+    }
+   ]
+  },
+  {
+   "label": "Pause page",
+   "text": "A place should fit the people who use it.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 23",
+   "text": "Pak Chan and Jero Undagi discuss two traditions.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "TWO TRADITIONS. ONE CONVERSATION"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Water in front. Good fortune."
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "Here, kaja points toward the mountain, our sacred direction. We must read this land on its own terms."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Then show me."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "The atmosphere on the land changes.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "Then the wind changed."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "Pak Remy notices an unsettling reflection.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "UNKNOWN ENTITY: ???. LAND OWNER: NOT YOU"
+    },
+    {
+     "who": "PAK REMY",
+     "text": "...Pak Chan. The numbers are all fours."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "The guardian of the land appears.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "We are leaving."
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "Sit down. It's the penunggu. The guardian of this land."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "The guardian of the land appears.",
+   "lines": [
+    {
+     "who": "JERO UNDAGI",
+     "text": "You asked the seller. There is someone else to greet."
+    },
+    {
+     "who": "ODY",
+     "text": "Who?"
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "The one who was here before the seller's grandfather."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "Jero Undagi explains respect for the land through a traditional painting.",
+   "lines": [
+    {
+     "who": "JERO UNDAGI",
+     "text": "Before we build, we ask permission. We make offerings and restore balance with the land."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "Pak Chan and Jero Undagi speak about incense and auspicious days.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "In Hong Kong, my family also burns incense and chooses a good day before building."
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "Then you know how to begin. By listening."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30",
+   "text": "The group returns after preparations for the ceremony.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "After the preparations, they return for the ceremony."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "The group returns after preparations for the ceremony.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "What is the ROI of a ceremony?"
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "A building that stands."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "...I'll put it under infrastructure."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "The guardian acknowledges the group.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "THE GUARDIAN NODS. PERMISSION GRANTED"
+    }
+   ]
+  },
+  {
+   "label": "Pause page",
+   "text": "The land has been heard.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 33",
+   "text": "A flower falls as Grandmother speaks with Pak Chan.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "It likes you."
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "...Good."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "The proposed Experience Centre takes shape in their imagination.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "CITADEL BLUEPRINT: 80%. PROPOSED EXPERIENCE CENTRE"
+    },
+    {
+     "who": "ODY",
+     "text": "See every bike. Touch it. Try it. Charge while you eat. Rent from Werigo if you're not ready to buy."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "The proposed Experience Centre takes shape in their imagination.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "And the corner with the question mark?"
+    },
+    {
+     "who": "ODY",
+     "text": "That's for later."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "They discuss the right day to begin.",
+   "lines": [
+    {
+     "who": "PAK REMY",
+     "text": "What price are you suggesting?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "What day is good?"
+    },
+    {
+     "who": "JERO UNDAGI",
+     "text": "Not this month."
+    },
+    {
+     "who": "PAK CHAN & PAK REMY",
+     "text": "...Of course."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "Dewa and Pak Chan ride back together.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "PAK CHAN: RIDES TAKEN 2. COMPLAINTS: 0"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "Dewa and Pak Chan ride back together.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "Dewa."
+    },
+    {
+     "who": "DEWA",
+     "text": "Pak?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Tomorrow I will ride in front."
+    },
+    {
+     "who": "DEWA",
+     "text": "...On your own bike?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "I didn't say that."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "Arya arranges Pak Remy’s rental.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "NEW ROLE. THE BOARD BECOMES THE CUSTOMER"
+    },
+    {
+     "who": "ARYA",
+     "text": "Keep it for the three days. We'll collect it at the airport."
+    },
+    {
+     "who": "PAK REMY",
+     "text": "How much?"
+    },
+    {
+     "who": "ARYA",
+     "text": "It's on the Werigo WhatsApp, Pak. Like everyone else."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40",
+   "text": "Pak Chan and Ody discuss Werigo’s place in the Citadel.",
+   "lines": [
+    {
+     "who": "PAK CHAN",
+     "text": "The Citadel will be Wedison's. The showroom team will run it."
+    },
+    {
+     "who": "ODY",
+     "text": "And Werigo?"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Werigo will have a desk. In the corner."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "Ody considers the desk offered to Werigo.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "A desk isn't a home, Pak. The showroom crew already sell bikes all day."
+    },
+    {
+     "who": "ODY",
+     "text": "Werigo needs its own shop. Its own crew. Its own fleet."
+    }
+   ]
+  },
+  {
+   "label": "Pause page",
+   "text": "Its own shop. Its own crew. Its own fleet.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 42",
+   "text": "The System issues a new main quest.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "NEW MAIN QUEST. WERIGO MUST STAND ALONE"
+    },
+    {
+     "who": "PAK CHAN",
+     "text": "Then prove Werigo can stand alone."
+    }
+   ]
+  },
+  {
+   "label": "End card",
+   "text": "To be continued. CH.16: WERIGO MUST STAND ALONE.",
+   "lines": [
+    {
+     "who": "CAPTION",
+     "text": "If you could design one corner of a Wedison Experience Centre, what would it be? Tell us in the comments."
+    },
+    {
+     "who": "NOTE",
+     "text": "A fictional story. The Experience Centre shown is a concept, not an opening announcement."
+    }
+   ]
+  }
  ]
 }
