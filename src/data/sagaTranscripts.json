@@ -8591,5 +8591,493 @@
    "text": "To be continued. Next chapter: Too Many Hats. Would you open the door, or leave the key where it was?",
    "lines": []
   }
+ ],
+ "17": [
+  {
+   "label": "PANEL 1",
+   "text": "The same night. One key too many.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Ody... don't move yet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "His hand rises. The reflection lowers its own.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I'm not doing that."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA CHAPTER 17: Too Many Hats",
+   "lines": []
+  },
+  {
+   "label": "Part 1",
+   "text": "KEEP THE EVIDENCE",
+   "lines": []
+  },
+  {
+   "label": "PANEL 3",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Put it down. Let's record what actually happened."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "If you're joining, the morning shift is open."
+    },
+    {
+     "who": "ARYA",
+     "text": "Back up, Mang."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "Photographed. Sealed. Kept separate from the fleet keys.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Every bike key is here. This isn't a counting error."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Tomorrow, everything goes through me."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Then we're back to waiting for you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "What if something happens to you?"
+    },
+    {
+     "who": "ARYA",
+     "text": "Then we need a clear plan. Not one exhausted person."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "The key stays locked. Nobody opens alone. Tomorrow's guests still need us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "That night, even sitting still feels like falling behind.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "ACTIVE ROLES|OPERATIONS · SALES · RESCUE · EVERYTHING ELSE"
+    }
+   ]
+  },
+  {
+   "label": "Part 2",
+   "text": "FOLLOW ONE GUEST",
+   "lines": []
+  },
+  {
+   "label": "PANEL 11",
+   "text": "The next morning.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Follow one guest. From the first question to the returned key."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ONE GUEST JOURNEY|ENQUIRY → CONFIRMATION → ALLOCATION → HANDOVER → RETURN"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "What the guest sees goes above. What makes it possible goes below."
+    },
+    {
+     "who": "DEWA",
+     "text": "And a name beside each job."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Who added 'look cool'?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Finally, my specialty."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "Before pickup, the guest changes the plan.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "They want a later return time. That bike is already booked again."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Make sure the next guest isn't left waiting."
+    },
+    {
+     "who": "ARYA",
+     "text": "Let me check the options first."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "Arya calls the guest before changing the plan.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "More time on the road, or more time to enjoy the stop?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "",
+   "lines": [
+    {
+     "who": "GUEST",
+     "text": "We just don't want to watch the clock through breakfast."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "This unit is available. Battery and handover slot checked."
+    },
+    {
+     "who": "JULES",
+     "text": "The original schedule, or a longer rental on this unit. Their choice."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "They confirmed the longer rental on this unit. The other bike stays reserved."
+    },
+    {
+     "who": "JULES",
+     "text": "Updated. Same information for everyone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "Condition checked together. Helmets, controls and return time explained.",
+   "lines": [
+    {
+     "who": "GUEST",
+     "text": "So we don't need to explain it all again?"
+    },
+    {
+     "who": "ARYA",
+     "text": "You don't. Enjoy your morning."
+    }
+   ]
+  },
+  {
+   "label": "Part 3",
+   "text": "AN END WITHOUT A BEGINNING",
+   "lines": []
+  },
+  {
+   "label": "PANEL 21",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Now this one. It has an ending, but no beginning."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "No guest. No bike. What is it trying to return?"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "RETURN REQUEST|NO ENQUIRY · NO ALLOCATION · NO HANDOVER"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "The envelope remains sealed. Arya checks last night's photograph again.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Maybe it isn't asking for a bike."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "You have a team. You still work like everyone else is on leave."
+    }
+   ]
+  },
+  {
+   "label": "Part 4",
+   "text": "TWO HOURS OFF",
+   "lines": []
+  },
+  {
+   "label": "PANEL 25",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Saturday. Sanur. Sunrise. Two hours."
+    },
+    {
+     "who": "ODY",
+     "text": "What if something happens?"
+    },
+    {
+     "who": "JULES",
+     "text": "Dewa and I are on duty. We know when to call."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "Saturday, before sunrise. Sanur. The waterfront is for walking.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "We park here. Walk the rest."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "Segara Ayu, Sanur. The eastern sky opens slowly above the sea.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 28",
+   "text": "Selin's name is still in his phone. The photograph stays unsent.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I used to send her the view before I really looked at it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Then just look for a minute."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30",
+   "text": "For a while, neither of them fills the silence.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 31",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "When I stop, it feels like everything will leave me behind."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "We used to talk until morning. If talking is harder now, I can wait."
+    },
+    {
+     "who": "BRAM",
+     "text": "The coffee's still warm."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "They keep walking along the waterfront toward Sindhu. Breakfast can wait a little.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I told the church group I'll be there tomorrow."
+    },
+    {
+     "who": "BRAM",
+     "text": "Good. I'll leave Sunday to them. Breakfast is on me."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "Back at the office. Komang tries to photograph a helmet check.",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Is this documentation or a personal attack?"
+    },
+    {
+     "who": "JULES",
+     "text": "Switch cameras."
+    }
+   ]
+  },
+  {
+   "label": "Part 5",
+   "text": "SOMEONE CLOCKED IN",
+   "lines": []
+  },
+  {
+   "label": "PANEL 35",
+   "text": "The security feed is live. The records-room door is still closed.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Jules. Who's inside the records room?"
+    },
+    {
+     "who": "JULES",
+     "text": "Nobody. Dewa's outside with the rider."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "Arya starts a video call. He stays beside Jules, away from the door.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "You're still in Sanur?"
+    },
+    {
+     "who": "ODY",
+     "text": "Yes. Bram's right here. Why?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "On the call: sea light. On the security feed: Ody's green lanyard, inside the office.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Because someone in the office is wearing your face."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "Arya holds Jules back from the door.",
+   "lines": [
+    {
+     "who": "VOICE",
+     "text": "Arya. Open up."
+    },
+    {
+     "who": "ODY",
+     "text": "Don't."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "REPLACEMENT OPERATOR|ACTIVE"
+    }
+   ]
+  },
+  {
+   "label": "Next chapter",
+   "text": "CH.18 · One Good Day",
+   "lines": [
+    {
+     "who": "QUESTION",
+     "text": "If he has your face, how would your friends know which one is you?"
+    }
+   ]
+  }
  ]
 }

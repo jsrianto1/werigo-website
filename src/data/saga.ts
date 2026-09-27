@@ -347,6 +347,24 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 17,
+    slug: "chapter-17",
+    key: "episode-17",
+    title: "Too Many Hats",
+    titleId: "Kebanyakan Peran",
+    logline: "A simple booking map reveals a return with no beginning. Ody takes two hours off in Sanur, but the office refuses to let him go.",
+    loglineId: "Peta booking sederhana mengungkap pengembalian tanpa awal. Ody mengambil dua jam jeda di Sanur, tetapi kantor belum mau melepasnya.",
+    featuredModels: [
+      "athena",
+      "edpower"
+    ],
+    commentPrompt: {
+      en: "What would you ask the two Odys to find out which one is real?",
+      id: "Apa yang lo tanyakan ke dua Ody supaya tahu mana yang asli?"
+    },
+    published: true
+  },
 ];
 
 export const characters: SagaCharacter[] = [
