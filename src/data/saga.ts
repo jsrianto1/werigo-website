@@ -29,6 +29,8 @@ export interface SagaEpisode {
   loglineId: string;
   /** Versioned media URLs keep revised artwork fresh in browser and CDN caches. */
   assetVersion?: string;
+  /** One-based page revisions for isolated art corrections. */
+  pageAssetVersions?: Record<number, string>;
   featuredModels: SagaModel[];
   published: boolean;
   /** The end-card question, shown above the episode's comments. */
@@ -331,6 +333,7 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 16,
+    pageAssetVersions: { 1: "anatomy-v2", 2: "anatomy-v2" },
     slug: "chapter-16",
     key: "chapter-16",
     title: "Werigo Must Stand Alone",
@@ -485,11 +488,14 @@ export function getNeighbours(episode: SagaEpisode) {
 export function getPages(episode: SagaEpisode): SagaPageImage[] {
   const entry = (pages as PagesManifest)[String(episode.number)];
   if (!entry) return [];
-  return entry.heights.map((height, i) => ({
-    src: `/media/saga/ep-${episode.number}/p${String(i + 1).padStart(2, "0")}${episode.assetVersion ? `-${episode.assetVersion}` : ""}.webp`,
-    width: entry.width,
-    height,
-  }));
+  return entry.heights.map((height, i) => {
+    const version = episode.pageAssetVersions?.[i + 1] ?? episode.assetVersion;
+    return {
+      src: `/media/saga/ep-${episode.number}/p${String(i + 1).padStart(2, "0")}${version ? `-${version}` : ""}.webp`,
+      width: entry.width,
+      height,
+    };
+  });
 }
 
 
