@@ -292,6 +292,23 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 14,
+    slug: "chapter-14",
+    key: "chapter-14",
+    title: "Nyepi",
+    titleId: "Nyepi",
+    logline:
+      "Once a year the whole island switches off. Every Werigo bike goes home full the day before, Chloe and Jake land on the last flight, an ogoh-ogoh looks suspiciously like Pak Chan, and for twenty-four hours even the System goes quiet.",
+    loglineId:
+      "Setahun sekali seluruh pulau dimatikan. Semua motor Werigo pulang dengan baterai penuh sehari sebelumnya, Chloe dan Jake mendarat di penerbangan terakhir, ada ogoh-ogoh yang mirip sekali dengan Pak Chan, dan selama dua puluh empat jam bahkan System ikut diam.",
+    featuredModels: ["athena", "edpower", "victory", "bees"],
+    commentPrompt: {
+      en: "What would you do with one day of total silence? Tell us in the comments.",
+      id: "Kalau dapat satu hari sunyi total, kamu mau ngapain? Tulis di kolom komentar.",
+    },
+    published: true,
+  },
 ];
 
 export const characters: SagaCharacter[] = [
