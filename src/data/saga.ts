@@ -333,7 +333,7 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 16,
-    pageAssetVersions: { 1: "anatomy-v2", 2: "anatomy-v2" },
+    pageAssetVersions: { 1: "anatomy-v2", 2: "anatomy-v2", 24: "edpower-v3", 25: "edpower-v3" },
     slug: "chapter-16",
     key: "chapter-16",
     title: "Werigo Must Stand Alone",
