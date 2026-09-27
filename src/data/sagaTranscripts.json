@@ -5211,11 +5211,15 @@
   },
   {
    "label": "PANEL 3 · VFX",
-   "text": "A later night, at his restaurant counter. ODY doodles on a napkin: a W made of a road and two wheels. He writes one word. The napkin glows green. Title card: CH.12 · RENT TO OWN",
+   "text": "A later night, at his restaurant counter. Every tourist who walks in asks the same thing: \"Where we go?\" ODY writes it on a napkin, then squeezes it into one word. The napkin glows green. Title card: CH.12 · RENT TO OWN",
    "lines": [
     {
+     "who": "CAPTION",
+     "text": "Every tourist's first question in Bali: where we go?"
+    },
+    {
      "who": "ODY (thought)",
-     "text": "Rent. Ride. Go. We... ri... go."
+     "text": "Where we go? Where... we... go... We-ri-go."
     },
     {
      "who": "SYSTEM (green)",
@@ -5414,7 +5418,7 @@
     },
     {
      "who": "SYSTEM (gold)",
-     "text": "[STIPEND · YOKO (FORMER): 17 GOLD] [STIPEND · ODY: 9.5 GOLD]"
+     "text": "[STIPEND · YOKO (FORMER): GOLD TIER] [STIPEND · ODY: BRONZE TIER]"
     }
    ]
   },
@@ -5424,7 +5428,7 @@
    "lines": [
     {
      "who": "ODY (thought)",
-     "text": "The man who built nothing was paid almost double the man who built everything."
+     "text": "The man who built nothing got gold. The man who built everything got bronze."
     }
    ]
   },

@@ -265,9 +265,9 @@ const allEpisodes: SagaEpisode[] = [
     title: "Rent to Own",
     titleId: "Sewa Jadi Milik",
     logline:
-      "How Werigo was born on a napkin. ODY loses his first team, finds a ledger he was never meant to see, almost logs out, then wins over the Jakarta tower so drivers can rent a Wedison until it's theirs.",
+      "Werigo, from \"where we go?\", is born on a napkin. ODY loses his first team, finds a ledger he was never meant to see, almost logs out, then wins over the Jakarta tower so drivers can rent a Wedison until it's theirs.",
     loglineId:
-      "Werigo lahir dari coretan di serbet. ODY kehilangan tim pertamanya, menemukan buku besar yang tak seharusnya ia lihat, hampir keluar, lalu meyakinkan menara Jakarta agar driver bisa menyewa Wedison sampai jadi milik sendiri.",
+      "Werigo, dari \"where we go?\", lahir di selembar serbet. ODY kehilangan tim pertamanya, menemukan buku besar yang tak seharusnya ia lihat, hampir keluar, lalu meyakinkan menara Jakarta agar driver bisa menyewa Wedison sampai jadi milik sendiri.",
     featuredModels: ["bees", "athena", "victory", "edpower"],
     commentPrompt: {
       en: "Would you rent to own your first Wedison? Tell us in the comments.",
