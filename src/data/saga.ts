@@ -333,7 +333,7 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 16,
-    pageAssetVersions: { 1: "anatomy-v2", 2: "anatomy-v2", 24: "edpower-v3", 25: "edpower-v3" },
+    assetVersion: "jules-v1",
     slug: "chapter-16",
     key: "chapter-16",
     title: "Werigo Must Stand Alone",
@@ -349,6 +349,7 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 17,
+    assetVersion: "jules-v1",
     slug: "chapter-17",
     key: "episode-17",
     title: "Too Many Hats",
@@ -367,6 +368,7 @@ const allEpisodes: SagaEpisode[] = [
   },
   {
     number: 18,
+    assetVersion: "jules-v1",
     slug: "chapter-18",
     key: "episode-18",
     title: "One Good Day",
@@ -381,7 +383,6 @@ const allEpisodes: SagaEpisode[] = [
       id: "Kalau ditawari hari yang sempurna, apa lo bakal membaca syaratnya?"
     },
     published: true,
-    assetVersion: "climax-v2"
   },
 ];
 

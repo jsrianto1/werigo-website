@@ -8001,13 +8001,44 @@
    ]
   },
   {
-   "label": "Title card",
-   "text": "WERIGO SAGA CHAPTER 16: Werigo Must Stand Alone",
-   "lines": []
+   "label": "PANEL 3",
+   "text": "Earlier that day. At the showroom, before Werigo has a team of its own.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Arya, this is Jules from showroom sales. He is helping with our rental trial."
+    },
+    {
+     "who": "JULES",
+     "text": "Usually I explain the bikes. Now I have to make sure our promises reach the guest."
+    },
+    {
+     "who": "ARYA",
+     "text": "Arya. I deliver those promises. Preferably to the right address."
+    }
+   ]
   },
   {
-   "label": "PANEL 3",
-   "text": "That morning. One bike. Two promises.",
+   "label": "PANEL 4",
+   "text": "Jules. Showroom sales, trying his first rental-coordination shift.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "You check the details before promising anything. Try the booking desk today. I will back you up."
+    },
+    {
+     "who": "JULES",
+     "text": "And if I get it wrong?"
+    },
+    {
+     "who": "ODY",
+     "text": "Tell us early. We fix it together."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "Minutes later. One bike. Two promises.",
    "lines": [
     {
      "who": "JULES",
@@ -8020,7 +8051,7 @@
    ]
   },
   {
-   "label": "PANEL 4",
+   "label": "PANEL 6",
    "text": "",
    "lines": [
     {
@@ -8034,7 +8065,7 @@
    ]
   },
   {
-   "label": "PANEL 5",
+   "label": "PANEL 7",
    "text": "",
    "lines": [
     {
@@ -8048,7 +8079,7 @@
    ]
   },
   {
-   "label": "PANEL 6",
+   "label": "PANEL 8",
    "text": "",
    "lines": [
     {
@@ -8066,7 +8097,7 @@
    ]
   },
   {
-   "label": "PANEL 7",
+   "label": "PANEL 9",
    "text": "",
    "lines": [
     {
@@ -8084,25 +8115,25 @@
    ]
   },
   {
-   "label": "PANEL 8",
+   "label": "PANEL 10",
    "text": "",
    "lines": [
     {
      "who": "DEWA",
-     "text": "You run the bookings. I run the riders. Arya checks the delivery."
+     "text": "You handle bookings. I lead the riders. Arya checks deliveries. Ody leads the operation."
     },
     {
      "who": "JULES",
-     "text": "And if I get it wrong?"
+     "text": "So a changed booking goes straight to Arya?"
     },
     {
      "who": "DEWA",
-     "text": "Tell us while we can still fix it."
+     "text": "Yes. Before he sets off with the old plan."
     }
    ]
   },
   {
-   "label": "PANEL 9",
+   "label": "PANEL 11",
    "text": "Bram Ardan. Hospitality beverage sales. Old friend.",
    "lines": [
     {
@@ -8116,7 +8147,7 @@
    ]
   },
   {
-   "label": "PANEL 10",
+   "label": "PANEL 12",
    "text": "",
    "lines": [
     {
@@ -8134,7 +8165,7 @@
    ]
   },
   {
-   "label": "PANEL 11",
+   "label": "PANEL 13",
    "text": "2025. Ody’s sushi restaurant and bar.",
    "lines": [
     {
@@ -8148,7 +8179,7 @@
    ]
   },
   {
-   "label": "PANEL 12",
+   "label": "PANEL 14",
    "text": "The pitch became a friendship. At parties, they were usually the last two still up. That night, a hired car took them home.",
    "lines": [
     {
@@ -8162,7 +8193,7 @@
    ]
   },
   {
-   "label": "PANEL 13",
+   "label": "PANEL 15",
    "text": "Present day. A saved message from Selin, Jakarta.",
    "lines": [
     {
@@ -8172,7 +8203,7 @@
    ]
   },
   {
-   "label": "PANEL 14",
+   "label": "PANEL 16",
    "text": "",
    "lines": [
     {
@@ -8190,12 +8221,12 @@
    ]
   },
   {
-   "label": "PANEL 15",
+   "label": "PANEL 17",
    "text": "A few Sundays earlier. After church. No targets. Just people who noticed when Ody went quiet.",
    "lines": []
   },
   {
-   "label": "PANEL 16",
+   "label": "PANEL 18",
    "text": "He believed meeting Pak Chan and Remy, and building Werigo, was part of that path. It did not mean walking it alone.",
    "lines": [
     {
@@ -8205,7 +8236,7 @@
    ]
   },
   {
-   "label": "PANEL 17",
+   "label": "PANEL 19",
    "text": "",
    "lines": [
     {
@@ -8219,7 +8250,7 @@
    ]
   },
   {
-   "label": "PANEL 18",
+   "label": "PANEL 20",
    "text": "A trial space. Small enough to run properly.",
    "lines": [
     {
@@ -8233,7 +8264,7 @@
    ]
   },
   {
-   "label": "PANEL 19",
+   "label": "PANEL 21",
    "text": "",
    "lines": [
     {
@@ -8251,7 +8282,7 @@
    ]
   },
   {
-   "label": "PANEL 20",
+   "label": "PANEL 22",
    "text": "",
    "lines": [
     {
@@ -8269,7 +8300,7 @@
    ]
   },
   {
-   "label": "PANEL 21",
+   "label": "PANEL 23",
    "text": "",
    "lines": [
     {
@@ -8291,7 +8322,7 @@
    ]
   },
   {
-   "label": "PANEL 22",
+   "label": "PANEL 24",
    "text": "",
    "lines": [
     {
@@ -8305,7 +8336,7 @@
    ]
   },
   {
-   "label": "PANEL 23",
+   "label": "PANEL 25",
    "text": "The EdPower’s SuperCharge port sits ahead of the closed seat, on the centre tunnel.",
    "lines": [
     {
@@ -8319,25 +8350,29 @@
    ]
   },
   {
-   "label": "PANEL 24",
+   "label": "PANEL 26",
    "text": "",
    "lines": [
     {
      "who": "JULES",
-     "text": "If a guest changes hotels, who updates the rider?"
+     "text": "I used to stop at the sale. I do not want a guest stranded because I missed a detail."
     },
     {
      "who": "ARYA",
-     "text": "Me, after you confirm it."
+     "text": "You check the details. I check the road. If something changes, tell me."
     },
     {
      "who": "JULES",
-     "text": "Good. They should not have to tell three people."
+     "text": "Deal. Even if the guest sends three different map pins?"
+    },
+    {
+     "who": "ARYA",
+     "text": "Especially then."
     }
    ]
   },
   {
-   "label": "PANEL 25",
+   "label": "PANEL 27",
    "text": "",
    "lines": [
     {
@@ -8351,7 +8386,7 @@
    ]
   },
   {
-   "label": "PANEL 26",
+   "label": "PANEL 28",
    "text": "19:47. Three knocks. We are back at the door.",
    "lines": [
     {
@@ -8361,7 +8396,7 @@
    ]
   },
   {
-   "label": "PANEL 27",
+   "label": "PANEL 29",
    "text": "Ody lowers his phone. The reflection does not.",
    "lines": [
     {
@@ -8375,7 +8410,7 @@
    ]
   },
   {
-   "label": "PANEL 28",
+   "label": "PANEL 30",
    "text": "",
    "lines": [
     {
@@ -8389,7 +8424,7 @@
    ]
   },
   {
-   "label": "PANEL 29",
+   "label": "PANEL 31",
    "text": "Behind them, the brass key turns once on its hook.",
    "lines": [
     {
@@ -8403,7 +8438,7 @@
    ]
   },
   {
-   "label": "PANEL 30",
+   "label": "PANEL 32",
    "text": "The next morning. The first real change to the plan.",
    "lines": [
     {
@@ -8417,7 +8452,7 @@
    ]
   },
   {
-   "label": "PANEL 31",
+   "label": "PANEL 33",
    "text": "",
    "lines": [
     {
@@ -8435,7 +8470,7 @@
    ]
   },
   {
-   "label": "PANEL 32",
+   "label": "PANEL 34",
    "text": "",
    "lines": [
     {
@@ -8449,7 +8484,7 @@
    ]
   },
   {
-   "label": "PANEL 33",
+   "label": "PANEL 35",
    "text": "For once, Ody puts his phone face down before it stops ringing. The task stays with its owner.",
    "lines": [
     {
@@ -8459,7 +8494,7 @@
    ]
   },
   {
-   "label": "PANEL 34",
+   "label": "PANEL 36",
    "text": "",
    "lines": [
     {
@@ -8477,7 +8512,7 @@
    ]
   },
   {
-   "label": "PANEL 35",
+   "label": "PANEL 37",
    "text": "",
    "lines": [
     {
@@ -8495,7 +8530,7 @@
    ]
   },
   {
-   "label": "PANEL 36",
+   "label": "PANEL 38",
    "text": "",
    "lines": [
     {
@@ -8504,7 +8539,7 @@
     },
     {
      "who": "ODY",
-     "text": "Jules leads the desk. Dewa leads the field."
+     "text": "Jules, keep leading the booking desk. Dewa leads the field. I am responsible for the operation."
     },
     {
      "who": "PAK REMY",
@@ -8513,7 +8548,7 @@
    ]
   },
   {
-   "label": "PANEL 37",
+   "label": "PANEL 39",
    "text": "",
    "lines": [
     {
@@ -8531,7 +8566,7 @@
    ]
   },
   {
-   "label": "PANEL 38",
+   "label": "PANEL 40",
    "text": "",
    "lines": [
     {
@@ -8549,7 +8584,7 @@
    ]
   },
   {
-   "label": "PANEL 39",
+   "label": "PANEL 41",
    "text": "A message from his church group: We saved you a seat for Sunday.",
    "lines": [
     {
@@ -8563,7 +8598,7 @@
    ]
   },
   {
-   "label": "PANEL 40",
+   "label": "PANEL 42",
    "text": "That evening, Jules counts the keys. Every assigned key is there.",
    "lines": [
     {
@@ -8573,7 +8608,7 @@
    ]
   },
   {
-   "label": "PANEL 41",
+   "label": "PANEL 43",
    "text": "In the glass, Ody’s reflection smiles first.",
    "lines": [
     {
@@ -8585,11 +8620,6 @@
      "text": "UNCLAIMED QUEST|RETURN THE OPERATOR"
     }
    ]
-  },
-  {
-   "label": "Closing",
-   "text": "To be continued. Next chapter: Too Many Hats. Would you open the door, or leave the key where it was?",
-   "lines": []
   }
  ],
  "17": [
@@ -8718,11 +8748,11 @@
   },
   {
    "label": "PANEL 11",
-   "text": "The next morning.",
+   "text": "Friday morning. Jules brings the showroom notes to the new rental desk.",
    "lines": [
     {
      "who": "JULES",
-     "text": "Follow one guest. From the first question to the returned key."
+     "text": "In sales I followed the guest to a yes. Now we follow them until the key comes back."
     },
     {
      "who": "SYSTEM",
@@ -8736,7 +8766,7 @@
    "lines": [
     {
      "who": "ARYA",
-     "text": "What the guest sees goes above. What makes it possible goes below."
+     "text": "Jules checks the booking details. I check the road. Both belong on this map."
     },
     {
      "who": "DEWA",
@@ -8826,7 +8856,7 @@
     },
     {
      "who": "JULES",
-     "text": "Updated. Same information for everyone."
+     "text": "Updated for everyone. You checked the road; I kept the details together."
     }
    ]
   },
@@ -8904,7 +8934,7 @@
    "lines": [
     {
      "who": "BRAM",
-     "text": "Saturday. Sanur. Sunrise. Two hours."
+     "text": "Tomorrow before dawn. Saturday. Sanur. Two hours."
     },
     {
      "who": "ODY",
@@ -8912,7 +8942,7 @@
     },
     {
      "who": "JULES",
-     "text": "Dewa and I are on duty. We know when to call."
+     "text": "Bookings with me. Riders with Dewa. We will call if we need you."
     }
    ]
   },
@@ -8996,7 +9026,7 @@
   },
   {
    "label": "PANEL 34",
-   "text": "Back at the office. Komang tries to photograph a helmet check.",
+   "text": "That same Saturday morning, back at the office. Komang tries to photograph the helmet check.",
    "lines": [
     {
      "who": "KOMANG",
@@ -9277,7 +9307,7 @@
    "lines": [
     {
      "who": "JULES",
-     "text": "Wait. There is another line underneath."
+     "text": "Check the terms before promising anything. Wait… there is another line underneath."
     },
     {
      "who": "SYSTEM",
@@ -9295,7 +9325,7 @@
     },
     {
      "who": "JULES",
-     "text": "I almost pressed it. I thought nobody would have to fix my mistakes again."
+     "text": "I almost pressed it. I thought a replacement could never let you down."
     }
    ]
   },
@@ -9305,7 +9335,7 @@
    "lines": [
     {
      "who": "ARYA",
-     "text": "Jules. Look at me. You spotted the trap. We need YOU."
+     "text": "You check the details. I check the road. Remember? You just saved us, Jules."
     }
    ]
   },
