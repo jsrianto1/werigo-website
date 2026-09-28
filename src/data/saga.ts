@@ -384,6 +384,24 @@ const allEpisodes: SagaEpisode[] = [
     },
     published: true,
   },
+  {
+    number: 19,
+    slug: "chapter-19",
+    key: "episode-19",
+    title: "The Small Yes",
+    titleId: "Mulai dari Satu Ya",
+    logline: "A sealed key takes the team into the Gatekeeper’s 1963 record. A forgotten friend, a stolen face, and one small business test reveal how an offer becomes a trap.",
+    loglineId: "Kunci tersegel membawa tim ke catatan Gatekeeper tahun 1963. Teman yang terlupakan, wajah curian, dan satu tes bisnis kecil mengungkap cara sebuah tawaran menjadi jebakan.",
+    featuredModels: [
+      "edpower"
+    ],
+    commentPrompt: {
+      en: "Would you trade a painful memory for a comforting lie?",
+      id: "Maukah lo menukar ingatan menyakitkan dengan kebohongan yang menenangkan?"
+    },
+    published: true,
+    assetVersion: "first-v1"
+  },
 ];
 
 export const characters: SagaCharacter[] = [
