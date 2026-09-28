@@ -9305,17 +9305,21 @@
    "lines": [
     {
      "who": "ARYA",
-     "text": "You found the catch. That is why we need you here."
+     "text": "Jules. Look at me. You spotted the trap. We need YOU."
     }
    ]
   },
   {
    "label": "PANEL 18",
-   "text": "",
+   "text": "The floor answers before anyone can take a step.",
    "lines": [
     {
+     "who": "ARYA",
+     "text": "Together. Even if we have to crawl!"
+    },
+    {
      "who": "SYSTEM",
-     "text": "RALLY|Stay together. No one takes the next step alone."
+     "text": "RALLY|Fear remains. No one faces it alone."
     }
    ]
   },
@@ -9353,17 +9357,25 @@
    "lines": [
     {
      "who": "JULES",
-     "text": "Arya!"
+     "text": "ARYA! THE FLOOR—"
+    },
+    {
+     "who": "COPY",
+     "text": "Say yes. I can still save him."
     }
    ]
   },
   {
    "label": "PANEL 22",
-   "text": "Some choices do not need a button.",
+   "text": "His phone shatters. Arya does not let go of the shirt.",
    "lines": [
     {
      "who": "ARYA",
-     "text": "I have you. Look at me."
+     "text": "Both palms on the ledge! Push, Jules. PUSH!"
+    },
+    {
+     "who": "JULES",
+     "text": "I am… not… saying YES!"
     }
    ]
   },
@@ -9374,11 +9386,15 @@
   },
   {
    "label": "PANEL 23",
-   "text": "",
+   "text": "The beautiful doors stay wide open. Only the real way out is shrinking.",
    "lines": [
     {
      "who": "KOMANG",
-     "text": "Keep looking at the red strap. Not the doors!"
+     "text": "RED STRAP! Keep moving! Do not answer that voice!"
+    },
+    {
+     "who": "JULES",
+     "text": "The light is narrowing. The exit is closing!"
     }
    ]
   },
@@ -9388,7 +9404,11 @@
    "lines": [
     {
      "who": "DEWA",
-     "text": "One more step. All three of you."
+     "text": "I HAVE THE STRAP! Jules, NOW!"
+    },
+    {
+     "who": "JULES",
+     "text": "I am here! THREE. There are THREE of us!"
     }
    ]
   },
@@ -9408,18 +9428,22 @@
   },
   {
    "label": "PANEL 26",
-   "text": "",
+   "text": "Only the sea answers.",
    "lines": [
     {
      "who": "ODY",
-     "text": "Arya, if you can still hear me—come back as yourself."
+     "text": "ARYA! Answer me. Please. Just one word."
     }
    ]
   },
   {
    "label": "PANEL 27",
-   "text": "Three people cross the real threshold. None has accepted.",
+   "text": "Jules clears the threshold. Three people. No agreement. The false smile goes last.",
    "lines": [
+    {
+     "who": "COPY",
+     "text": "You will want a day off again."
+    },
     {
      "who": "SYSTEM",
      "text": "TRIAL ENDED|Replacement declined. Perfect-day reward forfeited."

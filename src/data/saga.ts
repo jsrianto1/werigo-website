@@ -380,7 +380,8 @@ const allEpisodes: SagaEpisode[] = [
       en: "Would you notice the hidden price of your perfect day?",
       id: "Kalau ditawari hari yang sempurna, apa lo bakal membaca syaratnya?"
     },
-    published: true
+    published: true,
+    assetVersion: "climax-v2"
   },
 ];
 
