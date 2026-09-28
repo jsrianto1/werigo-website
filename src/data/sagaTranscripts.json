@@ -10540,5 +10540,883 @@
     }
    ]
   }
+ ],
+ "20": [
+  {
+   "label": "PANEL 1",
+   "text": "Monday. Seconds after the call from Ubud.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "It says completed. Paid. Collected at 19:47."
+    },
+    {
+     "who": "DEWA",
+     "text": "It is still morning. The bike has not moved."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "And there is no matching payment."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "BOOKING HELD|No vehicle allocated. Evidence preserved."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA CHAPTER 20: The Name the Door Stole",
+   "lines": []
+  },
+  {
+   "label": "PANEL 3",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I am calling the manager back on the number we already used."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "She confirms: no launch, no guest referral, no payment."
+    },
+    {
+     "who": "BRAM",
+     "text": "Then do not accuse a guest who might not even exist."
+    }
+   ]
+  },
+  {
+   "label": "Part 1",
+   "text": "A PROMISE NEEDS PROOF",
+   "lines": []
+  },
+  {
+   "label": "PANEL 5",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Keep the original entry. Copy its history. Mark it disputed."
+    },
+    {
+     "who": "DEWA",
+     "text": "And no handover just because a screen says green."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 6",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Ody, come back safely. I will keep the office closed to walk-ins."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "The bell again. I am not opening the box alone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "Later. Arya and Komang arrive after her call.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "We are here, Nek. Ody knows we came."
+    },
+    {
+     "who": "KOMANG",
+     "text": "I brought food. My emergency plan has improved."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Wedison gets us home. Panic does not get to choose the speed."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "Bram prepares his own ride. They call again only after parking.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Battery checked. Route checked. We leave now."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Please say something only the real Ody would say."
+    },
+    {
+     "who": "ODY",
+     "text": "Who approved this booking?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "Midday. Safely back at the office.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Authentic. Even the ghost would have asked whether we had eaten."
+    },
+    {
+     "who": "ODY",
+     "text": "Eat first. Then we fix the plan."
+    }
+   ]
+  },
+  {
+   "label": "Part 2",
+   "text": "THE COST OF PERFECT",
+   "lines": []
+  },
+  {
+   "label": "PANEL 13",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Remy, I asked you here to check the pilot numbers. Now we have a false booking too."
+    },
+    {
+     "who": "REMY",
+     "text": "Good. We will separate what happened from what the dashboard claims."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "",
+   "lines": [
+    {
+     "who": "REMY",
+     "text": "A booking is not cash. Cash received is not automatically profit."
+    },
+    {
+     "who": "ODY",
+     "text": "Apparently, a signature is not automatically me either."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Fictional exercise. Revenue 300 thousand, variable costs 180 thousand."
+    },
+    {
+     "who": "BRAM",
+     "text": "So 120 thousand profit?"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ILLUSTRATION ONLY · NOT WERIGO RATES|Rp300,000 − Rp180,000 = Rp120,000"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Contribution. It still has to help cover fixed costs. Not net profit."
+    },
+    {
+     "who": "BRAM",
+     "text": "Even imaginary money has responsibilities."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "",
+   "lines": [
+    {
+     "who": "REMY",
+     "text": "For this example, fixed costs are 1.2 million. At 120 thousand contribution each, break-even is ten rentals."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "SIMPLIFIED EXAMPLE · SAME PERIOD|Rp1,200,000 ÷ Rp120,000 = 10 rentals"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "A 60-thousand discount halves that contribution. Now twenty rentals?"
+    },
+    {
+     "who": "REMY",
+     "text": "If those costs and capacity stay the same. More volume is not free."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "",
+   "lines": [
+    {
+     "who": "REMY",
+     "text": "A refundable security deposit stays an obligation. Do not spend it as revenue."
+    },
+    {
+     "who": "JULES",
+     "text": "And money due next week cannot pay today’s delivery."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "A discrepancy to investigate. Not proof that a stranger is guilty.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "I have checked the payment reference and the independent account record. Still no match."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "The manager did not ask for the cheapest bike. She asked who answers when arrival changes."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "That is the job: get the guest moving with a clear handover and someone reachable."
+    },
+    {
+     "who": "BRAM",
+     "text": "A promise the team can actually keep. That is worth marketing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "One page: Ubud overnight guests, one partner, one booking contact, agreed hours."
+    },
+    {
+     "who": "JULES",
+     "text": "Capacity, costs, cash timing, and a stop rule go on the same page."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Two handovers per day is a ceiling, not a dare."
+    },
+    {
+     "who": "JULES",
+     "text": "I am writing that in very large letters."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Werigo handles the rental. Wedison supplies the electric motorcycle and its charging ecosystem."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "Official EdPower claim: SuperCharge 10–80% in 15 minutes. Check station availability before departure.",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Show people where to charge and how to plan the trip. A feature only helps when they can use it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Headline: NEVER GET STUCK IN BALI AGAIN!"
+    },
+    {
+     "who": "ODY",
+     "text": "We rent motorcycles, Bram. We do not delete traffic."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Show the real bike, the real handover, and a useful route. Ask permission before using guest photos."
+    },
+    {
+     "who": "BRAM",
+     "text": "Useful proof. Then one clear invitation to ask about availability."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Track inquiries, qualified requests, completed paid rentals, and complaints. Likes cannot cover delivery."
+    },
+    {
+     "who": "DEWA",
+     "text": "And keep this fake booking out of the pilot results."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 30",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Then why is someone asking us to count him as a happy customer… before he arrives?"
+    }
+   ]
+  },
+  {
+   "label": "Part 3",
+   "text": "THE PERSON WHO WAITED",
+   "lines": []
+  },
+  {
+   "label": "PANEL 31",
+   "text": "Late afternoon. A call connects the courtyard and the office.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "The bell detail survived. We can view that fragment together. The key stays sealed."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Only the bicycle memory. No passage, no exchange. Stop means stop."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "LIMITED OBSERVATION|Three witnesses present. Others listen by phone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "They are not going back. They are watching what was left behind.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 34",
+   "text": "1963. The memory before the missing road.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "My chain broke. He sent the others ahead and stayed with me."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Everyone called him slow. He said arriving alone was not winning."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "I called him… Su…"
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "There is something after that. Something I do not want to remember."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "You can stop. We are not trading you for an answer."
+    },
+    {
+     "who": "KOMANG",
+     "text": "We can stay even when there is no answer."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "A name is a clue. It is not permission to open the door."
+    },
+    {
+     "who": "JULES",
+     "text": "If it copies our records, it can learn what we just said too."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Ody… please keep standing where I can see you."
+    }
+   ]
+  },
+  {
+   "label": "Part 4",
+   "text": "THE BEST CUSTOMER",
+   "lines": []
+  },
+  {
+   "label": "PANEL 40",
+   "text": "At the office. The door remains shut.",
+   "lines": [
+    {
+     "who": "COPY",
+     "text": "Your best customer is here. Why are you making him wait?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "",
+   "lines": [
+    {
+     "who": "COPY",
+     "text": "Open. You promised. Do you want everyone to hear how Werigo treats people?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "We check complaints. We do not skip verification because someone threatens us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 43",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "It claims every slot is sold. No cancellations. No costs. No complaints."
+    },
+    {
+     "who": "REMY",
+     "text": "No costs? Our team is not imaginary."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 44",
+   "text": "",
+   "lines": [
+    {
+     "who": "REMY",
+     "text": "No payment match. No vehicle release. No partner approval. Three separate records disagree."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 45",
+   "text": "",
+   "lines": [
+    {
+     "who": "COPY",
+     "text": "I can fill the fleet. Every day. You will never have to disappoint anyone again."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "OFFER|Replace the operator. Erase all unpaid obligations."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 46",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Read it to the end, Dy. Who disappears when the numbers turn perfect?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 47",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "The obligations disappear because the people owed them are removed from the record."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 48",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "That is not profit. That is making people disappear so the spreadsheet looks good."
+    }
+   ]
+  },
+  {
+   "label": "Part 5",
+   "text": "WHAT WE LEFT OUT",
+   "lines": []
+  },
+  {
+   "label": "PANEL 49",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "He did not choose alone. I begged him to find us a way home."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 50",
+   "text": "She is choosing to remember. Nobody asks her to pay with another person.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "I let his face take the blame. I hid my own part in it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 51",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Nek! Hear us. You are here. We are staying."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "RALLY|Hold together. Nobody takes another person’s place."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 52",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "The bright stairs are fake. The real floor is still under us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 53",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "For once, the boring route is the best route. I hate that I am growing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 54",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Werigo stays ours to build, including the mistakes. I reject the replacement."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 55",
+   "text": "",
+   "lines": [
+    {
+     "who": "COPY",
+     "text": "Then keep your losses."
+    },
+    {
+     "who": "ODY",
+     "text": "And the people whose names belong in the books."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 56",
+   "text": "The syllable returns with the memory she had avoided.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "Sura. I called him Sura."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 57",
+   "text": "",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "You waited for me. I can remember that without asking you to come back through this door."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "WITNESS RECORD|Remembered name: Sura. Identity and fate still unverified."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 58",
+   "text": "Remembering him does not mean accepting his replacement.",
+   "lines": [
+    {
+     "who": "GRANDMOTHER",
+     "text": "We withdraw permission to view. The record closes. Nobody is invited through."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 59",
+   "text": "19:48. Both doors stayed shut.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "The fake entry is still there. Disputed. Nothing was paid or handed over."
+    },
+    {
+     "who": "ODY",
+     "text": "Good. We keep the evidence."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 60",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "For the record, I was very brave."
+    },
+    {
+     "who": "GRANDMOTHER",
+     "text": "For the record, you shouted louder than the bell."
+    }
+   ]
+  },
+  {
+   "label": "Part 6",
+   "text": "BUILD WHAT IS REAL",
+   "lines": []
+  },
+  {
+   "label": "PANEL 61",
+   "text": "Tuesday morning. The pilot remains a proposal.",
+   "lines": [
+    {
+     "who": "REMY",
+     "text": "Four completed rentals can test the handover. They do not prove the business breaks even."
+    },
+    {
+     "who": "ODY",
+     "text": "Then service quality, contribution, and cash each get their own check."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 62",
+   "text": "",
+   "lines": [
+    {
+     "who": "HOST",
+     "text": "Send the responsibilities, costs and cancellation process. My team will review them."
+    },
+    {
+     "who": "BRAM",
+     "text": "A relationship is built after the introduction. That is the actual work."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 63",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "No growth strategy until the coffee arrives."
+    },
+    {
+     "who": "ODY",
+     "text": "You turned breakfast into a policy."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 64",
+   "text": "A short break near the office. No extra tour squeezed between handovers.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I am keeping Sunday lunch with my church friends. The business cannot take every hour."
+    },
+    {
+     "who": "BRAM",
+     "text": "Good. Even a business plan needs space for its human."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 65",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "A real inquiry. Dates, route, availability. No reservation until we confirm."
+    },
+    {
+     "who": "DEWA",
+     "text": "One honest lead beats a hundred invented bookings."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 66",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Then who sent the testimonial?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 67",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "It shows you welcoming a customer. Tomorrow."
+    },
+    {
+     "who": "ODY",
+     "text": "Do not publish it. Save the original file."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 68",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "We refused its booking. Now it is selling our story."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "UNVERIFIED VIDEO|Recorded: TOMORROW · 19:47"
+    }
+   ]
+  },
+  {
+   "label": "Next chapter",
+   "text": "CH.21 · The Customer Who Never Came",
+   "lines": [
+    {
+     "who": "QUESTION",
+     "text": "Who is creating tomorrow’s happy customer before the rental even exists?"
+    }
+   ]
+  }
  ]
 }

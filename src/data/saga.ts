@@ -402,6 +402,24 @@ const allEpisodes: SagaEpisode[] = [
     published: true,
     assetVersion: "first-v1"
   },
+  {
+    number: 20,
+    slug: "chapter-20",
+    key: "episode-20",
+    title: "The Name the Door Stole",
+    titleId: "Nama yang Dicuri Pintu",
+    logline: "A paid booking with no payment brings a perfect copy to Werigo’s door. While the team follows the costs behind its offer, the Gatekeeper must face the memory hiding a friend’s name.",
+    loglineId: "Booking lunas tanpa pembayaran membawa peniru sempurna ke pintu Werigo. Saat tim menelusuri biaya di balik tawarannya, Gatekeeper harus menghadapi ingatan yang menyembunyikan nama temannya.",
+    featuredModels: [
+      "edpower"
+    ],
+    commentPrompt: {
+      en: "Which would fool you first: a familiar face, a perfect review, or beautiful numbers?",
+      id: "Mana yang paling mudah menipu lo: wajah familiar, ulasan sempurna, atau angka yang bagus?"
+    },
+    published: true,
+    assetVersion: "first-v1"
+  },
 ];
 
 export const characters: SagaCharacter[] = [
