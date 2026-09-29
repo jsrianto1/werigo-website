@@ -211,3 +211,17 @@ be strengthened or published. Never invent these on the website.
 - [ ] Liability wording anywhere on the site
 - [ ] Delivery fee policy (airport / hotel / villa remain
       "by arrangement")
+
+## Marketing tracking
+
+The root layout installs GTM `GTM-5RC9TGR4` and Meta Pixel
+`27824990167174730` on every page. Both bootstrap scripts run from the
+initial HTML head; their external libraries load asynchronously. GTM's
+noscript iframe is first in the body, followed by Meta's noscript beacon.
+
+Meta sends one `PageView` on a full load. `MetaPageViews` handles subsequent
+App Router pathname/query changes, skipping hydration and repeated renders.
+GTM tags and History Change triggers are managed in the GTM container.
+Do not also initialize the same Meta Pixel through GTM: this installation
+already owns its base code and PageView events. No booking conversion or
+purchase event is added by this change.
