@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import Link from "next/link";
 import { MessageCircle, Mail } from "lucide-react";
 
@@ -63,14 +65,8 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Logo variant="footer" />
-            <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.14em] text-ink-inverse/50">
-              Powered by Wedison
-            </p>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-inverse/70">
-              Werigo is Wedison&apos;s electric motorcycle rental and mobility
-              service in Bali. Official Wedison electric motorcycles, delivered
-              to your door with at least 80% battery, ready to ride.
-            </p>
+            <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.14em] text-ink-inverse/50"><T>{"Powered by Wedison"}</T>{" "}</p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-inverse/70"><T>{"Werigo is Wedison's electric motorcycle rental and mobility service in Bali. Official Wedison electric motorcycles, delivered to your door with at least 80% battery, ready to ride."}</T>{" "}</p>
             <div className="mt-5 flex gap-3">
               <a
                 href={site.social.instagram}
@@ -98,9 +94,7 @@ export function Footer() {
 
           {/* Delivery areas */}
           <nav aria-label="Delivery areas">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-inverse/60">
-              Delivery Areas
-            </h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-inverse/60"><T>{"Delivery Areas"}</T>{" "}</h2>
             <ul className="mt-4 grid grid-cols-2 gap-x-4">
               {serviceAreas.map((area) => (
                 <li key={area.slug}>
@@ -108,7 +102,7 @@ export function Footer() {
                     href={`/delivery-areas/${area.slug}`}
                     className="block py-1.5 text-sm text-ink-inverse/80 transition-colors hover:text-ink-inverse"
                   >
-                    {area.name}
+                    <T>{area.name}</T>
                   </Link>
                 </li>
               ))}
@@ -117,9 +111,7 @@ export function Footer() {
 
           {/* Company */}
           <nav aria-label="Company">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-inverse/60">
-              Company
-            </h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-inverse/60"><T>{"Company"}</T>{" "}</h2>
             <ul className="mt-4">
               {companyLinks.map((link) => (
                 <li key={link.href}>
@@ -127,7 +119,7 @@ export function Footer() {
                     href={link.href}
                     className="block py-1.5 text-sm text-ink-inverse/80 transition-colors hover:text-ink-inverse"
                   >
-                    {link.label}
+                    <T>{link.label}</T>
                   </Link>
                 </li>
               ))}
@@ -136,9 +128,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-inverse/60">
-              Get in touch
-            </h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-inverse/60"><T>{"Get in touch"}</T>{" "}</h2>
             <ul className="mt-4 space-y-2">
               <li>
                 <a
@@ -147,9 +137,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 py-1.5 text-sm text-ink-inverse/80 transition-colors hover:text-ink-inverse"
                 >
-                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  WhatsApp us
-                </a>
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" /><T>{"WhatsApp us"}</T>{" "}</a>
               </li>
               <li>
                 <a
@@ -161,7 +149,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="pt-1 text-sm text-ink-inverse/60">
-                {site.operatingHours}
+                <T>{site.operatingHours}</T>
               </li>
             </ul>
           </div>
@@ -169,7 +157,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-ink-inverse/10 pt-6 text-sm text-ink-inverse/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.name} · {site.domain}
+            © {new Date().getFullYear()} <T>{site.name}</T> · {site.domain}
           </p>
           <ul className="flex gap-6">
             {legalLinks.map((link) => (
@@ -178,7 +166,7 @@ export function Footer() {
                   href={link.href}
                   className="transition-colors hover:text-ink-inverse"
                 >
-                  {link.label}
+                  <T>{link.label}</T>
                 </Link>
               </li>
             ))}

@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import { Check } from "lucide-react";
 
 const stepLabels = ["Search", "Choose ride", "Extras", "Your details", "Review", "WhatsApp"];
@@ -37,7 +39,7 @@ export function BookingStepper({ current }: { current: number }) {
                 ) : (
                   <span className="tnum">{i + 1}.</span>
                 )}
-                {label}
+                <T>{label}</T>
               </span>
             </li>
           );

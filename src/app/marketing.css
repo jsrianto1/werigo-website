@@ -125,12 +125,29 @@
 .home-video-hero .eyebrow { color: #b2f1df; }
 .home-video-hero .hero-lede { color: #fff; max-width: 410px; }
 .home-video-hero .text-link { color: white; text-decoration-color: #ffffff80; }
-.hero-video-control { position: absolute; right: 32px; bottom: 24px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 1px solid #ffffff70; border-radius: 24px; background: #102a31c9; color: white; font-size: .75rem; cursor: pointer; }
-.hero-video-control:hover { background: #102a31; }
 @media (max-width: 767px) {
   .home-hero-inner { min-height: 620px; padding: 40px 20px 90px; align-items: flex-end; }
   .home-video-hero .hero-copy { padding: 0; }
   .home-video-hero .hero-footage { object-position: 62% center; }
   .hero-video-scrim { background: linear-gradient(0deg, rgba(5,25,29,.93), rgba(5,25,29,.65) 52%, rgba(5,25,29,.15)); }
-  .hero-video-control { right: 20px; bottom: 20px; }
 }
+
+.rental-search-grid { display: grid; gap: 24px; }
+.rental-search-grid > * { min-width: 0; }
+.rental-date-grid { display: grid; gap: 24px; }
+.rental-date-inputs { display: grid; grid-template-columns: minmax(0,1fr) 92px; gap: 12px; }
+.rental-search-submit { display: flex; justify-content: flex-end; }
+.rental-search-submit > button { width: 100%; white-space: normal; }
+.language-selector { display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+.language-selector select { max-width: 112px; min-height: 44px; background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 8px; cursor: pointer; font-size: .875rem; }
+.language-selector-mobile select { flex: 1; max-width: none; }
+@media (min-width: 640px) {
+  .rental-date-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .rental-search-submit > button { width: auto; min-width: 240px; }
+}
+@media (min-width: 1200px) {
+  .rental-search-compact { grid-template-columns: minmax(0,.85fr) minmax(0,1.3fr); align-items: start; gap: 24px 32px; }
+  .rental-search-compact .rental-search-submit { grid-column: 1/-1; }
+}
+
+@media (max-width: 359px) { .rental-date-inputs { grid-template-columns: minmax(0,1fr); } .rental-date-inputs select { width: 100%; } }

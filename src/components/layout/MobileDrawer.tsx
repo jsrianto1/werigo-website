@@ -1,12 +1,14 @@
 "use client";
+import { T, useLanguage } from "@/components/i18n/LanguageProvider";
+
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { X, ChevronDown, Globe, MapPin } from "lucide-react";
+import { X, ChevronDown, MapPin } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { serviceAreas } from "@/data/locations";
-import { site } from "@/lib/config";
+import { LanguageSelector } from "@/components/i18n/LanguageSelector";
 
 /**
  * Accessible mobile navigation drawer.
@@ -27,6 +29,7 @@ export function MobileDrawer({
   onClose: () => void;
   returnFocusRef: React.RefObject<HTMLButtonElement | null>;
 }) {
+  const { t } = useLanguage();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [areasOpen, setAreasOpen] = useState(false);
@@ -58,7 +61,7 @@ export function MobileDrawer({
       const panel = panelRef.current;
       if (!panel) return;
       const focusables = panel.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        'a[href], button:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
       );
       if (focusables.length === 0) return;
       const first = focusables[0];
@@ -102,7 +105,7 @@ export function MobileDrawer({
     <div className="fixed inset-0 z-[100] xl:hidden">
       {/* Overlay — tapping outside closes */}
       <button
-        aria-label="Close menu"
+        aria-label={t("Close menu")}
         onClick={onClose}
         className="absolute inset-0 h-full w-full cursor-default bg-black/50"
         tabIndex={-1}
@@ -117,13 +120,11 @@ export function MobileDrawer({
         className="drawer-panel absolute bottom-0 right-0 top-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-page shadow-2xl"
       >
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
-          <span className="text-sm font-semibold uppercase tracking-wider text-ink-soft">
-            Menu
-          </span>
+          <span className="text-sm font-semibold uppercase tracking-wider text-ink-soft"><T>{"Menu"}</T>{" "}</span>
           <button
             ref={closeRef}
             onClick={onClose}
-            aria-label="Close menu"
+            aria-label={t("Close menu")}
             className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-ink hover:bg-sunken"
           >
             <X className="h-5 w-5" aria-hidden="true" />
@@ -135,7 +136,7 @@ export function MobileDrawer({
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} onClick={onClose} className={linkClass}>
-                  {item.label}
+                  <T>{item.label}</T>
                 </Link>
               </li>
             ))}
@@ -147,9 +148,7 @@ export function MobileDrawer({
                 aria-controls="drawer-areas"
                 onClick={() => setAreasOpen((v) => !v)}
                 className="flex w-full cursor-pointer items-center justify-between rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-sunken"
-              >
-                Delivery Areas
-                <ChevronDown
+              ><T>{"Delivery Areas"}</T>{" "}<ChevronDown
                   aria-hidden="true"
                   className={`h-4 w-4 text-ink-faint transition-transform duration-200 ${
                     areasOpen ? "rotate-180" : ""
@@ -163,9 +162,7 @@ export function MobileDrawer({
                       href="/delivery-areas"
                       onClick={onClose}
                       className="block rounded-md px-3 py-2.5 text-sm font-medium text-primary hover:bg-sunken"
-                    >
-                      All delivery areas
-                    </Link>
+                    ><T>{"All delivery areas"}</T>{" "}</Link>
                   </li>
                   {serviceAreas.map((area) => (
                     <li key={area.slug}>
@@ -175,7 +172,7 @@ export function MobileDrawer({
                         className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-ink-soft hover:bg-sunken hover:text-ink"
                       >
                         <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                        {area.name}
+                        <T>{area.name}</T>
                       </Link>
                     </li>
                   ))}
@@ -186,7 +183,7 @@ export function MobileDrawer({
             {navItemsAfterAreas.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} onClick={onClose} className={linkClass}>
-                  {item.label}
+                  <T>{item.label}</T>
                 </Link>
               </li>
             ))}
@@ -200,21 +197,8 @@ export function MobileDrawer({
             size="lg"
             className="w-full"
             onClick={onClose}
-          >
-            Check availability
-          </ButtonLink>
-          <div className="mt-4 flex items-center gap-2 px-1 text-sm text-ink-soft">
-            <Globe className="h-4 w-4" aria-hidden="true" />
-            {site.locales.map((l, i) => (
-              <span key={l.code}>
-                {i > 0 ? <span className="mr-2 text-ink-faint">·</span> : null}
-                <span className={l.active ? "font-medium text-ink" : "text-ink-faint"}>
-                  {l.label}
-                  {!l.active ? " (soon)" : ""}
-                </span>
-              </span>
-            ))}
-          </div>
+          ><T>{"Check availability"}</T>{" "}</ButtonLink>
+          <div className="mt-4"><LanguageSelector mobile /></div>
         </div>
       </div>
     </div>,

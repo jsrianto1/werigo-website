@@ -1,3 +1,4 @@
+import { LanguageProvider } from "@/components/i18n/LanguageProvider";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MetaPageViews } from "@/components/analytics/MetaPageViews";
@@ -13,12 +14,12 @@ import "./marketing.css";
 
 const manrope = Manrope({
   variable: "--font-manrope",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 export const metadata: Metadata = {
@@ -118,6 +119,7 @@ fbq('track','PageView');`,
           <MetaPageViews />
           <MarketingEvents />
         </Suspense>
+        <LanguageProvider>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink focus:shadow-lg"
@@ -130,6 +132,7 @@ fbq('track','PageView');`,
         </main>
         <Footer />
         <FloatingWhatsApp />
+        </LanguageProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(localBusinessSchema()) }}

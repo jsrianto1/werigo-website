@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import {
   chipBenefits,
   confirmedBenefits,
@@ -43,7 +45,7 @@ export function BenefitChips({
             className={variant === "card" ? "h-3 w-3" : "h-3.5 w-3.5"}
             aria-hidden="true"
           />
-          {b.label}
+          <T>{b.label}</T>
         </li>
       ))}
       {policies.map((p) => (
@@ -53,7 +55,7 @@ export function BenefitChips({
             variant === "card" ? "px-2.5 text-[11px]" : "px-3 text-xs"
           }`}
         >
-          {p.label}
+          <T>{p.label}</T>
         </li>
       ))}
     </ul>

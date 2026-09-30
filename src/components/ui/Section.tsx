@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import type { ReactNode } from "react";
 
 /**
@@ -62,7 +64,7 @@ export function SectionHeading({
     >
       {eyebrow ? (
         <p className={`eyebrow mb-3 ${inverse ? "!text-ink-inverse/70" : ""}`}>
-          {eyebrow}
+          <T>{eyebrow}</T>
         </p>
       ) : null}
       <Heading
@@ -71,7 +73,7 @@ export function SectionHeading({
           inverse ? "text-ink-inverse" : "text-ink"
         }`}
       >
-        {title}
+        <T>{title}</T>
       </Heading>
       {lede ? (
         <p
@@ -79,7 +81,7 @@ export function SectionHeading({
             inverse ? "text-ink-inverse/80" : "text-ink-soft"
           }`}
         >
-          {lede}
+          <T>{lede}</T>
         </p>
       ) : null}
     </div>

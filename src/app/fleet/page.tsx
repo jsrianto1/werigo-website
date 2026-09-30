@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import { pageMetadata } from "@/lib/seo";
 import { Check, Minus } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -33,12 +35,7 @@ export default async function FleetPage() {
             <VehicleCard key={entry.id} entry={entry} />
           ))}
         </div>
-        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint">
-          Minimum rental 2 days. Rates are per motorcycle per day in IDR;
-          US dollar amounts are estimates. A rain poncho can be requested
-          and optional protection can be added at checkout. Availability
-          and your final quote are confirmed on WhatsApp.
-        </p>
+        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint"><T>{"Minimum rental 2 days. Rates are per motorcycle per day in IDR; US dollar amounts are estimates. A rain poncho can be requested and optional protection can be added at checkout. Availability and your final quote are confirmed on WhatsApp."}</T>{" "}</p>
       </Section>
 
       <RidingMotorcycle />
@@ -53,33 +50,16 @@ export default async function FleetPage() {
         />
         <div className="overflow-x-auto rounded-[14px] border border-line bg-card">
           <table className="w-full min-w-[860px] text-left text-sm">
-            <caption className="sr-only">
-              Comparison of Wedison fleet configurations by motor, speed,
-              battery, range and charging
-            </caption>
+            <caption className="sr-only"><T>{"Comparison of Wedison fleet configurations by motor, speed, battery, range and charging"}</T>{" "}</caption>
             <thead>
               <tr className="border-b border-line">
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Model
-                </th>
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Motor
-                </th>
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Top speed
-                </th>
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Battery (LFP)
-                </th>
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Claimed range
-                </th>
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Home charging
-                </th>
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  SuperCharge
-                </th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Model"}</T>{" "}</th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Motor"}</T>{" "}</th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Top speed"}</T>{" "}</th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Battery (LFP)"}</T>{" "}</th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Claimed range"}</T>{" "}</th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Home charging"}</T>{" "}</th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"SuperCharge"}</T>{" "}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line">
@@ -106,11 +86,8 @@ export default async function FleetPage() {
                       {e.displayName}
                     </th>
                     <td className="tnum px-5 py-4 text-ink-soft">
-                      {e.motorW.toLocaleString("en-US")} W
-                    </td>
-                    <td className="tnum px-5 py-4 text-ink-soft">
-                      up to {e.topSpeedKmh} km/h
-                    </td>
+                      {e.motorW.toLocaleString("en-US")}{" "}<T>{"W"}</T>{" "}</td>
+                    <td className="tnum px-5 py-4 text-ink-soft"><T>{"up to"}</T>{" "}{e.topSpeedKmh}{" "}<T>{"km/h"}</T>{" "}</td>
                     <td className="tnum px-5 py-4 text-ink-soft">{battery}</td>
                     <td className="tnum px-5 py-4 text-ink-soft">{range}</td>
                     <td className="px-5 py-4 text-ink-soft">
@@ -120,12 +97,12 @@ export default async function FleetPage() {
                       {e.supercharge ? (
                         <span className="inline-flex items-center gap-1 text-ok">
                           <Check className="h-4 w-4" aria-hidden="true" />
-                          <span>Supported</span>
+                          <span><T>{"Supported"}</T></span>
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 text-ink-faint">
                           <Minus className="h-4 w-4" aria-hidden="true" />
-                          <span>Home charging</span>
+                          <span><T>{"Home charging"}</T></span>
                         </span>
                       )}
                     </td>
@@ -135,24 +112,18 @@ export default async function FleetPage() {
             </tbody>
           </table>
         </div>
-        <h3 className="mb-4 mt-10 font-display text-2xl text-ink">
-          Rental rates per day
-        </h3>
+        <h3 className="mb-4 mt-10 font-display text-2xl text-ink"><T>{"Rental rates per day"}</T>{" "}</h3>
         <div className="overflow-x-auto rounded-[14px] border border-line bg-card">
           <table className="w-full min-w-[720px] text-left text-sm">
-            <caption className="sr-only">
-              Approved rental rates per motorcycle per day by duration
-            </caption>
+            <caption className="sr-only"><T>{"Approved rental rates per motorcycle per day by duration"}</T>{" "}</caption>
             <thead>
               <tr className="border-b border-line">
-                <th scope="col" className="px-5 py-4 font-semibold text-ink">
-                  Model
-                </th>
+                <th scope="col" className="px-5 py-4 font-semibold text-ink"><T>{"Model"}</T>{" "}</th>
                 {pricingTiers.map((t) => (
                   <th key={t.id} scope="col" className="px-5 py-4 font-semibold text-ink">
-                    {t.label}
+                    <T>{t.label}</T>
                     <span className="tnum block text-xs font-normal text-ink-faint">
-                      {t.range}
+                      <T>{t.range}</T>
                     </span>
                   </th>
                 ))}
@@ -183,15 +154,9 @@ export default async function FleetPage() {
           </table>
         </div>
         <p className="mt-4 text-xs leading-relaxed text-ink-faint">
-          {specDisclaimer} Rates are per motorcycle per day in IDR.
-          Minimum rental 2 days. Riders must be at least 25 years old for
-          the EdPower. Estimated totals are confirmed with availability
-          on WhatsApp.
-        </p>
+          <T>{specDisclaimer}</T>{" "}<T>{"Rates are per motorcycle per day in IDR. Minimum rental 2 days. Riders must be at least 25 years old for the EdPower. Estimated totals are confirmed with availability on WhatsApp."}</T>{" "}</p>
         <div className="mt-8">
-          <ButtonLink href="/book" variant="accent" size="lg">
-            Check availability and rates
-          </ButtonLink>
+          <ButtonLink href="/book" variant="accent" size="lg"><T>{"Check availability and rates"}</T>{" "}</ButtonLink>
         </div>
       </Section>
     </>

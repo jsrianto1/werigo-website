@@ -1,4 +1,6 @@
 "use client";
+import { T, useLanguage } from "@/components/i18n/LanguageProvider";
+
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -61,6 +63,7 @@ const phaseToStep: Record<Phase, number> = {
 };
 
 export function CheckoutFlow() {
+  const { t } = useLanguage();
   const params = useSearchParams();
 
   /** Entry id from the URL; legacy variant ids are normalised to the
@@ -191,20 +194,12 @@ export function CheckoutFlow() {
   if (!valid) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="font-display text-3xl text-ink">
-          Your booking session is incomplete
-        </h1>
-        <p className="mt-3 text-ink-soft">
-          We couldn&apos;t find the ride or dates for this checkout.
-          {" "}{MIN_RENTAL_MESSAGE} Start a fresh search. It only takes a
-          moment.
-        </p>
+        <h1 className="font-display text-3xl text-ink"><T>{"Your booking session is incomplete"}</T>{" "}</h1>
+        <p className="mt-3 text-ink-soft"><T>{"We couldn't find the ride or dates for this checkout."}</T>{" "}{" "}<T>{MIN_RENTAL_MESSAGE}</T>{" "}<T>{"Start a fresh search. It only takes a moment."}</T>{" "}</p>
         <Link
           href="/book"
           className="mt-6 inline-flex min-h-11 items-center justify-center rounded-[10px] bg-accent px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
-        >
-          Start a new search
-        </Link>
+        ><T>{"Start a new search"}</T>{" "}</Link>
       </div>
     );
   }
@@ -289,7 +284,7 @@ export function CheckoutFlow() {
       endDate: period.endDate,
       endTime: period.endTime,
       days,
-      tierLabel: `${estimate.tier.label} (${estimate.tier.range})`,
+      tierLabel: `${t(estimate.tier.label)} (${t(estimate.tier.range)})`,
       ratePerDayIdr: estimate.ratePerDayIdr,
       estimatedTotalIdr: estimate.totalIdr * quantity,
       baseUsdApprox: formatUsdApprox(estimate.totalIdr * quantity, usdRate),
@@ -344,15 +339,13 @@ export function CheckoutFlow() {
             {area?.isAirport ? (
               <Plane className="inline h-3.5 w-3.5 text-primary" aria-hidden="true" />
             ) : null}{" "}
-            {area?.name}
+            <T>{area?.name}</T>
             {returnArea && ret !== pickup ? ` → ${returnArea.name}` : ""} ·{" "}
             {period.startDate} {period.startTime} → {period.endDate} {period.endTime}
             <Link
               href={`/book?${searchQs}`}
               className="ml-2 font-semibold text-primary hover:text-primary-strong"
-            >
-              Change
-            </Link>
+            ><T>{"Change"}</T>{" "}</Link>
           </p>
 
           {/* ============ PHASE: EXTRAS ============ */}
@@ -362,27 +355,19 @@ export function CheckoutFlow() {
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
-              >
-                Make it yours
-              </h1>
-              <p className="mt-2 text-ink-soft">
-                Two sanitised helmets and one installed phone holder are
-                already included. Add-on requests below are optional, and
-                their price and availability are confirmed on WhatsApp.
-              </p>
+              ><T>{"Make it yours"}</T>{" "}</h1>
+              <p className="mt-2 text-ink-soft"><T>{"Two sanitised helmets and one installed phone holder are already included. Add-on requests below are optional, and their price and availability are confirmed on WhatsApp."}</T>{" "}</p>
 
 
               {/* Quantity */}
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-[14px] border border-line bg-card p-5">
                 <div>
-                  <h2 className="font-semibold text-ink">Number of motorcycles</h2>
-                  <p className="mt-0.5 text-sm text-ink-soft">
-                    Riding as a group? Request up to 4 of the same model.
-                  </p>
+                  <h2 className="font-semibold text-ink"><T>{"Number of motorcycles"}</T></h2>
+                  <p className="mt-0.5 text-sm text-ink-soft"><T>{"Riding as a group? Request up to 4 of the same model."}</T>{" "}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
-                    aria-label="Remove one motorcycle"
+                    aria-label={t("Remove one motorcycle")}
                     disabled={quantity <= 1}
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-line-strong text-ink transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-40"
@@ -393,7 +378,7 @@ export function CheckoutFlow() {
                     {quantity}
                   </span>
                   <button
-                    aria-label="Add one motorcycle"
+                    aria-label={t("Add one motorcycle")}
                     disabled={quantity >= 4}
                     onClick={() => setQuantity((q) => Math.min(4, q + 1))}
                     className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-line-strong text-ink transition-colors hover:border-primary disabled:cursor-not-allowed disabled:opacity-40"
@@ -412,12 +397,10 @@ export function CheckoutFlow() {
                   >
                     <div>
                       <h2 className="font-semibold text-ink">
-                        {extra.name}
-                        <span className="ml-2 rounded-full bg-sunken px-2 py-0.5 text-xs font-medium text-ink-faint">
-                          Price on request
-                        </span>
+                        <T>{extra.name}</T>
+                        <span className="ml-2 rounded-full bg-sunken px-2 py-0.5 text-xs font-medium text-ink-faint"><T>{"Price on request"}</T>{" "}</span>
                       </h2>
-                      <p className="mt-0.5 text-sm text-ink-soft">{extra.description}</p>
+                      <p className="mt-0.5 text-sm text-ink-soft"><T>{extra.description}</T></p>
                     </div>
                     {(
                       <div className="flex shrink-0 items-center gap-3">
@@ -447,15 +430,13 @@ export function CheckoutFlow() {
               </ul>
 
               {/* Optional protection — unchecked by default */}
-              <h2 className="mt-8 font-display text-2xl text-ink">
-                Optional protection
-              </h2>
+              <h2 className="mt-8 font-display text-2xl text-ink"><T>{"Optional protection"}</T>{" "}</h2>
               <ul className="mt-3 space-y-4">
                 {[
                   {
                     key: "cancellation" as const,
                     name: "Cancellation Protection",
-                    price: `${formatUsdFee(0.5)} per rental day`,
+                    price: `${formatUsdFee(0.5)} ${t("per rental day")}`,
                     amount: addOnBreakdown?.cancellationProtectionUsd ?? 0,
                     computed: formatUsdFee(0.5 * days),
                     copy: protectionCopy.cancellation,
@@ -463,7 +444,7 @@ export function CheckoutFlow() {
                   {
                     key: "motorcycle" as const,
                     name: "Motorcycle Protection",
-                    price: `${formatUsdFee(4.95)} per motorcycle, per rental day`,
+                    price: `${formatUsdFee(4.95)} ${t("per motorcycle, per rental day")}`,
                     amount: addOnBreakdown?.motorcycleProtectionUsd ?? 0,
                     computed: formatUsdFee(4.95 * days * quantity),
                     copy: protectionCopy.motorcycle,
@@ -481,18 +462,16 @@ export function CheckoutFlow() {
                         <div>
                           <h3 className="flex items-center gap-2 font-semibold text-ink">
                             <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
-                            {item.name}
+                            <T>{item.name}</T>
                           </h3>
                           <p className="tnum mt-0.5 text-sm font-medium text-ink-soft">
                             {item.price}
                           </p>
                           <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                            {item.copy}
+                            <T>{item.copy}</T>
                           </p>
                           {selected ? (
-                            <p className="tnum mt-2 text-sm font-semibold text-primary">
-                              Added: {item.computed} for this booking
-                            </p>
+                            <p className="tnum mt-2 text-sm font-semibold text-primary"><T>{"Added:"}</T>{" "}{item.computed}{" "}<T>{"for this booking"}</T>{" "}</p>
                           ) : null}
                         </div>
                         <button
@@ -510,7 +489,7 @@ export function CheckoutFlow() {
                               : "border-primary text-primary hover:bg-primary-faint"
                           }`}
                         >
-                          {selected ? "Remove" : "Add"}
+                          {t(selected ? "Remove" : "Add")}
                         </button>
                       </div>
                     </li>
@@ -520,32 +499,22 @@ export function CheckoutFlow() {
 
               {(area?.isAirport || returnArea?.isAirport) && addOnBreakdown ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-                  <Plane className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
-                  Airport handover: {area?.isAirport ? `delivery fee ${formatUsdFee(1)}` : ""}
+                  <Plane className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Airport handover:"}</T>{" "}{area?.isAirport ? `delivery fee ${formatUsdFee(1)}` : ""}
                   {area?.isAirport && returnArea?.isAirport ? " and " : ""}
-                  {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}, once per
-                  booking.
-                </p>
+                  {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}<T>{", once per booking."}</T>{" "}</p>
               ) : null}
 
               {areaFeesIdr > 0 ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
-                  Delivery & collection: {formatIdr(areaFeesIdr)}, once per
-                  booking. {deliveryFeeWaiverNote}
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{deliveryFeeWaiverNote}</T>
                 </p>
               ) : areaFeeWaivedMonthly ? (
                 <p className="mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" />
-                  Delivery and collection are free on this rental because it
-                  is one month or longer.
-                </p>
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery and collection are free on this rental because it is one month or longer."}</T>{" "}</p>
               ) : null}
 
               {/* Included with every rental */}
-              <h2 className="mt-8 font-display text-2xl text-ink">
-                Included with every rental
-              </h2>
+              <h2 className="mt-8 font-display text-2xl text-ink"><T>{"Included with every rental"}</T>{" "}</h2>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {confirmedBenefits.map((b) => (
                   <li
@@ -553,7 +522,7 @@ export function CheckoutFlow() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-primary-faint px-3 py-1.5 text-sm font-medium text-primary"
                   >
                     <b.icon className="h-4 w-4" aria-hidden="true" />
-                    {b.label}
+                    <T>{b.label}</T>
                   </li>
                 ))}
               </ul>
@@ -564,23 +533,18 @@ export function CheckoutFlow() {
                   htmlFor="promo"
                   className="flex items-center gap-2 font-semibold text-ink"
                 >
-                  <Tag className="h-4 w-4 text-primary" aria-hidden="true" />
-                  Promo code
-                </label>
+                  <Tag className="h-4 w-4 text-primary" aria-hidden="true" /><T>{"Promo code"}</T>{" "}</label>
                 <div className="mt-2 flex gap-2">
                   <input
                     id="promo"
                     type="text"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-                    placeholder="Enter a code"
+                    placeholder={t("Enter a code")}
                     className={inputClass()}
                   />
                 </div>
-                <p className="mt-1.5 text-xs text-ink-faint">
-                  Have a code from our team or a partner? It&apos;s included in
-                  your WhatsApp request and applied to your final quote.
-                </p>
+                <p className="mt-1.5 text-xs text-ink-faint"><T>{"Have a code from our team or a partner? It's included in your WhatsApp request and applied to your final quote."}</T>{" "}</p>
               </div>
 
               <div className="mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
@@ -588,12 +552,8 @@ export function CheckoutFlow() {
                   href={`/book?${searchQs}&vehicle=${entryId}`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-4 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
                 >
-                  <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                  Back to rides
-                </Link>
-                <Button variant="accent" size="lg" onClick={() => setPhase("details")}>
-                  Continue to your details
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Back to rides"}</T>{" "}</Link>
+                <Button variant="accent" size="lg" onClick={() => setPhase("details")}><T>{"Continue to your details"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Button>
               </div>
 
@@ -604,7 +564,7 @@ export function CheckoutFlow() {
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="tnum min-w-0 text-sm leading-snug text-ink-soft">
-                    <span className="block text-xs">Estimated total</span>
+                    <span className="block text-xs"><T>{"Estimated total"}</T></span>
                     <span className="font-bold text-ink">
                       {grandTotalIdr !== null
                         ? formatIdr(grandTotalIdr)
@@ -613,9 +573,7 @@ export function CheckoutFlow() {
                           : ""}
                     </span>
                   </p>
-                  <Button variant="accent" onClick={() => setPhase("details")}>
-                    Continue
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <Button variant="accent" onClick={() => setPhase("details")}><T>{"Continue"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </div>
@@ -629,19 +587,9 @@ export function CheckoutFlow() {
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
-              >
-                Who&apos;s riding?
-              </h1>
-              <p className="mt-2 text-ink-soft">
-                We use these details for delivery and to reply to your booking
-                request, and for nothing else.
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-ink-faint">
-                What to prepare: after availability is confirmed, Werigo may
-                request a valid driving licence and identification through a
-                separately approved secure process. Please don&apos;t send
-                document photos through this form.
-              </p>
+              ><T>{"Who's riding?"}</T>{" "}</h1>
+              <p className="mt-2 text-ink-soft"><T>{"We use these details for delivery and to reply to your booking request, and for nothing else."}</T>{" "}</p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{"What to prepare: after availability is confirmed, Werigo may request a valid driving licence and identification through a separately approved secure process. Please don't send document photos through this form."}</T>{" "}</p>
 
               <form
                 className="mt-6 grid gap-5 sm:grid-cols-2"
@@ -720,7 +668,7 @@ export function CheckoutFlow() {
                       htmlFor={`field-${field.key}`}
                       className="mb-1.5 block text-sm font-medium text-ink"
                     >
-                      {field.label}
+                      <T>{field.label}</T>
                       {field.required ? (
                         <span aria-hidden="true" className="text-danger">
                           {" "}
@@ -756,7 +704,7 @@ export function CheckoutFlow() {
                       className={inputClass(errors[field.key])}
                     />
                     {"hint" in field && field.hint && !errors[field.key] ? (
-                      <p className="mt-1.5 text-xs text-ink-faint">{field.hint}</p>
+                      <p className="mt-1.5 text-xs text-ink-faint"><T>{field.hint}</T></p>
                     ) : null}
                     {errors[field.key] ? (
                       <p
@@ -764,7 +712,7 @@ export function CheckoutFlow() {
                         role="alert"
                         className="mt-1.5 text-xs font-medium text-danger"
                       >
-                        {errors[field.key]}
+                        <T>{errors[field.key]}</T>
                       </p>
                     ) : null}
                   </div>
@@ -774,9 +722,7 @@ export function CheckoutFlow() {
                   <label
                     htmlFor="field-specialRequest"
                     className="mb-1.5 block text-sm font-medium text-ink"
-                  >
-                    Special request (optional)
-                  </label>
+                  ><T>{"Special request (optional)"}</T>{" "}</label>
                   <textarea
                     id="field-specialRequest"
                     rows={3}
@@ -784,7 +730,7 @@ export function CheckoutFlow() {
                     onChange={(e) =>
                       setCustomer((c) => ({ ...c, specialRequest: e.target.value }))
                     }
-                    placeholder="A second rider's details, an early delivery, a surf rack question…"
+                    placeholder={t("A second rider's details, an early delivery, a surf rack question\u2026")}
                     className="w-full rounded-[10px] border border-line-strong bg-card px-3 py-2.5 text-[15px] text-ink placeholder:text-ink-faint"
                   />
                 </div>
@@ -808,18 +754,12 @@ export function CheckoutFlow() {
                       }}
                       className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                     />
-                    <span className="text-sm text-ink-soft">
-                      I accept the{" "}
+                    <span className="text-sm text-ink-soft"><T>{"I accept the"}</T>{" "}
                       <Link
                         href="/terms"
                         target="_blank"
                         className="font-medium text-primary underline underline-offset-2 hover:text-primary-strong"
-                      >
-                        rental terms and conditions
-                      </Link>{" "}
-                      and confirm I hold a licence valid for riding in
-                      Indonesia.
-                    </span>
+                      ><T>{"rental terms and conditions"}</T>{" "}</Link>{" "}<T>{"and confirm I hold a licence valid for riding in Indonesia."}</T>{" "}</span>
                   </label>
                   {errors.termsAccepted ? (
                     <p
@@ -827,7 +767,7 @@ export function CheckoutFlow() {
                       role="alert"
                       className="mt-1.5 text-xs font-medium text-danger"
                     >
-                      {errors.termsAccepted}
+                      <T>{errors.termsAccepted}</T>
                     </p>
                   ) : null}
                 </div>
@@ -852,10 +792,7 @@ export function CheckoutFlow() {
                         }}
                         className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                       />
-                      <span className="text-sm text-ink-soft">
-                        I confirm the rider is at least 25 years old, as
-                        required for the Wedison EdPower.
-                      </span>
+                      <span className="text-sm text-ink-soft"><T>{"I confirm the rider is at least 25 years old, as required for the Wedison EdPower."}</T>{" "}</span>
                     </label>
                     {errors.ageConfirmed ? (
                       <p
@@ -863,7 +800,7 @@ export function CheckoutFlow() {
                         role="alert"
                         className="mt-1.5 text-xs font-medium text-danger"
                       >
-                        {errors.ageConfirmed}
+                        <T>{errors.ageConfirmed}</T>
                       </p>
                     ) : null}
                   </div>
@@ -875,12 +812,8 @@ export function CheckoutFlow() {
                     variant="ghost"
                     onClick={() => setPhase("extras")}
                   >
-                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                    Back to extras
-                  </Button>
-                  <Button type="submit" variant="accent" size="lg">
-                    Review booking
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Back to extras"}</T>{" "}</Button>
+                  <Button type="submit" variant="accent" size="lg"><T>{"Review booking"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </form>
@@ -894,20 +827,15 @@ export function CheckoutFlow() {
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
-              >
-                One last look
-              </h1>
-              <p className="mt-2 text-ink-soft">
-                Check everything below, then send your request. We confirm
-                availability and your rate on WhatsApp, usually quickly.
-              </p>
+              ><T>{"One last look"}</T>{" "}</h1>
+              <p className="mt-2 text-ink-soft"><T>{"Check everything below, then send your request. We confirm availability and your rate on WhatsApp, usually quickly."}</T>{" "}</p>
 
               <dl className="mt-6 space-y-4 rounded-[14px] border border-line bg-card p-6">
                 {[
                   { term: "Ride", detail: `${entry!.displayName} × ${quantity}` },
                   {
                     term: "Rental period",
-                    detail: `${period.startDate} ${period.startTime} → ${period.endDate} ${period.endTime} (${days} day${days === 1 ? "" : "s"})`,
+                    detail: `${period.startDate} ${period.startTime} → ${period.endDate} ${period.endTime} (${days} ${t("days")})`,
                   },
                   {
                     term: "Delivery",
@@ -915,7 +843,7 @@ export function CheckoutFlow() {
                   },
                   {
                     term: "Return",
-                    detail: ret !== pickup ? returnArea?.name ?? ret : "Same as delivery",
+                    detail: ret !== pickup ? returnArea?.name ?? ret : t("Same as delivery"),
                   },
                   ...(Object.values(extraQty).some((q) => q > 0)
                     ? [
@@ -923,7 +851,7 @@ export function CheckoutFlow() {
                           term: "Extras",
                           detail: rentalExtras
                             .filter((e) => (extraQty[e.id] ?? 0) > 0)
-                            .map((e) => `${e.name} × ${extraQty[e.id]}`)
+                            .map((e) => `${t(e.name)} × ${extraQty[e.id]}`)
                             .join(", "),
                         },
                       ]
@@ -932,11 +860,11 @@ export function CheckoutFlow() {
                     ? [
                         {
                           term: "Pricing tier",
-                          detail: `${estimate.tier.label} (${estimate.tier.range})`,
+                          detail: `${t(estimate.tier.label)} (${t(estimate.tier.range)})`,
                         },
                         {
                           term: "Rate",
-                          detail: `${formatIdr(estimate.ratePerDayIdr)} per day${
+                          detail: `${formatIdr(estimate.ratePerDayIdr)} ${t("per day")}${
                             formatUsdApprox(estimate.ratePerDayIdr, usdRate)
                               ? ` (${formatUsdApprox(estimate.ratePerDayIdr, usdRate)})`
                               : ""
@@ -948,7 +876,7 @@ export function CheckoutFlow() {
                             formatUsdApprox(estimate.totalIdr * quantity, usdRate)
                               ? ` (${formatUsdApprox(estimate.totalIdr * quantity, usdRate)})`
                               : ""
-                          } for ${days} day${days === 1 ? "" : "s"}${quantity > 1 ? ` × ${quantity} motorcycles` : ""}. Confirmed with availability on WhatsApp.`,
+                          } ${t("for")} ${days} ${t("days")}${quantity > 1 ? ` × ${quantity} ${t("motorcycles")}` : ""}. ${t("Confirmed with availability on WhatsApp.")}`,
                         },
                       ]
                     : []),
@@ -956,14 +884,14 @@ export function CheckoutFlow() {
                     ? [
                         {
                           term: "Delivery & collection",
-                          detail: `${formatIdr(areaFeesIdr)} once per booking. ${deliveryFeeWaiverNote}`,
+                          detail: `${formatIdr(areaFeesIdr)} ${t("once per booking.")} ${t(deliveryFeeWaiverNote)}`,
                         },
                       ]
                     : areaFeeWaivedMonthly
                       ? [
                           {
                             term: "Delivery & collection",
-                            detail: "Free, because this rental is one month or longer.",
+                            detail: t("Free, because this rental is one month or longer."),
                           },
                         ]
                       : []),
@@ -973,16 +901,16 @@ export function CheckoutFlow() {
                           term: "Add-ons",
                           detail: [
                             addOnBreakdown.airportDeliveryUsd > 0
-                              ? `Airport delivery fee ${formatUsdFee(addOnBreakdown.airportDeliveryUsd)}`
+                              ? `${t("Airport delivery fee")} ${formatUsdFee(addOnBreakdown.airportDeliveryUsd)}`
                               : "",
                             addOnBreakdown.airportCollectionUsd > 0
-                              ? `Airport collection fee ${formatUsdFee(addOnBreakdown.airportCollectionUsd)}`
+                              ? `${t("Airport collection fee")} ${formatUsdFee(addOnBreakdown.airportCollectionUsd)}`
                               : "",
                             addOnBreakdown.cancellationProtectionUsd > 0
-                              ? `Cancellation Protection ${formatUsdFee(addOnBreakdown.cancellationProtectionUsd)}`
+                              ? `${t("Cancellation Protection")} ${formatUsdFee(addOnBreakdown.cancellationProtectionUsd)}`
                               : "",
                             addOnBreakdown.motorcycleProtectionUsd > 0
-                              ? `Motorcycle Protection ${formatUsdFee(addOnBreakdown.motorcycleProtectionUsd)}`
+                              ? `${t("Motorcycle Protection")} ${formatUsdFee(addOnBreakdown.motorcycleProtectionUsd)}`
                               : "",
                           ]
                             .filter(Boolean)
@@ -1000,8 +928,8 @@ export function CheckoutFlow() {
                                   formatUsdApprox(grandTotalIdr, usdRate)
                                     ? ` (${formatUsdApprox(grandTotalIdr, usdRate)})`
                                     : ""
-                                }. Confirmed with availability on WhatsApp.`
-                              : `${formatIdr((estimate?.totalIdr ?? 0) * quantity + areaFeesIdr)} plus ${formatUsdFee(addOnBreakdown.totalUsd)} add-ons. Confirmed with availability on WhatsApp.`,
+                                }. ${t("Confirmed with availability on WhatsApp.")}`
+                              : `${formatIdr((estimate?.totalIdr ?? 0) * quantity + areaFeesIdr)} ${t("plus")} ${formatUsdFee(addOnBreakdown.totalUsd)} ${t("add-ons.")} ${t("Confirmed with availability on WhatsApp.")}`,
                         },
                       ]
                     : []),
@@ -1025,7 +953,7 @@ export function CheckoutFlow() {
                     key={row.term}
                     className="grid gap-1 border-b border-line pb-3 last:border-0 last:pb-0 sm:grid-cols-[160px_1fr]"
                   >
-                    <dt className="text-sm font-semibold text-ink">{row.term}</dt>
+                    <dt className="text-sm font-semibold text-ink"><T>{row.term}</T></dt>
                     <dd className="tnum text-sm text-ink-soft">{row.detail}</dd>
                   </div>
                 ))}
@@ -1034,7 +962,7 @@ export function CheckoutFlow() {
               {/* Battery-return acknowledgement — required */}
               <div className="mt-6 rounded-[10px] border border-line bg-primary-faint p-4">
                 <p className="text-sm leading-relaxed text-ink">
-                  {batteryReturnNote}
+                  <T>{batteryReturnNote}</T>
                 </p>
                 <label className="mt-3 flex cursor-pointer items-start gap-3">
                   <input
@@ -1047,10 +975,7 @@ export function CheckoutFlow() {
                     }}
                     className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                   />
-                  <span className="text-sm text-ink-soft">
-                    I understand, and I&apos;ll arrange anything different with
-                    the team on WhatsApp.
-                  </span>
+                  <span className="text-sm text-ink-soft"><T>{"I understand, and I'll arrange anything different with the team on WhatsApp."}</T>{" "}</span>
                 </label>
               </div>
 
@@ -1069,16 +994,12 @@ export function CheckoutFlow() {
                     }}
                     className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                   />
-                  <span className="text-sm text-ink-soft">
-                    I agree to send these details to Werigo through WhatsApp so
-                    the team can respond to my booking request. See the{" "}
+                  <span className="text-sm text-ink-soft"><T>{"I agree to send these details to Werigo through WhatsApp so the team can respond to my booking request. See the"}</T>{" "}
                     <Link
                       href="/privacy"
                       target="_blank"
                       className="font-medium text-primary underline underline-offset-2 hover:text-primary-strong"
-                    >
-                      privacy policy
-                    </Link>
+                    ><T>{"privacy policy"}</T>{" "}</Link>
                     .
                   </span>
                 </label>
@@ -1088,7 +1009,7 @@ export function CheckoutFlow() {
                     role="alert"
                     className="mt-1.5 text-xs font-medium text-danger"
                   >
-                    {consentError}
+                    <T>{consentError}</T>
                   </p>
                 ) : null}
               </div>
@@ -1100,21 +1021,13 @@ export function CheckoutFlow() {
                   onClick={() => sendToWhatsApp()}
                   className="w-full sm:w-auto"
                 >
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  Send booking request on WhatsApp
-                </Button>
+                  <MessageCircle className="h-5 w-5" aria-hidden="true" /><T>{"Send booking request on WhatsApp"}</T>{" "}</Button>
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-                Availability, final pricing, delivery, add-ons and your
-                booking are confirmed by the Werigo team on WhatsApp. Nothing
-                is charged before that.
-              </p>
+              <p className="mt-3 text-xs leading-relaxed text-ink-faint"><T>{"Availability, final pricing, delivery, add-ons and your booking are confirmed by the Werigo team on WhatsApp. Nothing is charged before that."}</T>{" "}</p>
 
               <div className="mt-6">
                 <Button variant="ghost" onClick={() => setPhase("details")}>
-                  <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                  Edit details
-                </Button>
+                  <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Edit details"}</T>{" "}</Button>
               </div>
             </div>
           ) : null}
@@ -1126,14 +1039,8 @@ export function CheckoutFlow() {
                 ref={headingRef}
                 tabIndex={-1}
                 className="mt-3 font-display text-3xl text-ink outline-none"
-              >
-                Your request is ready in WhatsApp
-              </h1>
-              <p className="mt-3 max-w-xl text-ink-soft">
-                WhatsApp should have opened with your booking request. Send the
-                message and our team will reply with availability and your
-                quote. If WhatsApp did not open, use the button below.
-              </p>
+              ><T>{"Your request is ready in WhatsApp"}</T>{" "}</h1>
+              <p className="mt-3 max-w-xl text-ink-soft"><T>{"WhatsApp should have opened with your booking request. Send the message and our team will reply with availability and your quote. If WhatsApp did not open, use the button below."}</T>{" "}</p>
               {whatsappUrl ? (
                 <a
                   href={whatsappUrl}
@@ -1141,22 +1048,14 @@ export function CheckoutFlow() {
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-6 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
                 >
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  Open WhatsApp
-                </a>
+                  <MessageCircle className="h-5 w-5" aria-hidden="true" /><T>{"Open WhatsApp"}</T>{" "}</a>
               ) : null}
-              <p className="mt-5 text-xs leading-relaxed text-ink-faint">
-                Your rental stays a request until our team confirms
-                availability and you approve the quote. Nothing is booked or
-                charged before that.
-              </p>
+              <p className="mt-5 text-xs leading-relaxed text-ink-faint"><T>{"Your rental stays a request until our team confirms availability and you approve the quote. Nothing is booked or charged before that."}</T>{" "}</p>
               <div className="mt-6">
                 <Link
                   href="/"
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-line-strong px-5 text-sm font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
-                >
-                  Back to home
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                ><T>{"Back to home"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -1164,7 +1063,7 @@ export function CheckoutFlow() {
         </div>
 
         {/* Sidebar selection summary */}
-        <aside aria-label="Booking summary" className="lg:sticky lg:top-24 lg:self-start">
+        <aside aria-label={t("Booking summary")} className="lg:sticky lg:top-24 lg:self-start">
           <BookingSummary
             vehicleName={entry!.displayName}
             quantity={quantity}

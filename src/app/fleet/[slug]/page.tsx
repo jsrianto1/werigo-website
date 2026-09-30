@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
@@ -137,17 +139,13 @@ export default async function VehicleDetailPage({ params }: Props) {
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-1.5 text-sm text-ink-faint">
             <li>
-              <Link href="/" className="transition-colors hover:text-primary">
-                Home
-              </Link>
+              <Link href="/" className="transition-colors hover:text-primary"><T>{"Home"}</T>{" "}</Link>
             </li>
             <li aria-hidden="true">
               <ChevronRight className="h-3.5 w-3.5" />
             </li>
             <li>
-              <Link href="/fleet" className="transition-colors hover:text-primary">
-                Our Fleet
-              </Link>
+              <Link href="/fleet" className="transition-colors hover:text-primary"><T>{"Our Fleet"}</T>{" "}</Link>
             </li>
             <li aria-hidden="true">
               <ChevronRight className="h-3.5 w-3.5" />
@@ -193,11 +191,11 @@ export default async function VehicleDetailPage({ params }: Props) {
 
           {/* Summary + booking */}
           <div>
-            <p className="eyebrow mb-3">Werigo fleet · Powered by Wedison</p>
+            <p className="eyebrow mb-3"><T>{"Werigo fleet · Powered by Wedison"}</T></p>
             <h1 className="font-display text-4xl text-ink">{entry.displayName}</h1>
-            <p className="mt-2 text-lg text-ink-soft">{entry.positioning}</p>
+            <p className="mt-2 text-lg text-ink-soft"><T>{entry.positioning}</T></p>
 
-            <p className="mt-6 leading-relaxed text-ink-soft">{entry.description}</p>
+            <p className="mt-6 leading-relaxed text-ink-soft"><T>{entry.description}</T></p>
 
             {entry.features?.length ? (
               <ul className="mt-4 flex flex-wrap gap-2">
@@ -217,10 +215,7 @@ export default async function VehicleDetailPage({ params }: Props) {
             {/* Rental durations + rate */}
             <div className="mt-8 rounded-[14px] border border-line bg-card p-5">
               <RateTable modelSlug={entry.modelSlug} variant="full" />
-              <p className="mt-4 border-t border-line pt-4 text-sm leading-relaxed text-ink-soft">
-                Tell us your dates and delivery area. We confirm your rate and
-                availability on WhatsApp before you commit to anything.
-              </p>
+              <p className="mt-4 border-t border-line pt-4 text-sm leading-relaxed text-ink-soft"><T>{"Tell us your dates and delivery area. We confirm your rate and availability on WhatsApp before you commit to anything."}</T>{" "}</p>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -229,18 +224,14 @@ export default async function VehicleDetailPage({ params }: Props) {
                 variant="accent"
                 size="lg"
                 className="flex-1 sm:flex-none"
-              >
-                Check availability and rates
-              </ButtonLink>
+              ><T>{"Check availability and rates"}</T>{" "}</ButtonLink>
               <a
                 href={buildModelInquiryWhatsAppUrl(entry.id)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-[10px] border border-line-strong px-6 text-base font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Ask on WhatsApp
-              </a>
+                <MessageCircle className="h-4 w-4" aria-hidden="true" /><T>{"Ask on WhatsApp"}</T>{" "}</a>
             </div>
           </div>
         </div>
@@ -248,12 +239,10 @@ export default async function VehicleDetailPage({ params }: Props) {
 
       {/* Specifications + equipment */}
       <Section tone="wash" labelledBy="specs-title" className="!pt-10">
-        <h2 id="specs-title" className="mb-6 font-display text-2xl text-ink">
-          Specifications
-        </h2>
+        <h2 id="specs-title" className="mb-6 font-display text-2xl text-ink"><T>{"Specifications"}</T>{" "}</h2>
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-[14px] border border-line bg-card p-6">
-            <h3 className="font-display text-xl text-ink">Official specifications</h3>
+            <h3 className="font-display text-xl text-ink"><T>{"Official specifications"}</T></h3>
             <dl className="mt-4 divide-y divide-line">
               {specRows(entry).map((spec) => (
                 <div
@@ -262,7 +251,7 @@ export default async function VehicleDetailPage({ params }: Props) {
                 >
                   <dt className="flex items-center gap-2.5 text-sm text-ink-soft">
                     <spec.icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                    {spec.label}
+                    <T>{spec.label}</T>
                   </dt>
                   <dd className="tnum text-right text-sm font-semibold text-ink">
                     {spec.value}
@@ -274,15 +263,11 @@ export default async function VehicleDetailPage({ params }: Props) {
               href={`/book?vehicle=${entry.id}`}
               variant="accent"
               className="mt-5 w-full"
-            >
-              Check availability and rates
-            </ButtonLink>
+            ><T>{"Check availability and rates"}</T>{" "}</ButtonLink>
           </div>
 
           <div className="rounded-[14px] border border-line bg-card p-6">
-            <h3 className="font-display text-xl text-ink">
-              Included with every rental
-            </h3>
+            <h3 className="font-display text-xl text-ink"><T>{"Included with every rental"}</T>{" "}</h3>
             <ul className="mt-4 space-y-3">
               {entry.includedEquipment.map((item) => (
                 <li key={item} className="flex items-center gap-2.5 text-sm text-ink-soft">
@@ -291,21 +276,15 @@ export default async function VehicleDetailPage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-ink-faint">
-              Delivery, a condition walk-around and a riding briefing are part
-              of every handover. Extras like additional helmets can be added
-              during booking.
-            </p>
+            <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-ink-faint"><T>{"Delivery, a condition walk-around and a riding briefing are part of every handover. Extras like additional helmets can be added during booking."}</T>{" "}</p>
           </div>
         </div>
-        <p className="mt-6 text-xs leading-relaxed text-ink-faint">{specDisclaimer}</p>
+        <p className="mt-6 text-xs leading-relaxed text-ink-faint"><T>{specDisclaimer}</T></p>
       </Section>
 
       {/* Other models */}
       <Section labelledBy="others-title">
-        <h2 id="others-title" className="mb-8 font-display text-2xl text-ink">
-          Other Wedison rides in the fleet
-        </h2>
+        <h2 id="others-title" className="mb-8 font-display text-2xl text-ink"><T>{"Other Wedison rides in the fleet"}</T>{" "}</h2>
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {others.map((e) => (
             <VehicleCard key={e.id} entry={e} />

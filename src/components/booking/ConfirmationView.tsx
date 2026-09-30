@@ -1,4 +1,6 @@
 "use client";
+import { T } from "@/components/i18n/LanguageProvider";
+
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -40,16 +42,12 @@ export function ConfirmationView() {
   if (!code) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="font-display text-3xl text-ink">No booking to show</h1>
-        <p className="mt-3 text-ink-soft">
-          Start a booking and your confirmation will appear here.
-        </p>
+        <h1 className="font-display text-3xl text-ink"><T>{"No booking to show"}</T></h1>
+        <p className="mt-3 text-ink-soft"><T>{"Start a booking and your confirmation will appear here."}</T>{" "}</p>
         <Link
           href="/book"
           className="mt-6 inline-flex min-h-11 items-center justify-center rounded-[10px] bg-accent px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
-        >
-          Start a new booking
-        </Link>
+        ><T>{"Start a new booking"}</T>{" "}</Link>
       </div>
     );
   }
@@ -70,25 +68,17 @@ export function ConfirmationView() {
     <div className="mx-auto max-w-2xl">
       <div className="text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-ok" aria-hidden="true" />
-        <h1 className="mt-4 font-display text-3xl text-ink md:text-4xl">
-          Booking request received
-        </h1>
-        <p className="tnum mt-3 inline-block rounded-full bg-primary-faint px-4 py-1.5 text-sm font-semibold text-primary">
-          Booking code: {code}
+        <h1 className="mt-4 font-display text-3xl text-ink md:text-4xl"><T>{"Booking request received"}</T>{" "}</h1>
+        <p className="tnum mt-3 inline-block rounded-full bg-primary-faint px-4 py-1.5 text-sm font-semibold text-primary"><T>{"Booking code:"}</T>{" "}{code}
         </p>
-        <p className="mx-auto mt-4 max-w-md text-ink-soft">
-          Your booking is saved.{" "}
+        <p className="mx-auto mt-4 max-w-md text-ink-soft"><T>{"Your booking is saved."}</T>{" "}
           {b ? (
-            <>
-              Continue to WhatsApp and our team will confirm availability and
-              your rate with{" "}
+            <><T>{"Continue to WhatsApp and our team will confirm availability and your rate with"}</T>{" "}
               <strong className="font-semibold text-ink">{b.fullName}</strong>.
             </>
           ) : (
             "Quote your booking code in any conversation with our team."
-          )}{" "}
-          Nothing is charged until you approve the final quote.
-        </p>
+          )}{" "}<T>{"Nothing is charged until you approve the final quote."}</T>{" "}</p>
       </div>
 
       {b ? (
@@ -145,23 +135,16 @@ export function ConfirmationView() {
             rel="noopener noreferrer"
             className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-6 text-base font-semibold text-white transition-colors hover:bg-accent-strong"
           >
-            <MessageCircle className="h-5 w-5" aria-hidden="true" />
-            Continue to WhatsApp
-          </a>
+            <MessageCircle className="h-5 w-5" aria-hidden="true" /><T>{"Continue to WhatsApp"}</T>{" "}</a>
         ) : null}
         <Link
           href="/"
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[10px] border border-line-strong px-6 text-base font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
-        >
-          Back to home
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        ><T>{"Back to home"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
 
-      <p className="mt-6 text-center text-xs leading-relaxed text-ink-faint">
-        Keep your booking code handy. It identifies your booking in every
-        conversation with our team.
-      </p>
+      <p className="mt-6 text-center text-xs leading-relaxed text-ink-faint"><T>{"Keep your booking code handy. It identifies your booking in every conversation with our team."}</T>{" "}</p>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { WedisonEntry } from "@/data/vehicles";
@@ -12,11 +14,11 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
       </Link>
       <div className="vehicle-info">
         <h3 className="font-display text-xl text-ink"><Link href={`/fleet/${entry.modelSlug}`}>{entry.displayName}</Link></h3>
-        <p className="mt-2 min-h-10 text-sm leading-relaxed text-ink-soft">{entry.bestFor}</p>
+        <p className="mt-2 min-h-10 text-sm leading-relaxed text-ink-soft"><T>{entry.bestFor}</T></p>
         <RateTable modelSlug={entry.modelSlug} className="mt-5" />
         <div className="mt-auto pt-5">
-          <Link href={`/book?vehicle=${entry.id}`} className="vehicle-cta">Check availability <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link>
-          <Link href={`/fleet/${entry.modelSlug}`} className="mt-2 flex min-h-11 items-center justify-center text-sm font-semibold text-primary">View details</Link>
+          <Link href={`/book?vehicle=${entry.id}`} className="vehicle-cta"><T>{"Check availability"}</T>{" "}<ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link>
+          <Link href={`/fleet/${entry.modelSlug}`} className="mt-2 flex min-h-11 items-center justify-center text-sm font-semibold text-primary"><T>{"View details"}</T></Link>
         </div>
       </div>
     </article>

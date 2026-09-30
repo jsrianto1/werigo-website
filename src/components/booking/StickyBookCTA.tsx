@@ -1,4 +1,6 @@
 "use client";
+import { T } from "@/components/i18n/LanguageProvider";
+
 
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
@@ -35,9 +37,7 @@ export function StickyBookCTA({ targetId }: { targetId: string }) {
     >
       <div className="flex items-center gap-3">
         <p className="min-w-0 flex-1 text-xs leading-snug text-ink-soft">
-          <span className="block font-semibold text-ink">Ready to ride?</span>
-          Request in minutes, confirmed on WhatsApp.
-        </p>
+          <span className="block font-semibold text-ink"><T>{"Ready to ride?"}</T></span><T>{"Request in minutes, confirmed on WhatsApp."}</T>{" "}</p>
         <button
           onClick={() => {
             document
@@ -48,9 +48,7 @@ export function StickyBookCTA({ targetId }: { targetId: string }) {
           }}
           className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-[10px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
         >
-          <ArrowUp className="h-4 w-4" aria-hidden="true" />
-          Check availability
-        </button>
+          <ArrowUp className="h-4 w-4" aria-hidden="true" /><T>{"Check availability"}</T>{" "}</button>
       </div>
     </div>
   );

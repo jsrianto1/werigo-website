@@ -1,13 +1,15 @@
 "use client";
+import { T, useLanguage } from "@/components/i18n/LanguageProvider";
+
 
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Globe, ChevronDown } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
-import { site } from "@/lib/config";
+import { LanguageSelector } from "@/components/i18n/LanguageSelector";
 
 // The logo links home, so the desktop nav starts at Our Fleet: nine
 // items no longer fit beside the logo at the xl breakpoint without
@@ -26,8 +28,8 @@ const navItems = [
 ];
 
 export function Header() {
+  const { t } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
@@ -36,7 +38,6 @@ export function Header() {
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
     setMobileOpen(false);
-    setLangOpen(false);
   }
 
   const isActive = (href: string) =>
@@ -67,7 +68,7 @@ export function Header() {
                       : "text-ink-soft hover:text-ink"
                   }`}
                 >
-                  {item.label}
+                  <T>{item.label}</T>
                 </Link>
               </li>
             ))}
@@ -75,53 +76,10 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Language selector (desktop) */}
-          <div className="relative hidden md:block">
-            <button
-              aria-expanded={langOpen}
-              aria-haspopup="listbox"
-              aria-label="Change language"
-              onClick={() => setLangOpen((v) => !v)}
-              className="flex min-h-11 cursor-pointer items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
-            >
-              <Globe className="h-4 w-4" aria-hidden="true" />
-              EN
-              <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-            </button>
-            {langOpen ? (
-              <ul
-                role="listbox"
-                aria-label="Language"
-                className="absolute right-0 top-full mt-1 w-48 rounded-[10px] border border-line bg-card py-1 shadow-lg"
-              >
-                {site.locales.map((locale) => (
-                  <li key={locale.code} role="option" aria-selected={locale.active}>
-                    <button
-                      disabled={!locale.active}
-                      onClick={() => setLangOpen(false)}
-                      className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm ${
-                        locale.active
-                          ? "cursor-pointer font-medium text-ink hover:bg-primary-faint"
-                          : "cursor-default text-ink-faint"
-                      }`}
-                    >
-                      {locale.label}
-                      {!locale.active ? (
-                        <span className="text-[10px] uppercase tracking-wide">
-                          Soon
-                        </span>
-                      ) : null}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
+          <div className="hidden md:block"><LanguageSelector /></div>
 
           <div className="hidden sm:block">
-            <ButtonLink href="/book" variant="accent" size="md">
-              Check availability
-            </ButtonLink>
+            <ButtonLink href="/book" variant="accent" size="md"><T>{"Check availability"}</T>{" "}</ButtonLink>
           </div>
 
           {/* Mobile menu toggle */}
@@ -129,7 +87,7 @@ export function Header() {
             ref={hamburgerRef}
             aria-expanded={mobileOpen}
             aria-controls="mobile-drawer"
-            aria-label="Open menu"
+            aria-label={t("Open menu")}
             onClick={() => setMobileOpen(true)}
             className="flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md text-ink xl:hidden"
           >

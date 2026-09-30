@@ -1,4 +1,6 @@
 "use client";
+import { T } from "@/components/i18n/LanguageProvider";
+
 
 import { useState, useId } from "react";
 import { ChevronDown } from "lucide-react";
@@ -32,7 +34,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left text-[15px] font-medium text-ink transition-colors hover:text-primary"
               >
-                {item.question}
+                <T>{item.question}</T>
                 <ChevronDown
                   aria-hidden="true"
                   className={`h-4 w-4 shrink-0 text-ink-faint transition-transform duration-200 ${
@@ -48,7 +50,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
               hidden={!isOpen}
               className="px-5 pb-5"
             >
-              <p className="text-sm leading-relaxed text-ink-soft">{item.answer}</p>
+              <p className="text-sm leading-relaxed text-ink-soft"><T>{item.answer}</T></p>
             </div>
           </div>
         );

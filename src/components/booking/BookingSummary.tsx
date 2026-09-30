@@ -1,4 +1,6 @@
 "use client";
+import { T, useLanguage } from "@/components/i18n/LanguageProvider";
+
 
 import { rentalExtras } from "@/data/extras";
 import { formatIdr, type RentalQuoteEstimate } from "@/lib/pricing";
@@ -41,43 +43,44 @@ export function BookingSummary({
   areaFeeWaived?: boolean;
 }) {
   const usdRate = useUsdRate();
+  const { t } = useLanguage();
   const extraRows = extras
     .filter((e) => e.quantity > 0)
     .map((e) => {
       const def = rentalExtras.find((x) => x.id === e.id);
-      return def ? `${def.name} × ${e.quantity}` : null;
+      return def ? `${t(def.name)} × ${e.quantity}` : null;
     })
     .filter(Boolean) as string[];
 
   return (
     <div className="rounded-[14px] border border-line bg-card p-5">
-      <h2 className="font-display text-lg text-ink">Your selection</h2>
+      <h2 className="font-display text-lg text-ink"><T>{"Your selection"}</T></h2>
       <dl className="mt-4 space-y-2.5 border-b border-line pb-4 text-sm">
         <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-ink-soft">Ride</dt>
+          <dt className="text-ink-soft"><T>{"Ride"}</T></dt>
           <dd className="text-right font-medium text-ink">
             {vehicleName} × {quantity}
           </dd>
         </div>
         <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-ink-soft">Duration</dt>
+          <dt className="text-ink-soft"><T>{"Duration"}</T></dt>
           <dd className="tnum font-medium text-ink">
-            {days} day{days === 1 ? "" : "s"}
+            {days}{" "}<T>{"days"}</T>
           </dd>
         </div>
         <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-ink-soft">Delivery</dt>
+          <dt className="text-ink-soft"><T>{"Delivery"}</T></dt>
           <dd className="text-right font-medium text-ink">{pickupName}</dd>
         </div>
         {returnName ? (
           <div className="flex items-baseline justify-between gap-3">
-            <dt className="text-ink-soft">Return</dt>
+            <dt className="text-ink-soft"><T>{"Return"}</T></dt>
             <dd className="text-right font-medium text-ink">{returnName}</dd>
           </div>
         ) : null}
         {extraRows.map((row) => (
           <div key={row} className="flex items-baseline justify-between gap-3">
-            <dt className="text-ink-soft">Extra</dt>
+            <dt className="text-ink-soft"><T>{"Extra"}</T></dt>
             <dd className="text-right font-medium text-ink">{row}</dd>
           </div>
         ))}
@@ -85,18 +88,16 @@ export function BookingSummary({
       {estimate ? (
         <div className="mt-4 space-y-1.5 text-sm">
           <p className="flex items-baseline justify-between gap-3">
-            <span className="text-ink-soft">{estimate.tier.label} rate</span>
+            <span className="text-ink-soft"><T>{`${estimate.tier.label} rate`}</T></span>
             <span className="tnum text-right font-semibold text-ink">
-              {formatIdr(estimate.ratePerDayIdr)}/day
-              {formatUsdApprox(estimate.ratePerDayIdr, usdRate) ? (
+              {formatIdr(estimate.ratePerDayIdr)}<T>{"/day"}</T>{" "}{formatUsdApprox(estimate.ratePerDayIdr, usdRate) ? (
                 <span className="tnum block text-xs font-normal text-ink-faint">
-                  {formatUsdApprox(estimate.ratePerDayIdr, usdRate)}/day
-                </span>
+                  {formatUsdApprox(estimate.ratePerDayIdr, usdRate)}<T>{"/day"}</T>{" "}</span>
               ) : null}
             </span>
           </p>
           <p className="flex items-baseline justify-between gap-3">
-            <span className="text-ink-soft">Estimated total</span>
+            <span className="text-ink-soft"><T>{"Estimated total"}</T></span>
             <span className="tnum text-right font-semibold text-ink">
               {formatIdr(estimate.totalIdr * quantity)}
               {formatUsdApprox(estimate.totalIdr * quantity, usdRate) ? (
@@ -108,16 +109,14 @@ export function BookingSummary({
           </p>
         </div>
       ) : (
-        <p className="mt-4 text-sm font-semibold text-ink">
-          Rates shown once dates are selected
-        </p>
+        <p className="mt-4 text-sm font-semibold text-ink"><T>{"Rates shown once dates are selected"}</T>{" "}</p>
       )}
       {areaFeeIdr > 0 || areaFeeWaived ? (
         <div className="mt-2 space-y-1.5 border-t border-line pt-2 text-sm">
           <p className="flex items-baseline justify-between gap-3">
-            <span className="text-ink-soft">Delivery & collection</span>
+            <span className="text-ink-soft"><T>{"Delivery & collection"}</T></span>
             <span className="tnum font-medium text-ink">
-              {areaFeeIdr > 0 ? formatIdr(areaFeeIdr) : <span className="text-ok">Free</span>}
+              {areaFeeIdr > 0 ? formatIdr(areaFeeIdr) : <span className="text-ok"><T>{"Free"}</T></span>}
             </span>
           </p>
         </div>
@@ -133,7 +132,7 @@ export function BookingSummary({
             .filter((row) => row.usd > 0)
             .map((row) => (
               <p key={row.label} className="flex items-baseline justify-between gap-3">
-                <span className="text-ink-soft">{row.label}</span>
+                <span className="text-ink-soft"><T>{row.label}</T></span>
                 <span className="tnum font-medium text-ink">{formatUsdFee(row.usd)}</span>
               </p>
             ))}
@@ -148,7 +147,7 @@ export function BookingSummary({
             const grandIdr = addUsd > 0 ? (addIdr !== null ? baseIdr + addIdr : null) : baseIdr;
             return (
               <p className="flex items-baseline justify-between gap-3 text-sm">
-                <span className="font-semibold text-ink">Estimated total</span>
+                <span className="font-semibold text-ink"><T>{"Estimated total"}</T></span>
                 <span className="tnum text-right font-bold text-ink">
                   {grandIdr !== null ? formatIdr(grandIdr) : `${formatIdr(baseIdr)} + ${formatUsdFee(addUsd)}`}
                   {grandIdr !== null && formatUsdApprox(grandIdr, usdRate) ? (
@@ -162,11 +161,7 @@ export function BookingSummary({
           })()}
         </div>
       ) : null}
-      <p className="mt-2 text-xs leading-relaxed text-ink-faint">
-        Estimate only. Availability, final pricing, delivery and add-ons
-        are confirmed by the Werigo team on WhatsApp. There are no charges
-        without your approval.
-      </p>
+      <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{"Estimate only. Availability, final pricing, delivery and add-ons are confirmed by the Werigo team on WhatsApp. There are no charges without your approval."}</T>{" "}</p>
       <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-xs text-ink-soft">
         {[
           "2 sanitised helmets included",
@@ -177,7 +172,7 @@ export function BookingSummary({
         ].map((cue) => (
           <li key={cue} className="flex items-start gap-1.5">
             <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ok" />
-            {cue}
+            <T>{cue}</T>
           </li>
         ))}
       </ul>

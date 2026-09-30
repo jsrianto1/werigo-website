@@ -48,7 +48,8 @@ export const site = {
   /** Languages prepared for the language selector. */
   locales: [
     { code: "en", label: "English", active: true },
-    { code: "id", label: "Bahasa Indonesia", active: false },
+    { code: "id", label: "Bahasa Indonesia", active: true },
+    { code: "ru", label: "Русский", active: true },
   ],
 
   currency: {

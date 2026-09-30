@@ -1,4 +1,6 @@
 "use client";
+import { T } from "@/components/i18n/LanguageProvider";
+
 
 import { useMemo } from "react";
 import Link from "next/link";
@@ -57,13 +59,8 @@ export function BookSearchResults() {
     return (
       <div className="mx-auto max-w-3xl">
         <BookingStepper current={0} />
-        <h1 className="font-display text-3xl text-ink md:text-4xl">
-          Where and when do you want to ride?
-        </h1>
-        <p className="mt-3 text-ink-soft">
-          Tell us your area and dates. We&apos;ll show you every Wedison model
-          available by request for your trip.
-          {preselect ? " Your chosen ride will be waiting at the next step." : ""}
+        <h1 className="font-display text-3xl text-ink md:text-4xl"><T>{"Where and when do you want to ride?"}</T>{" "}</h1>
+        <p className="mt-3 text-ink-soft"><T>{"Tell us your area and dates. We'll show you every Wedison model available by request for your trip."}</T>{" "}{preselect ? <T>{" Your chosen ride will be waiting at the next step."}</T> : ""}
         </p>
         <div className="mt-8">
           <SearchWidget referralCode={ref} vehicle={preselect} monthly={params.get("duration") === "monthly"} />
@@ -100,33 +97,25 @@ export function BookSearchResults() {
       <BookingStepper current={1} />
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl text-ink md:text-4xl">
-            Wedison models for {area?.name ?? pickup}
+          <h1 className="font-display text-3xl text-ink md:text-4xl"><T>{"Wedison models for"}</T>{" "}{area?.name ?? pickup}
           </h1>
           <p className="tnum mt-2 text-sm text-ink-soft">
             {period.startDate} {period.startTime} → {period.endDate}{" "}
-            {period.endTime} · {days} day{days === 1 ? "" : "s"}
+            {period.endTime} · {days}{" "}<T>{"days"}</T>
             {returnArea && ret !== pickup ? ` · return in ${returnArea.name}` : ""}
           </p>
         </div>
         <Link
           href="/book"
           className="inline-flex min-h-11 items-center text-sm font-semibold text-primary transition-colors hover:text-primary-strong"
-        >
-          Change search
-        </Link>
+        ><T>{"Change search"}</T>{" "}</Link>
       </div>
 
       {models.length === 0 ? (
         <div className="mt-10 rounded-[14px] border border-dashed border-line-strong bg-card p-10 text-center">
           <SearchX className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />
-          <h2 className="mt-3 font-display text-xl text-ink">
-            No models listed right now
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
-            Message us on WhatsApp and we&apos;ll tell you what&apos;s possible
-            for your dates.
-          </p>
+          <h2 className="mt-3 font-display text-xl text-ink"><T>{"No models listed right now"}</T>{" "}</h2>
+          <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft"><T>{"Message us on WhatsApp and we'll tell you what's possible for your dates."}</T>{" "}</p>
         </div>
       ) : (
         <ul className="mt-8 space-y-5">
@@ -151,27 +140,25 @@ export function BookSearchResults() {
                   sizes="(max-width: 768px) 100vw, 260px"
                 />
                 <div>
-                  {highlighted ? <p className="eyebrow mb-1">Your pick</p> : null}
+                  {highlighted ? <p className="eyebrow mb-1"><T>{"Your pick"}</T></p> : null}
                   <h2 className="font-display text-2xl text-ink">
                     {model.displayName}
                   </h2>
-                  <p className="mt-1 text-sm text-ink-soft">{model.positioning}</p>
+                  <p className="mt-1 text-sm text-ink-soft"><T>{model.positioning}</T></p>
                   <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-ink-soft">
                     {range !== null ? (
                       <li className="flex items-center gap-1.5">
                         <Route className="h-4 w-4 text-primary" aria-hidden="true" />
-                        <span className="tnum">up to {range} km</span>
+                        <span className="tnum"><T>{"up to"}</T>{" "}{range}{" "}<T>{"km"}</T></span>
                       </li>
                     ) : null}
                     <li className="flex items-center gap-1.5">
                       <Gauge className="h-4 w-4 text-primary" aria-hidden="true" />
-                      <span className="tnum">up to {model.topSpeedKmh} km/h</span>
+                      <span className="tnum"><T>{"up to"}</T>{" "}{model.topSpeedKmh}{" "}<T>{"km/h"}</T></span>
                     </li>
                     {model.supercharge ? (
                       <li className="flex items-center gap-1.5">
-                        <Zap className="h-4 w-4 text-primary" aria-hidden="true" />
-                        SuperCharge
-                      </li>
+                        <Zap className="h-4 w-4 text-primary" aria-hidden="true" /><T>{"SuperCharge"}</T>{" "}</li>
                     ) : null}
                   </ul>
                   {(() => {
@@ -179,36 +166,27 @@ export function BookSearchResults() {
                     return est ? (
                       <p className="tnum mt-4 text-sm text-ink-soft">
                         <span className="font-semibold text-ink">
-                          {formatIdr(est.ratePerDayIdr)}/day
-                        </span>
+                          {formatIdr(est.ratePerDayIdr)}<T>{"/day"}</T>{" "}</span>
                         {formatUsdApprox(est.ratePerDayIdr, usdRate)
                           ? ` (${formatUsdApprox(est.ratePerDayIdr, usdRate)})`
                           : ""}{" "}
-                        · {est.tier.label} rate ({est.tier.range}) · estimated{" "}
+                        · <T>{`${est.tier.label} rate`}</T>{" ("}<T>{est.tier.range}</T><T>{") · estimated"}</T>{" "}
                         <span className="font-semibold text-ink">
                           {formatIdr(est.totalIdr)}
                         </span>
                         {formatUsdApprox(est.totalIdr, usdRate)
                           ? ` (${formatUsdApprox(est.totalIdr, usdRate)})`
-                          : ""}{" "}
-                        for {est.days} days
-                      </p>
+                          : ""}{" "}<T>{"for"}</T>{" "}{est.days}{" "}<T>{"days"}</T>{" "}</p>
                     ) : null;
                   })()}
                 </div>
                 <div className="flex flex-col items-stretch gap-3 md:items-end">
                   <p className="text-sm text-ink-soft md:max-w-[190px] md:text-right">
-                    <span className="block font-semibold text-ink">
-                      Available by request
-                    </span>
-                    Estimate confirmed with availability on WhatsApp.
-                  </p>
+                    <span className="block font-semibold text-ink"><T>{"Available by request"}</T>{" "}</span><T>{"Estimate confirmed with availability on WhatsApp."}</T>{" "}</p>
                   <button
                     onClick={() => goToCheckout(model.id)}
                     className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
-                  >
-                    Check availability and rates
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  ><T>{"Check availability and rates"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </div>
               </li>
@@ -217,7 +195,7 @@ export function BookSearchResults() {
         </ul>
       )}
 
-      <p className="mt-6 text-xs leading-relaxed text-ink-faint">{specDisclaimer}</p>
+      <p className="mt-6 text-xs leading-relaxed text-ink-faint"><T>{specDisclaimer}</T></p>
     </div>
   );
 }

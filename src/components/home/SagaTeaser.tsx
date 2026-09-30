@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
@@ -24,32 +26,23 @@ export function SagaTeaser() {
         />
         <div className="relative grid items-center gap-10 p-6 sm:p-10 lg:grid-cols-[1fr_1fr] lg:p-14">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]">Off the road. Into the story.</p>
-            <h2 id="saga-teaser-heading" className="mt-3 font-display text-3xl leading-tight text-white md:text-4xl">
-              Take a break and read {saga.title}
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]"><T>{"Off the road. Into the story."}</T></p>
+            <h2 id="saga-teaser-heading" className="mt-3 font-display text-3xl leading-tight text-white md:text-4xl"><T>{"Take a break and read"}</T>{" "}{saga.title}
             </h2>
-            <p className="mt-4 max-w-lg leading-relaxed text-white/75">
-              A delivery rider in Denpasar, a bike that changes everything and a System only he can see. Free to read
-              here in English and Indonesian, whenever you feel like taking a break.
-            </p>
+            <p className="mt-4 max-w-lg leading-relaxed text-white/75"><T>{"A delivery rider in Denpasar, a bike that changes everything and a System only he can see. Free to read here in English and Indonesian, whenever you feel like taking a break."}</T>{" "}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href={`/saga/${episodes[0].slug}`}
                 className="inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-[#2ee0b0] px-6 text-base font-semibold text-[#06201a] transition-colors hover:bg-[#5ff0c8]"
               >
-                <BookOpen className="h-5 w-5" aria-hidden="true" />
-                Read Chapter 1
-              </Link>
+                <BookOpen className="h-5 w-5" aria-hidden="true" /><T>{"Read Chapter 1"}</T>{" "}</Link>
               <Link
                 href="/saga"
                 className="inline-flex min-h-12 items-center gap-2 rounded-[10px] border border-white/25 px-6 text-base font-semibold text-white hover:border-white/50"
-              >
-                All {episodes.length} chapters
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              ><T>{"All"}</T>{" "}{episodes.length}{" "}<T>{"chapters"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
-            <Link href={`/saga/${latest.slug}`} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white">
-              Latest: Chapter {latest.number}, {latest.title}
+            <Link href={`/saga/${latest.slug}`} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white"><T>{"Latest: Chapter"}</T>{" "}{latest.number}, {latest.title}
               <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>
           </div>
@@ -78,8 +71,7 @@ export function SagaTeaser() {
                     sizes="200px"
                     className="aspect-[3/4] h-auto w-full object-cover"
                   />
-                  <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pb-2 pt-6 text-xs font-semibold text-white">
-                    Chapter {e.number}
+                  <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pb-2 pt-6 text-xs font-semibold text-white"><T>{"Chapter"}</T>{" "}{e.number}
                   </p>
                 </div>
               );

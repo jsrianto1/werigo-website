@@ -1,3 +1,5 @@
+
+import { T } from "@/components/i18n/LanguageProvider";
 import {
   pricingTiers,
   ratesIdrPerDay,
@@ -43,36 +45,30 @@ export async function RateTable({
 
   const fullTable = (
     <table className="w-full text-left">
-      <caption className="sr-only">Rental rates per day by duration</caption>
+      <caption className="sr-only"><T>{"Rental rates per day by duration"}</T></caption>
       <thead>
         <tr className="text-[11px] uppercase tracking-wide text-ink-faint">
-          <th scope="col" className="py-1 font-medium">
-            Duration
-          </th>
-          <th scope="col" className="py-1 text-right font-medium">
-            Per day
-          </th>
+          <th scope="col" className="py-1 font-medium"><T>{"Duration"}</T>{" "}</th>
+          <th scope="col" className="py-1 text-right font-medium"><T>{"Per day"}</T>{" "}</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-line">
         {pricingTiers.map((t) => (
           <tr key={t.id}>
             <th scope="row" className="py-1.5 pr-2 text-sm font-medium text-ink">
-              {t.label}
+              <T>{t.label}</T>
               <span className="tnum ml-1.5 text-xs font-normal text-ink-faint">
-                {t.range}
+                <T>{t.range}</T>
               </span>
             </th>
             <td className="tnum py-1.5 text-right text-sm font-semibold text-ink">
-              {formatIdr(rates[t.id])}/day
-              {usd(t.id) ? (
+              {formatIdr(rates[t.id])}<T>{"/day"}</T>{" "}{usd(t.id) ? (
                 <span
                   aria-describedby={noteId}
                   title={usdEstimateNote}
                   className="tnum block text-xs font-normal text-ink-faint"
                 >
-                  {usd(t.id)}/day
-                </span>
+                  {usd(t.id)}<T>{"/day"}</T>{" "}</span>
               ) : null}
             </td>
           </tr>
@@ -83,24 +79,19 @@ export async function RateTable({
 
   const usdNote = fx ? (
     <p id={noteId} className="mt-2 text-[11px] leading-relaxed text-ink-faint">
-      {usdEstimateNote}
+      <T>{usdEstimateNote}</T>
     </p>
   ) : null;
 
   if (variant === "full") {
     return (
       <div className={className}>
-        <h3 className="text-sm font-semibold text-ink">Rental rates</h3>
+        <h3 className="text-sm font-semibold text-ink"><T>{"Rental rates"}</T></h3>
         <div className="mt-3">{fullTable}</div>
         {usdNote}
-        <p className="tnum mt-2 text-xs text-ink-soft">
-          Minimum rental 2 days. Estimates are confirmed with availability
-          on WhatsApp.
-        </p>
+        <p className="tnum mt-2 text-xs text-ink-soft"><T>{"Minimum rental 2 days. Estimates are confirmed with availability on WhatsApp."}</T>{" "}</p>
         {age ? (
-          <p className="mt-1 text-xs font-medium text-ink-soft">
-            Riders must be at least {age} years old for this model.
-          </p>
+          <p className="mt-1 text-xs font-medium text-ink-soft"><T>{"Riders must be at least"}</T>{" "}{age}{" "}<T>{"years old for this model."}</T>{" "}</p>
         ) : null}
       </div>
     );
@@ -124,7 +115,7 @@ export async function RateTable({
               }`}
             >
               <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
-                {t.label}
+                <T>{t.label}</T>
               </p>
               <p className="tnum mt-1 text-[13px] font-bold leading-tight text-ink xl:text-sm">
                 {formatIdr(rates[id])}
@@ -135,14 +126,12 @@ export async function RateTable({
                     {usd(id)}
                   </span>
                 ) : (
-                  "per day"
+                  <T>{"per day"}</T>
                 )}
               </p>
               {best ? (
                 <p className="mt-1">
-                  <span className="rounded-full bg-primary px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide text-white">
-                    Best rate
-                  </span>
+                  <span className="rounded-full bg-primary px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide text-white"><T>{"Best rate"}</T>{" "}</span>
                 </p>
               ) : null}
             </div>
@@ -150,9 +139,7 @@ export async function RateTable({
         })}
       </div>
       <details className="group mt-2">
-        <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1 text-xs font-semibold text-primary hover:text-primary-strong [&::-webkit-details-marker]:hidden">
-          View all duration rates
-          <span
+        <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1 text-xs font-semibold text-primary hover:text-primary-strong [&::-webkit-details-marker]:hidden"><T>{"View all duration rates"}</T>{" "}<span
             aria-hidden="true"
             className="transition-transform group-open:rotate-180"
           >
@@ -165,9 +152,7 @@ export async function RateTable({
         </div>
       </details>
       {age ? (
-        <p className="mt-1.5 text-xs font-medium text-ink-soft">
-          Riders must be at least {age} years old for this model.
-        </p>
+        <p className="mt-1.5 text-xs font-medium text-ink-soft"><T>{"Riders must be at least"}</T>{" "}{age}{" "}<T>{"years old for this model."}</T>{" "}</p>
       ) : null}
     </div>
   );

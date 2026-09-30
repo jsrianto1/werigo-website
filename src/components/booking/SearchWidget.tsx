@@ -1,4 +1,6 @@
 "use client";
+import { T, useLanguage } from "@/components/i18n/LanguageProvider";
+
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -33,6 +35,7 @@ export function SearchWidget({
       checkout, where it pre-fills the existing promo code field. */
   referralCode?: string;
 }) {
+  const { t } = useLanguage();
   const router = useRouter();
   const [state, setState] = useState<SearchState>({
     ...defaultSearch(monthly),
@@ -81,12 +84,12 @@ export function SearchWidget({
   return (
     <form
       onSubmit={submit}
-      aria-label="Search rental availability"
+      aria-label={t("Search rental availability")}
       className={`rounded-[14px] border border-line bg-card p-4 shadow-[0_12px_40px_-16px_rgba(14,43,39,0.25)] sm:p-5 ${
         compact ? "" : "md:p-6"
       }`}
     >
-      <div className={`grid gap-3 ${compact ? "lg:grid-cols-[1fr_1fr_auto]" : ""}`}>
+      <div className={`rental-search-grid ${compact ? "rental-search-compact" : ""}`}>
         {/* Location row */}
         <div className={compact ? "" : "grid gap-3 sm:grid-cols-2"}>
           <div>
@@ -94,27 +97,25 @@ export function SearchWidget({
               htmlFor="pickup-location"
               className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-ink-soft"
             >
-              <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              Pick-up or delivery area
-            </label>
+              <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" /><T>{"Pick-up or delivery area"}</T>{" "}</label>
             <select
               id="pickup-location"
               value={state.pickupSlug}
               onChange={(e) => update("pickupSlug", e.target.value)}
               className="min-h-11 w-full cursor-pointer rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink"
             >
-              <option value="">Choose an area…</option>
-              <optgroup label="Ngurah Rai Airport">
+              <option value=""><T>{"Choose an area…"}</T></option>
+              <optgroup label={t("Ngurah Rai Airport")}>
                 {airportPoints.map((a) => (
                   <option key={a.slug} value={a.slug}>
-                    {a.name}
+                    <T>{a.name}</T>
                   </option>
                 ))}
               </optgroup>
-              <optgroup label="Bali areas">
+              <optgroup label={t("Bali areas")}>
                 {serviceAreas.map((area) => (
                   <option key={area.slug} value={area.slug}>
-                    {area.name}
+                    <T>{area.name}</T>
                     {area.deliveryFee === 0 ? " (free delivery)" : ""}
                   </option>
                 ))}
@@ -128,9 +129,7 @@ export function SearchWidget({
                 htmlFor="different-return"
                 className="flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-soft"
               >
-                <CornerDownRight className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                Different return area
-              </label>
+                <CornerDownRight className="h-3.5 w-3.5 text-primary" aria-hidden="true" /><T>{"Different return area"}</T>{" "}</label>
               <input
                 id="different-return"
                 type="checkbox"
@@ -141,26 +140,26 @@ export function SearchWidget({
             </div>
             <select
               id="return-location"
-              aria-label="Return area"
+              aria-label={t("Return area")}
               value={state.returnSlug}
               disabled={!state.differentReturn}
               onChange={(e) => update("returnSlug", e.target.value)}
               className="min-h-11 w-full cursor-pointer rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink disabled:cursor-not-allowed disabled:bg-sunken disabled:text-ink-faint"
             >
               <option value="">
-                {state.differentReturn ? "Choose return area…" : "Same as pick-up"}
+                {t(state.differentReturn ? "Choose return area…" : "Same as pick-up")}
               </option>
-              <optgroup label="Ngurah Rai Airport">
+              <optgroup label={t("Ngurah Rai Airport")}>
                 {airportPoints.map((a) => (
                   <option key={a.slug} value={a.slug}>
-                    {a.name}
+                    <T>{a.name}</T>
                   </option>
                 ))}
               </optgroup>
-              <optgroup label="Bali areas">
+              <optgroup label={t("Bali areas")}>
                 {serviceAreas.map((area) => (
                   <option key={area.slug} value={area.slug}>
-                    {area.name}
+                    <T>{area.name}</T>
                   </option>
                 ))}
               </optgroup>
@@ -169,23 +168,21 @@ export function SearchWidget({
         </div>
 
         {/* Date/time row */}
-        <div className="grid gap-3 sm:grid-cols-2">
-          <fieldset>
+        <div className="rental-date-grid">
+          <fieldset className="min-w-0">
             <legend className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-              <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              Start
-            </legend>
-            <div className="grid grid-cols-[1fr_auto] gap-2">
+              <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" /><T>{"Start"}</T>{" "}</legend>
+            <div className="rental-date-inputs">
               <input
                 type="date"
-                aria-label="Start date"
+                aria-label={t("Start date")}
                 value={state.startDate}
                 min={todayStr}
                 onChange={(e) => update("startDate", e.target.value)}
-                className="tnum min-h-11 w-full rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink"
+                className="tnum min-w-0 min-h-11 w-full rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink"
               />
               <select
-                aria-label="Start time"
+                aria-label={t("Start time")}
                 value={state.startTime}
                 onChange={(e) => update("startTime", e.target.value)}
                 className="tnum min-h-11 cursor-pointer rounded-[10px] border border-line-strong bg-card px-2.5 text-[15px] text-ink"
@@ -198,22 +195,20 @@ export function SearchWidget({
               </select>
             </div>
           </fieldset>
-          <fieldset>
+          <fieldset className="min-w-0">
             <legend className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-              <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              End
-            </legend>
-            <div className="grid grid-cols-[1fr_auto] gap-2">
+              <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" /><T>{"End"}</T>{" "}</legend>
+            <div className="rental-date-inputs">
               <input
                 type="date"
-                aria-label="End date"
+                aria-label={t("End date")}
                 value={state.endDate}
                 min={state.startDate || todayStr}
                 onChange={(e) => update("endDate", e.target.value)}
-                className="tnum min-h-11 w-full rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink"
+                className="tnum min-w-0 min-h-11 w-full rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink"
               />
               <select
-                aria-label="End time"
+                aria-label={t("End time")}
                 value={state.endTime}
                 onChange={(e) => update("endTime", e.target.value)}
                 className="tnum min-h-11 cursor-pointer rounded-[10px] border border-line-strong bg-card px-2.5 text-[15px] text-ink"
@@ -229,7 +224,7 @@ export function SearchWidget({
         </div>
 
         {/* Submit */}
-        <div className={compact ? "flex items-end" : ""}>
+        <div className={compact ? "rental-search-submit" : ""}>
           <Button
             type="submit"
             variant="accent"
@@ -238,25 +233,21 @@ export function SearchWidget({
             className="w-full"
           >
             {submitting ? (
-              "Searching…"
+              t("Searching…")
             ) : (
               <>
-                <Search className="h-4 w-4" aria-hidden="true" />
-                Search availability
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                <Search className="h-4 w-4" aria-hidden="true" /><T>{"Search availability"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
               </>
             )}
           </Button>
         </div>
       </div>
 
-      <p className="mt-3 text-center text-xs text-ink-faint">
-        Your request goes straight to our team on WhatsApp. Availability and your quote confirmed there.
-      </p>
+      <p className="mt-3 text-center text-xs text-ink-faint"><T>{"Your request goes straight to our team on WhatsApp. Availability and your quote confirmed there."}</T>{" "}</p>
 
       {error ? (
         <p role="alert" className="mt-3 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
-          {error}
+          <T>{error}</T>
         </p>
       ) : null}
     </form>
