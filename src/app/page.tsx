@@ -1,580 +1,95 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowRight,
-  BatteryCharging,
-  CalendarCheck,
-  MapPin,
-  MessageCircle,
-  PlugZap,
-  Send,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Truck,
-  Zap,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, BatteryCharging, Check, HardHat, MessageCircle, Truck } from "lucide-react";
+import { pageMetadata } from "@/lib/seo";
 import { SearchWidget } from "@/components/booking/SearchWidget";
-import { HeroBackdrop } from "@/components/home/HeroBackdrop";
-import { SagaTeaser } from "@/components/home/SagaTeaser";
 import { StickyBookCTA } from "@/components/booking/StickyBookCTA";
-import { MediaImage } from "@/components/media/MediaImage";
-import { MediaVideo } from "@/components/media/MediaVideo";
-import { findMedia } from "@/data/media";
-import { AreaImage } from "@/components/areas/AreaImage";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
-import { Section, SectionHeading } from "@/components/ui/Section";
-import { RouteLine } from "@/components/ui/RouteLine";
+import { MonthlyRates } from "@/components/home/MonthlyRates";
+import { AreaImage } from "@/components/areas/AreaImage";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
-import { faqCategories } from "@/data/faqs";
+import { confirmedBenefits } from "@/data/commercialTerms";
+import { marketingFaqs } from "@/data/marketingFaqs";
 import { faqSchema, jsonLd } from "@/lib/schema";
-import { confirmedBenefits, requestOnlyBenefits } from "@/data/commercialTerms";
-import { coveragePoints } from "@/data/coverage";
+import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
+import { getEpisodes, coverSrc } from "@/data/saga";
 
-export const metadata: Metadata = {
-  title: "Electric Scooter and Motorcycle Rental in Bali, Delivered to You",
-  description:
-    "Rent a premium electric motorcycle in Bali with Werigo. Hotel and villa delivery in Canggu, Seminyak, Ubud, Uluwatu and beyond. Charged, helmeted and booked online in minutes.",
-  alternates: { canonical: "/" },
-};
+export const metadata = pageMetadata("Electric Scooter Rental Bali | Daily & Monthly", "Rent a Wedison electric scooter in Bali from Rp90,000/day. Hotel and villa delivery, two helmets included, plus weekly and monthly rates. Check your dates.", "/");
 
-const trustPoints = [
-  {
-    icon: Truck,
-    title: "Delivered to your door",
-    text: "We deliver to your hotel, villa or guesthouse. Your ride arrives with at least 80% battery.",
-  },
-  {
-    icon: BatteryCharging,
-    title: "Charges from any outlet",
-    text: "Plug in overnight like a phone. No fuel stations, ever.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Helmets & briefing included",
-    text: "Two sanitised helmets, an installed phone holder and a proper handover on every rental.",
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp support",
-    text: "A real local team on the number you already use.",
-  },
+const proof = [
+  { icon: Truck, title: "Delivered to your stay", detail: "Hotel and villa handover" },
+  { icon: HardHat, title: "Two helmets included", detail: "Plus an installed phone holder" },
+  { icon: BatteryCharging, title: "Charge at your stay", detail: "Guidance at handover" },
+  { icon: MessageCircle, title: "A local team", detail: "Daily, 08:00 to 20:00 WITA" },
 ];
-
 const steps = [
-  {
-    icon: CalendarCheck,
-    title: "Choose your ride",
-    text: "Pick your motorcycle, dates and delivery area.",
-  },
-  {
-    icon: Sparkles,
-    title: "Review your estimate",
-    text: "Check the estimated rate for your dates and send the request.",
-  },
-  {
-    icon: Send,
-    title: "We confirm on WhatsApp",
-    text: "Werigo confirms availability, the final price and the arrangements with you.",
-  },
-  {
-    icon: MessageCircle,
-    title: "Ride out ready",
-    text: "The motorcycle is handed over with two sanitised helmets, an installed phone holder, and a basic riding and charging briefing.",
-  },
-];
-
-// FAQ preview: a hand-picked question from the most useful categories
-const faqPreview = [
-  faqCategories.find((c) => c.id === "general")!.items[1],
-  faqCategories.find((c) => c.id === "battery")!.items[0],
-  faqCategories.find((c) => c.id === "license")!.items[0],
-  faqCategories.find((c) => c.id === "delivery")!.items[0],
-  faqCategories.find((c) => c.id === "reservations")!.items[0],
+  ["Choose your ride", "Compare the models, select your dates and tell us where you are staying."],
+  ["Review your estimate", "See the rental rate and optional extras before you send your request."],
+  ["Confirm on WhatsApp", "Our team checks availability and agrees the final quote and delivery time with you."],
+  ["Meet your motorcycle", "Get your helmets, a condition check and a riding and charging briefing at handover."],
 ];
 
 export default function HomePage() {
-  const featured = getPrimaryCards();
-
+  const bikes = getPrimaryCards();
+  const episodes = getEpisodes();
+  const latest = episodes.at(-1);
   return (
     <>
-      {/* ================= HERO + SEARCH ================= */}
-      <div className="relative overflow-hidden">
-        {/* soft laguna wash paints before the poster loads */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 -z-10 h-[520px] bg-gradient-to-b from-primary-soft/80 via-primary-faint to-page"
-        />
-        <HeroBackdrop />
-        <Section className="!py-0">
-          <div className="grid items-center gap-10 pb-14 pt-12 md:pt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-20">
-            <div className="rise-in">
-              <p className="eyebrow mb-4">
-                Electric motorcycle rental · Bali · Powered by Wedison
-              </p>
-              <h1 className="font-display text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-[3.4rem]">
-                Ride Bali the quiet&nbsp;way.
-              </h1>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
-                Ride Bali on a fully electric Wedison motorcycle. We deliver
-                it to your hotel or villa with at least 80% battery and ready
-                to go, with helmets included.
-              </p>
-              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
-                <li className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary" aria-hidden="true" />
-                  8 delivery areas
-                </li>
-                <li className="flex items-center gap-2">
-                  <PlugZap className="h-4 w-4 text-primary" aria-hidden="true" />
-                  Charges from any outlet
-                </li>
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
-                  Helmets included
-                </li>
-              </ul>
-            </div>
-
-            <div id="hero-booking" className="rise-in rise-in-delay-2">
-              <h2 className="sr-only">Search rental availability</h2>
-              <SearchWidget />
-            </div>
-          </div>
-        </Section>
-        <RouteLine className="-mt-4" />
-      </div>
-
-      {/* ================= HERO MEDIA BAND =================
-          Renders only once real hero photography/video is published
-          in src/data/media.ts — layout is unchanged until then. */}
-      {findMedia("hero-video")?.available || findMedia("hero-photo")?.available ? (
-        <Section className="!pb-0 !pt-10">
-          {findMedia("hero-video")?.available ? (
-            <MediaVideo id="hero-video" autoPlay />
-          ) : (
-            <MediaImage id="hero-photo" ratio="16/9" sizes="100vw" priority />
-          )}
-        </Section>
-      ) : null}
-
-      {/* ================= TRUST STRIP ================= */}
-      <Section labelledBy="trust-heading" className="!py-0">
-        <h2 id="trust-heading" className="sr-only">
-          Why rent with Werigo
-        </h2>
-        <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-[14px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {trustPoints.map((point) => (
-            <li key={point.title} className="bg-card p-5 xl:p-6">
-              <point.icon className="h-5 w-5 text-primary" aria-hidden="true" />
-              <h3 className="mt-3 text-sm font-semibold text-ink">{point.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-ink-soft">{point.text}</p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* ================= EVERY WERIGO RIDE INCLUDES ================= */}
-      <Section labelledBy="includes-heading" className="!pb-0 !pt-8 md:!pt-10">
-        <div className="rounded-[18px] border border-line bg-primary-faint p-6 sm:p-10">
-          <div className="max-w-2xl">
-            <p className="eyebrow">Included with every rental</p>
-            <h2
-              id="includes-heading"
-              className="mt-3 font-display text-3xl leading-tight text-ink md:text-4xl"
-            >
-              What comes with your Werigo rental
-            </h2>
-            <p className="mt-4 leading-relaxed text-ink-soft">
-              The useful details are already sorted, so you can spend less
-              time preparing and more time exploring Bali.
-            </p>
-          </div>
-          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {confirmedBenefits.map((benefit) => (
-              <li
-                key={benefit.id}
-                className="rounded-[14px] border border-line bg-card p-5"
-              >
-                <benefit.icon className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h3 className="mt-3 text-sm font-semibold text-ink">
-                  {benefit.label}
-                </h3>
-                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                  {benefit.description}
-                </p>
-              </li>
-            ))}
-            {requestOnlyBenefits.map((benefit) => (
-              <li
-                key={benefit.id}
-                className="rounded-[14px] border border-dashed border-line-strong bg-card p-5"
-              >
-                <benefit.icon className="h-5 w-5 text-ink-faint" aria-hidden="true" />
-                <h3 className="mt-3 text-sm font-semibold text-ink">
-                  {benefit.label}
-                </h3>
-                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                  {benefit.description}
-                </p>
-              </li>
-            ))}
-          </ul>
+      <section className="marketing-hero" aria-labelledby="home-title">
+        <div className="hero-copy">
+          <p className="eyebrow">Electric scooter rental in Bali</p>
+          <h1 id="home-title">Your Bali.<br />Your own ride.</h1>
+          <p className="hero-lede">Electric scooters delivered to your stay. Two helmets included. Daily, weekly and monthly rates.</p>
+          <div className="hero-actions"><ButtonLink href="#hero-booking" variant="accent" size="lg">Check availability <ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><Link href="/monthly-scooter-rental-bali" className="text-link">Monthly rentals</Link></div>
         </div>
+        <figure className="hero-product">
+          <Image src="/media/fleet/athena/catalog.webp" alt="Official Wedison Athena electric motorcycle in olive green, available for rental in Bali" width={760} height={639} priority sizes="(max-width: 767px) 100vw, 52vw" className="hero-bike" />
+          <figcaption><span>Wedison Athena</span><span>Powered by Wedison</span></figcaption>
+        </figure>
+      </section>
+
+      <div className="proof-strip" aria-label="Included with your rental">{proof.map(({icon: Icon, title, detail}) => <div key={title}><Icon aria-hidden="true" /><p><strong>{title}</strong><span>{detail}</span></p></div>)}</div>
+
+      <Section id="hero-booking" labelledBy="booking-title" className="!py-10 md:!py-14">
+        <div className="booking-heading"><h2 id="booking-title" className="font-display text-2xl">Where will Bali take you?</h2><p>From <strong>{formatIdr(ratesIdrPerDay.bees.daily)}/day</strong> for Wedison Bees. Minimum 2 days.</p></div>
+        <SearchWidget compact />
       </Section>
-
-      {/* ================= FEATURED FLEET ================= */}
-      <Section labelledBy="fleet-heading">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading
-            eyebrow="The fleet · Powered by Wedison"
-            title="Official Wedison electric motorcycles, one for every kind of day"
-            lede="Choose from four official Wedison electric motorcycles. Every bike is maintained by our team and delivered with at least 80% battery."
-            id="fleet-heading"
-          />
-          <Link
-            href="/fleet"
-            className="mb-10 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-strong md:mb-12"
-          >
-            Compare all models
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-7">
-          {featured.map((entry) => (
-            <VehicleCard key={entry.id} entry={entry} />
-          ))}
-        </div>
-        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint">
-          Minimum rental 2 days. Rates are per motorcycle per day in IDR;
-          US dollar amounts are estimates. A rain poncho can be requested
-          and optional protection can be added at checkout. Availability
-          and your final quote are confirmed on WhatsApp.
-        </p>
-      </Section>
-
-      {/* ================= HOW IT WORKS (feature) ================= */}
-      <Section tone="wash" labelledBy="how-heading" className="md:!pb-12 lg:!pb-14">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-          {/* Featured motorcycle panel */}
-          <div className="relative overflow-hidden rounded-[18px] border border-line bg-card p-6 sm:p-10">
-            <p className="eyebrow">How Werigo works</p>
-            <h2
-              id="how-heading"
-              className="mt-3 font-display text-3xl leading-tight text-ink md:text-4xl xl:text-[2.6rem]"
-            >
-              Four steps between you and the open road
-            </h2>
-            <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
-              From first tap to riding out of your villa gate, the whole
-              request takes a few minutes on your phone.
-            </p>
-            <div className="mt-6">
-              <MediaImage
-                id="fleet-athena-main"
-                fallbackLabel="Wedison Athena product photo"
-                ratio="3/2"
-                fit="contain"
-                sizes="(max-width: 1024px) 100vw, 640px"
-              />
-            </div>
-            <RouteLine className="pointer-events-none absolute inset-x-0 bottom-3 opacity-40" />
-          </div>
-
-          {/* Connected step rail */}
-          <div>
-            <ol className="relative">
-              {steps.map((step, i) => (
-                <li key={step.title} className="relative flex gap-5 pb-9 last:pb-0">
-                  {i < steps.length - 1 ? (
-                    <span
-                      aria-hidden="true"
-                      className="absolute bottom-1 left-[21px] top-14 w-0 border-l-2 border-dashed border-primary/30"
-                    />
-                  ) : null}
-                  <span className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-[0_6px_16px_-8px_rgba(10,92,85,0.7)]">
-                    <step.icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <p className="tnum text-xs font-semibold uppercase tracking-wider text-ink-faint">
-                      Step {i + 1}
-                    </p>
-                    <h3 className="mt-1 font-display text-xl text-ink md:text-2xl">
-                      {step.title}
-                    </h3>
-                    <p className="mt-1.5 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
-                      {step.text}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div className="mt-9 pl-16">
-              <ButtonLink href="/book" variant="accent" size="lg">
-                Start your booking request
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ================= DELIVERY AREAS ================= */}
-      <Section tone="wash" labelledBy="areas-heading" className="md:!pt-6 lg:!pt-8">
-        <SectionHeading
-          eyebrow="Delivery coverage"
-          title="From touchdown to your villa, we bring the ride"
-          lede="Tell us where you're staying. We'll confirm the delivery time and any applicable fee on WhatsApp."
-          id="areas-heading"
-        />
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3 xl:gap-5">
-          {coveragePoints.map((point) => (
-            <li key={point.id}>
-              <div className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]">
-                <div className="relative h-40 w-full overflow-hidden lg:h-48 xl:h-56">
-                  <Image
-                    src={point.image.src}
-                    alt={point.image.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 440px"
-                    className="object-cover"
-                    style={{ objectPosition: point.image.focal }}
-                  />
-                  {point.image.credit ? (
-                    <span className="absolute bottom-1.5 right-1.5 rounded-full bg-ink/60 px-2 py-0.5 text-[10px] leading-tight text-white">
-                      {point.image.credit}
-                    </span>
-                  ) : null}
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-xl text-ink">{point.name}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                    {point.description}
-                  </p>
-                  <p className="mt-2.5 text-xs font-medium text-ok">{point.status}</p>
-                  <div className="mt-4 flex flex-1 items-end">
-                    <Link
-                      href="/book"
-                      className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong"
-                    >
-                      Check availability
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <h3 className="mb-4 mt-10 font-display text-2xl text-ink">
-          Eight service areas across the south and centre
-        </h3>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {serviceAreas.map((area) => (
-            <li key={area.slug}>
-              <div className="group flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-shadow hover:shadow-[0_12px_32px_-18px_rgba(14,43,39,0.35)]">
-                <Link
-                  href={`/delivery-areas/${area.slug}`}
-                  aria-label={`Explore ${area.name}`}
-                  className="block"
-                >
-                  <AreaImage
-                    slug={area.slug}
-                    variant="card"
-                    className="h-24 w-full sm:h-28 lg:h-32 xl:h-36"
-                    sizes="(max-width: 640px) 50vw, 300px"
-                  />
-                </Link>
-                <div className="flex flex-1 flex-col p-4 xl:p-5">
-                  <span className="font-display text-lg text-ink">{area.name}</span>
-                  <span className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-ink-soft">
-                    {area.vibe}
-                  </span>
-                  <span className="mt-1 text-xs font-medium text-ok">
-                    {area.deliveryFee === 0 ? "Free delivery" : "Delivery available"}
-                  </span>
-                  <span className="mt-3 flex items-center justify-between gap-2 border-t border-line pt-3 text-xs font-semibold">
-                    <Link
-                      href={`/delivery-areas/${area.slug}`}
-                      className="text-primary hover:text-primary-strong"
-                    >
-                      Explore area
-                    </Link>
-                    <Link
-                      href="/book"
-                      className="text-accent hover:text-accent-strong"
-                    >
-                      Check availability
-                    </Link>
-                  </span>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* ================= SUPERCHARGE ================= */}
-      <Section labelledBy="supercharge-heading">
-        <div className="relative overflow-hidden rounded-[14px] bg-deep px-6 py-12 sm:px-10 md:py-16">
-          <RouteLine className="absolute inset-x-0 bottom-4 opacity-30" />
-          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_auto]">
-            <div>
-              <p className="eyebrow mb-3 !text-accent">
-                <Zap className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
-                Wedison SuperCharge
-              </p>
-              <h2
-                id="supercharge-heading"
-                className="font-display text-3xl leading-tight text-ink-inverse md:text-4xl"
-              >
-                Charge Fast. Ride Farther.
-              </h2>
-              <p className="mt-3 font-display text-xl text-accent-soft">
-                30% to 90% in approx. 10 min*
-              </p>
-              <p className="mt-1 font-display text-lg text-ink-inverse/90">
-                100+ km total range on selected models*
-              </p>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-inverse/80">
-                Compatible Wedison models have been tested to charge from 30%
-                to 90% in approximately 10 minutes at supported Wedison
-                SuperCharge locations, handled by our team while you take a
-                break. Selected Wedison models offer more than 100 km of total
-                claimed riding range.
-              </p>
-              <p className="mt-3 max-w-xl text-xs leading-relaxed text-ink-inverse/50">
-                *Based on internal Wedison testing under specific conditions.
-                Actual charging time and riding range may vary depending on
-                model, battery condition, battery temperature, starting charge
-                level, load, riding style, charger availability, and operating
-                conditions. SuperCharge is available only for compatible
-                Wedison models at supported locations.
-              </p>
-              <div className="mt-7">
-                <ButtonLink href="/supercharge" variant="accent" size="lg">
-                  Explore SuperCharge
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </ButtonLink>
-              </div>
-            </div>
-            <div className="mx-auto w-72 sm:w-80 lg:mx-0 lg:w-[26rem]">
-              <MediaImage
-                id="supercharge-unit"
-                ratio="3/4"
-                fit="contain-bare"
-                sizes="(max-width: 1024px) 320px, 416px"
-              />
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ================= WERIGO SAGA (webtoon teaser) ================= */}
-      <SagaTeaser />
-
-      {/* ================= THE WERIGO STANDARD (service assurance) =================
-          Replace or extend with verified rider reviews once collected —
-          never invented or borrowed testimonials. */}
-      <Section labelledBy="standard-heading">
-        <SectionHeading
-          eyebrow="The Werigo standard"
-          title="What every rider can hold us to"
-          lede="We'd rather make promises we control than borrow praise we haven't earned. These four are checked on every single rental."
-          id="standard-heading"
-        />
-        <ul className="grid gap-6 sm:grid-cols-2">
-          {[
-            {
-              title: "At least 80% battery at handover",
-              text: "Your motorcycle is delivered with at least 80% battery, and we complete a condition walk-around together at handover. There are no surprises during the ride or at return.",
-            },
-            {
-              title: "The price you saw is the price",
-              text: "Rental, extras and delivery are itemised before you confirm. Nothing is added after checkout, and nothing is charged before you approve the quote.",
-            },
-            {
-              title: "Honest numbers",
-              text: "Specifications come straight from official Wedison product information, always stated as 'up to'. Actual range varies with riding style, load, terrain, traffic and weather, so we never guarantee it.",
-            },
-            {
-              title: "A person answers",
-              text: "Your booking thread on WhatsApp is staffed by the same local team that delivers your ride. Real people answer your questions daily from 08:00 to 20:00 WITA.",
-            },
-          ].map((item) => (
-            <li
-              key={item.title}
-              className="rounded-[14px] border border-line bg-card p-6"
-            >
-              <Star className="h-5 w-5 text-accent" aria-hidden="true" />
-              <h3 className="mt-3 font-display text-xl text-ink">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{item.text}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 text-sm text-ink-faint">
-          Verified rider reviews will be published here as they come in. We
-          never invent or borrow reviews.
-        </p>
-      </Section>
-
-      {/* ================= FAQ ================= */}
-      <Section tone="wash" labelledBy="faq-heading">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <div>
-            <SectionHeading
-              eyebrow="Questions"
-              title="Good to know before you ride"
-              id="faq-heading"
-            />
-            <ButtonLink href="/help-center" variant="outline">
-              Visit the Help Center
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </ButtonLink>
-          </div>
-          <Accordion items={faqPreview} />
-        </div>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema(faqPreview)) }}
-        />
-      </Section>
-
       <StickyBookCTA targetId="hero-booking" />
 
-      {/* ================= FINAL CTA ================= */}
-      <Section labelledBy="cta-heading">
-        <div className="relative overflow-hidden rounded-[14px] bg-primary px-6 py-14 text-center sm:px-12">
-          <RouteLine className="absolute inset-x-0 top-4 opacity-40" />
-          <h2
-            id="cta-heading"
-            className="font-display text-3xl leading-tight text-white md:text-4xl"
-          >
-            Your ride can be at the door tomorrow morning
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-base text-white/85">
-            Check availability for your dates. Booking takes a few minutes,
-            and one flat fee covers both delivery and collection.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <ButtonLink href="/book" variant="accent" size="lg">
-              Rent a Bike
-            </ButtonLink>
-            <ButtonLink
-              href="/fleet"
-              size="lg"
-              className="!bg-white/10 !text-white hover:!bg-white/20"
-            >
-              Browse the fleet
-            </ButtonLink>
-          </div>
+      <Section labelledBy="fleet-heading" className="!pt-6">
+        <div className="section-intro"><h2 id="fleet-heading">Find your Bali ride.</h2><p>Four electric models for different kinds of days. Compare rates, then choose the one that fits your plans.</p></div>
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">{bikes.map(entry => <VehicleCard key={entry.id} entry={entry} />)}</div>
+        <p className="mt-5 text-sm text-ink-soft">Rates are per motorcycle, per day. Daily tier: 2 to 6 days. Monthly tier: 1 month or longer. Availability and final quote confirmed on WhatsApp.</p>
+        <Link href="/fleet" className="text-link mt-6">Compare all models <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+      </Section>
+
+      <Section tone="wash" labelledBy="monthly-heading">
+        <div className="monthly-feature">
+          <div className="monthly-story"><p className="eyebrow">Stay a little longer</p><h2 id="monthly-heading" className="marketing-heading">Make it your<br />everyday ride.</h2><p>Your coffee run, coworking commute and sunset stop. Monthly electric scooter rental gives your Bali routine a ride of its own.</p><ButtonLink href="/monthly-scooter-rental-bali" variant="accent" size="lg">Explore monthly rentals <ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><AreaImage slug="ubud" className="mt-8 h-56 rounded-[14px]" sizes="(max-width: 768px) 100vw, 45vw" /></div>
+          <MonthlyRates />
         </div>
       </Section>
+
+      <Section labelledBy="includes-heading">
+        <div className="essentials-layout">
+          <div><h2 id="includes-heading" className="marketing-heading">The essentials.<br />Already sorted.</h2><p className="mt-5 max-w-lg leading-relaxed text-ink-soft">Your rental is more than a motorcycle. Here is what comes with every Werigo ride.</p><ul className="essentials-list">{confirmedBenefits.map(b => <li key={b.id}><Check aria-hidden="true" className="h-5 w-5 shrink-0 text-primary" /><span><strong>{b.label}</strong><span>{b.description}</span></span></li>)}</ul><p className="mt-6 text-sm leading-relaxed text-ink-soft">A rain poncho and protection options can be added on request. Ask our team about availability, pricing and conditions.</p></div>
+          <div className="charging-panel"><Image src="/media/supercharge/supercharge-unit.png" alt="Official Wedison SuperCharge charging unit" width={1200} height={1600} sizes="(max-width: 768px) 80vw, 360px" className="charging-photo" /><h3 className="font-display text-2xl">A charging plan that fits your day.</h3><p className="mt-3 leading-relaxed text-ink-soft">Charge at your accommodation with a suitable outlet and the official charger. For compatible models, ask us about Wedison SuperCharge locations.</p><Link href="/supercharge" className="text-link mt-5">Explore SuperCharge <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
+        </div>
+      </Section>
+
+      <Section labelledBy="how-heading" tone="wash"><div className="section-intro"><h2 id="how-heading">A few steps. Then you are off.</h2><p>Check your estimate online. Finalise the details with a real person.</p></div><ol className="rental-steps">{steps.map(([title, detail], i) => <li key={title}><span className="step-number" aria-hidden="true">0{i+1}</span><h3>{title}</h3><p>{detail}</p></li>)}</ol><Link href="/how-it-works" className="text-link mt-8">How it works <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Section>
+
+      <Section labelledBy="areas-heading"><div className="section-intro"><h2 id="areas-heading">Your stay is our starting point.</h2><p>Arrange scooter delivery to your hotel or villa in eight Bali service areas. Airport handover is also available by arrangement.</p></div><div className="destination-grid">{["canggu", "ubud", "uluwatu"].map(slug => <Link key={slug} href={`/delivery-areas/${slug}`} className="destination-tile"><AreaImage slug={slug} className="h-full" sizes="(max-width: 640px) 100vw, 33vw" /><span>{serviceAreas.find(a => a.slug === slug)?.name} <ArrowRight aria-hidden="true" className="h-5 w-5" /></span></Link>)}</div><div className="area-links">{serviceAreas.map(area => <Link href={`/delivery-areas/${area.slug}`} key={area.slug}>{area.name}</Link>)}</div><p className="mt-4 text-sm text-ink-soft">Delivery timing and fees are confirmed for your booking.</p></Section>
+
+      <Section tone="wash" labelledBy="faq-heading"><div className="faq-layout"><div><h2 id="faq-heading" className="marketing-heading">Good questions.<br />Clear answers.</h2><p className="mt-5 text-ink-soft">A little planning makes a better ride.</p><Link href="/help-center" className="text-link mt-6">Visit the Help Center <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div><Accordion items={marketingFaqs} /></div></Section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(faqSchema(marketingFaqs))}} />
+
+      {latest ? <Section labelledBy="saga-teaser-heading" className="!py-10"><div className="saga-inline"><Image src={coverSrc(latest)} alt="WERIGO SAGA latest chapter cover" width={96} height={120} className="rounded-lg object-cover" sizes="96px" /><div><h2 id="saga-teaser-heading" className="font-display text-xl">Another side of the ride.</h2><p className="mt-2 text-sm text-ink-soft">Discover WERIGO SAGA, our free Bali adventure webtoon.</p><Link href="/saga" className="text-link mt-2">Read the story <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div></div></Section> : null}
+      <Section labelledBy="cta-heading"><div className="closing-cta"><h2 id="cta-heading">Give your Bali plans<br />a ride of their own.</h2><p>Choose your dates. We will help with the rest.</p><ButtonLink href="/book" variant="accent" size="lg">Check availability <ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink></div></Section>
     </>
   );
 }

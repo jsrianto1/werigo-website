@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import {
   CalendarCheck,
   Truck,
@@ -13,12 +13,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
 import { ButtonLink } from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title: "How It Works: Electric Motorcycle Rental Made Simple",
-  description:
-    "How renting an electric motorcycle with Werigo works: book online, get free hotel delivery in Bali, ride with overnight charging, and hand back at collection. Step by step.",
-  alternates: { canonical: "/how-it-works" },
-};
+export const metadata = pageMetadata("How to Rent an Electric Scooter in Bali", "Choose your dates and electric scooter, review your estimate and confirm with Werigo on WhatsApp. Hotel delivery, charging guidance and local support.", "/how-it-works");
 
 const journey = [
   {
@@ -39,17 +34,17 @@ const journey = [
   {
     icon: KeyRound,
     title: "Ride the island",
-    text: "Explore on your own schedule. Two sanitised helmets and an installed phone holder are always included; the range figures we quote are honest Bali numbers, not brochure optimism.",
+    text: "Explore on your own schedule. Two sanitised helmets and an installed phone holder are always included; our team explains the controls and charging before you set off. Claimed range varies with riding conditions.",
   },
   {
     icon: BatteryCharging,
     title: "Charge overnight",
-    text: "Plug into any standard outlet at your accommodation, the same way you charge your phone. A full overnight charge covers a typical exploring day twice over.",
+    text: "Charge with the official charger using a suitable outlet at your accommodation. Confirm access with your host and ask us about charging time for your model.",
   },
   {
     icon: MessageCircle,
     title: "Support while you ride",
-    text: "Questions, extensions, a puncture or a battery worry? Message the team on WhatsApp. Emergencies get a dedicated line, printed on your key tag.",
+    text: "Questions about charging, your rental or an extension? Message our local team on WhatsApp, daily from 08:00 to 20:00 WITA.",
   },
   {
     icon: Undo2,
@@ -62,10 +57,10 @@ export default function HowItWorksPage() {
   return (
     <>
       <Section className="!pb-6">
-        <SectionHeading
+        <SectionHeading as="h1"
           eyebrow="How it works"
-          title="From booking to open road, without the friction"
-          lede="Renting with Werigo is designed around one idea: your holiday time is too valuable for queues, paperwork and fuel stations."
+          title="Your ride, from first click to handover."
+          lede="Choose your electric scooter, check the estimate and arrange delivery with our local team. Here is what happens next."
         />
       </Section>
       <RouteLine />

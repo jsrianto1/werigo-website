@@ -42,6 +42,7 @@ const companyLinks = [
   { href: "/about", label: "About Werigo" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/fleet", label: "Our Fleet" },
+  { href: "/monthly-scooter-rental-bali", label: "Monthly Rentals" },
   { href: "/supercharge", label: "Supercharge" },
   { href: "/saga", label: "WERIGO SAGA webtoon" },
   { href: "/partners", label: "Partners" },

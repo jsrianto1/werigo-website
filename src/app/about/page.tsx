@@ -1,16 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Leaf, MapPin, ShieldCheck, Zap } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
 import { ButtonLink } from "@/components/ui/Button";
 import { MediaImage } from "@/components/media/MediaImage";
 
-export const metadata: Metadata = {
-  title: "About Werigo, Electric Mobility for Bali",
-  description:
-    "Werigo is Wedison's electric motorcycle rental and mobility service in Bali, built on a simple idea: exploring the island shouldn't cost the island. Meet the brand and its mission.",
-  alternates: { canonical: "/about" },
-};
+export const metadata = pageMetadata("About Werigo: Electric Scooter Rentals in Bali", "Meet Werigo, powered by Wedison. Official electric motorcycles for your Bali holiday or longer stay, with hotel delivery and a local WhatsApp team.", "/about");
 
 const values = [
   {
@@ -21,17 +16,17 @@ const values = [
   {
     icon: ShieldCheck,
     title: "Honesty over hype",
-    text: "Real-world range figures, complete pricing before you book, and no invented reviews or inflated claims. If we haven't earned it yet, we don't publish it.",
+    text: "Official model specifications and an itemised quote before you confirm. Our team explains the rental, delivery and any optional extras.",
   },
   {
     icon: MapPin,
     title: "Local to the core",
-    text: "Our team lives and rides here. Delivery windows, road advice and support all come from people who know exactly which gang floods in the rain.",
+    text: "Our Bali team handles delivery, handover and WhatsApp support. You can reach us daily from 08:00 to 20:00 WITA.",
   },
   {
     icon: Zap,
     title: "Premium means taken care of",
-    text: "Charged batteries, fitted helmets and one WhatsApp thread for everything. For us, premium means you never have to think about the machine.",
+    text: "At least 80% battery at handover, two sanitised helmets and a practical briefing. Start your rental knowing your motorcycle and how to charge it.",
   },
 ];
 
@@ -41,10 +36,10 @@ export default function AboutPage() {
       <Section className="!pb-8">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
-            <SectionHeading
+            <SectionHeading as="h1"
               eyebrow="About Werigo · Powered by Wedison"
-              title="Exploring the island shouldn't cost the island"
-              lede="Bali mostly gets explored with engines running, and the island feels it. We think it deserves a quieter ride."
+              title="A Bali ride, backed by people here."
+              lede="Official Wedison electric motorcycles, a local rental team and a handover at your hotel or villa."
             />
             <p className="max-w-xl leading-relaxed text-ink-soft">
               Werigo is Wedison&apos;s electric motorcycle rental and mobility
@@ -60,8 +55,9 @@ export default function AboutPage() {
             </div>
           </div>
           <MediaImage
-            id="about-team"
-            fallbackLabel="Werigo team & fleet photo"
+            id="fleet-athena-main"
+            fallbackLabel="Official Wedison Athena motorcycle"
+            fit="contain"
             ratio="4/3"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />

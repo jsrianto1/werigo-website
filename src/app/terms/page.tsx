@@ -13,7 +13,7 @@ export default function TermsPage() {
   return (
     <Section>
       <div className="mx-auto max-w-2xl">
-        <SectionHeading
+        <SectionHeading as="h1"
           eyebrow="Legal"
           title="Terms & Conditions"
           lede="These are the current Werigo rental terms used for every booking request. Your final quote, delivery arrangements and any optional protection are confirmed with you on WhatsApp before anything is charged."

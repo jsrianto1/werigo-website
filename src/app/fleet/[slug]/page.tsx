@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
+import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { notFound } from "next/navigation";
 import {
   Battery,
@@ -43,14 +45,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const entry = getModel(slug);
   if (!entry) return {};
-  const range = sharedSpec(slug, "claimedRangeKm");
-  return {
-    title: `${entry.displayName} Electric Motorcycle Rental in Bali`,
-    description: `Rent the ${entry.displayName} in Bali through Werigo. Official Wedison specifications: ${
-      range !== null ? `up to ${range} km claimed range, ` : ""
-    }up to ${entry.topSpeedKmh} km/h. Rates available upon request.`,
-    alternates: { canonical: `/fleet/${slug}` },
-  };
+  return pageMetadata(
+    `${entry.displayName} Electric Scooter Rental Bali`,
+    `Rent the ${entry.displayName} in Bali from ${formatIdr(ratesIdrPerDay[slug].daily)}/day for 2 to 6 days. Monthly rates available. Two helmets and hotel delivery by arrangement.`,
+    `/fleet/${slug}`,
+    `/media/fleet/${slug}/main.webp`,
+  );
 }
 
 function specRows(entry: WedisonEntry) {

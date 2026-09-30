@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { ChevronRight, MapPin, Truck, Compass, Bike } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -24,25 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const area = getArea(slug);
   if (!area) return {};
-  return {
-    title: `Scooter Rental ${area.name} with Electric Motorcycle Delivery`,
-    description: `Rent an electric scooter in ${area.name}, Bali with Werigo. ${
-      area.deliveryFee === 0 ? "Free delivery" : "Delivery"
-    } to your hotel or villa, ${area.deliveryWindow.toLowerCase()}. Book online.`,
-    alternates: { canonical: `/delivery-areas/${slug}` },
-    openGraph: getAreaMedia(slug)
-      ? {
-          images: [
-            {
-              url: getAreaMedia(slug)!.src,
-              width: getAreaMedia(slug)!.width,
-              height: getAreaMedia(slug)!.height,
-              alt: getAreaMedia(slug)!.alt,
-            },
-          ],
-        }
-      : undefined,
-  };
+  return pageMetadata(
+    `Electric Scooter Rental ${area.name}, Bali`,
+    `Rent a Wedison electric scooter in ${area.name}. Daily, weekly and monthly rates, two helmets and hotel or villa delivery by arrangement. Check your dates.`,
+    `/delivery-areas/${slug}`,
+    getAreaMedia(slug)?.src,
+  );
 }
 
 export default async function AreaPage({ params }: Props) {
@@ -92,7 +80,7 @@ export default async function AreaPage({ params }: Props) {
             Electric scooter rental · Powered by Wedison
           </p>
           <h1 className="mt-1 font-display text-4xl leading-tight text-white md:text-5xl">
-            {area.name}
+            {area.name} electric scooter rental
           </h1>
         </AreaImage>
 

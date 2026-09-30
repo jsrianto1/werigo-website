@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MetaPageViews } from "@/components/analytics/MetaPageViews";
-import { Fraunces, Inter } from "next/font/google";
+import { Manrope, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { site } from "@/lib/config";
 import { localBusinessSchema, jsonLd } from "@/lib/schema";
+import { MarketingEvents } from "@/components/analytics/MarketingEvents";
 import "./globals.css";
+import "./marketing.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
 });
 
 const inter = Inter({
@@ -90,7 +91,7 @@ fbq('track','PageView');`,
         />
       </head>
       <body
-        className={`${fraunces.variable} ${inter.variable} flex min-h-dvh flex-col antialiased`}
+        className={`${manrope.variable} ${inter.variable} flex min-h-dvh flex-col antialiased`}
       >
         {/* Google Tag Manager fallback belongs immediately after body opens. */}
         <noscript>
@@ -115,6 +116,7 @@ fbq('track','PageView');`,
         </noscript>
         <Suspense fallback={null}>
           <MetaPageViews />
+          <MarketingEvents />
         </Suspense>
         <a
           href="#main"

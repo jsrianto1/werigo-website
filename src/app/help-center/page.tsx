@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -7,19 +7,14 @@ import { faqCategories, helpGroups } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
-export const metadata: Metadata = {
-  title: "Help Center: Rental Questions Answered",
-  description:
-    "Everything about renting an electric motorcycle in Bali with Werigo: reservations, licences, charging, delivery, payments, cancellation and rider support.",
-  alternates: { canonical: "/help-center" },
-};
+export const metadata = pageMetadata("Bali Electric Scooter Rental: FAQs & Charging Help", "Find answers about Werigo rental rates, delivery, charging, rider requirements and monthly rentals. Plan your Bali electric scooter rental with confidence.", "/help-center");
 
 export default function HelpCenterPage() {
   const allItems = faqCategories.flatMap((c) => c.items);
 
   return (
     <Section>
-      <SectionHeading
+      <SectionHeading as="h1"
         eyebrow="Help Center"
         title="Answers before you ask"
         lede="Organised by topic, written plainly. If anything is missing, the team is one WhatsApp message away."

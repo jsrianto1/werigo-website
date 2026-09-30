@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { MapPin, ArrowRight, Truck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -7,17 +7,12 @@ import { AreaImage } from "@/components/areas/AreaImage";
 import { serviceAreas, deliveryFeeWaiverNote } from "@/data/locations";
 import { formatIdr } from "@/lib/pricing";
 
-export const metadata: Metadata = {
-  title: "Delivery Areas: Electric Scooter Delivery Across South Bali",
-  description:
-    "Werigo delivers electric motorcycles across Bali: Canggu, Seminyak, Kuta, Ubud, Uluwatu, Jimbaran, Sanur and Denpasar. One flat delivery and collection fee per booking.",
-  alternates: { canonical: "/delivery-areas" },
-};
+export const metadata = pageMetadata("Bali Scooter Rental with Hotel & Villa Delivery", "Electric scooter delivery in Canggu, Seminyak, Ubud, Uluwatu, Kuta, Sanur, Jimbaran and Denpasar. Check rental rates and arrange your handover.", "/delivery-areas");
 
 export default function DeliveryAreasPage() {
   return (
     <Section>
-      <SectionHeading
+      <SectionHeading as="h1"
         eyebrow="Delivery areas"
         title="Wherever you're staying, we bring the ride"
         lede="Every delivery includes a charged battery, fitted helmets and a riding briefing. Fees and windows are always shown before you book, so there are no surprises at the door."

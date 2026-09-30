@@ -10,6 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { path: "", priority: 1.0 },
     { path: "/fleet", priority: 0.9 },
+    { path: "/monthly-scooter-rental-bali", priority: 0.9 },
+    { path: "/partners", priority: 0.6 },
+    { path: "/privacy", priority: 0.3 },
+    { path: "/terms", priority: 0.3 },
     { path: "/book", priority: 0.9 },
     { path: "/supercharge", priority: 0.8 },
     { path: "/how-it-works", priority: 0.8 },

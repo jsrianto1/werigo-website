@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Check, Minus } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
@@ -13,12 +13,7 @@ import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { formatUsdApprox, usdEstimateNote } from "@/lib/currency";
 import { getUsdIdrRate } from "@/lib/exchangeRate";
 
-export const metadata: Metadata = {
-  title: "Our Fleet of Official Wedison Electric Motorcycles for Rent in Bali",
-  description:
-    "Compare official Wedison electric motorcycles available for rent through Werigo in Bali: Bees, Victory, Athena and EdPower. Rates available upon request.",
-  alternates: { canonical: "/fleet" },
-};
+export const metadata = pageMetadata("Electric Scooter Rental Bali: Compare Models & Rates", "Compare four Wedison electric scooters in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Two helmets included; hotel delivery by arrangement.", "/fleet");
 
 export default async function FleetPage() {
   const cards = getPrimaryCards();
@@ -27,10 +22,10 @@ export default async function FleetPage() {
   return (
     <>
       <Section labelledBy="fleet-title" className="!pb-8">
-        <SectionHeading
+        <SectionHeading as="h1"
           eyebrow="Our fleet · Powered by Wedison"
-          title="Official Wedison electric motorcycles, available for rent through Werigo"
-          lede={specDisclaimer}
+          title="Find your Bali ride."
+          lede="Compare electric scooters for beach days, everyday trips and a longer stay. Choose your dates for a rental estimate."
           id="fleet-title"
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">

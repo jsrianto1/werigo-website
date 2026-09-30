@@ -15,7 +15,7 @@ export default function PrivacyPage() {
   return (
     <Section>
       <div className="mx-auto max-w-2xl">
-        <SectionHeading
+        <SectionHeading as="h1"
           eyebrow="Legal"
           title="Privacy Policy"
           lede={`How Werigo collects, uses and protects your information. Last updated ${lastUpdated}.`}

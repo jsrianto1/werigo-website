@@ -66,7 +66,7 @@ export function BookSearchResults() {
           {preselect ? " Your chosen ride will be waiting at the next step." : ""}
         </p>
         <div className="mt-8">
-          <SearchWidget referralCode={ref} />
+          <SearchWidget referralCode={ref} vehicle={preselect} monthly={params.get("duration") === "monthly"} />
         </div>
       </div>
     );

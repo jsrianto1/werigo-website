@@ -44,6 +44,7 @@ export function SectionHeading({
   id,
   align = "left",
   inverse = false,
+  as: Heading = "h2",
 }: {
   eyebrow?: string;
   title: string;
@@ -51,6 +52,7 @@ export function SectionHeading({
   id?: string;
   align?: "left" | "center";
   inverse?: boolean;
+  as?: "h1" | "h2" | "h3";
 }) {
   return (
     <div
@@ -63,14 +65,14 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2
+      <Heading
         id={id}
         className={`font-display text-3xl leading-tight md:text-4xl ${
           inverse ? "text-ink-inverse" : "text-ink"
         }`}
       >
         {title}
-      </h2>
+      </Heading>
       {lede ? (
         <p
           className={`mt-4 text-base leading-relaxed md:text-lg ${

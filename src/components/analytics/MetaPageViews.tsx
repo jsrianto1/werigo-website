@@ -3,11 +3,6 @@
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-declare global {
-  interface Window {
-    fbq?: (command: "track", event: "PageView") => void;
-  }
-}
 
 /** The head snippet tracks the first load; this covers App Router navigation. */
 export function MetaPageViews() {

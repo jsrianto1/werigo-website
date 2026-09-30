@@ -41,6 +41,7 @@ import {
   usdToIdr,
   protectionCopy,
 } from "@/lib/addons";
+import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import {
   emptyCustomer,
@@ -318,6 +319,7 @@ export function CheckoutFlow() {
         .filter(Boolean)
         .join("\n") || undefined,
     });
+    trackMarketingEvent("booking_handoff", { content_ids: [entry!.modelSlug], content_type: "product", num_items: quantity, rental_days: days });
     setWhatsappUrl(url);
     window.open(url, "_blank", "noopener,noreferrer");
     clearDraft();
@@ -333,8 +335,8 @@ export function CheckoutFlow() {
     <div>
       <BookingStepper current={phaseToStep[phase]} />
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
-        <div>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="min-w-0">
           {/* Booking context line */}
           <p className="tnum mb-6 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
             <strong className="font-semibold text-ink">{entry!.displayName}</strong>{" "}
@@ -371,7 +373,7 @@ export function CheckoutFlow() {
 
 
               {/* Quantity */}
-              <div className="mt-4 flex items-center justify-between rounded-[14px] border border-line bg-card p-5">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-[14px] border border-line bg-card p-5">
                 <div>
                   <h2 className="font-semibold text-ink">Number of motorcycles</h2>
                   <p className="mt-0.5 text-sm text-ink-soft">

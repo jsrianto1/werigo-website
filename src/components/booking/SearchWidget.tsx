@@ -22,8 +22,12 @@ export function SearchWidget({
   compact = false,
   initial,
   referralCode = "",
+  monthly = false,
+  vehicle = "",
 }: {
   compact?: boolean;
+  monthly?: boolean;
+  vehicle?: string;
   initial?: Partial<SearchState>;
   /** Partner referral code to carry through to the search results and
       checkout, where it pre-fills the existing promo code field. */
@@ -31,7 +35,7 @@ export function SearchWidget({
 }) {
   const router = useRouter();
   const [state, setState] = useState<SearchState>({
-    ...defaultSearch(),
+    ...defaultSearch(monthly),
     ...initial,
   });
   const [error, setError] = useState<string | null>(null);
@@ -68,6 +72,7 @@ export function SearchWidget({
       startTime: state.startTime,
       endDate: state.endDate,
       endTime: state.endTime,
+      ...(vehicle ? { vehicle } : {}),
       ...(referralCode ? { ref: referralCode } : {}),
     });
     router.push(`/book?${params.toString()}`);

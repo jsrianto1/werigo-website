@@ -67,11 +67,19 @@ export const emptyCustomer: CustomerInfo = {
   ageConfirmed: false,
 };
 
-export function defaultSearch(): SearchState {
+export function defaultSearch(monthly = false): SearchState {
   const start = new Date();
   start.setDate(start.getDate() + 1);
   const end = new Date(start);
-  end.setDate(end.getDate() + 3);
+  if (monthly) {
+    const day = end.getDate();
+    end.setDate(1);
+    end.setMonth(end.getMonth() + 1);
+    const lastDay = new Date(end.getFullYear(), end.getMonth() + 1, 0).getDate();
+    end.setDate(Math.min(day, lastDay));
+  } else {
+    end.setDate(end.getDate() + 3);
+  }
   return {
     pickupSlug: "",
     returnSlug: "",

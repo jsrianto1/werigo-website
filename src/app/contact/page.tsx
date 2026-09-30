@@ -1,21 +1,16 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Mail, MessageCircle, Clock, MapPin } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { site } from "@/lib/config";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { ContactForm } from "@/components/contact/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Contact Werigo, Bali Electric Motorcycle Rental",
-  description:
-    "Get in touch with the Werigo team in Bali by WhatsApp, email or the contact form. Questions about bookings, custom deliveries or partnerships are welcome.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = pageMetadata("Contact Werigo for Electric Scooter Rental in Bali", "Ask the Werigo Bali team about electric scooter availability, monthly rentals and hotel delivery. WhatsApp support daily, 08:00 to 20:00 WITA.", "/contact");
 
 export default function ContactPage() {
   return (
     <Section>
-      <SectionHeading
+      <SectionHeading as="h1"
         eyebrow="Contact"
         title="Talk to a person, not a ticket queue"
         lede="WhatsApp is fastest, and it's the same thread we'll use for your booking. Email and the form below work too."

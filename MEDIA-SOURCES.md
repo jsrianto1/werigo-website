@@ -61,3 +61,11 @@ Source files and export scripts live in the Werigo OneDrive workspace
 `saga-motion.py`). Page counts and transcripts are generated into
 `src/data/sagaPages.json` and `src/data/sagaTranscripts.json`; do not edit
 those by hand.
+
+## 2026-09-30 marketing renewal: verified catalogue images
+
+`public/media/fleet/{bees,victory,athena,edpower}/catalog.webp` are byte-for-byte copies of the existing `wedison-bali-site/public/assets/{model}.webp` assets in the Werigo workspace. They preserve the real product geometry, wheels, lights, seat and branding. No image generation, recolouring, stretching or mirroring was applied in this renewal. The original management-supplied `main.webp` photographs remain in place.
+
+Visually checked against the current [Wedison catalogue](https://wedison.co/), each product page, [Wedison Bali](https://wedison-bali.com/), and public Instagram profiles [wedison.id](https://www.instagram.com/wedison.id/) and [wedison.bali](https://www.instagram.com/wedison.bali/). Bees is the compact angular scooter; Victory is the sporty model; Athena is the retro model; EdPower has a windshield and stepped seat.
+
+Generated design references from the design exploration are not website product assets. In particular the generated Bees, Victory and EdPower silhouettes were rejected. All four catalogue images render with object-fit contain.

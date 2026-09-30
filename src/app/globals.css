@@ -84,7 +84,7 @@
   --radius-card: 14px;
   --radius-control: 10px;
 
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-manrope);
   --font-sans: var(--font-inter);
 
   --breakpoint-xs: 23.4375rem; /* 375px */
@@ -118,7 +118,7 @@ body {
 
 /* Display face is used with restraint: page titles + section headings only */
 .font-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-family: var(--font-manrope), ui-serif, Georgia, serif;
   font-variation-settings: "SOFT" 40, "WONK" 0;
   letter-spacing: -0.01em;
 }

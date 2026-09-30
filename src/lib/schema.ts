@@ -12,6 +12,9 @@ export function localBusinessSchema() {
     description: site.description,
     url: site.baseUrl,
     email: site.contactEmail,
+    telephone: `+${site.whatsappNumber}`,
+    logo: `${site.baseUrl}/brand/werigo-logo-full.png`,
+    sameAs: [site.social.instagram, site.social.tiktok],
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Bali, Indonesia",
@@ -37,6 +40,7 @@ export function vehicleSchema(entry: WedisonEntry) {
     name: `${entry.displayName} Electric Motorcycle Rental in Bali`,
     description: entry.description,
     brand: { "@type": "Brand", name: entry.brand },
+    image: `${site.baseUrl}/media/fleet/${entry.modelSlug}/main.webp`,
     url: `${site.baseUrl}/fleet/${entry.modelSlug}`,
   };
 }

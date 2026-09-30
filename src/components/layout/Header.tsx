@@ -14,6 +14,7 @@ import { site } from "@/lib/config";
 // crowding into the language selector. Home stays in the drawer.
 const navItems = [
   { href: "/fleet", label: "Our Fleet" },
+  { href: "/monthly-scooter-rental-bali", label: "Monthly Rentals" },
   { href: "/supercharge", label: "SuperCharge" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/delivery-areas", label: "Delivery Areas" },
@@ -49,13 +50,13 @@ export function Header() {
     <header
       className={`${inReader ? "relative" : "sticky top-0"} z-50 border-b border-line bg-page/95 backdrop-blur-sm`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-10">
+      <div className="mx-auto flex h-20 w-full max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-10">
         <Logo />
 
         {/* Desktop nav */}
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-1">
-            {navItems.map((item) => (
+            {navItems.filter((item) => ["/fleet", "/monthly-scooter-rental-bali", "/how-it-works", "/delivery-areas", "/help-center"].includes(item.href)).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -117,9 +118,11 @@ export function Header() {
             ) : null}
           </div>
 
-          <ButtonLink href="/book" variant="accent" size="md" className="hidden sm:inline-flex">
-            Rent a Bike
-          </ButtonLink>
+          <div className="hidden sm:block">
+            <ButtonLink href="/book" variant="accent" size="md">
+              Check availability
+            </ButtonLink>
+          </div>
 
           {/* Mobile menu toggle */}
           <button

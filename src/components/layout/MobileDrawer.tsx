@@ -83,6 +83,7 @@ export function MobileDrawer({
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/fleet", label: "Our Fleet" },
+    { href: "/monthly-scooter-rental-bali", label: "Monthly Rentals" },
     { href: "/supercharge", label: "SuperCharge" },
     { href: "/how-it-works", label: "How It Works" },
   ];
@@ -200,7 +201,7 @@ export function MobileDrawer({
             className="w-full"
             onClick={onClose}
           >
-            Rent a Bike
+            Check availability
           </ButtonLink>
           <div className="mt-4 flex items-center gap-2 px-1 text-sm text-ink-soft">
             <Globe className="h-4 w-4" aria-hidden="true" />
