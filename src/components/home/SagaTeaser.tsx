@@ -16,7 +16,7 @@ export function SagaTeaser() {
   const latest = episodes[episodes.length - 1];
 
   return (
-    <Section labelledBy="saga-teaser-heading" className="!pt-4 md:!pt-6">
+    <Section labelledBy="saga-teaser-heading" id="werigo-saga">
       <div className="relative overflow-hidden rounded-[24px] bg-[#0b100f] text-ink-inverse">
         <div
           aria-hidden="true"
@@ -24,13 +24,13 @@ export function SagaTeaser() {
         />
         <div className="relative grid items-center gap-10 p-6 sm:p-10 lg:grid-cols-[1fr_1fr] lg:p-14">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]">New: the Werigo webtoon</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]">Off the road. Into the story.</p>
             <h2 id="saga-teaser-heading" className="mt-3 font-display text-3xl leading-tight text-white md:text-4xl">
               Take a break and read {saga.title}
             </h2>
             <p className="mt-4 max-w-lg leading-relaxed text-white/75">
               A delivery rider in Denpasar, a bike that changes everything and a System only he can see. Free to read
-              here, one chapter at a time, and every bike in it is one you can rent from us.
+              here in English and Indonesian, whenever you feel like taking a break.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
@@ -48,6 +48,10 @@ export function SagaTeaser() {
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
+            <Link href={`/saga/${latest.slug}`} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white">
+              Latest: Chapter {latest.number}, {latest.title}
+              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+            </Link>
           </div>
 
           <Link

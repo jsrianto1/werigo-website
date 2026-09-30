@@ -56,7 +56,7 @@ export function Header() {
         {/* Desktop nav */}
         <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-1">
-            {navItems.filter((item) => ["/fleet", "/monthly-scooter-rental-bali", "/how-it-works", "/delivery-areas", "/help-center"].includes(item.href)).map((item) => (
+            {navItems.filter((item) => ["/fleet", "/monthly-scooter-rental-bali", "/how-it-works", "/delivery-areas", "/saga", "/help-center"].includes(item.href)).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

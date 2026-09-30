@@ -4,7 +4,9 @@ Audience: international visitors and people staying a month or longer in Bali. E
 
 ## Design decisions
 
-Design dials: variation 7/10, motion 3/10, density 4/10. White and pale mint surfaces, deep navy text, one deep teal action colour. Manrope headings, Inter body. Clear product photographs lead the page, followed by the date search, model comparison, monthly proposition, included essentials, delivery coverage and practical FAQs.
+Design dials: variation 7/10, motion 3/10, density 4/10. White and pale mint surfaces, deep navy text, one deep teal action colour. Manrope headings, Inter body. The original Canggu riding video opens the homepage with an overlaid marketing headline and a pause/play control. Reduced-motion visitors see its original poster frame. This is followed by the date search, model comparison, monthly proposition, included essentials, delivery coverage and practical FAQs.
+
+WERIGO SAGA remains a prominent entertainment section after monthly rentals, with chapter covers, first/latest chapter links and access to the complete archive. Saga is also in desktop and mobile navigation.
 
 The generated hero, fleet and monthly section images were composition studies. Their useful layout cues were a 48/52 hero split, large left-aligned headline, compact proof strip, equal-width product columns and clear monthly rate rows. Generated motorcycle silhouettes were rejected after product comparison. No generated motorcycle image is shipped.
 

@@ -16,7 +16,8 @@ import { confirmedBenefits } from "@/data/commercialTerms";
 import { marketingFaqs } from "@/data/marketingFaqs";
 import { faqSchema, jsonLd } from "@/lib/schema";
 import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
-import { getEpisodes, coverSrc } from "@/data/saga";
+import { HeroBackdrop } from "@/components/home/HeroBackdrop";
+import { SagaTeaser } from "@/components/home/SagaTeaser";
 
 export const metadata = pageMetadata("Electric Scooter Rental Bali | Daily & Monthly", "Rent a Wedison electric scooter in Bali from Rp90,000/day. Hotel and villa delivery, two helmets included, plus weekly and monthly rates. Check your dates.", "/");
 
@@ -35,21 +36,17 @@ const steps = [
 
 export default function HomePage() {
   const bikes = getPrimaryCards();
-  const episodes = getEpisodes();
-  const latest = episodes.at(-1);
   return (
     <>
-      <section className="marketing-hero" aria-labelledby="home-title">
-        <div className="hero-copy">
+      <section className="home-video-hero" aria-labelledby="home-title">
+        <HeroBackdrop />
+        <div className="home-hero-inner"><div className="hero-copy">
           <p className="eyebrow">Electric scooter rental in Bali</p>
           <h1 id="home-title">Your Bali.<br />Your own ride.</h1>
           <p className="hero-lede">Electric scooters delivered to your stay. Two helmets included. Daily, weekly and monthly rates.</p>
           <div className="hero-actions"><ButtonLink href="#hero-booking" variant="accent" size="lg">Check availability <ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><Link href="/monthly-scooter-rental-bali" className="text-link">Monthly rentals</Link></div>
         </div>
-        <figure className="hero-product">
-          <Image src="/media/fleet/athena/catalog.webp" alt="Official Wedison Athena electric motorcycle in olive green, available for rental in Bali" width={760} height={639} priority sizes="(max-width: 767px) 100vw, 52vw" className="hero-bike" />
-          <figcaption><span>Wedison Athena</span><span>Powered by Wedison</span></figcaption>
-        </figure>
+        </div>
       </section>
 
       <div className="proof-strip" aria-label="Included with your rental">{proof.map(({icon: Icon, title, detail}) => <div key={title}><Icon aria-hidden="true" /><p><strong>{title}</strong><span>{detail}</span></p></div>)}</div>
@@ -74,6 +71,8 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <SagaTeaser />
+
       <Section labelledBy="includes-heading">
         <div className="essentials-layout">
           <div><h2 id="includes-heading" className="marketing-heading">The essentials.<br />Already sorted.</h2><p className="mt-5 max-w-lg leading-relaxed text-ink-soft">Your rental is more than a motorcycle. Here is what comes with every Werigo ride.</p><ul className="essentials-list">{confirmedBenefits.map(b => <li key={b.id}><Check aria-hidden="true" className="h-5 w-5 shrink-0 text-primary" /><span><strong>{b.label}</strong><span>{b.description}</span></span></li>)}</ul><p className="mt-6 text-sm leading-relaxed text-ink-soft">A rain poncho and protection options can be added on request. Ask our team about availability, pricing and conditions.</p></div>
@@ -88,7 +87,6 @@ export default function HomePage() {
       <Section tone="wash" labelledBy="faq-heading"><div className="faq-layout"><div><h2 id="faq-heading" className="marketing-heading">Good questions.<br />Clear answers.</h2><p className="mt-5 text-ink-soft">A little planning makes a better ride.</p><Link href="/help-center" className="text-link mt-6">Visit the Help Center <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div><Accordion items={marketingFaqs} /></div></Section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(faqSchema(marketingFaqs))}} />
 
-      {latest ? <Section labelledBy="saga-teaser-heading" className="!py-10"><div className="saga-inline"><Image src={coverSrc(latest)} alt="WERIGO SAGA latest chapter cover" width={96} height={120} className="rounded-lg object-cover" sizes="96px" /><div><h2 id="saga-teaser-heading" className="font-display text-xl">Another side of the ride.</h2><p className="mt-2 text-sm text-ink-soft">Discover WERIGO SAGA, our free Bali adventure webtoon.</p><Link href="/saga" className="text-link mt-2">Read the story <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div></div></Section> : null}
       <Section labelledBy="cta-heading"><div className="closing-cta"><h2 id="cta-heading">Give your Bali plans<br />a ride of their own.</h2><p>Choose your dates. We will help with the rest.</p><ButtonLink href="/book" variant="accent" size="lg">Check availability <ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink></div></Section>
     </>
   );
