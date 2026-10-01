@@ -3,7 +3,8 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { contentHistory, generateDates } from './sitemap-dates.mjs';
+import { pathToFileURL } from 'node:url';
+import { contentHistory, generateDates, prepareHistory } from './sitemap-dates.mjs';
 
 const root = mkdtempSync(path.join(tmpdir(), 'werigo-sitemap-'));
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
@@ -59,6 +60,11 @@ try {
   assert.equal(readFileSync(path.join(root, '.next/sitemap-dates.json'), 'utf8'), readFileSync(path.join(root, '.next/standalone/.next/sitemap-dates.json'), 'utf8'));
   output({ '/': { srcRoute: '/' }, '/b': { srcRoute: '/b', initialHeaders: { 'x-robots-tag': 'noindex' } } });
   assert.deepEqual(generateDates(root), { '/': '2026-06-01T10:00:00Z' }, 'homepage path, CRLF normalization and header noindex');
+  const shallowRoot = path.join(root, '.next/shallow-checkout');
+  git('clone', '--quiet', '--depth', '1', pathToFileURL(root).href, shallowRoot);
+  assert.equal(execFileSync('git', ['rev-parse', '--is-shallow-repository'], { cwd: shallowRoot, encoding: 'utf8' }).trim(), 'true');
+  prepareHistory(shallowRoot);
+  assert.equal(contentHistory(shallowRoot).modified('src/app/b/page.tsx'), first, 'hosting shallow clone recovers original content date');
   write('.git/shallow', git('rev-parse', 'HEAD').trim() + '\n');
   assert.throws(() => contentHistory(root), /full Git history/);
   console.log('PASS: stable rebuilds, unrelated commits, formatting, isolated content updates, new/removed/noindex pages, images, standalone packaging and shallow-history guard.');

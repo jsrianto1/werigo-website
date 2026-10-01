@@ -22,7 +22,7 @@ After Next builds the site, npm's `postbuild` discovers eligible pages from the 
 
 The generated `.next/sitemap-dates.json` is also copied into `.next/standalone/.next` when that output exists, so production needs neither Git nor TypeScript. A missing/invalid date fails the sitemap response instead of silently publishing incomplete XML. New/deleted/unpublished pages still follow the published HTML automatically.
 
-Release workflow: commit authored content and images first, then run `npm run build` (not bare `next build`). Full Git history is required; for shallow clones run `git fetch --unshallow` before building. Uncommitted source changes or missing history fail generation rather than inventing a date. A rebuild or an unrelated commit keeps dates unchanged. If a CMS or remotely updated public content is introduced, use its reliable per-record modification dates instead of this repository adapter.
+Release workflow: commit authored content and images first, then run `npm run build` (not bare `next build`). Full Git history is required; the build automatically fetches it with `git fetch --unshallow --quiet origin` for shallow hosting clones. Git read access must remain available to that build; a failed fetch stops publication rather than inventing dates. Uncommitted source changes or missing history fail generation rather than inventing a date. A rebuild or an unrelated commit keeps dates unchanged. If a CMS or remotely updated public content is introduced, use its reliable per-record modification dates instead of this repository adapter.
 
 ## Verification file
 

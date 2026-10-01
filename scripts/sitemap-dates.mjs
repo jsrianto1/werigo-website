@@ -8,6 +8,16 @@ import { extractSitemapEntry } from '../src/lib/sitemap-content.ts';
 const slash = value => value.replaceAll('\\', '/');
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
 
+/** Hosting clones may be shallow; fetch history only, without changing the checkout. */
+export function prepareHistory(root) {
+  const options = { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } };
+  if (execFileSync('git', ['rev-parse', '--is-shallow-repository'], options).trim() === 'true') {
+    console.log('Sitemap: fetching complete source history for accurate modification dates.');
+    try { execFileSync('git', ['fetch', '--unshallow', '--quiet', 'origin'], { ...options, timeout: 300000 }); }
+    catch { throw new Error('Unable to fetch sitemap content history. Provide a full-history checkout or Git read access before building.'); }
+  }
+}
+
 /** Git commit dates describe authored changes, never build/file-copy times. */
 export function contentHistory(root) {
   const git = args => execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }).trimEnd();
@@ -135,4 +145,7 @@ export function generateDates(root) {
   return result;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) generateDates(process.cwd());
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  prepareHistory(process.cwd());
+  generateDates(process.cwd());
+}
