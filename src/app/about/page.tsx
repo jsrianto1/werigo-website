@@ -1,3 +1,4 @@
+import { site } from "@/lib/config";
 import { pageMetadata } from "@/lib/seo";
 import { Leaf, MapPin, ShieldCheck, Zap } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -48,6 +49,9 @@ export default function AboutPage() {
               on WhatsApp. Werigo is now live in Bali. Book your electric
               ride and explore the island with quiet, powerful mobility.
             </p>
+            <address className="mt-5 max-w-xl text-sm not-italic leading-relaxed text-ink-soft">
+              <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{site.address.display}</a>
+            </address>
             <div className="mt-8">
               <ButtonLink href="/fleet" variant="primary" size="lg">
                 Meet the fleet

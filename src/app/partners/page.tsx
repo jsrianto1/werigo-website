@@ -26,9 +26,9 @@ import {
 import { faqSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Partner Program for Hotels, Villas, Tour Operators and Rental Companies",
+  title: "Hotel & Villa Partner Program, Bali",
   description:
-    "Refer your guests to Werigo electric motorcycle rental in Bali and earn a 10% commission on every completed rental, or rent a fleet monthly at partner rates. Apply on WhatsApp.",
+    "Join Werigo’s Bali partner program. Refer hotel and villa guests for rental commission, or ask about monthly fleet rates for your rental business.",
   alternates: { canonical: "/partners" },
 };
 

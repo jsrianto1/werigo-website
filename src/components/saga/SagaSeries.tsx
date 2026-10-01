@@ -108,7 +108,7 @@ export function SagaSeries() {
               href={`/saga/${latest.slug}`}
               className="absolute -bottom-5 left-4 right-4 flex items-center gap-3 rounded-[14px] border border-white/15 bg-[#132a25]/95 p-2.5 shadow-xl backdrop-blur hover:border-white/30 sm:left-auto sm:right-[-12px] sm:w-72"
             >
-              <Image src={coverSrc(latest)} alt="" width={56} height={56} className="h-14 w-14 rounded-[8px] object-cover" />
+              <Image src={coverSrc(latest)} alt={`WERIGO SAGA Chapter ${latest.number}: ${title(latest)} cover`} width={56} height={56} className="h-14 w-14 rounded-[8px] object-cover" />
               <div className="min-w-0">
                 <p className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: ACCENT }}>
                   {t.newest}

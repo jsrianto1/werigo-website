@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     "Werigo privacy policy. How we collect, use, store and protect your information when you book an electric motorcycle rental in Bali.",
   alternates: { canonical: "/privacy" },
+  robots: { index: false, follow: true },
 };
 
 const lastUpdated = "26 July 2026";

@@ -61,10 +61,11 @@ export function MediaImage({
       <Image
         src={asset.src}
         alt={asset.alt}
-        fill
+        width={asset.width}
+        height={asset.height}
         sizes={sizes}
         priority={priority}
-        className={fit === "cover" ? "object-cover" : "object-contain"}
+        className={`absolute inset-0 h-full w-full ${fit === "cover" ? "object-cover" : "object-contain"}`}
       />
     </div>
   );

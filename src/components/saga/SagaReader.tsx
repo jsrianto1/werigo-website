@@ -248,7 +248,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
           >
             <Image
               src={next.cover}
-              alt=""
+              alt={`WERIGO SAGA Chapter ${next.number}: ${titleOf(next)} cover`}
               width={96}
               height={96}
               className="h-20 w-20 shrink-0 rounded-[10px] object-cover sm:h-24 sm:w-24"
@@ -324,7 +324,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
                   >
                     <Image
                       src={e.cover}
-                      alt=""
+                      alt={`WERIGO SAGA Chapter ${e.number}: ${titleOf(e)} cover`}
                       width={144}
                       height={144}
                       className="aspect-square w-full rounded-[8px] object-cover"

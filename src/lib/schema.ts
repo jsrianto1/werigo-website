@@ -1,3 +1,5 @@
+import { MIN_RENTAL_DAYS, ratesIdrPerDay } from "@/lib/pricing";
+import { findMedia } from "@/data/media";
 import { site } from "@/lib/config";
 import type { WedisonEntry } from "@/data/vehicles";
 import type { FaqItem } from "@/data/faqs";
@@ -21,27 +23,65 @@ export function localBusinessSchema() {
     },
     address: {
       "@type": "PostalAddress",
-      addressRegion: "Bali",
-      addressCountry: "ID",
+      streetAddress: site.address.streetAddress,
+      addressLocality: site.address.addressLocality,
+      addressRegion: site.address.addressRegion,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.addressCountry,
     },
+    geo: { "@type": "GeoCoordinates", ...site.geo },
+    hasMap: site.mapsUrl,
     priceRange: "Rp",
+    openingHoursSpecification: [{
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "08:00", closes: "20:00",
+    }],
   };
 }
 
 /**
  * Product schema for a Wedison fleet model.
- * No price or availability claims — rates are provided on request
- * and availability is confirmed by the team.
+ * Published IDR daily rental rate with its actual minimum period.
+ * Availability stays unclaimed until confirmed for the customer's dates.
  */
 export function vehicleSchema(entry: WedisonEntry) {
+  const rate = ratesIdrPerDay[entry.modelSlug]?.daily;
+  const image = findMedia(`fleet-${entry.modelSlug}-main`);
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: `${entry.displayName} Electric Motorcycle Rental in Bali`,
     description: entry.description,
     brand: { "@type": "Brand", name: entry.brand },
-    image: `${site.baseUrl}/media/fleet/${entry.modelSlug}/main.webp`,
+    image: new URL(image?.src ?? `/media/fleet/${entry.modelSlug}/catalog.webp`, site.baseUrl).href,
     url: `${site.baseUrl}/fleet/${entry.modelSlug}`,
+    ...(rate ? { offers: {
+      "@type": "Offer",
+      url: `${site.baseUrl}/fleet/${entry.modelSlug}`,
+      price: rate,
+      priceCurrency: "IDR",
+      businessFunction: "http://purl.org/goodrelations/v1#LeaseOut",
+      description: `Daily rental rate per motorcycle; minimum ${MIN_RENTAL_DAYS} days. Availability and final quote confirmed on WhatsApp.`,
+      eligibleDuration: { "@type": "QuantitativeValue", minValue: MIN_RENTAL_DAYS, unitCode: "DAY" },
+      priceSpecification: {
+        "@type": "UnitPriceSpecification", price: rate, priceCurrency: "IDR",
+        referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "DAY" },
+      },
+      seller: { "@id": `${site.baseUrl}/#business` },
+    } } : {}),
+  };
+}
+
+export interface BreadcrumbItem { name: string; path: string }
+
+export function breadcrumbSchema(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem", position: index + 1, name: item.name,
+      item: new URL(item.path, site.baseUrl).href,
+    })),
   };
 }
 

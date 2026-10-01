@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 import { T } from "@/components/i18n/LanguageProvider";
 import type { Metadata } from "next";
@@ -134,6 +135,7 @@ export default async function VehicleDetailPage({ params }: Props) {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Our Fleet", path: "/fleet" }, { name: entry.displayName, path: `/fleet/${slug}` }]} schemaOnly />
       <Section className="!pb-8">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">

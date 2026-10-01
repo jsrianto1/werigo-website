@@ -32,9 +32,9 @@ import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "SuperCharge Fast Charging for Electric Motorcycles in Bali",
+  title: "SuperCharge EV Motorcycle Charging Bali",
   description:
-    "Wedison SuperCharge through Werigo: compatible Wedison models have been tested to charge from 30% to 90% in approximately 10 minutes at supported locations in Bali.",
+    "Find Wedison SuperCharge locations in Bali. Check compatible electric motorcycles, charging guidance and support for your Werigo rental.",
   alternates: { canonical: "/supercharge" },
 };
 

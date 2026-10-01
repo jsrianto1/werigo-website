@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { MapPin, ArrowRight, Truck } from "lucide-react";
@@ -12,6 +13,7 @@ export const metadata = pageMetadata("Bali Scooter Rental with Hotel & Villa Del
 export default function DeliveryAreasPage() {
   return (
     <Section>
+      <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Delivery Areas", path: "/delivery-areas" }]} />
       <SectionHeading as="h1"
         eyebrow="Delivery areas"
         title="Wherever you're staying, we bring the ride"

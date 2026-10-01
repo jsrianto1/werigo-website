@@ -148,6 +148,9 @@ export function Footer() {
                   {site.contactEmail}
                 </a>
               </li>
+              <li className="pt-1 text-sm leading-relaxed text-ink-inverse/70">
+                <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">{site.address.display}</a>
+              </li>
               <li className="pt-1 text-sm text-ink-inverse/60">
                 <T>{site.operatingHours}</T>
               </li>

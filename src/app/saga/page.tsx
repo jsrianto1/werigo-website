@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import type { Metadata } from "next";
 import { SagaSeries } from "@/components/saga/SagaSeries";
 import { getEpisodes, saga } from "@/data/saga";
@@ -7,7 +8,7 @@ import { jsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "WERIGO SAGA, the Werigo Webtoon Set in Bali",
   description:
-    "Read WERIGO SAGA free: a Bali webtoon about a delivery rider, a guild of electric riders and the day the ride changed. Every bike in the story is a real Wedison you can rent from Werigo.",
+    "Read WERIGO SAGA free in English or Indonesian. Follow Arya, a delivery rider in Bali, and a guild of electric riders through every chapter.",
   alternates: { canonical: "/saga" },
   openGraph: {
     title: "WERIGO SAGA, the Werigo Webtoon Set in Bali",
@@ -38,6 +39,7 @@ export default function SagaPage() {
   };
   return (
     <>
+      <div className="bg-[#0b100f]"><Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "WERIGO SAGA", path: "/saga" }]} dark /></div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
       <SagaSeries />
     </>

@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/config";
 
+export function conciseDescription(text: string, max = 155): string {
+  const value = text.replace(/\s+/g, " ").trim();
+  if (value.length <= max) return value;
+  const cropped = value.slice(0, max - 1).replace(/\s+\S*$/, "").replace(/[.,;:!?]+$/, "");
+  return `${cropped}…`;
+}
+
 export function pageMetadata(title: string, description: string, path: string, image = "/brand/og-image.png"): Metadata {
   const socialTitle = `${title} | Werigo`;
   return {

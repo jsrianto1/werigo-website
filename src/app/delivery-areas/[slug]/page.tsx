@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
@@ -42,6 +43,7 @@ export default async function AreaPage({ params }: Props) {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Delivery Areas", path: "/delivery-areas" }, { name: area.name, path: `/delivery-areas/${slug}` }]} schemaOnly />
       <Section className="!pb-10">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-1.5 text-sm text-ink-faint">

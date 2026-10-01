@@ -52,6 +52,18 @@ export const site = {
     { code: "ru", label: "Русский", active: true },
   ],
 
+  /** Business location supplied by management via Google Maps on 1 October 2026. */
+  address: {
+    streetAddress: "Lantai 3, Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja",
+    addressLocality: "Denpasar Utara, Kota Denpasar",
+    addressRegion: "Bali",
+    postalCode: "80118",
+    addressCountry: "ID",
+    display: "Lantai 3, Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Denpasar Utara, Kota Denpasar, Bali 80118",
+  },
+  mapsUrl: "https://www.google.com/maps?cid=7693854991597541277",
+  geo: { latitude: -8.6359252, longitude: 115.2213422 },
+
   currency: {
     code: "IDR",
     symbol: "Rp",

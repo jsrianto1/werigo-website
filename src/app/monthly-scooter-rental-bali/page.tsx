@@ -13,7 +13,7 @@ import { faqSchema, jsonLd } from "@/lib/schema";
 import { marketingFaqs } from "@/data/marketingFaqs";
 import { deliveryFeeWaiverNote, serviceAreas } from "@/data/locations";
 
-export const metadata = pageMetadata("Monthly Scooter Rental Bali | Electric Long-Stay Rentals", "Monthly electric scooter rental in Bali from Rp50,000/day for 1 month or longer. Official Wedison models, two helmets and local support. Check your dates.", "/monthly-scooter-rental-bali");
+export const metadata = pageMetadata("Monthly Electric Scooter Rental Bali", "Monthly electric scooter rental in Bali from Rp50,000/day for 1 month or longer. Official Wedison models, two helmets and local support. Check your dates.", "/monthly-scooter-rental-bali");
 
 const faqs = [marketingFaqs[1], marketingFaqs[3], marketingFaqs[4], {question: "What delivery fees apply to a monthly rental?", answer: deliveryFeeWaiverNote}, marketingFaqs[5]];
 

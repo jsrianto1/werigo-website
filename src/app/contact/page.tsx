@@ -29,7 +29,7 @@ export default function ContactPage() {
             <span>
               <span className="block font-semibold text-ink">WhatsApp</span>
               <span className="mt-0.5 block text-sm text-ink-soft">
-                Fastest replies, daily 08:00 to 20:00 WITA
+                {site.whatsappDisplay} · Daily 08:00 to 20:00 WITA
               </span>
             </span>
           </a>
@@ -63,11 +63,12 @@ export default function ContactPage() {
               <MapPin className="h-5 w-5" aria-hidden="true" />
             </span>
             <span>
-              <span className="block font-semibold text-ink">Base</span>
+              <span className="block font-semibold text-ink">Werigo address</span>
               <span className="mt-0.5 block text-sm text-ink-soft">
-                Canggu, Bali. The exact address is shared with your booking
-                confirmation
+                {site.address.display}
               </span>
+              <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-4">View location on Google Maps</a>
+              <span className="mt-1 block text-sm text-ink-soft">Please confirm your visit or motorcycle handover with our team on WhatsApp.</span>
             </span>
           </div>
         </div>

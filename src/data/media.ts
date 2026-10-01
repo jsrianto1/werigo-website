@@ -81,7 +81,7 @@ export const media = {
   "delivery-02": { kind: "image", src: "/media/delivery/handover-02.jpg", alt: "Helmet fitting and riding briefing at a Werigo handover", width: 1920, height: 1280, available: false },
 
   // ---- Supercharge ----
-  "supercharge-unit": { kind: "image", src: "/media/supercharge/supercharge-unit.png", alt: "Official Wedison Supercharge fast-charging unit", width: 1200, height: 1600, available: true },
+  "supercharge-unit": { kind: "image", src: "/media/supercharge/supercharge-unit.webp", alt: "Official Wedison Supercharge fast-charging unit", width: 1200, height: 1600, available: true },
   "supercharge-hero": { kind: "image", src: "/media/supercharge/hero.jpg", alt: "Wedison electric motorcycle at a Wedison Supercharge fast-charging point", width: 2560, height: 1440, available: false },
   "supercharge-video": { kind: "video", src: "/media/supercharge/supercharge.mp4", poster: "/media/supercharge/supercharge-poster.jpg", label: "A Wedison Supercharge session from arrival to ride-out", width: 1920, height: 1080, available: false },
   "supercharge-process-01": { kind: "image", src: "/media/supercharge/process-01.jpg", alt: "Rider arriving at a Wedison Supercharge location", width: 1600, height: 1200, available: false },

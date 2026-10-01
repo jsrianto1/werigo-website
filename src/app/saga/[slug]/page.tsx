@@ -1,3 +1,5 @@
+import { conciseDescription } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SagaReader, type ReaderEpisodeRef } from "@/components/saga/SagaReader";
@@ -32,18 +34,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ep = getEpisode(slug);
   if (!ep) return {};
   const title = `WERIGO SAGA Chapter ${ep.number}: ${ep.title}`;
+  const description = conciseDescription(`Read WERIGO SAGA Chapter ${ep.number}. ${ep.logline}`);
   return {
     title,
-    description: `${ep.logline} Read Chapter ${ep.number} of WERIGO SAGA, the Werigo webtoon set in Bali, free on werigo.co.`,
+    description,
     alternates: { canonical: `/saga/${ep.slug}` },
     openGraph: {
       type: "article",
       title,
-      description: ep.logline,
+      description,
       url: `${site.baseUrl}/saga/${ep.slug}`,
       images: [{ url: ogSrc(ep), width: 1200, height: 630, alt: `${saga.title} Chapter ${ep.number} cover art` }],
     },
-    twitter: { card: "summary_large_image", title, description: ep.logline, images: [ogSrc(ep)] },
+    twitter: { card: "summary_large_image", title, description, images: [ogSrc(ep)] },
   };
 }
 
@@ -78,6 +81,7 @@ export default async function ChapterPage({ params }: Props) {
 
   return (
     <>
+      <div className="bg-[#0b100f]"><Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "WERIGO SAGA", path: "/saga" }, { name: `Chapter ${ep.number}: ${ep.title}`, path: `/saga/${ep.slug}` }]} dark /></div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
       <h1 className="sr-only">
         {saga.title} Chapter {ep.number}: {ep.title}

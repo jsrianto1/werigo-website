@@ -65,7 +65,7 @@ export function SagaTeaser() {
                 >
                   <Image
                     src={coverSrc(e)}
-                    alt=""
+                    alt={`WERIGO SAGA Chapter ${e.number}: ${e.title} cover`}
                     width={320}
                     height={320}
                     sizes="200px"

@@ -59,7 +59,7 @@ export function BookSearchResults() {
     return (
       <div className="mx-auto max-w-3xl">
         <BookingStepper current={0} />
-        <h1 className="font-display text-3xl text-ink md:text-4xl"><T>{"Where and when do you want to ride?"}</T>{" "}</h1>
+        <h2 className="font-display text-3xl text-ink md:text-4xl"><T>{"Where and when do you want to ride?"}</T>{" "}</h2>
         <p className="mt-3 text-ink-soft"><T>{"Tell us your area and dates. We'll show you every Wedison model available by request for your trip."}</T>{" "}{preselect ? <T>{" Your chosen ride will be waiting at the next step."}</T> : ""}
         </p>
         <div className="mt-8">
@@ -97,8 +97,8 @@ export function BookSearchResults() {
       <BookingStepper current={1} />
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl text-ink md:text-4xl"><T>{"Wedison models for"}</T>{" "}{area?.name ?? pickup}
-          </h1>
+          <h2 className="font-display text-3xl text-ink md:text-4xl"><T>{"Wedison models for"}</T>{" "}{area?.name ?? pickup}
+          </h2>
           <p className="tnum mt-2 text-sm text-ink-soft">
             {period.startDate} {period.startTime} → {period.endDate}{" "}
             {period.endTime} · {days}{" "}<T>{"days"}</T>

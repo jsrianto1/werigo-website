@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 import { T } from "@/components/i18n/LanguageProvider";
 import { pageMetadata } from "@/lib/seo";
@@ -15,7 +16,7 @@ import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { formatUsdApprox, usdEstimateNote } from "@/lib/currency";
 import { getUsdIdrRate } from "@/lib/exchangeRate";
 
-export const metadata = pageMetadata("Electric Scooter Rental Bali: Compare Models & Rates", "Compare four Wedison electric scooters in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Two helmets included; hotel delivery by arrangement.", "/fleet");
+export const metadata = pageMetadata("Compare Electric Scooters & Rates in Bali", "Compare four Wedison electric scooters in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Two helmets included; hotel delivery by arrangement.", "/fleet");
 
 export default async function FleetPage() {
   const cards = getPrimaryCards();
@@ -23,6 +24,7 @@ export default async function FleetPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Our Fleet", path: "/fleet" }]} />
       <Section labelledBy="fleet-title" className="!pb-8">
         <SectionHeading as="h1"
           eyebrow="Our fleet · Powered by Wedison"
