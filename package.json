@@ -9,7 +9,9 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postbuild": "node scripts/sitemap-dates.mjs",
+    "test:sitemap": "node scripts/sitemap-test.mjs && node scripts/sitemap-dates-test.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

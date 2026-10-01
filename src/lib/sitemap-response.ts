@@ -16,6 +16,7 @@ interface PrerenderManifest {
 async function readPublishedEntries(): Promise<SitemapEntry[]> {
   const root = process.cwd();
   const manifest: PrerenderManifest = JSON.parse(await readFile(path.join(root, ".next/prerender-manifest.json"), "utf8"));
+  const dates: Record<string, string> = JSON.parse(await readFile(path.join(root, ".next/sitemap-dates.json"), "utf8"));
   const entries = await Promise.all(Object.entries(manifest.routes).map(async ([route, info]) => {
     if (!isPublicPage(route) || (info.initialStatus ?? 200) !== 200) return null;
     const headers = Object.entries(info.initialHeaders ?? {});
@@ -31,6 +32,11 @@ async function readPublishedEntries(): Promise<SitemapEntry[]> {
     }
     const entry = extractSitemapEntry(route, html, site.baseUrl, info.initialStatus ?? 200);
     if (!entry) return null;
+    const modified = dates[route];
+    if (!modified || !Number.isFinite(Date.parse(modified)) || Date.parse(modified) > Date.now()) {
+      throw new Error(`Missing or invalid content date for ${route}; run the complete production build.`);
+    }
+    entry.lastModified = modified;
     const validImages = await Promise.all(entry.images.map(async src => {
       const pathname = decodeURIComponent(new URL(src).pathname);
       const publicRoot = path.resolve(root, "public");
