@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const VIDEO_MP4 = "/media/hero/werigo-canggu-hero-720p.mp4";
+const VIDEO_MP4 = "/media/hero/werigo-athena-canggu-hero.mp4";
 const POSTER_SRC = "/media/hero/werigo-athena-canggu-hero-poster.webp";
 
-/** Original footage on desktop and mobile; respect reduced-motion and Save-Data. */
+/** Keep the original 1080p footage: full-width playback needs its original detail. */
 export function HeroBackdrop() {
   const [showVideo, setShowVideo] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
@@ -36,7 +36,7 @@ export function HeroBackdrop() {
       {showVideo ? (
         <video
           autoPlay muted loop playsInline preload="none" poster={POSTER_SRC}
-          width={1278} height={720}
+          width={1916} height={1080}
           onPlaying={() => setHasPlayed(true)} onError={() => setHasPlayed(false)}
           className={`hero-footage ${hasPlayed ? "opacity-100" : "opacity-0"}`}
         >
