@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server";
-import {
-  createSupabaseAdminClient,
-  isPublishableKey,
-  logStorageError,
-  resolveSupabaseServerConfig,
-  storageErrorFrom,
-  storageErrorFromThrown,
-} from "@/lib/supabaseServer";
+import { getPool, isDatabaseConfigured } from "@/lib/db";
+import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -15,47 +9,26 @@ export const dynamic = "force-dynamic";
  * Non-sensitive database health diagnostic.
  *
  * Returns exactly three booleans and nothing else — no environment
- * variable values, no URLs, no keys, no error strings:
- *   configured  — a Supabase URL and a genuine server key are set
- *   reachable   — Supabase answered and accepted the server key
+ * variable values, no URLs, no error strings:
+ *   configured  — DATABASE_URL is set
+ *   reachable   — PostgreSQL answered and accepted the credentials
  *   schemaReady — the bookings tables exist and can be queried
  */
 export async function GET() {
-  const { url, secretKey } = resolveSupabaseServerConfig();
-  const configured = Boolean(url && secretKey && !isPublishableKey(secretKey));
+  const configured = isDatabaseConfigured();
   if (!configured) {
-    return NextResponse.json({
-      configured: false,
-      reachable: false,
-      schemaReady: false,
-    });
+    return NextResponse.json({ configured: false, reachable: false, schemaReady: false });
   }
 
   let reachable = false;
   let schemaReady = false;
   try {
-    const client = createSupabaseAdminClient();
-    const [bookings, events] = await Promise.all([
-      client.from("bookings").select("id", { count: "exact", head: true }),
-      client.from("booking_events").select("id", { count: "exact", head: true }),
-    ]);
-    const failed = bookings.error
-      ? { error: bookings.error, status: bookings.status }
-      : events.error
-        ? { error: events.error, status: events.status }
-        : null;
-    if (!failed) {
-      reachable = true;
-      schemaReady = true;
-    } else {
-      const se = storageErrorFrom("health_check", failed.error, failed.status);
-      // Schema and data-level errors mean Supabase itself responded.
-      reachable =
-        se.category === "schema_mismatch" ||
-        se.category === "constraint_failed" ||
-        se.category === "insert_failed";
-      logStorageError(se);
-    }
+    const pool = getPool();
+    await pool.query("select 1");
+    reachable = true;
+    await pool.query("select 1 from bookings limit 0");
+    await pool.query("select 1 from booking_events limit 0");
+    schemaReady = true;
   } catch (err) {
     logStorageError(storageErrorFromThrown("health_check", err));
   }

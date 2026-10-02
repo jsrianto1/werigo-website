@@ -1,7 +1,6 @@
 -- ============================================================
 -- Werigo bookings schema — initial migration
--- Run with: supabase db push   (or paste into the Supabase SQL
--- editor once, in order, per README "Supabase setup").
+-- Run with: node scripts/db-migrate.mjs (see README "Database").
 -- ============================================================
 
 -- ---------- Enums ----------
@@ -60,7 +59,7 @@ create table public.bookings (
 );
 
 comment on table public.bookings is
-  'Source of truth for Werigo booking requests. Public inserts only via the server API (service role); RLS denies anon/authenticated.';
+  'Source of truth for Werigo booking requests. All access goes through the Next.js server (role werigo).';
 
 create index bookings_created_at_idx on public.bookings (created_at desc);
 create index bookings_status_idx on public.bookings (status);
@@ -161,14 +160,3 @@ as $$
   select status, count(*)::bigint from public.bookings group by status;
 $$;
 
--- ---------- Row Level Security ----------
--- RLS enabled with NO policies: anon and authenticated roles can
--- neither read nor write. All access goes through the server using
--- the service role (which bypasses RLS) after the ADMIN_EMAILS
--- allowlist check. Public booking creation happens only via
--- POST /api/bookings on the server.
-alter table public.bookings enable row level security;
-alter table public.booking_events enable row level security;
-
-revoke all on public.bookings from anon, authenticated;
-revoke all on public.booking_events from anon, authenticated;

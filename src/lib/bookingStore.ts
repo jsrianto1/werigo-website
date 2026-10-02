@@ -1,24 +1,20 @@
 import "server-only";
-import type { SupabaseClient } from "@supabase/supabase-js";
+import type { PoolClient } from "pg";
 import type { BookingSubmission } from "@/lib/bookingSchema";
-import {
-  createSupabaseAdminClient,
-  resolveSupabaseServerConfig,
-  StorageError,
-  storageErrorFrom,
-  storageErrorFromThrown,
-} from "@/lib/supabaseServer";
+import { getPool, isDatabaseConfigured, withTransaction } from "@/lib/db";
+import { StorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 
 /**
  * Server-side booking storage.
  *
- * Default driver: Supabase PostgreSQL via the service-role key
- * (server-only; RLS denies all direct client access).
+ * Default driver: PostgreSQL on the Werigo VPS (plain SQL through the
+ * shared pool in `@/lib/db`). All access goes through the server; the
+ * browser never talks to the database.
  *
  * Test driver: an in-memory store enabled ONLY by BOOKING_STORE=memory
  * — used by the automated local test suite so the full API flow
  * (validation → insert → booking code → idempotency → WhatsApp gating)
- * can be verified without live credentials. It is never selected in
+ * can be verified without a database. It is never selected in
  * production unless explicitly configured, and logs a loud warning.
  */
 
@@ -30,7 +26,7 @@ export interface StoredBooking {
   updated_at: string;
   full_name: string;
   whatsapp_number: string;
-  email: string;
+  email: string | null;
   nationality: string | null;
   pickup_area: string;
   pickup_address: string | null;
@@ -98,7 +94,7 @@ function submissionToRow(s: BookingSubmission) {
     client_submission_id: s.clientSubmissionId,
     full_name: s.fullName,
     whatsapp_number: s.whatsapp,
-    email: s.email,
+    email: s.email || null,
     nationality: s.nationality || null,
     pickup_area: s.pickupArea,
     pickup_address: s.pickupAddress || null,
@@ -118,171 +114,214 @@ function submissionToRow(s: BookingSubmission) {
   };
 }
 
-/* ================= Supabase driver ================= */
+/* ================= PostgreSQL driver ================= */
 
-class SupabaseBookingStore implements BookingStore {
-  private client: SupabaseClient;
-
-  constructor() {
-    // Plain supabase-js client on the secret/service-role key with all
-    // session behavior disabled — never the SSR browser client, never
-    // the publishable key (createSupabaseAdminClient enforces both).
-    this.client = createSupabaseAdminClient();
+/** pg returns timestamptz as Date and bigint as string; normalise for JSON. */
+function normalizeRow<T>(row: object): T {
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(row)) {
+    out[k] = v instanceof Date ? v.toISOString() : v;
   }
+  return out as T;
+}
 
+/** Escape LIKE wildcards in user input. */
+function likePattern(s: string): string {
+  return `%${s.replace(/[\\%_]/g, (c) => `\\${c}`)}%`;
+}
+
+const STATUSES = ["new", "contacted", "quoted", "confirmed", "active", "completed", "cancelled", "no_response"];
+
+class PostgresBookingStore implements BookingStore {
   async create(submission: BookingSubmission) {
     const row = submissionToRow(submission);
-    let data: unknown;
-    let error: { code?: string; message?: string; details?: string | null; hint?: string | null } | null;
-    let status: number | undefined;
+    const cols = Object.keys(row);
+    const values = Object.values(row);
+    const placeholders = cols.map((_, i) => `$${i + 1}`).join(", ");
+
     try {
-      ({ data, error, status } = await this.client
-        .from("bookings")
-        .insert(row)
-        .select()
-        .single());
+      return await withTransaction(async (client) => {
+        let inserted: Record<string, unknown> | undefined;
+        try {
+          // The unique index on client_submission_id makes retries idempotent.
+          const res = await client.query(
+            `insert into bookings (${cols.join(", ")}) values (${placeholders})
+             on conflict (client_submission_id) do nothing
+             returning *`,
+            values
+          );
+          inserted = res.rows[0];
+        } catch (err) {
+          throw storageErrorFromThrown("insert_booking", err);
+        }
+
+        if (!inserted) {
+          const existing = await client.query(
+            "select * from bookings where client_submission_id = $1",
+            [submission.clientSubmissionId]
+          );
+          if (!existing.rows[0]) {
+            throw new StorageError("insert_failed", {
+              operation: "idempotent_replay",
+              message: "duplicate row not found",
+            });
+          }
+          return { booking: normalizeRow<StoredBooking>(existing.rows[0]), duplicate: true };
+        }
+
+        await client.query(
+          `insert into booking_events (booking_id, event_type, new_status, actor)
+           values ($1, 'created', 'new', 'customer')`,
+          [inserted.id]
+        );
+        return { booking: normalizeRow<StoredBooking>(inserted), duplicate: false };
+      });
     } catch (err) {
       throw storageErrorFromThrown("insert_booking", err);
     }
-
-    if (error) {
-      // Unique violation on client_submission_id → idempotent replay
-      if (error.code === "23505") {
-        const {
-          data: existing,
-          error: err2,
-          status: status2,
-        } = await this.client
-          .from("bookings")
-          .select()
-          .eq("client_submission_id", submission.clientSubmissionId)
-          .single();
-        if (err2 || !existing) {
-          throw storageErrorFrom(
-            "idempotent_replay",
-            err2 ?? { message: "duplicate row not found" },
-            status2
-          );
-        }
-        return { booking: existing as StoredBooking, duplicate: true };
-      }
-      throw storageErrorFrom("insert_booking", error, status);
-    }
-
-    await this.client.from("booking_events").insert({
-      booking_id: (data as StoredBooking).id,
-      event_type: "created",
-      new_status: "new",
-      actor: "customer",
-    });
-    return { booking: data as StoredBooking, duplicate: false };
   }
 
-  private applyFilters<
-    T extends {
-      eq(col: string, v: string): T;
-      gte(col: string, v: string): T;
-      lte(col: string, v: string): T;
-      or(filters: string): T;
-    },
-  >(q: BookingListQuery, builder: T): T {
-    let b = builder;
-    if (q.status) b = b.eq("status", q.status);
-    if (q.model) b = b.eq("vehicle_model", q.model);
-    if (q.pickupArea) b = b.eq("pickup_area", q.pickupArea);
-    if (q.source) b = b.eq("source_page", q.source);
-    if (q.dateFrom) b = b.gte("created_at", q.dateFrom);
-    if (q.dateTo) b = b.lte("created_at", q.dateTo);
-    if (q.search) {
-      const s = q.search.replace(/[%,()]/g, " ").trim();
-      b = b.or(
-        `booking_code.ilike.%${s}%,full_name.ilike.%${s}%,whatsapp_number.ilike.%${s}%,email.ilike.%${s}%`
+  /** WHERE clause + params shared by list() and exportRows(). */
+  private filters(q: BookingListQuery): { where: string; params: unknown[] } {
+    const clauses: string[] = [];
+    const params: unknown[] = [];
+    const add = (sql: string, v: unknown) => {
+      params.push(v);
+      clauses.push(sql.replace("?", `$${params.length}`));
+    };
+    if (q.status) add("status = ?::booking_status", q.status);
+    if (q.model) add("vehicle_model = ?::vehicle_model", q.model);
+    if (q.pickupArea) add("pickup_area = ?", q.pickupArea);
+    if (q.source) add("source_page = ?", q.source);
+    if (q.dateFrom) add("created_at >= ?::timestamptz", q.dateFrom);
+    if (q.dateTo) add("created_at <= ?::timestamptz", q.dateTo);
+    if (q.search?.trim()) {
+      params.push(likePattern(q.search.trim()));
+      const p = `$${params.length}`;
+      clauses.push(
+        `(booking_code ilike ${p} or full_name ilike ${p} or whatsapp_number ilike ${p} or email ilike ${p})`
       );
     }
-    return b;
+    return { where: clauses.length ? `where ${clauses.join(" and ")}` : "", params };
   }
 
   async list(q: BookingListQuery) {
     const page = Math.max(1, q.page ?? 1);
     const pageSize = Math.min(100, Math.max(1, q.pageSize ?? 20));
-    let builder = this.client.from("bookings").select("*", { count: "exact" });
-    builder = this.applyFilters(q, builder);
-    builder = builder
-      .order("created_at", { ascending: q.sort === "oldest" })
-      .range((page - 1) * pageSize, page * pageSize - 1);
-    const { data, count, error, status } = await builder;
-    if (error) throw storageErrorFrom("list_bookings", error, status);
-
-    // status counts (unfiltered summary)
-    const counts: Record<string, number> = {};
-    const { data: countRows, error: cErr } = await this.client.rpc("booking_status_counts");
-    if (!cErr && Array.isArray(countRows)) {
-      for (const r of countRows) counts[r.status] = Number(r.n);
-    } else {
-      // fallback: single query per interesting status
-      const statuses = ["new", "contacted", "quoted", "confirmed", "active", "completed", "cancelled", "no_response"];
-      for (const st of statuses) {
-        const { count: n } = await this.client
-          .from("bookings")
-          .select("id", { count: "exact", head: true })
-          .eq("status", st);
-        counts[st] = n ?? 0;
-      }
+    const { where, params } = this.filters(q);
+    const order = q.sort === "oldest" ? "asc" : "desc";
+    try {
+      const pool = getPool();
+      const [rowsRes, countsRes] = await Promise.all([
+        pool.query(
+          `select *, count(*) over() as total_count from bookings ${where}
+           order by created_at ${order}, id ${order}
+           limit $${params.length + 1} offset $${params.length + 2}`,
+          [...params, pageSize, (page - 1) * pageSize]
+        ),
+        pool.query("select status, n from booking_status_counts()"),
+      ]);
+      const total = rowsRes.rows[0] ? Number(rowsRes.rows[0].total_count) : 0;
+      const rows = rowsRes.rows.map((r) => {
+        const { total_count: _ignored, ...rest } = r;
+        void _ignored;
+        return normalizeRow<StoredBooking>(rest);
+      });
+      const counts: Record<string, number> = {};
+      for (const st of STATUSES) counts[st] = 0;
+      for (const r of countsRes.rows) counts[r.status] = Number(r.n);
+      return { rows, total, counts };
+    } catch (err) {
+      throw storageErrorFromThrown("list_bookings", err);
     }
-    return { rows: (data ?? []) as StoredBooking[], total: count ?? 0, counts };
   }
 
   async get(id: string) {
-    const { data, error } = await this.client.from("bookings").select().eq("id", id).single();
-    if (error || !data) return null;
-    const { data: events } = await this.client
-      .from("booking_events")
-      .select()
-      .eq("booking_id", id)
-      .order("created_at", { ascending: false });
-    return { booking: data as StoredBooking, events: (events ?? []) as BookingEvent[] };
+    try {
+      const pool = getPool();
+      const b = await pool.query("select * from bookings where id = $1::uuid", [id]);
+      if (!b.rows[0]) return null;
+      const ev = await pool.query(
+        "select * from booking_events where booking_id = $1::uuid order by created_at desc",
+        [id]
+      );
+      return {
+        booking: normalizeRow<StoredBooking>(b.rows[0]),
+        events: ev.rows.map((e) => normalizeRow<BookingEvent>(e)),
+      };
+    } catch (err) {
+      const se = storageErrorFromThrown("get_booking", err);
+      // A malformed id (22P02) is simply "not found".
+      if (se.category === "constraint_failed") return null;
+      throw se;
+    }
   }
 
   async update(id: string, patch: BookingUpdate, actor: string) {
-    const before = await this.get(id);
-    if (!before) return null;
-    const { data, error } = await this.client
-      .from("bookings")
-      .update(patch)
-      .eq("id", id)
-      .select()
-      .single();
-    if (error || !data) return null;
-    const events: object[] = [];
-    if (patch.status && patch.status !== before.booking.status) {
-      events.push({
-        booking_id: id,
-        event_type: "status_change",
-        previous_status: before.booking.status,
-        new_status: patch.status,
-        actor,
+    const sets: string[] = [];
+    const params: unknown[] = [];
+    const set = (col: string, v: unknown, cast = "") => {
+      params.push(v);
+      sets.push(`${col} = $${params.length}${cast}`);
+    };
+    if (patch.status !== undefined) set("status", patch.status, "::booking_status");
+    if (patch.internal_notes !== undefined) set("internal_notes", patch.internal_notes);
+    if (patch.assigned_to !== undefined) set("assigned_to", patch.assigned_to);
+    if (patch.follow_up_at !== undefined) set("follow_up_at", patch.follow_up_at, "::timestamptz");
+
+    try {
+      return await withTransaction(async (client: PoolClient) => {
+        const before = await client.query("select * from bookings where id = $1::uuid for update", [id]);
+        const prev = before.rows[0] as StoredBooking | undefined;
+        if (!prev) return null;
+        if (sets.length === 0) return normalizeRow<StoredBooking>(prev);
+
+        // The status-change audit trigger reads this setting for the actor.
+        await client.query("select set_config('werigo.actor', $1, true)", [actor]);
+        params.push(id);
+        const updated = await client.query(
+          `update bookings set ${sets.join(", ")} where id = $${params.length}::uuid returning *`,
+          params
+        );
+        const after = updated.rows[0] as StoredBooking;
+
+        const events: [string, string | null][] = [];
+        if (patch.internal_notes !== undefined && patch.internal_notes !== (prev.internal_notes ?? "")) {
+          events.push(["note_updated", null]);
+        }
+        if (patch.assigned_to !== undefined && patch.assigned_to !== (prev.assigned_to ?? "")) {
+          events.push(["assigned", patch.assigned_to || "unassigned"]);
+        }
+        if (patch.follow_up_at !== undefined) {
+          events.push(["follow_up_set", patch.follow_up_at ?? "cleared"]);
+        }
+        for (const [type, note] of events) {
+          await client.query(
+            "insert into booking_events (booking_id, event_type, note, actor) values ($1, $2, $3, $4)",
+            [id, type, note, actor]
+          );
+        }
+        return normalizeRow<StoredBooking>(after);
       });
+    } catch (err) {
+      const se = storageErrorFromThrown("update_booking", err);
+      if (se.category === "constraint_failed") return null;
+      throw se;
     }
-    if (patch.internal_notes !== undefined && patch.internal_notes !== (before.booking.internal_notes ?? "")) {
-      events.push({ booking_id: id, event_type: "note_updated", actor });
-    }
-    if (patch.assigned_to !== undefined && patch.assigned_to !== (before.booking.assigned_to ?? "")) {
-      events.push({ booking_id: id, event_type: "assigned", note: patch.assigned_to || "unassigned", actor });
-    }
-    if (patch.follow_up_at !== undefined) {
-      events.push({ booking_id: id, event_type: "follow_up_set", note: patch.follow_up_at ?? "cleared", actor });
-    }
-    if (events.length > 0) await this.client.from("booking_events").insert(events);
-    return data as StoredBooking;
   }
 
   async exportRows(q: BookingListQuery) {
-    let builder = this.client.from("bookings").select("*");
-    builder = this.applyFilters(q, builder);
-    builder = builder.order("created_at", { ascending: q.sort === "oldest" }).limit(5000);
-    const { data, error, status } = await builder;
-    if (error) throw storageErrorFrom("export_bookings", error, status);
-    return (data ?? []) as StoredBooking[];
+    const { where, params } = this.filters(q);
+    const order = q.sort === "oldest" ? "asc" : "desc";
+    try {
+      const res = await getPool().query(
+        `select * from bookings ${where} order by created_at ${order} limit 5000`,
+        params
+      );
+      return res.rows.map((r) => normalizeRow<StoredBooking>(r));
+    } catch (err) {
+      throw storageErrorFromThrown("export_bookings", err);
+    }
   }
 }
 
@@ -350,7 +389,7 @@ class MemoryBookingStore implements BookingStore {
     if (q.search) {
       const s = q.search.toLowerCase();
       rows = rows.filter((b) =>
-        [b.booking_code, b.full_name, b.whatsapp_number, b.email].some((v) =>
+        [b.booking_code, b.full_name, b.whatsapp_number, b.email ?? ""].some((v) =>
           v.toLowerCase().includes(s)
         )
       );
@@ -424,12 +463,11 @@ export function getBookingStore(): BookingStore {
       return globalThis.__werigoMemoryStore;
     }
   }
-  const { url, secretKey } = resolveSupabaseServerConfig();
-  if (!url || !secretKey) {
+  if (!isDatabaseConfigured()) {
     throw new StorageError("configuration_missing", {
       operation: "select_store",
-      message: "Supabase URL or server key is not set",
+      message: "DATABASE_URL is not set",
     });
   }
-  return new SupabaseBookingStore();
+  return new PostgresBookingStore();
 }

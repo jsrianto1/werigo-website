@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { getSupabaseBrowser } from "@/lib/supabaseBrowser";
+import { authClient } from "@/lib/auth-client";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 
@@ -185,8 +185,7 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
   }
 
   async function signOut() {
-    const supabase = getSupabaseBrowser();
-    await supabase?.auth.signOut();
+    await authClient.signOut();
     router.refresh();
   }
 

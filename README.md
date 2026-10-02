@@ -8,12 +8,23 @@ built with Next.js (App Router), TypeScript and Tailwind CSS.
 - Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4
 - Lucide icons, Fraunces + Inter via `next/font`
 - Node.js **24.x** (see `.nvmrc` / `package.json` engines)
+- PostgreSQL 16 on the Werigo VPS (`db.werigo.co`), accessed only from
+  the Next.js server with the `pg` driver
+- Better Auth for staff (and later customer) accounts
+- Fonnte for WhatsApp notifications to the ops team
+
+The whole application — pages, API routes, admin dashboard — runs on
+Hostinger. The VPS hosts only the database (plus its backups and the
+cron that retries notifications). There is no separate backend.
 
 ## Getting started
 
 ```bash
 npm install
 cp .env.example .env.local   # then fill in real values
+createdb werigo              # or create it in pgAdmin (UTF8)
+npm run db:migrate           # applies db/migrations/*.sql
+npm run create-admin -- --email you@werigo.co --name "Your Name" --role super_admin
 npm run dev                  # http://localhost:3000
 ```
 
@@ -25,6 +36,10 @@ npm run dev                  # http://localhost:3000
 | `npm run build` | Production build |
 | `npm run start` | Serve the production build |
 | `npm run lint` | ESLint |
+| `npm run db:migrate` | Apply pending SQL migrations to `DATABASE_URL` |
+| `npm run db:status` | Show applied / pending migrations |
+| `npm run create-admin -- --email … --name … [--role admin\|super_admin]` | Create or reset a staff account |
+| `npm run auth:generate` | Regenerate the Better Auth schema SQL after changing `src/lib/auth.ts` |
 
 ## Environment variables
 
@@ -35,21 +50,118 @@ commit real values, and never put server-only keys in a
 
 | Variable | Scope | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | public | Supabase project URL (server also accepts `SUPABASE_URL`, which takes priority) |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | public | Supabase publishable/anon key, admin sign-in sessions only; RLS blocks all data access (server also accepts `SUPABASE_PUBLISHABLE_KEY`, which takes priority) |
-| `SUPABASE_SECRET_KEY` | **server-only** | New-format secret key (`sb_secret_...`) used exclusively by API routes; takes priority over the service-role key |
-| `SUPABASE_SERVICE_ROLE_KEY` | **server-only** | Legacy service-role JWT, used if `SUPABASE_SECRET_KEY` is not set |
-| `ADMIN_EMAILS` | **server-only** | Comma-separated allowlist for /admin/bookings |
-| `SAGA_DATA_DIR` | **server-only** | Optional folder for the WERIGO SAGA counters and comments (default `~/.werigo-data`, outside the app folder) |
-| `SAGA_COMMENTS_ADMIN_KEY` | **server-only** | Long random secret for moderating saga comments; comment moderation is disabled while unset |
-
-All values are trimmed before use. A publishable key placed in a
-server-key variable is rejected at startup, and server-side booking
-inserts never use the publishable key.
+| `NEXT_PUBLIC_BOOKING_MODE` | public, build-time | `database` (store + admin + notifications) or `whatsapp` (direct WhatsApp, no database) |
+| `NEXT_PUBLIC_SITE_URL` | public, build-time | Canonical origin, used for auth callbacks and links |
+| `DATABASE_URL` | **server-only** | `postgresql://werigo:…@db.werigo.co:5432/werigo`; TLS is enforced for any host other than localhost |
+| `BETTER_AUTH_SECRET` | **server-only** | Session signing secret (`openssl rand -base64 32`) |
+| `FONNTE_TOKEN` | **server-only** | Fonnte device token for WhatsApp notifications |
+| `ADMIN_WHATSAPP_NUMBERS` | **server-only** | Comma-separated recipients of booking notifications (`628…`) |
+| `CRON_SECRET` | **server-only** | Bearer token for `/api/cron/*` (called from the VPS cron) |
+| `MIDTRANS_SERVER_KEY`, `NEXT_PUBLIC_MIDTRANS_CLIENT_KEY`, `NEXT_PUBLIC_MIDTRANS_ENV` | Phase 1 | Payments (not used yet) |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Phase 1 | Google sign-in for customers (optional; sign-in is hidden when unset) |
+| `SMTP_*`, `MAIL_FROM` | Phase 1 | Verification and password-reset email |
+| `SAGA_DATA_DIR` | **server-only** | Optional folder for the WERIGO SAGA counters and comments (default `~/.werigo-data`) |
+| `SAGA_COMMENTS_ADMIN_KEY` | **server-only** | Secret for moderating saga comments |
 
 `GET /api/health/db` returns a non-sensitive diagnostic —
 `{ configured, reachable, schemaReady }` booleans only — for checking
 the live database connection without exposing any configuration.
+
+## Booking database
+
+The database is the source of truth for bookings. The flow in
+`database` mode is: form → server validation (`POST /api/bookings`,
+Zod) → insert into PostgreSQL → unique `WRG-YYYYMMDD-XXXX` booking
+code → WhatsApp notification to the ops team → confirmation screen →
+"Continue to WhatsApp" (same code + details). If the insert fails,
+WhatsApp is never opened and the form data is preserved for retry.
+localStorage holds only temporary form drafts.
+
+### Schema and migrations
+
+SQL migrations live in `db/migrations/` and are applied in filename
+order by `npm run db:migrate`, which records each file in
+`schema_migrations` (re-running is safe). Never edit an applied file;
+add a new one.
+
+- `0001_bookings.sql` — `bookings`, `booking_events`, booking-code
+  generator, status audit trigger, `booking_status_counts()`
+- `0002_auth.sql` — Better Auth tables (`user`, `session`, `account`,
+  `verification`); regenerate with `npm run auth:generate` into a new
+  file when the auth config changes
+- `0003_notification_outbox.sql` — WhatsApp outbox with retries
+- `0004_booking_email_optional.sql` — email optional on the form
+
+For a database where `0001` was applied by hand, record it first:
+`node scripts/db-migrate.mjs --baseline 0001_bookings.sql`.
+
+### VPS database (production)
+
+PostgreSQL 16 runs natively on the Werigo VPS. Only the `werigo` role
+may connect from outside, only to the `werigo` database, only over TLS
+(`hostssl … scram-sha-256` in `pg_hba.conf`); the firewall additionally
+limits port 5432 to Hostinger's network. The server certificate is the
+Let's Encrypt certificate for `db.werigo.co`, copied into
+`/etc/postgresql/16/main/ssl/` by `/usr/local/sbin/werigo-pg-cert-sync`
+(also run automatically on renewal). Daily backups:
+`/usr/local/sbin/werigo-db-backup` → `/var/backups/werigo/` (14 days).
+
+The VPS cron calls `GET /api/cron/notifications` every 5 minutes with
+`Authorization: Bearer $CRON_SECRET` to retry undelivered WhatsApp
+messages (see `/etc/cron.d/werigo-cron`).
+
+### Staff accounts and the admin dashboard
+
+`/admin/bookings` requires a signed-in account whose role is `admin`
+or `super_admin`. Public sign-up is disabled; create or reset staff
+accounts with:
+
+```bash
+npm run create-admin -- --email ops@werigo.co --name "Ops Team" --role admin
+```
+
+The password is asked for interactively (or taken from
+`ADMIN_PASSWORD` for scripts). Running it again for an existing email
+resets the password and role and signs that account out everywhere.
+Roles and their permissions are defined in `src/lib/permissions.ts`.
+
+### WhatsApp notifications (Fonnte)
+
+Every new booking queues one message per number in
+`ADMIN_WHATSAPP_NUMBERS` into `notification_outbox`, then delivery is
+attempted immediately. Failures are retried with increasing back-off
+(1 min → 8 h, up to 10 attempts) by the cron endpoint; a notification
+can never fail or delay a booking. Use a dedicated WhatsApp number for
+the Fonnte device, not the main business number.
+
+### Hostinger deployment
+
+1. hPanel → your Node.js app → Environment variables: set every
+   variable in the table above that applies (at least
+   `NEXT_PUBLIC_BOOKING_MODE`, `NEXT_PUBLIC_SITE_URL`, `DATABASE_URL`,
+   `BETTER_AUTH_SECRET`, `FONNTE_TOKEN`, `ADMIN_WHATSAPP_NUMBERS`,
+   `CRON_SECRET`). Remove the old `SUPABASE_*` and `ADMIN_EMAILS`
+   variables.
+2. Redeploy from `main` (Node 24, `npm ci`, `npm run build`,
+   `npm run start`).
+3. `NEXT_PUBLIC_*` values are baked in at build time — re-deploy
+   after changing them.
+4. Check `https://werigo.co/api/health/db` returns all three `true`.
+
+### Backups / export
+
+- Admin → `/admin/bookings` → **CSV** exports the currently filtered
+  bookings (up to 5000 rows).
+- Full backups: daily `pg_dump` on the VPS (see above). On demand:
+  `ssh root@db.werigo.co /usr/local/sbin/werigo-db-backup`.
+
+### Local testing without a database
+
+`BOOKING_STORE=memory ALLOW_MEMORY_STORE=1 npm run start` switches
+the API to an in-memory store so `scripts/db-flow-test.mjs` can
+verify the whole flow (validation, booking codes, idempotency,
+failure handling, WhatsApp gating) without credentials. Never set
+these in production.
 
 ## WERIGO SAGA comments
 
@@ -90,104 +202,27 @@ Editing `saga-comments.json` by hand also works (set `"hidden": true`
 or remove the entry); the server notices the newer file on the next
 request.
 
-## Booking database (Supabase)
-
-The database is the source of truth for bookings. The flow is:
-form → server validation (`POST /api/bookings`, Zod) → insert into
-Supabase → unique `WRG-YYYYMMDD-XXXX` booking code → confirmation
-screen → "Continue to WhatsApp" (same code + details). If the insert
-fails, WhatsApp is never opened and the form data is preserved for
-retry. localStorage holds only temporary form drafts.
-
-### Supabase setup
-
-1. Create a project at https://supabase.com (region: Singapore is
-   closest to Bali).
-2. Run the SQL migrations, in filename order, from
-   `supabase/migrations/` — either:
-   - Supabase Dashboard → SQL Editor → paste each file and run, or
-   - `npx supabase login && npx supabase link --project-ref <ref> && npx supabase db push`
-3. Copy the project URL and keys (Dashboard → Settings → API) into
-   the environment variables above.
-4. Auth → Providers → Email: **disable "Allow new users to sign up"**
-   (public registration must stay off).
-
-### First admin account
-
-1. Supabase Dashboard → Authentication → Users → **Add user** →
-   "Create new user": enter the staff email and a strong password
-   (tick "Auto confirm user").
-2. Add that same email to `ADMIN_EMAILS` in the server environment.
-3. Sign in at `/admin/bookings`. A Supabase session alone is not
-   enough — the server also checks the allowlist, so removing an
-   email from `ADMIN_EMAILS` revokes access immediately.
-
-### Hostinger deployment
-
-1. hPanel → your Node.js app → Environment variables: add all five
-   variables above (reuse any that already exist with these exact
-   names).
-2. Redeploy from `main` (Node 24, `npm ci`, `npm run build`,
-   `npm run start`).
-3. `NEXT_PUBLIC_*` values are baked in at build time — re-deploy
-   after changing them.
-
-### Backups / export
-
-- Admin → `/admin/bookings` → **CSV** exports the currently filtered
-  bookings (up to 5000 rows).
-- Full backups: Supabase Dashboard → Database → Backups (daily on the
-  free tier), or `npx supabase db dump -f backup.sql --linked` for an
-  on-demand SQL dump.
-
-### Importing historical WhatsApp bookings
-
-Insert them with the service role (SQL Editor), marking the source:
-
-```sql
-insert into bookings
-  (client_submission_id, full_name, whatsapp_number, email,
-   pickup_area, return_area, start_at, end_at, vehicle_model,
-   quantity, status, source_page, privacy_consent_at, customer_notes)
-values
-  (gen_random_uuid(), 'Customer Name', '+628123456789', 'x@y.com',
-   'canggu', 'canggu', '2026-07-01T09:00+08', '2026-07-04T09:00+08',
-   'victory', 1, 'completed', 'import:whatsapp', now(),
-   'Imported from WhatsApp history');
-```
-
-The booking code is generated automatically. Only import data the
-customer already provided for their booking.
-
-### Local testing without Supabase
-
-`BOOKING_STORE=memory ALLOW_MEMORY_STORE=1 npm run start` switches
-the API to an in-memory store so `scripts/db-flow-test.mjs` can
-verify the whole flow (validation, booking codes, idempotency,
-failure handling, WhatsApp gating) without credentials. Never set
-these in production.
-
 ## Where things live
 
 - **Design tokens (brand colors, type)** — `src/app/globals.css` (`:root`) + `DESIGN-SYSTEM.md`
 - **Fleet data** — `src/data/vehicles.ts`
 - **Service areas** — `src/data/locations.ts`
-- **Rental extras** — `src/data/extras.ts`
+- **Rental extras** — `src/data/extras.ts` (free of charge; availability confirmed on WhatsApp)
 - **Help Center content** — `src/data/faqs.ts`
 - **Site config (contact, socials, locales)** — `src/lib/config.ts`
 - **Pricing engine** — `src/lib/pricing.ts`
-- **Booking storage (prototype: localStorage)** — `src/lib/booking.ts`
+- **Database pool** — `src/lib/db.ts`; **booking storage** — `src/lib/bookingStore.ts`
+- **Auth** — `src/lib/auth.ts` (server), `src/lib/auth-client.ts` (browser), `src/lib/permissions.ts` (roles)
+- **Notifications** — `src/lib/notifications.ts`
 - **WhatsApp message builder** — `src/lib/whatsapp.ts`
 
-## Status
+## Roadmap
 
-Live site, first iteration: bookings persist in the browser and are
-confirmed personally over WhatsApp. Payment gateway, database, email and
-admin panel are structured to be connected later. Placeholder brand
-colors and photo slots are centrally managed — see `DESIGN-SYSTEM.md`
-and `MEDIA-MANIFEST.md`. Supercharge stations and model compatibility
-are published only from verified data in `src/data/supercharge.ts`.
-
+- **Phase 1** — customer accounts (email + Google), Midtrans payment
+  at checkout, stock per model, customer WhatsApp confirmation
+- **Phase 2** — promo codes, referral program with payouts
+- **Phase 3** — customer management, staff management, audit log
+  viewer, Fonnte settings in the dashboard
 
 ## [LEGAL REVIEW REQUIRED] checklist
 
@@ -196,8 +231,8 @@ be strengthened or published. Never invent these on the website.
 
 - [ ] Full Terms and Conditions text (`/terms`) — Indonesian counsel
 - [ ] Privacy policy full text (`/privacy`)
-- [ ] Cancellation policy (deadlines, refunds) — currently "confirmed
-      with your quote"; no deadlines or percentages published
+- [ ] Cancellation and refund policy (deadlines, refunds) — required
+      before online payment goes live
 - [ ] Deposit policy — no deposit wording published
 - [ ] Bike damage protection — request-only; price, coverage,
       exclusions, and liability cap all pending
