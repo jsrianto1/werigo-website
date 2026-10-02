@@ -11,20 +11,26 @@
     "start": "next start",
     "lint": "eslint",
     "postbuild": "node scripts/sitemap-dates.mjs",
-    "test:sitemap": "node scripts/sitemap-test.mjs && node scripts/sitemap-dates-test.mjs"
+    "test:sitemap": "node scripts/sitemap-test.mjs && node scripts/sitemap-dates-test.mjs",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "db:status": "node scripts/db-migrate.mjs --status",
+    "auth:generate": "better-auth generate --config src/lib/auth.ts --output db/migrations/0002_auth.sql -y",
+    "create-admin": "node scripts/create-admin.mjs"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.12.3",
-    "@supabase/supabase-js": "^2.110.8",
+    "better-auth": "^1.7.7",
     "lucide-react": "^1.26.0",
     "next": "16.3.8",
+    "pg": "^8.23.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@better-auth/cli": "^1.4.22",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

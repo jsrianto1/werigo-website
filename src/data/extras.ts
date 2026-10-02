@@ -1,7 +1,7 @@
 /**
  * Optional add-ons: the management-approved, request-only list.
- * Neither add-on has an approved public price; customers can request
- * them and the price and availability are confirmed on WhatsApp.
+ * Add-ons are free of charge (management decision, 2026-10-02);
+ * customers request them and availability is confirmed on WhatsApp.
  * Do not add items or prices here without management approval.
  */
 
@@ -18,7 +18,7 @@ export const rentalExtras: RentalExtra[] = [
     id: "rain-poncho",
     name: "Rain poncho",
     description:
-      "Optional rain poncho for wet-season rides. Not included automatically. Availability and price are confirmed on WhatsApp.",
+      "Optional rain poncho for wet-season rides, free of charge. Not included automatically; availability is confirmed on WhatsApp.",
     maxQuantity: 2,
   },
 ];

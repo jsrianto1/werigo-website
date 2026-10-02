@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { getSupabaseBrowser } from "@/lib/supabaseBrowser";
+import { authClient } from "@/lib/auth-client";
 
 /**
- * Admin sign-in. Registration is disabled — accounts are created by
- * the site owner in the Supabase dashboard (see README). A valid
- * session alone is not enough: the server also checks the email
- * against the private ADMIN_EMAILS allowlist.
+ * Admin sign-in. Registration is disabled — staff accounts are created
+ * with `node scripts/create-admin.mjs` (see README). A valid session
+ * alone is not enough: the server also checks that the account holds
+ * a staff role.
  */
 export function AdminLogin() {
   const router = useRouter();
@@ -23,22 +23,14 @@ export function AdminLogin() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    const supabase = getSupabaseBrowser();
-    if (!supabase) {
-      setError("Admin sign-in is not configured on this deployment.");
-      return;
-    }
     setBusy(true);
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error: authError } = await authClient.signIn.email({ email, password });
     if (authError) {
       setBusy(false);
       setError("Sign-in failed. Check your email and password.");
       return;
     }
-    // Server re-checks the session against the ADMIN_EMAILS allowlist.
+    // Server re-checks the session for a staff role.
     router.refresh();
   }
 

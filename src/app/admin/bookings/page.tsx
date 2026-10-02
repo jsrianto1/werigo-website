@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function AdminBookingsPage() {
-  // TEMPORARY: booking storage is disconnected. Render the internal
-  // notice before any Supabase call (including auth) can happen.
+  // WhatsApp-only mode: booking storage is disconnected. Render the
+  // internal notice before any database call (including auth) happens.
   if (WHATSAPP_FIRST_BOOKING) {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center">

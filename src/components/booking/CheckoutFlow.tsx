@@ -4,7 +4,7 @@ import { T, useLanguage } from "@/components/i18n/LanguageProvider";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
@@ -45,11 +45,13 @@ import {
 } from "@/lib/addons";
 import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
+import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 import {
   emptyCustomer,
   saveDraft,
   loadDraft,
   clearDraft,
+  cacheConfirmation,
   type CustomerInfo,
 } from "@/lib/booking";
 
@@ -65,6 +67,7 @@ const phaseToStep: Record<Phase, number> = {
 export function CheckoutFlow() {
   const { t } = useLanguage();
   const params = useSearchParams();
+  const router = useRouter();
 
   /** Entry id from the URL; legacy variant ids are normalised to the
       customer-facing model (four rental models only). */
@@ -104,6 +107,11 @@ export function CheckoutFlow() {
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
   const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
+  // Database mode: one idempotency key per checkout session, so a retry
+  // after a network error can never create two bookings.
+  const submissionId = useRef<string>("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const usdRate = useUsdRate();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -321,6 +329,115 @@ export function CheckoutFlow() {
     setPhase("sent");
   }
 
+  /**
+   * Database mode: the request is stored first (POST /api/bookings →
+   * booking code), then the confirmation screen offers the WhatsApp
+   * continuation. If the insert fails, WhatsApp is never opened and
+   * every field stays on this page for a retry.
+   */
+  async function confirmBooking() {
+    if (!customer.batteryAck) {
+      setConsentError(
+        "Please acknowledge the 80% battery-return arrangement first."
+      );
+      document.getElementById("field-batteryAck")?.focus();
+      return;
+    }
+    if (!privacyConsent) {
+      setConsentError(
+        "Please confirm you agree to us using these details to handle your booking."
+      );
+      document.getElementById("field-privacyConsent")?.focus();
+      return;
+    }
+    if (!estimate || !entry) return;
+    const phone = normalizePhone(customer.countryCode, customer.whatsapp);
+    if (!phone) return;
+    if (!submissionId.current) submissionId.current = crypto.randomUUID();
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const extrasNote = rentalExtras
+      .filter((e) => (extraQty[e.id] ?? 0) > 0)
+      .map((e) => `${e.name} × ${extraQty[e.id]}`)
+      .join(", ");
+    const protectionNote = [
+      protection.cancellation ? "Cancellation Protection" : "",
+      protection.motorcycle ? "Motorcycle Protection" : "",
+    ]
+      .filter(Boolean)
+      .join(", ");
+    const notes = [
+      customer.specialRequest.trim(),
+      extrasNote ? `Add-ons: ${extrasNote}` : "",
+      protectionNote ? `Protection requested: ${protectionNote}` : "",
+      promoCode ? `Promo code: ${promoCode}` : "",
+      customer.flightNumber ? `Flight: ${customer.flightNumber}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const search = new URLSearchParams(window.location.search);
+
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clientSubmissionId: submissionId.current,
+          fullName: `${customer.firstName} ${customer.lastName}`.trim(),
+          email: customer.email.trim(),
+          whatsapp: `${phone.countryCode}${phone.national}`,
+          pickupArea: pickup,
+          pickupAddress: [customer.hotelName, customer.address]
+            .filter(Boolean)
+            .join(", "),
+          returnArea: ret,
+          returnAddress: "",
+          startAt: `${period.startDate}T${period.startTime}:00+08:00`,
+          endAt: `${period.endDate}T${period.endTime}:00+08:00`,
+          vehicleModel: entry.modelSlug,
+          quantity,
+          deliveryMethod: "delivery",
+          customerNotes: notes,
+          privacyConsent: true,
+          sourcePage: window.location.pathname,
+          utmSource: search.get("utm_source") ?? "",
+          utmMedium: search.get("utm_medium") ?? "",
+          utmCampaign: search.get("utm_campaign") ?? "",
+          website: "", // honeypot — real users never fill this
+        }),
+      });
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.ok) {
+        // Not stored → never open WhatsApp; keep the form as it is.
+        setSubmitting(false);
+        setSubmitError(
+          data?.message ??
+            "We couldn't save your booking just now. Your details are still here, so please try again."
+        );
+        return;
+      }
+
+      trackMarketingEvent("booking_handoff", { content_ids: [entry.modelSlug], content_type: "product", num_items: quantity, rental_days: days });
+      cacheConfirmation({
+        bookingCode: data.booking.bookingCode,
+        whatsappUrl: data.whatsappUrl,
+        booking: data.booking,
+      });
+      clearDraft();
+      router.push(
+        `/book/confirmation?code=${encodeURIComponent(data.booking.bookingCode)}`
+      );
+    } catch {
+      setSubmitting(false);
+      setSubmitError(
+        "We couldn't reach the booking service. Your details are still here. Please check your connection and try again."
+      );
+    }
+  }
+
   const inputClass = (hasError?: string) =>
     `min-h-11 w-full rounded-[10px] border bg-card px-3 text-[15px] text-ink placeholder:text-ink-faint ${
       hasError ? "border-danger" : "border-line-strong"
@@ -356,7 +473,7 @@ export function CheckoutFlow() {
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
               ><T>{"Make it yours"}</T>{" "}</h1>
-              <p className="mt-2 text-ink-soft"><T>{"Two sanitised helmets and one installed phone holder are already included. Add-on requests below are optional, and their price and availability are confirmed on WhatsApp."}</T>{" "}</p>
+              <p className="mt-2 text-ink-soft"><T>{"Two sanitised helmets and one installed phone holder are already included. The add-ons below are free of charge; availability is confirmed on WhatsApp."}</T>{" "}</p>
 
 
               {/* Quantity */}
@@ -1014,14 +1131,25 @@ export function CheckoutFlow() {
                 ) : null}
               </div>
 
+              {submitError ? (
+                <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
+                  <T>{submitError}</T>
+                </p>
+              ) : null}
               <div className="mt-6">
                 <Button
                   variant="accent"
                   size="lg"
-                  onClick={() => sendToWhatsApp()}
+                  onClick={() => (WHATSAPP_FIRST_BOOKING ? sendToWhatsApp() : void confirmBooking())}
+                  disabled={submitting}
                   className="w-full sm:w-auto"
                 >
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" /><T>{"Send booking request on WhatsApp"}</T>{" "}</Button>
+                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                  {submitting ? (
+                    <T>{"Saving your request…"}</T>
+                  ) : (
+                    <T>{"Send booking request on WhatsApp"}</T>
+                  )}{" "}</Button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-ink-faint"><T>{"Availability, final pricing, delivery, add-ons and your booking are confirmed by the Werigo team on WhatsApp. Nothing is charged before that."}</T>{" "}</p>
 

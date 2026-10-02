@@ -24,7 +24,8 @@ export const bookingSubmissionSchema = z
   .object({
     clientSubmissionId: z.uuid(),
     fullName: z.string().trim().min(1).max(200),
-    email: z.email().max(320),
+    /** Optional on the form; WhatsApp is the primary contact. */
+    email: z.union([z.email().max(320), z.literal("")]).optional().default(""),
     whatsapp: z
       .string()
       .trim()

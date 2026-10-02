@@ -511,9 +511,13 @@
     "Sesuaikan kebutuhanmu",
     "Настройте свою поездку"
   ],
-  "Two sanitised helmets and one installed phone holder are already included. Add-on requests below are optional, and their price and availability are confirmed on WhatsApp.": [
-    "Dua helm yang disanitasi dan satu holder HP terpasang sudah termasuk. Tambahan berikut bersifat opsional; harga dan ketersediaannya dikonfirmasi lewat WhatsApp.",
-    "Два обработанных шлема и держатель телефона уже включены. Опции ниже необязательны; их стоимость и наличие подтвердим в WhatsApp."
+  "Two sanitised helmets and one installed phone holder are already included. The add-ons below are free of charge; availability is confirmed on WhatsApp.": [
+    "Dua helm yang disanitasi dan satu holder HP terpasang sudah termasuk. Tambahan berikut gratis; ketersediaannya dikonfirmasi lewat WhatsApp.",
+    "Два обработанных шлема и держатель телефона уже включены. Опции ниже бесплатны; наличие подтвердим в WhatsApp."
+  ],
+  "Saving your request…": [
+    "Menyimpan permintaan Anda…",
+    "Сохраняем ваш запрос…"
   ],
   "Number of motorcycles": [
     "Jumlah motor",

@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { bookingSubmissionSchema } from "@/lib/bookingSchema";
 import { getBookingStore } from "@/lib/bookingStore";
 import { buildStoredBookingWhatsAppUrl } from "@/lib/whatsapp";
-import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
+import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
+import { notifyAdminsOfNewBooking } from "@/lib/notifications";
 
 export const runtime = "nodejs";
 
@@ -98,6 +99,8 @@ export async function POST(req: NextRequest) {
   try {
     const store = getBookingStore();
     const { booking, duplicate } = await store.create(parsed.data);
+    // Stored → tell the ops team on WhatsApp (queued; never fails the booking).
+    if (!duplicate) await notifyAdminsOfNewBooking(booking);
     return NextResponse.json(
       {
         ok: true,

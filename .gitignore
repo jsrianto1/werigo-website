@@ -50,3 +50,6 @@ next-env.d.ts
 *.log
 *.tmp
 Thumbs.db
+
+# Playwright MCP session logs
+.playwright-mcp/

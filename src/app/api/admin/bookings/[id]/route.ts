@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAdmin } from "@/lib/adminAuth";
 import { getBookingStore } from "@/lib/bookingStore";
-import { logStorageError, storageErrorFromThrown } from "@/lib/supabaseServer";
+import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
 export const runtime = "nodejs";
