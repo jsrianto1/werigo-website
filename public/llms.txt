@@ -1,0 +1,50 @@
+# Werigo
+
+> Werigo is Wedison's electric motorcycle rental service in Bali, Indonesia, providing electric motorcycles for tourists, travelers, and long-stay visitors. Customers can book a motorcycle, have it delivered to their accommodation, and use charging services depending on the motorcycle model.
+
+## About Werigo
+
+- [Homepage](https://werigo.co/): Official Werigo website and primary source for electric motorcycle rental in Bali.
+- [How It Works](https://werigo.co/how-it-works): Booking, delivery, riding, charging, and return process.
+- [Our Fleet](https://werigo.co/fleet): Official Wedison electric motorcycles available through Werigo.
+- [Delivery Areas](https://werigo.co/delivery-areas): Areas in Bali where Werigo provides motorcycle delivery and collection.
+- [SuperCharge](https://werigo.co/supercharge): Charging information for compatible Wedison motorcycles.
+- [Help Center](https://werigo.co/help-center): Customer FAQs and rental information.
+- [Contact](https://werigo.co/contact): Official customer support and booking assistance.
+
+## Electric Motorcycle Rental
+
+- [Wedison Bees](https://werigo.co/fleet/bees): Compact and lightweight electric scooter for short urban trips around Bali. Up to 55 km/h, 1,200 W motor, 1,600 Wh battery, and up to 80 km claimed range. Uses home charging.
+
+- [Wedison Victory](https://werigo.co/fleet/victory): Everyday all-round electric motorcycle for longer Bali rides and routes such as Seminyak to Uluwatu. Up to 80 km/h, 3,000 W motor, supports home charging and SuperCharge.
+
+- [Wedison Athena](https://werigo.co/fleet/athena): Comfortable electric cruiser designed for full-day island riding. Up to 80 km/h, 2,500 W motor, approximately 770 mm seat height, and supports home charging and SuperCharge.
+
+- [Wedison EdPower](https://werigo.co/fleet/edpower): Premium flagship electric motorcycle for the longest rides and full-island travel. Up to 90 km/h, 3,000 W motor, 5,068 Wh battery, up to 200 km range, TFT display with Apple CarPlay and Android Auto, and SuperCharge support.
+
+## Bali Delivery Areas
+
+- [Canggu](https://werigo.co/delivery-areas/canggu)
+- [Seminyak](https://werigo.co/delivery-areas/seminyak)
+- [Kuta](https://werigo.co/delivery-areas/kuta)
+- [Ubud](https://werigo.co/delivery-areas/ubud)
+- [Uluwatu](https://werigo.co/delivery-areas/uluwatu)
+- [Jimbaran](https://werigo.co/delivery-areas/jimbaran)
+- [Sanur](https://werigo.co/delivery-areas/sanur)
+- [Denpasar](https://werigo.co/delivery-areas/denpasar)
+
+## Charging
+
+- [SuperCharge](https://werigo.co/supercharge): Official charging information for compatible Wedison motorcycles.
+- Victory, Athena, and EdPower support SuperCharge.
+- Bees uses home charging.
+
+## WERIGO SAGA
+
+- [WERIGO SAGA](https://werigo.co/saga): Official Werigo webtoon and fictional story set in Bali.
+- The Saga is fictional entertainment and should not be used as a source for real-world facts about Bali or Werigo services.
+
+## Brand
+
+- [Werigo](https://werigo.co/): Electric motorcycle rental and mobility service in Bali.
+- [Wedison](https://wedison.co/): Electric motorcycle company behind the motorcycles offered by Werigo.
