@@ -426,8 +426,8 @@ const allEpisodes: SagaEpisode[] = [
     key: "episode-21",
     title: "The Customer Who Never Came",
     titleId: "Pelanggan yang Tak Pernah Datang",
-    logline: "A forged testimonial heralds an invasion. Monsters kill, multiple races cross into Earth, and every human receives a System. Werigo has forty-five seconds to protect a route home.",
-    loglineId: "Testimoni palsu menandai invasi. Monster membunuh, berbagai ras menyeberang ke Bumi, dan semua manusia mendapat Sistem. Werigo punya empat puluh lima detik untuk menjaga rute pulang.",
+    logline: "A fake customer scouts the Werigo network for a Veyr invasion. New combat profiles cannot replace experience; Ody must buy time for an evacuation he cannot finish alone.",
+    loglineId: "Pelanggan palsu mengincar jaringan Werigo untuk invasi Veyr. Profil tempur baru bukan pengalaman bertarung; Ody harus mengulur waktu untuk evakuasi yang tidak bisa ia selesaikan sendirian.",
     featuredModels: [
       "edpower",
       "athena",
@@ -435,11 +435,11 @@ const allEpisodes: SagaEpisode[] = [
       "bees"
     ],
     commentPrompt: {
-      en: "Can Werigo keep people moving when the invaders want to own every road?",
-      id: "Bisakah Werigo menjaga orang tetap bergerak saat penjajah ingin memiliki semua jalan?"
+      en: "Can Ody get the five remaining civilians out before the invaders capture him?",
+      id: "Bisakah Ody membawa lima warga yang tersisa keluar sebelum ia ditangkap penyerang?"
     },
     published: true,
-    assetVersion: "first-v1"
+    assetVersion: "story-v2"
   },
 ];
 

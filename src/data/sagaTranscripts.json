@@ -11422,11 +11422,11 @@
  "21": [
   {
    "label": "PANEL 1",
-   "text": "Tuesday afternoon. The file from Chapter 20 is still unpublished.",
+   "text": "Wednesday afternoon, at the Werigo rental desk inside the Wedison showroom in Denpasar. Yesterday, a fake testimonial arrived. No one uploaded it.",
    "lines": [
     {
      "who": "JULES",
-     "text": "Tomorrow. 19:47. That is the time in the video."
+     "text": "Wednesday. 19:47. The video says you welcome this man tonight."
     }
    ]
   },
@@ -11436,7 +11436,7 @@
    "lines": [
     {
      "who": "JULES",
-     "text": "But look at the back door. That scratch is not there yet."
+     "text": "The video shows a deep scratch beside the handle. Our door is still clean."
     }
    ]
   },
@@ -11447,11 +11447,11 @@
   },
   {
    "label": "PANEL 3",
-   "text": "",
+   "text": "The booking attached to it has no matching payment or handover. Yesterday, Ody also rejected the door entity's offer to erase people from the records.",
    "lines": [
     {
      "who": "ODY",
-     "text": "No upload. No testimonial. Preserve the original."
+     "text": "Save the file and sender details. I never recorded that welcome."
     }
    ]
   },
@@ -11461,21 +11461,21 @@
    "lines": [
     {
      "who": "BRAM",
-     "text": "Great. Even the apocalypse wants your endorsement."
+     "text": "A fake booking was not enough. Now it wants a fake review."
     },
     {
      "who": "ODY",
-     "text": "It is not getting my approval."
+     "text": "Nobody opens the door because of that video."
     }
    ]
   },
   {
    "label": "PANEL 5",
-   "text": "",
+   "text": "At Grandma's house. Ody checks on her by phone; Arya and Komang are there with her.",
    "lines": [
     {
      "who": "GRANDMOTHER",
-     "text": "The envelope stays sealed. Sura is a name, not proof."
+     "text": "I remember Sura. I still do not know what happened to him. The envelope stays sealed."
     }
    ]
   },
@@ -11485,17 +11485,17 @@
    "lines": [
     {
      "who": "ARYA",
-     "text": "We will head to the showroom once your neighbour is here."
+     "text": "Your neighbour will stay here. We will call again from the showroom."
     },
     {
      "who": "KOMANG",
-     "text": "Nobody is spending tonight alone."
+     "text": "And the food stays here. I am a very generous person under supervision."
     }
    ]
   },
   {
    "label": "PANEL 7",
-   "text": "Grey EdPower. Red Victory. Separate models, separate readiness checks.",
+   "text": "Before evening handovers: Ody checks the grey EdPower and red Victory. The fake booking receives no bike.",
    "lines": [
     {
      "who": "ODY",
@@ -11515,7 +11515,7 @@
   },
   {
    "label": "PANEL 9",
-   "text": "Early evening. They arrive by road, after leaving the courtyard.",
+   "text": "Later that afternoon. Arya and Komang arrive at the same showroom. Dewa handles the bikes; Jules handles bookings; Remy checks the pilot budget. Bram is helping Ody contact partners.",
    "lines": [
     {
      "who": "ARYA",
@@ -11535,46 +11535,36 @@
   },
   {
    "label": "PANEL 11",
-   "text": "19:46. The original file changes while they watch.",
-   "lines": [
-    {
-     "who": "JULES",
-     "text": "The timestamp changed. Tonight."
-    }
-   ]
+   "text": "After sunset, before handovers close. The white Athena and black Victory are ready; the team checks rider fit, batteries and passenger helmets.",
+   "lines": []
   },
   {
    "label": "PANEL 12",
-   "text": "The scratch from the video appears on the real door.",
+   "text": "The white Bees is another option, with home charging. Dewa checks the route against each model's charging needs.",
    "lines": []
   },
   {
    "label": "PANEL 13",
-   "text": "",
-   "lines": [
-    {
-     "who": "CUSTOMER",
-     "text": "You already welcomed me. Here is your video."
-    }
-   ]
+   "text": "Outside the same showroom. Athena, Victory and EdPower support SuperCharge; Bees does not. A ready bike matters more than a promise to charge it later.",
+   "lines": []
   },
   {
    "label": "PANEL 14",
-   "text": "",
+   "text": "Charging time depends on suitable conditions. Their fleet has already been checked.",
    "lines": [
     {
-     "who": "ODY",
-     "text": "That never happened. Who sent you?"
+     "who": "DEWA",
+     "text": "The station is working. SuperCharge 10–80% takes about fifteen minutes. Handovers still need charged bikes."
     }
    ]
   },
   {
    "label": "PANEL 15",
-   "text": "The smile was a disguise. The video was a rehearsal.",
+   "text": "",
    "lines": [
     {
-     "who": "VEYR",
-     "text": "A reservation is a claim on a place that has not happened yet."
+     "who": "REMY",
+     "text": "The pilot is still a proposal. Refundable deposits cannot fund it."
     }
    ]
   },
@@ -11584,48 +11574,127 @@
    "lines": [
     {
      "who": "ODY",
-     "text": "I refused your contract. You cannot use my name."
+     "text": "Show the actual bike and handover process. Sell what this team can deliver."
+    },
+    {
+     "who": "REMY",
+     "text": "Then match the budget to that capacity. More bookings also mean more costs."
     }
    ]
   },
   {
    "label": "PANEL 17",
-   "text": "The old consent rule still holds. This breach comes from outside.",
+   "text": "",
    "lines": [
     {
-     "who": "VEYR",
-     "text": "The little door stayed shut. Our fleet did not need it."
+     "who": "BRAM",
+     "text": "My hosts want one confirmed contact for late arrivals. I will send them Jules' number."
     }
    ]
   },
   {
    "label": "PANEL 18",
-   "text": "19:47 WITA. Denpasar is not the only city looking up.",
+   "text": "A few quiet minutes before closing. His friends still make room for him outside work.",
    "lines": [
     {
-     "who": "SYSTEM",
-     "text": "WORLD ALERT|Multiple external breaches. Origin: unidentified."
+     "who": "ODY",
+     "text": "My church group is arranging Sunday lunch. I told them I would come after the pilot review."
     }
    ]
   },
   {
    "label": "PANEL 19",
-   "text": "Jakarta. The same instant.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 20",
-   "text": "Hospitals. Homes. Streets. The screen does not belong to a phone.",
+   "text": "The same Wednesday night. Jules has kept the original file; its timestamp has not changed.",
    "lines": [
     {
-     "who": "SYSTEM",
-     "text": "EMERGENCY EXPANSION|Human survival protocol: global."
+     "who": "JULES",
+     "text": "19:46. One minute until the time in that video."
     }
    ]
   },
   {
+   "label": "PANEL 20",
+   "text": "Metal scrapes outside. The same mark cuts into the showroom door, beside the handle. Someone is there.",
+   "lines": []
+  },
+  {
    "label": "PANEL 21",
-   "text": "Jakarta. The green breach did not carry Veyr. It carried a forest, and the elves who had lived in it.",
+   "text": "A man stands outside the closed glass. Jules recognises the face in the fake testimonial.",
+   "lines": [
+    {
+     "who": "CUSTOMER",
+     "text": "Ody. Open up. Your video says you already accepted my booking."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 22",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I never met you. There is no valid booking. Who are you?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "Outside the glass, the human disguise tears apart. Ivory armour unfolds underneath it. The visitor admits the video was bait.",
+   "lines": [
+    {
+     "who": "VEYR",
+     "text": "We are Veyr. You were supposed to open the door for us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "The booking, the video… all to make us let you in? We refused."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "The invitation-based door remains closed. The fleet is attacking from outside; refusing a fake booking cannot stop a military invasion.",
+   "lines": [
+    {
+     "who": "VEYR",
+     "text": "That entrance failed. Our invasion fleet will open its own breaches."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "19:47 WITA. Above Denpasar, amber fractures spread across the sky. Reports arrive from other cities too.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "WORLD ALERT|External invasion breaches detected.|Dimensional overlap is spreading."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "Jakarta, at the same instant. More breaches open above the streets. The attack is not limited to Bali.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 28",
+   "text": "A blue window appears directly in people's sight, even without a phone. Earth's System announces a global survival response.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "EARTH SYSTEM · EMERGENCY RESPONSE|Combat profiles activated for all humans.|The invaders did not grant these profiles."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "Elsewhere in Jakarta, a green breach carries part of a forest realm and its elves onto Earth. They look as displaced as the humans.",
    "lines": [
     {
      "who": "SYSTEM",
@@ -11634,8 +11703,8 @@
    ]
   },
   {
-   "label": "PANEL 22",
-   "text": "Dwarves. Goblins. Not every arrival had chosen to come.",
+   "label": "PANEL 30",
+   "text": "Another street in Jakarta. Dwarves and goblins arrive with their belongings. Some crossings carry refugees, not armies.",
    "lines": [
     {
      "who": "DWARF",
@@ -11644,8 +11713,8 @@
    ]
   },
   {
-   "label": "PANEL 23",
-   "text": "The first scout did not ask for a signature.",
+   "label": "PANEL 31",
+   "text": "Jakarta, near an amber breach. A Veyr scout attacks a man who is helping people cross the road.",
    "lines": [
     {
      "who": "WITNESS",
@@ -11654,8 +11723,8 @@
    ]
   },
   {
-   "label": "PANEL 24",
-   "text": "He did not wake up. A human life ended on the street. A level was not a second life.",
+   "label": "PANEL 32",
+   "text": "He dies before anyone can save him. The new level does not make humans invulnerable.",
    "lines": [
     {
      "who": "WITNESS",
@@ -11664,13 +11733,13 @@
    ]
   },
   {
-   "label": "PANEL 25",
-   "text": "At another breach, an orc raiding clan killed the people defending a shop. Veyr was not the only danger.",
+   "label": "PANEL 33",
+   "text": "A street in Bali. Armed orc raiders kill the people defending a shop. This faction attacks too; it is not the same force as Veyr.",
    "lines": []
   },
   {
-   "label": "PANEL 26",
-   "text": "Dark elves sheltered a goblin while a horned nomad lit the escape route. Names would come later. Tonight, their choices came first.",
+   "label": "PANEL 34",
+   "text": "Nearby, dark elves shelter a goblin and humans under a collapsing roof. These displaced strangers choose to help.",
    "lines": [
     {
      "who": "DARK ELF",
@@ -11679,8 +11748,8 @@
    ]
   },
   {
-   "label": "PANEL 27",
-   "text": "",
+   "label": "PANEL 35",
+   "text": "Back inside the Denpasar showroom. Jules and Bram see their own System windows. The emissary still waits beyond the front glass.",
    "lines": [
     {
      "who": "JULES",
@@ -11693,51 +11762,51 @@
    ]
   },
   {
-   "label": "PANEL 28",
+   "label": "PANEL 36",
    "text": "",
    "lines": [
     {
      "who": "SYSTEM",
-     "text": "GLOBAL COMBAT PROFILE|Every human receives G-LV.1.|EXP: hostile monster defeats and verified survival tasks."
+     "text": "GLOBAL COMBAT PROFILE|Human combat level: G-LV.1 · Job: Unassigned.|EXP: defeat hostile monsters or complete verified survival tasks.|A profile is not fighting experience."
     }
    ]
   },
   {
-   "label": "PANEL 29",
+   "label": "PANEL 37",
    "text": "",
    "lines": [
     {
      "who": "ARYA",
-     "text": "Rally is still here. This is another layer."
+     "text": "My old Rally skill is still here. But this combat profile starts at level one."
     },
     {
      "who": "SYSTEM",
-     "text": "LINKED PROFILE|Existing classes, skills and local progress retained.|G-LV measures combat growth. It is not the old local level."
+     "text": "TWO TRACKS · ONE PERSON|Old local roles and skills are retained.|New combat level: G-LV.1 · Combat job: Unassigned."
     }
    ]
   },
   {
-   "label": "PANEL 30",
+   "label": "PANEL 38",
    "text": "",
    "lines": [
     {
      "who": "ODY",
-     "text": "Operator. Same responsibility. Bigger emergency."
+     "text": "Operator is my old network role. It does not make me a trained warrior."
     }
    ]
   },
   {
-   "label": "PANEL 31",
-   "text": "",
+   "label": "PANEL 39",
+   "text": "Arya and Komang step into the side courtyard to test the basic ability, away from the waiting people.",
    "lines": [
     {
      "who": "SYSTEM",
-     "text": "BASE SKILL · PULSE|A short kinetic push. Stamina cost.|Cooldown: 10 seconds. Not a shield."
+     "text": "BASE ABILITY · PULSE|A short kinetic push. Uses stamina.|Cooldown: 10 seconds. It is not a shield or a combat job."
     }
    ]
   },
   {
-   "label": "PANEL 32",
+   "label": "PANEL 40",
    "text": "",
    "lines": [
     {
@@ -11751,8 +11820,8 @@
    ]
   },
   {
-   "label": "PANEL 33",
-   "text": "",
+   "label": "PANEL 41",
+   "text": "A four-legged scout drops into the front forecourt. The tall emissary remains a separate threat near the glass.",
    "lines": [
     {
      "who": "SYSTEM",
@@ -11761,85 +11830,12 @@
    ]
   },
   {
-   "label": "PANEL 34",
-   "text": "",
-   "lines": [
-    {
-     "who": "DEWA",
-     "text": "People are still at the side entrance. We move them first."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 35",
-   "text": "",
-   "lines": [
-    {
-     "who": "ODY",
-     "text": "Jules, contact the waiting guests. Suspend handovers."
-    },
-    {
-     "who": "JULES",
-     "text": "One update. One contact. No promises we cannot keep."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 36",
-   "text": "",
-   "lines": [
-    {
-     "who": "BRAM",
-     "text": "I will call my nearby hosts. Confirm a safe room, not a rumour."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 37",
-   "text": "Different Wedison models. Choose by rider fit, readiness and route.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 38",
-   "text": "Bees uses home charging. No SuperCharge claim for this model.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 39",
-   "text": "Wedison SuperCharge: 10–80% in around 15 minutes under suitable conditions.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 40",
-   "text": "",
-   "lines": [
-    {
-     "who": "DEWA",
-     "text": "Check the bay and power first. Nobody charges through damaged equipment."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 41",
-   "text": "",
-   "lines": [
-    {
-     "who": "REMY",
-     "text": "Separate the emergency costs. Keep refundable deposits untouched."
-    }
-   ]
-  },
-  {
    "label": "PANEL 42",
    "text": "",
    "lines": [
     {
-     "who": "ODY",
-     "text": "No disaster promo. Give useful, verified information."
-    },
-    {
-     "who": "REMY",
-     "text": "Our business plan now starts with bringing people home."
+     "who": "DEWA",
+     "text": "Nine people are sheltering here. Two are at the side door. I will take those two down the back lane."
     }
    ]
   },
@@ -11848,8 +11844,12 @@
    "text": "",
    "lines": [
     {
-     "who": "BRAM",
-     "text": "The neighbour confirmed shelter behind the lane. No crowd there yet."
+     "who": "ODY",
+     "text": "Jules, stop all handovers. Tell customers where to shelter; count everyone here."
+    },
+    {
+     "who": "JULES",
+     "text": "I will keep one list: people inside, people evacuated, people still waiting."
     }
    ]
   },
@@ -11858,8 +11858,28 @@
    "text": "",
    "lines": [
     {
+     "who": "BRAM",
+     "text": "A host I know lives at the end of this lane. I will ask if he can shelter people."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 45",
+   "text": "The front opens toward the breach. The side lane leads to the confirmed house, about eighty metres behind the showroom.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "He confirmed it. Side door, back lane, his courtyard. He is opening the gate now."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 46",
+   "text": "",
+   "lines": [
+    {
      "who": "KOMANG",
-     "text": "The shortest route goes under the breach. We take the longer one."
+     "text": "Pathfinder shows the lane. I checked the exit too. Do not take the front road."
     },
     {
      "who": "SYSTEM",
@@ -11868,51 +11888,27 @@
    ]
   },
   {
-   "label": "PANEL 45",
-   "text": "",
+   "label": "PANEL 47",
+   "text": "Ody follows them to the side entrance. Dewa escorts the two civilians on foot; Arya watches the forecourt.",
    "lines": [
     {
      "who": "ODY",
-     "text": "Stay together. Follow Dewa. Not the light in the sky!"
-    }
-   ]
-  },
-  {
-   "label": "PANEL 46",
-   "text": "The scout follows the moving people. A tether glints behind its shell.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 47",
-   "text": "",
-   "lines": [
-    {
-     "who": "SYSTEM",
-     "text": "SURVIVAL TASK VERIFIED|Two adults reached the checked shelter.|ODY: +40 EXP · G-LV.1 · 40/100"
+     "text": "Both of you, follow Dewa to the courtyard. I will cover the side door."
     }
    ]
   },
   {
    "label": "PANEL 48",
-   "text": "",
-   "lines": [
-    {
-     "who": "BRAM",
-     "text": "So we can level without hunting?"
-    },
-    {
-     "who": "ODY",
-     "text": "When we actually help. Not when we pose for it."
-    }
-   ]
+   "text": "The scout turns toward the side lane. A glowing tether links it to the breach.",
+   "lines": []
   },
   {
    "label": "PANEL 49",
-   "text": "",
+   "text": "Dewa confirms their arrival by phone and heads back. Ody returns to the showroom's side courtyard.",
    "lines": [
     {
-     "who": "ARYA",
-     "text": "It is between us and the entrance."
+     "who": "SYSTEM",
+     "text": "SURVIVAL TASK VERIFIED|Two civilians reached the confirmed house on foot.|ODY: +40 EXP · G-LV.1 · 40/100|Seven civilians remain at the showroom."
     }
    ]
   },
@@ -11921,8 +11917,12 @@
    "text": "",
    "lines": [
     {
-     "who": "KOMANG",
-     "text": "Arya! Its legs stop for a second when the tether tightens!"
+     "who": "BRAM",
+     "text": "The two are there. Helping them gave you EXP?"
+    },
+    {
+     "who": "ODY",
+     "text": "A completed task. The rest still need a way out."
     }
    ]
   },
@@ -11932,42 +11932,62 @@
    "lines": [
     {
      "who": "ARYA",
-     "text": "RALLY! Stay with the route!"
-    },
-    {
-     "who": "SYSTEM",
-     "text": "PULSE|Stamina spent. Cooldown: 10 seconds."
+     "text": "The scout has cut across the side courtyard. The others cannot reach the lane!"
     }
    ]
   },
   {
    "label": "PANEL 52",
-   "text": "It loses one step. Not its life.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 53",
    "text": "",
    "lines": [
     {
-     "who": "ODY",
-     "text": "The pulse did not break it. But the plates opened."
+     "who": "KOMANG",
+     "text": "Arya! Its tether tightens before it lunges. The legs pause!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 53",
+   "text": "Rally keeps the group together. Arya's separate Pulse catches the scout during its pause.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "RALLY! Stay behind me!"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ARYA · PULSE USED|Scout staggered. Stamina spent.|Cooldown: 10 seconds."
     }
    ]
   },
   {
    "label": "PANEL 54",
-   "text": "",
-   "lines": [
-    {
-     "who": "ODY",
-     "text": "Hit the core while it is open. Same moment."
-    }
-   ]
+   "text": "It loses one step. Not its life.",
+   "lines": []
   },
   {
    "label": "PANEL 55",
    "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "The shell opened when it staggered. That orange core is exposed."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 56",
+   "text": "They stay behind the doorway while the scout pulls against its tether. Ten seconds pass.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Arya, wait for your cooldown. Then we hit the exposed core together."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 57",
+   "text": "Ody and Arya fire two Pulses at the same exposed core. The scout breaks; they have opened the lane, not won the invasion.",
    "lines": [
     {
      "who": "ODY",
@@ -11976,7 +11996,7 @@
    ]
   },
   {
-   "label": "PANEL 56",
+   "label": "PANEL 58",
    "text": "",
    "lines": [
     {
@@ -11986,7 +12006,7 @@
    ]
   },
   {
-   "label": "PANEL 57",
+   "label": "PANEL 59",
    "text": "",
    "lines": [
     {
@@ -12000,32 +12020,32 @@
    ]
   },
   {
-   "label": "PANEL 58",
+   "label": "PANEL 60",
    "text": "",
    "lines": [
     {
      "who": "JULES",
-     "text": "Seven people still waiting. We can move four on the first round."
+     "text": "Seven civilians left. Two bikes, two riders: only two passenger seats."
     },
     {
      "who": "ODY",
-     "text": "Then promise four. Confirm the second round after the route is clear."
+     "text": "Take two. The other five stay with you, Bram and Remy in the back room."
     }
    ]
   },
   {
-   "label": "PANEL 59",
-   "text": "",
+   "label": "PANEL 61",
+   "text": "The same capacity rule they used in the pilot now shapes the evacuation.",
    "lines": [
     {
      "who": "JULES",
-     "text": "Capacity before reach. Tonight that is not just a business rule."
+     "text": "Two passengers this trip. I will not tell seven people there are seven seats."
     }
    ]
   },
   {
-   "label": "PANEL 60",
-   "text": "The bikes remain real Wedison models. No fantasy modifications.",
+   "label": "PANEL 62",
+   "text": "Dewa is back. His red EdPower is ready for one civilian passenger.",
    "lines": [
     {
      "who": "DEWA",
@@ -12034,32 +12054,12 @@
    ]
   },
   {
-   "label": "PANEL 61",
-   "text": "",
-   "lines": [
-    {
-     "who": "DEWA",
-     "text": "Komang leads the checked lane. Nobody races the portal."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 62",
-   "text": "",
-   "lines": [
-    {
-     "who": "KOMANG",
-     "text": "Taking the white Athena. This one is checked for the first run."
-    }
-   ]
-  },
-  {
    "label": "PANEL 63",
    "text": "",
    "lines": [
     {
-     "who": "KOMANG",
-     "text": "First time I have wished for boring traffic."
+     "who": "DEWA",
+     "text": "Same house at the end of the lane. Komang, take the second passenger."
     }
    ]
   },
@@ -12068,28 +12068,28 @@
    "text": "",
    "lines": [
     {
-     "who": "BRAM",
-     "text": "Hosts want one update they can forward. No victory claim yet."
+     "who": "KOMANG",
+     "text": "The checked white Athena, then. Helmet first. Both feet on the passenger rests."
     }
    ]
   },
   {
    "label": "PANEL 65",
-   "text": "A familiar community. A steady voice. Not a new magic skill.",
+   "text": "Komang rolls the Athena toward the side exit. His passenger is still waiting inside; they have not left the showroom.",
    "lines": [
     {
-     "who": "ODY",
-     "text": "My church group is checking everyone. I told them where we are."
+     "who": "KOMANG",
+     "text": "First time I have wished for boring traffic."
     }
    ]
   },
   {
    "label": "PANEL 66",
-   "text": "",
+   "text": "The emissary leaves the front glass and advances toward the side exit. The waiting riders cannot get past him.",
    "lines": [
     {
      "who": "VEYR",
-     "text": "You defeated a tool. Do not mistake that for defeating us."
+     "text": "You broke one scout. I still need the Operator alive."
     },
     {
      "who": "SYSTEM",
@@ -12103,18 +12103,18 @@
    "lines": [
     {
      "who": "ODY",
-     "text": "Everyone inside. Now."
+     "text": "Jules! Take the other five to the back room!"
     }
    ]
   },
   {
    "label": "PANEL 68",
-   "text": "His next pulse hits. The emissary does not move.",
+   "text": "Ody tries to push the emissary away from the exit. His Pulse cannot move a G-LV.18 enemy.",
    "lines": []
   },
   {
    "label": "PANEL 69",
-   "text": "",
+   "text": "A casual counterblow throws Ody down. The emissary could kill him, but is trying to capture him.",
    "lines": [
     {
      "who": "ODY",
@@ -12128,7 +12128,7 @@
    "lines": [
     {
      "who": "ARYA",
-     "text": "Ody! Look at me. We do not have to beat it to get them out."
+     "text": "Ody! We cannot beat him. Give the bikes a way past him!"
     }
    ]
   },
@@ -12138,17 +12138,17 @@
    "lines": [
     {
      "who": "ODY",
-     "text": "Right. We need a window. Not a miracle."
+     "text": "A few seconds for the side lane. I can try the old network."
     }
    ]
   },
   {
    "label": "PANEL 72",
-   "text": "He remembers the linked island network from Chapter 6.",
+   "text": "Ody opens his existing Operator profile. Its local links offer a temporary stabilisation skill. He reads the limits before using it.",
    "lines": [
     {
      "who": "SYSTEM",
-     "text": "OPERATOR · LEGACY NETWORK|Existing link detected. Manual stabilisation available.|One local exit corridor · 45 seconds."
+     "text": "OPERATOR · LEGACY NETWORK|ANCHOR: slow hostile intrusion across one local exit.|Maximum duration: 45 seconds.|Cannot seal the sky breaches or defeat the emissary."
     }
    ]
   },
@@ -12158,17 +12158,17 @@
    "lines": [
     {
      "who": "ODY",
-     "text": "No borrowed names. No replaced people. I hold the cost."
+     "text": "It drains me while I hold this spot. Dewa, Komang—go when the lane opens."
     },
     {
      "who": "SYSTEM",
-     "text": "CONDITIONS|Operator stays at anchor. Corridor must be checked.|Heavy stamina drain. Not invulnerability."
+     "text": "ANCHOR CONDITIONS|Keep physical contact with the anchor point.|Release or depleted stamina ends the corridor.|This is Ody's System ability, not charging-station power."
     }
    ]
   },
   {
    "label": "PANEL 74",
-   "text": "",
+   "text": "At the side exit, Ody plants his palm on the anchor. The field slows the emissary's advance just enough to leave a narrow lane behind Ody.",
    "lines": [
     {
      "who": "ODY",
@@ -12182,26 +12182,26 @@
   },
   {
    "label": "PANEL 75",
-   "text": "The first group reaches the checked shelter. The lane stays one-way for the run.",
+   "text": "Dewa carries one passenger on the red EdPower; Komang carries one on the white Athena. Four people on two bikes, including the riders.",
    "lines": []
   },
   {
    "label": "PANEL 76",
-   "text": "",
+   "text": "The two early walkers are already there. Dewa and Komang stay with all four civilians.",
    "lines": [
     {
      "who": "DEWA",
-     "text": "First four safe. Returning only if the route holds."
+     "text": "Both passengers reached the house. Four civilians safe in total. We cannot return yet."
     }
    ]
   },
   {
    "label": "PANEL 77",
-   "text": "",
+   "text": "From the side doorway, Jules calls the headcount to Ody.",
    "lines": [
     {
      "who": "JULES",
-     "text": "The other three are inside the locked back room. Door checked."
+     "text": "Five civilians are in the back room with Bram and Remy. The rear door is locked."
     },
     {
      "who": "SYSTEM",
@@ -12211,35 +12211,39 @@
   },
   {
    "label": "PANEL 78",
-   "text": "",
+   "text": "Ody lifts his hand. The corridor collapses; the sky breach remains. Arya stays beside him while he catches his breath.",
    "lines": [
     {
      "who": "ARYA",
-     "text": "They are clear! Release it!"
+     "text": "The bikes made it! Release the Anchor before you collapse!"
     },
     {
      "who": "ODY",
-     "text": "Get the headcount. Do not announce a victory."
+     "text": "Four out, five sheltered. Stay with me."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ANCHOR RELEASED|Evacuated civilians: 4/9 · Sheltered on site: 5/9.|No second trip. The side exit is exposed again."
     }
    ]
   },
   {
    "label": "PANEL 79",
-   "text": "",
+   "text": "The emissary drops a claim tablet instead of finishing Ody off. It is a demand from the invaders, not an accepted agreement.",
    "lines": [
     {
      "who": "VEYR",
-     "text": "Your network can hold a breach. That makes you useful."
+     "text": "You can stabilise our passage. That is why I need you alive."
     }
    ]
   },
   {
    "label": "PANEL 80",
-   "text": "",
+   "text": "Jules can read it from the doorway. Ody does not touch the tablet. Behind them, the five civilians remain sheltered.",
    "lines": [
     {
      "who": "SYSTEM",
-     "text": "CLAIM NOTICE · HOSTILE TRANSMISSION|WERIGO · OPERATOR ODY|Origin of signal: VEYR EXPEDITION / BEYOND THE RIFT"
+     "text": "HOSTILE DEMAND · NO AGREEMENT|Target: Operator Ody and his island network.|Issued by: Veyr invasion fleet.|Ody has granted no access."
     }
    ]
   },
@@ -12249,17 +12253,17 @@
    "lines": [
     {
      "who": "ODY",
-     "text": "What do you actually want to rent?"
+     "text": "You do not want a bike. You want our network. For what?"
     }
    ]
   },
   {
    "label": "PANEL 82",
-   "text": "The customer was never booking a bike.",
+   "text": "The fake customer was scouting a route for an invasion. Four civilians are out, five are still trapped, and the Operator is now the target.",
    "lines": [
     {
      "who": "VEYR",
-     "text": "Your island."
+     "text": "To occupy your island."
     }
    ]
   },
@@ -12269,7 +12273,7 @@
    "lines": [
     {
      "who": "QUESTION",
-     "text": "Can Werigo keep people moving when the invaders want to own every road?"
+     "text": "Can Ody get the five remaining civilians out before the invaders capture him?"
     }
    ]
   }
