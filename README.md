@@ -306,3 +306,7 @@ GTM tags and History Change triggers are managed in the GTM container.
 Do not also initialize the same Meta Pixel through GTM: this installation
 already owns its base code and PageView events. No booking conversion or
 purchase event is added by this change.
+
+### Sitemap history snapshot for hosting releases
+
+After a local production build from a full-history checkout, run node scripts/sitemap-dates.mjs --write-cache and commit scripts/sitemap-dates-cache.json with the release. This preserves verified Git dates on shallow hosting clones without a second large history fetch. The content fingerprint covers tracked source, public assets, build scripts and package/config files, normalizing text line endings; any content change invalidates the snapshot and restores the full-history requirement. Refresh the snapshot after each release change.

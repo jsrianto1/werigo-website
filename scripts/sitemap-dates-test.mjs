@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { contentHistory, generateDates, prepareHistory } from './sitemap-dates.mjs';
+import { contentHistory, generateDates, prepareHistory, writeHistoryCache, readHistoryCache } from './sitemap-dates.mjs';
 
 const root = mkdtempSync(path.join(tmpdir(), 'werigo-sitemap-'));
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
@@ -65,6 +65,25 @@ try {
   assert.equal(execFileSync('git', ['rev-parse', '--is-shallow-repository'], { cwd: shallowRoot, encoding: 'utf8' }).trim(), 'true');
   prepareHistory(shallowRoot);
   assert.equal(contentHistory(shallowRoot).modified('src/app/b/page.tsx'), first, 'hosting shallow clone recovers original content date');
+
+  // A committed, fingerprinted snapshot works without network in a shallow clone.
+  const cachedDates = writeHistoryCache(root);
+  commit('2026-07-01T10:00:00Z');
+  const cachedRoot = path.join(root, '.next/cached-checkout');
+  git('clone', '--quiet', '--depth', '1', pathToFileURL(root).href, cachedRoot);
+  mkdirSync(path.join(cachedRoot, '.next/server/app'), { recursive: true });
+  writeFileSync(path.join(cachedRoot, '.next/prerender-manifest.json'), readFileSync(path.join(root, '.next/prerender-manifest.json')));
+  writeFileSync(path.join(cachedRoot, '.next/server/app/index.html'), readFileSync(path.join(root, '.next/server/app/index.html')));
+  prepareHistory(cachedRoot);
+  assert.equal(execFileSync('git', ['rev-parse', '--is-shallow-repository'], { cwd: cachedRoot, encoding: 'utf8' }).trim(), 'true', 'valid snapshot must avoid network history fetch');
+  assert.deepEqual(generateDates(cachedRoot), cachedDates, 'snapshot preserves original Git dates');
+  const cachedSource = path.join(cachedRoot, 'src/app/page.tsx');
+  const sourceBytes = readFileSync(cachedSource, 'utf8');
+  writeFileSync(cachedSource, sourceBytes.replace(/\r?\n/g, '\r\n'));
+  assert.deepEqual(readHistoryCache(cachedRoot), cachedDates, 'CRLF checkout remains valid');
+  writeFileSync(cachedSource, sourceBytes + '\n// changed source');
+  assert.equal(readHistoryCache(cachedRoot), null, 'source change must invalidate cached dates');
+
   write('.git/shallow', git('rev-parse', 'HEAD').trim() + '\n');
   assert.throws(() => contentHistory(root), /full Git history/);
   console.log('PASS: stable rebuilds, unrelated commits, formatting, isolated content updates, new/removed/noindex pages, images, standalone packaging and shallow-history guard.');
