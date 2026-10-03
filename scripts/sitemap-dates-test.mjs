@@ -32,6 +32,8 @@ try {
   write('src/app/a/page.tsx', 'export default function Page() { return <h1>First</h1>; }\n');
   write('src/app/b/page.tsx', 'export default function Page() { return <h1>Second</h1>; }\n');
   write('public/media/a.webp', 'image fixture');
+  write('next.config.ts', 'export default { output: \"standalone\" };\n');
+  write('public/media/.htaccess', '# Authored media serving configuration\n');
   commit(first);
   output({ '/a': { srcRoute: '/a' }, '/b': { srcRoute: '/b' } });
   const baseline = generateDates(root);
@@ -81,8 +83,21 @@ try {
   const sourceBytes = readFileSync(cachedSource, 'utf8');
   writeFileSync(cachedSource, sourceBytes.replace(/\r?\n/g, '\r\n'));
   assert.deepEqual(readHistoryCache(cachedRoot), cachedDates, 'CRLF checkout remains valid');
+  // Hosting mutations retain verified Git dates without a second network fetch.
+  writeFileSync(path.join(cachedRoot, 'next.config.ts'), 'export default { output: "standalone", images: { unoptimized: true } };\n');
+  writeFileSync(path.join(cachedRoot, 'public/media/.htaccess'), '# Hosting-generated media configuration\n');
+  assert.deepEqual(readHistoryCache(cachedRoot), cachedDates, 'generated settings must verify committed bytes');
+  prepareHistory(cachedRoot);
+  assert.equal(execFileSync('git', ['rev-parse', '--is-shallow-repository'], { cwd: cachedRoot, encoding: 'utf8' }).trim(), 'true', 'hosting mutations must not trigger history fetch');
   writeFileSync(cachedSource, sourceBytes + '\n// changed source');
   assert.equal(readHistoryCache(cachedRoot), null, 'source change must invalidate cached dates');
+  writeFileSync(cachedSource, sourceBytes);
+  execFileSync('git', ['add', 'next.config.ts', 'public/media/.htaccess'], { cwd: cachedRoot });
+  execFileSync('git', ['-c', 'user.name=Sitemap Test', '-c', 'user.email=sitemap@example.test', 'commit', '-qm', 'Authored settings change'], {
+    cwd: cachedRoot, env: { ...process.env, GIT_AUTHOR_DATE: '2026-08-01T10:00:00Z', GIT_COMMITTER_DATE: '2026-08-01T10:00:00Z' },
+  });
+  assert.equal(readHistoryCache(cachedRoot), null, 'authored configuration changes must invalidate old snapshots');
+
 
   write('.git/shallow', git('rev-parse', 'HEAD').trim() + '\n');
   assert.throws(() => contentHistory(root), /full Git history/);

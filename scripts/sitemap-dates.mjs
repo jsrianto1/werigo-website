@@ -28,6 +28,29 @@ export function historyFingerprint(root, inputs = []) {
   return hash.digest('hex');
 }
 
+/** Hostinger rewrites these deployment settings after checking out Git.
+ * Verify their committed bytes; authored changes and all content still invalidate.
+ */
+function verifiedHostingSettings(root, cache, inputs, changed) {
+  const managed = new Set(['next.config.ts', 'public/media/.htaccess']);
+  if (!changed.length || changed.some(file => !managed.has(file))) return false;
+  const expected = new Map((cache.inputs ?? []).map(entry => [entry.file, entry.hash]));
+  if (expected.size !== inputs.length || inputs.some(entry => !expected.has(entry.file))) return false;
+  try {
+    const verified = new Map();
+    for (const file of changed) {
+      let bytes = execFileSync('git', ['show', `HEAD:${file}`], { cwd: root, maxBuffer: 4 * 1024 * 1024 });
+      if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
+      const digest = createHash('sha256').update(bytes).digest('hex');
+      if (digest !== expected.get(file)) return false;
+      verified.set(file, digest);
+    }
+    const fingerprint = createHash('sha256');
+    for (const entry of inputs) fingerprint.update(entry.file + '\0').update(Buffer.from(verified.get(entry.file) ?? entry.hash, 'hex'));
+    return fingerprint.digest('hex') === cache.fingerprint;
+  } catch { return false; }
+}
+
 export function readHistoryCache(root) {
   const file = path.join(root, historyCachePath);
   if (!existsSync(file)) return null;
@@ -36,9 +59,14 @@ export function readHistoryCache(root) {
     const inputs = [];
     const fingerprint = historyFingerprint(root, inputs);
     if (cache.version !== 1 || !Object.keys(cache.dates ?? {}).length) return null;
+    if (Object.values(cache.dates).some(date => !Number.isFinite(Date.parse(date)) || Date.parse(date) > Date.now())) return null;
     if (cache.fingerprint !== fingerprint) {
       const expected = new Map((cache.inputs ?? []).map(entry => [entry.file, entry.hash]));
       const changed = inputs.filter(entry => expected.get(entry.file) !== entry.hash).map(entry => entry.file);
+      if (verifiedHostingSettings(root, cache, inputs, changed)) {
+        console.log('Sitemap: verified committed inputs for hosting-generated settings.');
+        return cache.dates;
+      }
       console.warn('Sitemap: snapshot mismatch in ' + changed.slice(0, 30).join(', '));
       return null;
     }
