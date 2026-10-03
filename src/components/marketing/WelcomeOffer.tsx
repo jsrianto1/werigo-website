@@ -105,21 +105,23 @@ export function WelcomeOffer() {
       ) : null}
 
       {modal ? (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="welcome-offer-title">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-3 md:p-4" role="dialog" aria-modal="true" aria-labelledby="welcome-offer-title">
           <button type="button" aria-label="Close" onClick={snooze} tabIndex={-1} className="absolute inset-0 h-full w-full cursor-default bg-primary-strong/60 backdrop-blur-sm" />
-          <div className="relative grid w-full max-w-[900px] overflow-hidden rounded-[24px] bg-[#fcf9f2] shadow-2xl md:grid-cols-[46%_54%]">
+          <div className="relative w-full max-w-[900px]">
             <button
               ref={closeRef}
               type="button"
               onClick={snooze}
               aria-label="Close"
               style={{ borderRadius: 9999 }}
-              className="absolute right-4 top-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center border-2 border-primary-strong/70 bg-[#fcf9f2]/95 text-primary-strong shadow-[0_0_0_4px_rgba(7,68,63,0.15)] transition-colors hover:bg-primary-faint"
+              className="absolute right-3 top-3 z-10 flex h-10 w-10 cursor-pointer items-center justify-center border-2 border-primary-strong/70 bg-[#fcf9f2]/95 text-primary-strong shadow-[0_0_0_4px_rgba(7,68,63,0.15)] transition-colors hover:bg-primary-faint md:right-4 md:top-4 md:h-11 md:w-11"
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
+            {/* The card never exceeds the visible viewport; it scrolls inside if needed. */}
+            <div className="grid max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain rounded-[24px] bg-[#fcf9f2] shadow-2xl md:max-h-[calc(100dvh-2rem)] md:grid-cols-[46%_54%]">
             {/* Visual panel */}
-            <div className="relative min-h-[300px] overflow-hidden bg-[#e3f1f4] md:min-h-[560px]">
+            <div className="relative h-[210px] shrink-0 overflow-hidden bg-[#e3f1f4] md:h-auto md:min-h-[560px]">
               <Image
                 src="/media/areas/uluwatu/hero.webp"
                 alt=""
@@ -129,9 +131,9 @@ export function WelcomeOffer() {
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-b from-[#e8f3f6] via-[#e8f3f6]/85 to-transparent md:via-[#e8f3f6]/70" />
-              <div className="absolute left-6 top-6 right-6 md:left-8 md:top-8">
-                <Image src="/brand/werigo-logo-compact.png" alt="Werigo" width={128} height={52} className="h-9 w-auto md:h-11" />
-                <p className="mt-4 font-display text-[28px] font-extrabold leading-[1.05] text-primary-strong md:mt-6 md:text-[38px]">
+              <div className="absolute left-5 top-5 right-6 md:left-8 md:top-8">
+                <Image src="/brand/werigo-logo-compact.png" alt="Werigo" width={128} height={52} className="h-8 w-auto md:h-11" />
+                <p className="mt-3 font-display text-[24px] font-extrabold leading-[1.05] text-primary-strong md:mt-6 md:text-[38px]">
                   Less noise.
                   <br />
                   More Bali.
@@ -143,42 +145,43 @@ export function WelcomeOffer() {
                 width={1380}
                 height={1380}
                 sizes="(min-width: 768px) 400px, 60vw"
-                className="absolute -right-2 bottom-2 w-[60%] max-w-[440px] drop-shadow-[0_18px_24px_rgba(7,68,63,0.25)] md:bottom-8 md:w-[96%]"
+                className="absolute -right-2 bottom-1 w-[52%] max-w-[440px] drop-shadow-[0_18px_24px_rgba(7,68,63,0.25)] md:bottom-8 md:w-[96%]"
               />
-              <p className="absolute bottom-4 left-6 max-w-[40%] text-[10px] font-semibold uppercase leading-relaxed tracking-[0.22em] text-primary-strong md:left-8 md:max-w-none">
+              <p className="absolute bottom-3 left-5 max-w-[45%] text-[9px] font-semibold uppercase leading-relaxed tracking-[0.2em] text-primary-strong md:bottom-4 md:left-8 md:max-w-none md:text-[10px]">
                 Your island. Your pace.
               </p>
             </div>
 
             {/* Offer panel */}
-            <div className="relative px-6 py-8 text-center md:px-10 md:py-12">
+            <div className="relative px-5 py-5 text-center md:px-10 md:py-12">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c14a05]"><T>{"Your Bali welcome offer"}</T></p>
-              <h2 id="welcome-offer-title" className="mt-4 font-display text-3xl font-extrabold text-primary-strong md:text-[34px]">
+              <h2 id="welcome-offer-title" className="mt-2 font-display text-2xl font-extrabold text-primary-strong md:mt-4 md:text-[34px]">
                 <T>{"The island is calling."}</T>
               </h2>
-              <p className="mt-3 flex items-end justify-center gap-2 text-primary-strong">
-                <span className="font-display text-[88px] font-extrabold leading-[0.85] tracking-tight md:text-[112px]">{welcomeOffer.percent}</span>
-                <span className="pb-2 font-display text-5xl font-extrabold leading-none md:pb-3">%</span>
-                <span className="pb-3 text-2xl font-bold uppercase md:pb-4 md:text-3xl">off</span>
+              <p className="mt-1 flex items-end justify-center gap-2 text-primary-strong md:mt-3">
+                <span className="font-display text-[64px] font-extrabold leading-[0.85] tracking-tight md:text-[112px]">{welcomeOffer.percent}</span>
+                <span className="pb-1 font-display text-4xl font-extrabold leading-none md:pb-3 md:text-5xl">%</span>
+                <span className="pb-2 text-xl font-bold uppercase md:pb-4 md:text-3xl">off</span>
               </p>
-              <p className="mt-3 text-lg font-semibold text-primary-strong"><T>{"your first electric scooter rental"}</T></p>
-              <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-ink-soft"><T>{"Create your Werigo account and make your first Bali ride a little sweeter."}</T></p>
+              <p className="mt-2 text-base font-semibold text-primary-strong md:mt-3 md:text-lg"><T>{"your first electric scooter rental"}</T></p>
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink-soft md:mt-3"><T>{"Create your Werigo account and make your first Bali ride a little sweeter."}</T></p>
               <Link
                 href={registerHref}
                 onClick={() => setModal(false)}
-                className="mt-6 inline-flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#c14a05] px-8 text-base font-semibold text-white transition-colors hover:bg-[#a83f04]"
+                className="mt-4 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#c14a05] px-8 text-base font-semibold text-white transition-colors hover:bg-[#a83f04] md:mt-6 md:min-h-14"
               >
                 <T>{"Create account & save 20%"}</T>
                 <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
               </Link>
-              <p className="mt-4 text-xs leading-relaxed text-ink-soft">
+              <p className="mt-3 text-xs leading-relaxed text-ink-soft md:mt-4">
                 <T>{"For newly registered customers only."}</T>
                 <br />
                 <T>{"Offer ends"}</T> <strong className="font-semibold text-ink">{welcomeOffer.endsLabel}.</strong>
               </p>
-              <button type="button" onClick={snooze} className="mt-4 cursor-pointer text-sm text-ink-soft underline underline-offset-4 hover:text-ink">
+              <button type="button" onClick={snooze} className="mt-3 cursor-pointer text-sm text-ink-soft underline underline-offset-4 hover:text-ink md:mt-4">
                 <T>{"Maybe later"}</T>
               </button>
+            </div>
             </div>
           </div>
         </div>
