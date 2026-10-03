@@ -12277,5 +12277,688 @@
     }
    ]
   }
+ ],
+ "22": [
+  {
+   "label": "PANEL 1",
+   "text": "Minutes after the first breach. Four civilians reached the host house, eighty metres behind the showroom. Five remain inside. Ody has released Anchor.",
+   "lines": [
+    {
+     "who": "VEYR",
+     "text": "Your island needs an Operator. You will remain alive."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Then you picked a terrible employee."
+    }
+   ]
+  },
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA CHAPTER 22: Forty-Five Seconds",
+   "lines": []
+  },
+  {
+   "label": "PANEL 3",
+   "text": "The blade hit the scout. Not the commander.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 4",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Still branding islands as inventory, Emissary?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "She crossed through a forest rift and followed the command signal to the showroom. She had seen that mask before.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 6",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Can you beat him?"
+    },
+    {
+     "who": "LIORA",
+     "text": "At full strength, perhaps. Tonight, I can buy an exit."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Five people are behind that door."
+    },
+    {
+     "who": "LIORA",
+     "text": "Then give me a route. Not a speech."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 8",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Rear kitchen, left into the lane. The house gate is unlocked."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "The contact Bram called before the invasion is still answering. No new destination, no gamble on a map.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Dewa and Komang are waiting with the first four."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "",
+   "lines": [
+    {
+     "who": "CIVILIAN",
+     "text": "My knee will not let me run. Leave me a torch."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "We planned for five. We leave with five."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "One charge left. It will mimic your trace for forty-five seconds."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "It fools his tracker, not his eyes. Once he sees you, it is over."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ECHO DECOY|Duration: 45 seconds|Consumable focus: last charge|No shield. No damage."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "A copied signal ran toward the front road. The real evacuation went the other way.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "ECHO ACTIVE|00:45|The real Operator must leave line of sight."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "00:42. The Emissary followed the signal.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 16",
+   "text": "00:37. Five civilians. One doorway. No pushing.",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Slowest first. Keep one hand on the wall."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Jammed. Bram, wedge it!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 18",
+   "text": "00:29. Ody could still lift metal. He could not summon another Anchor.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 19",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Another scout!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 20",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Do not chase the core. Watch the front legs plant."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "00:23. She broke its turn. Arya finally had a stationary target.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 22",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Now?"
+    },
+    {
+     "who": "LIORA",
+     "text": "Now."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "DOWN!"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "PULSE|Scout G-LV.3: defeated|Arya: +60 EXP|Pulse cooldown: 10 seconds"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "00:18. Winning made noise. It did not refill their lungs.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "ARYA|G-LV.1 → G-LV.2|EXP: 20 / 150|Job: unassigned|Level-up does not heal injuries."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "Its command filament snapped. Somewhere, the Emissary turned his head.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 26",
+   "text": "00:12. The fifth civilian reached the last bend.",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "Gate is ten steps away. I am counting them with you."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "00:09. Ody left no one behind the kitchen door.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Arya. Move!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "00:03. The last two humans crossed the gate.",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Inside. Do not look for me on the road."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "She crossed with them. Then the echo died.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 30",
+   "text": "",
+   "lines": [
+    {
+     "who": "VEYR",
+     "text": "A borrowed signal. The exile is here."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "ECHO ENDED|00:00|Focus exhausted. Cannot repeat."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "The first four are here. Where are the others?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Please tell me nobody picked Warrior on the way."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 33",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Four from the first trips. Five from the kitchen. Nine."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "Nine arrived. All nine."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Ody. Werigo. You got our people out. Who are you?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Liora Veylen. Assassin. Once, I guarded an island too."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "LIORA VEYLEN|Race: Elf|G-LV.16 • Job: Assassin|Status: injured • focus depleted"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Elarin. We thought the first portal was the whole invasion."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "It was a survey. The occupation came after we stopped counting the missing."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "Some crossed to escape. Some crossed to conquer. An ear, a tusk or a beard did not tell the difference.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 40",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Ask what they do to the person who cannot run. That tells you more."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "You are sixteen. He is eighteen. Is the number everything?"
+    },
+    {
+     "who": "LIORA",
+     "text": "It measures growth. It does not measure a good decision."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "You killed a scout because we controlled its angle. Repeat the charge alone and you die."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 43",
+   "text": "The reward arrived after the gate closed. It changed a record, not a wound.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "ODY|G-LV.2 • EXP: 40 / 150|Survival task: evacuate five civilians +40|Job: unassigned|Legacy network role: Operator"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 44",
+   "text": "",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "ARYA|G-LV.2 • EXP: 20 / 150|Job: unassigned|Legacy role: Squad Leader • Rally|Pulse and Rally are different abilities."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 45",
+   "text": "",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "JOB PATHS|Warrior • Archer • Priest • Monk|Swordsman • Mage • Sage • Assassin|Preview only. Selection requires a class trial.|A mentor cannot assign your job."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 46",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "Can I choose Monk and still complain?"
+    },
+    {
+     "who": "LIORA",
+     "text": "You already have the endurance for complaining."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 47",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "My bar contact lent the house. Your church group is checking who needs help."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 48",
+   "text": "Trust had a practical return: an open gate, drinking water, and someone who knew the lane.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "This is what a partner network is for. People answer because we showed up before we needed them."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 49",
+   "text": "",
+   "lines": [
+    {
+     "who": "REMY",
+     "text": "Bookings stop tonight. Customer deposits stay separate. They are not money we can spend."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 50",
+   "text": "A full bank balance was not the same as cash available. The next decision needed a cash-flow view, not a sales total.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Use our operating reserve for water, first aid and evacuation. Log every expense."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 51",
+   "text": "",
+   "lines": [
+    {
+     "who": "JULES",
+     "text": "What do we tell riders who ask if the showroom is safe?"
+    },
+    {
+     "who": "ODY",
+     "text": "Say it is closed. Contact everyone already riding. No safety claim we cannot check."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 52",
+   "text": "",
+   "lines": [
+    {
+     "who": "CHAN",
+     "text": "People first. Freeze expansion spending. Send me the verified headcount and cash needed."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 53",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "The red EdPower and white Athena brought four people here: two riders, two passengers."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 54",
+   "text": "",
+   "lines": [
+    {
+     "who": "DEWA",
+     "text": "Next trip: check the route, battery and helmets first. A level-up does not upgrade a motorcycle."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 55",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "God, help me keep my head clear. And keep them together."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 56",
+   "text": "",
+   "lines": [
+    {
+     "who": "BRAM",
+     "text": "In 2025 you made me pitch liquor over sushi. Tonight I am selling drinking water."
+    },
+    {
+     "who": "ODY",
+     "text": "Best product-market fit of your career."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 57",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Where did the Emissary hit you?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 58",
+   "text": "The ache was old. The amber line beneath it was new.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "My arm. When he threw me back. Why?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 59",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "A tracking seal. He planted it when he touched you."
+    },
+    {
+     "who": "SYSTEM",
+     "text": "HOSTILE TRACK|Operator signal recovered|The echo masked the seal. It did not remove it."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 60",
+   "text": "",
+   "lines": [
+    {
+     "who": "VEYR",
+     "text": "Nine witnesses. One address."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 61",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Then I leave. He follows me."
+    },
+    {
+     "who": "LIORA",
+     "text": "Alone? That is exactly the capture he wants."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 62",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "There is a relay behind his scouts. Break it and I can cut the seal. Keep it alive, and it reconnects."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 63",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Three of us go for the relay. The others move the civilians through the rear lane. We agree the rendezvous before we split."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 64",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "First lesson?"
+    },
+    {
+     "who": "LIORA",
+     "text": "Come back. Leveling is useless if you do not."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 65",
+   "text": "Above the lane, the relay unfolded. Forty-five seconds had saved the last five. All nine were alive. The next minute would decide whether they stayed free.",
+   "lines": [
+    {
+     "who": "SYSTEM",
+     "text": "VEYR RELAY|G-LV.12 • Command node|Linked scouts: 4|Tracking seal: connected"
+    }
+   ]
+  },
+  {
+   "label": "Next chapter",
+   "text": "CH.23 · The First Hunt",
+   "lines": [
+    {
+     "who": "QUESTION",
+     "text": "Can an exhausted Operator, a new level-two fighter and an injured Assassin break the relay before the nine civilians are found?"
+    }
+   ]
+  }
  ]
 }
