@@ -15,7 +15,11 @@ export const runtime = "nodejs";
  * Snap token while the window is still open; after an expiry or a
  * failed attempt it re-checks stock and opens a new transaction.
  */
-export async function POST(_req: NextRequest, ctx: RouteContext<"/api/bookings/[code]/pay">) {
+interface Ctx {
+  params: Promise<{ code: string }>;
+}
+
+export async function POST(_req: NextRequest, ctx: Ctx) {
   if (WHATSAPP_FIRST_BOOKING) {
     return NextResponse.json({ ok: false, error: "storage_disabled" }, { status: 503 });
   }

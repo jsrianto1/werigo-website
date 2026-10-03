@@ -17,7 +17,11 @@ export const dynamic = "force-dynamic";
  * the payment is pending, the status is re-checked with Midtrans so a
  * missed webhook never leaves a paid booking showing as unpaid.
  */
-export async function GET(_req: NextRequest, ctx: RouteContext<"/api/bookings/[code]">) {
+interface Ctx {
+  params: Promise<{ code: string }>;
+}
+
+export async function GET(_req: NextRequest, ctx: Ctx) {
   if (WHATSAPP_FIRST_BOOKING) {
     return NextResponse.json({ ok: false, error: "storage_disabled" }, { status: 503 });
   }
