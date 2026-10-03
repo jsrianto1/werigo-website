@@ -1,22 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAdmin } from "@/lib/adminAuth";
-import { getBookingStore } from "@/lib/bookingStore";
+import { BOOKING_STATUSES, getBookingStore } from "@/lib/bookingStore";
+import { logAudit, requestIp } from "@/lib/audit";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
 export const runtime = "nodejs";
 
-const STATUSES = [
-  "new", "contacted", "quoted", "confirmed",
-  "active", "completed", "cancelled", "no_response",
-] as const;
-
 const patchSchema = z.object({
-  status: z.enum(STATUSES).optional(),
+  status: z.enum(BOOKING_STATUSES).optional(),
   internal_notes: z.string().max(5000).optional(),
   assigned_to: z.string().max(200).optional(),
   follow_up_at: z.iso.datetime({ offset: true }).nullable().optional(),
+  /**
+   * Staff-recorded payment outcome. "refunded" after a manual refund in
+   * the Midtrans dashboard, "paid" for a payment received outside the
+   * site (bank transfer). Super admin only.
+   */
+  payment_status: z.enum(["refunded", "paid"]).optional(),
 });
 
 interface Ctx {
@@ -57,11 +59,22 @@ export async function PATCH(req: NextRequest, ctx: Ctx) {
   if (!parsed.success) {
     return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   }
+  if (parsed.data.payment_status && admin.role !== "super_admin") {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
   try {
     const booking = await getBookingStore().update(id, parsed.data, admin.email);
     if (!booking) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
     }
+    await logAudit({
+      actor: admin,
+      action: "booking.update",
+      entityType: "booking",
+      entityId: booking.booking_code,
+      meta: parsed.data,
+      ip: requestIp(req),
+    });
     return NextResponse.json({ ok: true, booking });
   } catch (err) {
     logStorageError(storageErrorFromThrown("admin_update", err));

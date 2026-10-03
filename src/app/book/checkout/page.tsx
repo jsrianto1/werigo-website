@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Section } from "@/components/ui/Section";
 import { CheckoutFlow } from "@/components/booking/CheckoutFlow";
+import { GOOGLE_SIGN_IN_ENABLED } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Checkout: Complete Your Booking",
@@ -22,7 +23,7 @@ export default function CheckoutPage() {
           </div>
         }
       >
-        <CheckoutFlow />
+        <CheckoutFlow googleEnabled={GOOGLE_SIGN_IN_ENABLED} />
       </Suspense>
     </Section>
   );

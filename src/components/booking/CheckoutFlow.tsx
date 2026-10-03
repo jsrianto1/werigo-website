@@ -46,14 +46,37 @@ import {
 import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
+import { computeQuote } from "@/lib/quote";
+import { authClient } from "@/lib/auth-client";
+import { useSnap } from "@/lib/useSnap";
+import { AuthForm } from "@/components/account/AuthForm";
 import {
   emptyCustomer,
   saveDraft,
   loadDraft,
   clearDraft,
-  cacheConfirmation,
   type CustomerInfo,
 } from "@/lib/booking";
+
+/**
+ * Split a stored "+62812…" number into dialling code and national
+ * part. Longest known dialling code wins (so +62 8… is never read as
+ * +628); unknown codes fall back to two digits.
+ */
+const DIAL_CODES = [
+  "+1", "+7", "+20", "+27", "+30", "+31", "+32", "+33", "+34", "+36", "+39", "+41", "+43", "+44",
+  "+45", "+46", "+47", "+48", "+49", "+52", "+54", "+55", "+60", "+61", "+62", "+63", "+64", "+65",
+  "+66", "+81", "+82", "+84", "+86", "+90", "+91", "+92", "+94", "+351", "+353", "+358", "+380",
+  "+420", "+852", "+880", "+886", "+966", "+971", "+972", "+977",
+];
+function splitDialCode(raw: string): { countryCode: string; national: string } | null {
+  const s = raw.replace(/[\s\-()]/g, "");
+  if (!/^\+\d{8,15}$/.test(s)) return null;
+  const code =
+    DIAL_CODES.filter((c) => s.startsWith(c)).sort((a, b) => b.length - a.length)[0] ?? s.slice(0, 3);
+  const national = s.slice(code.length);
+  return national.length >= 6 ? { countryCode: code, national } : null;
+}
 
 type Phase = "extras" | "details" | "review" | "sent";
 
@@ -64,10 +87,15 @@ const phaseToStep: Record<Phase, number> = {
   sent: 5,
 };
 
-export function CheckoutFlow() {
+export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolean }) {
   const { t } = useLanguage();
   const params = useSearchParams();
   const router = useRouter();
+  // Database mode: payment needs an account. The session is read on
+  // the client so the page itself stays cacheable.
+  const { data: session } = authClient.useSession();
+  const sessionUser = session?.user ?? null;
+  const { pay: snapPay, preload: preloadSnap } = useSnap();
 
   /** Entry id from the URL; legacy variant ids are normalised to the
       customer-facing model (four rental models only). */
@@ -134,6 +162,30 @@ export function CheckoutFlow() {
     }
   }, [entryId]);
 
+  // Signed-in customers: pre-fill contact details once, never overwrite typing.
+  useEffect(() => {
+    if (!sessionUser) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCustomer((c) => {
+      const next = { ...c };
+      if (!c.firstName && !c.lastName && sessionUser.name) {
+        const [first, ...rest] = sessionUser.name.trim().split(/\s+/);
+        next.firstName = first;
+        next.lastName = rest.join(" ");
+      }
+      if (!c.email && sessionUser.email) next.email = sessionUser.email;
+      const phone = (sessionUser as { phone?: string | null }).phone;
+      if (!c.whatsapp && phone) {
+        const split = splitDialCode(phone);
+        if (split) {
+          next.countryCode = split.countryCode;
+          next.whatsapp = split.national;
+        }
+      }
+      return next;
+    });
+  }, [sessionUser]);
+
   // Persist draft as user progresses
   useEffect(() => {
     if (!entryId) return;
@@ -158,11 +210,17 @@ export function CheckoutFlow() {
   // Focus heading on phase change for keyboard/screen-reader users
   useEffect(() => {
     headingRef.current?.focus();
-  }, [phase]);
+    if (phase === "review" && !WHATSAPP_FIRST_BOOKING) preloadSnap();
+  }, [phase, preloadSnap]);
 
   const valid = entry && pickup && isValidPeriod(period);
   const days = valid ? rentalDays(period) : 0;
   const estimate = valid ? estimateRental(entry!.modelSlug, period) : null;
+  // The amount charged online: same function the server uses to price
+  // the booking, so the button and the invoice never disagree.
+  const quote = valid
+    ? computeQuote({ modelSlug: entry!.modelSlug, period, quantity, pickupSlug: pickup, returnSlug: ret })
+    : null;
   const needsAgeCheck = Boolean(entry && minRiderAge[entry.modelSlug]);
   const addOnBreakdown = valid
     ? computeAddOns({
@@ -411,25 +469,30 @@ export function CheckoutFlow() {
       const data = await res.json().catch(() => null);
 
       if (!res.ok || !data?.ok) {
-        // Not stored → never open WhatsApp; keep the form as it is.
+        // Not stored → nothing is charged; keep the form as it is.
         setSubmitting(false);
         setSubmitError(
-          data?.message ??
-            "We couldn't save your booking just now. Your details are still here, so please try again."
+          res.status === 401
+            ? "Please sign in below to continue to payment."
+            : data?.message ??
+                "We couldn't save your booking just now. Your details are still here, so please try again."
         );
         return;
       }
 
       trackMarketingEvent("booking_handoff", { content_ids: [entry.modelSlug], content_type: "product", num_items: quantity, rental_days: days });
-      cacheConfirmation({
-        bookingCode: data.booking.bookingCode,
-        whatsappUrl: data.whatsappUrl,
-        booking: data.booking,
-      });
       clearDraft();
-      router.push(
-        `/book/confirmation?code=${encodeURIComponent(data.booking.bookingCode)}`
-      );
+      const code: string = data.booking.bookingCode;
+      const token: string | null = data.payment?.snapToken ?? null;
+      if (token) {
+        // Midtrans popup. Whatever happens in it, the confirmation page
+        // shows the real status from the server (webhook / status API).
+        const { outcome } = await snapPay(token);
+        if (outcome === "error") {
+          setSubmitError("The payment could not be completed. You can try again from the confirmation page.");
+        }
+      }
+      router.push(`/book/confirmation?code=${encodeURIComponent(code)}`);
     } catch {
       setSubmitting(false);
       setSubmitError(
@@ -945,7 +1008,9 @@ export function CheckoutFlow() {
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
               ><T>{"One last look"}</T>{" "}</h1>
-              <p className="mt-2 text-ink-soft"><T>{"Check everything below, then send your request. We confirm availability and your rate on WhatsApp, usually quickly."}</T>{" "}</p>
+              <p className="mt-2 text-ink-soft"><T>{WHATSAPP_FIRST_BOOKING
+                ? "Check everything below, then send your request. We confirm availability and your rate on WhatsApp, usually quickly."
+                : "Check everything below, then pay to confirm your ride. Our team arranges delivery with you on WhatsApp."}</T>{" "}</p>
 
               <dl className="mt-6 space-y-4 rounded-[14px] border border-line bg-card p-6">
                 {[
@@ -1050,6 +1115,18 @@ export function CheckoutFlow() {
                         },
                       ]
                     : []),
+                  ...(!WHATSAPP_FIRST_BOOKING && quote
+                    ? [
+                        {
+                          term: "Total to pay now",
+                          detail: `${formatIdr(quote.totalIdr)}${
+                            formatUsdApprox(quote.totalIdr, usdRate)
+                              ? ` (${formatUsdApprox(quote.totalIdr, usdRate)})`
+                              : ""
+                          }. ${t("Add-ons and protection requests are free of charge and confirmed by the team.")}`,
+                        },
+                      ]
+                    : []),
                   { term: "Name", detail: `${customer.firstName} ${customer.lastName}` },
                   {
                     term: "WhatsApp",
@@ -1111,7 +1188,9 @@ export function CheckoutFlow() {
                     }}
                     className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                   />
-                  <span className="text-sm text-ink-soft"><T>{"I agree to send these details to Werigo through WhatsApp so the team can respond to my booking request. See the"}</T>{" "}
+                  <span className="text-sm text-ink-soft"><T>{WHATSAPP_FIRST_BOOKING
+                    ? "I agree to send these details to Werigo through WhatsApp so the team can respond to my booking request. See the"
+                    : "I agree to Werigo processing these details to handle my booking and payment. See the"}</T>{" "}
                     <Link
                       href="/privacy"
                       target="_blank"
@@ -1136,22 +1215,41 @@ export function CheckoutFlow() {
                   <T>{submitError}</T>
                 </p>
               ) : null}
-              <div className="mt-6">
-                <Button
-                  variant="accent"
-                  size="lg"
-                  onClick={() => (WHATSAPP_FIRST_BOOKING ? sendToWhatsApp() : void confirmBooking())}
-                  disabled={submitting}
-                  className="w-full sm:w-auto"
-                >
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  {submitting ? (
-                    <T>{"Saving your request…"}</T>
-                  ) : (
-                    <T>{"Send booking request on WhatsApp"}</T>
-                  )}{" "}</Button>
-              </div>
-              <p className="mt-3 text-xs leading-relaxed text-ink-faint"><T>{"Availability, final pricing, delivery, add-ons and your booking are confirmed by the Werigo team on WhatsApp. Nothing is charged before that."}</T>{" "}</p>
+              {!WHATSAPP_FIRST_BOOKING && !sessionUser ? (
+                <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
+                  <h2 className="font-display text-xl text-ink"><T>{"Sign in to pay"}</T></h2>
+                  <p className="mt-1 text-sm text-ink-soft"><T>{"Your booking, payment and receipt are kept in your Werigo account. Everything you filled in above stays here."}</T></p>
+                  <div className="mt-4">
+                    <AuthForm
+                      googleEnabled={googleEnabled}
+                      heading={false}
+                      callbackURL={`/book/checkout?${params.toString()}`}
+                      onSuccess={() => setSubmitError(null)}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-6">
+                  <Button
+                    variant="accent"
+                    size="lg"
+                    onClick={() => (WHATSAPP_FIRST_BOOKING ? sendToWhatsApp() : void confirmBooking())}
+                    disabled={submitting || (!WHATSAPP_FIRST_BOOKING && !quote)}
+                    className="w-full sm:w-auto"
+                  >
+                    <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                    {submitting ? (
+                      <T>{WHATSAPP_FIRST_BOOKING ? "Saving your request…" : "Opening secure payment…"}</T>
+                    ) : WHATSAPP_FIRST_BOOKING ? (
+                      <T>{"Send booking request on WhatsApp"}</T>
+                    ) : (
+                      <><T>{"Pay"}</T>{quote ? ` ${formatIdr(quote.totalIdr)}` : ""}</>
+                    )}{" "}</Button>
+                </div>
+              )}
+              <p className="mt-3 text-xs leading-relaxed text-ink-faint"><T>{WHATSAPP_FIRST_BOOKING
+                ? "Availability, final pricing, delivery, add-ons and your booking are confirmed by the Werigo team on WhatsApp. Nothing is charged before that."
+                : "Secure payment by Midtrans (cards, bank transfer, QRIS, e-wallets). Your ride is held for one hour while you pay. Delivery details are confirmed by our team on WhatsApp."}</T>{" "}</p>
 
               <div className="mt-6">
                 <Button variant="ghost" onClick={() => setPhase("details")}>

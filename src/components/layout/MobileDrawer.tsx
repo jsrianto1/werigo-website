@@ -9,6 +9,7 @@ import { X, ChevronDown, MapPin } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { serviceAreas } from "@/data/locations";
 import { LanguageSelector } from "@/components/i18n/LanguageSelector";
+import { AccountMenu } from "@/components/account/AccountMenu";
 
 /**
  * Accessible mobile navigation drawer.
@@ -129,6 +130,10 @@ export function MobileDrawer({
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
+        </div>
+
+        <div className="border-b border-line px-3 py-2">
+          <AccountMenu className="w-full justify-start" />
         </div>
 
         <nav aria-label="Primary mobile" className="flex-1 px-3 py-3">

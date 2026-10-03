@@ -3,14 +3,18 @@ import { admin } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
 import { getPool } from "./db";
 import { ac, roles } from "./permissions";
+import { sendPasswordResetEmail, sendVerificationEmail } from "./mailer";
 
 /**
  * Better Auth server configuration (users, sessions, roles).
  *
- * Roles: "customer" (default, Phase 1 accounts), "admin" and
- * "super_admin" (staff). Staff accounts are created with
- * `node scripts/create-admin.mjs`; public sign-up stays disabled
- * until the customer accounts phase ships.
+ * Roles: "customer" (default; public sign-up with email + password or
+ * Google), "admin" and "super_admin" (staff, created only with
+ * `node scripts/create-admin.mjs`).
+ *
+ * Email verification is sent on sign-up but does not block checkout:
+ * WhatsApp is the primary contact. A working email is still needed
+ * for password reset, which is why the verification email goes out.
  *
  * Imports are relative on purpose: the Better Auth CLI loads this
  * file outside Next.js (`npm run auth:generate`) and does not know
@@ -29,24 +33,42 @@ const siteUrl =
 const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
 
+export const GOOGLE_SIGN_IN_ENABLED = Boolean(googleClientId && googleClientSecret);
+
 export const auth = betterAuth({
   appName: "Werigo",
   baseURL: siteUrl,
   secret: process.env.BETTER_AUTH_SECRET?.trim(),
   trustedOrigins: [siteUrl],
   database: getPool(),
+  user: {
+    additionalFields: {
+      /** WhatsApp number in +62… form; pre-fills checkout. */
+      phone: { type: "string", required: false, input: true },
+      nationality: { type: "string", required: false, input: true },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 10,
-    // Phase 1 (customer accounts) turns sign-up on.
-    disableSignUp: true,
+    resetPasswordTokenExpiresIn: 60 * 60,
+    sendResetPassword: async ({ user, url }) => {
+      await sendPasswordResetEmail(user.email, user.name, url);
+    },
   },
-  socialProviders:
-    googleClientId && googleClientSecret
-      ? { google: { clientId: googleClientId, clientSecret: googleClientSecret } }
-      : {},
+  emailVerification: {
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
+    expiresIn: 60 * 60,
+    sendVerificationEmail: async ({ user, url }) => {
+      await sendVerificationEmail(user.email, user.name, url);
+    },
+  },
+  socialProviders: GOOGLE_SIGN_IN_ENABLED
+    ? { google: { clientId: googleClientId!, clientSecret: googleClientSecret! } }
+    : {},
   session: {
-    expiresIn: 60 * 60 * 24 * 14, // 14 days
+    expiresIn: 60 * 60 * 24 * 30, // 30 days
     updateAge: 60 * 60 * 24,
     cookieCache: { enabled: true, maxAge: 5 * 60 },
   },
@@ -57,3 +79,9 @@ export const auth = betterAuth({
 });
 
 export type Session = typeof auth.$Infer.Session;
+export type SessionUser = Session["user"] & {
+  role?: string | null;
+  banned?: boolean | null;
+  phone?: string | null;
+  nationality?: string | null;
+};

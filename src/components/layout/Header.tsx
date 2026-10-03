@@ -10,6 +10,7 @@ import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { LanguageSelector } from "@/components/i18n/LanguageSelector";
+import { AccountMenu } from "@/components/account/AccountMenu";
 
 // The logo links home, so the desktop nav starts at Our Fleet: nine
 // items no longer fit beside the logo at the xl breakpoint without
@@ -77,6 +78,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <div className="hidden md:block"><LanguageSelector /></div>
+          <AccountMenu className="hidden sm:inline-flex" />
 
           <div className="hidden sm:block">
             <ButtonLink href="/book" variant="accent" size="md"><T>{"Check availability"}</T>{" "}</ButtonLink>

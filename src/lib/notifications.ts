@@ -4,6 +4,7 @@ import type { StoredBooking } from "@/lib/bookingStore";
 import { toCustomerEntry } from "@/data/vehicles";
 import { getPickupPoint } from "@/data/locations";
 import { site } from "@/lib/config";
+import { formatIdr } from "@/lib/pricing";
 
 /**
  * WhatsApp notifications through Fonnte, with an outbox.
@@ -215,18 +216,83 @@ export function buildNewBookingAdminMessage(b: StoredBooking): string {
   return lines.filter((l) => l !== "").join("\n");
 }
 
+/** Ops message once a booking is paid online. */
+export function buildPaidBookingAdminMessage(b: StoredBooking): string {
+  const model = toCustomerEntry(b.vehicle_model)?.displayName ?? b.vehicle_model;
+  const pickup = getPickupPoint(b.pickup_area)?.name ?? b.pickup_area;
+  const ret = getPickupPoint(b.return_area)?.name ?? b.return_area;
+  const lines = [
+    `*Booking LUNAS* — ${b.booking_code}`,
+    `Dibayar: ${b.total_idr !== null ? formatIdr(b.total_idr) : "-"}`,
+    "",
+    `Nama: ${b.full_name}`,
+    `WhatsApp: ${b.whatsapp_number}`,
+    b.email ? `Email: ${b.email}` : "",
+    "",
+    `Unit: ${model} × ${b.quantity}`,
+    `Mulai: ${fmtDateTime(b.start_at)} WITA`,
+    `Selesai: ${fmtDateTime(b.end_at)} WITA`,
+    `Antar: ${pickup}${b.pickup_address ? ` — ${b.pickup_address}` : ""}`,
+    `Ambil: ${ret}${b.return_address ? ` — ${b.return_address}` : ""}`,
+    b.customer_notes ? `Catatan: ${b.customer_notes}` : "",
+    "",
+    `Dashboard: ${site.baseUrl}/admin/bookings`,
+  ];
+  return lines.filter((l) => l !== "").join("\n");
+}
+
+/** Confirmation to the customer (English, the site language). */
+export function buildPaidBookingCustomerMessage(b: StoredBooking): string {
+  const model = toCustomerEntry(b.vehicle_model)?.displayName ?? b.vehicle_model;
+  const pickup = getPickupPoint(b.pickup_area)?.name ?? b.pickup_area;
+  const ret = getPickupPoint(b.return_area)?.name ?? b.return_area;
+  const lines = [
+    `*Werigo — booking confirmed*`,
+    `Booking code: ${b.booking_code}`,
+    "",
+    `Hi ${b.full_name.split(" ")[0]}, we received your payment${b.total_idr !== null ? ` of ${formatIdr(b.total_idr)}` : ""}. Your ride is booked.`,
+    "",
+    `Ride: ${model} × ${b.quantity}`,
+    `From: ${fmtDateTime(b.start_at)} (Bali time)`,
+    `To: ${fmtDateTime(b.end_at)} (Bali time)`,
+    `Delivery: ${pickup}${b.pickup_address ? `, ${b.pickup_address}` : ""}`,
+    `Return: ${b.return_area !== b.pickup_area ? ret : "same as delivery"}`,
+    "",
+    `Our team will message you on WhatsApp before delivery. Reply here any time if anything changes.`,
+    `Your bookings: ${site.baseUrl}/account`,
+  ];
+  return lines.filter((l) => l !== "").join("\n");
+}
+
+async function enqueueAndDeliver(kind: string, targets: string[], message: string, bookingId: string | null) {
+  const n = await enqueue(kind, targets, message, bookingId);
+  if (n > 0) {
+    void deliverDue(n).catch(() => {
+      /* already logged inside */
+    });
+  }
+}
+
 /**
- * Called by POST /api/bookings after a successful insert. Queues one
- * message per admin number and starts delivery in the background.
- * Never throws.
+ * Called by POST /api/bookings after a successful insert in the
+ * WhatsApp-handoff flow (no online payment). Queues one message per
+ * admin number and starts delivery in the background. Never throws.
  */
 export async function notifyAdminsOfNewBooking(b: StoredBooking): Promise<void> {
   try {
-    const n = await enqueue("booking_new_admin", adminWhatsAppTargets(), buildNewBookingAdminMessage(b), b.id);
-    if (n > 0) {
-      void deliverDue(n).catch(() => {
-        /* already logged inside */
-      });
+    await enqueueAndDeliver("booking_new_admin", adminWhatsAppTargets(), buildNewBookingAdminMessage(b), b.id);
+  } catch (err) {
+    console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
+  }
+}
+
+/** Called once a payment is confirmed: ops team + customer. Never throws. */
+export async function notifyBookingPaid(b: StoredBooking): Promise<void> {
+  try {
+    await enqueueAndDeliver("booking_paid_admin", adminWhatsAppTargets(), buildPaidBookingAdminMessage(b), b.id);
+    const customer = b.whatsapp_number.replace(/\D/g, "");
+    if (/^\d{9,15}$/.test(customer)) {
+      await enqueueAndDeliver("booking_paid_customer", [customer], buildPaidBookingCustomerMessage(b), b.id);
     }
   } catch (err) {
     console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);

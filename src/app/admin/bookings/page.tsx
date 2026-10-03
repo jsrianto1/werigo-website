@@ -35,5 +35,5 @@ export default async function AdminBookingsPage() {
   if (!admin) {
     return <AdminLogin />;
   }
-  return <AdminDashboard adminEmail={admin.email} />;
+  return <AdminDashboard adminEmail={admin.email} adminRole={admin.role} />;
 }
