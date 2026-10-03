@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "5dab12cda64fb9eb8a317ec4cab444ca383bde3a13b94f77f693207d153e88d4",
+  "fingerprint": "e9d373dd2a5777b51ec7a433f7198584416e2e56a9fdcc8778df70e3b2c664ad",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -400,6 +400,14 @@
     },
     {
       "file": "public/media/saga/covers/ep-21-first-v1.webp",
+      "hash": "24891e1b75988deab5a49731ef9719a506da1f95cd9262af8f52b81ce13b3448"
+    },
+    {
+      "file": "public/media/saga/covers/ep-21-story-v2-og.jpg",
+      "hash": "8decdbded20e2c4bd597b1fa7faa981359b4680da48d63ca3f6d7fc34b14dc81"
+    },
+    {
+      "file": "public/media/saga/covers/ep-21-story-v2.webp",
       "hash": "24891e1b75988deab5a49731ef9719a506da1f95cd9262af8f52b81ce13b3448"
     },
     {
@@ -3767,244 +3775,504 @@
       "hash": "aa2157b235fc3eb986b218240ac7b2563dd17b970741d5aae1c9638271e2f5c2"
     },
     {
+      "file": "public/media/saga/ep-21/p01-story-v2.webp",
+      "hash": "50eba46ccb6b62de0deae1478bdc7710c68f4f759d9e21826213fee3ab2da667"
+    },
+    {
       "file": "public/media/saga/ep-21/p02-first-v1.webp",
       "hash": "7204ec3ad7fc2834ee5b60566aa0ce2e0f0c8f1c4ec160d736a7ec07c0c2d789"
+    },
+    {
+      "file": "public/media/saga/ep-21/p02-story-v2.webp",
+      "hash": "80edf7adbba5156158d2d234f8cf050ddcf7080ba914a956a38785bc655f12db"
     },
     {
       "file": "public/media/saga/ep-21/p03-first-v1.webp",
       "hash": "bb9f81ac77a9694a6db35e7dc467adf3608c7ea13fe92bb5f0bb6c8673bbad5a"
     },
     {
+      "file": "public/media/saga/ep-21/p03-story-v2.webp",
+      "hash": "9c89c09b484abfa9536ccfb33fd95f05104d179565cf09090d569766fae441a0"
+    },
+    {
       "file": "public/media/saga/ep-21/p04-first-v1.webp",
       "hash": "1ec5273ccc8a46e79b6325297699c3c3d7ecd00d64f28845f95e32c05bb1ccac"
+    },
+    {
+      "file": "public/media/saga/ep-21/p04-story-v2.webp",
+      "hash": "5bc2017e205c940f53828bcb10152ee58f365a336a0d6d36b813d388f89b4b38"
     },
     {
       "file": "public/media/saga/ep-21/p05-first-v1.webp",
       "hash": "766324bb6ce8ab8f7a47ee5493a24763a8d121fee900336ef4811eb29d79d29a"
     },
     {
+      "file": "public/media/saga/ep-21/p05-story-v2.webp",
+      "hash": "d09d948703173017ea3189fc5c6382257b0f7934d9c14a63f7ea01f403b403c8"
+    },
+    {
       "file": "public/media/saga/ep-21/p06-first-v1.webp",
       "hash": "a01e6b6acef088827fc4e0e800e6b19d776c67fc651e063e36ed8534d5299827"
+    },
+    {
+      "file": "public/media/saga/ep-21/p06-story-v2.webp",
+      "hash": "5322108a96528d8fa31e124f00c6560586a22476f1ae5535da38af9a7d241bc6"
     },
     {
       "file": "public/media/saga/ep-21/p07-first-v1.webp",
       "hash": "b2c9a56d4561255c7fb6b70a25bd620a5a971934c4d6c5ecd405fb806bfba132"
     },
     {
+      "file": "public/media/saga/ep-21/p07-story-v2.webp",
+      "hash": "92c977e2669d76fb5dbe53410558edcb06ba844644247a9bf5f58ba88a50742a"
+    },
+    {
       "file": "public/media/saga/ep-21/p08-first-v1.webp",
       "hash": "f2ee4d74ddbfff2adb4f9e39f25147b68152df37f7e390e4d39e1fe118c986fa"
+    },
+    {
+      "file": "public/media/saga/ep-21/p08-story-v2.webp",
+      "hash": "4255c190682b7fb9d1b6c2f7aa8ec2552e0d35a938a750756061c09c1ddaf689"
     },
     {
       "file": "public/media/saga/ep-21/p09-first-v1.webp",
       "hash": "26eef062b3b3cb038d9301c0886d451010b79ce7149ee1d091e949ed77a4495f"
     },
     {
+      "file": "public/media/saga/ep-21/p09-story-v2.webp",
+      "hash": "9f835c607f54680866106b009255be5cf9cb21e5d4ad62af9e8c4e0cbbe0af7f"
+    },
+    {
       "file": "public/media/saga/ep-21/p10-first-v1.webp",
       "hash": "c14cd1b1de6754d12923cbd491861f8481d441631f5ed283850ca971e699e3d0"
+    },
+    {
+      "file": "public/media/saga/ep-21/p10-story-v2.webp",
+      "hash": "508c1cf3541624c8bc2194e27df00f33d772640a8164d6316f5e7aac974d045f"
     },
     {
       "file": "public/media/saga/ep-21/p11-first-v1.webp",
       "hash": "042fed3a9f008c441896d430e1acb0ca5e604881b51b191f46c35ecc054cde93"
     },
     {
+      "file": "public/media/saga/ep-21/p11-story-v2.webp",
+      "hash": "a4097fbd972840a47f37bf183f7b66f0f6e75d210f29af06cb5e1c5108d998fc"
+    },
+    {
       "file": "public/media/saga/ep-21/p12-first-v1.webp",
       "hash": "201f1b221c11456759b4a5093fababd9a739e1f1e35e96c52441774c67c33889"
+    },
+    {
+      "file": "public/media/saga/ep-21/p12-story-v2.webp",
+      "hash": "e9b552a1960644e6cfe36af09072fd5d0127094ab505586361364cbd8795e4c5"
     },
     {
       "file": "public/media/saga/ep-21/p13-first-v1.webp",
       "hash": "fd3f0a4bec5058031e472cc67da194d812b257c253da2e791ad9ec06d30aa5b4"
     },
     {
+      "file": "public/media/saga/ep-21/p13-story-v2.webp",
+      "hash": "156c0fb5636ba5b0aa452d03e246a622a21474cf1d04366c9be77f0d6db6734d"
+    },
+    {
       "file": "public/media/saga/ep-21/p14-first-v1.webp",
       "hash": "13f4d0479c8b59e3d58db0cfc0bebc4236cfcd7ba51065e64c3654588f6cd067"
+    },
+    {
+      "file": "public/media/saga/ep-21/p14-story-v2.webp",
+      "hash": "d9f39aea99a73f85bb43451a9905c5a337e508c2d39f12782dcee8b6d6b08573"
     },
     {
       "file": "public/media/saga/ep-21/p15-first-v1.webp",
       "hash": "31726ab05ffc617f7ed06a6036c1ef424dea9b51a2ed164a9eb79f4aab296a4f"
     },
     {
+      "file": "public/media/saga/ep-21/p15-story-v2.webp",
+      "hash": "77381d696ca2875acb31a73950298764b94e7844412b3fe16c616eee8bb9644e"
+    },
+    {
       "file": "public/media/saga/ep-21/p16-first-v1.webp",
       "hash": "50d4ed8f5a737fcaf3023daf613e6c398541e3c0165033d94429b9ab5278cfa4"
+    },
+    {
+      "file": "public/media/saga/ep-21/p16-story-v2.webp",
+      "hash": "80a10174a16f566db1c89b50d45ff48fb42b577eb49551c1a110d209d766dabd"
     },
     {
       "file": "public/media/saga/ep-21/p17-first-v1.webp",
       "hash": "8a92e2be03b632f96376b7df86d83783bb308fa18d4af5b83e899b97d3c8c633"
     },
     {
+      "file": "public/media/saga/ep-21/p17-story-v2.webp",
+      "hash": "0819cc3f89ace4322587dc6df342f4ffe45c388b7d78c5e416c03b243137704d"
+    },
+    {
       "file": "public/media/saga/ep-21/p18-first-v1.webp",
       "hash": "4ee4d779bf09aabd9eeb0d1b45dd1ff85df477c69eb60860230eacc2cee78418"
+    },
+    {
+      "file": "public/media/saga/ep-21/p18-story-v2.webp",
+      "hash": "f42c6c7d3d31dcb9bbfff673b29242d09e13e8fb04f367a73a3ea157acd1dd14"
     },
     {
       "file": "public/media/saga/ep-21/p19-first-v1.webp",
       "hash": "ec37f00a5513d98cf1346f6c902b1652989ebea85049c89999aa3454dc48c69c"
     },
     {
+      "file": "public/media/saga/ep-21/p19-story-v2.webp",
+      "hash": "f46645af5e71e6e89c6b0465c76653a964122eb43f607d855a80a634815ac2d3"
+    },
+    {
       "file": "public/media/saga/ep-21/p20-first-v1.webp",
       "hash": "5018be6af791b0580157b5cc40e65dff5de3b9a2714c73e01670272c7fe730b2"
+    },
+    {
+      "file": "public/media/saga/ep-21/p20-story-v2.webp",
+      "hash": "ea8cf5ac2d205e8d5bb938bb2b2cea0c53313b04fdeebca4ccb798bed9d00662"
     },
     {
       "file": "public/media/saga/ep-21/p21-first-v1.webp",
       "hash": "fc33691c90ab371e0d2cc64ee8c5c5b1d5764569538cacf3cc91f1fae7ef95c8"
     },
     {
+      "file": "public/media/saga/ep-21/p21-story-v2.webp",
+      "hash": "e45ad9589a0dcf807d5ff1eb2fe54c9ff872d0270e80a7001fc959f2f9182f15"
+    },
+    {
       "file": "public/media/saga/ep-21/p22-first-v1.webp",
       "hash": "7b6e1a26b63e606ba408021001a1fab81b34b9f006454165d7ef90e500eaeb7f"
+    },
+    {
+      "file": "public/media/saga/ep-21/p22-story-v2.webp",
+      "hash": "c101bd9dfd503f53531714e6a4b992dbe865ff7f09f30b68680c5732beadfac2"
     },
     {
       "file": "public/media/saga/ep-21/p23-first-v1.webp",
       "hash": "7b865a9135514a85929a91932ecd9ba47e6a4c68d56822b518738f283fe2c49a"
     },
     {
+      "file": "public/media/saga/ep-21/p23-story-v2.webp",
+      "hash": "571adde72c2d941ae9bb67e302ff058ff163376f57d48b61713665ea5041280c"
+    },
+    {
       "file": "public/media/saga/ep-21/p24-first-v1.webp",
       "hash": "6af1bd08a7d82706f9872814628bf29e3a578b87066cced20b8160c75ecfe8e0"
+    },
+    {
+      "file": "public/media/saga/ep-21/p24-story-v2.webp",
+      "hash": "16b4f10694c7c07df41edc0353a26a18c85787591f576a67cc17942a4b433ee3"
     },
     {
       "file": "public/media/saga/ep-21/p25-first-v1.webp",
       "hash": "bdbde01d9160a5bb26ead5893cc28873590508271604286a08614bf008e7624b"
     },
     {
+      "file": "public/media/saga/ep-21/p25-story-v2.webp",
+      "hash": "d3cbd86d6e2cec3146971e16f196fcd1664757c5f22e60c3a44e7e1c07ac7011"
+    },
+    {
       "file": "public/media/saga/ep-21/p26-first-v1.webp",
       "hash": "bdd1b7e484ad1e04eca585ee90a74f6ce2a9cc75a53dfb5a9207186c13a97983"
+    },
+    {
+      "file": "public/media/saga/ep-21/p26-story-v2.webp",
+      "hash": "12b9ae4a2b4c9cb953d781e867df33685962f44b61397aaf5143aa242098d565"
     },
     {
       "file": "public/media/saga/ep-21/p27-first-v1.webp",
       "hash": "a70b4985abd66faee332131d6e4ec3615f7e78cf4852b9c4918b442d59883bcb"
     },
     {
+      "file": "public/media/saga/ep-21/p27-story-v2.webp",
+      "hash": "1622e37e6a61685aa4d475508afc19c6b1fae829d73a36c5001e8d31f5bcf376"
+    },
+    {
       "file": "public/media/saga/ep-21/p28-first-v1.webp",
       "hash": "f4e4085f1a5ac08cca3c484c8ae3ada4207872c0bf6415cdf61468db3d885df9"
+    },
+    {
+      "file": "public/media/saga/ep-21/p28-story-v2.webp",
+      "hash": "e7b0972e358dbf45eb480422f42f572e2d53013a85bb82336662b17b4cac4ff9"
     },
     {
       "file": "public/media/saga/ep-21/p29-first-v1.webp",
       "hash": "8b41c77a8cc8c6673a25ac083cbce82c6e35f53684b9a1197febd1fb6692bb6c"
     },
     {
+      "file": "public/media/saga/ep-21/p29-story-v2.webp",
+      "hash": "2e7863952f0443784ce1b080eca560ef4ae0d111ac36a601fe2a459fbfe3f39d"
+    },
+    {
       "file": "public/media/saga/ep-21/p30-first-v1.webp",
       "hash": "019a5e823d2d418241933204f0eb7e6afc78c41089a3c06b906da44e070110cf"
+    },
+    {
+      "file": "public/media/saga/ep-21/p30-story-v2.webp",
+      "hash": "fc9924791fdfa266c2acc8d132c3000c618b65f8fabf08f4b26c0ac87e0069b7"
     },
     {
       "file": "public/media/saga/ep-21/p31-first-v1.webp",
       "hash": "da84ea26891e8acef1710d19ea5c4c5a125bca8fd83e37eb1b659873dc0f64b8"
     },
     {
+      "file": "public/media/saga/ep-21/p31-story-v2.webp",
+      "hash": "5aa7eb79b0a2818b545a44bfc4b07fb576f5db57f08d9ce0a0c1888d561fa7e2"
+    },
+    {
       "file": "public/media/saga/ep-21/p32-first-v1.webp",
       "hash": "f9bf2861fc7490be56fe450ee2303872caa79091dc79752f5b66ca1d81d525e2"
+    },
+    {
+      "file": "public/media/saga/ep-21/p32-story-v2.webp",
+      "hash": "9425ed542aad452204c3ef1a7c4a42d5486f784e6c3bc9ffbd9dcc49ad7fb9a7"
     },
     {
       "file": "public/media/saga/ep-21/p33-first-v1.webp",
       "hash": "ea15642309c3a8d5dab98abd1c2d961eb1edea940582bbea4609154bfda364f2"
     },
     {
+      "file": "public/media/saga/ep-21/p33-story-v2.webp",
+      "hash": "a83180232ef3084ae5c327240143dbfe1bdd7ac1a25a7c44c90a5038534d5abd"
+    },
+    {
       "file": "public/media/saga/ep-21/p34-first-v1.webp",
       "hash": "d4df343df6d8759f81d7461418717a1f473d1986e7df519153895fd165f39124"
+    },
+    {
+      "file": "public/media/saga/ep-21/p34-story-v2.webp",
+      "hash": "66025afdb5640189c7a2de9492032d3754c11926c26fd9c32d26615d8804365d"
     },
     {
       "file": "public/media/saga/ep-21/p35-first-v1.webp",
       "hash": "c7408c4f212b4dc72160a18609109f9b81638edeef1b9b927be42e0ba18d359e"
     },
     {
+      "file": "public/media/saga/ep-21/p35-story-v2.webp",
+      "hash": "70cca80e4f5f0b6348894682853f80dcd3058763d1caa873bfe2e4ef280c0368"
+    },
+    {
       "file": "public/media/saga/ep-21/p36-first-v1.webp",
       "hash": "97aa6426c577f9b8112919a28e2d78551133a97db811ac284769c67767ee1014"
+    },
+    {
+      "file": "public/media/saga/ep-21/p36-story-v2.webp",
+      "hash": "7f25de644730bbfc2b075022862b7e94120bdb1327cd699be72d490881a1b20f"
     },
     {
       "file": "public/media/saga/ep-21/p37-first-v1.webp",
       "hash": "a1f6670b92e27f2cf16aef136eee6a60c282d23cbc67bca2a17ad95e2a675827"
     },
     {
+      "file": "public/media/saga/ep-21/p37-story-v2.webp",
+      "hash": "37546adadd1b5ca95d2984195370b96e43d83be610ab6468f463afb3114cf6a0"
+    },
+    {
       "file": "public/media/saga/ep-21/p38-first-v1.webp",
       "hash": "9a8f84c717c494541215f7d8d015996ef4173d27e0be5d5ab2c6af97a4d9da86"
+    },
+    {
+      "file": "public/media/saga/ep-21/p38-story-v2.webp",
+      "hash": "18f237f573770b690325f4927fa37460a5aa4a599b19a8b76433cb34caf8773b"
     },
     {
       "file": "public/media/saga/ep-21/p39-first-v1.webp",
       "hash": "2bac03562d5fb8e31a36f00bd5e2ab58203bd1204b6e377984023f3e0393cd7e"
     },
     {
+      "file": "public/media/saga/ep-21/p39-story-v2.webp",
+      "hash": "16bcaf5a150b9323537b17a0cec4c1d666088d90583b47bd22944ff229bd9ba2"
+    },
+    {
       "file": "public/media/saga/ep-21/p40-first-v1.webp",
       "hash": "b5fd1b76552a07084ec83bf816c1dbb62f8cf113d88afa0e7e5d377a4422e478"
+    },
+    {
+      "file": "public/media/saga/ep-21/p40-story-v2.webp",
+      "hash": "91933cb08aadd3014f3dc7fea89814b1c464c4a8e34a3964bfb5367814ae7382"
     },
     {
       "file": "public/media/saga/ep-21/p41-first-v1.webp",
       "hash": "516ceeeca4b6df58799dae25ae4c4e7ee493ec2f51e9540a23971fd024056ef1"
     },
     {
+      "file": "public/media/saga/ep-21/p41-story-v2.webp",
+      "hash": "f125a7538208d5b0470c38cc9ed5c545d15d4bfe208cb32681d91bac9c106ab1"
+    },
+    {
       "file": "public/media/saga/ep-21/p42-first-v1.webp",
       "hash": "e86cc4deedbe320b8db31fa9c667367854eaef8b7283c2f7ae342deb01341ae7"
+    },
+    {
+      "file": "public/media/saga/ep-21/p42-story-v2.webp",
+      "hash": "49f5c7c9c5e89f10bc949173ad18e6422b7a337f189a431cf289e68f1f07420e"
     },
     {
       "file": "public/media/saga/ep-21/p43-first-v1.webp",
       "hash": "559127b2238b853540f1aa684b46fc4b6e38afd702cf846e7ffc084934cc30a0"
     },
     {
+      "file": "public/media/saga/ep-21/p43-story-v2.webp",
+      "hash": "ae1a2664e92c4c8845c792291b200226ac2b2255592570a309b6434df29721f5"
+    },
+    {
       "file": "public/media/saga/ep-21/p44-first-v1.webp",
       "hash": "e6b284cef4debbc4fa53067526c02e824e9dc075d4d99dfee0f771dd4df22fb2"
+    },
+    {
+      "file": "public/media/saga/ep-21/p44-story-v2.webp",
+      "hash": "82298325ec15a8243e60f07871f5f23846911fab2aa6e84e9a051b5393ffa124"
     },
     {
       "file": "public/media/saga/ep-21/p45-first-v1.webp",
       "hash": "ae58a3e982accd4674be8c266d8e917776f9d6ec13455e0a8fadcc90420b975b"
     },
     {
+      "file": "public/media/saga/ep-21/p45-story-v2.webp",
+      "hash": "cb24e2a58730801a159b770b7fb231c40031e35dd912e7d9bed36c2a1ce6b3a5"
+    },
+    {
       "file": "public/media/saga/ep-21/p46-first-v1.webp",
       "hash": "2a0d90d08fe4af2e120255c91cde70814ae99b3dcb4db254d9dfc6133edac95a"
+    },
+    {
+      "file": "public/media/saga/ep-21/p46-story-v2.webp",
+      "hash": "412db43876cd1c9a286f78fbdd44c48943fbb883296004259f9ff9c77d6e4ec6"
     },
     {
       "file": "public/media/saga/ep-21/p47-first-v1.webp",
       "hash": "45c01f871fef757ba52129792852f5b31f126762bf24c5acd4f801eb1a32c8b8"
     },
     {
+      "file": "public/media/saga/ep-21/p47-story-v2.webp",
+      "hash": "ae62c148b8feefe3103627dfee77f0511505dac3fc0a716dbb068855b3e45154"
+    },
+    {
       "file": "public/media/saga/ep-21/p48-first-v1.webp",
       "hash": "90f0bfa059a7d605bec4351353efa6c124bda35ef9986552b28025f0c2e4c6d6"
+    },
+    {
+      "file": "public/media/saga/ep-21/p48-story-v2.webp",
+      "hash": "d0325fbceb4d4443d872c765d4bb4d8d899d44e41eb17e19ab0cb79c67c9f1fb"
     },
     {
       "file": "public/media/saga/ep-21/p49-first-v1.webp",
       "hash": "de86b87d4372b0ab4c3c3a2c6531e3dd4f8de942846214bd68c9fd9bca8bb079"
     },
     {
+      "file": "public/media/saga/ep-21/p49-story-v2.webp",
+      "hash": "da019e7b7583ac5933a74feb3ce590234581420fffd0e66dbdf0960fb50bd79e"
+    },
+    {
       "file": "public/media/saga/ep-21/p50-first-v1.webp",
       "hash": "856f28efa370de16263d36bebaedad585c8829f381a8f7781e06fd6ba1d5498f"
+    },
+    {
+      "file": "public/media/saga/ep-21/p50-story-v2.webp",
+      "hash": "b6b07b87af04145de0ba3c04feabd4326f389e12bf1c2230ce021ae25d521420"
     },
     {
       "file": "public/media/saga/ep-21/p51-first-v1.webp",
       "hash": "47d0ff370797de463e935d363bd23dc002968775ac3eb24e576d73132b2ebecd"
     },
     {
+      "file": "public/media/saga/ep-21/p51-story-v2.webp",
+      "hash": "dfdeec0d925a519890e7f2087702f66f844ace01e293016e397657593796bcf4"
+    },
+    {
       "file": "public/media/saga/ep-21/p52-first-v1.webp",
       "hash": "61bcf4ef8dca353fd12c4fa83feb2228dbfa577eaf206c221af7c1580846ec86"
+    },
+    {
+      "file": "public/media/saga/ep-21/p52-story-v2.webp",
+      "hash": "22dc483bc85adba33585f7ab81f10f65c0dc3223f0aae535f428e95a119bd488"
     },
     {
       "file": "public/media/saga/ep-21/p53-first-v1.webp",
       "hash": "88b38af7cbef8dae44013acb3a5bc0ff202963ddc076f8333abd9b3e51798fb3"
     },
     {
+      "file": "public/media/saga/ep-21/p53-story-v2.webp",
+      "hash": "9ca03831e08fe6f4437734ca4ca5749e6cd7e041774274025609a55232623995"
+    },
+    {
       "file": "public/media/saga/ep-21/p54-first-v1.webp",
       "hash": "8b1737b63117e895cf103f8b257b5558623e6e2d493f2047120f7b8cb09aaff2"
+    },
+    {
+      "file": "public/media/saga/ep-21/p54-story-v2.webp",
+      "hash": "72949c3233e0b84f2467cd38e940d4e5f2ec6eaaa76b23ef32eae182f6cd2b20"
     },
     {
       "file": "public/media/saga/ep-21/p55-first-v1.webp",
       "hash": "eeebd9bb6010721a44eaf6dd26a2a960050fe77cd34a3f950211eb76290bfa3a"
     },
     {
+      "file": "public/media/saga/ep-21/p55-story-v2.webp",
+      "hash": "032cf1fe350ecfc10800f04d404a78c1f4df14e6935a05c01bc45336dc995f98"
+    },
+    {
       "file": "public/media/saga/ep-21/p56-first-v1.webp",
       "hash": "eb516147accf40809d7dc7b4dbeed5743f9d32d35cfe567137c2638827efa1bc"
+    },
+    {
+      "file": "public/media/saga/ep-21/p56-story-v2.webp",
+      "hash": "2d6edc8a641dc61e49d77972381a93c03dd1f332a1ce3688f0178c376e27b50a"
     },
     {
       "file": "public/media/saga/ep-21/p57-first-v1.webp",
       "hash": "876c121e8bdf9b457e81f9c75ef41392a7898df1eb373bef340db4a0ad701d0c"
     },
     {
+      "file": "public/media/saga/ep-21/p57-story-v2.webp",
+      "hash": "4e6eb1c56933a3bece08789eb7b85731f0d5ad97a23ec74e6b8c8ecfeccd4fd7"
+    },
+    {
       "file": "public/media/saga/ep-21/p58-first-v1.webp",
       "hash": "1133aef90a30a3e5acc2c23865940803005a5056ab56f920581542cfd4231d23"
+    },
+    {
+      "file": "public/media/saga/ep-21/p58-story-v2.webp",
+      "hash": "0b033d1256c08fe14c0d7fcf0895abd3e5b487a5a23372fbcde526698c2c7790"
     },
     {
       "file": "public/media/saga/ep-21/p59-first-v1.webp",
       "hash": "0dedff3cd729a0e5cd71dd12cf146e3f74f838de87a910793bc4c4090131b7f2"
     },
     {
+      "file": "public/media/saga/ep-21/p59-story-v2.webp",
+      "hash": "84f42aa5817584975a7d3873226c131daa7cfc58a2434cc43e60ba18bb5cf12e"
+    },
+    {
       "file": "public/media/saga/ep-21/p60-first-v1.webp",
       "hash": "1dd5de26adf48db80d5dbd9d44f61009a3f06ddf838723c47fd10f0f340fa3ae"
     },
     {
+      "file": "public/media/saga/ep-21/p60-story-v2.webp",
+      "hash": "058432a759e66e47364144c37b43e8334fe680f9e4318590ff0d109f039a66b6"
+    },
+    {
       "file": "public/media/saga/ep-21/p61-first-v1.webp",
       "hash": "312ccced7fea85afb178510323ddb53f94c1ff2fa9763b02f489e3688fd86d4b"
+    },
+    {
+      "file": "public/media/saga/ep-21/p61-story-v2.webp",
+      "hash": "b92d10e83957ac2216824e57418f2009a055ccb02d20b3aa0f455cc6007594da"
+    },
+    {
+      "file": "public/media/saga/ep-21/p62-story-v2.webp",
+      "hash": "7c0a6c29919c7732c1b7dd83f9481c7f4b94531a98871debb6e8cd485602e54b"
+    },
+    {
+      "file": "public/media/saga/ep-21/p63-story-v2.webp",
+      "hash": "b6ebfe4a9ccaf5f99ad6f4fe9e06fd52eefe8a4f0b4614e787727fef7154d210"
+    },
+    {
+      "file": "public/media/saga/ep-21/p64-story-v2.webp",
+      "hash": "e4e6a919cb4d55f9a043d71b024d418a411d6a10b99268fba43087ff3b6b4024"
+    },
+    {
+      "file": "public/media/saga/ep-21/p65-story-v2.webp",
+      "hash": "848fb246048b61537e6d6d87e4fc6ec741b227dc3f22339ae1eae91fff715da4"
     },
     {
       "file": "public/media/saga/ep-3/p01.webp",
@@ -8235,244 +8503,504 @@
       "hash": "ff2a1d2231d84ade2515f8f231a51e1ff2e7e18463c0f93a370824528180c061"
     },
     {
+      "file": "public/media/saga/id/ep-21/p01-story-v2.webp",
+      "hash": "bc700378cf3b7cd16bb9d69859e6c02807c1a41fe0bb1a6b78f911a66b10f01e"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p02-first-v1.webp",
       "hash": "b6d0f9784b58a0c89fb1f9d7d2441b457298fd9b0f448960f5cdfb55e250e3ea"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p02-story-v2.webp",
+      "hash": "3489766625bfe69f59b3a333e2de3b92e59fcfed0cc61fd6b5b0913590c98071"
     },
     {
       "file": "public/media/saga/id/ep-21/p03-first-v1.webp",
       "hash": "795a80983863768e97674569995a0abfd8559870c428f2e63fc1efc45ce350ab"
     },
     {
+      "file": "public/media/saga/id/ep-21/p03-story-v2.webp",
+      "hash": "d16c04d5965d8b0e009b9215b99f71973e4a6dc342d41fe7d9911d8aa0fbb378"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p04-first-v1.webp",
       "hash": "9d1ee4fa364c3e5eb55a2e39aff8172ac9e9be2c6060f5e8968fb3c1dd9f44be"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p04-story-v2.webp",
+      "hash": "1494b8ab1a52987b123617e76052c53753732c3c2117ce988126b2408c3b2f0f"
     },
     {
       "file": "public/media/saga/id/ep-21/p05-first-v1.webp",
       "hash": "af6616093cc4e5c34fe80a9dc7ba6bcb0b7da29fc4d3476955532dc2f9853ab1"
     },
     {
+      "file": "public/media/saga/id/ep-21/p05-story-v2.webp",
+      "hash": "b2d124b4b7c96e70f95e915b46f1e20d17f2c9b8308df6ea9ad69aad23c783a7"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p06-first-v1.webp",
       "hash": "566302a47a0b2b2e079ed2241dfce5b87b4546f6470931439f0ab0347c0be9e5"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p06-story-v2.webp",
+      "hash": "69ef022ed8a90bce74c0c1295a5943668d791478de5e5cfa4f990f1cfefee8c6"
     },
     {
       "file": "public/media/saga/id/ep-21/p07-first-v1.webp",
       "hash": "f4ce580b65f89c59d3f663dd70bab44098b5c80773bf4af62390d5d54918a6e2"
     },
     {
+      "file": "public/media/saga/id/ep-21/p07-story-v2.webp",
+      "hash": "a28e6c79fc0095b6a821a8bf9dbd91a60733c99d8955730f147ad3d0c57357fd"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p08-first-v1.webp",
       "hash": "3b05cb8c88f40bb6ece958921062fca1d8bed9c9beeaa00c4beff6e664603805"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p08-story-v2.webp",
+      "hash": "59ee54cb0daca2647deadcf1b31b6ba15a71987ce5d94a782ad19e55c9604f92"
     },
     {
       "file": "public/media/saga/id/ep-21/p09-first-v1.webp",
       "hash": "f3124e93ae88b33c0197051aa318db2029ef02b192b003f596d4e0e0099780f5"
     },
     {
+      "file": "public/media/saga/id/ep-21/p09-story-v2.webp",
+      "hash": "19d3a4b3106a7c425fa648e62c9ed6ca282a99969d880beeb44fa0d7bd4df7db"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p10-first-v1.webp",
       "hash": "87e2fb5bfcdf3e355c7bc17bbc8ddd1e09a673578cad2b0d26f754e0e2feb202"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p10-story-v2.webp",
+      "hash": "ee1a6a4d3df4b5097c2d5a4c964d9e37f44982ce0205c85d979d39b0690f6059"
     },
     {
       "file": "public/media/saga/id/ep-21/p11-first-v1.webp",
       "hash": "f3af9e2d553231f27ba051b893ff2f5805111786831076ff93b6504f05b09d7a"
     },
     {
+      "file": "public/media/saga/id/ep-21/p11-story-v2.webp",
+      "hash": "c1fe0ad4b783c23303d2c7d1fe26bf114fc4485fa034d5845ac263e2c2c6f05d"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p12-first-v1.webp",
       "hash": "8dd0232298d467380e1715c8c0e1eb40beb676baa686dddc2b5d51035f89c693"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p12-story-v2.webp",
+      "hash": "fb584bad68cbb0ac2697e1043326a502ec31e6e39e67a4a34bb58db666cc970d"
     },
     {
       "file": "public/media/saga/id/ep-21/p13-first-v1.webp",
       "hash": "2d44616fb806d22bf2be29173bb161ab315bd30f7613083b64329a884686adf7"
     },
     {
+      "file": "public/media/saga/id/ep-21/p13-story-v2.webp",
+      "hash": "773991ed08a92e8fcb529a161f719ed8ee194d6e919263820cea592d7622a6d5"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p14-first-v1.webp",
       "hash": "461733eaa7e96612b163c721a2895717d85833c680384b0fc816b590d58dc2d6"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p14-story-v2.webp",
+      "hash": "8fc0e6b8d6b297bdbbcac14b025b183ef585c42a098e7f967e57d617fb452360"
     },
     {
       "file": "public/media/saga/id/ep-21/p15-first-v1.webp",
       "hash": "0b654254e38b9c8626d97e94ed580e19da3d35cc422e526275836c745b0f5ae2"
     },
     {
+      "file": "public/media/saga/id/ep-21/p15-story-v2.webp",
+      "hash": "7d38b6b565a97e4b36c91d70d0fb6d4efc9834f884454a4a3bef15dd81dd2505"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p16-first-v1.webp",
       "hash": "6ba3aab2686a074407e083d92ca7c2557cf387c6f7dd6d1a6cb2f54001f017ca"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p16-story-v2.webp",
+      "hash": "bc62ca20ef57a758b9c18e0ea42cc9384c4c68130f1225b64ef8934ff44a00ac"
     },
     {
       "file": "public/media/saga/id/ep-21/p17-first-v1.webp",
       "hash": "c1527e0b8fc0a4f01d8275520efa4a105c1b837b87622611575885b10cbfd3b4"
     },
     {
+      "file": "public/media/saga/id/ep-21/p17-story-v2.webp",
+      "hash": "072f8d92a33c39e238b0540203ceadef36e548304048b20ac8545d3ec1f722f9"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p18-first-v1.webp",
       "hash": "b488909cb8c56ba028862999fc3b6b6bb9ac8d0bc5ccc97a0218043a6c040642"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p18-story-v2.webp",
+      "hash": "62815f3c357b0152c2638857889d62b8ad3d201063b086146452ebc8fac6d4a4"
     },
     {
       "file": "public/media/saga/id/ep-21/p19-first-v1.webp",
       "hash": "4e441ae930ea200026bf4198021c089e6f3ea77b8f551d289a9e22d55978d525"
     },
     {
+      "file": "public/media/saga/id/ep-21/p19-story-v2.webp",
+      "hash": "c9da41320c6e664af2306f4e70162128051de4b3c0dc63f3305b052937b0a053"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p20-first-v1.webp",
       "hash": "dae5d371346969152653bf95fa43949df62a2ee5d6f682a48f691aba97e95d68"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p20-story-v2.webp",
+      "hash": "d4efd66364d67f78c065ceff3c81d29cf503aef44b83a71e620a2f4d968e0208"
     },
     {
       "file": "public/media/saga/id/ep-21/p21-first-v1.webp",
       "hash": "2078ff127e5a3a765fdce65a1186ed39e4e298d191bd50fcd4c619f6840bcf91"
     },
     {
+      "file": "public/media/saga/id/ep-21/p21-story-v2.webp",
+      "hash": "876f520e753e1153b2a1c2f1df7350e865de9de816902ca8419c189a17d76498"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p22-first-v1.webp",
       "hash": "f917b8f02bfdec97e907c9f29eb2943a8c73527115001c6ae0ce0e12a2637b06"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p22-story-v2.webp",
+      "hash": "6fcba3a768509066f8f9250afabb3daaa62ce39f7503585fad38c77007f84385"
     },
     {
       "file": "public/media/saga/id/ep-21/p23-first-v1.webp",
       "hash": "ca4ec249bd9a4aa86adbec23ccc7313dfe506deef621abd00dc9d5caef5f6230"
     },
     {
+      "file": "public/media/saga/id/ep-21/p23-story-v2.webp",
+      "hash": "6958f3d6090d600e4e84c78adb6b5227025265e0532b10c3ddfc443cf23a0fb9"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p24-first-v1.webp",
       "hash": "20ffed197c1916d409acba71b927ba0869abdfaf0da13e5fe642e881f4dcc837"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p24-story-v2.webp",
+      "hash": "92b9830d0513f98982b95ca62a7e908cd1a28a5b305d748f154d2a57324612f2"
     },
     {
       "file": "public/media/saga/id/ep-21/p25-first-v1.webp",
       "hash": "09b93a7bb3d671202288c06a4cfa76a18130e46ce6f82bfd25eb4a9cba4b7c0c"
     },
     {
+      "file": "public/media/saga/id/ep-21/p25-story-v2.webp",
+      "hash": "9fb5fdc13dc78fab0db2a2f2afb3e0d43d02b13dcee278da9bf0a492078c88c8"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p26-first-v1.webp",
       "hash": "48a3c784feb702a08b0985541b27900ff4e431b6832f3d14567a34694dcc6228"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p26-story-v2.webp",
+      "hash": "33920af3b7d332bdd2566858debca3b73f6df908f293939de6ce271622df3163"
     },
     {
       "file": "public/media/saga/id/ep-21/p27-first-v1.webp",
       "hash": "5f3f1a04e1e21fe622896a49b06aff36441d53f287aa5b6fe5abc13f285a4a7e"
     },
     {
+      "file": "public/media/saga/id/ep-21/p27-story-v2.webp",
+      "hash": "e794c8f520edc130345786e3bda2656fb3d2dcc0d47e4763e943b9404228e591"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p28-first-v1.webp",
       "hash": "7c0285a613b046f233a965c3401f0a759d6bf5550d8a889bdd665825d88ecb33"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p28-story-v2.webp",
+      "hash": "22183935f74923798acbc4c072185e4486c07684a23072eef792175525967fe0"
     },
     {
       "file": "public/media/saga/id/ep-21/p29-first-v1.webp",
       "hash": "c4c701014edbfbefe6b7363f328c564f32d055f3b66f0e55da4ae8b038a5210e"
     },
     {
+      "file": "public/media/saga/id/ep-21/p29-story-v2.webp",
+      "hash": "46553578a9e3888c4f9f394c5509f827d9afbc13082486b0cc265be8173679db"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p30-first-v1.webp",
       "hash": "712025aae0e913294e0553c90e70e88765684d048b2381a782635cc5bb639069"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p30-story-v2.webp",
+      "hash": "364122034d6b31ad036324c2729bce9cdabb254200af38b41ed159ebb7ae0442"
     },
     {
       "file": "public/media/saga/id/ep-21/p31-first-v1.webp",
       "hash": "0aa216c0e680916a218fd1e67c1ad220c9a6145da5238c868eef2edd81a592bd"
     },
     {
+      "file": "public/media/saga/id/ep-21/p31-story-v2.webp",
+      "hash": "5dc57ee4eec1dad8916d0bd9f1ce67da93c1ca5df2e48b044ed72b4e50077d2f"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p32-first-v1.webp",
       "hash": "f673e08b43fbd13fffb18b37a06e1c28bd8d1c6887d13d697721c71007ed5425"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p32-story-v2.webp",
+      "hash": "17427c4a1a3d3769c183319c56fcae965d32148f8aefb75cc76f466f51b855eb"
     },
     {
       "file": "public/media/saga/id/ep-21/p33-first-v1.webp",
       "hash": "c16151f5bbdf1f81cdb41c435689e761e3e001107a13ebf387795e4e13ae3fe3"
     },
     {
+      "file": "public/media/saga/id/ep-21/p33-story-v2.webp",
+      "hash": "394f6bb94f1670eb167e118705465527a265d691399051c5ccaba508b5a1123b"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p34-first-v1.webp",
       "hash": "0cbd6f872299dba9f4e4b06c0d76dbf7f89023dfc710f6c4376540ba248d1452"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p34-story-v2.webp",
+      "hash": "152b4b09defd3a334fffb4af3ea7015791d8e8c8da76756236bacd7b417be06d"
     },
     {
       "file": "public/media/saga/id/ep-21/p35-first-v1.webp",
       "hash": "6d7e40612edf16caea0ffffcebfefd7ffe1c988a1695908f3e534a0672116d2e"
     },
     {
+      "file": "public/media/saga/id/ep-21/p35-story-v2.webp",
+      "hash": "a820b46c71fe6637c8e0cb2ab75655e27e361c87d08035f830134bbe54f0b9ae"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p36-first-v1.webp",
       "hash": "00eacc21229e3b8fddb32ecbaf42febfe52746c3002c8a90825fb967dbdb7df0"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p36-story-v2.webp",
+      "hash": "a843dfdf735c68bc4e0b1a11017cd13520e704c41d39191fbd5355ddce16e779"
     },
     {
       "file": "public/media/saga/id/ep-21/p37-first-v1.webp",
       "hash": "97def74ba84889d64e7155877facc012f3ce27f47d7ead02e3ccecf741f95506"
     },
     {
+      "file": "public/media/saga/id/ep-21/p37-story-v2.webp",
+      "hash": "54a41842c975a76239b0ed4e7781957573fef8f51cbd5a7bdb39111a4b22e952"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p38-first-v1.webp",
       "hash": "6d756607e8f5b4e8f485d45aea220f4036c571de995ae41066086de5a7e922f3"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p38-story-v2.webp",
+      "hash": "913086b51d04f8725be5aae8858e357fe1c75822e31f6d73c06ae897f67e3721"
     },
     {
       "file": "public/media/saga/id/ep-21/p39-first-v1.webp",
       "hash": "8ee8bf049e0c1730773a531a3db4024317ae7a60e524ceb8de77338c23b39ad5"
     },
     {
+      "file": "public/media/saga/id/ep-21/p39-story-v2.webp",
+      "hash": "f11e4b461e386201e9c7b45a67edf461292b153177a21552fc564f7b04ef23e3"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p40-first-v1.webp",
       "hash": "4df4585a473106a4d7f1e1841f976bd6799d934d64d215e9442bea9d42396683"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p40-story-v2.webp",
+      "hash": "86036d42f1bb32d85d06a380c0b0d2a989310ddc1472b061c2761d793cba2482"
     },
     {
       "file": "public/media/saga/id/ep-21/p41-first-v1.webp",
       "hash": "33fb4dee00f1e56a54a611ad7b61ce0c9ff269871f48478cf2b925d6f6c0cdd3"
     },
     {
+      "file": "public/media/saga/id/ep-21/p41-story-v2.webp",
+      "hash": "24c1c2e0384067163e3b01c31795c8d10e418c53dcd2a43dc332f88b92d71626"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p42-first-v1.webp",
       "hash": "dd7d7301ecbef0693d2bfb1f6d9f0898c9e4f5af549a1bb2b97f6ae1e0ee9fb6"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p42-story-v2.webp",
+      "hash": "970097e1ebe7ab00a614206cdc3ad3c9ac3c4dda2126da5cda97e4a8879bd97d"
     },
     {
       "file": "public/media/saga/id/ep-21/p43-first-v1.webp",
       "hash": "4da9e085fe004370260825f7e41cae58ce628eb577d4e0b2e071f5d25f529ecf"
     },
     {
+      "file": "public/media/saga/id/ep-21/p43-story-v2.webp",
+      "hash": "f6798cdfc2ea55ae61870dfa920e4dcc85f90aa9faf9a564482c78004f6282a9"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p44-first-v1.webp",
       "hash": "9fc4725d1b5d4e3efebcf7a3a719ed42b426bdf4ebe9f4b5cdaecf1af60164f7"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p44-story-v2.webp",
+      "hash": "ad725a221bb6efadd2e9126bdd1823117ab1d5e4183d9d26ec7057c0115999b3"
     },
     {
       "file": "public/media/saga/id/ep-21/p45-first-v1.webp",
       "hash": "18956e54a586ab8d1e88099cd7459c300f52b933a49c6bf73e4992c0e5d0723b"
     },
     {
+      "file": "public/media/saga/id/ep-21/p45-story-v2.webp",
+      "hash": "8ea8e85bf16ef869d3093e3981c6862274c6f4817b7f7b487a4f4dd39a978787"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p46-first-v1.webp",
       "hash": "558b4ade9068773e580ea60e63440a8b48e434515cc1d5d99931b29f4c29415c"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p46-story-v2.webp",
+      "hash": "0c9b54c37234bfa30bae9bcd49c11d341bee0383398901f9ff649a1089b36bb1"
     },
     {
       "file": "public/media/saga/id/ep-21/p47-first-v1.webp",
       "hash": "78e029dc34e422f3f9a158785f596cfa3f4fcce75a9c35e17fad47e467dd3274"
     },
     {
+      "file": "public/media/saga/id/ep-21/p47-story-v2.webp",
+      "hash": "75c82e03afcaec551dbfb40977f9099f0b128919793d354d95b5a3be63300233"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p48-first-v1.webp",
       "hash": "3160917ffbd7e9338caed98ca6a6c1a808cbdc0ae2abcda5d6dd2db3abf291a5"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p48-story-v2.webp",
+      "hash": "7f033a80c60d450d7299efd6fa066a6301fedabad3789c4bdb116d215920702e"
     },
     {
       "file": "public/media/saga/id/ep-21/p49-first-v1.webp",
       "hash": "02a2b3f73128ba0da2625fbf391ff1a7bc83c942a7822043d2fc0ee41ba635bb"
     },
     {
+      "file": "public/media/saga/id/ep-21/p49-story-v2.webp",
+      "hash": "7d4fbbaab26626af86306c774fa395040d273cb455b9d037dd4b2393c6ada825"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p50-first-v1.webp",
       "hash": "981e39adba7840a4a07b04651c82d78f69c627b33f6c07353f6ff1c49fa67c9d"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p50-story-v2.webp",
+      "hash": "46641cba9d452c437b3e53952b2d3624d2bc776aeea9bc491bf8973b7786072d"
     },
     {
       "file": "public/media/saga/id/ep-21/p51-first-v1.webp",
       "hash": "c884176f8c8372dc262a0a3deaeb199cc866aeb1458b46d368be092c5f9b8df3"
     },
     {
+      "file": "public/media/saga/id/ep-21/p51-story-v2.webp",
+      "hash": "ed6f2ba1891cbc97d3d1fe1f11730d41d26f62996dd04bf0414820f79becfc6f"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p52-first-v1.webp",
       "hash": "e7799edd7fbd9560394eab1e17d3f5145ed1456999415fa102af0f4a262c85ca"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p52-story-v2.webp",
+      "hash": "ed72e7dc7b6c5181996129de9101caf7bf259dd6eaa91b57e9d6eb76d6042e02"
     },
     {
       "file": "public/media/saga/id/ep-21/p53-first-v1.webp",
       "hash": "e783ae34ab33c6563dbaaf7c4be75c9fa4e557f40612bc7ab0d9a801c5b316ca"
     },
     {
+      "file": "public/media/saga/id/ep-21/p53-story-v2.webp",
+      "hash": "0deae318dfade88552a3901a9851cccd32be0d30fba0f911c8bb055896a1624c"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p54-first-v1.webp",
       "hash": "59cb4f785345ca6236533860a2265542cfd4af3771fbbd057a73dc1824e61c16"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p54-story-v2.webp",
+      "hash": "78b2fbc1ac7319786b887508879e1347a430860889d0989a48ecb231e77c04e6"
     },
     {
       "file": "public/media/saga/id/ep-21/p55-first-v1.webp",
       "hash": "d56b86353c2cdf27d4696ad002ef4229e8fa39e5ead62bba10999a36f1993d12"
     },
     {
+      "file": "public/media/saga/id/ep-21/p55-story-v2.webp",
+      "hash": "bcce93b031d7dd9c3c005526bbd1fa76b898681f2e5fa355c4305eddf59870a3"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p56-first-v1.webp",
       "hash": "ad9a7adf2d75c1a1f9a62cfca9e7834bbccb2dd1ef60974228d00b8b1088fa7f"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p56-story-v2.webp",
+      "hash": "1cc1f3e1ee0c96e501a6db44d126cd9c0fa692fe772129d486f255d4928fe0fe"
     },
     {
       "file": "public/media/saga/id/ep-21/p57-first-v1.webp",
       "hash": "93f5357bcf37aed99a224b62e3099e97cfec586e56ee1bc4c3d690cbe940a607"
     },
     {
+      "file": "public/media/saga/id/ep-21/p57-story-v2.webp",
+      "hash": "f3c270b235c0d3e8d6fa79174605fa864724ddbd43741ba28f5befeb90b06088"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p58-first-v1.webp",
       "hash": "298d3f13907354cf5cf993b1ecabebfa1941e3d0616b7d5795ad9f9000333f60"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p58-story-v2.webp",
+      "hash": "bc3dc2b5c34a69851d67a7614129e59dacbce48fa8b233bb8f04f09d920318f8"
     },
     {
       "file": "public/media/saga/id/ep-21/p59-first-v1.webp",
       "hash": "7c1a6a947e160f66e9968846bc0b4b0d5598916c8196412d1347b603f7472778"
     },
     {
+      "file": "public/media/saga/id/ep-21/p59-story-v2.webp",
+      "hash": "20f110d79d191ecf9755b89b43001c3435a9eb5830a754904ec0c539fd9d0d54"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p60-first-v1.webp",
       "hash": "e13ee0d85849e2ece037c85795a19de9f568aebbc4c95440294ff98a288d0636"
     },
     {
+      "file": "public/media/saga/id/ep-21/p60-story-v2.webp",
+      "hash": "c92f1a778bf3bde2eb5f15bb2bf3da6322ce165f7526d55deb703f53600738a7"
+    },
+    {
       "file": "public/media/saga/id/ep-21/p61-first-v1.webp",
       "hash": "15bcdea1ef61e34b93718bd3acfc7f0270fae6e5304bcdcfd30d6b2ade7f0bd7"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p61-story-v2.webp",
+      "hash": "f8275b594eb4c9376015c690f7a8756eb0f27580183faf473ee51b07df75489f"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p62-story-v2.webp",
+      "hash": "305df33107bb72a4b9e9ddef283dd0cacf983229a9bedad7540f9dda377bacc4"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p63-story-v2.webp",
+      "hash": "56de38036775719a6640c49a6150c5e9e85325829e7f707be1087119b683681c"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p64-story-v2.webp",
+      "hash": "10c291f0094a632f92a3ab4507d2168a552e09ee22dd6f317bf7ef0b12c4b749"
+    },
+    {
+      "file": "public/media/saga/id/ep-21/p65-story-v2.webp",
+      "hash": "95f1e888f5b59316af7d17e335ea3eff074f51b3bd1ec74a3352f1388fd477ce"
     },
     {
       "file": "public/media/saga/id/ep-3/p01.webp",
@@ -9980,11 +10508,11 @@
     },
     {
       "file": "src/data/saga.ts",
-      "hash": "96e16b9bcea1446bb84d261a1428867ef22bb07b857e4f55b28b9d7f90d9409c"
+      "hash": "0db7e8ca747335daf0e9177fee84bc903a9dfc0bd62f8111c68e7ee12f2eac8f"
     },
     {
       "file": "src/data/sagaPages.json",
-      "hash": "e620f4d84ea635736cb07bd645da13c50ed44a9deddfa4f1192b3b448ccce8b6"
+      "hash": "ba87a8546f5c5f4d9b6d9e8c45d92dfed5f918e53c1ad165da29f20229c0f315"
     },
     {
       "file": "src/data/sagaReactions.ts",
@@ -9996,7 +10524,7 @@
     },
     {
       "file": "src/data/sagaTranscripts.json",
-      "hash": "8ebb7b1aa34b0569db7de28843e2bbaa0f98c7284678884a73c22a195709ea7c"
+      "hash": "c2241c36166e343ee7246ce30b189381025f3cebc1589f0dac4102caf6fba54b"
     },
     {
       "file": "src/data/sagaUi.ts",
@@ -10192,7 +10720,7 @@
     }
   ],
   "dates": {
-    "/": "2026-10-04T00:07:26+08:00",
+    "/": "2026-10-04T02:09:32+08:00",
     "/about": "2026-10-03T17:42:59+07:00",
     "/book": "2026-10-03T17:42:59+07:00",
     "/contact": "2026-10-03T17:42:59+07:00",
@@ -10214,28 +10742,28 @@
     "/how-it-works": "2026-10-03T17:42:59+07:00",
     "/monthly-scooter-rental-bali": "2026-10-03T17:42:59+07:00",
     "/partners": "2026-10-03T17:42:59+07:00",
-    "/saga": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-1": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-10": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-11": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-12": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-13": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-14": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-15": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-16": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-17": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-18": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-19": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-2": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-20": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-21": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-3": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-4": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-5": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-6": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-7": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-8": "2026-10-04T00:07:26+08:00",
-    "/saga/chapter-9": "2026-10-04T00:07:26+08:00",
+    "/saga": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-1": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-10": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-11": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-12": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-13": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-14": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-15": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-16": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-17": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-18": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-19": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-2": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-20": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-21": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-3": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-4": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-5": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-6": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-7": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-8": "2026-10-04T02:09:32+08:00",
+    "/saga/chapter-9": "2026-10-04T02:09:32+08:00",
     "/supercharge": "2026-10-03T17:42:59+07:00"
   }
 }
