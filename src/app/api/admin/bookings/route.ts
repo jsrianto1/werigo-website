@@ -11,6 +11,7 @@ function parseQuery(req: NextRequest): BookingListQuery {
   return {
     search: p.get("search") ?? undefined,
     status: p.get("status") ?? undefined,
+    paymentStatus: p.get("paymentStatus") ?? undefined,
     model: p.get("model") ?? undefined,
     pickupArea: p.get("pickupArea") ?? undefined,
     source: p.get("source") ?? undefined,

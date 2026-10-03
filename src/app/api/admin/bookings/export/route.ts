@@ -7,7 +7,8 @@ import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 export const runtime = "nodejs";
 
 const COLUMNS: (keyof StoredBooking)[] = [
-  "booking_code", "created_at", "status", "full_name", "whatsapp_number",
+  "booking_code", "created_at", "status", "payment_status", "total_idr", "discount_idr", "discount_code", "paid_at",
+  "full_name", "whatsapp_number",
   "email", "nationality", "vehicle_model", "quantity", "pickup_area",
   "pickup_address", "return_area", "return_address", "start_at", "end_at",
   "delivery_method", "customer_notes", "source_page", "utm_source",
@@ -32,6 +33,7 @@ export async function GET(req: NextRequest) {
   const q: BookingListQuery = {
     search: p.get("search") ?? undefined,
     status: p.get("status") ?? undefined,
+    paymentStatus: p.get("paymentStatus") ?? undefined,
     model: p.get("model") ?? undefined,
     pickupArea: p.get("pickupArea") ?? undefined,
     source: p.get("source") ?? undefined,

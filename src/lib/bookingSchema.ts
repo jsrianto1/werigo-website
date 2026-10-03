@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { getModel } from "@/data/vehicles";
-import { getArea } from "@/data/locations";
+import { getPickupPoint } from "@/data/locations";
 
 /**
  * Server-side validation for public booking submissions.
@@ -45,13 +45,13 @@ export const bookingSubmissionSchema = z
       .string()
       .trim()
       .toLowerCase()
-      .refine((s) => Boolean(getArea(s)), "Unknown pickup area."),
+      .refine((s) => Boolean(getPickupPoint(s)), "Unknown pickup area."),
     pickupAddress: z.string().trim().max(500).optional().default(""),
     returnArea: z
       .string()
       .trim()
       .toLowerCase()
-      .refine((s) => Boolean(getArea(s)), "Unknown return area."),
+      .refine((s) => Boolean(getPickupPoint(s)), "Unknown return area."),
     returnAddress: z.string().trim().max(500).optional().default(""),
     startAt: z.iso.datetime({ offset: true }),
     endAt: z.iso.datetime({ offset: true }),

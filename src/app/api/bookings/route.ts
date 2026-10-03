@@ -1,21 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { bookingSubmissionSchema } from "@/lib/bookingSchema";
-import { getBookingStore } from "@/lib/bookingStore";
+import { getBookingStore, StockUnavailableError } from "@/lib/bookingStore";
 import { buildStoredBookingWhatsAppUrl } from "@/lib/whatsapp";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
-import { notifyAdminsOfNewBooking } from "@/lib/notifications";
+import { getSessionUser } from "@/lib/session";
+import { computeQuote, periodFromIso } from "@/lib/quote";
+import { isMidtransConfigured, MidtransError } from "@/lib/midtrans";
+import { openPayment, paymentDeadline } from "@/lib/payments";
+import { latestPayment } from "@/lib/paymentStore";
+import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
+import { offersForUser } from "@/lib/offers";
 
 export const runtime = "nodejs";
 
 /**
- * Public booking creation. The database insert must succeed BEFORE
- * any WhatsApp URL is returned — the client never opens WhatsApp
- * without a stored booking.
+ * Public booking creation (signed-in customers).
  *
- * Protections: Zod validation, honeypot, per-IP rate limiting,
- * idempotency via client_submission_id. No prices are accepted from
- * the browser. No personal data is logged.
+ * Order of operations: validate → price on the server → reserve units
+ * and insert the booking (pending payment) → open a Midtrans Snap
+ * transaction → return the token. The browser never sends a price.
+ * If the payment provider cannot be reached, the booking is released
+ * again and the customer keeps their form to retry.
+ *
+ * Protections: session required, Zod validation, honeypot, per-IP
+ * rate limiting, idempotency via client_submission_id, stock check
+ * inside the insert transaction. No personal data is logged.
  */
 
 // Simple per-IP sliding window (single-instance deployment).
@@ -42,8 +52,8 @@ function rateLimited(ip: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
-  // TEMPORARY: storage disconnected — the public flow never calls
-  // this route; direct calls are refused before any store access.
+  // WhatsApp-only mode: the public flow never calls this route;
+  // direct calls are refused before any store access.
   if (WHATSAPP_FIRST_BOOKING) {
     return NextResponse.json(
       { ok: false, error: "storage_disabled", message: "Booking storage is temporarily disabled. Please use the WhatsApp booking flow on the website." },
@@ -83,6 +93,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, ignored: true }, { status: 200 });
   }
 
+  const user = await getSessionUser();
+  if (!user) {
+    return NextResponse.json(
+      { ok: false, error: "auth_required", message: "Please sign in to complete your booking." },
+      { status: 401 }
+    );
+  }
+
   const parsed = bookingSubmissionSchema.safeParse(body);
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {};
@@ -95,34 +113,62 @@ export async function POST(req: NextRequest) {
       { status: 422 }
     );
   }
+  const submission = { ...parsed.data, email: parsed.data.email || user.email };
 
+  // The server prices the booking from approved data only, including
+  // whether this customer still qualifies for the welcome offer.
+  let offers;
   try {
-    const store = getBookingStore();
-    const { booking, duplicate } = await store.create(parsed.data);
-    // Stored → tell the ops team on WhatsApp (queued; never fails the booking).
-    if (!duplicate) await notifyAdminsOfNewBooking(booking);
-    return NextResponse.json(
-      {
-        ok: true,
-        duplicate,
-        booking: {
-          bookingCode: booking.booking_code,
-          fullName: booking.full_name,
-          vehicleModel: booking.vehicle_model,
-          quantity: booking.quantity,
-          pickupArea: booking.pickup_area,
-          pickupAddress: booking.pickup_address,
-          returnArea: booking.return_area,
-          returnAddress: booking.return_address,
-          startAt: booking.start_at,
-          endAt: booking.end_at,
-          customerNotes: booking.customer_notes,
-        },
-        whatsappUrl: buildStoredBookingWhatsAppUrl(booking),
-      },
-      { status: duplicate ? 200 : 201 }
-    );
+    offers = await offersForUser(user.id);
   } catch (err) {
+    logStorageError(storageErrorFromThrown("offers", err));
+    return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
+  }
+  const quote = computeQuote({
+    modelSlug: submission.vehicleModel,
+    period: periodFromIso(submission.startAt, submission.endAt),
+    quantity: submission.quantity,
+    pickupSlug: submission.pickupArea,
+    returnSlug: submission.returnArea,
+    discountPercent: offers.welcome.eligible ? offers.welcome.percent : 0,
+    discountCode: offers.welcome.eligible ? offers.welcome.code : null,
+  });
+  if (!quote) {
+    return NextResponse.json(
+      { ok: false, error: "quote_unavailable", message: "These dates cannot be priced. Please check the rental period (minimum 2 days)." },
+      { status: 422 }
+    );
+  }
+  if (!isMidtransConfigured()) {
+    return NextResponse.json(
+      { ok: false, error: "payment_unavailable", message: "Online payment is not available right now. Please contact us on WhatsApp." },
+      { status: 503 }
+    );
+  }
+
+  const store = getBookingStore();
+  let booking;
+  let duplicate = false;
+  try {
+    ({ booking, duplicate } = await store.create(submission, {
+      userId: user.id,
+      payment: { quote, expiresAt: paymentDeadline() },
+    }));
+  } catch (err) {
+    if (err instanceof StockUnavailableError) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "sold_out",
+          available: err.available,
+          message:
+            err.available > 0
+              ? `Only ${err.available} unit${err.available === 1 ? "" : "s"} of this model ${err.available === 1 ? "is" : "are"} left for these dates.`
+              : "This model is fully booked for these dates. Try different dates or another model.",
+        },
+        { status: 409 }
+      );
+    }
     // Typed, categorized, redacted logging — never credentials,
     // payloads, or personal data.
     logStorageError(storageErrorFromThrown("create_booking", err));
@@ -136,4 +182,42 @@ export async function POST(req: NextRequest) {
       { status: 503 }
     );
   }
+
+  // A replayed submission (network retry) returns the existing booking
+  // and its open payment; a new one gets a fresh Snap transaction.
+  let payment = duplicate ? await latestPayment(booking.id) : null;
+  const windowOpen =
+    booking.payment_status === "pending" &&
+    booking.payment_expires_at !== null &&
+    new Date(booking.payment_expires_at).getTime() > Date.now();
+
+  if (!payment && booking.payment_status === "pending" && windowOpen) {
+    try {
+      payment = await openPayment(booking, user.email);
+    } catch (err) {
+      const message = err instanceof MidtransError ? err.message : err instanceof Error ? err.message : String(err);
+      console.error(`[payments] snap create failed for ${booking.booking_code}: ${message.slice(0, 200)}`);
+      // Release the units: the customer keeps the form and can retry.
+      await store.setPaymentState(booking.id, { payment_status: "failed", status: "expired" }, "system", "payment provider unavailable").catch(() => null);
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "payment_unavailable",
+          message: "We couldn't start the payment just now. Your details are still on this page. Please try again in a moment, or contact us on WhatsApp.",
+        },
+        { status: 503 }
+      );
+    }
+  }
+
+  return NextResponse.json(
+    {
+      ok: true,
+      duplicate,
+      booking: toPublicBooking(booking),
+      payment: toPublicPayment(booking, payment),
+      whatsappUrl: buildStoredBookingWhatsAppUrl(booking),
+    },
+    { status: duplicate ? 200 : 201 }
+  );
 }

@@ -19,12 +19,27 @@ import { authClient } from "@/lib/auth-client";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 
+import { formatIdr } from "@/lib/pricing";
+
 const STATUSES = [
-  "new", "contacted", "quoted", "confirmed",
-  "active", "completed", "cancelled", "no_response",
+  "pending_payment", "new", "contacted", "quoted", "confirmed",
+  "active", "completed", "cancelled", "no_response", "expired",
 ] as const;
 
+const PAYMENT_STATUSES = ["pending", "paid", "expired", "failed", "refunded", "unpaid"] as const;
+
+const PAYMENT_STYLES: Record<string, string> = {
+  paid: "bg-ok-soft text-ok",
+  pending: "bg-warn-soft text-warn",
+  expired: "bg-danger-soft text-danger",
+  failed: "bg-danger-soft text-danger",
+  refunded: "bg-sunken text-ink-soft",
+  unpaid: "bg-sunken text-ink-faint",
+};
+
 const STATUS_STYLES: Record<string, string> = {
+  pending_payment: "bg-warn-soft text-warn",
+  expired: "bg-sunken text-ink-faint",
   new: "bg-primary-faint text-primary",
   contacted: "bg-warn-soft text-warn",
   quoted: "bg-warn-soft text-warn",
@@ -56,6 +71,11 @@ interface Row {
   customer_notes: string | null;
   pickup_address: string | null;
   nationality: string | null;
+  payment_status: string;
+  total_idr: number | null;
+  discount_idr: number;
+  discount_code: string | null;
+  paid_at: string | null;
 }
 
 interface EventRow {
@@ -80,7 +100,7 @@ const fmt = (iso: string | null) =>
       })
     : "—";
 
-export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
+export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; adminRole: string }) {
   const router = useRouter();
   const models = getPrimaryCards();
 
@@ -93,6 +113,7 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
   // filters
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState("");
   const [model, setModel] = useState("");
   const [pickupArea, setPickupArea] = useState("");
   const [dateFrom, setDateFrom] = useState("");
@@ -110,13 +131,14 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
     const p = new URLSearchParams();
     if (search) p.set("search", search);
     if (status) p.set("status", status);
+    if (paymentStatus) p.set("paymentStatus", paymentStatus);
     if (model) p.set("model", model);
     if (pickupArea) p.set("pickupArea", pickupArea);
     if (dateFrom) p.set("dateFrom", `${dateFrom}T00:00:00+08:00`);
     if (dateTo) p.set("dateTo", `${dateTo}T23:59:59+08:00`);
     p.set("sort", sort);
     return p;
-  }, [search, status, model, pickupArea, dateFrom, dateTo, sort]);
+  }, [search, status, paymentStatus, model, pickupArea, dateFrom, dateTo, sort]);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -194,6 +216,7 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
 
   const summary = [
     { label: "Total", value: totalBookings },
+    { label: "Awaiting payment", value: counts.pending_payment ?? 0 },
     { label: "New", value: counts.new ?? 0 },
     { label: "Confirmed", value: counts.confirmed ?? 0 },
     { label: "Active", value: counts.active ?? 0 },
@@ -214,6 +237,12 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
         </div>
         <div className="flex items-center gap-2">
           <span className="hidden text-sm text-ink-soft sm:inline">{adminEmail}</span>
+          <a
+            href="/admin/stock"
+            className="inline-flex min-h-9 cursor-pointer items-center gap-2 rounded-[10px] border border-line-strong px-3.5 text-sm font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
+          >
+            Stock
+          </a>
           <Button variant="outline" size="sm" onClick={() => void load()}>
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
             Refresh
@@ -271,6 +300,12 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
           <option value="">All statuses</option>
           {STATUSES.map((s) => (
             <option key={s} value={s}>{s.replace("_", " ")}</option>
+          ))}
+        </select>
+        <select aria-label="Payment filter" value={paymentStatus} onChange={(e) => { setPaymentStatus(e.target.value); setPage(1); }} className={selectClass}>
+          <option value="">All payments</option>
+          {PAYMENT_STATUSES.map((s) => (
+            <option key={s} value={s}>{s}</option>
           ))}
         </select>
         <select aria-label="Model filter" value={model} onChange={(e) => { setModel(e.target.value); setPage(1); }} className={selectClass}>
@@ -338,6 +373,7 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
                   <th className="px-4 py-3 font-semibold">Model</th>
                   <th className="px-4 py-3 font-semibold">Period</th>
                   <th className="px-4 py-3 font-semibold">Area</th>
+                  <th className="px-4 py-3 font-semibold">Payment</th>
                   <th className="px-4 py-3 font-semibold">Status</th>
                 </tr>
               </thead>
@@ -369,6 +405,14 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
                       {fmt(r.start_at)} → {fmt(r.end_at)}
                     </td>
                     <td className="px-4 py-3 capitalize text-ink-soft">{r.pickup_area}</td>
+                    <td className="px-4 py-3">
+                      <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${PAYMENT_STYLES[r.payment_status] ?? "bg-sunken text-ink-soft"}`}>
+                        {r.payment_status}
+                      </span>
+                      {r.total_idr !== null ? (
+                        <span className="tnum mt-1 block text-xs text-ink-faint">{formatIdr(r.total_idr)}</span>
+                      ) : null}
+                    </td>
                     <td className="px-4 py-3">
                       <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_STYLES[r.status] ?? "bg-sunken text-ink-soft"}`}>
                         {r.status.replace("_", " ")}
@@ -448,6 +492,7 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
                   ["Period", `${fmt(detail.booking.start_at)} → ${fmt(detail.booking.end_at)}`],
                   ["Pickup", `${detail.booking.pickup_area}${detail.booking.pickup_address ? ` — ${detail.booking.pickup_address}` : ""}`],
                   ["Return", detail.booking.return_area],
+                  ["Payment", `${detail.booking.payment_status}${detail.booking.total_idr !== null ? ` · ${formatIdr(detail.booking.total_idr)}` : ""}${detail.booking.discount_idr > 0 ? ` · discount ${formatIdr(detail.booking.discount_idr)}${detail.booking.discount_code ? ` (${detail.booking.discount_code})` : ""}` : ""}${detail.booking.paid_at ? ` · paid ${fmt(detail.booking.paid_at)}` : ""}`],
                   ["Source", detail.booking.source_page ?? "—"],
                   ["Notes from customer", detail.booking.customer_notes ?? "—"],
                 ].map(([k, v]) => (
@@ -531,6 +576,41 @@ export function AdminDashboard({ adminEmail }: { adminEmail: string }) {
                   />
                   <p className="mt-1 text-xs text-ink-faint">Saved when the field loses focus.</p>
                 </div>
+                {adminRole === "super_admin" ? (
+                  <div className="border-t border-line pt-4">
+                    <p className="mb-2 text-sm font-medium text-ink">Payment record</p>
+                    <div className="flex flex-wrap gap-2">
+                      {detail.booking.payment_status === "paid" ? (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={detailBusy}
+                          onClick={() => {
+                            if (window.confirm("Mark this booking as refunded? Do the actual refund in the Midtrans dashboard first.")) {
+                              void patchDetail({ payment_status: "refunded" });
+                            }
+                          }}
+                        >
+                          Mark refunded
+                        </Button>
+                      ) : detail.booking.payment_status !== "refunded" ? (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={detailBusy}
+                          onClick={() => {
+                            if (window.confirm("Record this booking as paid outside the website (e.g. bank transfer)?")) {
+                              void patchDetail({ payment_status: "paid", status: detail.booking.status === "pending_payment" || detail.booking.status === "expired" ? "new" : detail.booking.status });
+                            }
+                          }}
+                        >
+                          Mark paid manually
+                        </Button>
+                      ) : null}
+                    </div>
+                    <p className="mt-1 text-xs text-ink-faint">Super admin only. Every change is written to the audit log.</p>
+                  </div>
+                ) : null}
               </div>
 
               {/* Timeline */}

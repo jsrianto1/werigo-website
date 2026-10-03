@@ -57,9 +57,10 @@ commit real values, and never put server-only keys in a
 | `FONNTE_TOKEN` | **server-only** | Fonnte device token for WhatsApp notifications |
 | `ADMIN_WHATSAPP_NUMBERS` | **server-only** | Comma-separated recipients of booking notifications (`628…`) |
 | `CRON_SECRET` | **server-only** | Bearer token for `/api/cron/*` (called from the VPS cron) |
-| `MIDTRANS_SERVER_KEY`, `NEXT_PUBLIC_MIDTRANS_CLIENT_KEY`, `NEXT_PUBLIC_MIDTRANS_ENV` | Phase 1 | Payments (not used yet) |
-| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Phase 1 | Google sign-in for customers (optional; sign-in is hidden when unset) |
-| `SMTP_*`, `MAIL_FROM` | Phase 1 | Verification and password-reset email |
+| `MIDTRANS_SERVER_KEY` | **server-only** | Midtrans server key (`SB-Mid-server-…` in sandbox) |
+| `NEXT_PUBLIC_MIDTRANS_CLIENT_KEY`, `NEXT_PUBLIC_MIDTRANS_ENV` | public, build-time | Snap client key and `sandbox` / `production` |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | **server-only** | Google sign-in for customers (optional; the button is hidden when unset) |
+| `SMTP_PASSWORD` (+ optional `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `MAIL_FROM`) | **server-only** | Verification and password-reset email; defaults to `noreply@werigo.co` on `smtp.hostinger.com:465` |
 | `SAGA_DATA_DIR` | **server-only** | Optional folder for the WERIGO SAGA counters and comments (default `~/.werigo-data`) |
 | `SAGA_COMMENTS_ADMIN_KEY` | **server-only** | Secret for moderating saga comments |
 
@@ -67,15 +68,53 @@ commit real values, and never put server-only keys in a
 `{ configured, reachable, schemaReady }` booleans only — for checking
 the live database connection without exposing any configuration.
 
-## Booking database
+## Booking database and payment
 
 The database is the source of truth for bookings. The flow in
-`database` mode is: form → server validation (`POST /api/bookings`,
-Zod) → insert into PostgreSQL → unique `WRG-YYYYMMDD-XXXX` booking
-code → WhatsApp notification to the ops team → confirmation screen →
-"Continue to WhatsApp" (same code + details). If the insert fails,
-WhatsApp is never opened and the form data is preserved for retry.
-localStorage holds only temporary form drafts.
+`database` mode is: form → sign in or create an account (only at the
+payment step; estimates need no account) → server validation
+(`POST /api/bookings`, Zod) → **price computed on the server**
+(`src/lib/quote.ts`: approved per-day rate × days × units + the
+Rp 75,000 delivery & collection fee, waived on monthly rentals;
+add-ons are free) → stock check and insert (status `pending_payment`)
+→ Midtrans Snap transaction → payment popup → webhook / status check
+marks the booking `paid` (status `new`) → WhatsApp confirmation to the
+customer and the ops team → confirmation screen. The browser never
+sends a price. If the payment provider cannot be reached, the booking
+is released and the form is preserved for retry. localStorage holds
+only temporary form drafts.
+
+- Unpaid bookings expire after **60 minutes** (`PAYMENT_WINDOW_MINUTES`
+  in `src/lib/payments.ts`); Midtrans expires the transaction at the
+  same time and the VPS cron (`/api/cron/expire-bookings`) is the
+  safety net. An expired booking can be paid again from the account or
+  confirmation page if units are still free (new Snap order id
+  `WRG-…-2`).
+- `POST /api/payments/midtrans/notify` is the webhook. A notification
+  is applied only when its `signature_key` verifies **and** the Get
+  Status API confirms it; replays never downgrade a paid booking. Set
+  it in the Midtrans dashboard as
+  `https://werigo.co/api/payments/midtrans/notify`.
+- Customers see their bookings at `/account` (pay now, details,
+  WhatsApp), edit their profile at `/account/profile`, and sign in at
+  `/account/login` (email + password, or Google when
+  `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` are set). Verification and
+  password-reset emails go out through the Hostinger mailbox.
+- **Stock** (`/admin/stock`): units per model. Blank = not tracked
+  (never sells out). A booking holds units while paid, or pending and
+  not expired, or confirmed by staff. Per-unit (plate) tracking is a
+  later version.
+- **Refunds** are done in the Midtrans dashboard; a super admin then
+  records "Mark refunded" on the booking. "Mark paid manually" records
+  a payment received outside the site. Both are written to `audit_log`.
+
+### Midtrans environments
+
+`NEXT_PUBLIC_MIDTRANS_ENV=sandbox` (default) uses the sandbox hosts and
+`SB-Mid-*` keys; set it to `production` together with the production
+keys when going live, and register the production notification URL.
+Sandbox test card: `4811 1111 1111 1114`, any future expiry, CVV `123`,
+OTP `112233`.
 
 ### Schema and migrations
 
@@ -91,6 +130,10 @@ add a new one.
   file when the auth config changes
 - `0003_notification_outbox.sql` — WhatsApp outbox with retries
 - `0004_booking_email_optional.sql` — email optional on the form
+- `0005_payment_enums.sql` — `pending_payment`/`expired` statuses, `payment_status`
+- `0006_accounts_payments_stock.sql` — customer profile fields, price
+  snapshot and payment state on bookings, `payments`, `vehicle_stock`,
+  `audit_log`
 
 For a database where `0001` was applied by hand, record it first:
 `node scripts/db-migrate.mjs --baseline 0001_bookings.sql`.
@@ -106,9 +149,10 @@ Let's Encrypt certificate for `db.werigo.co`, copied into
 (also run automatically on renewal). Daily backups:
 `/usr/local/sbin/werigo-db-backup` → `/var/backups/werigo/` (14 days).
 
-The VPS cron calls `GET /api/cron/notifications` every 5 minutes with
-`Authorization: Bearer $CRON_SECRET` to retry undelivered WhatsApp
-messages (see `/etc/cron.d/werigo-cron`).
+The VPS cron calls `GET /api/cron/notifications` (retry undelivered
+WhatsApp messages) and `GET /api/cron/expire-bookings` (close payment
+windows) every 5 minutes with `Authorization: Bearer $CRON_SECRET`
+(see `/etc/cron.d/werigo-cron`).
 
 ### Staff accounts and the admin dashboard
 
@@ -218,8 +262,9 @@ request.
 
 ## Roadmap
 
-- **Phase 1** — customer accounts (email + Google), Midtrans payment
-  at checkout, stock per model, customer WhatsApp confirmation
+- **Phase 1** (this release) — customer accounts (email + Google),
+  Midtrans payment at checkout, stock per model, customer WhatsApp
+  confirmation, audit log foundation
 - **Phase 2** — promo codes, referral program with payouts
 - **Phase 3** — customer management, staff management, audit log
   viewer, Fonnte settings in the dashboard
@@ -232,7 +277,8 @@ be strengthened or published. Never invent these on the website.
 - [ ] Full Terms and Conditions text (`/terms`) — Indonesian counsel
 - [ ] Privacy policy full text (`/privacy`)
 - [ ] Cancellation and refund policy (deadlines, refunds) — required
-      before online payment goes live
+      before online payment goes live; the checkout and confirmation
+      copy that replaced "nothing is charged" also needs sign-off
 - [ ] Deposit policy — no deposit wording published
 - [ ] Bike damage protection — request-only; price, coverage,
       exclusions, and liability cap all pending
