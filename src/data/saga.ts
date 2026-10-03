@@ -420,6 +420,27 @@ const allEpisodes: SagaEpisode[] = [
     published: true,
     assetVersion: "first-v1"
   },
+  {
+    number: 21,
+    slug: "chapter-21",
+    key: "episode-21",
+    title: "The Customer Who Never Came",
+    titleId: "Pelanggan yang Tak Pernah Datang",
+    logline: "A forged testimonial heralds an invasion. Monsters kill, multiple races cross into Earth, and every human receives a System. Werigo has forty-five seconds to protect a route home.",
+    loglineId: "Testimoni palsu menandai invasi. Monster membunuh, berbagai ras menyeberang ke Bumi, dan semua manusia mendapat Sistem. Werigo punya empat puluh lima detik untuk menjaga rute pulang.",
+    featuredModels: [
+      "edpower",
+      "athena",
+      "victory",
+      "bees"
+    ],
+    commentPrompt: {
+      en: "Can Werigo keep people moving when the invaders want to own every road?",
+      id: "Bisakah Werigo menjaga orang tetap bergerak saat penjajah ingin memiliki semua jalan?"
+    },
+    published: true,
+    assetVersion: "first-v1"
+  },
 ];
 
 export const characters: SagaCharacter[] = [
