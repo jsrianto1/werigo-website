@@ -50,6 +50,7 @@ import { computeQuote } from "@/lib/quote";
 import { authClient } from "@/lib/auth-client";
 import { useSnap } from "@/lib/useSnap";
 import { AuthForm } from "@/components/account/AuthForm";
+import { welcomeOffer, welcomeOfferActive } from "@/data/promotions";
 import {
   emptyCustomer,
   saveDraft,
@@ -96,6 +97,25 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   const { data: session } = authClient.useSession();
   const sessionUser = session?.user ?? null;
   const { pay: snapPay, preload: preloadSnap } = useSnap();
+  // Promotions the signed-in customer qualifies for (welcome offer).
+  const [offer, setOffer] = useState<{ eligible: boolean; percent: number; code: string } | null>(null);
+  useEffect(() => {
+    if (!sessionUser) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setOffer(null);
+      return;
+    }
+    let cancelled = false;
+    fetch("/api/account/offers", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled && d?.ok) setOffer(d.offers.welcome);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionUser]);
 
   /** Entry id from the URL; legacy variant ids are normalised to the
       customer-facing model (four rental models only). */
@@ -219,7 +239,15 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   // The amount charged online: same function the server uses to price
   // the booking, so the button and the invoice never disagree.
   const quote = valid
-    ? computeQuote({ modelSlug: entry!.modelSlug, period, quantity, pickupSlug: pickup, returnSlug: ret })
+    ? computeQuote({
+        modelSlug: entry!.modelSlug,
+        period,
+        quantity,
+        pickupSlug: pickup,
+        returnSlug: ret,
+        discountPercent: offer?.eligible ? offer.percent : 0,
+        discountCode: offer?.eligible ? offer.code : null,
+      })
     : null;
   const needsAgeCheck = Boolean(entry && minRiderAge[entry.modelSlug]);
   const addOnBreakdown = valid
@@ -1115,6 +1143,14 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                         },
                       ]
                     : []),
+                  ...(!WHATSAPP_FIRST_BOOKING && quote && quote.discountIdr > 0
+                    ? [
+                        {
+                          term: "Welcome offer",
+                          detail: `−${formatIdr(quote.discountIdr)} (${quote.discountPercent}% ${t("off your first rental")})`,
+                        },
+                      ]
+                    : []),
                   ...(!WHATSAPP_FIRST_BOOKING && quote
                     ? [
                         {
@@ -1219,6 +1255,11 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
                   <h2 className="font-display text-xl text-ink"><T>{"Sign in to pay"}</T></h2>
                   <p className="mt-1 text-sm text-ink-soft"><T>{"Your booking, payment and receipt are kept in your Werigo account. Everything you filled in above stays here."}</T></p>
+                  {welcomeOfferActive() ? (
+                    <p className="mt-3 rounded-[10px] bg-accent-soft px-3 py-2 text-sm font-medium text-accent">
+                      <T>{"New here? Create an account and get"}</T> {welcomeOffer.percent}% <T>{"off this rental."}</T>
+                    </p>
+                  ) : null}
                   <div className="mt-4">
                     <AuthForm
                       googleEnabled={googleEnabled}

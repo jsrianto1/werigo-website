@@ -7,7 +7,7 @@ import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 export const runtime = "nodejs";
 
 const COLUMNS: (keyof StoredBooking)[] = [
-  "booking_code", "created_at", "status", "payment_status", "total_idr", "paid_at",
+  "booking_code", "created_at", "status", "payment_status", "total_idr", "discount_idr", "discount_code", "paid_at",
   "full_name", "whatsapp_number",
   "email", "nationality", "vehicle_model", "quantity", "pickup_area",
   "pickup_address", "return_area", "return_address", "start_at", "end_at",

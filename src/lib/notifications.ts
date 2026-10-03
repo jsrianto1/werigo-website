@@ -223,7 +223,7 @@ export function buildPaidBookingAdminMessage(b: StoredBooking): string {
   const ret = getPickupPoint(b.return_area)?.name ?? b.return_area;
   const lines = [
     `*Booking LUNAS* — ${b.booking_code}`,
-    `Dibayar: ${b.total_idr !== null ? formatIdr(b.total_idr) : "-"}`,
+    `Dibayar: ${b.total_idr !== null ? formatIdr(b.total_idr) : "-"}${b.discount_idr > 0 ? ` (diskon ${formatIdr(b.discount_idr)}${b.discount_code ? ` ${b.discount_code}` : ""})` : ""}`,
     "",
     `Nama: ${b.full_name}`,
     `WhatsApp: ${b.whatsapp_number}`,

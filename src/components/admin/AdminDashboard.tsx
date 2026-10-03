@@ -73,6 +73,8 @@ interface Row {
   nationality: string | null;
   payment_status: string;
   total_idr: number | null;
+  discount_idr: number;
+  discount_code: string | null;
   paid_at: string | null;
 }
 
@@ -490,7 +492,7 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
                   ["Period", `${fmt(detail.booking.start_at)} → ${fmt(detail.booking.end_at)}`],
                   ["Pickup", `${detail.booking.pickup_area}${detail.booking.pickup_address ? ` — ${detail.booking.pickup_address}` : ""}`],
                   ["Return", detail.booking.return_area],
-                  ["Payment", `${detail.booking.payment_status}${detail.booking.total_idr !== null ? ` · ${formatIdr(detail.booking.total_idr)}` : ""}${detail.booking.paid_at ? ` · paid ${fmt(detail.booking.paid_at)}` : ""}`],
+                  ["Payment", `${detail.booking.payment_status}${detail.booking.total_idr !== null ? ` · ${formatIdr(detail.booking.total_idr)}` : ""}${detail.booking.discount_idr > 0 ? ` · discount ${formatIdr(detail.booking.discount_idr)}${detail.booking.discount_code ? ` (${detail.booking.discount_code})` : ""}` : ""}${detail.booking.paid_at ? ` · paid ${fmt(detail.booking.paid_at)}` : ""}`],
                   ["Source", detail.booking.source_page ?? "—"],
                   ["Notes from customer", detail.booking.customer_notes ?? "—"],
                 ].map(([k, v]) => (

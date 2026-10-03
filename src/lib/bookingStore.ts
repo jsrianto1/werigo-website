@@ -174,7 +174,7 @@ function submissionToRow(s: BookingSubmission, opts?: CreateOptions) {
     base_idr: q?.baseIdr ?? null,
     area_fee_idr: q?.areaFeeIdr ?? 0,
     discount_idr: q?.discountIdr ?? 0,
-    discount_code: null,
+    discount_code: q?.discountCode ?? null,
     total_idr: q?.totalIdr ?? null,
     payment_status: q ? "pending" : "unpaid",
     payment_expires_at: opts?.payment ? opts.payment.expiresAt.toISOString() : null,

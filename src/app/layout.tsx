@@ -11,6 +11,7 @@ import { localBusinessSchema, jsonLd } from "@/lib/schema";
 import { MarketingEvents } from "@/components/analytics/MarketingEvents";
 import "./globals.css";
 import "./marketing.css";
+import { WelcomeOffer } from "@/components/marketing/WelcomeOffer";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -126,6 +127,7 @@ fbq('track','PageView');`,
         >
           Skip to main content
         </a>
+        <WelcomeOffer />
         <Header />
         <main id="main" className="flex-1">
           {children}

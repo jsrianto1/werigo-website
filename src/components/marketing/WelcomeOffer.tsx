@@ -1,0 +1,188 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, X } from "lucide-react";
+import { T } from "@/components/i18n/LanguageProvider";
+import { authClient } from "@/lib/auth-client";
+import { welcomeOffer, welcomeOfferActive } from "@/data/promotions";
+
+/**
+ * Welcome offer for visitors without an account: a slim bar above the
+ * header on every marketing page, plus a one-time pop-up (snoozed for
+ * 7 days after "Maybe later"). Signed-in customers never see it; the
+ * discount itself is applied by the server at checkout.
+ */
+const MODAL_KEY = "werigo.welcome20.snoozedUntil";
+const BAR_KEY = "werigo.welcome20.barClosed";
+const SNOOZE_DAYS = 7;
+const HIDDEN_PREFIXES = ["/account", "/admin", "/book/checkout", "/book/confirmation", "/saga/"];
+
+function storage(kind: "local" | "session"): Storage | null {
+  try {
+    return kind === "local" ? window.localStorage : window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
+export function WelcomeOffer() {
+  const pathname = usePathname();
+  const { data, isPending } = authClient.useSession();
+  const [bar, setBar] = useState(false);
+  const [modal, setModal] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const registerHref = "/account/login?mode=register&next=/book";
+
+  const hiddenHere = HIDDEN_PREFIXES.some((p) => pathname.startsWith(p));
+  const eligible = !isPending && !data?.user && !hiddenHere && welcomeOfferActive();
+
+  useEffect(() => {
+    if (!eligible) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setBar(false);
+      setModal(false);
+      return;
+    }
+    setBar(storage("session")?.getItem(BAR_KEY) !== "1");
+    const until = Number(storage("local")?.getItem(MODAL_KEY) ?? 0);
+    if (until > Date.now()) return;
+    const id = setTimeout(() => setModal(true), 1200);
+    return () => clearTimeout(id);
+  }, [eligible]);
+
+  useEffect(() => {
+    if (!modal) return;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") snooze();
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [modal]);
+
+  function snooze() {
+    storage("local")?.setItem(MODAL_KEY, String(Date.now() + SNOOZE_DAYS * 86_400_000));
+    setModal(false);
+  }
+
+  function closeBar() {
+    storage("session")?.setItem(BAR_KEY, "1");
+    setBar(false);
+  }
+
+  if (!eligible) return null;
+
+  return (
+    <>
+      {bar ? (
+        <div className="relative bg-primary-strong text-white">
+          <div className="mx-auto flex min-h-10 w-full max-w-[1400px] items-center justify-center gap-x-3 gap-y-1 px-12 py-2 text-center text-xs font-medium sm:text-sm">
+            <span>
+              <T>{"Welcome offer: 20% off your first rental"}</T>
+              <span className="hidden sm:inline"> · <T>{"Ends"}</T> {welcomeOffer.endsLabel}</span>
+            </span>
+            <Link href={registerHref} className="whitespace-nowrap font-semibold underline underline-offset-4 hover:text-white/80">
+              <T>{"Sign up & save"}</T> →
+            </Link>
+          </div>
+          <button
+            type="button"
+            onClick={closeBar}
+            aria-label="Close offer bar"
+            className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md text-white/80 hover:bg-white/10 hover:text-white"
+          >
+            <X className="h-4 w-4" aria-hidden="true" />
+          </button>
+        </div>
+      ) : null}
+
+      {modal ? (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="welcome-offer-title">
+          <button type="button" aria-label="Close" onClick={snooze} tabIndex={-1} className="absolute inset-0 h-full w-full cursor-default bg-primary-strong/60 backdrop-blur-sm" />
+          <div className="relative grid w-full max-w-[900px] overflow-hidden rounded-[24px] bg-[#fcf9f2] shadow-2xl md:grid-cols-[46%_54%]">
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={snooze}
+              aria-label="Close"
+              style={{ borderRadius: 9999 }}
+              className="absolute right-4 top-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center border-2 border-primary-strong/70 bg-[#fcf9f2]/95 text-primary-strong shadow-[0_0_0_4px_rgba(7,68,63,0.15)] transition-colors hover:bg-primary-faint"
+            >
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
+            {/* Visual panel */}
+            <div className="relative min-h-[300px] overflow-hidden bg-[#e3f1f4] md:min-h-[560px]">
+              <Image
+                src="/media/areas/uluwatu/hero.webp"
+                alt=""
+                fill
+                sizes="(min-width: 768px) 420px, 100vw"
+                className="object-cover object-[72%_55%]"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#e8f3f6] via-[#e8f3f6]/85 to-transparent md:via-[#e8f3f6]/70" />
+              <div className="absolute left-6 top-6 right-6 md:left-8 md:top-8">
+                <Image src="/brand/werigo-logo-compact.png" alt="Werigo" width={128} height={52} className="h-9 w-auto md:h-11" />
+                <p className="mt-4 font-display text-[28px] font-extrabold leading-[1.05] text-primary-strong md:mt-6 md:text-[38px]">
+                  Less noise.
+                  <br />
+                  More Bali.
+                </p>
+              </div>
+              <Image
+                src="/media/fleet/athena/cutout.webp"
+                alt="Wedison Athena electric scooter in green"
+                width={1100}
+                height={930}
+                sizes="(min-width: 768px) 380px, 70vw"
+                className="absolute bottom-3 right-0 w-[58%] max-w-[420px] drop-shadow-[0_18px_24px_rgba(7,68,63,0.25)] md:bottom-12 md:w-[92%]"
+              />
+              <p className="absolute bottom-4 left-6 max-w-[40%] text-[10px] font-semibold uppercase leading-relaxed tracking-[0.22em] text-primary-strong md:left-8 md:max-w-none">
+                Your island. Your pace.
+              </p>
+            </div>
+
+            {/* Offer panel */}
+            <div className="relative px-6 py-8 text-center md:px-10 md:py-12">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c14a05]"><T>{"Your Bali welcome offer"}</T></p>
+              <h2 id="welcome-offer-title" className="mt-4 font-display text-3xl font-extrabold text-primary-strong md:text-[34px]">
+                <T>{"The island is calling."}</T>
+              </h2>
+              <p className="mt-3 flex items-end justify-center gap-2 text-primary-strong">
+                <span className="font-display text-[88px] font-extrabold leading-[0.85] tracking-tight md:text-[112px]">{welcomeOffer.percent}</span>
+                <span className="pb-2 font-display text-5xl font-extrabold leading-none md:pb-3">%</span>
+                <span className="pb-3 text-2xl font-bold uppercase md:pb-4 md:text-3xl">off</span>
+              </p>
+              <p className="mt-3 text-lg font-semibold text-primary-strong"><T>{"your first electric scooter rental"}</T></p>
+              <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-ink-soft"><T>{"Create your Werigo account and make your first Bali ride a little sweeter."}</T></p>
+              <Link
+                href={registerHref}
+                onClick={() => setModal(false)}
+                className="mt-6 inline-flex min-h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#c14a05] px-8 text-base font-semibold text-white transition-colors hover:bg-[#a83f04]"
+              >
+                <T>{"Create account & save 20%"}</T>
+                <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
+              <p className="mt-4 text-xs leading-relaxed text-ink-soft">
+                <T>{"For newly registered customers only."}</T>
+                <br />
+                <T>{"Offer ends"}</T> <strong className="font-semibold text-ink">{welcomeOffer.endsLabel}.</strong>
+              </p>
+              <button type="button" onClick={snooze} className="mt-4 cursor-pointer text-sm text-ink-soft underline underline-offset-4 hover:text-ink">
+                <T>{"Maybe later"}</T>
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}

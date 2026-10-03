@@ -10,6 +10,7 @@ import { isMidtransConfigured, MidtransError } from "@/lib/midtrans";
 import { openPayment, paymentDeadline } from "@/lib/payments";
 import { latestPayment } from "@/lib/paymentStore";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
+import { offersForUser } from "@/lib/offers";
 
 export const runtime = "nodejs";
 
@@ -114,13 +115,23 @@ export async function POST(req: NextRequest) {
   }
   const submission = { ...parsed.data, email: parsed.data.email || user.email };
 
-  // The server prices the booking from approved data only.
+  // The server prices the booking from approved data only, including
+  // whether this customer still qualifies for the welcome offer.
+  let offers;
+  try {
+    offers = await offersForUser(user.id);
+  } catch (err) {
+    logStorageError(storageErrorFromThrown("offers", err));
+    return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
+  }
   const quote = computeQuote({
     modelSlug: submission.vehicleModel,
     period: periodFromIso(submission.startAt, submission.endAt),
     quantity: submission.quantity,
     pickupSlug: submission.pickupArea,
     returnSlug: submission.returnArea,
+    discountPercent: offers.welcome.eligible ? offers.welcome.percent : 0,
+    discountCode: offers.welcome.eligible ? offers.welcome.code : null,
   });
   if (!quote) {
     return NextResponse.json(
