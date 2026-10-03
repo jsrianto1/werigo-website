@@ -1,6 +1,6 @@
 import { site } from "@/lib/config";
 import { toCustomerEntry } from "@/data/vehicles";
-import { getArea } from "@/data/locations";
+import { getPickupPoint } from "@/data/locations";
 
 /**
  * "Check availability and rates" link for a specific Wedison model —
@@ -34,8 +34,8 @@ export function buildStoredBookingWhatsAppUrl(booking: {
   customer_notes: string | null;
 }): string {
   const entry = toCustomerEntry(booking.vehicle_model);
-  const pickup = getArea(booking.pickup_area);
-  const ret = getArea(booking.return_area);
+  const pickup = getPickupPoint(booking.pickup_area);
+  const ret = getPickupPoint(booking.return_area);
   const fmt = (iso: string) =>
     new Date(iso).toLocaleString("en-GB", {
       timeZone: "Asia/Makassar",

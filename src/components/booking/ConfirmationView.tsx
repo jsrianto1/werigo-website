@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { CheckCircle2, MessageCircle, ArrowRight } from "lucide-react";
 import { readConfirmation, type ConfirmationPayload } from "@/lib/booking";
 import { toCustomerEntry } from "@/data/vehicles";
-import { getArea } from "@/data/locations";
+import { getPickupPoint } from "@/data/locations";
 
 /**
  * Step 8: confirmation. The booking is already stored in the
@@ -94,7 +94,7 @@ export function ConfirmationView() {
             },
             {
               term: "Delivery",
-              detail: `${getArea(b.pickupArea)?.name ?? b.pickupArea}${
+              detail: `${getPickupPoint(b.pickupArea)?.name ?? b.pickupArea}${
                 b.pickupAddress ? `, ${b.pickupAddress}` : ""
               }`,
             },
@@ -102,7 +102,7 @@ export function ConfirmationView() {
               term: "Return",
               detail:
                 b.returnArea !== b.pickupArea
-                  ? getArea(b.returnArea)?.name ?? b.returnArea
+                  ? getPickupPoint(b.returnArea)?.name ?? b.returnArea
                   : "Same as delivery",
             },
             ...(b.customerNotes

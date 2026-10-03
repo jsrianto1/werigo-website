@@ -2,7 +2,7 @@ import "server-only";
 import { getPool, isDatabaseConfigured } from "@/lib/db";
 import type { StoredBooking } from "@/lib/bookingStore";
 import { toCustomerEntry } from "@/data/vehicles";
-import { getArea } from "@/data/locations";
+import { getPickupPoint } from "@/data/locations";
 import { site } from "@/lib/config";
 
 /**
@@ -193,8 +193,8 @@ function fmtDateTime(iso: string): string {
 /** Internal message for the ops team (Indonesian, short, scannable). */
 export function buildNewBookingAdminMessage(b: StoredBooking): string {
   const model = toCustomerEntry(b.vehicle_model)?.displayName ?? b.vehicle_model;
-  const pickup = getArea(b.pickup_area)?.name ?? b.pickup_area;
-  const ret = getArea(b.return_area)?.name ?? b.return_area;
+  const pickup = getPickupPoint(b.pickup_area)?.name ?? b.pickup_area;
+  const ret = getPickupPoint(b.return_area)?.name ?? b.return_area;
   const lines = [
     `*Booking baru masuk* — ${b.booking_code}`,
     "",
