@@ -138,12 +138,12 @@ export function WelcomeOffer() {
                 </p>
               </div>
               <Image
-                src="/media/fleet/athena/cutout.webp"
+                src="/media/fleet/athena/cutout-green.webp"
                 alt="Wedison Athena electric scooter in green"
-                width={1100}
-                height={930}
-                sizes="(min-width: 768px) 380px, 70vw"
-                className="absolute bottom-3 right-0 w-[58%] max-w-[420px] drop-shadow-[0_18px_24px_rgba(7,68,63,0.25)] md:bottom-12 md:w-[92%]"
+                width={1380}
+                height={1380}
+                sizes="(min-width: 768px) 400px, 60vw"
+                className="absolute -right-2 bottom-2 w-[60%] max-w-[440px] drop-shadow-[0_18px_24px_rgba(7,68,63,0.25)] md:bottom-8 md:w-[96%]"
               />
               <p className="absolute bottom-4 left-6 max-w-[40%] text-[10px] font-semibold uppercase leading-relaxed tracking-[0.22em] text-primary-strong md:left-8 md:max-w-none">
                 Your island. Your pace.
