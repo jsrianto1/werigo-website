@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "a8087883eeb4af9bf4b836882e1ed0c23415495e027ded50de2f19707890dcb1",
+  "fingerprint": "5012c136b731c2b37809bc9d9fb7baf4c7a6c96210a8dbcf140b0a764985fd48",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -44,7 +44,7 @@
     },
     {
       "file": "public/media/.htaccess",
-      "hash": "9a94df8241fa52c6b3938ac5acac2ed680f8670e4325e0075005cf02924b5863"
+      "hash": "7c7c40c2f01591e615df9c33b152fb772e404de1459abca17982adc7d92d937b"
     },
     {
       "file": "public/media/areas/canggu/hero.webp",
@@ -10020,7 +10020,7 @@
     },
     {
       "file": "scripts/sitemap-dates.mjs",
-      "hash": "208b9f87e0995412f745f5324bdd9389922796e7d5f60edb5dc262572656a2cf"
+      "hash": "f99ed99e5146d16c9d1ac4bc0e2aa5ed83221f32fe7330a749c17f63a86aa54c"
     },
     {
       "file": "scripts/sitemap-test.mjs",

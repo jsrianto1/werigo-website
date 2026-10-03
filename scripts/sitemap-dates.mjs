@@ -20,7 +20,7 @@ export function historyFingerprint(root, inputs = []) {
   const hash = createHash('sha256');
   for (const file of files) {
     let bytes = readFileSync(path.join(root, file));
-    if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
+    if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml|htaccess)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
     const digest = createHash('sha256').update(bytes).digest();
     inputs.push({ file, hash: digest.toString('hex') });
     hash.update(file + '\0').update(digest);
@@ -40,7 +40,7 @@ function verifiedHostingSettings(root, cache, inputs, changed) {
     const verified = new Map();
     for (const file of changed) {
       let bytes = execFileSync('git', ['show', `HEAD:${file}`], { cwd: root, maxBuffer: 4 * 1024 * 1024 });
-      if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
+      if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml|htaccess)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
       const digest = createHash('sha256').update(bytes).digest('hex');
       if (digest !== expected.get(file)) return false;
       verified.set(file, digest);
