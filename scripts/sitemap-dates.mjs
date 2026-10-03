@@ -13,15 +13,17 @@ const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
 const historyCachePath = 'scripts/sitemap-dates-cache.json';
 
 /** A content fingerprint makes verified dates portable to hosting clones. */
-export function historyFingerprint(root) {
+export function historyFingerprint(root, inputs = []) {
   const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
     .split('\0').filter(file => file && file !== historyCachePath &&
-      (/^(src|public|scripts)\//.test(file) || /^(package(?:-lock)?\.json|next\.config\.[cm]?[jt]s)$/.test(file))).sort();
+      (/^(src|public|scripts)\//.test(file) || /^(next\.config\.[cm]?[jt]s)$/.test(file))).sort();
   const hash = createHash('sha256');
   for (const file of files) {
     let bytes = readFileSync(path.join(root, file));
     if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
-    hash.update(file + '\0').update(createHash('sha256').update(bytes).digest());
+    const digest = createHash('sha256').update(bytes).digest();
+    inputs.push({ file, hash: digest.toString('hex') });
+    hash.update(file + '\0').update(digest);
   }
   return hash.digest('hex');
 }
@@ -31,7 +33,15 @@ export function readHistoryCache(root) {
   if (!existsSync(file)) return null;
   try {
     const cache = JSON.parse(readFileSync(file, 'utf8'));
-    if (cache.version !== 1 || cache.fingerprint !== historyFingerprint(root) || !Object.keys(cache.dates ?? {}).length) return null;
+    const inputs = [];
+    const fingerprint = historyFingerprint(root, inputs);
+    if (cache.version !== 1 || !Object.keys(cache.dates ?? {}).length) return null;
+    if (cache.fingerprint !== fingerprint) {
+      const expected = new Map((cache.inputs ?? []).map(entry => [entry.file, entry.hash]));
+      const changed = inputs.filter(entry => expected.get(entry.file) !== entry.hash).map(entry => entry.file);
+      console.warn('Sitemap: snapshot mismatch in ' + changed.slice(0, 30).join(', '));
+      return null;
+    }
     if (Object.values(cache.dates).some(date => !Number.isFinite(Date.parse(date)) || Date.parse(date) > Date.now())) return null;
     return cache.dates;
   } catch { return null; }
@@ -41,7 +51,9 @@ export function readHistoryCache(root) {
 export function writeHistoryCache(root) {
   const dates = generateDates(root, true);
   mkdirSync(path.dirname(path.join(root, historyCachePath)), { recursive: true });
-  writeFileSync(path.join(root, historyCachePath), JSON.stringify({ version: 1, fingerprint: historyFingerprint(root), dates }, null, 2) + '\n');
+  const inputs = [];
+  const fingerprint = historyFingerprint(root, inputs);
+  writeFileSync(path.join(root, historyCachePath), JSON.stringify({ version: 1, fingerprint, inputs, dates }, null, 2) + '\n');
   return dates;
 }
 
