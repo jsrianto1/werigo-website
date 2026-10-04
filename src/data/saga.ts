@@ -447,18 +447,18 @@ const allEpisodes: SagaEpisode[] = [
     key: "episode-22",
     title: "Forty-Five Seconds",
     titleId: "Empat Puluh Lima Detik",
-    logline: "An injured elf Assassin buys forty-five seconds to save the five civilians left at the showroom. Werigo gets all nine to shelter, but Ody carries a seal that leads the Veyr straight to them.",
-    loglineId: "Elf Assassin yang terluka membeli empat puluh lima detik untuk menyelamatkan lima warga di showroom. Werigo membawa kesembilan warga ke tempat berlindung, tetapi Ody membawa segel pelacak Veyr.",
+    logline: "Three wary elf survivors help Werigo escape in forty-five seconds. A coordinated scout fight and a last-second interception save all nine civilians, but Ody still carries the Veyr tracking seal.",
+    loglineId: "Tiga elf penyintas yang masih dicurigai membantu Werigo lolos dalam empat puluh lima detik. Pertarungan terkoordinasi dan penyergapan bilah di detik terakhir menyelamatkan sembilan warga, tetapi segel pelacak Veyr masih melekat pada Ody.",
     featuredModels: [
       "edpower",
       "athena"
     ],
     commentPrompt: {
-      en: "Can an exhausted Operator, a new level-two fighter and an injured Assassin break the relay before the nine civilians are found?",
-      id: "Bisakah Operator yang kelelahan, petarung baru level dua, dan Assassin yang terluka menghancurkan relay sebelum sembilan warga ditemukan?"
+      en: "Can two inexperienced humans and three wounded elves break a command relay before the nine civilians are tracked?",
+      id: "Bisakah dua manusia yang belum berpengalaman dan tiga elf yang terluka memutus relay sebelum sembilan warga terlacak?"
     },
     published: true,
-    assetVersion: "first-v1"
+    assetVersion: "story-v2"
   },
 ];
 

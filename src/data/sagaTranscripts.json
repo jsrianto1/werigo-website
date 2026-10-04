@@ -12281,7 +12281,7 @@
  "22": [
   {
    "label": "PANEL 1",
-   "text": "Minutes after the first breach. Four civilians reached the host house, eighty metres behind the showroom. Five remain inside. Ody has released Anchor.",
+   "text": "Minutes after the breach. Four civilians are at the partner house: eighty metres from the front entrance, twenty-five from the rear kitchen. Five remain inside. Ody has released Anchor.",
    "lines": [
     {
      "who": "VEYR",
@@ -12311,18 +12311,27 @@
   },
   {
    "label": "PANEL 4",
-   "text": "",
+   "text": "Three survivors crossed the same forest rift. They followed the Veyr command signal, not a call from Earth.",
    "lines": [
     {
-     "who": "LIORA",
-     "text": "Still branding islands as inventory, Emissary?"
+     "who": "SERIS",
+     "text": "Clear the doorway. Kaelen, watch the roof!"
+    },
+    {
+     "who": "KAELEN",
+     "text": "One scout is still moving. The tall one is their commander."
     }
    ]
   },
   {
    "label": "PANEL 5",
-   "text": "She crossed through a forest rift and followed the command signal to the showroom. She had seen that mask before.",
-   "lines": []
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Ody... their ears. They came through a portal too!"
+    }
+   ]
   },
   {
    "label": "PANEL 6",
@@ -12330,11 +12339,7 @@
    "lines": [
     {
      "who": "ODY",
-     "text": "Can you beat him?"
-    },
-    {
-     "who": "LIORA",
-     "text": "At full strength, perhaps. Tonight, I can buy an exit."
+     "text": "Stop there! Arya, keep the civilians behind you."
     }
    ]
   },
@@ -12343,17 +12348,60 @@
    "text": "",
    "lines": [
     {
-     "who": "ODY",
-     "text": "Five people are behind that door."
+     "who": "KAELEN",
+     "text": "I am lowering my bow. We are not with them."
     },
     {
      "who": "LIORA",
-     "text": "Then give me a route. Not a speech."
+     "text": "Doubt us later. That blade is moving again."
     }
    ]
   },
   {
    "label": "PANEL 8",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Then why did you come after him?"
+    },
+    {
+     "who": "LIORA",
+     "text": "He occupied Elarin. We escaped through his survey rift."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "Seris put water beside Ody and stepped back. No touch, no healing, no demand that he trust her.",
+   "lines": [
+    {
+     "who": "SERIS",
+     "text": "She cannot win a duel injured. We can cover an evacuation."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "The Emissary struck again. Liora diverted the blade into the stone post. Her wrist shook from the impact.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 11",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Five people inside. I know a rear route. No promises beyond that."
+    },
+    {
+     "who": "LIORA",
+     "text": "Then we have the same first objective. Get them out."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 12",
    "text": "",
    "lines": [
     {
@@ -12363,7 +12411,7 @@
    ]
   },
   {
-   "label": "PANEL 9",
+   "label": "PANEL 13",
    "text": "The contact Bram called before the invasion is still answering. No new destination, no gamble on a map.",
    "lines": [
     {
@@ -12373,7 +12421,7 @@
    ]
   },
   {
-   "label": "PANEL 10",
+   "label": "PANEL 14",
    "text": "",
    "lines": [
     {
@@ -12383,41 +12431,41 @@
    ]
   },
   {
-   "label": "PANEL 11",
+   "label": "PANEL 15",
    "text": "",
    "lines": [
     {
      "who": "ODY",
-     "text": "We planned for five. We leave with five."
+     "text": "Five civilians. We get all five out."
     }
    ]
   },
   {
-   "label": "PANEL 12",
+   "label": "PANEL 16",
    "text": "",
    "lines": [
     {
      "who": "LIORA",
-     "text": "One charge left. It will mimic your trace for forty-five seconds."
+     "text": "My last focus. A false Operator trace for forty-five seconds."
     }
    ]
   },
   {
-   "label": "PANEL 13",
+   "label": "PANEL 17",
    "text": "",
    "lines": [
     {
      "who": "LIORA",
-     "text": "It fools his tracker, not his eyes. Once he sees you, it is over."
+     "text": "Kaelen covers the rear. Seris hides the crossing. Stay out of his sight."
     },
     {
      "who": "SYSTEM",
-     "text": "ECHO DECOY|Duration: 45 seconds|Consumable focus: last charge|No shield. No damage."
+     "text": "ECHO DECOY|45 seconds • last consumable focus|Fools tracking, not sight|No shield. No damage."
     }
    ]
   },
   {
-   "label": "PANEL 14",
+   "label": "PANEL 18",
    "text": "A copied signal ran toward the front road. The real evacuation went the other way.",
    "lines": [
     {
@@ -12427,76 +12475,100 @@
    ]
   },
   {
-   "label": "PANEL 15",
+   "label": "PANEL 19",
    "text": "00:42. The Emissary followed the signal.",
    "lines": []
   },
   {
-   "label": "PANEL 16",
-   "text": "00:37. Five civilians. One doorway. No pushing.",
+   "label": "PANEL 20",
+   "text": "00:37. The cane man went first; four others followed through the kitchen.",
    "lines": [
     {
      "who": "JULES",
-     "text": "Slowest first. Keep one hand on the wall."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 17",
-   "text": "",
-   "lines": [
-    {
-     "who": "ODY",
-     "text": "Jammed. Bram, wedge it!"
-    }
-   ]
-  },
-  {
-   "label": "PANEL 18",
-   "text": "00:29. Ody could still lift metal. He could not summon another Anchor.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 19",
-   "text": "",
-   "lines": [
-    {
-     "who": "ARYA",
-     "text": "Another scout!"
-    }
-   ]
-  },
-  {
-   "label": "PANEL 20",
-   "text": "",
-   "lines": [
-    {
-     "who": "LIORA",
-     "text": "Do not chase the core. Watch the front legs plant."
+     "text": "Slowest first. Stay against the wall. Bram, count at the gate!"
     }
    ]
   },
   {
    "label": "PANEL 21",
-   "text": "00:23. She broke its turn. Arya finally had a stationary target.",
-   "lines": []
-  },
-  {
-   "label": "PANEL 22",
    "text": "",
    "lines": [
     {
-     "who": "ARYA",
-     "text": "Now?"
-    },
-    {
-     "who": "LIORA",
-     "text": "Now."
+     "who": "ODY",
+     "text": "Jammed. Arya, wedge it!"
     }
    ]
   },
   {
+   "label": "PANEL 22",
+   "text": "00:29. Ody could still lift metal. He could not summon another Anchor.",
+   "lines": []
+  },
+  {
    "label": "PANEL 23",
+   "text": "00:26. The rear scout had not followed the decoy. It was watching the escape route.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "It is coming at the doorway!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 24",
+   "text": "",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Do not fire while it is turning. Kaelen, left leg!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "00:24. The arrow trapped its front leg against the cracked paving.",
+   "lines": [
+    {
+     "who": "KAELEN",
+     "text": "Pinned. One arrow used!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 26",
+   "text": "Liora cut the rear hinge. The scout could no longer turn its armoured chest away.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 27",
+   "text": "The veil blocked sight for six seconds. It could not stop a blade.",
+   "lines": [
+    {
+     "who": "SERIS",
+     "text": "Smoke Veil. Follow the wall, not the fog!"
+    },
+    {
+     "who": "SYSTEM",
+     "text": "SERIS|G-LV.14 • Mage|Smoke Veil: 6 seconds|Mana: 2 / 100 • no second cast"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "00:23. Behind the smoke, the core held still. Arya planted his feet.",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Core exposed. Right there!"
+    },
+    {
+     "who": "ARYA",
+     "text": "I can see it!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
    "text": "",
    "lines": [
     {
@@ -12510,57 +12582,77 @@
    ]
   },
   {
-   "label": "PANEL 24",
-   "text": "00:18. Winning made noise. It did not refill their lungs.",
+   "label": "PANEL 30",
+   "text": "00:18. The scout fell. Arya could barely breathe; the fight was not over.",
    "lines": [
     {
      "who": "SYSTEM",
-     "text": "ARYA|G-LV.1 → G-LV.2|EXP: 20 / 150|Job: unassigned|Level-up does not heal injuries."
+     "text": "ARYA|G-LV.1 → G-LV.2 • EXP: 20 / 150|Job: unassigned|Pulse cooldown: 10 seconds|Level-up does not heal injuries."
     }
    ]
   },
   {
-   "label": "PANEL 25",
-   "text": "Its command filament snapped. Somewhere, the Emissary turned his head.",
+   "label": "PANEL 31",
+   "text": "The command thread snapped. The Emissary recognised the trick and turned toward the rear lane.",
    "lines": []
   },
   {
-   "label": "PANEL 26",
-   "text": "00:12. The fifth civilian reached the last bend.",
+   "label": "PANEL 32",
+   "text": "00:12. The five civilians crossed the host gate. Ody and Arya were still in the lane.",
    "lines": [
     {
      "who": "BRAM",
-     "text": "Gate is ten steps away. I am counting them with you."
+     "text": "One... two... three... four... five! Everyone from the kitchen is here!"
     }
    ]
   },
   {
-   "label": "PANEL 27",
-   "text": "00:09. Ody left no one behind the kitchen door.",
+   "label": "PANEL 33",
+   "text": "00:09. Ody dragged his tired legs away from the empty kitchen.",
    "lines": [
     {
      "who": "ODY",
-     "text": "Arya. Move!"
+     "text": "Arya! Stop watching the numbers. Run!"
     }
    ]
   },
   {
-   "label": "PANEL 28",
-   "text": "00:03. The last two humans crossed the gate.",
-   "lines": [
-    {
-     "who": "LIORA",
-     "text": "Inside. Do not look for me on the road."
-    }
-   ]
-  },
-  {
-   "label": "PANEL 29",
-   "text": "She crossed with them. Then the echo died.",
+   "label": "PANEL 34",
+   "text": "00:05. The six-second veil was gone. The Emissary saw movement and launched his blade toward the lane.",
    "lines": []
   },
   {
-   "label": "PANEL 30",
+   "label": "PANEL 35",
+   "text": "He had one shot before the projectile reached the two humans.",
+   "lines": [
+    {
+     "who": "KAELEN",
+     "text": "Get below the wall!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 36",
+   "text": "00:03. The second arrow met the blade at its thin control filament. The explosion hit the empty wall above them.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 37",
+   "text": "Ody and Arya crossed. Seris followed; Kaelen retreated behind Liora.",
+   "lines": [
+    {
+     "who": "LIORA",
+     "text": "Inside! Kaelen, fall back!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 38",
+   "text": "Liora shut the gate. All three elves were inside when the decoy died.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 39",
    "text": "",
    "lines": [
     {
@@ -12574,37 +12666,41 @@
    ]
   },
   {
-   "label": "PANEL 31",
+   "label": "PANEL 40",
    "text": "",
    "lines": [
     {
      "who": "DEWA",
-     "text": "The first four are here. Where are the others?"
+     "text": "Who are they? Are those ears real?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Tell me this is a costume... please."
     }
    ]
   },
   {
-   "label": "PANEL 32",
+   "label": "PANEL 41",
    "text": "",
    "lines": [
     {
-     "who": "KOMANG",
-     "text": "Please tell me nobody picked Warrior on the way."
+     "who": "ODY",
+     "text": "They helped us out. That is all I know. Keep the exit clear."
     }
    ]
   },
   {
-   "label": "PANEL 33",
+   "label": "PANEL 42",
    "text": "",
    "lines": [
     {
      "who": "JULES",
-     "text": "Four from the first trips. Five from the kitchen. Nine."
+     "text": "Four arrived earlier. Five from the kitchen. Nine, all accounted for."
     }
    ]
   },
   {
-   "label": "PANEL 34",
+   "label": "PANEL 43",
    "text": "",
    "lines": [
     {
@@ -12614,56 +12710,60 @@
    ]
   },
   {
-   "label": "PANEL 35",
-   "text": "",
+   "label": "PANEL 44",
+   "text": "A rescue earned them a place by the door. It did not make them friends.",
    "lines": [
     {
      "who": "ODY",
-     "text": "Ody. Werigo. You got our people out. Who are you?"
+     "text": "Ody. Werigo. Names and weapons first. Keep them lowered."
+    },
+    {
+     "who": "LIORA",
+     "text": "Liora Veylen. These are Seris Aelwyn and Kaelen Thorne."
     }
    ]
   },
   {
-   "label": "PANEL 36",
+   "label": "PANEL 45",
    "text": "",
    "lines": [
     {
      "who": "LIORA",
-     "text": "Liora Veylen. Assassin. Once, I guarded an island too."
+     "text": "Elf. Assassin. We lost our island to that mask."
     },
     {
      "who": "SYSTEM",
-     "text": "LIORA VEYLEN|Race: Elf|G-LV.16 • Job: Assassin|Status: injured • focus depleted"
+     "text": "ELARIN SURVIVORS|Liora Veylen • G-LV.16 • Assassin|Seris Aelwyn • G-LV.14 • Mage|Kaelen Thorne • G-LV.15 • Archer|Injured. Supplies limited."
     }
    ]
   },
   {
-   "label": "PANEL 37",
+   "label": "PANEL 46",
    "text": "",
    "lines": [
     {
-     "who": "LIORA",
-     "text": "Elarin. We thought the first portal was the whole invasion."
+     "who": "SERIS",
+     "text": "Elarin. We thought the first portal was the entire invasion."
     }
    ]
   },
   {
-   "label": "PANEL 38",
-   "text": "",
+   "label": "PANEL 47",
+   "text": "They arrived exhausted from that retreat. Their levels had not made them invincible.",
    "lines": [
     {
-     "who": "LIORA",
-     "text": "It was a survey. The occupation came after we stopped counting the missing."
+     "who": "KAELEN",
+     "text": "It was a survey. We held a bridge until the last refugees crossed."
     }
    ]
   },
   {
-   "label": "PANEL 39",
+   "label": "PANEL 48",
    "text": "Some crossed to escape. Some crossed to conquer. An ear, a tusk or a beard did not tell the difference.",
    "lines": []
   },
   {
-   "label": "PANEL 40",
+   "label": "PANEL 49",
    "text": "",
    "lines": [
     {
@@ -12673,31 +12773,31 @@
    ]
   },
   {
-   "label": "PANEL 41",
+   "label": "PANEL 50",
    "text": "",
    "lines": [
     {
      "who": "ARYA",
-     "text": "You are sixteen. He is eighteen. Is the number everything?"
+     "text": "It said level two. I thought I would feel stronger."
     },
     {
      "who": "LIORA",
-     "text": "It measures growth. It does not measure a good decision."
+     "text": "You grew. You did not heal. Rest that hand."
     }
    ]
   },
   {
-   "label": "PANEL 42",
+   "label": "PANEL 51",
    "text": "",
    "lines": [
     {
      "who": "LIORA",
-     "text": "You killed a scout because we controlled its angle. Repeat the charge alone and you die."
+     "text": "Bow trapped a leg. Blade exposed the core. Smoke hid the exit. Your Pulse finished it. That was teamwork."
     }
    ]
   },
   {
-   "label": "PANEL 43",
+   "label": "PANEL 52",
    "text": "The reward arrived after the gate closed. It changed a record, not a wound.",
    "lines": [
     {
@@ -12707,7 +12807,7 @@
    ]
   },
   {
-   "label": "PANEL 44",
+   "label": "PANEL 53",
    "text": "",
    "lines": [
     {
@@ -12717,7 +12817,7 @@
    ]
   },
   {
-   "label": "PANEL 45",
+   "label": "PANEL 54",
    "text": "",
    "lines": [
     {
@@ -12727,21 +12827,21 @@
    ]
   },
   {
-   "label": "PANEL 46",
+   "label": "PANEL 55",
    "text": "",
    "lines": [
     {
      "who": "KOMANG",
-     "text": "Can I choose Monk and still complain?"
+     "text": "My current job is trying not to die. Does that count?"
     },
     {
-     "who": "LIORA",
-     "text": "You already have the endurance for complaining."
+     "who": "SERIS",
+     "text": "Keep it. It is a useful habit."
     }
    ]
   },
   {
-   "label": "PANEL 47",
+   "label": "PANEL 56",
    "text": "",
    "lines": [
     {
@@ -12751,7 +12851,7 @@
    ]
   },
   {
-   "label": "PANEL 48",
+   "label": "PANEL 57",
    "text": "Trust had a practical return: an open gate, drinking water, and someone who knew the lane.",
    "lines": [
     {
@@ -12761,7 +12861,7 @@
    ]
   },
   {
-   "label": "PANEL 49",
+   "label": "PANEL 58",
    "text": "",
    "lines": [
     {
@@ -12771,7 +12871,7 @@
    ]
   },
   {
-   "label": "PANEL 50",
+   "label": "PANEL 59",
    "text": "A full bank balance was not the same as cash available. The next decision needed a cash-flow view, not a sales total.",
    "lines": [
     {
@@ -12781,7 +12881,7 @@
    ]
   },
   {
-   "label": "PANEL 51",
+   "label": "PANEL 60",
    "text": "",
    "lines": [
     {
@@ -12795,7 +12895,7 @@
    ]
   },
   {
-   "label": "PANEL 52",
+   "label": "PANEL 61",
    "text": "",
    "lines": [
     {
@@ -12805,7 +12905,7 @@
    ]
   },
   {
-   "label": "PANEL 53",
+   "label": "PANEL 62",
    "text": "",
    "lines": [
     {
@@ -12815,7 +12915,7 @@
    ]
   },
   {
-   "label": "PANEL 54",
+   "label": "PANEL 63",
    "text": "",
    "lines": [
     {
@@ -12825,7 +12925,7 @@
    ]
   },
   {
-   "label": "PANEL 55",
+   "label": "PANEL 64",
    "text": "",
    "lines": [
     {
@@ -12835,7 +12935,7 @@
    ]
   },
   {
-   "label": "PANEL 56",
+   "label": "PANEL 65",
    "text": "",
    "lines": [
     {
@@ -12849,17 +12949,17 @@
    ]
   },
   {
-   "label": "PANEL 57",
+   "label": "PANEL 66",
    "text": "",
    "lines": [
     {
-     "who": "LIORA",
-     "text": "Where did the Emissary hit you?"
+     "who": "SERIS",
+     "text": "That amber pulse... it is coming from your arm."
     }
    ]
   },
   {
-   "label": "PANEL 58",
+   "label": "PANEL 67",
    "text": "The ache was old. The amber line beneath it was new.",
    "lines": [
     {
@@ -12869,21 +12969,17 @@
    ]
   },
   {
-   "label": "PANEL 59",
+   "label": "PANEL 68",
    "text": "",
    "lines": [
     {
      "who": "LIORA",
-     "text": "A tracking seal. He planted it when he touched you."
-    },
-    {
-     "who": "SYSTEM",
-     "text": "HOSTILE TRACK|Operator signal recovered|The echo masked the seal. It did not remove it."
+     "text": "A tracking seal. His command strike left it on your skin. The decoy hid it; it never removed it."
     }
    ]
   },
   {
-   "label": "PANEL 60",
+   "label": "PANEL 69",
    "text": "",
    "lines": [
     {
@@ -12893,41 +12989,41 @@
    ]
   },
   {
-   "label": "PANEL 61",
+   "label": "PANEL 70",
    "text": "",
    "lines": [
     {
      "who": "ODY",
-     "text": "Then I leave. He follows me."
+     "text": "Then I leave before it finds the people here."
     },
     {
      "who": "LIORA",
-     "text": "Alone? That is exactly the capture he wants."
+     "text": "Alone? The seal stays linked to the relay. He will still find you."
     }
    ]
   },
   {
-   "label": "PANEL 62",
+   "label": "PANEL 71",
    "text": "",
    "lines": [
     {
      "who": "LIORA",
-     "text": "There is a relay behind his scouts. Break it and I can cut the seal. Keep it alive, and it reconnects."
+     "text": "Break the relay, then I can remove the seal. We go as a team. Nobody becomes bait."
     }
    ]
   },
   {
-   "label": "PANEL 63",
-   "text": "",
+   "label": "PANEL 72",
+   "text": "Ody, Arya and all three elves would target the relay. Both teams agreed on a rendezvous and a check-in time.",
    "lines": [
     {
-     "who": "LIORA",
-     "text": "Three of us go for the relay. The others move the civilians through the rear lane. We agree the rendezvous before we split."
+     "who": "ODY",
+     "text": "Jules, Remy, Bram: stay with all nine. Dewa and Komang check the next host. Confirm the route before moving."
     }
    ]
   },
   {
-   "label": "PANEL 64",
+   "label": "PANEL 73",
    "text": "",
    "lines": [
     {
@@ -12936,12 +13032,12 @@
     },
     {
      "who": "LIORA",
-     "text": "Come back. Leveling is useless if you do not."
+     "text": "Come back alive. We are not done being strangers."
     }
    ]
   },
   {
-   "label": "PANEL 65",
+   "label": "PANEL 74",
    "text": "Above the lane, the relay unfolded. Forty-five seconds had saved the last five. All nine were alive. The next minute would decide whether they stayed free.",
    "lines": [
     {
@@ -12956,7 +13052,7 @@
    "lines": [
     {
      "who": "QUESTION",
-     "text": "Can an exhausted Operator, a new level-two fighter and an injured Assassin break the relay before the nine civilians are found?"
+     "text": "Can two inexperienced humans and three wounded elves break a command relay before the nine civilians are tracked?"
     }
    ]
   }
