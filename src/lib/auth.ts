@@ -60,8 +60,12 @@ export const auth = betterAuth({
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
     expiresIn: 60 * 60,
+    // Never let a slow or failing mailbox block sign-up: send in the
+    // background and log failures (the customer can resend from Profile).
     sendVerificationEmail: async ({ user, url }) => {
-      await sendVerificationEmail(user.email, user.name, url);
+      void sendVerificationEmail(user.email, user.name, url).catch((err) => {
+        console.error(`[mail] verification email failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
+      });
     },
   },
   socialProviders: GOOGLE_SIGN_IN_ENABLED

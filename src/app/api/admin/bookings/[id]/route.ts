@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getAdmin } from "@/lib/adminAuth";
 import { BOOKING_STATUSES, getBookingStore } from "@/lib/bookingStore";
 import { logAudit, requestIp } from "@/lib/audit";
+import { identityForBooking } from "@/lib/identity";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
@@ -39,7 +40,9 @@ export async function GET(_req: NextRequest, ctx: Ctx) {
     if (!result) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
     }
-    return NextResponse.json({ ok: true, ...result });
+    // Renter documents for the handover check (staff only, detail view only).
+    const identity = await identityForBooking(id).catch(() => null);
+    return NextResponse.json({ ok: true, ...result, identity });
   } catch (err) {
     logStorageError(storageErrorFromThrown("admin_get", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });

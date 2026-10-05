@@ -18,7 +18,16 @@ function smtpConfig() {
   const pass = process.env.SMTP_PASSWORD?.trim();
   const port = Number(process.env.SMTP_PORT?.trim() || 465);
   if (!pass) return null;
-  return { host, port, secure: port === 465, auth: { user, pass } };
+  return {
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+    // Fail fast instead of hanging a request on an unreachable mailbox.
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 20_000,
+  };
 }
 
 export function isMailConfigured(): boolean {

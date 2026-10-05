@@ -95,6 +95,14 @@ only temporary form drafts.
   Status API confirms it; replays never downgrade a paid booking. Set
   it in the Midtrans dashboard as
   `https://werigo.co/api/payments/midtrans/notify`.
+- **Rider documents** are mandatory before booking: identity document
+  (passport or Indonesian KTP number) and driving licence number, entered
+  in the registration form (email sign-up) or on `/account/complete`
+  (after Google sign-in, and for accounts created before the rule).
+  Stored in `customer_identity` (numbers only, never images), one account
+  per document, locked once the customer has a paid booking, enforced by
+  `POST /api/bookings` (`identity_required`), shown to staff in the
+  booking detail only (not in lists or CSV).
 - Customers see their bookings at `/account` (pay now, details,
   WhatsApp), edit their profile at `/account/profile`, and sign in at
   `/account/login` (email + password, or Google when
@@ -134,6 +142,7 @@ add a new one.
 - `0006_accounts_payments_stock.sql` — customer profile fields, price
   snapshot and payment state on bookings, `payments`, `vehicle_stock`,
   `audit_log`
+- `0007_customer_identity.sql` — rider documents (`customer_identity`)
 
 For a database where `0001` was applied by hand, record it first:
 `node scripts/db-migrate.mjs --baseline 0001_bookings.sql`.
@@ -156,8 +165,13 @@ windows) every 5 minutes with `Authorization: Bearer $CRON_SECRET`
 
 ### Staff accounts and the admin dashboard
 
-`/admin/bookings` requires a signed-in account whose role is `admin`
-or `super_admin`. Public sign-up is disabled; create or reset staff
+`/admin` is the staff home: what needs attention (new bookings,
+awaiting payment, follow-ups due, rentals starting within 7 days,
+revenue this month for super admins), the latest bookings, stock, and
+the module menu. Every admin page shares the same navigation
+(`src/components/admin/modules.ts` lists the modules). All `/admin`
+pages require a signed-in account whose role is `admin` or
+`super_admin`; staff who open `/account` are sent to `/admin`. Public sign-up is disabled; create or reset staff
 accounts with:
 
 ```bash
@@ -286,9 +300,12 @@ be strengthened or published. Never invent these on the website.
       `coverageStatus: "pending-management-approval"`). The USD150 cap
       seen in competitor material is a benchmark only, never publish it
       without approval
-- [ ] KYC / identity workflow — public site must not collect passport,
-      ID, or licence images until secure storage, retention, access,
-      and deletion processes are approved
+- [ ] KYC / identity workflow — since 2026-10-05 the site collects
+      passport / KTP and driving licence **numbers** (mandatory before
+      booking). The privacy policy must say so (purpose, retention,
+      who can see them). Document **images** must still not be collected
+      until secure storage, retention, access, and deletion processes
+      are approved
 - [ ] Liability wording anywhere on the site
 - [ ] Delivery fee policy (airport / hotel / villa remain
       "by arrangement")
