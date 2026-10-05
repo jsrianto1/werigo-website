@@ -4,6 +4,7 @@ import { findReferralOwner } from "@/lib/referrals";
 import { getReferralSettings } from "@/lib/settings";
 import { discountFor, discountLabel, normalizeCode } from "@/lib/promotionRules";
 import { formatIdr } from "@/lib/pricing";
+import { getModel } from "@/data/vehicles";
 
 /**
  * Discount engine. One discount per booking: every option that applies
@@ -28,8 +29,21 @@ export interface DiscountOption {
   referralFeePercent?: number;
 }
 
+/** A voucher the customer holds (or typed) that cannot be used on this booking, with a hint. */
+export interface UnavailableDiscount {
+  key: string;
+  kind: "promotion" | "referral";
+  code: string;
+  title: string;
+  label: string;
+  endsAt: string | null;
+  /** What to do (or why not), shown under the greyed-out card. */
+  hint: string;
+}
+
 export interface DiscountResolution {
   options: DiscountOption[];
+  unavailable: UnavailableDiscount[];
   bestKey: string | null;
   /** Feedback on a code the customer typed. */
   codeStatus: { code: string; ok: boolean; message?: string } | null;
@@ -46,6 +60,7 @@ export async function resolveDiscounts(input: {
   const promos = await promotionsForCustomer(ctx, typed || null);
 
   const options: DiscountOption[] = [];
+  const unavailable: UnavailableDiscount[] = [];
   let codeStatus: DiscountResolution["codeStatus"] = null;
   let typedMatched = false;
 
@@ -53,13 +68,28 @@ export async function resolveDiscounts(input: {
     const isTyped = typed !== "" && p.code.toUpperCase() === typed;
     if (isTyped) typedMatched = true;
     let reason = p.blockedReason;
-    if (!reason && p.models && !p.models.includes(input.modelSlug)) reason = "Not valid for this motorcycle.";
+    if (!reason && p.models && !p.models.includes(input.modelSlug)) {
+      reason = `Only for ${p.models.map((m) => getModel(m)?.displayName ?? m).join(", ")}.`;
+    }
     if (!reason && p.min_rental_idr !== null && input.rentalIdr < p.min_rental_idr) {
-      reason = `Needs a rental of at least ${formatIdr(p.min_rental_idr)}.`;
+      reason = `Add ${formatIdr(p.min_rental_idr - input.rentalIdr)} more to your rental to use this voucher (minimum ${formatIdr(p.min_rental_idr)}).`;
     }
     const amount = reason ? 0 : discountFor(p, input.rentalIdr);
     if (isTyped) codeStatus = reason ? { code: typed, ok: false, message: reason } : { code: typed, ok: true };
-    if (reason || amount <= 0) continue;
+    if (reason) {
+      // Vouchers the customer holds stay visible, greyed out with the reason.
+      unavailable.push({
+        key: `promotion:${p.id}`,
+        kind: "promotion",
+        code: p.code,
+        title: p.title,
+        label: discountLabel(p),
+        endsAt: p.ends_at,
+        hint: reason,
+      });
+      continue;
+    }
+    if (amount <= 0) continue;
     options.push({
       key: `promotion:${p.id}`,
       kind: "promotion",
@@ -85,6 +115,17 @@ export async function resolveDiscounts(input: {
       else if (settings.refereeDiscountPercent <= 0) reason = "Referral discounts are paused right now.";
       const amount = reason ? 0 : Math.round((input.rentalIdr * settings.refereeDiscountPercent) / 100);
       codeStatus = reason ? { code: typed, ok: false, message: reason } : { code: typed, ok: true };
+      if (reason) {
+        unavailable.push({
+          key: `referral:${owner.code.toUpperCase()}`,
+          kind: "referral",
+          code: owner.code.toUpperCase(),
+          title: `Referral from ${owner.name.split(/\s+/)[0]}`,
+          label: `${settings.refereeDiscountPercent}% off`,
+          endsAt: null,
+          hint: reason,
+        });
+      }
       if (!reason && amount > 0) {
         options.push({
           key: `referral:${owner.code.toUpperCase()}`,
@@ -103,7 +144,7 @@ export async function resolveDiscounts(input: {
   }
 
   options.sort((a, b) => b.discountIdr - a.discountIdr);
-  return { options, bestKey: options[0]?.key ?? null, codeStatus };
+  return { options, unavailable, bestKey: options[0]?.key ?? null, codeStatus };
 }
 
 /** The option to charge: the requested one if valid, none if asked, else the best. */

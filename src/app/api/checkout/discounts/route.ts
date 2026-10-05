@@ -59,6 +59,7 @@ export async function POST(req: Request) {
         discountIdr: o.discountIdr,
         endsAt: o.endsAt,
       })),
+      unavailable: r.unavailable,
     });
   } catch (err) {
     logStorageError(storageErrorFromThrown("checkout_discounts", err));

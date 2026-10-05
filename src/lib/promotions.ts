@@ -215,8 +215,10 @@ export async function promotionsForCustomer(
       let blockedReason: string | null = null;
       if (row.audience === "assigned" && !r.granted) blockedReason = "This voucher belongs to another account.";
       else if (row.first_booking_only && ctx.hasPaidBooking) blockedReason = "Only for your first booking.";
-      else if (row.usage_limit_total !== null && r.used_total >= row.usage_limit_total) blockedReason = "This offer has been fully used.";
-      else if (row.usage_limit_per_user !== null && r.used_by_user >= row.usage_limit_per_user) blockedReason = "You have already used this offer.";
+      else if (row.usage_limit_total !== null && r.used_total >= row.usage_limit_total) blockedReason = "This voucher has run out.";
+      else if (row.usage_limit_per_user !== null && r.used_by_user >= row.usage_limit_per_user) {
+        blockedReason = "You have already used this voucher. It frees up again if an unpaid booking expires.";
+      }
       return { ...row, blockedReason };
     });
   } catch (err) {

@@ -51,7 +51,7 @@ import { authClient } from "@/lib/auth-client";
 import { useSnap } from "@/lib/useSnap";
 import { AuthForm } from "@/components/account/AuthForm";
 import { IdentityForm } from "@/components/account/IdentityForm";
-import { DiscountChooser, type DiscountOptionView } from "@/components/booking/DiscountChooser";
+import { VoucherPicker, type DiscountOptionView, type UnavailableVoucherView } from "@/components/booking/VoucherPicker";
 import {
   emptyCustomer,
   saveDraft,
@@ -174,6 +174,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   // booking, the best one chosen unless the customer picks another.
   const [appliedCode, setAppliedCode] = useState(referralCode);
   const [discountOptions, setDiscountOptions] = useState<DiscountOptionView[]>([]);
+  const [discountUnavailable, setDiscountUnavailable] = useState<UnavailableVoucherView[]>([]);
   const [bestKey, setBestKey] = useState<string | null>(null);
   const [discountKey, setDiscountKey] = useState<string | null>(null);
   const [codeStatus, setCodeStatus] = useState<{ code: string; ok: boolean; message?: string } | null>(null);
@@ -253,6 +254,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
     if (WHATSAPP_FIRST_BOOKING || !sessionUser || !modelSlugForDiscounts || !isValidPeriod(period) || !pickup) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDiscountOptions([]);
+      setDiscountUnavailable([]);
       setBestKey(null);
       return;
     }
@@ -275,6 +277,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       .then((d) => {
         if (cancelled || !d?.ok) return;
         setDiscountOptions(d.options);
+        setDiscountUnavailable(d.unavailable ?? []);
         setBestKey(d.bestKey);
         setCodeStatus(d.codeStatus);
         // The biggest discount is always the default (management rule);
@@ -699,7 +702,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     <div>
                       <h2 className="font-semibold text-ink">
                         <T>{extra.name}</T>
-                        <span className="ml-2 rounded-full bg-sunken px-2 py-0.5 text-xs font-medium text-ink-faint"><T>{"Price on request"}</T>{" "}</span>
+                        <span className="ml-2 rounded-full bg-ok-soft px-2 py-0.5 text-xs font-medium text-ok"><T>{"Free"}</T>{" "}</span>
                       </h2>
                       <p className="mt-0.5 text-sm text-ink-soft"><T>{extra.description}</T></p>
                     </div>
@@ -828,7 +831,24 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 ))}
               </ul>
 
-              {/* Promo code placeholder */}
+              {/* Vouchers (database mode) / promo code note (WhatsApp mode) */}
+              {!WHATSAPP_FIRST_BOOKING ? (
+                <div className="mt-4">
+                  <VoucherPicker
+                    signedIn={Boolean(sessionUser)}
+                    options={discountOptions}
+                    unavailable={discountUnavailable}
+                    bestKey={bestKey}
+                    selectedKey={discountKey}
+                    onSelect={setDiscountKey}
+                    loading={discountsLoading}
+                    code={promoCode}
+                    onCodeChange={setPromoCode}
+                    onApply={() => setAppliedCode(promoCode.trim())}
+                    codeStatus={codeStatus}
+                  />
+                </div>
+              ) : (
               <div className="mt-4 rounded-[14px] border border-line bg-card p-5">
                 <label
                   htmlFor="promo"
@@ -866,6 +886,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     : "Promo, voucher or referral code. We pick your best discount automatically, and you can choose another at the review step."}</T>{" "}</p>
                 )}
               </div>
+              )}
 
               <div className="mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
                 <Link
@@ -884,14 +905,26 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="tnum min-w-0 text-sm leading-snug text-ink-soft">
-                    <span className="block text-xs"><T>{"Estimated total"}</T></span>
-                    <span className="font-bold text-ink">
-                      {grandTotalIdr !== null
-                        ? formatIdr(grandTotalIdr)
-                        : estimate
-                          ? `${formatIdr(estimate.totalIdr * quantity)} + ${formatUsdFee(addOnBreakdown?.totalUsd ?? 0)}`
-                          : ""}
-                    </span>
+                    {!WHATSAPP_FIRST_BOOKING && quote ? (
+                      <>
+                        <span className="block text-xs"><T>{"Total to pay"}</T></span>
+                        <span className="font-bold text-ink">{formatIdr(quote.totalIdr)}</span>
+                        {quote.discountIdr > 0 ? (
+                          <span className="ml-1.5 text-xs text-ink-faint line-through">{formatIdr(quote.baseIdr + quote.areaFeeIdr)}</span>
+                        ) : null}
+                      </>
+                    ) : (
+                      <>
+                        <span className="block text-xs"><T>{"Estimated total"}</T></span>
+                        <span className="font-bold text-ink">
+                          {grandTotalIdr !== null
+                            ? formatIdr(grandTotalIdr)
+                            : estimate
+                              ? `${formatIdr(estimate.totalIdr * quantity)} + ${formatUsdFee(addOnBreakdown?.totalUsd ?? 0)}`
+                              : ""}
+                        </span>
+                      </>
+                    )}
                   </p>
                   <Button variant="accent" onClick={() => setPhase("details")}><T>{"Continue"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
@@ -1193,12 +1226,12 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                           }`,
                         },
                         {
-                          term: "Estimated total",
+                          term: WHATSAPP_FIRST_BOOKING ? "Estimated total" : "Rental",
                           detail: `${formatIdr(estimate.totalIdr * quantity)}${
                             formatUsdApprox(estimate.totalIdr * quantity, usdRate)
                               ? ` (${formatUsdApprox(estimate.totalIdr * quantity, usdRate)})`
                               : ""
-                          } ${t("for")} ${days} ${t("days")}${quantity > 1 ? ` × ${quantity} ${t("motorcycles")}` : ""}. ${t("Confirmed with availability on WhatsApp.")}`,
+                          } ${t("for")} ${days} ${t("days")}${quantity > 1 ? ` × ${quantity} ${t("motorcycles")}` : ""}.${WHATSAPP_FIRST_BOOKING ? ` ${t("Confirmed with availability on WhatsApp.")}` : ""}`,
                         },
                       ]
                     : []),
@@ -1234,13 +1267,14 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                             addOnBreakdown.motorcycleProtectionUsd > 0
                               ? `${t("Motorcycle Protection")} ${formatUsdFee(addOnBreakdown.motorcycleProtectionUsd)}`
                               : "",
+                            WHATSAPP_FIRST_BOOKING ? "" : t("Not included in the online payment; confirmed by our team."),
                           ]
                             .filter(Boolean)
                             .join("\n"),
                         },
                       ]
                     : []),
-                  ...(addOnBreakdown && (addOnBreakdown.totalUsd > 0 || areaFeesIdr > 0)
+                  ...(WHATSAPP_FIRST_BOOKING && addOnBreakdown && (addOnBreakdown.totalUsd > 0 || areaFeesIdr > 0)
                     ? [
                         {
                           term: "Estimated grand total",
@@ -1258,7 +1292,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                   ...(!WHATSAPP_FIRST_BOOKING && quote && quote.discountIdr > 0 && selectedDiscount
                     ? [
                         {
-                          term: "Discount",
+                          term: "Voucher",
                           detail: `−${formatIdr(quote.discountIdr)} (${t(selectedDiscount.title)}, ${selectedDiscount.code})`,
                         },
                       ]
@@ -1359,17 +1393,21 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
               </div>
 
               {!WHATSAPP_FIRST_BOOKING && sessionUser && identityComplete !== false ? (
-                <DiscountChooser
-                  options={discountOptions}
-                  bestKey={bestKey}
-                  selectedKey={discountKey === "none" ? "none" : selectedDiscount?.key ?? null}
-                  onSelect={setDiscountKey}
-                  loading={discountsLoading}
-                  code={promoCode}
-                  onCodeChange={(v) => setPromoCode(v.toUpperCase())}
-                  onApply={() => setAppliedCode(promoCode.trim())}
-                  codeStatus={codeStatus && codeStatus.code === promoCode.trim().toUpperCase() ? codeStatus : null}
-                />
+                <div className="mt-6">
+                  <VoucherPicker
+                    signedIn
+                    options={discountOptions}
+                    unavailable={discountUnavailable}
+                    bestKey={bestKey}
+                    selectedKey={discountKey}
+                    onSelect={setDiscountKey}
+                    loading={discountsLoading}
+                    code={promoCode}
+                    onCodeChange={setPromoCode}
+                    onApply={() => setAppliedCode(promoCode.trim())}
+                    codeStatus={codeStatus}
+                  />
+                </div>
               ) : null}
               {submitError ? (
                 <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
@@ -1484,6 +1522,17 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
             addOnBreakdown={addOnBreakdown}
             areaFeeIdr={areaFeesIdr}
             areaFeeWaived={areaFeeWaivedMonthly}
+            payable={
+              !WHATSAPP_FIRST_BOOKING && quote
+                ? {
+                    rentalIdr: quote.baseIdr,
+                    areaFeeIdr: quote.areaFeeIdr,
+                    discountIdr: quote.discountIdr,
+                    discountLabel: selectedDiscount ? `${selectedDiscount.title} · ${selectedDiscount.code}` : null,
+                    totalIdr: quote.totalIdr,
+                  }
+                : null
+            }
           />
         </aside>
       </div>

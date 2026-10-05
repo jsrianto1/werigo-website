@@ -24,6 +24,7 @@ export function BookingSummary({
   addOnBreakdown,
   areaFeeIdr = 0,
   areaFeeWaived = false,
+  payable = null,
 }: {
   vehicleName: string;
   quantity: number;
@@ -41,6 +42,18 @@ export function BookingSummary({
   areaFeeIdr?: number;
   /** True when the fee is waived because the rental is one month or longer. */
   areaFeeWaived?: boolean;
+  /**
+   * Online-payment mode: the exact amount charged (same quote the server
+   * uses), including the voucher. When set, the summary shows what the
+   * customer pays instead of a WhatsApp estimate.
+   */
+  payable?: {
+    rentalIdr: number;
+    areaFeeIdr: number;
+    discountIdr: number;
+    discountLabel: string | null;
+    totalIdr: number;
+  } | null;
 }) {
   const usdRate = useUsdRate();
   const { t } = useLanguage();
@@ -97,7 +110,7 @@ export function BookingSummary({
             </span>
           </p>
           <p className="flex items-baseline justify-between gap-3">
-            <span className="text-ink-soft"><T>{"Estimated total"}</T></span>
+            <span className="text-ink-soft"><T>{payable ? "Rental" : "Estimated total"}</T></span>
             <span className="tnum text-right font-semibold text-ink">
               {formatIdr(estimate.totalIdr * quantity)}
               {formatUsdApprox(estimate.totalIdr * quantity, usdRate) ? (
@@ -136,9 +149,45 @@ export function BookingSummary({
                 <span className="tnum font-medium text-ink">{formatUsdFee(row.usd)}</span>
               </p>
             ))}
+          {payable ? (
+            <p className="text-xs text-ink-faint"><T>{"Not included in the online payment; confirmed by our team."}</T></p>
+          ) : null}
         </div>
       ) : null}
-      {estimate ? (
+      {payable && payable.discountIdr > 0 ? (
+        <div className="mt-2 border-t border-line pt-2 text-sm">
+          <p className="flex items-baseline justify-between gap-3">
+            <span className="min-w-0 text-ink-soft">
+              <T>{"Voucher"}</T>
+              {payable.discountLabel ? <span className="block truncate text-xs text-ink-faint">{payable.discountLabel}</span> : null}
+            </span>
+            <span className="tnum whitespace-nowrap font-semibold text-ok">−{formatIdr(payable.discountIdr)}</span>
+          </p>
+        </div>
+      ) : null}
+      {payable ? (
+        <div className="mt-2 border-t border-line-strong pt-2">
+          <p className="flex items-baseline justify-between gap-3 text-sm">
+            <span className="font-semibold text-ink"><T>{"Total to pay"}</T></span>
+            <span className="tnum text-right font-bold text-ink">
+              {payable.discountIdr > 0 ? (
+                <span className="mr-1.5 text-xs font-normal text-ink-faint line-through">
+                  {formatIdr(payable.rentalIdr + payable.areaFeeIdr)}
+                </span>
+              ) : null}
+              {formatIdr(payable.totalIdr)}
+              {formatUsdApprox(payable.totalIdr, usdRate) ? (
+                <span className="tnum block text-xs font-normal text-ink-faint">{formatUsdApprox(payable.totalIdr, usdRate)}</span>
+              ) : null}
+            </span>
+          </p>
+          {payable.discountIdr > 0 ? (
+            <p className="mt-1 text-right text-xs font-semibold text-ok">
+              <T>{"You save"}</T> {formatIdr(payable.discountIdr)}
+            </p>
+          ) : null}
+        </div>
+      ) : estimate ? (
         <div className="mt-2 border-t border-line-strong pt-2">
           {(() => {
             const baseIdr = estimate.totalIdr * quantity + areaFeeIdr;
@@ -161,14 +210,16 @@ export function BookingSummary({
           })()}
         </div>
       ) : null}
-      <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{"Estimate only. Availability, final pricing, delivery and add-ons are confirmed by the Werigo team on WhatsApp. There are no charges without your approval."}</T>{" "}</p>
+      <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{payable
+        ? "This is the amount you pay online. Delivery details are confirmed by our team on WhatsApp."
+        : "Estimate only. Availability, final pricing, delivery and add-ons are confirmed by the Werigo team on WhatsApp. There are no charges without your approval."}</T>{" "}</p>
       <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-xs text-ink-soft">
         {[
           "2 sanitised helmets included",
           "Installed premium phone holder",
           "Official Wedison motorcycles, maintained in-house",
           "Delivered with at least 80% battery",
-          "Your request goes straight to our WhatsApp team",
+          payable ? "Secure payment by Midtrans" : "Your request goes straight to our WhatsApp team",
         ].map((cue) => (
           <li key={cue} className="flex items-start gap-1.5">
             <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ok" />
