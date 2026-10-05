@@ -112,6 +112,32 @@ only temporary form drafts.
   (never sells out). A booking holds units while paid, or pending and
   not expired, or confirmed by staff. Per-unit (plate) tracking is a
   later version.
+- **Discounts** (`src/lib/discounts.ts`): one per booking. Every option
+  the customer qualifies for is listed with its rupiah value (automatic
+  campaigns, vouchers given to them, a promo code they typed, or a
+  friend's referral code); the biggest is applied automatically and the
+  customer can choose another one, or none, on the review step. The
+  booking API recomputes the same list, so the charged amount always
+  matches. Discounts apply to the rental amount only.
+- **Promotions** (`/admin/promotions`, table `promotions`): promo codes
+  (anyone with the code), automatic campaigns (every eligible customer)
+  and vouchers (only customers they are given to, `voucher_grants`).
+  Options: percent or fixed, maximum discount, minimum rental, first
+  booking only, models, start/end, total and per-customer limits. The
+  promotion marked *featured* drives the site pop-up and top bar
+  (`/api/promotions/featured`); the former hard-coded WELCOME20 is now a
+  row in this table.
+- **Referrals** (`/admin/referrals`): each customer has a code and a
+  share link (`/book?ref=CODE`) on `/account/referral`. The friend gets
+  `refereeDiscountPercent`, the owner earns `referrerFeePercent` of the
+  rental amount the friend paid (after the discount, without the
+  delivery fee), snapshotted on the booking. Ledger
+  (`referral_ledger`): pending when paid, available when the booking is
+  marked completed, void if cancelled/refunded. Customers request a
+  payout of the available balance once it reaches `minPayoutIdr`; a
+  super admin transfers manually and marks it transferred (customer is
+  told on WhatsApp). Defaults 10% / 10% / Rp 500,000, editable by a super
+  admin (table `settings`, key `referral`).
 - **Refunds** are done in the Midtrans dashboard; a super admin then
   records "Mark refunded" on the booking. "Mark paid manually" records
   a payment received outside the site. Both are written to `audit_log`.
@@ -143,6 +169,9 @@ add a new one.
   snapshot and payment state on bookings, `payments`, `vehicle_stock`,
   `audit_log`
 - `0007_customer_identity.sql` — rider documents (`customer_identity`)
+- `0008_promotions_referrals.sql` — `settings`, `promotions`,
+  `voucher_grants`, referral codes / ledger / payout requests, discount
+  columns on bookings, WELCOME20 moved into the database
 
 For a database where `0001` was applied by hand, record it first:
 `node scripts/db-migrate.mjs --baseline 0001_bookings.sql`.
@@ -279,7 +308,9 @@ request.
 - **Phase 1** (this release) — customer accounts (email + Google),
   Midtrans payment at checkout, stock per model, customer WhatsApp
   confirmation, audit log foundation
-- **Phase 2** — promo codes, referral program with payouts
+- **Phase 2** (this release) — promo codes, automatic campaigns,
+  vouchers, referral program with payouts, customer Vouchers and
+  Referral pages
 - **Phase 3** — customer management, staff management, audit log
   viewer, Fonnte settings in the dashboard
 

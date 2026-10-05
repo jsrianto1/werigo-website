@@ -7,7 +7,19 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, X } from "lucide-react";
 import { T } from "@/components/i18n/LanguageProvider";
 import { authClient } from "@/lib/auth-client";
-import { welcomeOffer, welcomeOfferActive } from "@/data/promotions";
+import { formatIdr } from "@/lib/pricing";
+
+/** The featured campaign, from /api/promotions/featured (managed in /admin/promotions). */
+interface FeaturedPromotion {
+  title: string;
+  discountType: "percent" | "fixed";
+  discountValue: number;
+  firstBookingOnly: boolean;
+  endsAt: string | null;
+}
+
+const fmtEnds = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-GB", { timeZone: "Asia/Makassar", day: "numeric", month: "long", year: "numeric" });
 
 /**
  * Welcome offer for visitors without an account: a slim bar above the
@@ -36,8 +48,28 @@ export function WelcomeOffer() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const registerHref = "/account/login?mode=register&next=/book";
 
+  const [promo, setPromo] = useState<FeaturedPromotion | null>(null);
   const hiddenHere = HIDDEN_PREFIXES.some((p) => pathname.startsWith(p));
-  const eligible = !isPending && !data?.user && !hiddenHere && welcomeOfferActive();
+  const audience = !isPending && !data?.user && !hiddenHere;
+
+  // Load the featured campaign once, only for visitors who could see it.
+  useEffect(() => {
+    if (!audience || promo) return;
+    let cancelled = false;
+    fetch("/api/promotions/featured")
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled && d?.ok && d.promotion) setPromo(d.promotion);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [audience, promo]);
+
+  const eligible = audience && promo !== null;
+  const valueLabel = promo ? (promo.discountType === "percent" ? `${promo.discountValue}%` : formatIdr(promo.discountValue)) : "";
+  const endsLabel = promo?.endsAt ? fmtEnds(promo.endsAt) : null;
 
   useEffect(() => {
     if (!eligible) {
@@ -86,8 +118,8 @@ export function WelcomeOffer() {
         <div className="relative bg-primary-strong text-white">
           <div className="mx-auto flex min-h-10 w-full max-w-[1400px] items-center justify-center gap-x-3 gap-y-1 px-12 py-2 text-center text-xs font-medium sm:text-sm">
             <span>
-              <T>{"Welcome offer: 20% off your first rental"}</T>
-              <span className="hidden sm:inline"> · <T>{"Ends"}</T> {welcomeOffer.endsLabel}</span>
+              <T>{promo!.title}</T>: {valueLabel} <T>{promo!.firstBookingOnly ? "off your first rental" : "off your rental"}</T>
+              {endsLabel ? <span className="hidden sm:inline"> · <T>{"Ends"}</T> {endsLabel}</span> : null}
             </span>
             <Link href={registerHref} className="whitespace-nowrap font-semibold underline underline-offset-4 hover:text-white/80">
               <T>{"Sign up & save"}</T> →
@@ -158,25 +190,38 @@ export function WelcomeOffer() {
               <h2 id="welcome-offer-title" className="mt-2 font-display text-2xl font-extrabold text-primary-strong md:mt-4 md:text-[34px]">
                 <T>{"The island is calling."}</T>
               </h2>
-              <p className="mt-1 flex items-end justify-center gap-2 text-primary-strong md:mt-3">
-                <span className="font-display text-[64px] font-extrabold leading-[0.85] tracking-tight md:text-[112px]">{welcomeOffer.percent}</span>
-                <span className="pb-1 font-display text-4xl font-extrabold leading-none md:pb-3 md:text-5xl">%</span>
-                <span className="pb-2 text-xl font-bold uppercase md:pb-4 md:text-3xl">off</span>
+              {promo!.discountType === "percent" ? (
+                <p className="mt-1 flex items-end justify-center gap-2 text-primary-strong md:mt-3">
+                  <span className="font-display text-[64px] font-extrabold leading-[0.85] tracking-tight md:text-[112px]">{promo!.discountValue}</span>
+                  <span className="pb-1 font-display text-4xl font-extrabold leading-none md:pb-3 md:text-5xl">%</span>
+                  <span className="pb-2 text-xl font-bold uppercase md:pb-4 md:text-3xl">off</span>
+                </p>
+              ) : (
+                <p className="mt-2 flex items-end justify-center gap-2 text-primary-strong md:mt-4">
+                  <span className="font-display text-[40px] font-extrabold leading-none tracking-tight md:text-[60px]">{formatIdr(promo!.discountValue)}</span>
+                  <span className="pb-1 text-xl font-bold uppercase md:text-3xl">off</span>
+                </p>
+              )}
+              <p className="mt-2 text-base font-semibold text-primary-strong md:mt-3 md:text-lg">
+                <T>{promo!.firstBookingOnly ? "your first electric scooter rental" : "your electric scooter rental"}</T>
               </p>
-              <p className="mt-2 text-base font-semibold text-primary-strong md:mt-3 md:text-lg"><T>{"your first electric scooter rental"}</T></p>
               <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink-soft md:mt-3"><T>{"Create your Werigo account and make your first Bali ride a little sweeter."}</T></p>
               <Link
                 href={registerHref}
                 onClick={() => setModal(false)}
                 className="mt-4 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#c14a05] px-8 text-base font-semibold text-white transition-colors hover:bg-[#a83f04] md:mt-6 md:min-h-14"
               >
-                <T>{"Create account & save 20%"}</T>
+                <T>{"Create account & save"}</T> {valueLabel}
                 <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
               </Link>
               <p className="mt-3 text-xs leading-relaxed text-ink-soft md:mt-4">
-                <T>{"For newly registered customers only."}</T>
-                <br />
-                <T>{"Offer ends"}</T> <strong className="font-semibold text-ink">{welcomeOffer.endsLabel}.</strong>
+                <T>{promo!.firstBookingOnly ? "For newly registered customers only." : "Sign up and it is applied at checkout."}</T>
+                {endsLabel ? (
+                  <>
+                    <br />
+                    <T>{"Offer ends"}</T> <strong className="font-semibold text-ink">{endsLabel}.</strong>
+                  </>
+                ) : null}
               </p>
               <button type="button" onClick={snooze} className="mt-3 cursor-pointer text-sm text-ink-soft underline underline-offset-4 hover:text-ink md:mt-4">
                 <T>{"Maybe later"}</T>

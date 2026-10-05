@@ -51,7 +51,7 @@ import { authClient } from "@/lib/auth-client";
 import { useSnap } from "@/lib/useSnap";
 import { AuthForm } from "@/components/account/AuthForm";
 import { IdentityForm } from "@/components/account/IdentityForm";
-import { welcomeOffer, welcomeOfferActive } from "@/data/promotions";
+import { DiscountChooser, type DiscountOptionView } from "@/components/booking/DiscountChooser";
 import {
   emptyCustomer,
   saveDraft,
@@ -121,19 +121,15 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       cancelled = true;
     };
   }, [sessionUser]);
-  // Promotions the signed-in customer qualifies for (welcome offer).
-  const [offer, setOffer] = useState<{ eligible: boolean; percent: number; code: string } | null>(null);
+  // Featured campaign, to mention it to visitors at the sign-in step.
+  const [featured, setFeatured] = useState<{ discountType: "percent" | "fixed"; discountValue: number } | null>(null);
   useEffect(() => {
-    if (!sessionUser) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setOffer(null);
-      return;
-    }
+    if (sessionUser || WHATSAPP_FIRST_BOOKING) return;
     let cancelled = false;
-    fetch("/api/account/offers", { cache: "no-store" })
+    fetch("/api/promotions/featured")
       .then((r) => r.json())
       .then((d) => {
-        if (!cancelled && d?.ok) setOffer(d.offers.welcome);
+        if (!cancelled && d?.ok && d.promotion) setFeatured(d.promotion);
       })
       .catch(() => {});
     return () => {
@@ -174,6 +170,14 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
     motorcycle: false,
   });
   const [promoCode, setPromoCode] = useState(referralCode);
+  // Discount engine (database mode): options for this customer and
+  // booking, the best one chosen unless the customer picks another.
+  const [appliedCode, setAppliedCode] = useState(referralCode);
+  const [discountOptions, setDiscountOptions] = useState<DiscountOptionView[]>([]);
+  const [bestKey, setBestKey] = useState<string | null>(null);
+  const [discountKey, setDiscountKey] = useState<string | null>(null);
+  const [codeStatus, setCodeStatus] = useState<{ code: string; ok: boolean; message?: string } | null>(null);
+  const [discountsLoading, setDiscountsLoading] = useState(false);
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
   const [privacyConsent, setPrivacyConsent] = useState(false);
@@ -201,7 +205,20 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
         Object.fromEntries(draft.extras.map((e) => [e.id, e.quantity]))
       );
       setPromoCode(draft.promoCode);
-      setCustomer(draft.customer);
+      if (draft.promoCode) setAppliedCode(draft.promoCode);
+      // Draft values win only where they were actually filled, so an old
+      // draft never blanks the details pre-filled from the account.
+      setCustomer((c) => {
+        const d = draft.customer;
+        return {
+          ...d,
+          firstName: d.firstName || c.firstName,
+          lastName: d.lastName || c.lastName,
+          email: d.email || c.email,
+          countryCode: d.whatsapp ? d.countryCode : c.countryCode,
+          whatsapp: d.whatsapp || c.whatsapp,
+        };
+      });
       if (draft.protection) setProtection(draft.protection);
     }
   }, [entryId]);
@@ -229,6 +246,50 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       return next;
     });
   }, [sessionUser]);
+
+  // Discount options for this booking (signed-in customers only).
+  const modelSlugForDiscounts = entry?.modelSlug ?? "";
+  useEffect(() => {
+    if (WHATSAPP_FIRST_BOOKING || !sessionUser || !modelSlugForDiscounts || !isValidPeriod(period) || !pickup) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDiscountOptions([]);
+      setBestKey(null);
+      return;
+    }
+    let cancelled = false;
+    setDiscountsLoading(true);
+    fetch("/api/checkout/discounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        vehicleModel: modelSlugForDiscounts,
+        startAt: `${period.startDate}T${period.startTime}:00+08:00`,
+        endAt: `${period.endDate}T${period.endTime}:00+08:00`,
+        quantity,
+        pickupArea: pickup,
+        returnArea: ret,
+        code: appliedCode,
+      }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled || !d?.ok) return;
+        setDiscountOptions(d.options);
+        setBestKey(d.bestKey);
+        setCodeStatus(d.codeStatus);
+        // The biggest discount is always the default (management rule);
+        // a newly typed code is added to the list, not forced. A manual
+        // choice that no longer exists falls back to the best one.
+        setDiscountKey((k) =>
+          k && k !== "none" && !(d.options as DiscountOptionView[]).some((o) => o.key === k) ? null : k
+        );
+      })
+      .catch(() => {})
+      .finally(() => !cancelled && setDiscountsLoading(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionUser, modelSlugForDiscounts, period, quantity, pickup, ret, appliedCode]);
 
   // Persist draft as user progresses
   useEffect(() => {
@@ -260,6 +321,10 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   const valid = entry && pickup && isValidPeriod(period);
   const days = valid ? rentalDays(period) : 0;
   const estimate = valid ? estimateRental(entry!.modelSlug, period) : null;
+  const selectedDiscount =
+    discountKey === "none"
+      ? null
+      : discountOptions.find((o) => o.key === discountKey) ?? discountOptions.find((o) => o.key === bestKey) ?? null;
   // The amount charged online: same function the server uses to price
   // the booking, so the button and the invoice never disagree.
   const quote = valid
@@ -269,8 +334,8 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
         quantity,
         pickupSlug: pickup,
         returnSlug: ret,
-        discountPercent: offer?.eligible ? offer.percent : 0,
-        discountCode: offer?.eligible ? offer.code : null,
+        discountIdr: selectedDiscount?.discountIdr ?? 0,
+        discountCode: selectedDiscount?.code ?? null,
       })
     : null;
   const needsAgeCheck = Boolean(entry && minRiderAge[entry.modelSlug]);
@@ -482,7 +547,6 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       customer.specialRequest.trim(),
       extrasNote ? `Add-ons: ${extrasNote}` : "",
       protectionNote ? `Protection requested: ${protectionNote}` : "",
-      promoCode ? `Promo code: ${promoCode}` : "",
       customer.flightNumber ? `Flight: ${customer.flightNumber}` : "",
     ]
       .filter(Boolean)
@@ -515,6 +579,8 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
           utmSource: search.get("utm_source") ?? "",
           utmMedium: search.get("utm_medium") ?? "",
           utmCampaign: search.get("utm_campaign") ?? "",
+          promoCode: appliedCode,
+          discountKey: discountKey === "none" ? "none" : selectedDiscount?.key ?? "",
           website: "", // honeypot — real users never fill this
         }),
       });
@@ -775,11 +841,30 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     type="text"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !WHATSAPP_FIRST_BOOKING) {
+                        e.preventDefault();
+                        setAppliedCode(promoCode.trim());
+                      }
+                    }}
                     placeholder={t("Enter a code")}
                     className={inputClass()}
                   />
+                  {!WHATSAPP_FIRST_BOOKING ? (
+                    <Button type="button" variant="outline" onClick={() => setAppliedCode(promoCode.trim())}>
+                      <T>{"Apply"}</T>
+                    </Button>
+                  ) : null}
                 </div>
-                <p className="mt-1.5 text-xs text-ink-faint"><T>{"Have a code from our team or a partner? It's included in your WhatsApp request and applied to your final quote."}</T>{" "}</p>
+                {!WHATSAPP_FIRST_BOOKING && codeStatus && codeStatus.code === promoCode.trim().toUpperCase() ? (
+                  <p role="status" className={`mt-1.5 text-xs font-medium ${codeStatus.ok ? "text-ok" : "text-danger"}`}>
+                    <T>{codeStatus.ok ? "Code added. We apply your biggest discount automatically; compare them at the review step." : codeStatus.message ?? "This code cannot be used."}</T>
+                  </p>
+                ) : (
+                  <p className="mt-1.5 text-xs text-ink-faint"><T>{WHATSAPP_FIRST_BOOKING
+                    ? "Have a code from our team or a partner? It's included in your WhatsApp request and applied to your final quote."
+                    : "Promo, voucher or referral code. We pick your best discount automatically, and you can choose another at the review step."}</T>{" "}</p>
+                )}
               </div>
 
               <div className="mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
@@ -1170,11 +1255,11 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                         },
                       ]
                     : []),
-                  ...(!WHATSAPP_FIRST_BOOKING && quote && quote.discountIdr > 0
+                  ...(!WHATSAPP_FIRST_BOOKING && quote && quote.discountIdr > 0 && selectedDiscount
                     ? [
                         {
-                          term: "Welcome offer",
-                          detail: `−${formatIdr(quote.discountIdr)} (${quote.discountPercent}% ${t("off your first rental")})`,
+                          term: "Discount",
+                          detail: `−${formatIdr(quote.discountIdr)} (${t(selectedDiscount.title)}, ${selectedDiscount.code})`,
                         },
                       ]
                     : []),
@@ -1273,6 +1358,19 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 ) : null}
               </div>
 
+              {!WHATSAPP_FIRST_BOOKING && sessionUser && identityComplete !== false ? (
+                <DiscountChooser
+                  options={discountOptions}
+                  bestKey={bestKey}
+                  selectedKey={discountKey === "none" ? "none" : selectedDiscount?.key ?? null}
+                  onSelect={setDiscountKey}
+                  loading={discountsLoading}
+                  code={promoCode}
+                  onCodeChange={(v) => setPromoCode(v.toUpperCase())}
+                  onApply={() => setAppliedCode(promoCode.trim())}
+                  codeStatus={codeStatus && codeStatus.code === promoCode.trim().toUpperCase() ? codeStatus : null}
+                />
+              ) : null}
               {submitError ? (
                 <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
                   <T>{submitError}</T>
@@ -1282,9 +1380,11 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
                   <h2 className="font-display text-xl text-ink"><T>{"Sign in to pay"}</T></h2>
                   <p className="mt-1 text-sm text-ink-soft"><T>{"Your booking, payment and receipt are kept in your Werigo account. Everything you filled in above stays here."}</T></p>
-                  {welcomeOfferActive() ? (
+                  {featured ? (
                     <p className="mt-3 rounded-[10px] bg-accent-soft px-3 py-2 text-sm font-medium text-accent">
-                      <T>{"New here? Create an account and get"}</T> {welcomeOffer.percent}% <T>{"off this rental."}</T>
+                      <T>{"New here? Create an account and get"}</T>{" "}
+                      {featured.discountType === "percent" ? `${featured.discountValue}%` : formatIdr(featured.discountValue)}{" "}
+                      <T>{"off this rental."}</T>
                     </p>
                   ) : null}
                   <div className="mt-4">

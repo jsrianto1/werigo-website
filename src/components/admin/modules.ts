@@ -1,4 +1,4 @@
-import { Boxes, ClipboardList } from "lucide-react";
+import { BadgePercent, Boxes, ClipboardList, Share2 } from "lucide-react";
 
 /**
  * Staff modules, in menu order. Adding an entry here puts it in the
@@ -16,5 +16,17 @@ export const MODULES = [
     label: "Stock",
     description: "Rentable units per model, used to stop overbooking at checkout.",
     icon: Boxes,
+  },
+  {
+    href: "/admin/promotions",
+    label: "Promotions",
+    description: "Promo codes, automatic campaigns and vouchers for chosen customers.",
+    icon: BadgePercent,
+  },
+  {
+    href: "/admin/referrals",
+    label: "Referrals",
+    description: "Referral percentages, earnings log and payout requests.",
+    icon: Share2,
   },
 ] as const;

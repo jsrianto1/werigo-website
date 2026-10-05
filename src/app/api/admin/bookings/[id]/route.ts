@@ -4,6 +4,7 @@ import { getAdmin } from "@/lib/adminAuth";
 import { BOOKING_STATUSES, getBookingStore } from "@/lib/bookingStore";
 import { logAudit, requestIp } from "@/lib/audit";
 import { identityForBooking } from "@/lib/identity";
+import { syncReferralForBooking } from "@/lib/referrals";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 
@@ -70,6 +71,8 @@ export async function PATCH(req: NextRequest, ctx: Ctx) {
     if (!booking) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
     }
+    // Completed → referral earnings become available; cancelled/refunded → void.
+    await syncReferralForBooking(booking);
     await logAudit({
       actor: admin,
       action: "booking.update",

@@ -70,6 +70,10 @@ export interface StoredBooking {
   payment_status: PaymentStatus | string;
   payment_expires_at: string | null;
   paid_at: string | null;
+  promotion_id: string | null;
+  discount_kind: "promotion" | "referral" | null;
+  referral_owner_id: string | null;
+  referral_fee_percent: number | null;
 }
 
 export interface BookingEvent {
@@ -110,6 +114,13 @@ export interface CreateOptions {
   userId?: string | null;
   /** When set, the booking is created awaiting online payment. */
   payment?: { quote: Quote; expiresAt: Date };
+  /** Which discount the quote includes (one per booking). */
+  discount?: {
+    kind: "promotion" | "referral";
+    promotionId?: string;
+    referralOwnerId?: string;
+    referralFeePercent?: number;
+  } | null;
 }
 
 /** Thrown by create() when the model is sold out for the period. */
@@ -178,6 +189,10 @@ function submissionToRow(s: BookingSubmission, opts?: CreateOptions) {
     total_idr: q?.totalIdr ?? null,
     payment_status: q ? "pending" : "unpaid",
     payment_expires_at: opts?.payment ? opts.payment.expiresAt.toISOString() : null,
+    promotion_id: q && q.discountIdr > 0 ? opts?.discount?.promotionId ?? null : null,
+    discount_kind: q && q.discountIdr > 0 ? opts?.discount?.kind ?? null : null,
+    referral_owner_id: q && q.discountIdr > 0 ? opts?.discount?.referralOwnerId ?? null : null,
+    referral_fee_percent: q && q.discountIdr > 0 ? opts?.discount?.referralFeePercent ?? null : null,
   };
 }
 
@@ -203,7 +218,11 @@ class PostgresBookingStore implements BookingStore {
     const cols = Object.keys(row);
     const values = Object.values(row);
     const placeholders = cols.map((c, i) => {
-      const cast = c === "status" ? "::booking_status" : c === "payment_status" ? "::payment_status" : "";
+      const cast =
+        c === "status" ? "::booking_status"
+        : c === "payment_status" ? "::payment_status"
+        : c === "promotion_id" ? "::uuid"
+        : "";
       return `$${i + 1}${cast}`;
     }).join(", ");
 

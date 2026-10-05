@@ -112,6 +112,11 @@ export function AdminHome({
                 <strong className="tnum font-semibold text-ink">{formatIdr(o.paidThisMonth.revenueIdr)}</strong>{" "}
                 from <span className="tnum">{o.paidThisMonth.count}</span> booking{o.paidThisMonth.count === 1 ? "" : "s"}
               </p>
+              {o.payoutRequests.count > 0 ? (
+                <Link href="/admin/referrals" className="ml-auto rounded-full bg-warn-soft px-3 py-1 text-xs font-semibold text-warn hover:underline">
+                  {o.payoutRequests.count} payout request{o.payoutRequests.count === 1 ? "" : "s"} · {formatIdr(o.payoutRequests.amountIdr)} →
+                </Link>
+              ) : null}
             </div>
           ) : null}
         </>

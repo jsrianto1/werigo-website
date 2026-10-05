@@ -298,3 +298,48 @@ export async function notifyBookingPaid(b: StoredBooking): Promise<void> {
     console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
   }
 }
+
+/* ================= Referral payouts ================= */
+
+/** Ops team: a customer asked for a referral payout. Never throws. */
+export async function notifyPayoutRequested(p: { customerName: string; amountIdr: number }): Promise<void> {
+  try {
+    await enqueueAndDeliver(
+      "payout_requested_admin",
+      adminWhatsAppTargets(),
+      [
+        `*Permintaan pencairan referral*`,
+        `Customer: ${p.customerName}`,
+        `Jumlah: ${formatIdr(p.amountIdr)}`,
+        "",
+        `Proses di: ${site.baseUrl}/admin/referrals`,
+      ].join("\n"),
+      null
+    );
+  } catch (err) {
+    console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
+  }
+}
+
+/** Customer: their payout was transferred. Never throws. */
+export async function notifyPayoutPaid(p: { whatsapp: string | null; name: string; amountIdr: number; bankName: string }): Promise<void> {
+  const target = (p.whatsapp ?? "").replace(/\D/g, "");
+  if (!/^\d{9,15}$/.test(target)) return;
+  try {
+    await enqueueAndDeliver(
+      "payout_paid_customer",
+      [target],
+      [
+        `*Werigo: referral payout sent*`,
+        "",
+        `Hi ${p.name.split(" ")[0]}, we transferred ${formatIdr(p.amountIdr)} of referral earnings to your ${p.bankName} account. Thank you for sharing Werigo!`,
+        "",
+        `Your referral page: ${site.baseUrl}/account/referral`,
+      ].join("\n"),
+      null
+    );
+  } catch (err) {
+    console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
+  }
+}
+
