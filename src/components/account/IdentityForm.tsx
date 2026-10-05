@@ -162,7 +162,8 @@ export function IdentityForm({
       .then((d) => {
         if (cancelled || !d?.ok) return;
         if (d.identity) setValue({ idType: d.identity.idType, idNumber: d.identity.idNumber, drivingLicenseNumber: d.identity.drivingLicenseNumber });
-        setLocked(Boolean(d.locked));
+        // Defence in depth: never lock an empty form.
+        setLocked(Boolean(d.locked && d.identity));
       })
       .catch(() => {})
       .finally(() => !cancelled && setLoaded(true));
