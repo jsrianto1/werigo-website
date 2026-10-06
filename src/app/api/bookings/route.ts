@@ -10,7 +10,7 @@ import { isMidtransConfigured, MidtransError } from "@/lib/midtrans";
 import { openPayment, paymentDeadline } from "@/lib/payments";
 import { latestPayment } from "@/lib/paymentStore";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
-import { offersForUser } from "@/lib/offers";
+import { pickDiscount, resolveDiscounts } from "@/lib/discounts";
 import { hasIdentity } from "@/lib/identity";
 
 export const runtime = "nodejs";
@@ -128,24 +128,35 @@ export async function POST(req: NextRequest) {
   }
   const submission = { ...parsed.data, email: parsed.data.email || user.email };
 
-  // The server prices the booking from approved data only, including
-  // whether this customer still qualifies for the welcome offer.
-  let offers;
-  try {
-    offers = await offersForUser(user.id);
-  } catch (err) {
-    logStorageError(storageErrorFromThrown("offers", err));
-    return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
-  }
-  const quote = computeQuote({
+  // The server prices the booking from approved data only: first the
+  // rental, then the one discount (best available, or the customer's
+  // own choice among the valid ones).
+  const pricingInput = {
     modelSlug: submission.vehicleModel,
     period: periodFromIso(submission.startAt, submission.endAt),
     quantity: submission.quantity,
     pickupSlug: submission.pickupArea,
     returnSlug: submission.returnArea,
-    discountPercent: offers.welcome.eligible ? offers.welcome.percent : 0,
-    discountCode: offers.welcome.eligible ? offers.welcome.code : null,
-  });
+  };
+  const undiscounted = computeQuote(pricingInput);
+  let discount = null;
+  if (undiscounted) {
+    try {
+      const resolution = await resolveDiscounts({
+        userId: user.id,
+        modelSlug: submission.vehicleModel,
+        rentalIdr: undiscounted.baseIdr,
+        code: submission.promoCode || null,
+      });
+      discount = pickDiscount(resolution, submission.discountKey || null);
+    } catch (err) {
+      logStorageError(storageErrorFromThrown("resolve_discounts", err));
+      return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
+    }
+  }
+  const quote = undiscounted
+    ? computeQuote({ ...pricingInput, discountIdr: discount?.discountIdr ?? 0, discountCode: discount?.code ?? null })
+    : null;
   if (!quote) {
     return NextResponse.json(
       { ok: false, error: "quote_unavailable", message: "These dates cannot be priced. Please check the rental period (minimum 2 days)." },
@@ -166,6 +177,14 @@ export async function POST(req: NextRequest) {
     ({ booking, duplicate } = await store.create(submission, {
       userId: user.id,
       payment: { quote, expiresAt: paymentDeadline() },
+      discount: discount
+        ? {
+            kind: discount.kind,
+            promotionId: discount.promotionId,
+            referralOwnerId: discount.referralOwnerId,
+            referralFeePercent: discount.referralFeePercent,
+          }
+        : null,
     }));
   } catch (err) {
     if (err instanceof StockUnavailableError) {

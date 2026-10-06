@@ -15,6 +15,7 @@ import {
   type MidtransTransactionStatus,
 } from "@/lib/midtrans";
 import { notifyBookingPaid } from "@/lib/notifications";
+import { syncReferralForBooking } from "@/lib/referrals";
 import { toCustomerEntry } from "@/data/vehicles";
 import { site } from "@/lib/config";
 
@@ -124,6 +125,7 @@ export async function syncPaymentStatus(
       `${status.payment_type ?? "payment"} ${status.transaction_status} (${orderId})`
     )) ?? booking;
     await notifyBookingPaid(booking);
+    await syncReferralForBooking(booking);
   } else if (outcome === "refunded" && booking.payment_status === "paid") {
     booking = (await store.setPaymentState(
       booking.id,
@@ -131,6 +133,7 @@ export async function syncPaymentStatus(
       actor,
       `${status.transaction_status} (${orderId})`
     )) ?? booking;
+    await syncReferralForBooking(booking);
   } else if ((outcome === "expired" || outcome === "failed") && isLatest && booking.payment_status === "pending") {
     booking = (await store.setPaymentState(
       booking.id,

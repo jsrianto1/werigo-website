@@ -12,7 +12,11 @@ export async function GET() {
   const user = await getSessionUser();
   if (!user) return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   try {
-    const [identity, locked] = await Promise.all([getIdentity(user.id), identityLocked(user.id)]);
+    const [identity, hasPaidBooking] = await Promise.all([getIdentity(user.id), identityLocked(user.id)]);
+    // Only saved documents can be locked. A customer with a paid booking
+    // but no documents yet (accounts from before documents were
+    // required) must still be able to add them.
+    const locked = identity !== null && hasPaidBooking;
     return NextResponse.json({ ok: true, complete: identity !== null, locked, identity });
   } catch (err) {
     logStorageError(storageErrorFromThrown("get_identity", err));

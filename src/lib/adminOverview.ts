@@ -12,6 +12,7 @@ export interface AdminOverview {
   followUpsDue: number;
   startingSoon: number;
   paidThisMonth: { count: number; revenueIdr: number };
+  payoutRequests: { count: number; amountIdr: number };
   recent: {
     id: string;
     booking_code: string;
@@ -30,7 +31,7 @@ export interface AdminOverview {
 export async function getAdminOverview(): Promise<AdminOverview> {
   const pool = getPool();
   try {
-    const [counts, month, recent, stock] = await Promise.all([
+    const [counts, month, recent, stock, payouts] = await Promise.all([
       pool.query(`
         select
           count(*) filter (where payment_status = 'pending' and payment_expires_at > now())::int as awaiting_payment,
@@ -56,6 +57,7 @@ export async function getAdminOverview(): Promise<AdminOverview> {
                total_idr, start_at, created_at
         from bookings order by created_at desc limit 6`),
       pool.query("select model, total_units from vehicle_stock order by model"),
+      pool.query("select count(*)::int as n, coalesce(sum(amount_idr), 0)::bigint as amount from payout_requests where status = 'requested'"),
     ]);
     const c = counts.rows[0];
     return {
@@ -64,6 +66,7 @@ export async function getAdminOverview(): Promise<AdminOverview> {
       followUpsDue: c.follow_ups_due,
       startingSoon: c.starting_soon,
       paidThisMonth: { count: month.rows[0].n, revenueIdr: Number(month.rows[0].revenue) },
+      payoutRequests: { count: payouts.rows[0].n, amountIdr: Number(payouts.rows[0].amount) },
       recent: recent.rows.map((r) => ({
         ...r,
         start_at: new Date(r.start_at).toISOString(),

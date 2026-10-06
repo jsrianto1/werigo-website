@@ -66,6 +66,10 @@ export const bookingSubmissionSchema = z
     utmSource: z.string().trim().max(100).optional().default(""),
     utmMedium: z.string().trim().max(100).optional().default(""),
     utmCampaign: z.string().trim().max(100).optional().default(""),
+    /** Promo, voucher or referral code typed at checkout (validated by the server). */
+    promoCode: z.string().trim().max(40).optional().default(""),
+    /** Discount the customer chose: an option key, "none", or empty for the best one. */
+    discountKey: z.string().trim().max(80).optional().default(""),
     /** Honeypot — must stay empty; bots fill it. */
     website: z.string().max(0).optional().default(""),
   })

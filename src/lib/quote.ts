@@ -16,8 +16,8 @@ import { getArea } from "@/data/locations";
  *               applied by the team, never assumed here)
  *   add-ons   = free of charge; protection options are requests only
  *               and are never charged online
- *   discount  = welcome offer on a customer's first paid booking (see
- *               src/data/promotions.ts), percentage of the rental amount
+ *   discount  = at most one per booking, chosen by the discount engine
+ *               (src/lib/discounts.ts); never more than the rental amount
  *   total     = base + area fee − discount
  */
 
@@ -27,8 +27,8 @@ export interface QuoteInput {
   quantity: number;
   pickupSlug: string;
   returnSlug: string;
-  /** Percentage off the rental amount (not the area fee), e.g. the welcome offer. */
-  discountPercent?: number;
+  /** Rupiah off the rental amount (not the area fee), from the discount engine. */
+  discountIdr?: number;
   discountCode?: string | null;
 }
 
@@ -43,7 +43,6 @@ export interface Quote {
   areaFeeIdr: number;
   areaFeeWaivedMonthly: boolean;
   discountIdr: number;
-  discountPercent: number;
   discountCode: string | null;
   totalIdr: number;
 }
@@ -64,11 +63,7 @@ export function computeQuote(input: QuoteInput): Quote | null {
     : Math.max(pickupArea?.deliveryFee ?? 0, returnArea?.deliveryFee ?? 0);
 
   const baseIdr = estimate.totalIdr * quantity;
-  const discountPercent =
-    input.discountPercent && input.discountPercent > 0 && input.discountPercent <= 100
-      ? input.discountPercent
-      : 0;
-  const discountIdr = Math.round((baseIdr * discountPercent) / 100);
+  const discountIdr = Math.max(0, Math.min(Math.round(input.discountIdr ?? 0), baseIdr));
   return {
     days: estimate.days,
     tierId: estimate.tier.id,
@@ -79,8 +74,7 @@ export function computeQuote(input: QuoteInput): Quote | null {
     areaFeeIdr,
     areaFeeWaivedMonthly,
     discountIdr,
-    discountPercent,
-    discountCode: discountPercent > 0 ? (input.discountCode ?? null) : null,
+    discountCode: discountIdr > 0 ? (input.discountCode ?? null) : null,
     totalIdr: baseIdr + areaFeeIdr - discountIdr,
   };
 }
