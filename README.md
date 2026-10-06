@@ -172,6 +172,9 @@ add a new one.
 - `0008_promotions_referrals.sql` — `settings`, `promotions`,
   `voucher_grants`, referral codes / ledger / payout requests, discount
   columns on bookings, WELCOME20 moved into the database
+- `0009_ride_club.sql` — Ride Club membership tiers and rental points
+- `0010_admin_management.sql` — `user.mustChangePassword`,
+  `user.lastLoginAt`, `customer_notes`, notification settings row
 
 For a database where `0001` was applied by hand, record it first:
 `node scripts/db-migrate.mjs --baseline 0001_bookings.sql`.
