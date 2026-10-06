@@ -9,7 +9,7 @@ import { formatIdr } from "@/lib/pricing";
 
 export interface DiscountOptionView {
   key: string;
-  kind: "promotion" | "referral";
+  kind: "promotion" | "referral" | "points";
   code: string;
   title: string;
   description: string | null;
@@ -241,7 +241,7 @@ export function VoucherPicker({
                                 >
                                   <span className="flex w-20 shrink-0 flex-col items-center justify-center bg-primary px-2 py-4 text-center text-white">
                                     <Ticket className="h-5 w-5" aria-hidden="true" />
-                                    <span className="mt-1 text-[11px] font-semibold leading-tight"><T>{o.kind === "referral" ? "Referral" : "Voucher"}</T></span>
+                                    <span className="mt-1 text-[11px] font-semibold leading-tight"><T>{o.kind === "points" ? "Ride Points" : o.kind === "referral" ? "Referral" : "Voucher"}</T></span>
                                   </span>
                                   <span className="flex-1 border-l border-dashed border-line bg-card p-3">
                                     <span className="flex items-start justify-between gap-2">

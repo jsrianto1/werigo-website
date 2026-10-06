@@ -12,6 +12,7 @@
     "lint": "eslint",
     "postbuild": "node scripts/sitemap-dates.mjs",
     "test:sitemap": "node scripts/sitemap-test.mjs && node scripts/sitemap-dates-test.mjs",
+    "test:membership": "node scripts/ride-club-test.mjs",
     "db:migrate": "node scripts/db-migrate.mjs",
     "db:status": "node scripts/db-migrate.mjs --status",
     "auth:generate": "better-auth generate --config src/lib/auth.ts --output db/migrations/0002_auth.sql -y",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@better-auth/cli": "^1.4.22",
+    "@electric-sql/pglite": "^0.5.8",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.2",

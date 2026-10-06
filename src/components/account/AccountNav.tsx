@@ -9,6 +9,7 @@ import { authClient } from "@/lib/auth-client";
 const tabs = [
   { href: "/account", label: "Bookings" },
   { href: "/account/vouchers", label: "Vouchers" },
+  { href: "/account/membership", label: "Ride Club" },
   { href: "/account/referral", label: "Referral" },
   { href: "/account/profile", label: "Profile" },
 ];

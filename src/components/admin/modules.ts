@@ -1,10 +1,11 @@
-import { BadgePercent, Boxes, ClipboardList, Share2 } from "lucide-react";
+import { BadgePercent, Boxes, ClipboardList, Share2, Award } from "lucide-react";
 
 /**
  * Staff modules, in menu order. Adding an entry here puts it in the
  * admin navigation and on the dashboard.
  */
 export const MODULES = [
+  { href: "/admin/membership", label: "Membership", description: "Ride Club tiers, points and audited corrections.", icon: Award },
   {
     href: "/admin/bookings",
     label: "Bookings",

@@ -5,6 +5,7 @@ import { getReferralSettings } from "@/lib/settings";
 import { discountFor, discountLabel, normalizeCode } from "@/lib/promotionRules";
 import { formatIdr } from "@/lib/pricing";
 import { getModel } from "@/data/vehicles";
+import { rideDiscount } from "@/lib/rideClub";
 
 /**
  * Discount engine. One discount per booking: every option that applies
@@ -17,7 +18,7 @@ import { getModel } from "@/data/vehicles";
 export interface DiscountOption {
   /** "promotion:<id>" or "referral:<CODE>" */
   key: string;
-  kind: "promotion" | "referral";
+  kind: "promotion" | "referral" | "points";
   code: string;
   title: string;
   description: string | null;
@@ -27,6 +28,7 @@ export interface DiscountOption {
   promotionId?: string;
   referralOwnerId?: string;
   referralFeePercent?: number;
+  points?: number;
 }
 
 /** A voucher the customer holds (or typed) that cannot be used on this booking, with a hint. */
@@ -143,6 +145,10 @@ export async function resolveDiscounts(input: {
     }
   }
 
+  const ride = await rideDiscount(input.userId, input.rentalIdr);
+  if (ride) options.push({ key: `points:${ride.points}`, kind: "points", code: "RIDE POINTS",
+    title: "Ride Points", description: "Use your points. One discount per booking.",
+    label: `${ride.points} points`, discountIdr: ride.discountIdr, endsAt: null, points: ride.points });
   options.sort((a, b) => b.discountIdr - a.discountIdr);
   return { options, unavailable, bestKey: options[0]?.key ?? null, codeStatus };
 }

@@ -82,6 +82,9 @@ export async function POST(_req: NextRequest, ctx: Ctx) {
       payment: toPublicPayment(booking, payment),
     });
   } catch (err) {
+    if (storageErrorFromThrown("reopen_payment", err).detail.code === "P0001") {
+      return NextResponse.json({ ok: false, error: "points_changed", message: "The points for this booking are no longer available. Please make a new booking with your current balance." }, { status: 409 });
+    }
     logStorageError(storageErrorFromThrown("reopen_payment", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
   }

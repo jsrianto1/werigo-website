@@ -71,7 +71,7 @@ export interface StoredBooking {
   payment_expires_at: string | null;
   paid_at: string | null;
   promotion_id: string | null;
-  discount_kind: "promotion" | "referral" | null;
+  discount_kind: "promotion" | "referral" | "points" | null;
   referral_owner_id: string | null;
   referral_fee_percent: number | null;
 }
@@ -116,10 +116,11 @@ export interface CreateOptions {
   payment?: { quote: Quote; expiresAt: Date };
   /** Which discount the quote includes (one per booking). */
   discount?: {
-    kind: "promotion" | "referral";
+    kind: "promotion" | "referral" | "points";
     promotionId?: string;
     referralOwnerId?: string;
     referralFeePercent?: number;
+    points?: number;
   } | null;
 }
 
@@ -139,6 +140,7 @@ export interface BookingStore {
   list(q: BookingListQuery): Promise<{ rows: StoredBooking[]; total: number; counts: Record<string, number> }>;
   get(id: string): Promise<{ booking: StoredBooking; events: BookingEvent[] } | null>;
   getByCode(code: string): Promise<StoredBooking | null>;
+  getBySubmission(id: string, userId: string): Promise<StoredBooking | null>;
   listForUser(userId: string): Promise<StoredBooking[]>;
   update(id: string, patch: BookingUpdate, actor: string): Promise<StoredBooking | null>;
   /** Payment outcome from the provider or the expiry cron. */
@@ -193,6 +195,7 @@ function submissionToRow(s: BookingSubmission, opts?: CreateOptions) {
     discount_kind: q && q.discountIdr > 0 ? opts?.discount?.kind ?? null : null,
     referral_owner_id: q && q.discountIdr > 0 ? opts?.discount?.referralOwnerId ?? null : null,
     referral_fee_percent: q && q.discountIdr > 0 ? opts?.discount?.referralFeePercent ?? null : null,
+    ...(opts?.discount?.kind === "points" ? { ride_points: opts.discount.points ?? 0 } : {}),
   };
 }
 
@@ -234,6 +237,7 @@ class PostgresBookingStore implements BookingStore {
           [submission.clientSubmissionId]
         );
         if (existing.rows[0]) {
+          if (existing.rows[0].user_id !== opts?.userId) throw new StorageError("constraint_failed", { operation: "submission_owner" });
           return { booking: normalizeRow<StoredBooking>(existing.rows[0]), duplicate: true };
         }
 
@@ -368,6 +372,11 @@ class PostgresBookingStore implements BookingStore {
     } catch (err) {
       throw storageErrorFromThrown("list_user_bookings", err);
     }
+  }
+
+  async getBySubmission(id: string, userId: string) {
+    const result=await getPool().query("select * from bookings where client_submission_id=$1::uuid and user_id=$2",[id,userId]);
+    return result.rows[0]?normalizeRow<StoredBooking>(result.rows[0]):null;
   }
 
   async update(id: string, patch: BookingUpdate, actor: string) {
@@ -539,6 +548,7 @@ class PostgresBookingStore implements BookingStore {
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
 class MemoryBookingStore implements BookingStore {
+  async getBySubmission(id:string,userId:string){return this.bookings.find(b=>b.client_submission_id===id&&b.user_id===userId)??null;}
   private bookings: StoredBooking[] = [];
   private events: BookingEvent[] = [];
 

@@ -127,6 +127,10 @@ export async function POST(req: NextRequest) {
     );
   }
   const submission = { ...parsed.data, email: parsed.data.email || user.email };
+  const store = getBookingStore();
+  let replay = null;
+  try { replay=await store.getBySubmission(submission.clientSubmissionId,user.id); }
+  catch { return NextResponse.json({ok:false,error:"storage_failed"},{status:503}); }
 
   // The server prices the booking from approved data only: first the
   // rental, then the one discount (best available, or the customer's
@@ -149,6 +153,9 @@ export async function POST(req: NextRequest) {
         code: submission.promoCode || null,
       });
       discount = pickDiscount(resolution, submission.discountKey || null);
+      if (!replay && submission.discountKey.startsWith("points:") && !resolution.options.some(o=>o.key===submission.discountKey)) {
+        return NextResponse.json({ok:false,error:"points_changed",message:"Your points balance changed. Refresh your discounts and try again."},{status:409});
+      }
     } catch (err) {
       logStorageError(storageErrorFromThrown("resolve_discounts", err));
       return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
@@ -170,7 +177,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const store = getBookingStore();
   let booking;
   let duplicate = false;
   try {
@@ -183,10 +189,15 @@ export async function POST(req: NextRequest) {
             promotionId: discount.promotionId,
             referralOwnerId: discount.referralOwnerId,
             referralFeePercent: discount.referralFeePercent,
+            points: discount.points,
           }
         : null,
     }));
   } catch (err) {
+    const membershipError = storageErrorFromThrown("create_booking", err);
+    if (membershipError.detail.code === "P0001") {
+      return NextResponse.json({ ok: false, error: "points_changed", message: "Your points balance changed. Refresh your discounts and try again." }, { status: 409 });
+    }
     if (err instanceof StockUnavailableError) {
       return NextResponse.json(
         {
