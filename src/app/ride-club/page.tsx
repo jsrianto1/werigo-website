@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { rideClubReady } from "@/lib/rideClub";
 import { RIDE_TIERS } from "@/lib/rideClubRules";
@@ -17,6 +18,9 @@ export default async function RideClubPage(){
     <p className="mt-5 max-w-xl text-lg text-ink-soft">Your coffee run, beach day and extra week in Bali can bring you closer to your next ride. Membership is free.</p>
     {!ready && <p role="status" className="mt-5 rounded-xl border border-line p-4">Ride Club is getting ready. Points will start earning after the program is activated.</p>}
     <div className="mt-7 flex flex-wrap gap-4"><Link href="/account/register?next=/account/membership" className="rounded-lg bg-primary px-6 py-3 font-semibold text-white">{ready?"Join Werigo Ride Club":"Create your Werigo account"}</Link><Link href="/account/membership" className="rounded-lg border border-line px-6 py-3 font-semibold">View my membership</Link></div>
+    <figure className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-2xl border border-line">
+      <Image src="/media/membership/ride-club-poster.webp" width={1122} height={1402} sizes="(max-width: 768px) calc(100vw - 48px), 672px" alt="Werigo Ride Club membership cards in Silver, Gold and Platinum, with Ride Points rewards for rentals in Bali." className="h-auto w-full" />
+    </figure>
     <div className="mt-12 grid gap-5 sm:grid-cols-3">{RIDE_TIERS.map(t=><article key={t.name} className="rounded-[14px] border border-line p-6"><h2 className="font-display text-2xl">{t.name}</h2><p className="mt-3 text-sm text-ink-soft">{t.spend?`${formatIdr(t.spend)} in completed rentals over the last 12 months`:"Start here when you create your account"}</p><p className="mt-5 text-2xl font-semibold text-primary">{t.multiplier} Ride Points</p><p className="text-sm text-ink-soft">per Rp10,000 of net rental charges</p></article>)}</div>
     <h2 className="mt-12 font-display text-3xl">Earn. Extend. Explore again.</h2>
     <ol className="mt-5 grid gap-5 sm:grid-cols-3"><li><h3 className="font-semibold">1. Create your account</h3><p className="mt-2 text-sm text-ink-soft">Verify your email. Your 50-point welcome bonus unlocks after your first completed, paid rental.</p></li><li><h3 className="font-semibold">2. Complete your rental</h3><p className="mt-2 text-sm text-ink-soft">Points arrive after completion and full payment. Your tier at booking sets your earning rate.</p></li><li><h3 className="font-semibold">3. Use your Ride Points</h3><p className="mt-2 text-sm text-ink-soft">Choose points at checkout for your next rental or a new extension booking on the same account.</p></li></ol>
