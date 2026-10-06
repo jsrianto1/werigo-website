@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 import { getAdmin } from "@/lib/adminAuth";
-import { getAdminOverview, type AdminOverview } from "@/lib/adminOverview";
-import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { AdminLogin } from "@/components/admin/AdminLogin";
 import { AdminShell } from "@/components/admin/AdminShell";
-import { AdminHome } from "@/components/admin/AdminHome";
+import { StaffManager } from "@/components/admin/StaffManager";
 
 export const metadata: Metadata = {
-  title: "Admin",
+  title: "Staff Admin",
   robots: { index: false, follow: false },
 };
 
-// Always evaluated per-request: the admin gate must never be cached.
 export const dynamic = "force-dynamic";
 
-export default async function AdminPage() {
+export default async function Page() {
   if (WHATSAPP_FIRST_BOOKING) {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center">
@@ -25,17 +23,10 @@ export default async function AdminPage() {
   }
   const admin = await getAdmin();
   if (!admin) return <AdminLogin />;
-
-  let overview: AdminOverview | null = null;
-  try {
-    overview = await getAdminOverview();
-  } catch (err) {
-    logStorageError(storageErrorFromThrown("admin_overview", err));
-  }
-
+  if (admin.role !== "super_admin") redirect("/admin");
   return (
     <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
-      <AdminHome name={admin.name} role={admin.role} overview={overview} />
+      <StaffManager />
     </AdminShell>
   );
 }

@@ -5,6 +5,7 @@ import { toCustomerEntry } from "@/data/vehicles";
 import { getPickupPoint } from "@/data/locations";
 import { site } from "@/lib/config";
 import { formatIdr } from "@/lib/pricing";
+import { getNotificationSettings, type NotificationKind } from "@/lib/settings";
 
 /**
  * WhatsApp notifications through Fonnte, with an outbox.
@@ -25,11 +26,36 @@ const MAX_ATTEMPTS = 10;
 /** Back-off per attempt number (minutes). */
 const BACKOFF_MINUTES = [1, 2, 5, 10, 15, 30, 60, 120, 240, 480];
 
-export function adminWhatsAppTargets(): string[] {
+/** Numbers from the environment (fallback when none are set in the dashboard). */
+export function envAdminWhatsAppTargets(): string[] {
   return (process.env.ADMIN_WHATSAPP_NUMBERS ?? "")
     .split(",")
     .map((n) => n.replace(/\D/g, ""))
     .filter((n) => /^\d{9,15}$/.test(n));
+}
+
+/** Staff numbers: dashboard settings first, environment as fallback. */
+export async function adminWhatsAppTargets(): Promise<string[]> {
+  try {
+    const s = await getNotificationSettings();
+    if (s.adminNumbers.length > 0) return s.adminNumbers;
+  } catch {
+    /* settings unavailable: use the environment */
+  }
+  return envAdminWhatsAppTargets();
+}
+
+/** Whether a kind of notification is switched on in the dashboard. */
+async function enabled(kind: NotificationKind): Promise<boolean> {
+  try {
+    return (await getNotificationSettings())[kind];
+  } catch {
+    return true;
+  }
+}
+
+export function isFonnteConfigured(): boolean {
+  return Boolean(fonnteToken());
 }
 
 function fonnteToken(): string | undefined {
@@ -280,7 +306,8 @@ async function enqueueAndDeliver(kind: string, targets: string[], message: strin
  */
 export async function notifyAdminsOfNewBooking(b: StoredBooking): Promise<void> {
   try {
-    await enqueueAndDeliver("booking_new_admin", adminWhatsAppTargets(), buildNewBookingAdminMessage(b), b.id);
+    if (!(await enabled("bookingNewAdmin"))) return;
+    await enqueueAndDeliver("booking_new_admin", await adminWhatsAppTargets(), buildNewBookingAdminMessage(b), b.id);
   } catch (err) {
     console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
   }
@@ -289,9 +316,11 @@ export async function notifyAdminsOfNewBooking(b: StoredBooking): Promise<void> 
 /** Called once a payment is confirmed: ops team + customer. Never throws. */
 export async function notifyBookingPaid(b: StoredBooking): Promise<void> {
   try {
-    await enqueueAndDeliver("booking_paid_admin", adminWhatsAppTargets(), buildPaidBookingAdminMessage(b), b.id);
+    if (await enabled("bookingPaidAdmin")) {
+      await enqueueAndDeliver("booking_paid_admin", await adminWhatsAppTargets(), buildPaidBookingAdminMessage(b), b.id);
+    }
     const customer = b.whatsapp_number.replace(/\D/g, "");
-    if (/^\d{9,15}$/.test(customer)) {
+    if (/^\d{9,15}$/.test(customer) && (await enabled("bookingPaidCustomer"))) {
       await enqueueAndDeliver("booking_paid_customer", [customer], buildPaidBookingCustomerMessage(b), b.id);
     }
   } catch (err) {
@@ -304,9 +333,10 @@ export async function notifyBookingPaid(b: StoredBooking): Promise<void> {
 /** Ops team: a customer asked for a referral payout. Never throws. */
 export async function notifyPayoutRequested(p: { customerName: string; amountIdr: number }): Promise<void> {
   try {
+    if (!(await enabled("payoutRequestedAdmin"))) return;
     await enqueueAndDeliver(
       "payout_requested_admin",
-      adminWhatsAppTargets(),
+      await adminWhatsAppTargets(),
       [
         `*Permintaan pencairan referral*`,
         `Customer: ${p.customerName}`,
@@ -326,6 +356,7 @@ export async function notifyPayoutPaid(p: { whatsapp: string | null; name: strin
   const target = (p.whatsapp ?? "").replace(/\D/g, "");
   if (!/^\d{9,15}$/.test(target)) return;
   try {
+    if (!(await enabled("payoutPaidCustomer"))) return;
     await enqueueAndDeliver(
       "payout_paid_customer",
       [target],
@@ -341,5 +372,60 @@ export async function notifyPayoutPaid(p: { whatsapp: string | null; name: strin
   } catch (err) {
     console.error(`[notify] enqueue failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
   }
+}
+
+/* ================= Dashboard: log, resend, test ================= */
+
+export interface OutboxEntry {
+  id: string;
+  kind: string;
+  target: string;
+  status: string;
+  attempts: number;
+  last_error: string | null;
+  next_attempt_at: string;
+  created_at: string;
+  sent_at: string | null;
+  booking_code: string | null;
+  preview: string;
+}
+
+export async function listNotifications(limit = 50): Promise<OutboxEntry[]> {
+  const res = await getPool().query(
+    `select o.id, o.kind, o.target, o.status, o.attempts, o.last_error, o.next_attempt_at, o.created_at, o.sent_at,
+            b.booking_code, left(o.message, 80) as preview
+     from notification_outbox o left join bookings b on b.id = o.booking_id
+     order by o.created_at desc limit $1`,
+    [limit]
+  );
+  return res.rows.map((r) => ({
+    ...r,
+    next_attempt_at: new Date(r.next_attempt_at).toISOString(),
+    created_at: new Date(r.created_at).toISOString(),
+    sent_at: r.sent_at ? new Date(r.sent_at).toISOString() : null,
+  }));
+}
+
+/** Put a failed (or stuck) message back in the queue and try right away. */
+export async function resendNotification(id: string): Promise<boolean> {
+  const res = await getPool().query(
+    `update notification_outbox set status = 'pending', attempts = 0, last_error = null, next_attempt_at = now()
+     where id = $1::uuid and status <> 'sent' returning id`,
+    [id]
+  );
+  if (!res.rows[0]) return false;
+  await deliverDue(5);
+  return true;
+}
+
+/** Queue a test message to one number and deliver it now. */
+export async function sendTestMessage(target: string, actorEmail: string): Promise<{ sent: number; failed: number; skipped: number }> {
+  await enqueue(
+    "test_admin",
+    [target],
+    `Werigo: test message from the admin dashboard (${actorEmail}, ${new Date().toLocaleString("en-GB", { timeZone: "Asia/Makassar" })} WITA). If you can read this, WhatsApp notifications work.`,
+    null
+  );
+  return deliverDue(5);
 }
 

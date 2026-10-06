@@ -46,6 +46,35 @@ export const auth = betterAuth({
       /** WhatsApp number in +62… form; pre-fills checkout. */
       phone: { type: "string", required: false, input: true },
       nationality: { type: "string", required: false, input: true },
+      /** Staff created with a temporary password must set their own (never set from the client). */
+      mustChangePassword: { type: "boolean", required: false, input: false, defaultValue: false },
+      lastLoginAt: { type: "date", required: false, input: false },
+    },
+  },
+  databaseHooks: {
+    session: {
+      create: {
+        // Every new session = a sign-in. Record it for staff (audit) and
+        // keep "last login" for the staff list.
+        after: async (session) => {
+          try {
+            const pool = getPool();
+            const res = await pool.query('select email, role from "user" where id = $1', [session.userId]);
+            const u = res.rows[0];
+            if (!u) return;
+            await pool.query('update "user" set "lastLoginAt" = now() where id = $1', [session.userId]);
+            if (u.role === "admin" || u.role === "super_admin") {
+              await pool.query(
+                `insert into audit_log (actor_id, actor_email, actor_role, action, entity_type, entity_id, meta, ip)
+                 values ($1, $2, $3, 'admin.login', 'session', $4, $5, $6)`,
+                [session.userId, u.email, u.role, session.id, JSON.stringify({ userAgent: session.userAgent ?? null }), session.ipAddress ?? null]
+              );
+            }
+          } catch (err) {
+            console.error(`[auth] login hook failed: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
+          }
+        },
+      },
     },
   },
   emailAndPassword: {
@@ -74,7 +103,9 @@ export const auth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 30, // 30 days
     updateAge: 60 * 60 * 24,
-    cookieCache: { enabled: true, maxAge: 5 * 60 },
+    // No cookie cache: suspensions, staff deactivation, role changes and
+    // forced password changes must take effect on the very next request.
+    cookieCache: { enabled: false },
   },
   plugins: [
     admin({ ac, roles, defaultRole: "customer", adminRoles: [...STAFF_ROLES] }),
@@ -88,4 +119,5 @@ export type SessionUser = Session["user"] & {
   banned?: boolean | null;
   phone?: string | null;
   nationality?: string | null;
+  mustChangePassword?: boolean | null;
 };

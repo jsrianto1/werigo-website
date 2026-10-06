@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CalendarClock, CreditCard, Inbox, BellRing, Wallet } from "lucide-react";
 import { Section } from "@/components/ui/Section";
-import { MODULES } from "@/components/admin/modules";
+import { modulesFor } from "@/components/admin/modules";
 import { formatIdr } from "@/lib/pricing";
 import { getModel } from "@/data/vehicles";
 import type { AdminOverview } from "@/lib/adminOverview";
@@ -124,7 +124,7 @@ export function AdminHome({
 
       <h2 className="mt-10 font-display text-xl text-ink">Modules</h2>
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {MODULES.map((m) => {
+        {modulesFor(role).map((m) => {
           const Icon = m.icon;
           return (
             <Link

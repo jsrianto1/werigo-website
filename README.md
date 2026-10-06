@@ -212,10 +212,39 @@ The password is asked for interactively (or taken from
 resets the password and role and signs that account out everywhere.
 Roles and their permissions are defined in `src/lib/permissions.ts`.
 
+Day to day, staff are managed in the dashboard instead:
+
+- **Staff** (`/admin/staff`, super admin): create an account with a
+  temporary password (shown once, hand it over in person), change
+  roles, deactivate/reactivate, set a new temporary password, sign
+  someone out everywhere. An account with a temporary password is sent
+  to `/admin/profile?change=1` and cannot use the rest of the dashboard
+  until it sets its own password. You cannot demote or deactivate
+  yourself, and the last active super admin is protected.
+- **My profile** (`/admin/profile`, click your email): change name and
+  password (other devices are signed out), see signed-in devices.
+- **Customers** (`/admin/customers`): search by name, email or
+  WhatsApp; a customer page shows bookings, rider documents (every
+  admin can view, only a super admin can correct them), vouchers (and
+  give one), referral balance, internal staff notes and sessions. A
+  super admin can **suspend** (until a date) or **block** (permanent)
+  a customer: both sign them out and stop sign-in and new bookings;
+  existing paid bookings are not cancelled automatically. Sessions are
+  checked against the database on every request (no cookie cache), so
+  suspensions, deactivations and role changes take effect at once.
+- **Audit log** (`/admin/audit`, super admin): every staff action and
+  sign-in, filterable by staff, action and date, CSV export. Entries
+  are append-only.
+- **Settings** (`/admin/settings`, super admin): WhatsApp recipients
+  and per-event switches (table `settings`, key `notifications`), a
+  test message, and the delivery log with manual resend. The Fonnte
+  token itself stays in `FONNTE_TOKEN` on the server.
+
 ### WhatsApp notifications (Fonnte)
 
-Every new booking queues one message per number in
-`ADMIN_WHATSAPP_NUMBERS` into `notification_outbox`, then delivery is
+Every new booking queues one message per staff number (the list saved
+in `/admin/settings`, or `ADMIN_WHATSAPP_NUMBERS` when that list is
+empty) into `notification_outbox`, then delivery is
 attempted immediately. Failures are retried with increasing back-off
 (1 min → 8 h, up to 10 attempts) by the cron endpoint; a notification
 can never fail or delay a booking. Use a dedicated WhatsApp number for
@@ -311,8 +340,10 @@ request.
 - **Phase 2** (this release) — promo codes, automatic campaigns,
   vouchers, referral program with payouts, customer Vouchers and
   Referral pages
-- **Phase 3** — customer management, staff management, audit log
-  viewer, Fonnte settings in the dashboard
+- **Phase 3** (this release) — customer management (suspend/block,
+  notes, documents, vouchers), staff management with temporary
+  passwords, audit log viewer, notification settings and delivery log,
+  staff profile
 
 ## [LEGAL REVIEW REQUIRED] checklist
 

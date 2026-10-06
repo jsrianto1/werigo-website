@@ -23,7 +23,7 @@ export default async function AdminPromotionsPage() {
   const admin = await getAdmin();
   if (!admin) return <AdminLogin />;
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role}>
+    <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <PromotionsManager />
     </AdminShell>
   );
