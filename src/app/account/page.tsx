@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 import { AccountNav } from "@/components/account/AccountNav";
 import { BookingsList } from "@/components/account/BookingsList";
-import { getSessionUser } from "@/lib/session";
+import { requireCustomer } from "@/lib/customerGate";
 
 export const metadata: Metadata = {
   title: "My Bookings",
@@ -13,8 +12,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
-  const user = await getSessionUser();
-  if (!user) redirect("/account/login?next=/account");
+  const user = await requireCustomer("/account");
   return (
     <Section className="!py-10">
       <div className="mx-auto max-w-3xl">

@@ -11,11 +11,12 @@ import { authClient } from "@/lib/auth-client";
  */
 export function AccountMenu({ className = "" }: { className?: string }) {
   const { data, isPending } = authClient.useSession();
-  const user = data?.user;
-  const label = user ? user.name.split(" ")[0] || user.email : null;
+  const user = data?.user as ({ name: string; email: string; role?: string | null } | undefined);
+  const staff = user?.role === "admin" || user?.role === "super_admin";
+  const label = user ? (staff ? "Admin" : user.name.split(" ")[0] || user.email) : null;
   return (
     <Link
-      href={user ? "/account" : "/account/login"}
+      href={user ? (staff ? "/admin" : "/account") : "/account/login"}
       aria-label={user ? `Account: ${user.name}` : undefined}
       className={`inline-flex min-h-11 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink ${isPending ? "invisible" : ""} ${className}`}
     >

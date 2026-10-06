@@ -7,6 +7,7 @@ import { isMidtransConfigured } from "@/lib/midtrans";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
+import { hasIdentity } from "@/lib/identity";
 
 export const runtime = "nodejs";
 
@@ -33,6 +34,9 @@ export async function POST(_req: NextRequest, ctx: Ctx) {
   const { code } = await ctx.params;
   const store = getBookingStore();
   try {
+    if (!(await hasIdentity(user.id))) {
+      return NextResponse.json({ ok: false, error: "identity_required" }, { status: 403 });
+    }
     let booking = await store.getByCode(code.toUpperCase());
     if (!booking || booking.user_id !== user.id) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });

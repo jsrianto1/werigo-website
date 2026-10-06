@@ -11,6 +11,7 @@ import { openPayment, paymentDeadline } from "@/lib/payments";
 import { latestPayment } from "@/lib/paymentStore";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
 import { offersForUser } from "@/lib/offers";
+import { hasIdentity } from "@/lib/identity";
 
 export const runtime = "nodejs";
 
@@ -99,6 +100,18 @@ export async function POST(req: NextRequest) {
       { ok: false, error: "auth_required", message: "Please sign in to complete your booking." },
       { status: 401 }
     );
+  }
+  // Renting needs an identity document and a driving licence on file.
+  try {
+    if (!(await hasIdentity(user.id))) {
+      return NextResponse.json(
+        { ok: false, error: "identity_required", message: "Add your passport or ID number and driving licence number to continue." },
+        { status: 403 }
+      );
+    }
+  } catch (err) {
+    logStorageError(storageErrorFromThrown("check_identity", err));
+    return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
   }
 
   const parsed = bookingSubmissionSchema.safeParse(body);

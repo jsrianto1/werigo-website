@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { ArrowLeft, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
@@ -79,10 +78,7 @@ export function StockManager() {
 
   return (
     <Section className="!py-10">
-      <Link href="/admin/bookings" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-strong">
-        <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Bookings
-      </Link>
-      <p className="eyebrow mt-4">Werigo admin</p>
+      <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Stock per model</h1>
       <p className="mt-2 max-w-xl text-sm text-ink-soft">
         Total rentable units of each model. Leave a field blank to stop tracking that

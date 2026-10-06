@@ -50,6 +50,7 @@ import { computeQuote } from "@/lib/quote";
 import { authClient } from "@/lib/auth-client";
 import { useSnap } from "@/lib/useSnap";
 import { AuthForm } from "@/components/account/AuthForm";
+import { IdentityForm } from "@/components/account/IdentityForm";
 import { welcomeOffer, welcomeOfferActive } from "@/data/promotions";
 import {
   emptyCustomer,
@@ -97,6 +98,29 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   const { data: session } = authClient.useSession();
   const sessionUser = session?.user ?? null;
   const { pay: snapPay, preload: preloadSnap } = useSnap();
+  // Rider documents on file? (null = not known yet / not signed in)
+  const [identityComplete, setIdentityComplete] = useState<boolean | null>(null);
+  useEffect(() => {
+    if (!sessionUser) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIdentityComplete(null);
+      return;
+    }
+    let cancelled = false;
+    // If the check itself fails, let the customer continue: the booking
+    // API enforces the documents and answers identity_required.
+    fetch("/api/account/identity", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled) setIdentityComplete(d?.ok ? Boolean(d.complete) : true);
+      })
+      .catch(() => {
+        if (!cancelled) setIdentityComplete(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionUser]);
   // Promotions the signed-in customer qualifies for (welcome offer).
   const [offer, setOffer] = useState<{ eligible: boolean; percent: number; code: string } | null>(null);
   useEffect(() => {
@@ -499,9 +523,12 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       if (!res.ok || !data?.ok) {
         // Not stored → nothing is charged; keep the form as it is.
         setSubmitting(false);
+        if (data?.error === "identity_required") setIdentityComplete(false);
         setSubmitError(
           res.status === 401
             ? "Please sign in below to continue to payment."
+            : data?.error === "identity_required"
+              ? "Add your rider documents below to continue to payment."
             : data?.message ??
                 "We couldn't save your booking just now. Your details are still here, so please try again."
         );
@@ -1269,13 +1296,25 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     />
                   </div>
                 </div>
+              ) : !WHATSAPP_FIRST_BOOKING && identityComplete === false ? (
+                <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
+                  <IdentityForm
+                    heading="Your rider documents"
+                    intro="Needed once to rent a motorcycle. Everything you filled in above stays here."
+                    submitLabel="Save and continue to payment"
+                    onSaved={() => {
+                      setIdentityComplete(true);
+                      setSubmitError(null);
+                    }}
+                  />
+                </div>
               ) : (
                 <div className="mt-6">
                   <Button
                     variant="accent"
                     size="lg"
                     onClick={() => (WHATSAPP_FIRST_BOOKING ? sendToWhatsApp() : void confirmBooking())}
-                    disabled={submitting || (!WHATSAPP_FIRST_BOOKING && !quote)}
+                    disabled={submitting || (!WHATSAPP_FIRST_BOOKING && (!quote || identityComplete === null))}
                     className="w-full sm:w-auto"
                   >
                     <MessageCircle className="h-5 w-5" aria-hidden="true" />

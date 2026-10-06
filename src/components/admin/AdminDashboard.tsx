@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Download,
-  LogOut,
   RefreshCw,
   Search,
   X,
@@ -15,7 +14,6 @@ import {
 } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { authClient } from "@/lib/auth-client";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 
@@ -78,6 +76,12 @@ interface Row {
   paid_at: string | null;
 }
 
+interface IdentityRow {
+  idType: "passport" | "national_id";
+  idNumber: string;
+  drivingLicenseNumber: string;
+}
+
 interface EventRow {
   id: string;
   event_type: string;
@@ -100,7 +104,14 @@ const fmt = (iso: string | null) =>
       })
     : "—";
 
-export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; adminRole: string }) {
+export function AdminDashboard({
+  adminRole,
+  initialFilters,
+}: {
+  adminRole: string;
+  /** From the URL, e.g. links on the admin dashboard (?q=, ?status=, ?payment=). */
+  initialFilters?: { search: string; status: string; paymentStatus: string };
+}) {
   const router = useRouter();
   const models = getPrimaryCards();
 
@@ -111,9 +122,9 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
   const [error, setError] = useState<string | null>(null);
 
   // filters
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("");
-  const [paymentStatus, setPaymentStatus] = useState("");
+  const [search, setSearch] = useState(initialFilters?.search ?? "");
+  const [status, setStatus] = useState(initialFilters?.status ?? "");
+  const [paymentStatus, setPaymentStatus] = useState(initialFilters?.paymentStatus ?? "");
   const [model, setModel] = useState("");
   const [pickupArea, setPickupArea] = useState("");
   const [dateFrom, setDateFrom] = useState("");
@@ -123,7 +134,7 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
   const pageSize = 20;
 
   // detail panel
-  const [detail, setDetail] = useState<{ booking: Row; events: EventRow[] } | null>(null);
+  const [detail, setDetail] = useState<{ booking: Row; events: EventRow[]; identity: IdentityRow | null } | null>(null);
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
 
@@ -178,7 +189,7 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
       const res = await fetch(`/api/admin/bookings/${id}`);
       const data = await res.json();
       if (!data.ok) throw new Error();
-      setDetail({ booking: data.booking, events: data.events });
+      setDetail({ booking: data.booking, events: data.events, identity: data.identity ?? null });
     } catch {
       setDetailError("Couldn't load this booking.");
     } finally {
@@ -206,11 +217,6 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
     }
   }
 
-  async function signOut() {
-    await authClient.signOut();
-    router.refresh();
-  }
-
   const totalBookings = Object.values(counts).reduce((a, b) => a + b, 0);
   const pages = Math.max(1, Math.ceil(total / pageSize));
 
@@ -236,13 +242,6 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
           <h1 className="font-display text-3xl text-ink">Bookings</h1>
         </div>
         <div className="flex items-center gap-2">
-          <span className="hidden text-sm text-ink-soft sm:inline">{adminEmail}</span>
-          <a
-            href="/admin/stock"
-            className="inline-flex min-h-9 cursor-pointer items-center gap-2 rounded-[10px] border border-line-strong px-3.5 text-sm font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
-          >
-            Stock
-          </a>
           <Button variant="outline" size="sm" onClick={() => void load()}>
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
             Refresh
@@ -254,10 +253,6 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
             <Download className="h-4 w-4" aria-hidden="true" />
             CSV
           </a>
-          <Button variant="ghost" size="sm" onClick={() => void signOut()}>
-            <LogOut className="h-4 w-4" aria-hidden="true" />
-            Sign out
-          </Button>
         </div>
       </div>
 
@@ -492,6 +487,12 @@ export function AdminDashboard({ adminEmail, adminRole }: { adminEmail: string; 
                   ["Period", `${fmt(detail.booking.start_at)} → ${fmt(detail.booking.end_at)}`],
                   ["Pickup", `${detail.booking.pickup_area}${detail.booking.pickup_address ? ` — ${detail.booking.pickup_address}` : ""}`],
                   ["Return", detail.booking.return_area],
+                  [
+                    "Rider documents",
+                    detail.identity
+                      ? `${detail.identity.idType === "passport" ? "Passport" : "KTP"} ${detail.identity.idNumber}\nDriving licence ${detail.identity.drivingLicenseNumber}`
+                      : "Not on file (booking made before documents were required)",
+                  ],
                   ["Payment", `${detail.booking.payment_status}${detail.booking.total_idr !== null ? ` · ${formatIdr(detail.booking.total_idr)}` : ""}${detail.booking.discount_idr > 0 ? ` · discount ${formatIdr(detail.booking.discount_idr)}${detail.booking.discount_code ? ` (${detail.booking.discount_code})` : ""}` : ""}${detail.booking.paid_at ? ` · paid ${fmt(detail.booking.paid_at)}` : ""}`],
                   ["Source", detail.booking.source_page ?? "—"],
                   ["Notes from customer", detail.booking.customer_notes ?? "—"],
