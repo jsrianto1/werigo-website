@@ -51,3 +51,51 @@ export async function setReferralSettings(value: ReferralSettings, actorEmail: s
     throw storageErrorFromThrown("set_settings", err);
   }
 }
+
+/* ================= Notifications ================= */
+
+export const notificationSettingsSchema = z.object({
+  /** Staff WhatsApp numbers, digits only international (628…). Falls back to ADMIN_WHATSAPP_NUMBERS when empty. */
+  adminNumbers: z.array(z.string().regex(/^\d{9,15}$/)).max(20),
+  bookingNewAdmin: z.boolean(),
+  bookingPaidAdmin: z.boolean(),
+  bookingPaidCustomer: z.boolean(),
+  payoutRequestedAdmin: z.boolean(),
+  payoutPaidCustomer: z.boolean(),
+});
+
+export type NotificationSettings = z.infer<typeof notificationSettingsSchema>;
+export type NotificationKind = Exclude<keyof NotificationSettings, "adminNumbers">;
+
+export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
+  adminNumbers: [],
+  bookingNewAdmin: true,
+  bookingPaidAdmin: true,
+  bookingPaidCustomer: true,
+  payoutRequestedAdmin: true,
+  payoutPaidCustomer: true,
+};
+
+export async function getNotificationSettings(): Promise<NotificationSettings> {
+  try {
+    const res = await getPool().query("select value from settings where key = 'notifications'");
+    const parsed = notificationSettingsSchema.safeParse({ ...DEFAULT_NOTIFICATION_SETTINGS, ...(res.rows[0]?.value ?? {}) });
+    return parsed.success ? parsed.data : DEFAULT_NOTIFICATION_SETTINGS;
+  } catch (err) {
+    throw storageErrorFromThrown("get_settings", err);
+  }
+}
+
+export async function setNotificationSettings(value: NotificationSettings, actorEmail: string): Promise<NotificationSettings> {
+  try {
+    await getPool().query(
+      `insert into settings (key, value, updated_by, updated_at) values ('notifications', $1::jsonb, $2, now())
+       on conflict (key) do update set value = excluded.value, updated_by = excluded.updated_by, updated_at = now()`,
+      [JSON.stringify(value), actorEmail]
+    );
+    return value;
+  } catch (err) {
+    throw storageErrorFromThrown("set_settings", err);
+  }
+}
+

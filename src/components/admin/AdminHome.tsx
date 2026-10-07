@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, CalendarClock, CreditCard, Inbox, BellRing, Wallet } from "lucide-react";
-import { Section } from "@/components/ui/Section";
-import { MODULES } from "@/components/admin/modules";
+import { modulesFor } from "@/components/admin/modules";
 import { formatIdr } from "@/lib/pricing";
 import { getModel } from "@/data/vehicles";
 import type { AdminOverview } from "@/lib/adminOverview";
@@ -73,7 +72,7 @@ export function AdminHome({
     : [];
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Hi, {name.split(" ")[0]}</h1>
       <p className="mt-1 text-sm text-ink-soft">Here is what needs your attention today.</p>
@@ -124,7 +123,7 @@ export function AdminHome({
 
       <h2 className="mt-10 font-display text-xl text-ink">Modules</h2>
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {MODULES.map((m) => {
+        {modulesFor(role).map((m) => {
           const Icon = m.icon;
           return (
             <Link
@@ -205,6 +204,6 @@ export function AdminHome({
           </div>
         </div>
       ) : null}
-    </Section>
+    </div>
   );
 }

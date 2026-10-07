@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Ticket } from "lucide-react";
-import { Section } from "@/components/ui/Section";
-import { AccountNav } from "@/components/account/AccountNav";
+import { AccountShell } from "@/components/account/AccountShell";
 import { requireCustomer } from "@/lib/customerGate";
 import { customerContext, promotionsForCustomer } from "@/lib/promotions";
 import { discountLabel } from "@/lib/promotionRules";
@@ -26,13 +25,13 @@ export default async function VouchersPage() {
   const used = promos.filter((p) => p.blockedReason);
 
   return (
-    <Section className="!py-10">
-      <div className="mx-auto max-w-3xl">
-        <AccountNav name={user.name} />
-        <p className="mt-6 text-sm text-ink-soft">
-          Vouchers and offers on your account. At checkout we apply the biggest discount that
-          fits your booking automatically, and you can pick another one. One discount per booking.
-        </p>
+    <AccountShell
+      name={user.name}
+      email={user.email}
+      title="Vouchers"
+      lede="At checkout we apply the biggest discount that fits your booking automatically; you can pick another one. One discount per booking."
+    >
+      <div>
 
         {usable.length === 0 ? (
           <div className="mt-6 rounded-[14px] border border-dashed border-line-strong bg-card p-10 text-center">
@@ -86,6 +85,6 @@ export default async function VouchersPage() {
           </div>
         ) : null}
       </div>
-    </Section>
+    </AccountShell>
   );
 }

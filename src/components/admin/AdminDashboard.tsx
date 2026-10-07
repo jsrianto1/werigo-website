@@ -12,7 +12,6 @@ import {
   Inbox,
   AlertTriangle,
 } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
@@ -234,7 +233,7 @@ export function AdminDashboard({
     "min-h-11 cursor-pointer rounded-[10px] border border-line-strong bg-card px-3 text-sm text-ink";
 
   return (
-    <Section className="!py-10">
+    <div>
       {/* Header row */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
@@ -641,6 +640,6 @@ export function AdminDashboard({
           </div>
         </div>
       ) : null}
-    </Section>
+    </div>
   );
 }

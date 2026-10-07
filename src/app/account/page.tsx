@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/ui/Section";
-import { AccountNav } from "@/components/account/AccountNav";
+import { AccountShell } from "@/components/account/AccountShell";
 import { BookingsList } from "@/components/account/BookingsList";
 import { requireCustomer } from "@/lib/customerGate";
 
@@ -14,13 +13,8 @@ export const dynamic = "force-dynamic";
 export default async function AccountPage() {
   const user = await requireCustomer("/account");
   return (
-    <Section className="!py-10">
-      <div className="mx-auto max-w-3xl">
-        <AccountNav name={user.name} />
-        <div className="mt-6">
-          <BookingsList />
-        </div>
-      </div>
-    </Section>
+    <AccountShell name={user.name} email={user.email} title="My bookings" lede="Pay, see details or message us about any booking.">
+      <BookingsList />
+    </AccountShell>
   );
 }

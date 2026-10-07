@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { formatIdr } from "@/lib/pricing";
 
@@ -134,7 +133,7 @@ export function ReferralsAdmin() {
   }
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Referrals</h1>
       <p className="mt-1 max-w-2xl text-sm text-ink-soft">
@@ -263,6 +262,6 @@ export function ReferralsAdmin() {
           </table>
         )}
       </div>
-    </Section>
+    </div>
   );
 }

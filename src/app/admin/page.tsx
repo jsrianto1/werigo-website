@@ -34,7 +34,7 @@ export default async function AdminPage() {
   }
 
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role}>
+    <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <AdminHome name={admin.name} role={admin.role} overview={overview} />
     </AdminShell>
   );

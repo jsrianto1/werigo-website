@@ -5,6 +5,7 @@ import { MetaPageViews } from "@/components/analytics/MetaPageViews";
 import { Manrope, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { HideOnAdmin } from "@/components/layout/HideOnAdmin";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { site } from "@/lib/config";
 import { localBusinessSchema, jsonLd } from "@/lib/schema";
@@ -128,12 +129,16 @@ fbq('track','PageView');`,
           Skip to main content
         </a>
         <WelcomeOffer />
-        <Header />
+        <HideOnAdmin>
+          <Header />
+        </HideOnAdmin>
         <main id="main" className="flex-1">
           {children}
         </main>
-        <Footer />
-        <FloatingWhatsApp />
+        <HideOnAdmin>
+          <Footer />
+          <FloatingWhatsApp />
+        </HideOnAdmin>
         </LanguageProvider>
         <script
           type="application/ld+json"

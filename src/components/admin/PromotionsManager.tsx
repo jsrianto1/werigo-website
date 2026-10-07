@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Star, X, Gift, Pencil } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
 import { AUDIENCE_LABELS, AUDIENCES, discountLabel, type Audience } from "@/lib/promotionRules";
@@ -265,7 +264,7 @@ export function PromotionsManager() {
   const set = (patch: Partial<FormState>) => setEditing((e) => (e ? { ...e, form: { ...e.form, ...patch } } : e));
 
   return (
-    <Section className="!py-10">
+    <div>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="eyebrow">Werigo admin</p>
@@ -518,6 +517,6 @@ export function PromotionsManager() {
           </form>
         </div>
       ) : null}
-    </Section>
+    </div>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
 
@@ -77,7 +76,7 @@ export function StockManager() {
     new Date(iso).toLocaleString("en-GB", { timeZone: "Asia/Makassar", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Stock per model</h1>
       <p className="mt-2 max-w-xl text-sm text-ink-soft">
@@ -132,6 +131,6 @@ export function StockManager() {
           </tbody>
         </table>
       </div>
-    </Section>
+    </div>
   );
 }
