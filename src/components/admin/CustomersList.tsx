@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { formatIdr } from "@/lib/pricing";
 
@@ -72,7 +71,7 @@ export function CustomersList() {
   const pages = Math.max(1, Math.ceil(total / pageSize));
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Customers</h1>
 
@@ -165,6 +164,6 @@ export function CustomersList() {
           </div>
         </div>
       ) : null}
-    </Section>
+    </div>
   );
 }

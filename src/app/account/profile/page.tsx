@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/ui/Section";
-import { AccountNav } from "@/components/account/AccountNav";
+import { AccountShell } from "@/components/account/AccountShell";
 import { ProfileForm } from "@/components/account/ProfileForm";
 import { IdentityForm } from "@/components/account/IdentityForm";
 import { requireCustomer } from "@/lib/customerGate";
@@ -15,10 +14,8 @@ export const dynamic = "force-dynamic";
 export default async function ProfilePage() {
   const user = await requireCustomer("/account/profile");
   return (
-    <Section className="!py-10">
-      <div className="mx-auto max-w-3xl">
-        <AccountNav name={user.name} />
-        <div className="mt-6 space-y-6">
+    <AccountShell name={user.name} email={user.email} title="Profile" lede="Your details, rider documents and password.">
+      <div className="space-y-6">
           <div className="rounded-[14px] border border-line bg-card p-6">
             <IdentityForm heading="Rider documents" />
           </div>
@@ -31,8 +28,7 @@ export default async function ProfilePage() {
               nationality: user.nationality ?? null,
             }}
           />
-        </div>
       </div>
-    </Section>
+    </AccountShell>
   );
 }

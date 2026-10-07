@@ -25,7 +25,7 @@ export default async function Page() {
   if (!admin) return <AdminLogin />;
   if (admin.role !== "super_admin") redirect("/admin");
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
+    <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <AuditViewer />
     </AdminShell>
   );

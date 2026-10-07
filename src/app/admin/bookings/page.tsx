@@ -42,7 +42,7 @@ export default async function AdminBookingsPage({
   }
   const { q, status, payment } = await searchParams;
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
+    <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <AdminDashboard
         adminRole={admin.role}
         initialFilters={{ search: q ?? "", status: status ?? "", paymentStatus: payment ?? "" }}

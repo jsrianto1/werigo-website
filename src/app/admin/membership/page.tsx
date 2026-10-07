@@ -7,5 +7,5 @@ export const metadata:Metadata={title:"Membership Admin",robots:{index:false,fol
 export const dynamic="force-dynamic";
 export default async function MembershipAdminPage(){
   const admin=await getAdmin();if(!admin)return <AdminLogin/>;
-  return <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}><MembershipManager canAdjust={admin.role==="super_admin"}/></AdminShell>;
+  return <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}><MembershipManager canAdjust={admin.role==="super_admin"}/></AdminShell>;
 }

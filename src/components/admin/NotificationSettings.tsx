@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { RefreshCw, Send, X } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 
 interface Settings {
@@ -108,12 +107,12 @@ export function NotificationSettings() {
     }
   }
 
-  if (!settings) return <Section className="!py-10"><div className="h-72 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" /></Section>;
+  if (!settings) return <div><div className="h-72 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" /></div>;
 
   const numbers = settings.adminNumbers.length > 0 ? settings.adminNumbers : envNumbers;
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Settings</h1>
       {msg ? <p role={msg.ok ? "status" : "alert"} className={`mt-4 rounded-[10px] px-3 py-2 text-sm ${msg.ok ? "bg-ok-soft text-ok" : "bg-danger-soft text-danger"}`}>{msg.text}</p> : null}
@@ -212,6 +211,6 @@ export function NotificationSettings() {
           )}
         </section>
       </div>
-    </Section>
+    </div>
   );
 }

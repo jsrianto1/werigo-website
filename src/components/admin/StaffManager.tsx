@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { KeyRound, LogOut, Plus, ShieldCheck, UserX } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 
 interface Staff {
@@ -100,7 +99,7 @@ export function StaffManager() {
   }
 
   return (
-    <Section className="!py-10">
+    <div>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="eyebrow">Werigo admin</p>
@@ -229,6 +228,6 @@ export function StaffManager() {
           </table>
         )}
       </div>
-    </Section>
+    </div>
   );
 }

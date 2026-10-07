@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 
 interface Row {
@@ -60,7 +59,7 @@ export function AuditViewer() {
   const pages = Math.max(1, Math.ceil(total / pageSize));
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Audit log</h1>
       <p className="mt-1 max-w-2xl text-sm text-ink-soft">Every staff action, newest first. Entries cannot be edited or deleted.</p>
@@ -132,6 +131,6 @@ export function AuditViewer() {
           </div>
         </div>
       ) : null}
-    </Section>
+    </div>
   );
 }

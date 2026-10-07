@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock } from "lucide-react";
-import { Section } from "@/components/ui/Section";
+import Link from "next/link";
+import { ArrowLeft, Lock } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { authClient } from "@/lib/auth-client";
 
@@ -35,9 +36,10 @@ export function AdminLogin() {
   }
 
   return (
-    <Section>
-      <div className="mx-auto max-w-sm">
-        <div className="rounded-[14px] border border-line bg-card p-6">
+    <div className="flex min-h-dvh flex-col items-center justify-center bg-sunken px-4 py-10">
+      <Logo className="mb-6" />
+      <div className="w-full max-w-sm">
+        <div className="rounded-[14px] border border-line bg-card p-6 shadow-sm">
           <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary-soft text-primary">
             <Lock className="h-5 w-5" aria-hidden="true" />
           </span>
@@ -84,7 +86,10 @@ export function AdminLogin() {
             </Button>
           </form>
         </div>
+        <Link href="/" className="mt-6 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink">
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to werigo.co
+        </Link>
       </div>
-    </Section>
+    </div>
   );
 }

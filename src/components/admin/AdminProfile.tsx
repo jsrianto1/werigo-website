@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { KeyRound, MonitorSmartphone } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { authClient } from "@/lib/auth-client";
 
@@ -102,10 +101,10 @@ export function AdminProfile() {
     await load();
   }
 
-  if (!me) return <Section className="!py-10"><div className="h-72 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" /></Section>;
+  if (!me) return <div><div className="h-72 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" /></div>;
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">My profile</h1>
       <p className="mt-1 text-sm text-ink-soft">{me.email} · {me.role === "super_admin" ? "Super admin" : "Admin"}</p>
@@ -162,6 +161,6 @@ export function AdminProfile() {
           </section>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, CalendarClock, CreditCard, Inbox, BellRing, Wallet } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { modulesFor } from "@/components/admin/modules";
 import { formatIdr } from "@/lib/pricing";
 import { getModel } from "@/data/vehicles";
@@ -73,7 +72,7 @@ export function AdminHome({
     : [];
 
   return (
-    <Section className="!py-10">
+    <div>
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Hi, {name.split(" ")[0]}</h1>
       <p className="mt-1 text-sm text-ink-soft">Here is what needs your attention today.</p>
@@ -205,6 +204,6 @@ export function AdminHome({
           </div>
         </div>
       ) : null}
-    </Section>
+    </div>
   );
 }

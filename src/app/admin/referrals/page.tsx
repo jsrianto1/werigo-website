@@ -23,7 +23,7 @@ export default async function AdminReferralsPage() {
   const admin = await getAdmin();
   if (!admin) return <AdminLogin />;
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
+    <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <ReferralsAdmin />
     </AdminShell>
   );

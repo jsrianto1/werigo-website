@@ -25,7 +25,7 @@ export default async function Page() {
   if (!admin) return <AdminLogin />;
   
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
+    <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <Suspense fallback={null}><AdminProfile /></Suspense>
     </AdminShell>
   );

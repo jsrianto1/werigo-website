@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Ban, IdCard, KeyRound, ShieldCheck, Ticket } from "lucide-react";
-import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { formatIdr } from "@/lib/pricing";
 import { getModel } from "@/data/vehicles";
@@ -114,8 +113,8 @@ export function CustomerDetail({ id }: { id: string }) {
     }
   }
 
-  if (error) return <Section className="!py-10"><p role="alert" className="text-sm text-danger">{error}</p></Section>;
-  if (!d) return <Section className="!py-10"><div className="h-96 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" /></Section>;
+  if (error) return <div><p role="alert" className="text-sm text-danger">{error}</p></div>;
+  if (!d) return <div><div className="h-96 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" /></div>;
 
   const c = d.customer;
 
@@ -130,7 +129,7 @@ export function CustomerDetail({ id }: { id: string }) {
   }
 
   return (
-    <Section className="!py-10">
+    <div>
       <Link href="/admin/customers" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-strong">
         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Customers
       </Link>
@@ -358,6 +357,6 @@ export function CustomerDetail({ id }: { id: string }) {
           </section>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }

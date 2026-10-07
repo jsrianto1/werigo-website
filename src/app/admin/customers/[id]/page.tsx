@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   if (!admin) return <AdminLogin />;
   const { id } = await params;
   return (
-    <AdminShell adminEmail={admin.email} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
+    <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <CustomerDetail id={id} />
     </AdminShell>
   );
