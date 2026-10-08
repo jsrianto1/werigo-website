@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "1a478ac7607e9e8bc18432d41b5bb8e637100099107d6dc53f7e12d1e1adfaf7",
+  "fingerprint": "686a199813dda64bdf04384bc6e2c9c2f93e1940e92dfff1db29810108c7c4e4",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -10884,7 +10884,7 @@
     },
     {
       "file": "scripts/marketing-test.mjs",
-      "hash": "c9705e821178c07d160f2cae7c7fba48683546f44649c990feeb61051aaf9ecc"
+      "hash": "6d1f095a17b30d23d48254e1f78e45c00ac66d21999a5bbe1c93ae1710397b6b"
     },
     {
       "file": "scripts/menu-test.mjs",
@@ -10944,19 +10944,19 @@
     },
     {
       "file": "src/app/account/membership/page.tsx",
-      "hash": "b94f1de4338aeb005c978682aaefd372e3758a644fc776b4a7aea72053e43fd5"
+      "hash": "f75727ebc9c1fa4b879aea3c8b8bbec284a7f76ea9b4314a8c9d9fc66aeebdf0"
     },
     {
       "file": "src/app/account/page.tsx",
-      "hash": "3fdc03fef76f249d7cd6397de0f25fad37d467e0696f9edf0317f81fa62ba8d4"
+      "hash": "f9a149210d82ec514456a0852566887bfd18f11492f574701f0fe4ccd499f6fb"
     },
     {
       "file": "src/app/account/profile/page.tsx",
-      "hash": "66eb9736a25a3e37624bdb51247ee9fe8b2f8d0896f7af7688f82468bbbdf188"
+      "hash": "b9330aef0481f7ff05d8130e046643f5f477a38ab6aae0ea65733c866d5d5730"
     },
     {
       "file": "src/app/account/referral/page.tsx",
-      "hash": "45c722d8940cc38b378f99036ba2de7ac771defdd1aeea23e7fc114cd7a3c9a3"
+      "hash": "5b7c0d6794396ddd75b1ca0eb4fc44238605292e73b6f7b751405e225d2b1d15"
     },
     {
       "file": "src/app/account/register/page.tsx",
@@ -10968,31 +10968,55 @@
     },
     {
       "file": "src/app/account/vouchers/page.tsx",
-      "hash": "70d1ad1ec353247f77ef2977ede6343b6f6303884a35b702d5321e6113b9c9bd"
+      "hash": "b04d2b4f4792823686d7f714d6e9ecb262c77bede4831e8cf6a9bb42d48d2a6a"
+    },
+    {
+      "file": "src/app/admin/audit/page.tsx",
+      "hash": "b0f913deec88e799034f8d764072a5c3c32113e753d295bd5fb1dd0216c008eb"
     },
     {
       "file": "src/app/admin/bookings/page.tsx",
-      "hash": "1766bcd19a3b64c916d1f349a644568024900d44ce05d956f2acc6eb650ddd85"
+      "hash": "f18a04a229ae1fa7cc8c2eb98b627a2f4fee037b288c48e888a28ccdbe4ef173"
+    },
+    {
+      "file": "src/app/admin/customers/[id]/page.tsx",
+      "hash": "f1af05a1b1820e5d502ff931eb9cef8f1c8f809788450d7200c551fe40ae321a"
+    },
+    {
+      "file": "src/app/admin/customers/page.tsx",
+      "hash": "2ba8e1d2ff6ac6e0dd543d23fd4ebc376d8626edd31871baa2c9485d4ddd059a"
     },
     {
       "file": "src/app/admin/membership/page.tsx",
-      "hash": "632aa664ade3a606c9a9a2b2e20de9ac55d31257cc29076d674566ebddbe83f8"
+      "hash": "89e2c26fc7e0c313049607baf240252400b40995d501146314adc9d82647695b"
     },
     {
       "file": "src/app/admin/page.tsx",
-      "hash": "b189a74d0773623d30ed7f91f5b4805d04755a78ba6b633e370d2c61c6c70ab7"
+      "hash": "5a3f822f3b37525cc6bab18fd98ca5a9984113a6bb0517f5eab0de248ffc5529"
+    },
+    {
+      "file": "src/app/admin/profile/page.tsx",
+      "hash": "8f5a8517a86f3919f75affa1d4a44ba377ac066aa1c23795d4c4515d3c6883db"
     },
     {
       "file": "src/app/admin/promotions/page.tsx",
-      "hash": "9a79f014ee19431b0a3133264492e0a8ecc8fd858656ecacb9f15ecf33ba614c"
+      "hash": "27fc41341e287da1f3b520d6b170d283962c08b90fcd92e38f1b1655f12720ac"
     },
     {
       "file": "src/app/admin/referrals/page.tsx",
-      "hash": "44e8f33a4fbb3ef62b332879ee57f2a70d725beb9bfd44f78946ab1e50518d1f"
+      "hash": "251882bb6bfb882a36a4c9efa2995125e0482f728b4545ba7e8a0304912e14d7"
+    },
+    {
+      "file": "src/app/admin/settings/page.tsx",
+      "hash": "bae8c4c43b3a3de3c7f0aebc802087ef3f50d039ef0bc457f633dee2c67024db"
+    },
+    {
+      "file": "src/app/admin/staff/page.tsx",
+      "hash": "24d504fdc050c3c4a824d753796728545696d61dd6b1289f28100af0dcba4da2"
     },
     {
       "file": "src/app/admin/stock/page.tsx",
-      "hash": "8835b58fbc9dfed73032005729a5afc301681e6b33c29dc85a9f53ff510560da"
+      "hash": "674fa2ff409813cc4c43a52600177fbedd1389606bef387716d33204378a9f1b"
     },
     {
       "file": "src/app/api/account/bookings/route.ts",
@@ -11011,6 +11035,10 @@
       "hash": "b8ff8da614232891f1ec123d150ffda9ed2aa4aa20d500c9f6c4df4215458012"
     },
     {
+      "file": "src/app/api/admin/audit/route.ts",
+      "hash": "14eb210d1d8a1090ba21c272743b8bec6b9b332cfb4fb1a5c917e23f3b68b52b"
+    },
+    {
       "file": "src/app/api/admin/bookings/[id]/route.ts",
       "hash": "63f2e588b3c219c5cb452f316cbb67068fd903db0384a507bb6aa9290a8a6a1d"
     },
@@ -11023,12 +11051,48 @@
       "hash": "a733c8de2a221bd69523a63ae6cd7667c5532eb6360168fddd4da827c624196f"
     },
     {
+      "file": "src/app/api/admin/customers/[id]/identity/route.ts",
+      "hash": "1300a67ab0678d58fa10b3409691f5f61c8daf9dfe71e5dfb8c83232470319ca"
+    },
+    {
+      "file": "src/app/api/admin/customers/[id]/notes/route.ts",
+      "hash": "ee34a5f88479fee3aaa7c62f630d6506e8bc4366e8db83c0af2f9221013e6f6e"
+    },
+    {
+      "file": "src/app/api/admin/customers/[id]/password-reset/route.ts",
+      "hash": "6567febf5b17ec2a991f494ae92b10deb605b05662532bf40bba851a6acab7bf"
+    },
+    {
+      "file": "src/app/api/admin/customers/[id]/route.ts",
+      "hash": "af84e7c4b7c04be92f7e19195ba58e740dd08becfec2853998fc01f20f223452"
+    },
+    {
+      "file": "src/app/api/admin/customers/[id]/vouchers/route.ts",
+      "hash": "fa2135799614f816c85b4d3b9bad9278432b50ff26fa022ff9754d6b383795e4"
+    },
+    {
+      "file": "src/app/api/admin/customers/route.ts",
+      "hash": "b2ecb6a7bf0b5a48569ec4d53ad15c95b3c74592439a5aa569b3132676657903"
+    },
+    {
+      "file": "src/app/api/admin/me/route.ts",
+      "hash": "3b19a4d35cbb7565fcec74caa25e5170e117790c96e19c719aab2c2ccea4d82c"
+    },
+    {
       "file": "src/app/api/admin/membership/route.ts",
       "hash": "0102329c6d03e6fe27c551aa376110f0e4fc215c57ce0e1cc50fe1707ab0c837"
     },
     {
       "file": "src/app/api/admin/membership/setup/route.ts",
       "hash": "c68f9ddad34193898244a92b639a40eb6630714171126ce5fa104abc2b366f81"
+    },
+    {
+      "file": "src/app/api/admin/notifications/[id]/resend/route.ts",
+      "hash": "9c6c9740f2c7ba02206450ceb61d64c88b98474c5e49256afb5e67018b086d7c"
+    },
+    {
+      "file": "src/app/api/admin/notifications/route.ts",
+      "hash": "b41320abd1f3df84125f0a1b7cdcdcd492c829bee1cc9e44d9b86fdf3ef67575"
     },
     {
       "file": "src/app/api/admin/promotions/[id]/grants/route.ts",
@@ -11049,6 +11113,22 @@
     {
       "file": "src/app/api/admin/referrals/route.ts",
       "hash": "9e12b5cd6bdcef18c4770f32504226a4bddcb9d51a8b04da9a6a821f0c6c2e35"
+    },
+    {
+      "file": "src/app/api/admin/settings/notifications/route.ts",
+      "hash": "fd53b7e40f769509c662b8f1804aff1e90c8d93418132c2dd9b7328b772d39f0"
+    },
+    {
+      "file": "src/app/api/admin/settings/notifications/test/route.ts",
+      "hash": "ebfdd71c35b0467b53c9308148fc7e3e073f748f886ba15b48ca1de73395c78b"
+    },
+    {
+      "file": "src/app/api/admin/staff/[id]/route.ts",
+      "hash": "ab17cb22d072e9c690571ebb2f43cc70414b420562ccba47b5147b85bfdfcd22"
+    },
+    {
+      "file": "src/app/api/admin/staff/route.ts",
+      "hash": "7041e320ef168384e57da74b5fe9a59cde763b7b7aab9c23ef7216c45cba8687"
     },
     {
       "file": "src/app/api/admin/stock/route.ts",
@@ -11073,6 +11153,10 @@
     {
       "file": "src/app/api/checkout/discounts/route.ts",
       "hash": "00a43637e91df7cd75b72943fcf72e5d9056131b6a807e57608265d93ae2fd31"
+    },
+    {
+      "file": "src/app/api/consent/route.ts",
+      "hash": "573532c6accecccfacb9ee0f2ab37557a2e8e51e2a61c5967bf107df96e4d768"
     },
     {
       "file": "src/app/api/cron/expire-bookings/route.ts",
@@ -11172,7 +11256,7 @@
     },
     {
       "file": "src/app/layout.tsx",
-      "hash": "f507063b6c9699d4e223ac6dc9f15e30b4820b838899f2cd302bb50c1d00375b"
+      "hash": "9bf946d7ffa9b1695baa2dec5100b6af93ee478d6922544c9070eb228bd253fd"
     },
     {
       "file": "src/app/location-sitemap.xml/route.ts",
@@ -11204,7 +11288,7 @@
     },
     {
       "file": "src/app/privacy/page.tsx",
-      "hash": "b74842c0dd079bb4a6ea047d435e6fb39887bf064f4e64f0a8fa74aa9392ffac"
+      "hash": "2d67d9305ce800177c9bc0f772593ede7ed967a9e4c494945cb5bdfcb37ca6b3"
     },
     {
       "file": "src/app/ride-club/page.tsx",
@@ -11243,8 +11327,8 @@
       "hash": "8d24cea75582348655a5c11a75c644a02df3de66409923d1ccd2bd4e458911d8"
     },
     {
-      "file": "src/components/account/AccountNav.tsx",
-      "hash": "c10f81aa3b623ccb273a07acda291ec07877d671d11d1c9e66e95a1a5a916314"
+      "file": "src/components/account/AccountShell.tsx",
+      "hash": "1ed5d4fe518d10f307a6625a0c2b6cf41786a49f5b9ec1f217bf32d7e18756ad"
     },
     {
       "file": "src/components/account/AuthForm.tsx",
@@ -11276,39 +11360,71 @@
     },
     {
       "file": "src/components/admin/AdminDashboard.tsx",
-      "hash": "3fb5da6a5693271baba62241f6219c5b8b39cc99aabdfde7dc208ce3ed6302d3"
+      "hash": "309dbf645fa74a4cd00759097bfb77c35da39a131db10d97d26e77a95dfa0c23"
     },
     {
       "file": "src/components/admin/AdminHome.tsx",
-      "hash": "da25dd461303a2d42453a15b11b3d45a50f56c5d2f4c1a363c51939cd83e26f6"
+      "hash": "6c7a73b7ebf1e445df505f7ee7491d5aefa1b462a00f8903843b98454316e210"
     },
     {
       "file": "src/components/admin/AdminLogin.tsx",
-      "hash": "5fb0347e2130f441e028504dc60b9aa7219560fea34465ac088e8c55fa6dafa3"
+      "hash": "b87a147325721afc4c66d2fe0bc6e940c4b1e48e9793cb52e8e9410c47ff86cf"
+    },
+    {
+      "file": "src/components/admin/AdminProfile.tsx",
+      "hash": "c83012719932a3219be43755c5cb03f989baa0b98d7dd1f51cd9ca50bd15287a"
     },
     {
       "file": "src/components/admin/AdminShell.tsx",
-      "hash": "d983a2490c0ae03282db806a3fb0175cfc2dcac286464c8dfe7c6e2afbe3c80c"
+      "hash": "8f7680c5d3ad5556fc74e66da73880364509cbdbcccb373aa3bb4903910bd094"
+    },
+    {
+      "file": "src/components/admin/AuditViewer.tsx",
+      "hash": "064d497e7c028e6819de2b9b4fc6e373424118a79c601a4c7acd0a97a60f28b2"
+    },
+    {
+      "file": "src/components/admin/CustomerDetail.tsx",
+      "hash": "1a8561f8b15b73107c885304d3cc9f95e2eefa970c0b5c8cc7e1a70eff478ccd"
+    },
+    {
+      "file": "src/components/admin/CustomersList.tsx",
+      "hash": "7e751d5e74a52116d9fde8ec0c4a90ffcc16874f4d48e10116ce75859af36ba2"
     },
     {
       "file": "src/components/admin/MembershipManager.tsx",
-      "hash": "6c0b869bc9ae7f6ccb5aac20842f8c51864bf6507404bf8af04cd389d6d97fe7"
+      "hash": "441b02a45ffe1b8a2231be243c417c797506e364f14a81191e25b4fd8d8fe49e"
+    },
+    {
+      "file": "src/components/admin/NotificationSettings.tsx",
+      "hash": "d6982a56926c240ba7926484af51f8ff8d582d4a4745b57ec369c2170afbc1e7"
     },
     {
       "file": "src/components/admin/PromotionsManager.tsx",
-      "hash": "af54e03da393be24580914e378e3d6faca28e551943c7d25127765512525a09e"
+      "hash": "bd1747eea7a3e2e8d26dedda6dc3af6dd6b41aaf2da8893a4aa6bf7b070bf735"
     },
     {
       "file": "src/components/admin/ReferralsAdmin.tsx",
-      "hash": "94e411717f602611e53e74519217f7f052ef5a6f82b28b84712efcafac6a8621"
+      "hash": "bd9a1cb0cb7237094edd753842b1814e9ddb668e07c6807aaa62b5dad90ba718"
+    },
+    {
+      "file": "src/components/admin/StaffManager.tsx",
+      "hash": "fe0631b2478f2714532c0e7bfb52d9e55f235e24045bd68107abebb3943e695a"
     },
     {
       "file": "src/components/admin/StockManager.tsx",
-      "hash": "cd3ffc61928f0cc2f803cf1bf7c7e90c2c622b16ed464b6a78d928d5a2957329"
+      "hash": "fcb1d3f17fe13a2456cc3e762f6a5cebd57bdac057c1b24c0330b7d21022f5c7"
     },
     {
       "file": "src/components/admin/modules.ts",
-      "hash": "720465fff266c8e2548d77ee267f76b957423ab3bb69522571c9abd585931178"
+      "hash": "6106004964add2c011a13979241ac633c4081d6c0e33626da7b2172966d3df10"
+    },
+    {
+      "file": "src/components/analytics/CookieConsent.tsx",
+      "hash": "f87719b6564b1f90df9e0b7acf5ffbafcfd8025969d3c7a793e15b6c03536930"
+    },
+    {
+      "file": "src/components/analytics/CookieSettingsLink.tsx",
+      "hash": "9515ec8f05f34593e4746ee6023e03865d4e39b05378f49407fef09e6f86aec2"
     },
     {
       "file": "src/components/analytics/MarketingEvents.tsx",
@@ -11316,7 +11432,7 @@
     },
     {
       "file": "src/components/analytics/MetaPageViews.tsx",
-      "hash": "b339ce70a2ea687f9ddf395bad9c5ce1eededab6cc5e6b4fd5f92fef4e7f0254"
+      "hash": "a7c670c749614be1f46ecd14b66121ca78b7314c06231a2603a154b69e91ad7c"
     },
     {
       "file": "src/components/areas/AreaImage.tsx",
@@ -11396,11 +11512,15 @@
     },
     {
       "file": "src/components/layout/Footer.tsx",
-      "hash": "0a391b81743dfb283ce5ec16a219b8980e5f4e8ec5e26601fd9919e3d229e794"
+      "hash": "1156bdf3f16c8e0b4b6af73cd55a64cb7698655b61d46955f29929e001bcc385"
     },
     {
       "file": "src/components/layout/Header.tsx",
       "hash": "83a07e3101adbd751550cb5378fb066060b6a48a107daaf1de019492de4d1454"
+    },
+    {
+      "file": "src/components/layout/HideOnAdmin.tsx",
+      "hash": "eeef58ef2df53f37cb142b726acde95fb63e873226d8d6d47be54d29712fe855"
     },
     {
       "file": "src/components/layout/MobileDrawer.tsx",
@@ -11457,6 +11577,10 @@
     {
       "file": "src/components/ui/Button.tsx",
       "hash": "a2dbbdb49d4fcc7fa54754246f21715e116ea54de4c101ec47dbe80553eca23f"
+    },
+    {
+      "file": "src/components/ui/DashboardShell.tsx",
+      "hash": "220e67be98bbc088bbf6e23115ba1f8c5f54af423b3a8a676de0559b22af8c03"
     },
     {
       "file": "src/components/ui/FloatingWhatsApp.tsx",
@@ -11548,7 +11672,7 @@
     },
     {
       "file": "src/data/translations.json",
-      "hash": "61cd833ce6121761d100e30b901a7b47607fe3ee6d9eccd22f67eba85f6db586"
+      "hash": "f2e4d702873990f417a34caec9b3a36747aae241d831e2c5b6fbac7b33d810e1"
     },
     {
       "file": "src/data/vehicles.ts",
@@ -11559,8 +11683,12 @@
       "hash": "e5dcc9c183348687e36deeb6016dbf095da6116fc0265198577624d2b013630b"
     },
     {
+      "file": "src/lib/adminApi.ts",
+      "hash": "4367572af8a2c8efc5951c7140e68c3f217dc8c777079b1af85e54c7a8aa9e7d"
+    },
+    {
       "file": "src/lib/adminAuth.ts",
-      "hash": "2f37e93f4bd18eecf2c5f2846c0fd328e8f98904ca10d34e0af51b7215c574fd"
+      "hash": "923fed60962c2d40cb0f08a54f822bce714cf73af79e7723d15ae4f3ae9ea497"
     },
     {
       "file": "src/lib/adminOverview.ts",
@@ -11568,11 +11696,15 @@
     },
     {
       "file": "src/lib/analytics.ts",
-      "hash": "aec1b160af0afc2c935489d35f149f4ece2d4d5238024b9c3a210973e323353c"
+      "hash": "8f0f6cabb017734fa7031c9a86577d1736bc988942fed60a66f6db3a2de2dc06"
     },
     {
       "file": "src/lib/audit.ts",
       "hash": "c5214b3ff7e618513709beb42f1f88cb56105fd14591908c425451591aea7531"
+    },
+    {
+      "file": "src/lib/auditLog.ts",
+      "hash": "6fd73f5e0cf751f364857dc1b6744b695a7b0d4b18630f0e35ef9e61d9ce85c9"
     },
     {
       "file": "src/lib/auth-client.ts",
@@ -11580,7 +11712,7 @@
     },
     {
       "file": "src/lib/auth.ts",
-      "hash": "89bdb7249da4db9d13d312dc09f2e08a36d2fae40efc0ed57e66d41687834c75"
+      "hash": "4d4f784f77a903a56c36f2206fb5b2e1ebff912d077815dbbc6f67db6a6ccf34"
     },
     {
       "file": "src/lib/booking.ts",
@@ -11607,12 +11739,20 @@
       "hash": "7d89c55ddd1a75b33dab5386e258642dd9b5d9f43f5b9f869d4b319c8ad96313"
     },
     {
+      "file": "src/lib/consent.ts",
+      "hash": "6c2e8d54c237cfdfa55f1591daea107295b19ce989dc368236cf0c41d792301c"
+    },
+    {
       "file": "src/lib/currency.ts",
       "hash": "a3c158cd4f6f6a2dc1e705bd1e520280191090cfc00fe5f0abd0d015b21d95fc"
     },
     {
       "file": "src/lib/customerGate.ts",
       "hash": "a42d40c569eab588c2b775aecc94d8b5168c3e64ecb2e3d7010741765fbe38d9"
+    },
+    {
+      "file": "src/lib/customers.ts",
+      "hash": "c61f4999b96d324e78f60db523eb2d7cbc619e843ebd8c186aefacf83561968a"
     },
     {
       "file": "src/lib/db.ts",
@@ -11648,7 +11788,7 @@
     },
     {
       "file": "src/lib/notifications.ts",
-      "hash": "90d02102256c97b28c61e24df0ca168a5ac8506fe4d51079c7d3d2e399a1bfc1"
+      "hash": "753477649fa9853c24cda41302892d65fb2409b7f39fdcf4ebc92eb36a4f46ef"
     },
     {
       "file": "src/lib/paymentStore.ts",
@@ -11736,7 +11876,7 @@
     },
     {
       "file": "src/lib/settings.ts",
-      "hash": "4b830a27d26e9bade11cb941dda1feb6982fdb980fd9f2430e1ae3b8fbedd52b"
+      "hash": "d4f02e0ea0c1061ea384d518a82512928e326bb7d9cc39336ba50403cb6a95ce"
     },
     {
       "file": "src/lib/sitemap-content.ts",
@@ -11745,6 +11885,10 @@
     {
       "file": "src/lib/sitemap-response.ts",
       "hash": "75eec140dc9bd2cac3e7ab41d7560739c631055650ce8e85da8d8db2d65e221c"
+    },
+    {
+      "file": "src/lib/staff.ts",
+      "hash": "c2d4c8a44d7b6b03b34a6cd2525b10a30fc842583e944b77c4c30596bec90cd9"
     },
     {
       "file": "src/lib/stock.ts",
@@ -11780,51 +11924,51 @@
     }
   ],
   "dates": {
-    "/": "2026-10-06T15:26:26+08:00",
-    "/about": "2026-10-06T15:26:26+08:00",
-    "/book": "2026-10-06T15:26:26+08:00",
-    "/contact": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/canggu": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/denpasar": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/jimbaran": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/kuta": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/sanur": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/seminyak": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/ubud": "2026-10-06T15:26:26+08:00",
-    "/delivery-areas/uluwatu": "2026-10-06T15:26:26+08:00",
-    "/fleet": "2026-10-06T15:26:26+08:00",
-    "/fleet/athena": "2026-10-06T15:26:26+08:00",
-    "/fleet/bees": "2026-10-06T15:26:26+08:00",
-    "/fleet/edpower": "2026-10-06T15:26:26+08:00",
-    "/fleet/victory": "2026-10-06T15:26:26+08:00",
-    "/help-center": "2026-10-06T15:26:26+08:00",
-    "/how-it-works": "2026-10-06T15:26:26+08:00",
-    "/monthly-scooter-rental-bali": "2026-10-06T15:26:26+08:00",
-    "/partners": "2026-10-06T15:26:26+08:00",
-    "/saga": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-1": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-10": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-11": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-12": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-13": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-14": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-15": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-16": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-17": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-18": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-19": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-2": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-20": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-21": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-22": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-3": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-4": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-5": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-6": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-7": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-8": "2026-10-06T15:26:26+08:00",
-    "/saga/chapter-9": "2026-10-06T15:26:26+08:00",
-    "/supercharge": "2026-10-06T15:26:26+08:00"
+    "/": "2026-10-08T10:30:31+07:00",
+    "/about": "2026-10-08T10:30:31+07:00",
+    "/book": "2026-10-08T10:30:31+07:00",
+    "/contact": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/canggu": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/denpasar": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/jimbaran": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/kuta": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/sanur": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/seminyak": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/ubud": "2026-10-08T10:30:31+07:00",
+    "/delivery-areas/uluwatu": "2026-10-08T10:30:31+07:00",
+    "/fleet": "2026-10-08T10:30:31+07:00",
+    "/fleet/athena": "2026-10-08T10:30:31+07:00",
+    "/fleet/bees": "2026-10-08T10:30:31+07:00",
+    "/fleet/edpower": "2026-10-08T10:30:31+07:00",
+    "/fleet/victory": "2026-10-08T10:30:31+07:00",
+    "/help-center": "2026-10-08T10:30:31+07:00",
+    "/how-it-works": "2026-10-08T10:30:31+07:00",
+    "/monthly-scooter-rental-bali": "2026-10-08T10:30:31+07:00",
+    "/partners": "2026-10-08T10:30:31+07:00",
+    "/saga": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-1": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-10": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-11": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-12": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-13": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-14": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-15": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-16": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-17": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-18": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-19": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-2": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-20": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-21": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-22": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-3": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-4": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-5": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-6": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-7": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-8": "2026-10-08T10:30:31+07:00",
+    "/saga/chapter-9": "2026-10-08T10:30:31+07:00",
+    "/supercharge": "2026-10-08T10:30:31+07:00"
   }
 }
