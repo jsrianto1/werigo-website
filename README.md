@@ -175,6 +175,8 @@ add a new one.
 - `0009_ride_club.sql` — Ride Club membership tiers and rental points
 - `0010_admin_management.sql` — `user.mustChangePassword`,
   `user.lastLoginAt`, `customer_notes`, notification settings row
+- `0011_consent_log.sql` — cookie banner choices (`consent_log`), no
+  IP or identity, purged after two years by `/api/consent`
 
 For a database where `0001` was applied by hand, record it first:
 `node scripts/db-migrate.mjs --baseline 0001_bookings.sql`.
@@ -377,17 +379,36 @@ be strengthened or published. Never invent these on the website.
 
 ## Marketing tracking
 
-The root layout installs GTM `GTM-5RC9TGR4` and Meta Pixel
-`27824990167174730` on every page. Both bootstrap scripts run from the
-initial HTML head; their external libraries load asynchronously. GTM's
-noscript iframe is first in the body, followed by Meta's noscript beacon.
+GTM `GTM-5RC9TGR4` (which holds the GA4 tag `G-JZCF5G1GZF`) and Meta Pixel
+`27824990167174730` load **only after cookie consent**. Everything lives
+in `src/lib/consent.ts`:
 
-Meta sends one `PageView` on a full load. `MetaPageViews` handles subsequent
-App Router pathname/query changes, skipping hydration and repeated renders.
-GTM tags and History Change triggers are managed in the GTM container.
-Do not also initialize the same Meta Pixel through GTM: this installation
-already owns its base code and PageView events. No booking conversion or
-purchase event is added by this change.
+- An inline `<head>` script (`consentBootstrapScript`) sets Google Consent
+  Mode v2 to `denied`, defines the GTM and Pixel loaders and, for a
+  returning visitor, loads only what their stored `werigo_consent` cookie
+  allows. With no choice, nothing is requested from Google or Meta.
+- The banner (`CookieConsent`) offers Reject optional / Accept all /
+  Choose cookies, with two optional categories: **analytics** (GTM + GA4,
+  `analytics_storage`) and **marketing** (Meta Pixel, `ad_storage`,
+  `ad_user_data`, `ad_personalization`). GTM loads when either is
+  allowed; the Pixel only with marketing. "Cookie settings" in the footer
+  reopens the choice.
+- Withdrawing consent updates Consent Mode, calls `fbq('consent','revoke')`
+  and deletes `_ga*`, `_gid`, `_fbp`, `_fbc` and `_gcl_*` cookies.
+- `trackMarketingEvent` and `MetaPageViews` read the cookie on every
+  call, so no event is queued or sent without the matching consent.
+- Each choice is recorded via `POST /api/consent` (migration `0011`).
+- Every change pushes `{event: 'consent_update', consent_analytics,
+  consent_marketing}` to the dataLayer. Any **non-Google** tag added to
+  the GTM container must use that as a trigger condition, because
+  Consent Mode only gates Google tags.
+- There is no `<noscript>` fallback: without JavaScript a visitor cannot
+  consent, so nothing tracks them.
+
+Raise `CONSENT_VERSION` when the categories or tags change materially;
+everyone is asked again. Do not also initialize the same Meta Pixel
+through GTM: this installation owns its base code and PageView events.
+No booking conversion or purchase event is added by this change.
 
 ### Sitemap history snapshot for hosting releases
 

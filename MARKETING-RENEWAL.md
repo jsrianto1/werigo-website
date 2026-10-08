@@ -40,7 +40,7 @@ Use distinct utm_content for each creative. Point the ad to the page matching it
 
 ## Measurement
 
-Existing GTM container GTM-5RC9TGR4 and Meta Pixel 27824990167174730 remain in the root layout.
+GTM container GTM-5RC9TGR4 and Meta Pixel 27824990167174730 are loaded from the root layout only after cookie consent (see README, Marketing tracking). The events below are sent only with the matching consent: dataLayer events need analytics or marketing consent, Meta events need marketing consent.
 
 | Action | dataLayer event | Meta event | Meaning |
 | --- | --- | --- | --- |

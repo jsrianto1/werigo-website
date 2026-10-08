@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const lastUpdated = "5 October 2026";
+const lastUpdated = "7 October 2026";
 
 function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -111,9 +111,16 @@ export default function PrivacyPage() {
               items={[
                 "A sign-in cookie that keeps you logged in to your account. The site cannot work without it.",
                 "Small items stored in your browser to remember your language, an unfinished booking form and offers you have closed.",
-                "Google Tag Manager and Google Analytics, and the Meta Pixel, which record the pages you visit, how you reached us and basic device and browser information. We use them to understand which pages and advertising work.",
+                "A cookie that remembers your cookie choice, and a record of that choice on our server (a random ID, the categories you allowed and the date, without your name or IP address).",
+                "Only if you allow them in the cookie banner: Google Tag Manager and Google Analytics (analytics), and the Meta Pixel (marketing). They record the pages you visit, how you reached us and basic device and browser information. We use them to understand which pages and advertising work. They are not loaded at all until you choose.",
               ]}
             />
+            <p>
+              You can change or withdraw your choice at any time with Cookie
+              settings at the bottom of every page. When you withdraw it, we
+              stop the tags and remove the analytics and advertising cookies
+              they set on our site.
+            </p>
           </Block>
 
           <Block title="How we use it">
@@ -125,7 +132,7 @@ export default function PrivacyPage() {
                 "To apply vouchers, promo codes and referral discounts, calculate referral earnings and pay them out.",
                 "To send you booking confirmations and updates on WhatsApp and email.",
                 "To keep accounting, tax and legal records we are required to keep.",
-                "To understand how the website is used and measure our advertising.",
+                "With your consent, to understand how the website is used and measure our advertising.",
                 "To prevent fraud and misuse, for example the same identity document being used to claim a first booking offer twice.",
               ]}
             />
@@ -176,6 +183,7 @@ export default function PrivacyPage() {
                 "Account details and rider documents: while your account is open. If you ask us to close your account, we delete them, except what we must keep for the records below.",
                 "Booking, payment and referral payout records: as long as Indonesian tax and accounting rules require, which can be up to 10 years.",
                 "WhatsApp and email conversations: as long as they are needed to support your rental and handle any questions afterwards.",
+                "Your cookie choice: the cookie on your device for six months, then we ask again. The record on our server for two years.",
               ]}
             />
           </Block>

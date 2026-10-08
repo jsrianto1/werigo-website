@@ -1566,5 +1566,69 @@
   "Choose your delivery area and rental dates, then compare Wedison models and daily, weekly or monthly rates. Minimum rental is 2 days. Our team confirms availability and your final quote on WhatsApp.": [
     "Pilih area pengantaran dan tanggal sewa, lalu bandingkan model Wedison serta tarif harian, mingguan, atau bulanan. Minimal sewa 2 hari. Tim kami mengonfirmasi ketersediaan dan harga akhir melalui WhatsApp.",
     "Выберите район доставки и даты аренды, затем сравните модели Wedison и тарифы на день, неделю или месяц. Минимальный срок аренды — 2 дня. Наличие и итоговую стоимость наша команда подтвердит в WhatsApp."
+  ],
+  "Cookies on Werigo": [
+    "Cookie di Werigo",
+    "Файлы cookie на Werigo"
+  ],
+  "We use cookies that keep the site working. With your permission we also use Google Analytics to see how the site is used and the Meta Pixel to measure our ads. Neither runs until you choose.": [
+    "Kami memakai cookie agar situs ini berfungsi. Dengan izinmu, kami juga memakai Google Analytics untuk melihat cara situs ini digunakan dan Meta Pixel untuk mengukur iklan kami. Keduanya tidak berjalan sebelum kamu memilih.",
+    "Мы используем файлы cookie, без которых сайт не работает. С вашего разрешения мы также используем Google Analytics, чтобы понимать, как используется сайт, и Meta Pixel, чтобы оценивать нашу рекламу. Ни то, ни другое не запускается, пока вы не сделаете выбор."
+  ],
+  "Read our privacy policy": [
+    "Baca kebijakan privasi kami",
+    "Политика конфиденциальности"
+  ],
+  "Reject optional": [
+    "Tolak opsional",
+    "Отклонить необязательные"
+  ],
+  "Accept all": [
+    "Terima semua",
+    "Принять все"
+  ],
+  "Choose cookies": [
+    "Pilih cookie",
+    "Выбрать cookie"
+  ],
+  "Cookie settings": [
+    "Pengaturan cookie",
+    "Настройки cookie"
+  ],
+  "Choose which optional cookies we may use. You can change this at any time with Cookie settings at the bottom of every page.": [
+    "Pilih cookie opsional mana yang boleh kami gunakan. Kamu bisa mengubahnya kapan saja lewat Pengaturan cookie di bagian bawah setiap halaman.",
+    "Выберите, какие необязательные файлы cookie мы можем использовать. Изменить выбор можно в любой момент через «Настройки cookie» внизу каждой страницы."
+  ],
+  "Necessary": [
+    "Wajib",
+    "Необходимые"
+  ],
+  "Sign-in, security, your language and your booking form. The site cannot work without these.": [
+    "Untuk login, keamanan, bahasa pilihanmu, dan formulir pemesanan. Situs ini tidak bisa berfungsi tanpanya.",
+    "Вход в аккаунт, безопасность, выбранный язык и форма бронирования. Без них сайт не работает."
+  ],
+  "Analytics": [
+    "Analitik",
+    "Аналитика"
+  ],
+  "Google Analytics, loaded through Google Tag Manager. Shows us which pages people use so we can improve them.": [
+    "Google Analytics, dimuat lewat Google Tag Manager. Menunjukkan halaman mana yang dipakai pengunjung agar bisa kami perbaiki.",
+    "Google Analytics, загружается через Google Tag Manager. Показывает, какими страницами пользуются посетители, чтобы мы могли их улучшать."
+  ],
+  "Marketing": [
+    "Pemasaran",
+    "Маркетинг"
+  ],
+  "The Meta Pixel and the advertising features of Google Analytics. Tell us which of our ads bring visitors to Werigo.": [
+    "Meta Pixel dan fitur iklan Google Analytics. Memberi tahu kami iklan mana yang membawa pengunjung ke Werigo.",
+    "Meta Pixel и рекламные функции Google Analytics. Показывают, какая наша реклама приводит посетителей на Werigo."
+  ],
+  "Always on": [
+    "Selalu aktif",
+    "Всегда включены"
+  ],
+  "Save choices": [
+    "Simpan pilihan",
+    "Сохранить выбор"
   ]
 }

@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { hasConsent } from "@/lib/consent";
 
-
-/** The head snippet tracks the first load; this covers App Router navigation. */
+/** The Pixel loader tracks the first load; this covers App Router navigation, with marketing consent only. */
 export function MetaPageViews() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -15,7 +15,7 @@ export function MetaPageViews() {
     if (previousPage.current === page) return;
     const isNavigation = previousPage.current !== null;
     previousPage.current = page;
-    if (isNavigation) window.fbq?.("track", "PageView");
+    if (isNavigation && hasConsent("marketing")) window.fbq?.("track", "PageView");
   }, [page]);
 
   return null;
