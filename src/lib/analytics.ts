@@ -1,3 +1,5 @@
+import { hasConsent } from "./consent.ts";
+
 type MarketingEvent = "view_vehicle" | "begin_checkout" | "whatsapp_click" | "booking_handoff";
 type EventData = Record<string, string | number | string[]>;
 
@@ -12,11 +14,15 @@ declare global {
 export function trackMarketingEvent(event: MarketingEvent, data: EventData = {}) {
   if (typeof window === "undefined") return;
   // Optional analytics must never interrupt navigation or a booking handoff.
+  // Nothing is queued without consent: GTM would replay it once loaded.
   try {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: `werigo_${event}`, page_path: window.location.pathname, ...data });
+    if (hasConsent("analytics") || hasConsent("marketing")) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: `werigo_${event}`, page_path: window.location.pathname, ...data });
+    }
   } catch { /* A blocked tag must not affect booking. */ }
   try {
+    if (!hasConsent("marketing")) return;
     const standard = { view_vehicle: "ViewContent", begin_checkout: "InitiateCheckout", whatsapp_click: "Contact" } as const;
     if (event === "booking_handoff") {
       // Opening WhatsApp does not prove a message was sent or a sale was made.

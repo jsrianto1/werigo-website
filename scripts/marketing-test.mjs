@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { defaultSearch } from '../src/lib/booking.ts';
 import { resolveTier } from '../src/lib/pricing.ts';
 import { trackMarketingEvent } from '../src/lib/analytics.ts';
+import { consentBootstrapScript } from '../src/lib/consent.ts';
 
 const NativeDate = Date;
 for (const [today, start, end] of [
@@ -18,8 +19,21 @@ for (const [today, start, end] of [
 }
 globalThis.Date=NativeDate;
 assert.doesNotThrow(()=>trackMarketingEvent('begin_checkout'));
+const consentCookie=(analytics,marketing)=>`werigo_consent=${encodeURIComponent(JSON.stringify({id:'00000000-0000-4000-8000-000000000000',v:1,t:1,analytics,marketing}))}`;
 const calls=[];
 globalThis.window={location:{pathname:'/fleet/athena'},dataLayer:[],fbq:(...args)=>calls.push(args)};
+// No choice yet: nothing reaches GTM or Meta.
+globalThis.document={cookie:''};
+trackMarketingEvent('view_vehicle',{content_ids:['athena']});
+assert.equal(calls.length,0);
+assert.equal(window.dataLayer.length,0);
+// Analytics only: dataLayer yes, Meta no.
+document.cookie=consentCookie(true,false);
+trackMarketingEvent('begin_checkout');
+assert.equal(calls.length,0);
+assert.equal(window.dataLayer.length,1);
+window.dataLayer=[];
+document.cookie=consentCookie(true,true);
 trackMarketingEvent('view_vehicle',{content_ids:['athena'],content_type:'product'});
 trackMarketingEvent('begin_checkout');
 trackMarketingEvent('whatsapp_click',{contact_method:'whatsapp'});
@@ -34,4 +48,32 @@ window.fbq=()=>{throw new Error('blocked pixel');};
 Object.defineProperty(window,'dataLayer',{get(){throw new Error('blocked GTM');}});
 assert.doesNotThrow(()=>trackMarketingEvent('booking_handoff'));
 delete globalThis.window;
-console.log('PASS: monthly calendar defaults, leap year, month end, event semantics, SSR and blocked-tag resilience.');
+delete globalThis.document;
+
+// Bootstrap: with no choice, no tag script is requested and Consent Mode defaults to denied.
+function bootstrap(cookie){
+  const added=[];
+  const el=()=>({});
+  const w={};
+  const d={cookie,createElement:el,head:{appendChild:(n)=>added.push(n.src)},getElementsByTagName:()=>[{parentNode:{insertBefore:(n)=>added.push(n.src)}}]};
+  new Function('window','document',consentBootstrapScript())(w,d);
+  return {w,added};
+}
+let b=bootstrap('');
+assert.deepEqual(b.added,[]);
+const def=b.w.dataLayer.find((x)=>x[0]==='consent'&&x[1]==='default')[2];
+assert.equal(def.analytics_storage,'denied');
+assert.equal(def.ad_storage,'denied');
+assert.equal(b.w.fbq,undefined);
+b=bootstrap(consentCookie(true,false));
+assert.equal(b.added.length,1);
+assert.ok(b.added[0].includes('googletagmanager.com/gtm.js'));
+assert.equal(b.w.fbq,undefined);
+b=bootstrap(consentCookie(true,true));
+assert.equal(b.added.length,2);
+assert.ok(b.added.some((s)=>s.includes('connect.facebook.net')));
+b.w.__werigoLoadGtm();b.w.__werigoLoadPixel();
+assert.equal(b.added.length,2);
+b=bootstrap(consentCookie(true,true).replace('%22v%22%3A1','%22v%22%3A0'));
+assert.deepEqual(b.added,[]);
+console.log('PASS: monthly calendar defaults, leap year, month end, event semantics, cookie consent gating, SSR and blocked-tag resilience.');

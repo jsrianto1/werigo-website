@@ -10,6 +10,8 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { site } from "@/lib/config";
 import { localBusinessSchema, jsonLd } from "@/lib/schema";
 import { MarketingEvents } from "@/components/analytics/MarketingEvents";
+import { CookieConsent } from "@/components/analytics/CookieConsent";
+import { consentBootstrapScript } from "@/lib/consent";
 import "./globals.css";
 import "./marketing.css";
 import { WelcomeOffer } from "@/components/marketing/WelcomeOffer";
@@ -65,58 +67,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Keep the supplied GTM bootstrap in head, before hydration. */}
-        {/* eslint-disable-next-line @next/next/next-script-for-ga */}
-        <script
-          id="werigo-gtm"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RC9TGR4');`,
-          }}
-        />
-        <script
-          id="werigo-meta-pixel"
-          dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','27824990167174730');
-fbq('track','PageView');`,
-          }}
-        />
+        {/* Consent Mode defaults and the GTM / Meta Pixel loaders, before hydration.
+            Neither tag is requested until the visitor allows it. */}
+        <script id="werigo-consent" dangerouslySetInnerHTML={{ __html: consentBootstrapScript() }} />
       </head>
       <body
         className={`${manrope.variable} ${inter.variable} flex min-h-dvh flex-col antialiased`}
       >
-        {/* Google Tag Manager fallback belongs immediately after body opens. */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5RC9TGR4"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-            title="Google Tag Manager"
-          />
-        </noscript>
-        <noscript>
-          {/* A tracking beacon must not use the Next.js image optimizer. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=27824990167174730&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
         <Suspense fallback={null}>
           <MetaPageViews />
           <MarketingEvents />
@@ -139,6 +96,7 @@ fbq('track','PageView');`,
           <Footer />
           <FloatingWhatsApp />
         </HideOnAdmin>
+        <CookieConsent />
         </LanguageProvider>
         <script
           type="application/ld+json"

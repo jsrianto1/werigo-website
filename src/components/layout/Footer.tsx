@@ -36,6 +36,7 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 import { Logo } from "@/components/ui/Logo";
+import { CookieSettingsLink } from "@/components/analytics/CookieSettingsLink";
 import { site } from "@/lib/config";
 import { serviceAreas } from "@/data/locations";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
@@ -163,7 +164,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} <T>{site.name}</T> · {site.domain}
           </p>
-          <ul className="flex gap-6">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legalLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -174,6 +175,9 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <CookieSettingsLink className="transition-colors hover:text-ink-inverse" />
+            </li>
           </ul>
         </div>
       </div>
