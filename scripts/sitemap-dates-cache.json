@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "686a199813dda64bdf04384bc6e2c9c2f93e1940e92dfff1db29810108c7c4e4",
+  "fingerprint": "884a12297bd7d6a0c4231ed4efb38dedc856c34e62584ab7e2c4baf5911b72ab",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -10871,6 +10871,10 @@
       "hash": "6e27d0c13523bd55e8916f876e55d6339c2e23ce4fb1c84a58609b62dcb44092"
     },
     {
+      "file": "scripts/delivery-test.mjs",
+      "hash": "4c0afbd7b0b87f306c024a6ee4e42adbe887b801a0f78951d4e21f43a0de9827"
+    },
+    {
       "file": "scripts/entries-test.mjs",
       "hash": "32ae432d6ccf7fb097877bbcf4b357c4bb8c6d7e52a9552c30719f49aa1824d5"
     },
@@ -11148,7 +11152,7 @@
     },
     {
       "file": "src/app/api/bookings/route.ts",
-      "hash": "530a6eedbc4867084d5406034cbf0d5969a71a5e3835980779a84682116d0fc7"
+      "hash": "dff2203895fa55487a34a5842e3f5365df9c5ff4a864871d1ebc0ca377f6d2bf"
     },
     {
       "file": "src/app/api/checkout/discounts/route.ts",
@@ -11212,11 +11216,11 @@
     },
     {
       "file": "src/app/delivery-areas/[slug]/page.tsx",
-      "hash": "d0b622d20e4d3f50d134f36cfc7d2ba45ddc087ef01c9ae222b2cc1f25c4bba1"
+      "hash": "e76f97c2a1c264266c044c56ed2b88bd292d76a0249ec264e49c537d6fde6152"
     },
     {
       "file": "src/app/delivery-areas/page.tsx",
-      "hash": "d3408e3365e18fad65a54e5bf43b39902a33da57463124c4750ff314c67d2c5e"
+      "hash": "e9bba4cee92e27ada36d8dd7b6faf4940045772e5a1a3dc81db0a413d63d1346"
     },
     {
       "file": "src/app/favicon.ico",
@@ -11320,7 +11324,7 @@
     },
     {
       "file": "src/app/terms/page.tsx",
-      "hash": "f1c7d3bb9165b61138922fa4512812c3d72523a7be5045bbc72b79e32de9ccde"
+      "hash": "2446a6c73aa26c5d3b6701658dfd4973a45214a4c3382b66f7aa6a943171ffd1"
     },
     {
       "file": "src/components/account/AccountMenu.tsx",
@@ -11452,7 +11456,7 @@
     },
     {
       "file": "src/components/booking/CheckoutFlow.tsx",
-      "hash": "4286053cc8277d3efc25b82d5b91e3d41ef6dd6fc9fde8aa39994880f61bb8e0"
+      "hash": "23a413eea64e8f84d2cd9117f5d5cc29b1bd9a71d324c3a9cba4b29fcf666a51"
     },
     {
       "file": "src/components/booking/ConfirmationView.tsx",
@@ -11624,11 +11628,11 @@
     },
     {
       "file": "src/data/faqs.ts",
-      "hash": "a4574507a057310db0a67c28a202654e773be339c3dc1f84ae4002c5c1935364"
+      "hash": "ab98f44c73d1aae9ef940d6055c022717f7f46dee4571a95891f17fae0af73fe"
     },
     {
       "file": "src/data/locations.ts",
-      "hash": "fc0f8a34e18952c31dc9933fddfa418a3d1dd923508e018ba3e741edbe48ce30"
+      "hash": "d5afc47b49cf84d91aecaaec1bd42d9ee9ea9a7598d00ad3a7225e196781257e"
     },
     {
       "file": "src/data/marketingFaqs.ts",
@@ -11824,7 +11828,7 @@
     },
     {
       "file": "src/lib/quote.ts",
-      "hash": "94b24c70733e189d448e8451eebc4599c8b95efb9c71cab6ab0cb3deeef0350d"
+      "hash": "47984b503d671b42ffff1dfb7c77da6c7bebb10e93e8ce9ffed4b6857f31ee38"
     },
     {
       "file": "src/lib/referrals.ts",
@@ -11924,51 +11928,51 @@
     }
   ],
   "dates": {
-    "/": "2026-10-08T10:30:31+07:00",
-    "/about": "2026-10-08T10:30:31+07:00",
-    "/book": "2026-10-08T10:30:31+07:00",
-    "/contact": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/canggu": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/denpasar": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/jimbaran": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/kuta": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/sanur": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/seminyak": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/ubud": "2026-10-08T10:30:31+07:00",
-    "/delivery-areas/uluwatu": "2026-10-08T10:30:31+07:00",
-    "/fleet": "2026-10-08T10:30:31+07:00",
-    "/fleet/athena": "2026-10-08T10:30:31+07:00",
-    "/fleet/bees": "2026-10-08T10:30:31+07:00",
-    "/fleet/edpower": "2026-10-08T10:30:31+07:00",
-    "/fleet/victory": "2026-10-08T10:30:31+07:00",
-    "/help-center": "2026-10-08T10:30:31+07:00",
-    "/how-it-works": "2026-10-08T10:30:31+07:00",
-    "/monthly-scooter-rental-bali": "2026-10-08T10:30:31+07:00",
-    "/partners": "2026-10-08T10:30:31+07:00",
-    "/saga": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-1": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-10": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-11": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-12": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-13": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-14": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-15": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-16": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-17": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-18": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-19": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-2": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-20": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-21": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-22": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-3": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-4": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-5": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-6": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-7": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-8": "2026-10-08T10:30:31+07:00",
-    "/saga/chapter-9": "2026-10-08T10:30:31+07:00",
-    "/supercharge": "2026-10-08T10:30:31+07:00"
+    "/": "2026-10-16T18:05:04+08:00",
+    "/about": "2026-10-16T18:05:04+08:00",
+    "/book": "2026-10-16T18:05:04+08:00",
+    "/contact": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/canggu": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/denpasar": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/jimbaran": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/kuta": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/sanur": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/seminyak": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/ubud": "2026-10-16T18:05:04+08:00",
+    "/delivery-areas/uluwatu": "2026-10-16T18:05:04+08:00",
+    "/fleet": "2026-10-16T18:05:04+08:00",
+    "/fleet/athena": "2026-10-16T18:05:04+08:00",
+    "/fleet/bees": "2026-10-16T18:05:04+08:00",
+    "/fleet/edpower": "2026-10-16T18:05:04+08:00",
+    "/fleet/victory": "2026-10-16T18:05:04+08:00",
+    "/help-center": "2026-10-16T18:05:04+08:00",
+    "/how-it-works": "2026-10-16T18:05:04+08:00",
+    "/monthly-scooter-rental-bali": "2026-10-16T18:05:04+08:00",
+    "/partners": "2026-10-16T18:05:04+08:00",
+    "/saga": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-1": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-10": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-11": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-12": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-13": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-14": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-15": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-16": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-17": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-18": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-19": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-2": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-20": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-21": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-22": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-3": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-4": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-5": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-6": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-7": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-8": "2026-10-16T18:05:04+08:00",
+    "/saga/chapter-9": "2026-10-16T18:05:04+08:00",
+    "/supercharge": "2026-10-16T18:05:04+08:00"
   }
 }
