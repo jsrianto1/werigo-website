@@ -11,6 +11,7 @@ import { openPayment, paymentDeadline } from "@/lib/payments";
 import { latestPayment } from "@/lib/paymentStore";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
 import { pickDiscount, resolveDiscounts } from "@/lib/discounts";
+import { needsDeliveryConfirmation } from "@/data/locations";
 import { hasIdentity } from "@/lib/identity";
 
 export const runtime = "nodejs";
@@ -143,6 +144,9 @@ export async function POST(req: NextRequest) {
     returnSlug: submission.returnArea,
   };
   const undiscounted = computeQuote(pricingInput);
+  if (undiscounted && needsDeliveryConfirmation(submission.pickupArea, submission.returnArea, undiscounted.tierId === "monthly")) {
+    return NextResponse.json({ ok: false, error: "delivery_quote_required", message: "Please confirm the route distance and final delivery total with Werigo on WhatsApp before payment." }, { status: 409 });
+  }
   let discount = null;
   if (undiscounted) {
     try {

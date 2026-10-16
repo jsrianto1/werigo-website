@@ -12,15 +12,7 @@ export interface ServiceArea {
   vibe: string;
   /** Longer intro for the area detail page */
   description: string;
-  /**
-   * Delivery & collection fee in IDR, approved 2026-08-19: a single
-   * Rp 75,000 per booking covering both delivery and collection
-   * ("antar jemput"), the same in every service area. The fee is
-   * waived only when the address is within 5 km of the Wedison
-   * showroom on Jl. Gatot Subroto Tengah, Denpasar — that is
-   * distance-based, so the waiver is confirmed by the team on
-   * WhatsApp, never assumed by the site. 0 renders as free delivery.
-   */
+  /** Base fee for both delivery and collection; route surcharge confirmed before payment. */
   deliveryFee: number;
   /** Typical delivery window shown to customers */
   deliveryWindow: string;
@@ -37,7 +29,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Surf mornings, laptop afternoons and an easy way through the sunset traffic.",
     description:
       "Canggu is Werigo's home turf. Between Batu Bolong, Berawa and Pererenan, an electric scooter is the difference between watching the shortcut jam and gliding through it. Charge at your villa overnight and the whole coast is yours.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Batu Bolong Beach", "Berawa", "Pererenan", "La Brisa", "Tanah Lot (day trip)"],
     ridingNotes:
@@ -49,7 +41,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Boutiques, beach clubs and dinner reservations on time.",
     description:
       "Seminyak rewards short, frequent rides between brunch spots, beach clubs and boutiques. Werigo delivers to your hotel lobby, and the compact fleet fits the narrow gang lanes that cars simply cannot.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Seminyak Beach", "Petitenget", "Eat Street", "Potato Head", "Double Six"],
     ridingNotes:
@@ -61,7 +53,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Airport-close and beach-ready within minutes.",
     description:
       "Landing at the airport? Kuta is the fastest place to start riding. We deliver to hotels across Kuta and Legian, so you can skip taxi queues for the rest of your trip.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Kuta Beach", "Legian", "Beachwalk Mall", "Waterbom Bali"],
     ridingNotes:
@@ -73,7 +65,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Jungle roads, rice terraces and temple mornings.",
     description:
       "Ubud is made for slow exploring and silent riding. Visit Tegallalang at sunrise, walk Campuhan Ridge before the heat and stop for a warung lunch in Penestanan. An electric motorcycle keeps the jungle soundtrack intact.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 2 hours, 08:00 to 18:00",
     landmarks: ["Tegallalang Rice Terrace", "Campuhan Ridge Walk", "Monkey Forest", "Goa Gajah"],
     ridingNotes:
@@ -85,7 +77,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Clifftop surf breaks and golden-hour temple runs.",
     description:
       "The Bukit's clifftop warungs, surf breaks and viewpoints spread out quickly, and that is exactly what a full battery is for. Ride Padang Padang to Melasti and still make the Kecak dance at sunset.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 2 hours, 08:00 to 18:00",
     landmarks: ["Uluwatu Temple", "Padang Padang", "Bingin", "Melasti Beach", "Suluban Cave"],
     ridingNotes:
@@ -97,7 +89,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Seafood sunsets and calm bay-side streets.",
     description:
       "Jimbaran's wide, calm streets are some of Bali's easiest riding, which makes them perfect for first-time electric riders. Have a seafood dinner on the sand, then glide quietly back along the bay.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Jimbaran Bay", "Seafood Cafés", "GWK Cultural Park", "Tegal Wangi Beach"],
     ridingNotes:
@@ -109,7 +101,7 @@ export const serviceAreas: ServiceArea[] = [
     vibe: "Flat seaside promenade and the gateway to the islands.",
     description:
       "Sanur is flat, calm and organised, and a gentle place to ride. Cruise the beach path neighbourhoods, catch a ferry to Nusa Penida, and come back to a fully charged ride waiting at your hotel.",
-    deliveryFee: 75000,
+    deliveryFee: 100000,
     deliveryWindow: "Within 90 minutes, 08:00 to 20:00",
     landmarks: ["Sanur Beach", "Sindhu Market", "Ferry Port", "Mertasari Beach"],
     ridingNotes:
@@ -184,4 +176,11 @@ export function getPickupPoint(
   if (airport) return { slug: airport.slug, name: airport.name, isAirport: true };
   const area = getArea(slug);
   return area ? { slug: area.slug, name: area.name, isAirport: false } : undefined;
+}
+
+export const deliveryPricingNote = "Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.";
+
+/** No address distance is available online: tourist deliveries need a final quote. */
+export function needsDeliveryConfirmation(pickup: string, ret: string, monthly: boolean): boolean {
+  return !monthly && [pickup, ret].some(slug => Boolean(getArea(slug)) && slug !== "denpasar");
 }

@@ -60,7 +60,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I change the delivery location after booking?",
         answer:
-          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. The delivery and collection fee stays the same across our service areas.",
+          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. Delivery fees depend on the service area and route distance; our team confirms any change before payment.",
       },
     ],
   },
@@ -175,12 +175,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Is delivery free?",
         answer:
-          "Delivery and collection are free on rentals of one month or longer. For shorter rentals the fee is Rp 75,000 per booking, covering both the drop-off and the pick-up, and it is waived if your address is within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar. Our team confirms the waiver with your quote on WhatsApp.",
+          "Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.",
       },
       {
         question: "Can I return the motorcycle in a different area?",
         answer:
-          "Yes. Choose a different return location during booking. The Rp 75,000 delivery and collection fee already covers both legs, even when they are in different areas.",
+          "Yes. Choose a different return location during booking. The fee covers both legs. Tourist service areas outside Denpasar start from Rp100,000; Denpasar remains Rp75,000. Our team confirms both addresses and any distance surcharge on WhatsApp before payment.",
       },
       {
         question: "What battery level should the motorcycle have at return?",

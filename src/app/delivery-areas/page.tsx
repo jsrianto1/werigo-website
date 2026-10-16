@@ -5,7 +5,7 @@ import { MapPin, ArrowRight, Truck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import { AreaImage } from "@/components/areas/AreaImage";
-import { serviceAreas, deliveryFeeWaiverNote } from "@/data/locations";
+import { serviceAreas } from "@/data/locations";
 import { formatIdr } from "@/lib/pricing";
 
 export const metadata = pageMetadata("Bali Scooter Rental with Hotel & Villa Delivery", "Electric scooter delivery in Canggu, Seminyak, Ubud, Uluwatu, Kuta, Sanur, Jimbaran and Denpasar. Check rental rates and arrange your handover.", "/delivery-areas");
@@ -68,8 +68,7 @@ export default function DeliveryAreasPage() {
         ))}
       </ul>
       <p className="mt-10 rounded-[14px] border border-line bg-primary-faint p-5 text-sm leading-relaxed text-ink-soft">
-        The Rp 75,000 fee covers both delivery and collection, once per
-        booking. {deliveryFeeWaiverNote} Staying somewhere else? We
+        Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.  Staying somewhere else? We
         regularly arrange custom deliveries beyond these zones.{" "}
         <Link
           href="/contact"

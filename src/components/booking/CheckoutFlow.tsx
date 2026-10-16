@@ -45,6 +45,7 @@ import {
 } from "@/lib/addons";
 import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
+import { needsDeliveryConfirmation, deliveryPricingNote } from "@/data/locations";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 import { computeQuote } from "@/lib/quote";
 import { authClient } from "@/lib/auth-client";
@@ -161,6 +162,9 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   const area = getPickupPoint(pickup);
   const returnArea = getPickupPoint(ret);
 
+  const manualDeliveryQuote = needsDeliveryConfirmation(pickup, ret, Boolean(entry && isValidPeriod(period) && estimateRental(entry.modelSlug, period)?.tier.id === "monthly"));
+  const whatsappCheckout = WHATSAPP_FIRST_BOOKING || manualDeliveryQuote;
+
   const [phase, setPhase] = useState<Phase>("extras");
   const [quantity, setQuantity] = useState(1);
   const [extraQty, setExtraQty] = useState<Record<string, number>>({});
@@ -251,7 +255,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   // Discount options for this booking (signed-in customers only).
   const modelSlugForDiscounts = entry?.modelSlug ?? "";
   useEffect(() => {
-    if (WHATSAPP_FIRST_BOOKING || !sessionUser || !modelSlugForDiscounts || !isValidPeriod(period) || !pickup) {
+    if (whatsappCheckout || !sessionUser || !modelSlugForDiscounts || !isValidPeriod(period) || !pickup) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDiscountOptions([]);
       setDiscountUnavailable([]);
@@ -292,7 +296,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
     return () => {
       cancelled = true;
     };
-  }, [sessionUser, modelSlugForDiscounts, period, quantity, pickup, ret, appliedCode]);
+  }, [sessionUser, modelSlugForDiscounts, period, quantity, pickup, ret, appliedCode, whatsappCheckout]);
 
   // Persist draft as user progresses
   useEffect(() => {
@@ -318,8 +322,8 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   // Focus heading on phase change for keyboard/screen-reader users
   useEffect(() => {
     headingRef.current?.focus();
-    if (phase === "review" && !WHATSAPP_FIRST_BOOKING) preloadSnap();
-  }, [phase, preloadSnap]);
+    if (phase === "review" && !whatsappCheckout) preloadSnap();
+  }, [phase, preloadSnap, whatsappCheckout]);
 
   const valid = entry && pickup && isValidPeriod(period);
   const days = valid ? rentalDays(period) : 0;
@@ -352,7 +356,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
         motorcycleProtection: protection.motorcycle,
       })
     : null;
-  // Area delivery & collection fee: one Rp 75,000 per booking covering
+  // Base delivery & collection fee by service area, covering
   // both legs ("antar jemput"). Waived automatically on rentals of one
   // month or longer (monthly tier), and by the team within 5 km of the
   // Wedison showroom (confirmed on WhatsApp, never assumed here).
@@ -496,7 +500,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       flightNumber: customer.flightNumber || undefined,
       batteryAck: customer.batteryAck,
       ageConfirmed: needsAgeCheck ? customer.ageConfirmed : undefined,
-      notes: [customer.specialRequest.trim(), promoCode ? `Promo code: ${promoCode}` : ""]
+      notes: [manualDeliveryQuote ? deliveryPricingNote : "", customer.specialRequest.trim(), promoCode ? `Promo code: ${promoCode}` : ""]
         .filter(Boolean)
         .join("\n") || undefined,
     });
@@ -808,6 +812,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                   {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}<T>{", once per booking."}</T>{" "}</p>
               ) : null}
 
+              {manualDeliveryQuote && <p className="mt-3 text-sm text-ink-soft">{deliveryPricingNote}</p>}
               {areaFeesIdr > 0 ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
                   <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{deliveryFeeWaiverNote}</T>
@@ -832,7 +837,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
               </ul>
 
               {/* Vouchers (database mode) / promo code note (WhatsApp mode) */}
-              {!WHATSAPP_FIRST_BOOKING ? (
+              {!whatsappCheckout ? (
                 <div className="mt-4">
                   <VoucherPicker
                     signedIn={Boolean(sessionUser)}
@@ -862,7 +867,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                     onKeyDown={(e) => {
-                      if (e.key === "Enter" && !WHATSAPP_FIRST_BOOKING) {
+                      if (e.key === "Enter" && !whatsappCheckout) {
                         e.preventDefault();
                         setAppliedCode(promoCode.trim());
                       }
@@ -870,18 +875,18 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     placeholder={t("Enter a code")}
                     className={inputClass()}
                   />
-                  {!WHATSAPP_FIRST_BOOKING ? (
+                  {!whatsappCheckout ? (
                     <Button type="button" variant="outline" onClick={() => setAppliedCode(promoCode.trim())}>
                       <T>{"Apply"}</T>
                     </Button>
                   ) : null}
                 </div>
-                {!WHATSAPP_FIRST_BOOKING && codeStatus && codeStatus.code === promoCode.trim().toUpperCase() ? (
+                {!whatsappCheckout && codeStatus && codeStatus.code === promoCode.trim().toUpperCase() ? (
                   <p role="status" className={`mt-1.5 text-xs font-medium ${codeStatus.ok ? "text-ok" : "text-danger"}`}>
                     <T>{codeStatus.ok ? "Code added. We apply your biggest discount automatically; compare them at the review step." : codeStatus.message ?? "This code cannot be used."}</T>
                   </p>
                 ) : (
-                  <p className="mt-1.5 text-xs text-ink-faint"><T>{WHATSAPP_FIRST_BOOKING
+                  <p className="mt-1.5 text-xs text-ink-faint"><T>{whatsappCheckout
                     ? "Have a code from our team or a partner? It's included in your WhatsApp request and applied to your final quote."
                     : "Promo, voucher or referral code. We pick your best discount automatically, and you can choose another at the review step."}</T>{" "}</p>
                 )}
@@ -905,7 +910,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="tnum min-w-0 text-sm leading-snug text-ink-soft">
-                    {!WHATSAPP_FIRST_BOOKING && quote ? (
+                    {!whatsappCheckout && quote ? (
                       <>
                         <span className="block text-xs"><T>{"Total to pay"}</T></span>
                         <span className="font-bold text-ink">{formatIdr(quote.totalIdr)}</span>
@@ -1181,7 +1186,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
               ><T>{"One last look"}</T>{" "}</h1>
-              <p className="mt-2 text-ink-soft"><T>{WHATSAPP_FIRST_BOOKING
+              <p className="mt-2 text-ink-soft"><T>{whatsappCheckout
                 ? "Check everything below, then send your request. We confirm availability and your rate on WhatsApp, usually quickly."
                 : "Check everything below, then pay to confirm your ride. Our team arranges delivery with you on WhatsApp."}</T>{" "}</p>
 
@@ -1226,12 +1231,12 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                           }`,
                         },
                         {
-                          term: WHATSAPP_FIRST_BOOKING ? "Estimated total" : "Rental",
+                          term: whatsappCheckout ? "Estimated total" : "Rental",
                           detail: `${formatIdr(estimate.totalIdr * quantity)}${
                             formatUsdApprox(estimate.totalIdr * quantity, usdRate)
                               ? ` (${formatUsdApprox(estimate.totalIdr * quantity, usdRate)})`
                               : ""
-                          } ${t("for")} ${days} ${t("days")}${quantity > 1 ? ` × ${quantity} ${t("motorcycles")}` : ""}.${WHATSAPP_FIRST_BOOKING ? ` ${t("Confirmed with availability on WhatsApp.")}` : ""}`,
+                          } ${t("for")} ${days} ${t("days")}${quantity > 1 ? ` × ${quantity} ${t("motorcycles")}` : ""}.${whatsappCheckout ? ` ${t("Confirmed with availability on WhatsApp.")}` : ""}`,
                         },
                       ]
                     : []),
@@ -1267,14 +1272,14 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                             addOnBreakdown.motorcycleProtectionUsd > 0
                               ? `${t("Motorcycle Protection")} ${formatUsdFee(addOnBreakdown.motorcycleProtectionUsd)}`
                               : "",
-                            WHATSAPP_FIRST_BOOKING ? "" : t("Not included in the online payment; confirmed by our team."),
+                            whatsappCheckout ? "" : t("Not included in the online payment; confirmed by our team."),
                           ]
                             .filter(Boolean)
                             .join("\n"),
                         },
                       ]
                     : []),
-                  ...(WHATSAPP_FIRST_BOOKING && addOnBreakdown && (addOnBreakdown.totalUsd > 0 || areaFeesIdr > 0)
+                  ...(whatsappCheckout && addOnBreakdown && (addOnBreakdown.totalUsd > 0 || areaFeesIdr > 0)
                     ? [
                         {
                           term: "Estimated grand total",
@@ -1289,7 +1294,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                         },
                       ]
                     : []),
-                  ...(!WHATSAPP_FIRST_BOOKING && quote && quote.discountIdr > 0 && selectedDiscount
+                  ...(!whatsappCheckout && quote && quote.discountIdr > 0 && selectedDiscount
                     ? [
                         {
                           term: "Voucher",
@@ -1297,7 +1302,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                         },
                       ]
                     : []),
-                  ...(!WHATSAPP_FIRST_BOOKING && quote
+                  ...(!whatsappCheckout && quote
                     ? [
                         {
                           term: "Total to pay now",
@@ -1370,7 +1375,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     }}
                     className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                   />
-                  <span className="text-sm text-ink-soft"><T>{WHATSAPP_FIRST_BOOKING
+                  <span className="text-sm text-ink-soft"><T>{whatsappCheckout
                     ? "I agree to send these details to Werigo through WhatsApp so the team can respond to my booking request. See the"
                     : "I agree to Werigo processing these details to handle my booking and payment. See the"}</T>{" "}
                     <Link
@@ -1392,7 +1397,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 ) : null}
               </div>
 
-              {!WHATSAPP_FIRST_BOOKING && sessionUser && identityComplete !== false ? (
+              {!whatsappCheckout && sessionUser && identityComplete !== false ? (
                 <div className="mt-6">
                   <VoucherPicker
                     signedIn
@@ -1409,12 +1414,13 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                   />
                 </div>
               ) : null}
+              {manualDeliveryQuote && <p role="status" className="mt-4 rounded-xl border border-line p-4 text-sm">Your delivery fee is a base estimate. We will confirm the route distance, any surcharge and your final total on WhatsApp before payment. This sends an enquiry; your booking is confirmed by our team.</p>}
               {submitError ? (
                 <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
                   <T>{submitError}</T>
                 </p>
               ) : null}
-              {!WHATSAPP_FIRST_BOOKING && !sessionUser ? (
+              {!whatsappCheckout && !sessionUser ? (
                 <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
                   <h2 className="font-display text-xl text-ink"><T>{"Sign in to pay"}</T></h2>
                   <p className="mt-1 text-sm text-ink-soft"><T>{"Your booking, payment and receipt are kept in your Werigo account. Everything you filled in above stays here."}</T></p>
@@ -1434,7 +1440,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     />
                   </div>
                 </div>
-              ) : !WHATSAPP_FIRST_BOOKING && identityComplete === false ? (
+              ) : !whatsappCheckout && identityComplete === false ? (
                 <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
                   <IdentityForm
                     heading="Your rider documents"
@@ -1451,21 +1457,21 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                   <Button
                     variant="accent"
                     size="lg"
-                    onClick={() => (WHATSAPP_FIRST_BOOKING ? sendToWhatsApp() : void confirmBooking())}
-                    disabled={submitting || (!WHATSAPP_FIRST_BOOKING && (!quote || identityComplete === null))}
+                    onClick={() => (whatsappCheckout ? sendToWhatsApp() : void confirmBooking())}
+                    disabled={submitting || (!whatsappCheckout && (!quote || identityComplete === null))}
                     className="w-full sm:w-auto"
                   >
                     <MessageCircle className="h-5 w-5" aria-hidden="true" />
                     {submitting ? (
-                      <T>{WHATSAPP_FIRST_BOOKING ? "Saving your request…" : "Opening secure payment…"}</T>
-                    ) : WHATSAPP_FIRST_BOOKING ? (
+                      <T>{whatsappCheckout ? "Saving your request…" : "Opening secure payment…"}</T>
+                    ) : whatsappCheckout ? (
                       <T>{"Send booking request on WhatsApp"}</T>
                     ) : (
                       <><T>{"Pay"}</T>{quote ? ` ${formatIdr(quote.totalIdr)}` : ""}</>
                     )}{" "}</Button>
                 </div>
               )}
-              <p className="mt-3 text-xs leading-relaxed text-ink-faint"><T>{WHATSAPP_FIRST_BOOKING
+              <p className="mt-3 text-xs leading-relaxed text-ink-faint"><T>{whatsappCheckout
                 ? "Availability, final pricing, delivery, add-ons and your booking are confirmed by the Werigo team on WhatsApp. Nothing is charged before that."
                 : "Secure payment by Midtrans (cards, bank transfer, QRIS, e-wallets). Your ride is held for one hour while you pay. Delivery details are confirmed by our team on WhatsApp."}</T>{" "}</p>
 
@@ -1523,7 +1529,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
             areaFeeIdr={areaFeesIdr}
             areaFeeWaived={areaFeeWaivedMonthly}
             payable={
-              !WHATSAPP_FIRST_BOOKING && quote
+              !whatsappCheckout && quote
                 ? {
                     rentalIdr: quote.baseIdr,
                     areaFeeIdr: quote.areaFeeIdr,

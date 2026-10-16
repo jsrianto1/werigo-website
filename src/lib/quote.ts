@@ -11,7 +11,7 @@ import { getArea } from "@/data/locations";
  *
  * Rules (management-approved, see pricing.ts and locations.ts):
  *   base      = per-day rate of the applicable tier × rental days × quantity
- *   area fee  = one Rp 75,000 per booking when either point is a service
+ *   area fee  = one area-specific base fee per booking when either point is a service
  *               area, waived on monthly rentals (distance waivers are
  *               applied by the team, never assumed here)
  *   add-ons   = free of charge; protection options are requests only

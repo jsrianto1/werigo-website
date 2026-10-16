@@ -50,12 +50,7 @@ export default function TermsPage() {
               both fees apply for US$2.00 in total.
             </li>
             <li>
-              Delivery and collection are free on rentals of one month or
-              longer. Shorter rentals carry a single Rp 75,000 fee per
-              booking, covering both the drop-off and the pick-up in any
-              Werigo service area. The fee is waived when the address is
-              within 5 km of the Wedison showroom on Jl. Gatot Subroto
-              Tengah, Denpasar, confirmed with your quote.
+              Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.
             </li>
             <li>
               Optional protection is added only when you select it.

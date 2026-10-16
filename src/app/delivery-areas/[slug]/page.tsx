@@ -10,7 +10,7 @@ import { AreaImage } from "@/components/areas/AreaImage";
 import { getAreaMedia } from "@/data/areaMedia";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { ButtonLink } from "@/components/ui/Button";
-import { serviceAreas, getArea, deliveryFeeWaiverNote } from "@/data/locations";
+import { serviceAreas, getArea, deliveryFeeWaiverNote, deliveryPricingNote } from "@/data/locations";
 import { getPrimaryCards } from "@/data/vehicles";
 import { formatIdr } from "@/lib/pricing";
 
@@ -125,7 +125,7 @@ export default async function AreaPage({ params }: Props) {
               </dl>
               <p className="mt-3 border-t border-line pt-3 text-xs leading-relaxed text-ink-faint">
                 One fee per booking, covering both delivery and
-                collection. {deliveryFeeWaiverNote}
+                collection. {area.slug === "denpasar" ? deliveryFeeWaiverNote : deliveryPricingNote}
               </p>
             </div>
             <div className="rounded-[14px] border border-line bg-card p-5">
