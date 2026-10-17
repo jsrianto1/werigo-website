@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "24199e0c1388864670a5d6c59e2419c30d081a118f1a685a1b6610a2fdf454f9",
+  "fingerprint": "d34ca59dd64038fa1546a9bbfaec511c616ac3ccde2bbedb98865adedd6a0479",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11568,7 +11568,7 @@
     },
     {
       "file": "src/components/booking/CheckoutFlow.tsx",
-      "hash": "35a95ed2268dfa80d4b38c540f81fa0d7562dd8080284f4001d551856e2c56d3"
+      "hash": "a674fad549e310e7cd84ba6c38af270e8808d542ea684ad4b01172e175dbc843"
     },
     {
       "file": "src/components/booking/ConfirmationView.tsx",
@@ -11576,11 +11576,11 @@
     },
     {
       "file": "src/components/booking/DeliveryFeePicker.module.css",
-      "hash": "b062c712d7913b7cb507232970815784373fe379e566f9685edb19ab9760c109"
+      "hash": "25c62b0b0f4bdf47e0aa4f6aff83e4dad1930b5aa2c1c011616df9fa3fbfa499"
     },
     {
       "file": "src/components/booking/DeliveryFeePicker.tsx",
-      "hash": "67afbf24664ea5934fade81a3291559ad8aa0ee246930d4d069e60e52735392e"
+      "hash": "b9e4394a6963e8155f3ebbf8f26429d9ec9ea8d5896c34ab0442991c1a1e552c"
     },
     {
       "file": "src/components/booking/SearchWidget.tsx",
@@ -11676,7 +11676,7 @@
     },
     {
       "file": "src/components/pwa/DeliveryMap.tsx",
-      "hash": "243e11410a86f19d300da67d412243f3c28377484bae6b136044e4da6798bf8f"
+      "hash": "61223c82afdbf4c1af7d66f59ea7eb3d46ed206cdf1dd4045a4df3f49d8e69a2"
     },
     {
       "file": "src/components/pwa/Explore.tsx",
@@ -11688,7 +11688,7 @@
     },
     {
       "file": "src/components/pwa/PickupLocation.tsx",
-      "hash": "315a5a6f094ad0463441cfce40e0a99d2e540376a213212f377b0a4be3efdaf5"
+      "hash": "09b6645329e396ba8fc3af94261baf0aa9f47d428967db61759e45018b0beb65"
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
