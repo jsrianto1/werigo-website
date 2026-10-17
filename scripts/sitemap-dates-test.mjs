@@ -34,6 +34,9 @@ try {
   write('public/media/a.webp', 'image fixture');
   write('next.config.ts', 'export default { output: \"standalone\" };\n');
   write('public/media/.htaccess', '# Authored media serving configuration\n');
+  write('public/offline.html', '<h1>Offline</h1>\r\n');
+  write('public/manifest.webmanifest', '{"name":"Werigo"}\r\n');
+  write('scripts/helper.py', '# Portable source snapshot\r\n');
   commit(first);
   output({ '/a': { srcRoute: '/a' }, '/b': { srcRoute: '/b' } });
   const baseline = generateDates(root);
@@ -75,6 +78,10 @@ try {
   const archiveRoot = path.join(root, '.next/archive-checkout');
   mkdirSync(archiveRoot, { recursive: true });
   for (const file of ['src', 'public', 'scripts', 'next.config.ts']) cpSync(path.join(root, file), path.join(archiveRoot, file), { recursive: true });
+  for (const file of ['public/offline.html', 'public/manifest.webmanifest', 'scripts/helper.py']) {
+    const target = path.join(archiveRoot, file);
+    writeFileSync(target, readFileSync(target, 'utf8').replace(/\r\n/g, '\n'));
+  }
   assert.deepEqual(readHistoryCache(archiveRoot), cachedDates, 'archive must preserve authored dates without Git');
   prepareHistory(archiveRoot);
   writeFileSync(path.join(archiveRoot, 'next.config.ts'), 'export default { output: "standalone", images: { unoptimized: true } };\n');

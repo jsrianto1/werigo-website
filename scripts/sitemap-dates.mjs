@@ -1,5 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { isUtf8 } from 'node:buffer';
 import { readFileSync, existsSync, mkdirSync, writeFileSync, copyFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +12,8 @@ const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
 
 
 const historyCachePath = 'scripts/sitemap-dates-cache.json';
+// Git archive uses LF while Windows checkouts can use CRLF in any text format.
+const normalizedBytes = bytes => !bytes.includes(0) && isUtf8(bytes) ? Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n')) : bytes;
 const relevantInput = file => file !== historyCachePath && (/^(src|public|scripts)\//.test(file) || /^(next\.config\.[cm]?[jt]s)$/.test(file));
 
 function archiveInputs(root) {
@@ -35,8 +38,7 @@ export function historyFingerprint(root, inputs = []) {
     : archiveInputs(root)).sort();
   const hash = createHash('sha256');
   for (const file of files) {
-    let bytes = readFileSync(path.join(root, file));
-    if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml|htaccess)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
+    const bytes = normalizedBytes(readFileSync(path.join(root, file)));
     const digest = createHash('sha256').update(bytes).digest();
     inputs.push({ file, hash: digest.toString('hex') });
     hash.update(file + '\0').update(digest);
@@ -58,7 +60,7 @@ function verifiedHostingSettings(root, cache, inputs, changed) {
       let bytes = existsSync(path.join(root, '.git'))
         ? execFileSync('git', ['show', `HEAD:${file}`], { cwd: root, maxBuffer: 4 * 1024 * 1024 })
         : Buffer.from(cache.hostingSettings?.[file] ?? '', 'utf8');
-      if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml|htaccess)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
+      bytes = normalizedBytes(bytes);
       const digest = createHash('sha256').update(bytes).digest('hex');
       if (digest !== expected.get(file)) return false;
       verified.set(file, digest);
