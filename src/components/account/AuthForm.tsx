@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { T } from "@/components/i18n/LanguageProvider";
 import { Button } from "@/components/ui/Button";
 import { authClient } from "@/lib/auth-client";
+import { describeAuthError } from "@/lib/authErrors";
 
 /**
  * Sign-in / create-account form shared by /account/login,
@@ -17,23 +18,6 @@ export type AuthMode = "login" | "register";
 const inputClass =
   "min-h-11 w-full rounded-[10px] border border-line-strong bg-card px-3 text-[15px] text-ink placeholder:text-ink-faint";
 
-const ERRORS: Record<string, string> = {
-  INVALID_EMAIL_OR_PASSWORD: "That email and password don't match.",
-  USER_ALREADY_EXISTS: "An account with this email already exists. Sign in instead.",
-  USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL: "An account with this email already exists. Sign in instead.",
-  PASSWORD_TOO_SHORT: "Use at least 10 characters for your password.",
-  PASSWORD_TOO_LONG: "That password is too long.",
-  INVALID_EMAIL: "Enter a valid email address.",
-  EMAIL_NOT_VERIFIED: "Please confirm your email first. Check your inbox for the link.",
-  BANNED_USER: "This account has been suspended. Contact us on WhatsApp.",
-  USER_NOT_FOUND: "That email and password don't match.",
-};
-
-function describe(error: { code?: string; message?: string } | null | undefined): string {
-  if (!error) return "Something went wrong. Please try again.";
-  return (error.code && ERRORS[error.code]) || error.message || "Something went wrong. Please try again.";
-}
-
 export function AuthForm({
   initialMode = "login",
   googleEnabled,
@@ -41,6 +25,7 @@ export function AuthForm({
   onSuccess,
   heading = true,
   appMode = false,
+  initialError,
 }: {
   initialMode?: AuthMode;
   googleEnabled: boolean;
@@ -50,6 +35,7 @@ export function AuthForm({
   onSuccess?: () => void;
   heading?: boolean;
   appMode?: boolean;
+  initialError?: string;
 }) {
   const router = useRouter();
   const [mode, setMode] = useState<AuthMode>(initialMode);
@@ -57,7 +43,7 @@ export function AuthForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(initialError ?? null);
   const [busy, setBusy] = useState(false);
 
   // Account creation never collects rental identity documents.
@@ -79,7 +65,7 @@ export function AuthForm({
       if (mode === "login") {
         const { error: err } = await authClient.signIn.email({ email: email.trim(), password });
         if (err) {
-          setError(describe(err));
+          setError(describeAuthError(err));
           return;
         }
       } else {
@@ -91,11 +77,13 @@ export function AuthForm({
           callbackURL,
         });
         if (err) {
-          setError(describe(err));
+          setError(describeAuthError(err));
           return;
         }
       }
       done();
+    } catch {
+      setError("Could not reach Werigo. Check your connection and try again.");
     } finally {
       setBusy(false);
     }
@@ -105,8 +93,10 @@ export function AuthForm({
     setError(null);
     setBusy(true);
     try {
-      const { error: err } = await authClient.signIn.social({ provider: "google", callbackURL, errorCallbackURL: appMode ? "/app/login?error=google" : "/account/login?error=google" });
-      if (err) { setError(describe(err)); setBusy(false); }
+      const failureQuery = new URLSearchParams({ error: "google", next: callbackURL });
+      const errorCallbackURL = `${appMode ? "/app/login" : "/account/login"}?${failureQuery}`;
+      const { error: err } = await authClient.signIn.social({ provider: "google", callbackURL, errorCallbackURL });
+      if (err) { setError(describeAuthError(err)); setBusy(false); }
     } catch {
       setError("Could not connect to Google. Please try again.");
       setBusy(false);

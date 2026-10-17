@@ -9,6 +9,6 @@ export function DeliveryFeePicker({ area, pin, onConfirmed }: { area: string; pi
   const choosing = !pin || editing;
   return <section className={styles.picker} aria-label="Delivery location">
     <div className={styles.header}><strong>{choosing ? "Delivery location" : "Delivery location confirmed"}</strong>{pin && <button type="button" onClick={() => setEditing(value => !value)}>{editing ? "Keep saved location" : "Change location"}</button>}</div>
-    {choosing ? <PickupLocation area={area} onChooseArea={() => {}} onConfirmed={onConfirmed} onSaved={() => setEditing(false)}/>: <p className={styles.saved}>Your saved pin will be used for delivery. <a href={pin.mapsUrl} target="_blank" rel="noopener noreferrer">View in Google Maps ↗</a></p>}
+    {choosing ? <PickupLocation area={area} onConfirmed={onConfirmed} onSaved={() => setEditing(false)}/>: <p className={styles.saved}>{pin.label && <strong className={styles.address}>{pin.label}</strong>}Your saved pin will be used for delivery. <a href={pin.mapsUrl} target="_blank" rel="noopener noreferrer">View in Google Maps ↗</a></p>}
   </section>;
 }

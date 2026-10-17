@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { inferDeliveryArea, deliveryAreaCenters, normalizeDeliveryPlaces } from '../src/lib/deliveryPlaces.ts';
+for (const [area, point] of Object.entries(deliveryAreaCenters)) assert.equal(inferDeliveryArea(point), area);
+assert.throws(() => inferDeliveryArea({latitude:55.75,longitude:37.61}), /Bali/);
+const feature = (name, coordinates) => ({properties:{name,street:'Jalan Pantai',city:'Canggu',state:'Bali'},geometry:{coordinates}});
+const good = feature('Public beach entrance',[115.13,-8.65]);
+assert.deepEqual(normalizeDeliveryPlaces({features:[good,good,feature('Outside Bali',[37.61,55.75]),feature('Invalid',['115.1',-8.6])]}), [{label:'Public beach entrance, Jalan Pantai, Canggu, Bali',latitude:-8.65,longitude:115.13}]);
+assert.deepEqual(normalizeDeliveryPlaces(null), []);
+assert.deepEqual(normalizeDeliveryPlaces({features:[{geometry:{coordinates:[115.1,-8.6]}}]}), []);
+assert.equal(normalizeDeliveryPlaces({features:Array.from({length:10},(_,i)=>feature(`Place ${i}`,[115.1+i/100,-8.6]))}).length,5);
+console.log('Delivery address filtering, deduplication and internal area resolution passed.');

@@ -144,6 +144,29 @@
 .ride-app[data-theme="dark"] .wr-activity-area, .ride-app[data-theme="dark"] .wr-activity-photo-label, .ride-app[data-theme="dark"] .wr-station-area { color: var(--ink-soft); }
 .ride-app[data-theme="dark"] .wr-nearby a, .ride-app[data-theme="dark"] .wr-wedison-charge-app a { background: #383838; color: var(--ink); border-color: var(--line); }
 .ride-app .wr-location-actions > button { min-height: 44px; }
+.ride-app .wr-location .wr-map-wrap { margin-top: 18px; }
+.wr-address-label { display: block; font-size: 13px; font-weight: 650; line-height: 1.5; margin-bottom: 9px; color: var(--ink); }
+.wr-address-search { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px; margin-bottom: 13px; }
+.wr-address-search input { display: block; width: 100%; min-width: 0; max-width: 100%; min-height: 52px; border: 1px solid var(--line-strong); border-radius: 11px; background: var(--app-background); color: var(--ink); padding: 12px; font-size: 16px; }
+.wr-address-search button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 52px; border: 0; border-radius: 11px; padding: 12px; background: var(--ink); color: var(--app-background); font-size: 12px; font-weight: 600; }
+.wr-address-results { list-style: none; padding: 0; margin: 0 0 17px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.wr-address-results li + li { border-top: 1px solid var(--line); }
+.wr-address-results button { width: 100%; display: flex; align-items: flex-start; gap: 10px; min-height: 52px; padding: 13px; text-align: left; background: var(--app-card); color: var(--ink); font-size: 12px; line-height: 1.65; border: 0; }
+.wr-address-results svg { flex-shrink: 0; margin-top: 2px; }
+.wr-address-results span { min-width: 0; overflow-wrap: anywhere; }
+.ride-app .wr-step-dates h1 { line-height: 1.22; letter-spacing: -.035em; max-width: 100%; }
+.ride-app .wr-rental-dates { padding-top: 15px; }
+.ride-app .wr-rental-dates label { min-width: 0; gap: 10px; line-height: 1.5; }
+.ride-app .wr-rental-dates input { display: block; width: 100%; min-width: 0; max-width: 100%; min-height: 54px; box-sizing: border-box; appearance: none; -webkit-appearance: none; }
+.ride-app .wr-rental-dates input::-webkit-date-and-time-value { min-width: 0; text-align: left; }
+.ride-app .wr-rental-dates input::-webkit-datetime-edit { padding: 0; max-width: 100%; }
+@media (max-width: 600px) {
+  .ride-app .wr-rental-dates .wr-date-row:first-child { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-bottom: 20px; }
+  .ride-app .wr-rental-dates .wr-date-row { gap: 16px; }
+}
+@media (max-width: 360px) {
+  .ride-app .wr-rental-dates .wr-date-row { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
 .ride-app[data-theme="dark"] .wr-back,
 .ride-app[data-theme="dark"] .wr-location-actions > button,
 .ride-app[data-theme="dark"] .wr-area-field select,
