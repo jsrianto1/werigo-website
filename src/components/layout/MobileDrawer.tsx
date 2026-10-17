@@ -5,7 +5,7 @@ import { T, useLanguage } from "@/components/i18n/LanguageProvider";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { X, ChevronDown, MapPin } from "lucide-react";
+import { X, ChevronDown, MapPin, Download } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { serviceAreas } from "@/data/locations";
 import { LanguageSelector } from "@/components/i18n/LanguageSelector";
@@ -196,6 +196,7 @@ export function MobileDrawer({
         </nav>
 
         <div className="border-t border-line px-4 py-4">
+          <ButtonLink href="/app/login?install=1" variant="outline" size="lg" className="mb-3 w-full" onClick={onClose}><Download size={18} aria-hidden="true"/><T>Get the app</T></ButtonLink>
           <ButtonLink
             href="/book"
             variant="accent"

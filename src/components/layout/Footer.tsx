@@ -42,6 +42,7 @@ import { serviceAreas } from "@/data/locations";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 
 const companyLinks = [
+  { href: "/app/login?install=1", label: "Get the app" },
   { href: "/about", label: "About Werigo" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/fleet", label: "Our Fleet" },
