@@ -23,6 +23,10 @@ export function DeliveryMap({ center, onMove }: { center: MapPoint; onMove: (poi
     }).catch(() => setFailed(true));
     return () => { cancelled = true; map.current?.remove(); map.current = null; };
   }, []);
-  useEffect(() => { map.current?.setView([center.latitude, center.longitude], Math.max(15, map.current.getZoom()), { animate: false }); }, [center.latitude, center.longitude]);
+  useEffect(() => {
+    // GPS or a restored pin may arrive while the map library is still loading.
+    initial.current = { latitude: center.latitude, longitude: center.longitude };
+    map.current?.setView([center.latitude, center.longitude], Math.max(15, map.current.getZoom()), { animate: false });
+  }, [center.latitude, center.longitude]);
   return <div className="wr-map-wrap"><div ref={container} className="wr-delivery-map" role="region" aria-label="Interactive delivery map. Drag the map, tap a point or use the arrow keys to choose your location."/><span className="wr-map-center" aria-hidden="true"><MapPin size={39} fill="#171717" color="white"/><i/></span><span className="wr-map-instruction">Move map to set your pin</span>{!loaded && !failed && <span role="status" className="wr-map-loading">Loading map…</span>}{failed && <p className="wr-map-unavailable" role="status">Map tiles could not load. Try GPS or add your Google Maps share link below.</p>}</div>;
 }
