@@ -10,5 +10,5 @@ export const metadata: Metadata = {
   icons: { apple: "/app/icon-192.png", icon: "/app/icon-192.png" },
   appleWebApp: { capable: true, statusBarStyle: "default", title: "Werigo" },
 };
-export const viewport: Viewport = { themeColor: "#ffffff", viewportFit: "cover" };
+export const viewport: Viewport = { themeColor: "#f8f9f7", viewportFit: "cover" };
 export default function AppLayout({ children }: { children: React.ReactNode }) { return <AppShell>{children}</AppShell>; }

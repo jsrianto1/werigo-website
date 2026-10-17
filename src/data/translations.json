@@ -1694,5 +1694,21 @@
   "Minimum rental 2 days. Rates are per motorcycle per day in IDR; US dollar amounts are estimates. Choose 0 to 2 helmets at checkout if you need them. Availability and your final quote are confirmed on WhatsApp.": [
     "Minimal rental 2 hari. Tarif per motor per hari dalam rupiah; nilai dolar AS hanya perkiraan. Pilih 0–2 helm saat booking jika dibutuhkan. Ketersediaan dan harga akhir dikonfirmasi melalui WhatsApp.",
     "Минимум аренды — 2 дня. Тарифы указаны за мотоцикл в день в рупиях; суммы в долларах США приблизительные. При необходимости выберите от 0 до 2 шлемов. Наличие и итоговая стоимость подтверждаются в WhatsApp."
+  ],
+  "Delivery & collection: free up to 5 km; Rp75,000 above 5 km and below 10 km; Rp100,000 from 10–15 km; above 15 km add Rp4,000 per km (proportional to the extra distance). Distances follow the road route from the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar. Monthly rentals have no delivery fee. If a route cannot be calculated or the return location differs, our team confirms a quote before payment.": [
+    "Biaya antar-jemput: gratis sampai 5 km; Rp75.000 untuk jarak di atas 5 km hingga kurang dari 10 km; Rp100.000 untuk 10–15 km; di atas 15 km ditambah Rp4.000 per km, proporsional sesuai jarak tambahan. Jarak dihitung mengikuti rute jalan dari showroom Wedison di Jl. Gatot Subroto Tengah, Denpasar. Sewa bulanan bebas biaya antar-jemput. Jika rute tidak dapat dihitung atau lokasi pengembalian berbeda, tim kami mengonfirmasi penawaran sebelum pembayaran.",
+    "Доставка и возврат: бесплатно до 5 км; 75 000 рупий свыше 5 км и менее 10 км; 100 000 рупий на расстоянии 10–15 км; свыше 15 км — дополнительно 4 000 рупий за км пропорционально дополнительному расстоянию. Расстояние рассчитывается по дороге от шоурума Wedison на Jl. Gatot Subroto Tengah в Денпасаре. При месячной аренде доставка бесплатна. Если маршрут рассчитать невозможно или место возврата отличается, команда подтвердит стоимость до оплаты."
+  ],
+  "Free on monthly rentals and for road routes up to 5 km from the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar. A confirmed map pin is needed to calculate the route.": [
+    "Gratis untuk sewa bulanan dan rute jalan sampai 5 km dari showroom Wedison di Jl. Gatot Subroto Tengah, Denpasar. Konfirmasi pin lokasi untuk menghitung rutenya.",
+    "Бесплатно при месячной аренде и на маршрутах до 5 км по дороге от шоурума Wedison на Jl. Gatot Subroto Tengah в Денпасаре. Для расчёта маршрута подтвердите точку на карте."
+  ],
+  "I accept the rider responsibilities above and the": [
+    "Saya menyetujui tanggung jawab pengendara di atas dan",
+    "Я принимаю указанные выше обязанности водителя и"
+  ],
+  "and understand that a licence valid for riding in Indonesia is required by law.": [
+    "dan memahami bahwa hukum mewajibkan SIM yang berlaku untuk berkendara di Indonesia.",
+    "и понимаю, что закон требует водительское удостоверение, действительное для управления мотоциклом в Индонезии."
   ]
 }

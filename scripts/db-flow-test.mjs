@@ -35,6 +35,7 @@ const validPayload = () => ({
   deliveryMethod: "delivery",
   customerNotes: "This is a clearly marked TEST booking created by automated QA.",
   privacyConsent: true,
+  riderResponsibilitiesAccepted: true,
   sourcePage: "/book/checkout",
   website: "",
 });

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const lastUpdated = "7 October 2026";
+const lastUpdated = "17 October 2026";
 
 function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -71,10 +71,13 @@ export default function PrivacyPage() {
             <p className="font-semibold text-ink">Rider documents</p>
             <List
               items={[
-                "The type and number of your identity document (passport or Indonesian KTP) and your driving licence number. We need these before you can book, because we hand over a motor vehicle to you.",
+                "Account registration does not require identity documents. When you rent, we require the type and number of your passport, Indonesian KTP or KITAS. A driving licence number is optional; you remain responsible for holding a valid licence.",
                 "We collect the numbers only. We do not ask you to upload photos of your documents on the website. When we deliver your ride, our team checks the physical documents in person.",
               ]}
             />
+            <p className="font-semibold text-ink">Maps and location</p>
+            <p>GPS is requested only when you choose Use my GPS location. You can move the map pin instead. Confirming a pin sends the showroom and destination coordinates to the FOSSGIS OpenStreetMap routing service to calculate road distance and delivery fees. That provider may log routing requests under its own privacy policy. OpenStreetMap serves map tiles and receives the map areas you view. Opening a Google Maps link shares the chosen destination with Google. Your confirmed pin and route quote stay in this browser tab for up to 30 minutes; if you submit a booking, the destination is included in your booking details for delivery. These coordinates are not added to analytics or app navigation URLs.</p>
+            <p><a href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener noreferrer" className="underline">Routing provider and privacy details</a></p>
             <p className="font-semibold text-ink">Your bookings</p>
             <List
               items={[

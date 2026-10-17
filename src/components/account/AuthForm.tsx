@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { T } from "@/components/i18n/LanguageProvider";
 import { Button } from "@/components/ui/Button";
 import { authClient } from "@/lib/auth-client";
-import { identityFieldErrors, type Identity } from "@/lib/identitySchema";
-import { IdentityFields, emptyIdentity, submitIdentity, type IdentityValues } from "@/components/account/IdentityForm";
 
 /**
  * Sign-in / create-account form shared by /account/login,
@@ -59,16 +57,10 @@ export function AuthForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [identity, setIdentity] = useState<IdentityValues>(emptyIdentity);
-  const [identityErrors, setIdentityErrors] = useState<Partial<Record<keyof Identity, string>>>({});
-  // Account already created but the documents were rejected (e.g. a
-  // document registered to another account): only the documents remain.
-  const [identityStep, setIdentityStep] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  // Google sign-in always passes through the documents step.
-  const googleCallback = `/account/complete?next=${encodeURIComponent(callbackURL)}`;
+  // Account creation never collects rental identity documents.
 
   function done() {
     if (onSuccess) {
@@ -79,36 +71,9 @@ export function AuthForm({
     router.refresh();
   }
 
-  async function saveIdentityStep(): Promise<boolean> {
-    const r = await submitIdentity(identity);
-    if (!r.ok) {
-      setIdentityErrors(r.fieldErrors ?? {});
-      if (r.message) setError(r.message);
-      setIdentityStep(true);
-      return false;
-    }
-    return true;
-  }
-
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    setIdentityErrors({});
-    if (identityStep) {
-      setBusy(true);
-      const ok = await saveIdentityStep();
-      setBusy(false);
-      if (ok) done();
-      return;
-    }
-    if (mode === "register") {
-      // Check the documents before creating the account.
-      const local = identityFieldErrors(identity);
-      if (local) {
-        setIdentityErrors(local);
-        return;
-      }
-    }
     setBusy(true);
     try {
       if (mode === "login") {
@@ -129,8 +94,6 @@ export function AuthForm({
           setError(describe(err));
           return;
         }
-        // Signed in now; store the documents on the new account.
-        if (!(await saveIdentityStep())) return;
       }
       done();
     } finally {
@@ -141,9 +104,11 @@ export function AuthForm({
   async function google() {
     setError(null);
     setBusy(true);
-    const { error: err } = await authClient.signIn.social({ provider: "google", callbackURL: googleCallback });
-    if (err) {
-      setError(describe(err));
+    try {
+      const { error: err } = await authClient.signIn.social({ provider: "google", callbackURL, errorCallbackURL: appMode ? "/app/login?error=google" : "/account/login?error=google" });
+      if (err) { setError(describe(err)); setBusy(false); }
+    } catch {
+      setError("Could not connect to Google. Please try again.");
       setBusy(false);
     }
     // On success the browser is redirected to Google.
@@ -166,13 +131,13 @@ export function AuthForm({
         </>
       ) : null}
 
-      {googleEnabled ? (
+      {(googleEnabled || appMode) ? (
         <>
           <Button
             type="button"
             variant="outline"
             size="lg"
-            disabled={busy}
+            disabled={busy || !googleEnabled}
             onClick={() => void google()}
             className={`w-full ${heading ? "mt-5" : ""}`}
           >
@@ -184,6 +149,7 @@ export function AuthForm({
             </svg>
             <T>{"Continue with Google"}</T>
           </Button>
+          {!googleEnabled && <p className="wr-google-unavailable" role="status">Google sign-in is temporarily unavailable here. Use email instead.</p>}
           <div className="my-5 flex items-center gap-3 text-xs uppercase tracking-wider text-ink-faint">
             <span className="h-px flex-1 bg-line" />
             <T>{"or with email"}</T>
@@ -194,22 +160,9 @@ export function AuthForm({
         <div className={heading ? "mt-5" : ""} />
       )}
 
-      {appMode && !identityStep && <div className="wr-auth-tabs" aria-label="Choose sign in or sign up"><button type="button" aria-pressed={mode === "login"} onClick={() => { setMode("login"); setError(null); }}>Log in</button><button type="button" aria-pressed={mode === "register"} onClick={() => { setMode("register"); setError(null); }}>Sign up</button></div>}
+      {appMode && <div className="wr-auth-tabs" aria-label="Choose sign in or sign up"><button type="button" aria-pressed={mode === "login"} onClick={() => { setMode("login"); setError(null); }}>Log in</button><button type="button" aria-pressed={mode === "register"} onClick={() => { setMode("register"); setError(null); }}>Sign up</button></div>}
       <form onSubmit={submit} className="space-y-4">
-        {identityStep ? (
-          <div className="space-y-4">
-            <p className="rounded-[10px] bg-primary-faint px-3 py-2 text-sm text-ink">
-              <T>{"Your account is created. Check your documents below to finish."}</T>
-            </p>
-            <IdentityFields value={identity} onChange={setIdentity} errors={identityErrors} idPrefix="auth-identity" />
-            {error ? (
-              <p role="alert" className="rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger"><T>{error}</T></p>
-            ) : null}
-            <Button type="submit" variant="primary" size="lg" disabled={busy} className="w-full">
-              {busy ? <T>{"Please wait…"}</T> : <T>{"Save and continue"}</T>}
-            </Button>
-          </div>
-        ) : (<>
+
         {mode === "register" ? (
           <div>
             <label htmlFor="auth-name" className="mb-1.5 block text-sm font-medium text-ink">
@@ -257,12 +210,6 @@ export function AuthForm({
             <p className="mt-1 text-xs text-ink-faint"><T>{"At least 10 characters."}</T></p>
           ) : null}
         </div>
-        {mode === "register" ? (
-          <div className="rounded-[14px] border border-line bg-page p-4">
-            <p className="mb-3 text-sm font-semibold text-ink"><T>{"Rider documents"}</T></p>
-            <IdentityFields value={identity} onChange={setIdentity} errors={identityErrors} idPrefix="auth-identity" />
-          </div>
-        ) : null}
         {error ? (
           <p role="alert" className="rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
             <T>{error}</T>
@@ -271,7 +218,7 @@ export function AuthForm({
         <Button type="submit" variant="primary" size="lg" disabled={busy} className="w-full">
           {busy ? <T>{"Please wait…"}</T> : <T>{mode === "login" ? "Sign in" : "Create account"}</T>}
         </Button>
-        </>)}
+
       </form>
 
       <p className="mt-5 text-center text-sm text-ink-soft">

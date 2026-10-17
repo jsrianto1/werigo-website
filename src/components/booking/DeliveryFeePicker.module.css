@@ -1,0 +1,24 @@
+.picker{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card,#fff);color:var(--ink)}
+.picker summary{font-size:14px;font-weight:650;cursor:pointer;min-height:28px}
+.picker :global(.wr-location){padding-top:14px}
+.picker :global(.wr-map-wrap){position:relative;height:300px;isolation:isolate;overflow:hidden;border-radius:12px;background:#edf3ef}
+.picker :global(.wr-delivery-map){height:100%;width:100%;z-index:0}
+.picker :global(.wr-map-center){position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);pointer-events:none;z-index:2}
+.picker :global(.wr-map-instruction){position:absolute;z-index:2;left:50%;top:12px;transform:translateX(-50%);white-space:nowrap;background:#fff;padding:7px 12px;border-radius:20px;font-size:11px;pointer-events:none}
+.picker :global(.wr-map-loading),.picker :global(.wr-map-unavailable){position:absolute;bottom:24px;left:12px;right:12px;z-index:3;font-size:12px;background:white;padding:10px;border-radius:8px}
+.picker :global(.wr-location-actions){display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:12px}
+.picker :global(.wr-location-actions)>button{display:flex;align-items:center;gap:7px;min-height:44px;padding:9px 12px;border-radius:20px;background:var(--surface-sunken,#eff2ef);font-size:11px}
+.picker :global(.wr-map-confirm){display:flex;align-items:center;gap:12px;margin:15px 0;font-size:13px}
+.picker :global(.wr-map-confirm)>div{flex:1;min-width:0}
+.picker :global(.wr-map-confirm) p{font-size:11px;margin:5px 0}
+.picker :global(.wr-map-confirm) a{display:inline-flex;align-items:center;gap:6px;text-decoration:underline;font-size:11px}
+.picker :global(.wr-confirm-pin),.picker :global(.wr-done){width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:9px;min-height:48px;background:var(--brand-primary);color:white;padding:12px 15px;font-size:12px;font-weight:600}
+.picker :global(.wr-pin-manual) label{display:grid;gap:7px;margin-block:12px;font-size:12px}
+.picker :global(.wr-pin-manual) input{width:100%;min-height:45px;border:1px solid var(--line-strong);padding:10px;border-radius:9px}
+.picker :global(.wr-location-note){font-size:11px;line-height:1.7;margin-top:12px;color:var(--ink-soft)}
+.picker :global(.wr-location-note) a{text-decoration:underline}
+.picker :global(.wr-route-price){background:#edf5ef;border-radius:10px;padding:14px;margin-top:14px;font-size:12px}
+.picker :global(.wr-route-price)>strong{display:block;margin-top:5px;font-size:22px}
+.picker :global(.wr-route-price)>p{margin-top:7px;line-height:1.65;font-size:11px}
+.picker :global(.wr-error){color:#9b332a;font-size:12px;line-height:1.6;margin-top:12px}
+.attribution{font-size:10px;line-height:1.6;color:var(--ink-soft);margin-top:14px}.attribution a{text-decoration:underline}

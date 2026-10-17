@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { confirmedBenefits, cancellationPolicy } from "@/data/commercialTerms";
 import { BookingStepper } from "@/components/booking/BookingStepper";
+import { DeliveryFeePicker } from "./DeliveryFeePicker";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
 import { toCustomerEntry } from "@/data/vehicles";
@@ -45,6 +46,7 @@ import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
 import { needsDeliveryConfirmation, deliveryPricingNote } from "@/data/locations";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
+import { riderLicenceNotice, riderFinesNotice, RIDER_POLICY_VERSION } from "@/data/riderPolicy";
 import { computeQuote } from "@/lib/quote";
 import { authClient } from "@/lib/auth-client";
 import { useSnap } from "@/lib/useSnap";
@@ -108,15 +110,14 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
       return;
     }
     let cancelled = false;
-    // If the check itself fails, let the customer continue: the booking
-    // API enforces the documents and answers identity_required.
+    // Failed identity checks must never bypass rental verification.
     fetch("/api/account/identity", { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
-        if (!cancelled) setIdentityComplete(d?.ok ? Boolean(d.complete) : true);
+        if (!cancelled) setIdentityComplete(d?.ok ? Boolean(d.complete) : false);
       })
       .catch(() => {
-        if (!cancelled) setIdentityComplete(true);
+        if (!cancelled) setIdentityComplete(false);
       });
     return () => {
       cancelled = true;
@@ -163,7 +164,19 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   const area = getPickupPoint(pickup);
   const returnArea = getPickupPoint(ret);
 
-  const manualDeliveryQuote = needsDeliveryConfirmation(pickup, ret, Boolean(entry && isValidPeriod(period) && estimateRental(entry.modelSlug, period)?.tier.id === "monthly"));
+  const [appPin, setAppPin] = useState<AppPickup | null>(null);
+  const onDeliveryConfirmed = (confirmed: boolean) => {
+    try { setAppPin(confirmed ? readAppPickup(sessionStorage, pickup) : null); } catch { setAppPin(null); }
+  };
+  useEffect(() => {
+    if (!appPin) return;
+    const expiresAt = appPin.route?.expiresAt ?? appPin.savedAt + 30 * 60000;
+    const timer = setTimeout(() => setAppPin(null), Math.max(0, expiresAt - Date.now()));
+    return () => clearTimeout(timer);
+  }, [appPin]);
+  const deliveryDistanceMeters = appPin?.route?.distanceMeters;
+  const deliveryQuoteToken = appPin?.route?.token ?? null;
+  const manualDeliveryQuote = needsDeliveryConfirmation(pickup, ret, Boolean(entry && isValidPeriod(period) && estimateRental(entry.modelSlug, period)?.tier.id === "monthly"), deliveryQuoteToken ? deliveryDistanceMeters : undefined);
   const whatsappCheckout = WHATSAPP_FIRST_BOOKING || manualDeliveryQuote;
 
   const [phase, setPhase] = useState<Phase>("extras");
@@ -185,7 +198,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   const [codeStatus, setCodeStatus] = useState<{ code: string; ok: boolean; message?: string } | null>(null);
   const [discountsLoading, setDiscountsLoading] = useState(false);
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
-  const [appPin, setAppPin] = useState<AppPickup | null>(null);
+
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
@@ -219,6 +232,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
         const d = draft.customer;
         return {
           ...d,
+          termsAccepted: false,
           firstName: d.firstName || c.firstName,
           lastName: d.lastName || c.lastName,
           email: d.email || c.email,
@@ -230,7 +244,6 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   }, [entryId]);
 
   useEffect(() => {
-    if (bookingBase !== "/app/rent") return;
     if (showroomPickup) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setCustomer(current => ({ ...current, hotelName: "Werigo showroom", address: site.address.display }));
@@ -358,6 +371,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
         quantity,
         pickupSlug: pickup,
         returnSlug: ret,
+        deliveryDistanceMeters,
         discountIdr: selectedDiscount?.discountIdr ?? 0,
         discountCode: selectedDiscount?.code ?? null,
       })
@@ -382,10 +396,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   const touchesServiceArea = Boolean(getArea(pickup) || getArea(ret));
   const monthlyRental = estimate?.tier.id === "monthly";
   const areaFeeWaivedMonthly = Boolean(valid && monthlyRental && touchesServiceArea);
-  const areaFeesIdr =
-    valid && !monthlyRental
-      ? Math.max(getArea(pickup)?.deliveryFee ?? 0, getArea(ret)?.deliveryFee ?? 0)
-      : 0;
+  const areaFeesIdr = quote?.areaFeeIdr ?? 0;
   const addOnsIdr = addOnBreakdown
     ? usdToIdr(addOnBreakdown.totalUsd, usdRate)
     : null;
@@ -459,6 +470,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
    * code. Nothing from this form is logged.
    */
   function sendToWhatsApp() {
+    if (!sessionUser || identityComplete !== true || !customer.termsAccepted) { setSubmitError("Sign in, save your rider identity and accept the rental responsibilities first."); return; }
     if (!customer.batteryAck) {
       setConsentError(
         "Please acknowledge the 80% battery-return arrangement first."
@@ -535,6 +547,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
    * every field stays on this page for a retry.
    */
   async function confirmBooking() {
+    if (!sessionUser || identityComplete !== true || !customer.termsAccepted) { setSubmitError("Complete your rider identity and accept the rental responsibilities first."); return; }
     if (!customer.batteryAck) {
       setConsentError(
         "Please acknowledge the 80% battery-return arrangement first."
@@ -599,6 +612,8 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
           deliveryMethod: showroomPickup ? "pickup" : "delivery",
           customerNotes: notes,
           privacyConsent: true,
+          riderResponsibilitiesAccepted: customer.termsAccepted,
+          deliveryQuoteToken: deliveryQuoteToken ?? "",
           sourcePage: window.location.pathname,
           utmSource: search.get("utm_source") ?? "",
           utmMedium: search.get("utm_medium") ?? "",
@@ -761,12 +776,13 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}<T>{", once per booking."}</T>{" "}</p>
               ) : null}
 
+              {!showroomPickup && pickup === ret && <DeliveryFeePicker key={pickup} area={pickup} confirmed={Boolean(appPin)} onConfirmed={onDeliveryConfirmed}/>}
               {manualDeliveryQuote && bookingBase === "/book" && <p className="mt-3 text-sm text-ink-soft">{deliveryPricingNote}</p>}
               {areaFeesIdr > 0 ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{bookingBase === "/app/rent" ? "Final distance and any waiver confirmed before payment." : deliveryFeeWaiverNote}</T>
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{bookingBase === "/app/rent" ? "Calculated by road distance from our showroom; delivery and collection included." : deliveryFeeWaiverNote}</T>
                 </p>
-              ) : areaFeeWaivedMonthly ? (
+              ) : deliveryDistanceMeters !== undefined && deliveryDistanceMeters <= 5000 ? (<p className="mt-4 rounded-xl bg-primary-faint px-4 py-3 text-sm">Delivery & collection are free: your road route is within 5 km of Werigo.</p>) : areaFeeWaivedMonthly ? (
                 <p className="mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
                   <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery and collection are free on this rental because it is one month or longer."}</T>{" "}</p>
               ) : null}
@@ -898,7 +914,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                 className="font-display text-3xl text-ink outline-none"
               ><T>{"Who's riding?"}</T>{" "}</h1>
               <p className="mt-2 text-ink-soft"><T>{"We use these details for delivery and to reply to your booking request, and for nothing else."}</T>{" "}</p>
-              <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{"What to prepare: after availability is confirmed, Werigo may request a valid driving licence and identification through a separately approved secure process. Please don't send document photos through this form."}</T>{" "}</p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{"Your passport, KTP or KITAS number is required before submitting a rental. A driving licence number is optional. Please do not upload document photos here."}</T>{" "}</p>
 
               <form
                 className="mt-6 grid gap-5 sm:grid-cols-2"
@@ -1045,6 +1061,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   />
                 </div>
 
+                <section className="sm:col-span-2 wr-rider-policy" aria-label="Rider responsibilities"><h2 className="text-base font-semibold">Rider responsibilities</h2><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderLicenceNotice}</p><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderFinesNotice}</p><small className="mt-2 block text-ink-faint">Policy {RIDER_POLICY_VERSION}</small></section>
                 <div className="sm:col-span-2">
                   <label className="flex cursor-pointer items-start gap-3">
                     <input
@@ -1064,12 +1081,12 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                       }}
                       className="mt-1 h-4 w-4 cursor-pointer accent-[var(--brand-primary)]"
                     />
-                    <span className="text-sm text-ink-soft"><T>{"I accept the"}</T>{" "}
+                    <span className="text-sm text-ink-soft"><T>{"I accept the rider responsibilities above and the"}</T>{" "}
                       <Link
                         href="/terms"
                         target="_blank"
                         className="font-medium text-primary underline underline-offset-2 hover:text-primary-strong"
-                      ><T>{"rental terms and conditions"}</T>{" "}</Link>{" "}<T>{"and confirm I hold a licence valid for riding in Indonesia."}</T>{" "}</span>
+                      ><T>{"rental terms and conditions"}</T>{" "}</Link>{" "}<T>{"and understand that a licence valid for riding in Indonesia is required by law."}</T>{" "}</span>
                   </label>
                   {errors.termsAccepted ? (
                     <p
@@ -1373,9 +1390,9 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   <T>{submitError}</T>
                 </p>
               ) : null}
-              {!whatsappCheckout && !sessionUser ? (
+              {!sessionUser ? (
                 <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
-                  <h2 className="font-display text-xl text-ink"><T>{"Sign in to pay"}</T></h2>
+                  <h2 className="font-display text-xl text-ink"><T>{"Sign in to rent"}</T></h2>
                   <p className="mt-1 text-sm text-ink-soft"><T>{"Your booking, payment and receipt are kept in your Werigo account. Everything you filled in above stays here."}</T></p>
                   {featured ? (
                     <p className="mt-3 rounded-[10px] bg-accent-soft px-3 py-2 text-sm font-medium text-accent">
@@ -1387,18 +1404,19 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   <div className="mt-4">
                     <AuthForm
                       googleEnabled={googleEnabled}
+                      appMode={bookingBase === "/app/rent"}
                       heading={false}
                       callbackURL={`${bookingBase}/checkout?${params.toString()}`}
                       onSuccess={() => setSubmitError(null)}
                     />
                   </div>
                 </div>
-              ) : !whatsappCheckout && identityComplete === false ? (
+              ) : sessionUser && identityComplete === false ? (
                 <div className="mt-6 rounded-[14px] border border-line bg-card p-6">
                   <IdentityForm
                     heading="Your rider documents"
-                    intro="Needed once to rent a motorcycle. Everything you filled in above stays here."
-                    submitLabel="Save and continue to payment"
+                    intro="Passport, KTP or KITAS is required to rent. Your driving licence number is optional. Everything you filled in above stays here."
+                    submitLabel="Save rider identity"
                     onSaved={() => {
                       setIdentityComplete(true);
                       setSubmitError(null);
@@ -1411,7 +1429,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                     variant="accent"
                     size="lg"
                     onClick={() => (whatsappCheckout ? sendToWhatsApp() : void confirmBooking())}
-                    disabled={submitting || (!whatsappCheckout && (!quote || identityComplete === null))}
+                    disabled={submitting || identityComplete !== true || (!whatsappCheckout && !quote)}
                     className="w-full sm:w-auto"
                   >
                     <MessageCircle className="h-5 w-5" aria-hidden="true" />
@@ -1481,7 +1499,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
             estimate={estimate}
             addOnBreakdown={addOnBreakdown}
             areaFeeIdr={areaFeesIdr}
-            areaFeeWaived={areaFeeWaivedMonthly}
+            areaFeeWaived={areaFeeWaivedMonthly || deliveryDistanceMeters !== undefined && deliveryDistanceMeters <= 5000}
             payable={
               !whatsappCheckout && quote
                 ? {

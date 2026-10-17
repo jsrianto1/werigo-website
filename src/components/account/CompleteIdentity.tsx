@@ -9,7 +9,7 @@ export function CompleteIdentity({ next }: { next: string }) {
   return (
     <IdentityForm
       heading="One more step: your rider documents"
-      intro="To rent a motorcycle we need your identity document and driving licence number. You only do this once."
+      intro="To rent a motorcycle we need your passport, KTP or KITAS number. Your driving licence number is optional."
       submitLabel="Save and continue"
       onSaved={() => {
         router.push(next);

@@ -1,7 +1,7 @@
 /** Temporary delivery pin. Never put precise coordinates in app navigation URLs. */
 export const APP_PICKUP_KEY = "werigo.app.pickup.v1";
 export const PICKUP_MAX_AGE = 30 * 60 * 1000;
-export interface AppPickup { version: 1; area: string; mapsUrl: string; savedAt: number; accuracy?: number; point?: { latitude: number; longitude: number }; }
+export interface AppPickup { version: 1; area: string; mapsUrl: string; savedAt: number; accuracy?: number; route?: { distanceMeters: number; token: string | null; expiresAt: number }; point?: { latitude: number; longitude: number }; }
 export interface GpsPoint { latitude: number; longitude: number; accuracy: number; }
 export function googleMapsSearch(query: string) { return `https://www.google.com/maps/search/?${new URLSearchParams({ api: "1", query })}`; }
 export function googleMapsDirections(destination: string) { return `https://www.google.com/maps/dir/?${new URLSearchParams({ api: "1", destination, travelmode: "driving" })}`; }
@@ -30,6 +30,7 @@ export function readAppPickup(storage: Pick<Storage, "getItem">, area: string, n
     const value = JSON.parse(storage.getItem(APP_PICKUP_KEY) || "null");
     if (!value || value.version !== 1 || value.area !== area || !validMapsUrl(value.mapsUrl) || !Number.isFinite(value.savedAt) || value.savedAt > now || now - value.savedAt > PICKUP_MAX_AGE) return null;
     if (value.point && !isBaliLocation({ ...value.point, accuracy: 0 })) return null;
+    if (value.route && (!Number.isFinite(value.route.distanceMeters) || value.route.distanceMeters < 0 || value.route.distanceMeters > 250000 || !Number.isFinite(value.route.expiresAt) || value.route.expiresAt <= now || (value.route.token !== null && typeof value.route.token !== "string"))) return null;
     return value;
   } catch { return null; }
 }

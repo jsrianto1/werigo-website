@@ -1,3 +1,4 @@
+import { deliveryPricingNote } from "./locations.ts";
 /**
  * Help Center content — original Werigo answers.
  * Answers directing customers to WhatsApp are interim wording for
@@ -175,12 +176,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Is delivery free?",
         answer:
-          "Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.",
+          deliveryPricingNote,
       },
       {
         question: "Can I return the motorcycle in a different area?",
         answer:
-          "Yes. Choose a different return location during booking. The fee covers both legs. Tourist service areas outside Denpasar start from Rp100,000; Denpasar remains Rp75,000. Our team confirms both addresses and any distance surcharge on WhatsApp before payment.",
+          "Yes. Choose a different return location during booking. Our team confirms both addresses and a delivery-and-collection quote on WhatsApp before payment. The automatic road-distance fee applies when delivery and collection use the same location.",
       },
       {
         question: "What battery level should the motorcycle have at return?",

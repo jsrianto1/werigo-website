@@ -1,5 +1,5 @@
 /* Cache only the generic offline page. Never persist account, order or payment responses. */
-const CACHE = 'werigo-app-offline-v1';
+const CACHE = 'werigo-app-offline-v2';
 const OFFLINE = '/app/offline.html';
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.add(OFFLINE)).then(() => self.skipWaiting()));

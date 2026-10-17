@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { AppBrand } from "./AppBrand";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -41,7 +41,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     catch { setMessage("Use your browser menu to add Werigo to your home screen."); }
   }
   return <div className={`ride-app${isAuth ? " wr-auth-shell" : ""}`}>
-    <header className="ra-header"><Link href="/app/rent" aria-label="Werigo app home" className="wr-brand"><Image src="/brand/werigo-logo-compact.png" width={126} height={50} alt="Werigo" className="ra-logo" /><span>Powered by WEDISON</span></Link>
+    <header className="ra-header"><Link href="/app/rent" aria-label="Werigo app home" className="wr-brand"><AppBrand /></Link>
       <div className="ra-header-actions"><span className="ra-location">Bali, Indonesia</span>{!standalone && <button onClick={() => void addToHome()} className="ra-install" aria-expanded={help} aria-controls="app-install-help"><Download size={16} /><span>Install app</span></button>}<Link href="/" className="ra-website" aria-label="Visit Werigo website"><ArrowUpRight size={20}/></Link></div>
     </header>
     {help && <aside className="ra-install-help" id="app-install-help" aria-label="Install Werigo"><button className="wr-help-close" aria-label="Close installation instructions" onClick={() => setHelp(false)}><X size={20}/></button><strong>Werigo, on your home screen.</strong><ol><li><b>iPhone:</b> Open in Safari → Share → Add to Home Screen → Add.</li><li><b>Android:</b> Open in Chrome → browser menu → Install app or Add to Home screen.</li></ol><p>Once installed, Werigo opens in its own app window. Booking and account services need an internet connection.</p></aside>}

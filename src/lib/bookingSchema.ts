@@ -59,6 +59,8 @@ export const bookingSubmissionSchema = z
     quantity: z.number().int().min(1).max(10),
     deliveryMethod: z.enum(["delivery", "pickup"]).default("delivery"),
     customerNotes: z.string().trim().max(2000).optional().default(""),
+    deliveryQuoteToken: z.string().max(1500).optional().default(""),
+    riderResponsibilitiesAccepted: z.literal(true, { error: "Accept the rider responsibilities to rent." }),
     privacyConsent: z.literal(true, {
       error: "Privacy consent is required.",
     }),

@@ -25,7 +25,7 @@ export interface IdentityValues {
 
 export const emptyIdentity: IdentityValues = { idType: "passport", idNumber: "", drivingLicenseNumber: "" };
 
-/** Controlled fields only (used inside the registration form). */
+/** Controlled fields used at rental checkout and on the customer's profile. */
 export function IdentityFields({
   value,
   onChange,
@@ -44,7 +44,7 @@ export function IdentityFields({
       <legend className="sr-only">Identity documents</legend>
       <div>
         <span className="mb-1.5 block text-sm font-medium text-ink"><T>{"Identity document"}</T></span>
-        <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-label="Identity document">
+        <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Identity document">
           {ID_TYPES.map((t) => (
             <label
               key={t}
@@ -67,7 +67,7 @@ export function IdentityFields({
       </div>
       <div>
         <label htmlFor={`${idPrefix}-number`} className="mb-1.5 block text-sm font-medium text-ink">
-          <T>{value.idType === "passport" ? "Passport number" : "KTP number (NIK)"}</T>
+          <T>{value.idType === "passport" ? "Passport number" : value.idType === "kitas" ? "KITAS number" : "KTP number (NIK)"}</T>
         </label>
         <input
           id={`${idPrefix}-number`}
@@ -75,7 +75,7 @@ export function IdentityFields({
           required
           autoComplete="off"
           inputMode={value.idType === "national_id" ? "numeric" : "text"}
-          placeholder={value.idType === "passport" ? "e.g. X1234567" : "16 digits"}
+          placeholder={value.idType === "passport" ? "e.g. X1234567" : value.idType === "national_id" ? "16 digits" : "As printed on your KITAS"}
           value={value.idNumber}
           onChange={(e) => onChange({ ...value, idNumber: e.target.value })}
           aria-invalid={Boolean(errors?.idNumber)}
@@ -85,12 +85,11 @@ export function IdentityFields({
       </div>
       <div>
         <label htmlFor={`${idPrefix}-license`} className="mb-1.5 block text-sm font-medium text-ink">
-          <T>{"Driving licence number"}</T>
+          <T>{"Driving licence number (optional)"}</T>
         </label>
         <input
           id={`${idPrefix}-license`}
           type="text"
-          required
           autoComplete="off"
           placeholder="As printed on your licence"
           value={value.drivingLicenseNumber}
@@ -101,7 +100,7 @@ export function IdentityFields({
         {errors?.drivingLicenseNumber ? (
           <p role="alert" className="mt-1 text-xs font-medium text-danger"><T>{errors.drivingLicenseNumber}</T></p>
         ) : (
-          <p className="mt-1 text-xs text-ink-faint"><T>{"Bring the licence and the document above when we deliver your ride."}</T></p>
+          <p className="mt-1 text-xs text-ink-faint"><T>{"You can leave this number blank. You remain responsible for having a licence valid for riding in Indonesia."}</T></p>
         )}
       </div>
     </fieldset>

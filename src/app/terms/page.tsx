@@ -1,3 +1,5 @@
+import { riderLicenceNotice, riderFinesNotice } from "@/data/riderPolicy";
+import { deliveryPricingNote } from "@/data/locations";
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/Section";
 
@@ -45,8 +47,10 @@ export default function TermsPage() {
               both fees apply for US$2.00 in total.
             </li>
             <li>
-              Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.
+              {deliveryPricingNote}
             </li>
+            <li>{riderLicenceNotice}</li>
+            <li>{riderFinesNotice}</li>
             <li>
               Riders must hold a licence valid for riding in Indonesia and
               follow local traffic law. A properly fitted helmet is

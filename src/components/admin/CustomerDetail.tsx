@@ -294,7 +294,7 @@ export function CustomerDetail({ id }: { id: string }) {
             ) : d.identity ? (
               <dl className="mt-3 space-y-1 text-sm">
                 <div className="flex justify-between gap-2"><dt className="text-ink-soft">{ID_TYPE_LABELS[d.identity.idType]}</dt><dd className="tnum font-semibold text-ink">{d.identity.idNumber}</dd></div>
-                <div className="flex justify-between gap-2"><dt className="text-ink-soft">Driving licence</dt><dd className="tnum font-semibold text-ink">{d.identity.drivingLicenseNumber}</dd></div>
+                <div className="flex justify-between gap-2"><dt className="text-ink-soft">Driving licence</dt><dd className="tnum font-semibold text-ink">{d.identity.drivingLicenseNumber || "Not provided (optional)"}</dd></div>
                 <p className="pt-1 text-xs text-ink-faint">Updated {fmt(d.identity.updatedAt)}{d.identityLocked ? " · locked for the customer (paid booking)" : ""}</p>
               </dl>
             ) : (

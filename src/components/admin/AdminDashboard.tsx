@@ -76,7 +76,7 @@ interface Row {
 }
 
 interface IdentityRow {
-  idType: "passport" | "national_id";
+  idType: "passport" | "national_id" | "kitas";
   idNumber: string;
   drivingLicenseNumber: string;
 }
@@ -489,7 +489,7 @@ export function AdminDashboard({
                   [
                     "Rider documents",
                     detail.identity
-                      ? `${detail.identity.idType === "passport" ? "Passport" : "KTP"} ${detail.identity.idNumber}\nDriving licence ${detail.identity.drivingLicenseNumber}`
+                      ? `${detail.identity.idType === "passport" ? "Passport" : detail.identity.idType === "kitas" ? "KITAS" : "KTP"} ${detail.identity.idNumber}\nDriving licence ${detail.identity.drivingLicenseNumber || "Not provided (optional)"}`
                       : "Not on file (booking made before documents were required)",
                   ],
                   ["Payment", `${detail.booking.payment_status}${detail.booking.total_idr !== null ? ` · ${formatIdr(detail.booking.total_idr)}` : ""}${detail.booking.discount_idr > 0 ? ` · discount ${formatIdr(detail.booking.discount_idr)}${detail.booking.discount_code ? ` (${detail.booking.discount_code})` : ""}` : ""}${detail.booking.paid_at ? ` · paid ${fmt(detail.booking.paid_at)}` : ""}`],

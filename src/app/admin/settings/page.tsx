@@ -1,3 +1,4 @@
+import { RentalIdentitySetup } from "@/components/admin/RentalIdentitySetup";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
@@ -27,6 +28,7 @@ export default async function Page() {
   return (
     <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
       <NotificationSettings />
+      <RentalIdentitySetup />
     </AdminShell>
   );
 }

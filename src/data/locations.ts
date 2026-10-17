@@ -1,3 +1,4 @@
+import { deliveryTariff } from "../lib/deliveryPricing.ts";
 /**
  * Werigo service areas — data-driven location system.
  * Add a new area by appending to this array; navigation,
@@ -127,11 +128,10 @@ export function getArea(slug: string): ServiceArea | undefined {
 
 /**
  * Approved wording for the delivery-fee waiver, used verbatim across
- * surfaces. The waiver is distance-based (5 km radius from the
- * showroom), so it is always confirmed by the team on WhatsApp.
+ * surfaces. Distance uses the verified road route from the showroom.
  */
 export const deliveryFeeWaiverNote =
-  "Free on rentals of one month or longer. Also free within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, confirmed with your quote on WhatsApp.";
+  "Free on monthly rentals and for road routes up to 5 km from the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar. A confirmed map pin is needed to calculate the route.";
 
 /* ================= Airport pickup points ================= */
 
@@ -179,9 +179,9 @@ export function getPickupPoint(
   return area ? { slug: area.slug, name: area.name, isAirport: false } : undefined;
 }
 
-export const deliveryPricingNote = "Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.";
+export const deliveryPricingNote = deliveryTariff;
 
-/** No address distance is available online: tourist deliveries need a final quote. */
-export function needsDeliveryConfirmation(pickup: string, ret: string, monthly: boolean): boolean {
-  return !monthly && [pickup, ret].some(slug => Boolean(getArea(slug)) && slug !== "denpasar");
+/** Missing route proof or different return locations require a manual quote. */
+export function needsDeliveryConfirmation(pickup: string, ret: string, monthly: boolean, distanceMeters?: number): boolean {
+  return !monthly && (pickup !== "showroom" || ret !== "showroom") && (pickup !== ret || !Number.isFinite(distanceMeters) || distanceMeters! < 0);
 }

@@ -1,3 +1,5 @@
+import { verifyDeliveryQuote } from "@/lib/deliveryToken";
+import { RIDER_POLICY_VERSION } from "@/data/riderPolicy";
 import { NextRequest, NextResponse } from "next/server";
 import { bookingSubmissionSchema } from "@/lib/bookingSchema";
 import { getBookingStore, StockUnavailableError } from "@/lib/bookingStore";
@@ -102,11 +104,11 @@ export async function POST(req: NextRequest) {
       { status: 401 }
     );
   }
-  // Renting needs an identity document and a driving licence on file.
+  // Renting needs an identity document on file. A licence number is optional.
   try {
     if (!(await hasIdentity(user.id))) {
       return NextResponse.json(
-        { ok: false, error: "identity_required", message: "Add your passport or ID number and driving licence number to continue." },
+        { ok: false, error: "identity_required", message: "Add your passport, KTP or KITAS number to continue. Your driving licence number is optional." },
         { status: 403 }
       );
     }
@@ -127,7 +129,9 @@ export async function POST(req: NextRequest) {
       { status: 422 }
     );
   }
-  const submission = { ...parsed.data, email: parsed.data.email || user.email };
+  const submission = { ...parsed.data, email: parsed.data.email || user.email, customerNotes: [parsed.data.customerNotes, `Rider responsibilities accepted: ${RIDER_POLICY_VERSION}`].filter(Boolean).join("\n") };
+  const deliveryRoute = verifyDeliveryQuote(submission.deliveryQuoteToken, submission.pickupArea, process.env.BETTER_AUTH_SECRET?.trim() ?? "");
+  if (deliveryRoute) submission.pickupAddress = `${submission.pickupAddress.slice(0, 370)} | Confirmed delivery pin: https://www.google.com/maps/search/?api=1&query=${deliveryRoute.latitude},${deliveryRoute.longitude}`;
   const store = getBookingStore();
   let replay = null;
   try { replay=await store.getBySubmission(submission.clientSubmissionId,user.id); }
@@ -142,9 +146,10 @@ export async function POST(req: NextRequest) {
     quantity: submission.quantity,
     pickupSlug: submission.pickupArea,
     returnSlug: submission.returnArea,
+    deliveryDistanceMeters: submission.pickupArea === submission.returnArea ? deliveryRoute?.distanceMeters : undefined,
   };
   const undiscounted = computeQuote(pricingInput);
-  if (undiscounted && needsDeliveryConfirmation(submission.pickupArea, submission.returnArea, undiscounted.tierId === "monthly")) {
+  if (undiscounted && needsDeliveryConfirmation(submission.pickupArea, submission.returnArea, undiscounted.tierId === "monthly", pricingInput.deliveryDistanceMeters)) {
     return NextResponse.json({ ok: false, error: "delivery_quote_required", message: "Please confirm the route distance and final delivery total with Werigo on WhatsApp before payment." }, { status: 409 });
   }
   let discount = null;

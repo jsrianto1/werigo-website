@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
       },
       { source: "/media/:path*.webm", headers: [{ key: "Content-Type", value: "video/webm" }] },
       { source: "/media/:path*.mp4", headers: [{ key: "Content-Type", value: "video/mp4" }] },
+      { source: "/book/:path*", headers: [{ key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(self)" }] },
       { source: "/app/:path*", headers: [{ key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(self)" }] },
     ];
   },

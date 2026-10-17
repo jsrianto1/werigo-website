@@ -1,3 +1,4 @@
+import { deliveryFeeIdr } from "@/lib/deliveryPricing";
 import { estimateRental, type PricingTierId, type RentalPeriod } from "@/lib/pricing";
 import { getArea } from "@/data/locations";
 
@@ -11,9 +12,9 @@ import { getArea } from "@/data/locations";
  *
  * Rules (management-approved, see pricing.ts and locations.ts):
  *   base      = per-day rate of the applicable tier × rental days × quantity
- *   area fee  = one area-specific base fee per booking when either point is a service
- *               area, waived on monthly rentals (distance waivers are
- *               applied by the team, never assumed here)
+ *   area fee  = one delivery-and-collection fee from a verified road distance;
+ *               monthly and <=5 km routes are waived. Area defaults are estimates
+ *               only; the booking API blocks payment without required route proof.
  *   add-ons   = free of charge; protection options are requests only
  *               and are never charged online
  *   discount  = at most one per booking, chosen by the discount engine
@@ -30,6 +31,8 @@ export interface QuoteInput {
   /** Rupiah off the rental amount (not the area fee), from the discount engine. */
   discountIdr?: number;
   discountCode?: string | null;
+  /** Trusted server-verified road distance, not a client-supplied price. */
+  deliveryDistanceMeters?: number;
 }
 
 export interface Quote {
@@ -60,7 +63,7 @@ export function computeQuote(input: QuoteInput): Quote | null {
   const areaFeeWaivedMonthly = monthly && touchesServiceArea;
   const areaFeeIdr = monthly
     ? 0
-    : Math.max(pickupArea?.deliveryFee ?? 0, returnArea?.deliveryFee ?? 0);
+    : input.deliveryDistanceMeters !== undefined ? deliveryFeeIdr(input.deliveryDistanceMeters) : Math.max(pickupArea?.deliveryFee ?? 0, returnArea?.deliveryFee ?? 0);
 
   const baseIdr = estimate.totalIdr * quantity;
   const discountIdr = Math.max(0, Math.min(Math.round(input.discountIdr ?? 0), baseIdr));

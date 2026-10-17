@@ -49,7 +49,7 @@ export default async function MembershipPage() {
           <div key={t.name} className={`rounded-[14px] border bg-card p-5 ${summary?.tier === t.name ? "border-primary" : "border-line"}`}>
             <h2 className="font-display text-lg text-ink">{t.name}</h2>
             <p className="mt-1 text-sm text-ink-soft">{t.spend ? `${formatIdr(t.spend)} in completed rentals over 12 months` : "Free when you create your customer account"}</p>
-            <p className="mt-3 text-sm font-semibold text-primary">{t.multiplier} points / Rp10,000</p>
+            <p className="mt-3 text-sm font-semibold text-primary">{t.multiplier} points / Rp10,000</p><p className="mt-2 text-sm text-ink-soft">{t.multiplier === 1 ? "Standard earning on eligible rentals" : `${Math.round((t.multiplier - 1) * 100)}% more points than Silver on eligible rentals`}</p>
           </div>
         ))}
       </div>
