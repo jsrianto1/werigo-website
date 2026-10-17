@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "39e8433558cc9c766b70677f5b420367ee85fd57bfa67fc49769e7d05369be82",
+  "fingerprint": "e9cc6c4b49cd8c85ec4d098e70ecc454074971ce25b0c11ec0b72b6b676cd69d",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11640,7 +11640,7 @@
     },
     {
       "file": "src/components/pwa/DeliveryMap.tsx",
-      "hash": "a237a6afd1896c9d73773257bab3407ef135812fa5ef25fe62748535c0c7e06a"
+      "hash": "243e11410a86f19d300da67d412243f3c28377484bae6b136044e4da6798bf8f"
     },
     {
       "file": "src/components/pwa/Explore.tsx",
