@@ -53,7 +53,7 @@ import { useSnap } from "@/lib/useSnap";
 import { AuthForm } from "@/components/account/AuthForm";
 import { IdentityForm } from "@/components/account/IdentityForm";
 import { VoucherPicker, type DiscountOptionView, type UnavailableVoucherView } from "@/components/booking/VoucherPicker";
-import { readAppPickup, type AppPickup } from "@/lib/appPickup";
+import { readAppPickup, validMapsUrl, type AppPickup } from "@/lib/appPickup";
 import { site } from "@/lib/config";
 import {
   emptyCustomer,
@@ -166,7 +166,15 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
   const [appPin, setAppPin] = useState<AppPickup | null>(null);
   const onDeliveryConfirmed = (confirmed: boolean) => {
-    try { setAppPin(confirmed ? readAppPickup(sessionStorage, pickup) : null); } catch { setAppPin(null); }
+    try {
+      const pin = confirmed ? readAppPickup(sessionStorage, pickup) : null;
+      setAppPin(pin);
+      setCustomer(current => {
+        if (pin && (!current.address || validMapsUrl(current.address))) return { ...current, address: pin.mapsUrl };
+        if (!pin && current.address === appPin?.mapsUrl) return { ...current, address: "" };
+        return current;
+      });
+    } catch { setAppPin(null); }
   };
   useEffect(() => {
     if (!appPin) return;
@@ -253,7 +261,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
       const pin = readAppPickup(sessionStorage, pickup);
       // Restore the explicitly confirmed pin from temporary tab storage.
       setAppPin(pin);
-      if (pin) setCustomer(current => current.address ? current : { ...current, address: pin.mapsUrl });
+      if (pin) setCustomer(current => current.address && !validMapsUrl(current.address) ? current : { ...current, address: pin.mapsUrl });
     } catch { /* Address entry remains available. */ }
   }, [bookingBase, pickup, showroomPickup]);
 
@@ -493,7 +501,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
       modelName: entry!.displayName,
       quantity,
       pickupAreaName: area?.name ?? pickup,
-      pickupAddress: [customer.hotelName, customer.address]
+      pickupAddress: [customer.hotelName, customer.address, appPin && !customer.address.includes(appPin.mapsUrl) ? appPin.mapsUrl : ""]
         .filter(Boolean)
         .join(", "),
       returnAreaName: returnArea?.name ?? ret,
@@ -600,7 +608,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
           email: customer.email.trim(),
           whatsapp: `${phone.countryCode}${phone.national}`,
           pickupArea: pickup,
-          pickupAddress: [customer.hotelName, customer.address]
+          pickupAddress: [customer.hotelName, customer.address, appPin && !customer.address.includes(appPin.mapsUrl) ? appPin.mapsUrl : ""]
             .filter(Boolean)
             .join(", "),
           returnArea: ret,
