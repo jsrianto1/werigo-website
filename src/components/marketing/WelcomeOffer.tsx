@@ -30,7 +30,7 @@ const fmtEnds = (iso: string) =>
 const MODAL_KEY = "werigo.welcome20.snoozedUntil";
 const BAR_KEY = "werigo.welcome20.barClosed";
 const SNOOZE_DAYS = 7;
-const HIDDEN_PREFIXES = ["/account", "/admin", "/book/checkout", "/book/confirmation", "/saga/"];
+const HIDDEN_PREFIXES = ["/account", "/admin", "/app", "/book/checkout", "/book/confirmation", "/saga/"];
 
 function storage(kind: "local" | "session"): Storage | null {
   try {

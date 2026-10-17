@@ -1,0 +1,17 @@
+{
+  "id": "/app/",
+  "name": "Werigo · Ride & Explore Bali",
+  "short_name": "Werigo",
+  "description": "Explore Bali, find your Wedison ride and keep your Werigo rewards close.",
+  "start_url": "/app/explore",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#f5f9f7",
+  "theme_color": "#007565",
+  "lang": "en",
+  "icons": [
+    {"src": "/app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

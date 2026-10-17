@@ -6,6 +6,6 @@ import { usePathname } from "next/navigation";
 /** The staff dashboard has its own frame: no marketing header, footer or WhatsApp bubble there. */
 export function HideOnAdmin({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  if (pathname === "/admin" || pathname.startsWith("/admin/")) return null;
+  if (pathname === "/admin" || pathname.startsWith("/admin/") || pathname === "/app" || pathname.startsWith("/app/")) return null;
   return <>{children}</>;
 }
