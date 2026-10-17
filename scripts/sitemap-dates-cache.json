@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "fingerprint": "184f13e3e8e18124157a49192e9af2017b621b9df7ea730912ae43e1a7d8d4d6",
+  "fingerprint": "76f88d03364d8501f1673d81fbd0c19ee758f6c3bd847b6feea9a7ec47789f30",
   "inputs": [
     {
       "file": "next.config.ts",
       "hash": "8f12efdadab5c407879a87c60ebb5722f5dba2278295c9d97ac44188fe099de0"
+    },
+    {
+      "file": "public/app/activities/ayung-rafting.jpg",
+      "hash": "3a8b2a8e6cd7aa28f344398b0a6b5d6969d6c9b29438a1664cb6203f7d82a7bf"
+    },
+    {
+      "file": "public/app/activities/padangbai.jpg",
+      "hash": "55a300daa48121ff204cbc390faf10db107584f4567fb6173218b5d5770fe951"
+    },
+    {
+      "file": "public/app/activities/tanjung-benoa-parasailing.jpg",
+      "hash": "49a6e51910e22dafa3b7771bef0a50b7db5d69aee88c2df33d796aaee87718d1"
+    },
+    {
+      "file": "public/app/edpower-red.webp",
+      "hash": "3d5600eb6ac7432a260e550c89e2bfbfdeaad8fd57dd194463d43dff52f8565c"
     },
     {
       "file": "public/app/icon-192.png",
@@ -10944,7 +10960,7 @@
     },
     {
       "file": "scripts/pwa-test.mjs",
-      "hash": "526f827eb33178ecadbb2ed1ce6063fa10cf070bed37e12962223f2dc223cf44"
+      "hash": "c2a5feaf20baf47883e87370116cf6c0635745a292befadb1ebe7f729f34ce6b"
     },
     {
       "file": "scripts/ride-club-schema.py",
@@ -11244,11 +11260,11 @@
     },
     {
       "file": "src/app/app/account/page.tsx",
-      "hash": "44cec7f081559209ef2e5d7624c8f8098bc39c47f6aa04c800ff68752856d766"
+      "hash": "97b93c7d1739e00ff1a4e8b6a03afe66f18da90dea9ce254f89d44f2e0298954"
     },
     {
       "file": "src/app/app/activity/page.tsx",
-      "hash": "cbab695805ab7c64f6df96ee114080fc408c5603029b8362dd750434c4c13b48"
+      "hash": "87deebf8f513b6a0b237c46d531a34c623f9db2a2d0a8fe4d2c2f26ad5232263"
     },
     {
       "file": "src/app/app/app.css",
@@ -11256,7 +11272,7 @@
     },
     {
       "file": "src/app/app/charge/page.tsx",
-      "hash": "5b00f6c1b37cb83f563790629802e03282376f0cd6b6f9eecae0e000099c770c"
+      "hash": "3ed3c8294cb7414323291babcc8d6d31f1d0b0d1aff87a758d9b0fc1d278c551"
     },
     {
       "file": "src/app/app/explore/page.tsx",
@@ -11264,11 +11280,15 @@
     },
     {
       "file": "src/app/app/layout.tsx",
-      "hash": "84a1abcb25321869501756352abf42e776c3e3a22c2036da52f3e262d40044bc"
+      "hash": "9a943a0510125dbe58fb8ae1b41bca9edaa3259a51337a33abdde2161eace921"
     },
     {
       "file": "src/app/app/login/page.tsx",
-      "hash": "ebead72c74e0a73207d7f82729a692abde28e46fc9fca81d24271a024c9d59b1"
+      "hash": "a32782eec6b826e71db60396b388b8779830ab429c3288d091cb0fc8bfb7df78"
+    },
+    {
+      "file": "src/app/app/mobile.css",
+      "hash": "44baeee66f4e919718fe5ba7805f42388f3290a8912153959d66cff94267203a"
     },
     {
       "file": "src/app/app/page.tsx",
@@ -11283,6 +11303,10 @@
       "hash": "922f41edd231227d47f39c01a6e27b9c9a5c4c04895615fe81bd2b2b6d044463"
     },
     {
+      "file": "src/app/app/reference.css",
+      "hash": "37e3bc12c7b32e819ecc0e93784f11675f05bbff1177fb7eff34754edef5b67a"
+    },
+    {
       "file": "src/app/app/rent/checkout/page.tsx",
       "hash": "ce7a0b5e6e4a66b53b732abb4e855788d8cc27d3d4a2dbdf3f9fb033a4ec5ebe"
     },
@@ -11292,7 +11316,7 @@
     },
     {
       "file": "src/app/app/rent/page.tsx",
-      "hash": "432ca7b136f0d710d9ac4baa55ce8d302da3581c32953f0a89d00fedf14ba1c6"
+      "hash": "4164925d44b340ec0c4cacf4076f16e349c9a1104c6502d41c82afc3f4ed07c8"
     },
     {
       "file": "src/app/app/rental.css",
@@ -11301,6 +11325,10 @@
     {
       "file": "src/app/app/rewards/page.tsx",
       "hash": "c404a79488365091f1072c1ef9ec32f93af2628417a97de1f9792197ef0692e0"
+    },
+    {
+      "file": "src/app/app/services/page.tsx",
+      "hash": "bce46f07257f5b3fcf9af1e5951e509cf82833ea328076ff9bb878d9c9f5dd2f"
     },
     {
       "file": "src/app/apple-icon.png",
@@ -11448,7 +11476,7 @@
     },
     {
       "file": "src/components/account/BookingsList.tsx",
-      "hash": "f00a016256f91fbbc80654db14ef823f47f24613f3db8f05d33be77e0091cf3e"
+      "hash": "1810b652f584db687b9d56fe868a27a18744ec5fe5777c9496752b9ebd776b5c"
     },
     {
       "file": "src/components/account/CompleteIdentity.tsx",
@@ -11663,16 +11691,28 @@
       "hash": "2ca100d7d50ca594428da7989dac1b7f0b48e99abb2cecd85755ad8d0f14ced6"
     },
     {
+      "file": "src/components/pwa/AppAppearance.tsx",
+      "hash": "da3087011b71723f09b1f65d977bbce03dbd3fe24f8f02f3ec146ee97b991f53"
+    },
+    {
       "file": "src/components/pwa/AppBrand.tsx",
-      "hash": "58c8b54dd333aeb41c1e21a1bb99609302210f5591437527022037220610a1a3"
+      "hash": "35f49de6ccd2cb2605ab301b644c2880bbacecd0b29152a9974aa32af853bd34"
+    },
+    {
+      "file": "src/components/pwa/AppHome.tsx",
+      "hash": "5b9f10ad0e869c3fb641f41ffa68a2241c72c3cb327eed9f909ecf02a2175c13"
     },
     {
       "file": "src/components/pwa/AppShell.tsx",
-      "hash": "81c098c4211daa674af2b601b6f652169602684fa66d9653e1755100a044345f"
+      "hash": "912f0ebe806856bd0bb78688820f5199b4a3ad4ea09b125632495e909ab4fc6b"
     },
     {
       "file": "src/components/pwa/AppSignOut.tsx",
       "hash": "2542e6be05f2c1f154241b4d16f7d337b5e5409004d36813edc5b6bc6b4b7056"
+    },
+    {
+      "file": "src/components/pwa/ChargingDirectory.tsx",
+      "hash": "6ca55ae3fb14666ff38cd4a87e1db64063d4b3ddd9699374f23616aed93fd77a"
     },
     {
       "file": "src/components/pwa/DeliveryMap.tsx",
@@ -11681,6 +11721,10 @@
     {
       "file": "src/components/pwa/Explore.tsx",
       "hash": "6fc057826eaa329da3e97521cb13fb1b0a58b8e1fecf8996b192e6a61321f7a2"
+    },
+    {
+      "file": "src/components/pwa/InstallGuide.tsx",
+      "hash": "effd36cf9cb1bb2374db938d0129808d076ea7d386d89497095e42cceffcb4a5"
     },
     {
       "file": "src/components/pwa/MembershipBenefits.tsx",
@@ -11692,11 +11736,11 @@
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
-      "hash": "30ac793a331e334c1289047893e5ee43dec88cc404a7f215cd99b0991696af72"
+      "hash": "dff1d6080f10b6d873152ace4c62e413c75f370dc99cf23aefa54e239b42c7af"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
-      "hash": "6e773e3a4ce3b8309f9edf61b42d289dc65d59576534c90376112069a1b5aa17"
+      "hash": "20fce74b544cd397bee9add190719de1cf21d87ee392bd705fb8a24927056a3f"
     },
     {
       "file": "src/components/saga/EpisodeExtras.tsx",
@@ -11765,6 +11809,18 @@
     {
       "file": "src/components/ui/Section.tsx",
       "hash": "71c7bc3c46a49fc8fbcb0cc988b1571bd992630bb928989943c6a0760e157ce4"
+    },
+    {
+      "file": "src/data/appActivities.ts",
+      "hash": "12b393e8a4f07d727e9a27afa9e469517fa32081e65cc3b1d42f14f058a288a6"
+    },
+    {
+      "file": "src/data/appActivityPhotoCredits.json",
+      "hash": "1b88f11b0157e406790d576f512570e24390ebee52d0c5e1014e7c92671737f5"
+    },
+    {
+      "file": "src/data/appChargingStations.json",
+      "hash": "a5efb80c955e2064e2d6511ed0b2b521f65b8844b636b141bf4ce96da45367cf"
     },
     {
       "file": "src/data/appGuides.ts",
