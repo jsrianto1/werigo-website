@@ -21,11 +21,11 @@ import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { SagaTeaser } from "@/components/home/SagaTeaser";
 
-export const metadata = pageMetadata("Electric Scooter Rental Bali | Daily & Monthly", "Rent a Wedison electric scooter in Bali from Rp90,000/day. Hotel and villa delivery, two helmets included, plus weekly and monthly rates. Check your dates.", "/");
+export const metadata = pageMetadata("Electric Scooter Rental Bali | Daily & Monthly", "Rent a Wedison electric scooter in Bali from Rp90,000/day. Hotel and villa delivery, helmets available on request, plus weekly and monthly rates. Check your dates.", "/");
 
 const proof = [
   { icon: Truck, title: "Delivered to your stay", detail: "Hotel and villa handover" },
-  { icon: HardHat, title: "Two helmets included", detail: "Plus an installed phone holder" },
+  { icon: HardHat, title: "Helmets on request", detail: "Choose 0 to 2 at checkout" },
   { icon: BatteryCharging, title: "Charge at your stay", detail: "Guidance at handover" },
   { icon: MessageCircle, title: "A local team", detail: "Daily, 08:00 to 20:00 WITA" },
 ];
@@ -33,7 +33,7 @@ const steps = [
   ["Choose your ride", "Compare the models, select your dates and tell us where you are staying."],
   ["Review your estimate", "See the rental rate and optional extras before you send your request."],
   ["Confirm on WhatsApp", "Our team checks availability and agrees the final quote and delivery time with you."],
-  ["Meet your motorcycle", "Get your helmets, a condition check and a riding and charging briefing at handover."],
+  ["Meet your motorcycle", "Get a condition check and a riding and charging briefing at handover. Choose any helmets you need during booking."],
 ];
 
 export default function HomePage() {
@@ -45,7 +45,7 @@ export default function HomePage() {
         <div className="home-hero-inner"><div className="hero-copy">
           <p className="eyebrow"><T>{"Electric scooter rental in Bali"}</T></p>
           <h1 id="home-title"><T>{"Your Bali."}</T><br /><T>{"Your own ride."}</T></h1>
-          <p className="hero-lede"><T>{"Electric scooters delivered to your stay. Two helmets included. Daily, weekly and monthly rates."}</T></p>
+          <p className="hero-lede"><T>{"Electric scooters delivered to your stay. Helmets on request. Daily, weekly and monthly rates."}</T></p>
           <div className="hero-actions"><ButtonLink href="#hero-booking" variant="accent" size="lg"><T>{"Check availability"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><Link href="/monthly-scooter-rental-bali" className="text-link"><T>{"Monthly rentals"}</T></Link></div>
         </div>
         </div>
@@ -77,7 +77,7 @@ export default function HomePage() {
 
       <Section labelledBy="includes-heading">
         <div className="essentials-layout">
-          <div><h2 id="includes-heading" className="marketing-heading"><T>{"The essentials."}</T><br /><T>{"Already sorted."}</T></h2><p className="mt-5 max-w-lg leading-relaxed text-ink-soft"><T>{"Your rental is more than a motorcycle. Here is what comes with every Werigo ride."}</T></p><ul className="essentials-list">{confirmedBenefits.map(b => <li key={b.id}><Check aria-hidden="true" className="h-5 w-5 shrink-0 text-primary" /><span><strong><T>{b.label}</T></strong><span><T>{b.description}</T></span></span></li>)}</ul><p className="mt-6 text-sm leading-relaxed text-ink-soft"><T>{"A rain poncho and protection options can be added on request. Ask our team about availability, pricing and conditions."}</T></p></div>
+          <div><h2 id="includes-heading" className="marketing-heading"><T>{"The essentials."}</T><br /><T>{"Already sorted."}</T></h2><p className="mt-5 max-w-lg leading-relaxed text-ink-soft"><T>{"Your rental is more than a motorcycle. Here is what comes with every Werigo ride."}</T></p><ul className="essentials-list">{confirmedBenefits.map(b => <li key={b.id}><Check aria-hidden="true" className="h-5 w-5 shrink-0 text-primary" /><span><strong><T>{b.label}</T></strong><span><T>{b.description}</T></span></span></li>)}</ul><p className="mt-6 text-sm leading-relaxed text-ink-soft"><T>{"Need helmets? Choose 0 to 2 during booking. No helmets are added automatically."}</T></p></div>
           <div className="charging-panel"><Image src="/media/supercharge/supercharge-unit.png" alt="Official Wedison SuperCharge charging unit" width={1200} height={1600} sizes="(max-width: 768px) 80vw, 360px" className="charging-photo" /><h3 className="font-display text-2xl"><T>{"A charging plan that fits your day."}</T></h3><p className="mt-3 leading-relaxed text-ink-soft"><T>{"Charge at your accommodation with a suitable outlet and the official charger. For compatible models, ask us about Wedison SuperCharge locations."}</T></p><Link href="/supercharge" className="text-link mt-5"><T>{"Explore SuperCharge"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
         </div>
       </Section>

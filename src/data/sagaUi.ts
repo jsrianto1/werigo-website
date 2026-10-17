@@ -30,7 +30,7 @@ const en = {
   realEyebrow: "Out of the comic, onto the road",
   realTitle: "Every bike in the saga is in our fleet",
   realBody:
-    "The Athena Arya delivers on, the EdPower Dewa leads the guild with and Komang's red Victory are all Wedison bikes we rent in Bali. We deliver yours to your hotel or villa with at least 80% battery, two helmets and a phone holder already fitted.",
+    "The Athena Arya delivers on, the EdPower Dewa leads the guild with and Komang's red Victory are all Wedison bikes we rent in Bali. We deliver yours to your hotel or villa with at least 80% battery, a phone holder already fitted. Choose 0 to 2 optional helmets when booking.",
   book: "Book your ride",
   seeFleet: "See the fleet",
   chooseEpisode: "Choose a chapter",
@@ -51,7 +51,7 @@ const en = {
   bikesReal: "The bikes are real",
   rideWhat: "Ride what you just read",
   rideBody:
-    "Every bike in this chapter is a Wedison you can rent from Werigo in Bali. We deliver it to your hotel or villa with at least 80% battery, two helmets and a phone holder fitted.",
+    "Every bike in this chapter is a Wedison you can rent from Werigo in Bali. We deliver it to your hotel or villa with at least 80% battery, a phone holder fitted. Choose 0 to 2 optional helmets when booking.",
   seeRates: "See rates and details",
   transcript: "Read the transcript",
   howWas: "How was this chapter?",
@@ -122,7 +122,7 @@ const id: Dict = {
   realEyebrow: "Dari komik ke jalan raya",
   realTitle: "Semua motor di saga ini ada di armada kami",
   realBody:
-    "Athena yang dipakai Arya mengantar, EdPower milik Dewa sang guild master, dan Victory merah Komang adalah motor Wedison yang kami sewakan di Bali. Motornya kami antar ke hotel atau villa kamu dengan baterai minimal 80%, dua helm dan phone holder yang sudah terpasang.",
+    "Athena yang dipakai Arya mengantar, EdPower milik Dewa sang guild master, dan Victory merah Komang adalah motor Wedison yang kami sewakan di Bali. Motornya kami antar ke hotel atau villa kamu dengan baterai minimal 80%, phone holder yang sudah terpasang. Pilih 0 sampai 2 helm saat memesan.",
   book: "Sewa sekarang",
   seeFleet: "Lihat armada",
   chooseEpisode: "Pilih chapter",
@@ -143,7 +143,7 @@ const id: Dict = {
   bikesReal: "Motornya nyata",
   rideWhat: "Naik motor yang barusan kamu baca",
   rideBody:
-    "Setiap motor di chapter ini adalah Wedison yang bisa kamu sewa di Werigo, Bali. Kami antar ke hotel atau villa kamu dengan baterai minimal 80%, dua helm dan phone holder terpasang.",
+    "Setiap motor di chapter ini adalah Wedison yang bisa kamu sewa di Werigo, Bali. Kami antar ke hotel atau villa kamu dengan baterai minimal 80%, phone holder terpasang. Pilih 0 sampai 2 helm saat memesan.",
   seeRates: "Lihat harga dan detail",
   transcript: "Baca transkrip (bahasa Inggris)",
   howWas: "Gimana chapter ini?",

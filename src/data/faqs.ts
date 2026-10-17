@@ -71,7 +71,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What is included with every rental?",
         answer:
-          "Every rental includes two sanitised helmets and one premium phone holder already installed on the motorcycle. A rain poncho is available as an optional request, with availability and price confirmed on WhatsApp.",
+          "Every rental includes one premium phone holder installed on the motorcycle. Helmets are optional: choose 0 to 2 per booking, at no additional charge. No helmets are added automatically.",
       },
       {
         question: "Is there a minimum age for the motorcycles?",
@@ -243,7 +243,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What am I liable for if the motorcycle is damaged?",
         answer:
-          "Liability terms for your rental are confirmed in writing with your booking quote, and the optional damage protection plan is explained before you choose it. You will never be held to terms that weren't shown to you at booking.",
+          "Liability terms for your rental are confirmed in writing with your booking quote, and any rental responsibilities are explained before you confirm. You will never be held to terms that weren't shown to you at booking.",
       },
       {
         question: "What about punctures and minor mechanical issues?",

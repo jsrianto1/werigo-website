@@ -23,7 +23,7 @@ interface Loaded {
   whatsappUrl: string;
 }
 
-export function ConfirmationView() {
+export function ConfirmationView({ bookingBase = "/book", accountPath = "/account", loginPath = "/account/login" }: { bookingBase?: "/book" | "/app/rent"; accountPath?: string; loginPath?: string }) {
   const params = useSearchParams();
   const code = (params.get("code") ?? "").toUpperCase();
   const [state, setState] = useState<"loading" | "ok" | "auth" | "missing" | "error">("loading");
@@ -123,20 +123,20 @@ export function ConfirmationView() {
         <h1 className="font-display text-3xl text-ink"><T>{state === "missing" ? "No booking to show" : "We couldn't load this booking"}</T></h1>
         <p className="mt-3 text-ink-soft"><T>{state === "missing" ? "Start a booking and your confirmation will appear here." : "Please refresh the page or open it from your account."}</T></p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="/account" variant="outline"><T>{"My bookings"}</T></ButtonLink>
-          <ButtonLink href="/book" variant="accent"><T>{"Start a new booking"}</T></ButtonLink>
+          <ButtonLink href={accountPath} variant="outline"><T>{"My bookings"}</T></ButtonLink>
+          <ButtonLink href={bookingBase} variant="accent"><T>{"Start a new booking"}</T></ButtonLink>
         </div>
       </div>
     );
   }
 
   if (state === "auth") {
-    const next = `/book/confirmation?code=${encodeURIComponent(code)}`;
+    const next = `${bookingBase}/confirmation?code=${encodeURIComponent(code)}`;
     return (
       <div className="mx-auto max-w-xl text-center">
         <h1 className="font-display text-3xl text-ink"><T>{"Sign in to see this booking"}</T></h1>
         <p className="mt-3 text-ink-soft"><T>{"Booking"}</T> <span className="tnum font-semibold text-ink">{code}</span> <T>{"belongs to a Werigo account. Sign in with the account you used at checkout."}</T></p>
-        <ButtonLink href={`/account/login?next=${encodeURIComponent(next)}`} variant="accent" className="mt-6"><T>{"Sign in"}</T></ButtonLink>
+        <ButtonLink href={`${loginPath}?next=${encodeURIComponent(next)}`} variant="accent" className="mt-6"><T>{"Sign in"}</T></ButtonLink>
       </div>
     );
   }
@@ -252,7 +252,7 @@ export function ConfirmationView() {
           <MessageCircle className="h-5 w-5" aria-hidden="true" /><T>{"Message us on WhatsApp"}</T>
         </a>
         <Link
-          href="/account"
+          href={accountPath}
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[10px] bg-primary px-6 text-base font-semibold text-white transition-colors hover:bg-primary-strong"
         ><T>{"My bookings"}</T> <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>

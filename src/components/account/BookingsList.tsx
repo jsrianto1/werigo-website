@@ -41,7 +41,7 @@ export function canPay(b: PublicBooking): boolean {
   );
 }
 
-export function BookingsList() {
+export function BookingsList({ bookingBase = "/book" }: { bookingBase?: "/book" | "/app/rent" }) {
   const [bookings, setBookings] = useState<PublicBooking[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [paying, setPaying] = useState<string | null>(null);
@@ -111,7 +111,7 @@ export function BookingsList() {
           <Inbox className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />
           <h2 className="mt-3 font-display text-xl text-ink"><T>{"No bookings yet"}</T></h2>
           <p className="mx-auto mt-1 max-w-sm text-sm text-ink-soft"><T>{"Your bookings and payments will appear here."}</T></p>
-          <ButtonLink href="/book" variant="accent" className="mt-5"><T>{"Find a ride"}</T></ButtonLink>
+          <ButtonLink href={bookingBase} variant="accent" className="mt-5"><T>{"Find a ride"}</T></ButtonLink>
         </div>
       ) : (
         <ul className="space-y-4">
@@ -157,7 +157,7 @@ export function BookingsList() {
                       {paying === b.bookingCode ? <T>{"Opening payment…"}</T> : <T>{"Pay now"}</T>}
                     </Button>
                   ) : null}
-                  <ButtonLink href={`/book/confirmation?code=${encodeURIComponent(b.bookingCode)}`} variant="outline" size="sm">
+                  <ButtonLink href={`${bookingBase}/confirmation?code=${encodeURIComponent(b.bookingCode)}`} variant="outline" size="sm">
                     <T>{"Details"}</T>
                   </ButtonLink>
                   <a

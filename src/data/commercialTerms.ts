@@ -1,14 +1,12 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BatteryCharging,
-  CloudRain,
   HardHat,
   MapPin,
   MessageCircle,
   ShieldCheck,
   Smartphone,
   Truck,
-  Umbrella,
 } from "lucide-react";
 
 /**
@@ -37,19 +35,19 @@ export interface RentalBenefit {
 }
 
 /**
- * Every rental includes exactly two sanitised helmets and one
- * premium phone holder already installed. Do not add unverified
+ * A premium phone holder is already installed. Helmets are optional,
+ * selected at checkout (0 to 2 per booking). Do not add unverified
  * items (hairnets, raincoats, insurance, roadside or 24-hour
  * assistance) without management confirmation.
  */
 export const rentalBenefits: RentalBenefit[] = [
   {
     id: "helmets",
-    label: "2 sanitised helmets",
-    description: "Two sanitised helmets come with every motorcycle.",
+    label: "Optional helmets",
+    description: "Choose 0 to 2 helmets during booking.",
     icon: HardHat,
-    confirmed: true,
-    chip: true,
+    confirmed: false,
+    chip: false,
   },
   {
     id: "phone-holder",
@@ -109,22 +107,7 @@ export const chipBenefits = confirmedBenefits.filter((b) => b.chip);
  * Request-only add-ons shown in the benefits section. These are not
  * included and carry no public price; wording must stay qualified.
  */
-export const requestOnlyBenefits: { id: string; label: string; description: string; icon: LucideIcon }[] = [
-  {
-    id: "rain-poncho",
-    label: "Rain poncho on request",
-    description:
-      "Available as an optional request. Availability and price confirmed on WhatsApp.",
-    icon: CloudRain,
-  },
-  {
-    id: "protection",
-    label: "Optional protection at checkout",
-    description:
-      "Cancellation and Motorcycle Protection can be added to your request. Conditions confirmed before you approve your quote.",
-    icon: Umbrella,
-  },
-];
+export const requestOnlyBenefits: { id: string; label: string; description: string; icon: LucideIcon }[] = [];
 
 /* ================= Card payment fee: none shown ================= */
 

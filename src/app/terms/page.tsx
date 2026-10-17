@@ -16,14 +16,14 @@ export default function TermsPage() {
         <SectionHeading as="h1"
           eyebrow="Legal"
           title="Terms & Conditions"
-          lede="These are the current Werigo rental terms used for every booking request. Your final quote, delivery arrangements and any optional protection are confirmed with you on WhatsApp before anything is charged."
+          lede="These are the current Werigo rental terms used for every booking request. Your final quote and delivery arrangements are confirmed with you on WhatsApp before anything is charged."
         />
         <div className="rounded-[14px] border border-line bg-card p-6 sm:p-8">
           <ul className="space-y-3 text-sm leading-relaxed text-ink-soft">
             <li>Minimum rental period is 2 days.</li>
             <li>
-              Every rental includes two sanitised helmets and one premium
-              phone holder already installed on the motorcycle.
+              Every rental includes one premium phone holder installed on the motorcycle.
+              Helmets are optional: choose 0 to 2 per booking at no additional charge.
             </li>
             <li>
               Please return the motorcycle with at least 80% battery unless
@@ -39,11 +39,6 @@ export default function TermsPage() {
               WhatsApp before anything is charged.
             </li>
             <li>
-              Protection is provided in-house by Werigo, not by an insurer,
-              and does not cover personal injury, medical costs, personal
-              belongings or liability to others.
-            </li>
-            <li>
               Airport handover at Ngurah Rai Airport carries a US$1.00
               delivery fee and a US$1.00 collection fee, each applied once
               per booking. If both pickup and return are at the airport,
@@ -51,14 +46,6 @@ export default function TermsPage() {
             </li>
             <li>
               Delivery and collection cost Rp100,000 per booking in tourist service areas outside Denpasar, including both drop-off and pick-up. Beyond 15 km from the Wedison showroom on Jl. Gatot Subroto Tengah, add Rp20,000 for each additional 5 km or part thereof. Our team confirms the route distance and final total on WhatsApp before payment. Denpasar remains Rp75,000. Existing monthly-rental and within-5-km waivers remain subject to confirmation.
-            </li>
-            <li>
-              Optional protection is added only when you select it.
-              Cancellation Protection is US$0.50 per rental day and
-              Motorcycle Protection is US$4.95 per motorcycle per rental
-              day. Eligibility, coverage, exclusions, refunds and any
-              applicable excess are confirmed with you before you approve
-              your quote.
             </li>
             <li>
               Riders must hold a licence valid for riding in Indonesia and

@@ -16,7 +16,7 @@ import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { formatUsdApprox, usdEstimateNote } from "@/lib/currency";
 import { getUsdIdrRate } from "@/lib/exchangeRate";
 
-export const metadata = pageMetadata("Compare Electric Scooters & Rates in Bali", "Compare four Wedison electric scooters in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Two helmets included; hotel delivery by arrangement.", "/fleet");
+export const metadata = pageMetadata("Compare Electric Scooters & Rates in Bali", "Compare four Wedison electric scooters in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Helmets on request; hotel delivery by arrangement.", "/fleet");
 
 export default async function FleetPage() {
   const cards = getPrimaryCards();
@@ -37,7 +37,7 @@ export default async function FleetPage() {
             <VehicleCard key={entry.id} entry={entry} />
           ))}
         </div>
-        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint"><T>{"Minimum rental 2 days. Rates are per motorcycle per day in IDR; US dollar amounts are estimates. A rain poncho can be requested and optional protection can be added at checkout. Availability and your final quote are confirmed on WhatsApp."}</T>{" "}</p>
+        <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-ink-faint"><T>{"Minimum rental 2 days. Rates are per motorcycle per day in IDR; US dollar amounts are estimates. Choose 0 to 2 helmets at checkout if you need them. Availability and your final quote are confirmed on WhatsApp."}</T>{" "}</p>
       </Section>
 
       <RidingMotorcycle />

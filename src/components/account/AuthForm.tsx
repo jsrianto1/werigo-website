@@ -42,6 +42,7 @@ export function AuthForm({
   callbackURL = "/account",
   onSuccess,
   heading = true,
+  appMode = false,
 }: {
   initialMode?: AuthMode;
   googleEnabled: boolean;
@@ -50,6 +51,7 @@ export function AuthForm({
   /** Inline use (checkout): called instead of navigating. */
   onSuccess?: () => void;
   heading?: boolean;
+  appMode?: boolean;
 }) {
   const router = useRouter();
   const [mode, setMode] = useState<AuthMode>(initialMode);
@@ -192,6 +194,7 @@ export function AuthForm({
         <div className={heading ? "mt-5" : ""} />
       )}
 
+      {appMode && !identityStep && <div className="wr-auth-tabs" aria-label="Choose sign in or sign up"><button type="button" aria-pressed={mode === "login"} onClick={() => { setMode("login"); setError(null); }}>Log in</button><button type="button" aria-pressed={mode === "register"} onClick={() => { setMode("register"); setError(null); }}>Sign up</button></div>}
       <form onSubmit={submit} className="space-y-4">
         {identityStep ? (
           <div className="space-y-4">

@@ -191,7 +191,7 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
       : d.addOnsTotalUsd > 0
         ? `*Estimated total: ${idr(d.estimatedTotalIdr + d.areaFeeIdr)} plus US$${d.addOnsTotalUsd.toFixed(2)} add-ons*`
         : `*Estimated total: ${idr(d.estimatedTotalIdr + d.areaFeeIdr)}*`,
-    `Availability, final price, protection conditions and payment are confirmed by the Werigo team.`,
+    `Availability, final price and payment are confirmed by the Werigo team.`,
     ``,
     `*Delivery*`,
     `${d.pickupAreaName}${d.pickupAddress ? `, ${d.pickupAddress}` : ""}`,

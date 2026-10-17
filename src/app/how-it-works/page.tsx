@@ -29,12 +29,12 @@ const journey = [
   {
     icon: Truck,
     title: "Delivery to your door",
-    text: "Your motorcycle arrives at your hotel, villa or guesthouse with at least 80% battery. We do a condition walk-around together, fit your helmets, and run through the controls until you're comfortable.",
+    text: "Your motorcycle arrives at your hotel, villa or guesthouse with at least 80% battery. We do a condition walk-around together, fit any requested helmets, and run through the controls until you're comfortable.",
   },
   {
     icon: KeyRound,
     title: "Ride the island",
-    text: "Explore on your own schedule. Two sanitised helmets and an installed phone holder are always included; our team explains the controls and charging before you set off. Claimed range varies with riding conditions.",
+    text: "Explore on your own schedule. An installed phone holder is included; helmets are optional during booking, with a maximum of 2 per booking; our team explains the controls and charging before you set off. Claimed range varies with riding conditions.",
   },
   {
     icon: BatteryCharging,

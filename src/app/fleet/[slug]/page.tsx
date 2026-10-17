@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return {};
   return pageMetadata(
     `${entry.displayName} Electric Scooter Rental Bali`,
-    `Rent the ${entry.displayName} in Bali from ${formatIdr(ratesIdrPerDay[slug].daily)}/day for 2 to 6 days. Monthly rates available. Two helmets and hotel delivery by arrangement.`,
+    `Rent the ${entry.displayName} in Bali from ${formatIdr(ratesIdrPerDay[slug].daily)}/day for 2 to 6 days. Monthly rates available. Optional helmets and hotel delivery by arrangement.`,
     `/fleet/${slug}`,
     `/media/fleet/${slug}/main.webp`,
   );
@@ -278,7 +278,7 @@ export default async function VehicleDetailPage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-ink-faint"><T>{"Delivery, a condition walk-around and a riding briefing are part of every handover. Extras like additional helmets can be added during booking."}</T>{" "}</p>
+            <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-ink-faint"><T>{"Delivery, a condition walk-around and a riding briefing are part of every handover. Choose 0 to 2 helmets during booking if you need them."}</T>{" "}</p>
           </div>
         </div>
         <p className="mt-6 text-xs leading-relaxed text-ink-faint"><T>{specDisclaimer}</T></p>

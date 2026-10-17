@@ -13,17 +13,16 @@ import {
   Minus,
   Plane,
   Plus,
-  ShieldCheck,
   Tag,
   Truck,
 } from "lucide-react";
-import { confirmedBenefits } from "@/data/commercialTerms";
+import { confirmedBenefits, cancellationPolicy } from "@/data/commercialTerms";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { BookingSummary } from "@/components/booking/BookingSummary";
 import { Button } from "@/components/ui/Button";
 import { toCustomerEntry } from "@/data/vehicles";
 import { getPickupPoint, getArea, deliveryFeeWaiverNote } from "@/data/locations";
-import { rentalExtras } from "@/data/extras";
+import { rentalExtras, sanitizeExtraQuantities } from "@/data/extras";
 import {
   rentalDays,
   isValidPeriod,
@@ -41,7 +40,6 @@ import {
   computeAddOns,
   formatUsdFee,
   usdToIdr,
-  protectionCopy,
 } from "@/lib/addons";
 import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
@@ -53,6 +51,8 @@ import { useSnap } from "@/lib/useSnap";
 import { AuthForm } from "@/components/account/AuthForm";
 import { IdentityForm } from "@/components/account/IdentityForm";
 import { VoucherPicker, type DiscountOptionView, type UnavailableVoucherView } from "@/components/booking/VoucherPicker";
+import { readAppPickup, type AppPickup } from "@/lib/appPickup";
+import { site } from "@/lib/config";
 import {
   emptyCustomer,
   saveDraft,
@@ -90,7 +90,7 @@ const phaseToStep: Record<Phase, number> = {
   sent: 5,
 };
 
-export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolean }) {
+export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: { googleEnabled?: boolean; bookingBase?: "/book" | "/app/rent" }) {
   const { t } = useLanguage();
   const params = useSearchParams();
   const router = useRouter();
@@ -142,6 +142,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       customer-facing model (four rental models only). */
   const rawEntryId = params.get("vehicle") ?? "";
   const pickup = params.get("pickup") ?? "";
+  const showroomPickup = pickup === "showroom";
   const ret = params.get("return") ?? pickup;
   // Partner referral code carried through from /book. Pre-fills the
   // promo code field below so the team can attribute the booking to
@@ -168,8 +169,8 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   const [phase, setPhase] = useState<Phase>("extras");
   const [quantity, setQuantity] = useState(1);
   const [extraQty, setExtraQty] = useState<Record<string, number>>({});
-  // Optional protection: never preselected. The customer opts in.
-  const [protection, setProtection] = useState({
+  // Protection is withdrawn. Never restore a previously selected option.
+  const [protection] = useState({
     cancellation: false,
     motorcycle: false,
   });
@@ -184,6 +185,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
   const [codeStatus, setCodeStatus] = useState<{ code: string; ok: boolean; message?: string } | null>(null);
   const [discountsLoading, setDiscountsLoading] = useState(false);
   const [customer, setCustomer] = useState<CustomerInfo>(emptyCustomer);
+  const [appPin, setAppPin] = useState<AppPickup | null>(null);
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerInfo, string>>>({});
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
@@ -207,7 +209,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuantity(draft.quantity);
       setExtraQty(
-        Object.fromEntries(draft.extras.map((e) => [e.id, e.quantity]))
+        sanitizeExtraQuantities(draft.extras)
       );
       setPromoCode(draft.promoCode);
       if (draft.promoCode) setAppliedCode(draft.promoCode);
@@ -224,9 +226,23 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
           whatsapp: d.whatsapp || c.whatsapp,
         };
       });
-      if (draft.protection) setProtection(draft.protection);
     }
   }, [entryId]);
+
+  useEffect(() => {
+    if (bookingBase !== "/app/rent") return;
+    if (showroomPickup) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCustomer(current => ({ ...current, hotelName: "Werigo showroom", address: site.address.display }));
+      return;
+    }
+    try {
+      const pin = readAppPickup(sessionStorage, pickup);
+      // Restore the explicitly confirmed pin from temporary tab storage.
+      setAppPin(pin);
+      if (pin) setCustomer(current => current.address ? current : { ...current, address: pin.mapsUrl });
+    } catch { /* Address entry remains available. */ }
+  }, [bookingBase, pickup, showroomPickup]);
 
   // Signed-in customers: pre-fill contact details once, never overwrite typing.
   useEffect(() => {
@@ -315,9 +331,10 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
         .map(([id, q]) => ({ id, quantity: q })),
       protection,
       promoCode,
-      customer,
+      // Keep precise app delivery pins out of long-lived localStorage drafts.
+      customer: bookingBase === "/app/rent" ? { ...customer, address: "" } : customer,
     });
-  }, [entryId, pickup, ret, period, quantity, extraQty, protection, promoCode, customer]);
+  }, [entryId, pickup, ret, period, quantity, extraQty, protection, promoCode, customer, bookingBase]);
 
   // Focus heading on phase change for keyboard/screen-reader users
   useEffect(() => {
@@ -387,7 +404,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
         <h1 className="font-display text-3xl text-ink"><T>{"Your booking session is incomplete"}</T>{" "}</h1>
         <p className="mt-3 text-ink-soft"><T>{"We couldn't find the ride or dates for this checkout."}</T>{" "}{" "}<T>{MIN_RENTAL_MESSAGE}</T>{" "}<T>{"Start a fresh search. It only takes a moment."}</T>{" "}</p>
         <Link
-          href="/book"
+          href={bookingBase}
           className="mt-6 inline-flex min-h-11 items-center justify-center rounded-[10px] bg-accent px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
         ><T>{"Start a new search"}</T>{" "}</Link>
       </div>
@@ -421,7 +438,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
     }
     if (customer.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(customer.email))
       next.email = "Enter a valid email address, or leave it empty.";
-    if (!customer.hotelName.trim())
+    if (!showroomPickup && !customer.hotelName.trim())
       next.hotelName = "Enter your hotel or villa name so we can deliver.";
     if (!customer.termsAccepted)
       next.termsAccepted = "Please accept the terms to continue.";
@@ -579,7 +596,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
           endAt: `${period.endDate}T${period.endTime}:00+08:00`,
           vehicleModel: entry.modelSlug,
           quantity,
-          deliveryMethod: "delivery",
+          deliveryMethod: showroomPickup ? "pickup" : "delivery",
           customerNotes: notes,
           privacyConsent: true,
           sourcePage: window.location.pathname,
@@ -620,7 +637,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
           setSubmitError("The payment could not be completed. You can try again from the confirmation page.");
         }
       }
-      router.push(`/book/confirmation?code=${encodeURIComponent(code)}`);
+      router.push(`${bookingBase}/confirmation?code=${encodeURIComponent(code)}`);
     } catch {
       setSubmitting(false);
       setSubmitError(
@@ -636,7 +653,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
 
   return (
     <div>
-      <BookingStepper current={phaseToStep[phase]} />
+      {bookingBase === "/app/rent" ? <nav aria-label="Booking progress" className="wr-app-progress"><Link href={`${bookingBase}?${searchQs}&vehicle=${entryId}`} aria-label="Back to your rental"><ArrowLeft size={18}/></Link><strong>{phase === "extras" ? "Your rental · Options" : phase === "details" ? "Your rental · Rider details" : phase === "review" ? "Your rental · Review & payment" : "Your rental · Request ready"}</strong><span>{phase === "extras" ? "1 / 3" : phase === "details" ? "2 / 3" : "3 / 3"}</span></nav> : <BookingStepper current={phaseToStep[phase]} />}
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0">
@@ -649,9 +666,9 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
             ) : null}{" "}
             <T>{area?.name}</T>
             {returnArea && ret !== pickup ? ` → ${returnArea.name}` : ""} ·{" "}
-            {period.startDate} {period.startTime} → {period.endDate} {period.endTime}
+            {bookingBase === "/app/rent" ? `${days} days` : `${period.startDate} ${period.startTime} → ${period.endDate} ${period.endTime}`}
             <Link
-              href={`/book?${searchQs}`}
+              href={`${bookingBase}?${searchQs}&vehicle=${entryId}`}
               className="ml-2 font-semibold text-primary hover:text-primary-strong"
             ><T>{"Change"}</T>{" "}</Link>
           </p>
@@ -664,14 +681,14 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
               ><T>{"Make it yours"}</T>{" "}</h1>
-              <p className="mt-2 text-ink-soft"><T>{"Two sanitised helmets and one installed phone holder are already included. The add-ons below are free of charge; availability is confirmed on WhatsApp."}</T>{" "}</p>
+              <p className="mt-2 text-ink-soft"><T>{bookingBase === "/app/rent" ? "Choose how many motorcycles and helmets you need." : "Choose your motorcycle quantity and any helmets you need. Helmets are optional, with a maximum of 2 per booking. A phone holder is installed on the motorcycle."}</T>{" "}</p>
 
 
               {/* Quantity */}
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-[14px] border border-line bg-card p-5">
+              <div className="wr-unit-option mt-4 flex flex-wrap items-center justify-between gap-4 rounded-[14px] border border-line bg-card p-5">
                 <div>
                   <h2 className="font-semibold text-ink"><T>{"Number of motorcycles"}</T></h2>
-                  <p className="mt-0.5 text-sm text-ink-soft"><T>{"Riding as a group? Request up to 4 of the same model."}</T>{" "}</p>
+                  <p className="mt-0.5 text-sm text-ink-soft"><T>{bookingBase === "/app/rent" ? "Up to 4 of the same model" : "Riding as a group? Request up to 4 of the same model."}</T>{" "}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
@@ -697,7 +714,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
               </div>
 
               {/* Extras list */}
-              <ul className="mt-4 space-y-4">
+              <ul className="wr-extra-options mt-4 space-y-4">
                 {rentalExtras.map((extra) => (
                   <li
                     key={extra.id}
@@ -708,7 +725,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                         <T>{extra.name}</T>
                         <span className="ml-2 rounded-full bg-ok-soft px-2 py-0.5 text-xs font-medium text-ok"><T>{"Free"}</T>{" "}</span>
                       </h2>
-                      <p className="mt-0.5 text-sm text-ink-soft"><T>{extra.description}</T></p>
+                      <p className="mt-0.5 text-sm text-ink-soft"><T>{bookingBase === "/app/rent" ? "Optional · maximum 2 per booking" : extra.description}</T></p>
                     </div>
                     {(
                       <div className="flex shrink-0 items-center gap-3">
@@ -737,74 +754,6 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 ))}
               </ul>
 
-              {/* Optional protection — unchecked by default */}
-              <h2 className="mt-8 font-display text-2xl text-ink"><T>{"Optional protection"}</T>{" "}</h2>
-              <ul className="mt-3 space-y-4">
-                {[
-                  {
-                    key: "cancellation" as const,
-                    name: "Cancellation Protection",
-                    price: `${formatUsdFee(0.5)} ${t("per rental day")}`,
-                    amount: addOnBreakdown?.cancellationProtectionUsd ?? 0,
-                    computed: formatUsdFee(0.5 * days),
-                    copy: protectionCopy.cancellation,
-                  },
-                  {
-                    key: "motorcycle" as const,
-                    name: "Motorcycle Protection",
-                    price: `${formatUsdFee(4.95)} ${t("per motorcycle, per rental day")}`,
-                    amount: addOnBreakdown?.motorcycleProtectionUsd ?? 0,
-                    computed: formatUsdFee(4.95 * days * quantity),
-                    copy: protectionCopy.motorcycle,
-                  },
-                ].map((item) => {
-                  const selected = protection[item.key];
-                  return (
-                    <li
-                      key={item.key}
-                      className={`rounded-[14px] border bg-card p-5 transition-colors ${
-                        selected ? "border-primary" : "border-line"
-                      }`}
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h3 className="flex items-center gap-2 font-semibold text-ink">
-                            <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
-                            <T>{item.name}</T>
-                          </h3>
-                          <p className="tnum mt-0.5 text-sm font-medium text-ink-soft">
-                            {item.price}
-                          </p>
-                          <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                            <T>{item.copy}</T>
-                          </p>
-                          {selected ? (
-                            <p className="tnum mt-2 text-sm font-semibold text-primary"><T>{"Added:"}</T>{" "}{item.computed}{" "}<T>{"for this booking"}</T>{" "}</p>
-                          ) : null}
-                        </div>
-                        <button
-                          type="button"
-                          aria-pressed={selected}
-                          onClick={() =>
-                            setProtection((prev) => ({
-                              ...prev,
-                              [item.key]: !prev[item.key],
-                            }))
-                          }
-                          className={`min-h-11 shrink-0 cursor-pointer rounded-[10px] border px-4 text-sm font-semibold transition-colors ${
-                            selected
-                              ? "border-line-strong text-ink hover:border-danger hover:text-danger"
-                              : "border-primary text-primary hover:bg-primary-faint"
-                          }`}
-                        >
-                          {t(selected ? "Remove" : "Add")}
-                        </button>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-
               {(area?.isAirport || returnArea?.isAirport) && addOnBreakdown ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
                   <Plane className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Airport handover:"}</T>{" "}{area?.isAirport ? `delivery fee ${formatUsdFee(1)}` : ""}
@@ -812,18 +761,19 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                   {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}<T>{", once per booking."}</T>{" "}</p>
               ) : null}
 
-              {manualDeliveryQuote && <p className="mt-3 text-sm text-ink-soft">{deliveryPricingNote}</p>}
+              {manualDeliveryQuote && bookingBase === "/book" && <p className="mt-3 text-sm text-ink-soft">{deliveryPricingNote}</p>}
               {areaFeesIdr > 0 ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{deliveryFeeWaiverNote}</T>
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{bookingBase === "/app/rent" ? "Final distance and any waiver confirmed before payment." : deliveryFeeWaiverNote}</T>
                 </p>
               ) : areaFeeWaivedMonthly ? (
                 <p className="mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
                   <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery and collection are free on this rental because it is one month or longer."}</T>{" "}</p>
               ) : null}
 
+              {bookingBase === "/app/rent" && <section className="wr-policy"><h2>Before you book</h2><p><strong>Cancellation & refunds.</strong> {cancellationPolicy.approved ? cancellationPolicy.summary : "Ask Werigo to confirm the applicable cancellation fee and refund terms before you pay."}</p><p className="mt-3"><strong>Return battery.</strong> {batteryReturnNote}</p><Link href="/terms" target="_blank" className="mt-3 inline-flex text-xs">Read rental terms ↗</Link></section>}
               {/* Included with every rental */}
-              <h2 className="mt-8 font-display text-2xl text-ink"><T>{"Included with every rental"}</T>{" "}</h2>
+              {bookingBase === "/book" && <><h2 className="mt-8 font-display text-2xl text-ink"><T>{"Included with every rental"}</T>{" "}</h2>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {confirmedBenefits.map((b) => (
                   <li
@@ -836,6 +786,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 ))}
               </ul>
 
+              </> }
               {/* Vouchers (database mode) / promo code note (WhatsApp mode) */}
               {!whatsappCheckout ? (
                 <div className="mt-4">
@@ -895,7 +846,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
 
               <div className="mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
                 <Link
-                  href={`/book?${searchQs}&vehicle=${entryId}`}
+                  href={`${bookingBase}?${searchQs}&vehicle=${entryId}`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-4 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Back to rides"}</T>{" "}</Link>
@@ -957,6 +908,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 }}
                 noValidate
               >
+                {appPin && <div className="wr-checkout-pin sm:col-span-2"><strong>Delivery pin from your app</strong><a href={appPin.mapsUrl} target="_blank" rel="noopener noreferrer">Open in Google Maps</a><p>Your address details below are sent with your booking request.</p><button type="button" onClick={() => setCustomer(current => ({ ...current, address: appPin.mapsUrl }))}>Use this pin as my address</button></div>}
                 {(
                   [
                     {
@@ -1020,7 +972,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                       hint: "If you're booking for arrival day, we track delays.",
                     },
                   ] as const
-                ).map((field) => (
+                ).filter(field => !showroomPickup || !["hotelName", "address", "flightNumber"].includes(field.key)).map((field) => (
                   <div key={field.key}>
                     <label
                       htmlFor={`field-${field.key}`}
@@ -1310,7 +1262,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                             formatUsdApprox(quote.totalIdr, usdRate)
                               ? ` (${formatUsdApprox(quote.totalIdr, usdRate)})`
                               : ""
-                          }. ${t("Add-ons and protection requests are free of charge and confirmed by the team.")}`,
+                          }. ${t("Your selected helmets are provided at no additional charge.")}`,
                         },
                       ]
                     : []),
@@ -1415,6 +1367,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                 </div>
               ) : null}
               {manualDeliveryQuote && <p role="status" className="mt-4 rounded-xl border border-line p-4 text-sm">Your delivery fee is a base estimate. We will confirm the route distance, any surcharge and your final total on WhatsApp before payment. This sends an enquiry; your booking is confirmed by our team.</p>}
+              {bookingBase === "/app/rent" && <section className="wr-policy"><h2>{whatsappCheckout ? "Confirm quote before payment" : "Payment"}</h2><p>{whatsappCheckout ? "Send your request to Werigo first. Our team confirms availability, the final total and applicable cancellation terms before arranging payment. No charge is made by this request." : "Continue to secure Midtrans checkout to choose from the payment methods available for your booking, including cards and QRIS when supported."}</p></section>}
               {submitError ? (
                 <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
                   <T>{submitError}</T>
@@ -1435,7 +1388,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
                     <AuthForm
                       googleEnabled={googleEnabled}
                       heading={false}
-                      callbackURL={`/book/checkout?${params.toString()}`}
+                      callbackURL={`${bookingBase}/checkout?${params.toString()}`}
                       onSuccess={() => setSubmitError(null)}
                     />
                   </div>
@@ -1503,7 +1456,7 @@ export function CheckoutFlow({ googleEnabled = false }: { googleEnabled?: boolea
               <p className="mt-5 text-xs leading-relaxed text-ink-faint"><T>{"Your rental stays a request until our team confirms availability and you approve the quote. Nothing is booked or charged before that."}</T>{" "}</p>
               <div className="mt-6">
                 <Link
-                  href="/"
+                  href={bookingBase === "/book" ? "/" : bookingBase}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-line-strong px-5 text-sm font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
                 ><T>{"Back to home"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>

@@ -172,6 +172,7 @@ export function isAirportSlug(slug: string): boolean {
 export function getPickupPoint(
   slug: string
 ): { slug: string; name: string; isAirport: boolean } | undefined {
+  if (slug === "showroom") return { slug, name: "Werigo showroom · Gatot Subroto, Denpasar", isAirport: false };
   const airport = airportPoints.find((a) => a.slug === slug);
   if (airport) return { slug: airport.slug, name: airport.name, isAirport: true };
   const area = getArea(slug);

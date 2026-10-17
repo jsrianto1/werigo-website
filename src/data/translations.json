@@ -1630,5 +1630,69 @@
   "Save choices": [
     "Simpan pilihan",
     "Сохранить выбор"
+  ],
+  "Helmets on request": [
+    "Helm sesuai permintaan",
+    "Шлемы по запросу"
+  ],
+  "Helmets only if selected": [
+    "Helm hanya jika dipilih",
+    "Шлемы только по вашему выбору"
+  ],
+  "Helmets": [
+    "Helm",
+    "Шлемы"
+  ],
+  "Choose 0 to 2 at checkout": [
+    "Pilih 0–2 saat booking",
+    "Выберите от 0 до 2 при бронировании"
+  ],
+  "Electric scooters delivered to your stay. Helmets on request. Daily, weekly and monthly rates.": [
+    "Motor listrik diantar ke tempat menginap. Helm sesuai permintaan. Tarif harian, mingguan, dan bulanan.",
+    "Электроскутеры с доставкой к месту проживания. Шлемы по запросу. Тарифы на день, неделю и месяц."
+  ],
+  "Need helmets? Choose 0 to 2 during booking. No helmets are added automatically.": [
+    "Butuh helm? Pilih 0–2 saat booking. Helm tidak ditambahkan otomatis.",
+    "Нужны шлемы? Выберите от 0 до 2 при бронировании. Шлемы не добавляются автоматически."
+  ],
+  "Choose 0 to 2 helmets for this booking. No helmets are added automatically. No additional charge.": [
+    "Pilih 0–2 helm untuk booking ini. Helm tidak ditambahkan otomatis. Tanpa biaya tambahan.",
+    "Выберите от 0 до 2 шлемов для этого бронирования. Они не добавляются автоматически. Без доплаты."
+  ],
+  "Choose your motorcycle quantity and any helmets you need. Helmets are optional, with a maximum of 2 per booking. A phone holder is installed on the motorcycle.": [
+    "Pilih jumlah motor dan helm yang dibutuhkan. Helm opsional, maksimal 2 per booking. Dudukan ponsel sudah terpasang di motor.",
+    "Выберите количество мотоциклов и нужные шлемы. Шлемы по желанию, максимум 2 на бронирование. Держатель телефона уже установлен."
+  ],
+  "Your selected helmets are provided at no additional charge.": [
+    "Helm yang dipilih disediakan tanpa biaya tambahan.",
+    "Выбранные шлемы предоставляются без доплаты."
+  ],
+  "Get a condition check and a riding and charging briefing at handover. Choose any helmets you need during booking.": [
+    "Pemeriksaan kondisi serta penjelasan berkendara dan pengisian daya saat serah terima. Pilih helm yang dibutuhkan saat booking.",
+    "При передаче — проверка состояния и инструктаж по езде и зарядке. Выберите нужные шлемы при бронировании."
+  ],
+  "One electric scooter for your everyday Bali. Monthly rates, optional helmets and a local team on WhatsApp.": [
+    "Satu motor listrik untuk keseharian di Bali. Tarif bulanan, helm opsional, dan tim lokal di WhatsApp.",
+    "Один электроскутер для повседневной жизни на Бали. Месячные тарифы, шлемы по желанию и местная команда в WhatsApp."
+  ],
+  "All four models are official Wedison motorcycles. Each rental includes an installed phone holder, a briefing and at least 80% battery at handover. Choose 0 to 2 helmets if you need them.": [
+    "Keempat model adalah motor resmi Wedison. Setiap rental dilengkapi dudukan ponsel, pengarahan, dan baterai minimal 80% saat serah terima. Pilih 0–2 helm jika dibutuhkan.",
+    "Все четыре модели — официальные мотоциклы Wedison. В аренду входят держатель телефона, инструктаж и заряд не менее 80% при передаче. При необходимости выберите от 0 до 2 шлемов."
+  ],
+  "Every rental includes one premium phone holder installed on the motorcycle. Helmets are optional: choose 0 to 2 per booking, at no additional charge. No helmets are added automatically.": [
+    "Setiap rental dilengkapi dudukan ponsel premium yang terpasang di motor. Helm opsional: pilih 0–2 per booking tanpa biaya tambahan. Helm tidak ditambahkan otomatis.",
+    "Каждая аренда включает установленный держатель телефона. Шлемы по желанию: от 0 до 2 на бронирование без доплаты. Они не добавляются автоматически."
+  ],
+  "Each motorcycle comes with an installed phone holder, at least 80% battery at handover and a riding and charging briefing. Helmets are optional: choose 0 to 2 per booking. Our local team replies on WhatsApp daily from 08:00 to 20:00 WITA.": [
+    "Setiap motor dilengkapi dudukan ponsel, baterai minimal 80% saat serah terima, serta pengarahan berkendara dan pengisian daya. Helm opsional: pilih 0–2 per booking. Tim lokal melayani WhatsApp setiap hari pukul 08.00–20.00 WITA.",
+    "Каждый мотоцикл имеет держатель телефона и заряд не менее 80% при передаче. Мы проводим инструктаж по езде и зарядке. Шлемы по желанию: от 0 до 2 на бронирование. Местная команда отвечает в WhatsApp ежедневно с 08:00 до 20:00 WITA."
+  ],
+  "Delivery, a condition walk-around and a riding briefing are part of every handover. Choose 0 to 2 helmets during booking if you need them.": [
+    "Setiap serah terima mencakup pengantaran, pemeriksaan kondisi, dan pengarahan berkendara. Pilih 0–2 helm saat booking jika dibutuhkan.",
+    "При передаче предусмотрены доставка, проверка состояния и инструктаж. При необходимости выберите от 0 до 2 шлемов во время бронирования."
+  ],
+  "Minimum rental 2 days. Rates are per motorcycle per day in IDR; US dollar amounts are estimates. Choose 0 to 2 helmets at checkout if you need them. Availability and your final quote are confirmed on WhatsApp.": [
+    "Minimal rental 2 hari. Tarif per motor per hari dalam rupiah; nilai dolar AS hanya perkiraan. Pilih 0–2 helm saat booking jika dibutuhkan. Ketersediaan dan harga akhir dikonfirmasi melalui WhatsApp.",
+    "Минимум аренды — 2 дня. Тарифы указаны за мотоцикл в день в рупиях; суммы в долларах США приблизительные. При необходимости выберите от 0 до 2 шлемов. Наличие и итоговая стоимость подтверждаются в WhatsApp."
   ]
 }

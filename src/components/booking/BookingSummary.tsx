@@ -215,7 +215,7 @@ export function BookingSummary({
         : "Estimate only. Availability, final pricing, delivery and add-ons are confirmed by the Werigo team on WhatsApp. There are no charges without your approval."}</T>{" "}</p>
       <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-xs text-ink-soft">
         {[
-          "2 sanitised helmets included",
+          "Helmets only if selected",
           "Installed premium phone holder",
           "Official Wedison motorcycles, maintained in-house",
           "Delivered with at least 80% battery",

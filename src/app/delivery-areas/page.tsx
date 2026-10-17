@@ -17,7 +17,7 @@ export default function DeliveryAreasPage() {
       <SectionHeading as="h1"
         eyebrow="Delivery areas"
         title="Wherever you're staying, we bring the ride"
-        lede="Every delivery includes a charged battery, fitted helmets and a riding briefing. Fees and windows are always shown before you book, so there are no surprises at the door."
+        lede="Every delivery includes a charged battery and a riding briefing. Choose any helmets you need during booking. Fees and windows are always shown before you book, so there are no surprises at the door."
       />
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {serviceAreas.map((area) => (

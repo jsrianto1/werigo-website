@@ -15,16 +15,21 @@ export interface RentalExtra {
 
 export const rentalExtras: RentalExtra[] = [
   {
-    id: "rain-poncho",
-    name: "Rain poncho",
+    id: "helmet",
+    name: "Helmets",
     description:
-      "Optional rain poncho for wet-season rides, free of charge. Not included automatically; availability is confirmed on WhatsApp.",
+      "Choose 0 to 2 helmets for this booking. No helmets are added automatically. No additional charge.",
     maxQuantity: 2,
   },
 ];
 
 export function getExtra(id: string): RentalExtra | undefined {
   return rentalExtras.find((e) => e.id === id);
+}
+
+/** Old drafts cannot restore withdrawn extras or quantities above the current limit. */
+export function sanitizeExtraQuantities(requests: { id: string; quantity: number }[]): Record<string, number> {
+  return Object.fromEntries(requests.filter(request => getExtra(request.id) && Number.isFinite(request.quantity) && request.quantity > 0).map(request => [request.id, Math.min(Math.floor(request.quantity), getExtra(request.id)!.maxQuantity)]));
 }
 
 /**

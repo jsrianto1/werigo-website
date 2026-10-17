@@ -1,6 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, BatteryCharging, ShieldCheck } from "lucide-react";
+import { RentalHome } from "@/components/pwa/RentalWizard";
 import { getListedModels } from "@/data/vehicles";
-import { formatIdr, ratesIdrPerDay } from "@/lib/pricing";
-export default function RentPage() { return <><p className="ra-eyebrow">Powered by Wedison</p><h1 className="ra-page-title">A ride that fits<br/>your Bali days.</h1><p className="ra-lead">Choose your model, then check dates, delivery and availability. Minimum rental: two days.</p><div className="ra-perks"><span><ShieldCheck size={18}/>Two helmets included</span><span><BatteryCharging size={18}/>Charging guidance</span></div><div className="ra-fleet">{getListedModels().map(model=><article className="ra-bike" key={model.modelSlug}><div className="ra-bike-image"><Image src={`/media/fleet/${model.modelSlug}/cutout.webp`} alt={model.displayName} fill sizes="(max-width:700px) 100vw,50vw" className="ra-contain"/></div><div><p className="ra-eyebrow">{model.supercharge ? "Supercharge compatible" : "Home charging"}</p><h2>{model.displayName}</h2><p>{model.bestFor}</p><div className="ra-bike-bottom"><span>From <strong>{formatIdr(ratesIdrPerDay[model.modelSlug].monthly)}</strong> /day<small>Monthly rate (1+ month); shorter rentals differ.</small></span><Link href={`/book?vehicle=${model.id}`} className="ra-round-link" aria-label={`Check dates for ${model.displayName}`}><ArrowUpRight/></Link></div></div></article>)}</div><aside className="ra-note"><p>Tourist-area delivery and collection start at Rp100,000. Distance surcharges and the final total are confirmed on WhatsApp before payment. <Link href="/delivery-areas">See delivery rules.</Link></p></aside><p className="ra-footnote">Booking continues through Werigo’s existing checkout. Card and QRIS options depend on the payment flow available for your booking; no payment is taken on this screen.</p></>; }
+import { defaultAppDates } from "@/lib/appRental";
+export const dynamic = "force-dynamic";
+export default async function RentPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const query = await searchParams;
+  const get = (key: string) => typeof query[key] === "string" ? query[key] as string : "";
+  const dates = defaultAppDates();
+  const bikes = getListedModels().map(({ id, modelSlug, model, displayName, bestFor, supercharge }) => ({ id, modelSlug, model, displayName, bestFor, supercharge }));
+  return <RentalHome key={get("start") || "home"} begin={get("start") === "1" || Boolean(get("pickup"))} bikes={bikes} today={dates.today} initial={{ pickup: get("pickup"), vehicle: bikes.find(bike => bike.id === get("vehicle"))?.id ?? bikes[0]?.id ?? "", startDate: get("startDate") || dates.startDate, endDate: get("endDate") || dates.endDate, startTime: get("startTime") || dates.startTime, endTime: get("endTime") || dates.endTime, ref: get("ref") }}/>;
+}

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!area) return {};
   return pageMetadata(
     `Electric Scooter Rental ${area.name}, Bali`,
-    `Rent a Wedison electric scooter in ${area.name}. Daily, weekly and monthly rates, two helmets and hotel or villa delivery by arrangement. Check your dates.`,
+    `Rent a Wedison electric scooter in ${area.name}. Daily, weekly and monthly rates, optional helmets and hotel or villa delivery by arrangement. Check your dates.`,
     `/delivery-areas/${slug}`,
     getAreaMedia(slug)?.src,
   );

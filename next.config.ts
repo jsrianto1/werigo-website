@@ -15,11 +15,12 @@ const nextConfig: NextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           { key: "Content-Security-Policy", value: "base-uri 'self'; object-src 'none'; frame-ancestors 'self'" },
           // Stage script restrictions without disrupting Next hydration, GTM or Meta.
-          { key: "Content-Security-Policy-Report-Only", value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'" },
+          { key: "Content-Security-Policy-Report-Only", value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'" },
         ],
       },
       { source: "/media/:path*.webm", headers: [{ key: "Content-Type", value: "video/webm" }] },
       { source: "/media/:path*.mp4", headers: [{ key: "Content-Type", value: "video/mp4" }] },
+      { source: "/app/:path*", headers: [{ key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(self)" }] },
     ];
   },
   async redirects() {

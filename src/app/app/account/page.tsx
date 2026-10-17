@@ -1,6 +1,16 @@
 import Link from "next/link";
-import { ArrowUpRight, CalendarDays, Gift, UserRound, MessageCircle } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Gift, UserRound, MessageCircle, Compass, Shield } from "lucide-react";
 import { getSessionUser } from "@/lib/session";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
-export const dynamic="force-dynamic";
-export default async function AppAccount(){const user=await getSessionUser(); return <><p className="ra-eyebrow">Your Werigo</p><h1 className="ra-page-title">{user ? `Hello, ${user.name.split(" ")[0]}.` : "Your island account."}</h1><p className="ra-lead">Bookings, rewards and a little help along the way. One Werigo account for the website and this app.</p>{!user&&<Link className="ra-button" href="/account/login?next=/app/account">Sign in or create an account <ArrowUpRight size={18}/></Link>}<div className="ra-account-links">{[{href:"/account",title:"My bookings",detail:"Order history, rental and payment status",icon:CalendarDays},{href:"/account/membership",title:"Ride Club",detail:"Points, tier and rewards history",icon:Gift},{href:"/account/profile",title:"My profile",detail:"Contact details and rider documents",icon:UserRound}].map(item=><Link href={item.href} key={item.href}><item.icon size={23}/><div><h2>{item.title}</h2><p>{item.detail}</p></div><ArrowUpRight size={20}/></Link>)}<a href={buildSupportWhatsAppUrl()}><MessageCircle size={23}/><div><h2>Talk to Werigo</h2><p>Daily 08:00–20:00 WITA</p></div><ArrowUpRight size={20}/></a></div><p className="ra-footnote">WhatsApp enquiries become bookings only after confirmation by the team. Existing account pages open with Werigo’s standard account navigation.</p></>;}
+import { AppSignOut } from "@/components/pwa/AppSignOut";
+export const dynamic = "force-dynamic";
+export default async function AppAccount() {
+  const user = await getSessionUser();
+  const staff = user?.role === "admin" || user?.role === "super_admin";
+  return <><p className="ra-eyebrow">Your Werigo account</p><h1 className="ra-page-title">{user ? `Hi, ${user.name.split(" ")[0]}.` : "Let’s make it your ride."}</h1><p className="ra-lead">One account for your rentals, Ride Points and details.</p>{!user && <Link className="ra-button" href="/app/login">Sign in or create an account <ArrowUpRight size={18}/></Link>}<div className="ra-account-links">{[
+    { href: "/app/activity", title: "My bookings", detail: "Upcoming rentals, payment status & history", icon: CalendarDays },
+    { href: "/app/rewards", title: "Ride Club", detail: "Your points, membership & rewards history", icon: Gift },
+    { href: staff ? "/admin/profile" : "/app/profile", title: "My details", detail: "Contact information & rider documents", icon: UserRound },
+    { href: "/app/explore", title: "Explore Bali", detail: "Ideas for your next day out", icon: Compass },
+  ].map(item => <Link href={item.href} key={item.title}><item.icon size={23}/><div><h2>{item.title}</h2><p>{item.detail}</p></div><ArrowUpRight size={20}/></Link>)}{staff && <Link href="/admin"><Shield size={23}/><div><h2>Staff dashboard</h2><p>Manage customer rentals</p></div><ArrowUpRight size={20}/></Link>}<a href={buildSupportWhatsAppUrl()} target="_blank" rel="noopener noreferrer"><MessageCircle size={23}/><div><h2>Help from Werigo</h2><p>WhatsApp · daily 08:00–20:00 WITA</p></div><ArrowUpRight size={20}/></a></div>{user && <AppSignOut/>}<p className="ra-footnote"><Link href="/terms">Rental terms</Link> · <Link href="/privacy">Privacy policy</Link> · <Link href="/">Werigo website</Link></p></>;
+}

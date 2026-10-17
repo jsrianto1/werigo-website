@@ -27,7 +27,7 @@ const values = [
   {
     icon: Zap,
     title: "Premium means taken care of",
-    text: "At least 80% battery at handover, two sanitised helmets and a practical briefing. Start your rental knowing your motorcycle and how to charge it.",
+    text: "At least 80% battery at handover, an installed phone holder and a practical briefing. Helmets are optional during booking. Start your rental knowing your motorcycle and how to charge it.",
   },
 ];
 

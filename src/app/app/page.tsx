@@ -1,2 +1,4 @@
 import { redirect } from "next/navigation";
-export default function AppEntry() { redirect("/app/explore"); }
+import { getSessionUser } from "@/lib/session";
+export const dynamic = "force-dynamic";
+export default async function AppEntry() { redirect(await getSessionUser() ? "/app/rent" : "/app/login"); }
