@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "fcfc3b84b64c7a35a735206d021eb738364fd3fd6c1b598ad165bfb1e69a94cf",
+  "fingerprint": "d7b17731b1ab653f1329a2b1a3961df4dcaac38ed2a93ae4070ca9178475cb7c",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11568,7 +11568,7 @@
     },
     {
       "file": "src/components/booking/CheckoutFlow.tsx",
-      "hash": "6eedc5920f14018d588b5497191da252719d28d5ea6e554b4f8cc233e4b83508"
+      "hash": "3da95fd6952a37a872fcc524d1d93613949a3270b15046bb5b92e1d9f15fc460"
     },
     {
       "file": "src/components/booking/ConfirmationView.tsx",
