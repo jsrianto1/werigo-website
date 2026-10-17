@@ -81,7 +81,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link href="/app/login?install=1" aria-label={t("Get the app")} className="inline-flex min-h-11 items-center justify-center gap-1.5 whitespace-nowrap rounded-[10px] border border-primary/30 bg-primary-faint px-3 text-xs font-semibold text-primary xl:hidden"><Download size={16} aria-hidden="true"/><span className="hidden min-[360px]:inline"><T>Get the app</T></span><span className="min-[360px]:hidden">App</span></Link>
           <div className="hidden lg:block"><LanguageSelector /></div>
-          <AccountMenu className="hidden lg:inline-flex" />
+          <div className="hidden lg:block"><AccountMenu /></div>
 
           <div className="hidden md:block">
             <ButtonLink href="/book" variant="accent" size="md"><T>{"Check availability"}</T>{" "}</ButtonLink>
