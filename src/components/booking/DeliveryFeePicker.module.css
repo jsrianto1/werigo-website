@@ -1,5 +1,8 @@
 .picker{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card,#fff);color:var(--ink)}
-.picker summary{font-size:14px;font-weight:650;cursor:pointer;min-height:28px}
+.header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px}
+.header button{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;font-size:12px;cursor:pointer}
+.saved{font-size:12px;line-height:1.7;margin-top:10px;color:var(--ink-soft)}
+.saved a{display:block;text-decoration:underline;color:var(--ink)}
 .picker :global(.wr-location){padding-top:14px}
 .picker :global(.wr-map-wrap){position:relative;height:300px;isolation:isolate;overflow:hidden;border-radius:12px;background:#edf3ef}
 .picker :global(.wr-delivery-map){height:100%;width:100%;z-index:0}

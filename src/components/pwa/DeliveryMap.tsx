@@ -18,7 +18,13 @@ export function DeliveryMap({ center, onMove }: { center: MapPoint; onMove: (poi
       const instance = L.map(container.current, { scrollWheelZoom: false, minZoom: 9, maxZoom: 19, maxBounds: [[-9, 114.4], [-8, 115.8]], maxBoundsViscosity: 1 }).setView([initial.current.latitude, initial.current.longitude], 15);
       map.current = instance;
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors' }).on("tileload", () => { setLoaded(true); setFailed(false); }).on("tileerror", () => setFailed(true)).addTo(instance);
-      instance.on("moveend", () => { const point = instance.getCenter(); onMoveRef.current({ latitude: point.lat, longitude: point.lng }); });
+      instance.on("moveend", () => {
+        const point = instance.getCenter();
+        // Restoring a saved pin or centering on GPS is not a new user choice.
+        // Leaflet emits moveend for setView too; keep the confirmed quote intact.
+        if (Math.abs(point.lat - initial.current.latitude) < 0.0000001 && Math.abs(point.lng - initial.current.longitude) < 0.0000001) return;
+        onMoveRef.current({ latitude: point.lat, longitude: point.lng });
+      });
       instance.on("click", event => instance.panTo(event.latlng));
     }).catch(() => setFailed(true));
     return () => { cancelled = true; map.current?.remove(); map.current = null; };

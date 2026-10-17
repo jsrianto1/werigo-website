@@ -8,7 +8,7 @@ import { DeliveryMap, type MapPoint } from "./DeliveryMap";
 const areaCenters: Record<string, MapPoint> = {
   canggu: { latitude: -8.6478, longitude: 115.1385 }, seminyak: { latitude: -8.684, longitude: 115.161 }, kuta: { latitude: -8.722, longitude: 115.172 }, ubud: { latitude: -8.5069, longitude: 115.2625 }, uluwatu: { latitude: -8.815, longitude: 115.105 }, jimbaran: { latitude: -8.771, longitude: 115.171 }, sanur: { latitude: -8.69, longitude: 115.26 }, denpasar: { latitude: -8.6359252, longitude: 115.2213422 }, "airport-domestic": { latitude: -8.7468, longitude: 115.167 }, "airport-international": { latitude: -8.7484, longitude: 115.1633 },
 };
-export function PickupLocation({ area, onChooseArea, onConfirmed }: { area: string; onChooseArea: () => void; onConfirmed?: (confirmed: boolean) => void }) {
+export function PickupLocation({ area, onChooseArea, onConfirmed, onSaved }: { area: string; onChooseArea: () => void; onConfirmed?: (confirmed: boolean) => void; onSaved?: () => void }) {
   const onConfirmedRef = useRef(onConfirmed);
   useEffect(() => { onConfirmedRef.current = onConfirmed; }, [onConfirmed]);
   const initial = areaCenters[area] ?? areaCenters.denpasar;
@@ -61,7 +61,7 @@ export function PickupLocation({ area, onChooseArea, onConfirmed }: { area: stri
         route = { distanceMeters: result.distanceMeters, token: result.token, expiresAt: result.expiresAt };
       }
       if (attempt !== confirmation.current.generation) return;
-      const fresh = { ...value, route, savedAt: Date.now() }; saveAppPickup(sessionStorage, fresh); setPin(fresh); onConfirmed?.(true); setError(""); }
+      const fresh = { ...value, route, savedAt: Date.now() }; saveAppPickup(sessionStorage, fresh); setPin(fresh); onConfirmed?.(true); onSaved?.(); setError(""); }
     catch (reason) { setError(reason instanceof Error ? reason.message : "Unable to confirm this location. Please try again."); }
     finally { setBusy(false); }
   }

@@ -776,7 +776,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}<T>{", once per booking."}</T>{" "}</p>
               ) : null}
 
-              {!showroomPickup && pickup === ret && <DeliveryFeePicker key={pickup} area={pickup} confirmed={Boolean(appPin)} onConfirmed={onDeliveryConfirmed}/>}
+              {!showroomPickup && pickup === ret && <DeliveryFeePicker key={pickup} area={pickup} pin={appPin} onConfirmed={onDeliveryConfirmed}/>}
               {manualDeliveryQuote && bookingBase === "/book" && <p className="mt-3 text-sm text-ink-soft">{deliveryPricingNote}</p>}
               {areaFeesIdr > 0 ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
@@ -924,7 +924,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                 }}
                 noValidate
               >
-                {appPin && <div className="wr-checkout-pin sm:col-span-2"><strong>Delivery pin from your app</strong><a href={appPin.mapsUrl} target="_blank" rel="noopener noreferrer">Open in Google Maps</a><p>Your address details below are sent with your booking request.</p><button type="button" onClick={() => setCustomer(current => ({ ...current, address: appPin.mapsUrl }))}>Use this pin as my address</button></div>}
+                {appPin && <div className="wr-checkout-pin sm:col-span-2"><strong>Delivery location saved</strong><a href={appPin.mapsUrl} target="_blank" rel="noopener noreferrer">Open in Google Maps</a><p>Add your hotel, villa or room details below. Your saved pin is already included with your booking request.</p></div>}
                 {(
                   [
                     {
