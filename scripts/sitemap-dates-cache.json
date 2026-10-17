@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "88bd6189bed3f70e3d6ab036394c6faeac357b6d9ddbe43be2153f437fdcd6f2",
+  "fingerprint": "16819b20ea74fcf7cf5399f6ee1766e5c2f7c107683fc3311918e2bc7a29f08f",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11268,7 +11268,7 @@
     },
     {
       "file": "src/app/app/login/page.tsx",
-      "hash": "80eaecb232b33391b8aa3e8e8a3b35194b2726b5a316b09310b2c717a6b62e99"
+      "hash": "ebead72c74e0a73207d7f82729a692abde28e46fc9fca81d24271a024c9d59b1"
     },
     {
       "file": "src/app/app/page.tsx",
@@ -11636,11 +11636,11 @@
     },
     {
       "file": "src/components/layout/Footer.tsx",
-      "hash": "1156bdf3f16c8e0b4b6af73cd55a64cb7698655b61d46955f29929e001bcc385"
+      "hash": "213a324da8ea2c1c4262ca2028ad91bb5e2aef918e17e5c060e2a9e8cae20ead"
     },
     {
       "file": "src/components/layout/Header.tsx",
-      "hash": "83a07e3101adbd751550cb5378fb066060b6a48a107daaf1de019492de4d1454"
+      "hash": "7145d2ee560de4ac6b42df45e9a530e3a54b80a1536bc10f528e740c47e176dc"
     },
     {
       "file": "src/components/layout/HideOnAdmin.tsx",
@@ -11648,7 +11648,7 @@
     },
     {
       "file": "src/components/layout/MobileDrawer.tsx",
-      "hash": "96155fb97099870345d1d9665d58e3d5911273d951d9e72504b6b35c7180dd1a"
+      "hash": "a5a210c80c5cb8fb9dd006399eba369bace07109da14f199b59b7aa79e559397"
     },
     {
       "file": "src/components/marketing/WelcomeOffer.tsx",
@@ -11668,7 +11668,7 @@
     },
     {
       "file": "src/components/pwa/AppShell.tsx",
-      "hash": "49bd81a8f0c5d457a726869e3b04013035f97c381afe64abb3c4a00d3784de2c"
+      "hash": "81c098c4211daa674af2b601b6f652169602684fa66d9653e1755100a044345f"
     },
     {
       "file": "src/components/pwa/AppSignOut.tsx",
@@ -11844,7 +11844,7 @@
     },
     {
       "file": "src/data/translations.json",
-      "hash": "28988c448cbc8364599e47fd7e25f5d25b99b5baef9eaa755ad9e3016c8991d4"
+      "hash": "7a17744898d81516785c7b67e664df6764dfc35b8bbf3a16741c14dbfeb3d97a"
     },
     {
       "file": "src/data/vehicles.ts",
@@ -12120,52 +12120,52 @@
     }
   ],
   "dates": {
-    "/": "2026-10-17T23:02:12+08:00",
-    "/about": "2026-10-17T23:02:12+08:00",
-    "/book": "2026-10-17T23:02:12+08:00",
-    "/contact": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/canggu": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/denpasar": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/jimbaran": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/kuta": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/sanur": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/seminyak": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/ubud": "2026-10-17T23:02:12+08:00",
-    "/delivery-areas/uluwatu": "2026-10-17T23:02:12+08:00",
-    "/fleet": "2026-10-17T23:02:12+08:00",
-    "/fleet/athena": "2026-10-17T23:02:12+08:00",
-    "/fleet/bees": "2026-10-17T23:02:12+08:00",
-    "/fleet/edpower": "2026-10-17T23:02:12+08:00",
-    "/fleet/victory": "2026-10-17T23:02:12+08:00",
-    "/help-center": "2026-10-17T23:02:12+08:00",
-    "/how-it-works": "2026-10-17T23:02:12+08:00",
-    "/monthly-scooter-rental-bali": "2026-10-17T23:02:12+08:00",
-    "/partners": "2026-10-17T23:02:12+08:00",
-    "/saga": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-1": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-10": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-11": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-12": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-13": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-14": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-15": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-16": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-17": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-18": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-19": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-2": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-20": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-21": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-22": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-3": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-4": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-5": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-6": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-7": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-8": "2026-10-17T23:02:12+08:00",
-    "/saga/chapter-9": "2026-10-17T23:02:12+08:00",
-    "/supercharge": "2026-10-17T23:02:12+08:00"
+    "/": "2026-10-18T00:15:29+08:00",
+    "/about": "2026-10-18T00:15:29+08:00",
+    "/book": "2026-10-18T00:15:29+08:00",
+    "/contact": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/canggu": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/denpasar": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/jimbaran": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/kuta": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/sanur": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/seminyak": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/ubud": "2026-10-18T00:15:29+08:00",
+    "/delivery-areas/uluwatu": "2026-10-18T00:15:29+08:00",
+    "/fleet": "2026-10-18T00:15:29+08:00",
+    "/fleet/athena": "2026-10-18T00:15:29+08:00",
+    "/fleet/bees": "2026-10-18T00:15:29+08:00",
+    "/fleet/edpower": "2026-10-18T00:15:29+08:00",
+    "/fleet/victory": "2026-10-18T00:15:29+08:00",
+    "/help-center": "2026-10-18T00:15:29+08:00",
+    "/how-it-works": "2026-10-18T00:15:29+08:00",
+    "/monthly-scooter-rental-bali": "2026-10-18T00:15:29+08:00",
+    "/partners": "2026-10-18T00:15:29+08:00",
+    "/saga": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-1": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-10": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-11": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-12": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-13": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-14": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-15": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-16": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-17": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-18": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-19": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-2": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-20": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-21": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-22": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-3": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-4": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-5": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-6": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-7": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-8": "2026-10-18T00:15:29+08:00",
+    "/saga/chapter-9": "2026-10-18T00:15:29+08:00",
+    "/supercharge": "2026-10-18T00:15:29+08:00"
   },
   "hostingSettings": {
     "next.config.ts": "import type { NextConfig } from \"next\";\r\n\r\nconst nextConfig: NextConfig = {\r\n  poweredByHeader: false,\r\n  images: { formats: [\"image/avif\", \"image/webp\"] },\r\n  async headers() {\r\n    return [\r\n      {\r\n        source: \"/:path*\",\r\n        headers: [\r\n          { key: \"Strict-Transport-Security\", value: \"max-age=31536000\" },\r\n          { key: \"X-Frame-Options\", value: \"SAMEORIGIN\" },\r\n          { key: \"X-Content-Type-Options\", value: \"nosniff\" },\r\n          { key: \"Referrer-Policy\", value: \"strict-origin-when-cross-origin\" },\r\n          { key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=()\" },\r\n          { key: \"Content-Security-Policy\", value: \"base-uri 'self'; object-src 'none'; frame-ancestors 'self'\" },\r\n          // Stage script restrictions without disrupting Next hydration, GTM or Meta.\r\n          { key: \"Content-Security-Policy-Report-Only\", value: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'\" },\r\n        ],\r\n      },\r\n      { source: \"/media/:path*.webm\", headers: [{ key: \"Content-Type\", value: \"video/webm\" }] },\r\n      { source: \"/media/:path*.mp4\", headers: [{ key: \"Content-Type\", value: \"video/mp4\" }] },\r\n      { source: \"/book/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\n      { source: \"/app/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n    ];\r\n  },\r\n  async redirects() {\r\n    return [\r\n      // WERIGO SAGA installments are \"chapters\" (it is a comic, not a series).\r\n      // Old /saga/episode-N links keep working; ?lang=id passes through.\r\n      {\r\n        source: \"/saga/episode-:n(\\\\d{1,})\",\r\n        destination: \"/saga/chapter-:n\",\r\n        permanent: true,\r\n      },\r\n    ];\r\n  },\r\n};\r\n\r\nexport default nextConfig;\r\n",
