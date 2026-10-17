@@ -1,4 +1,5 @@
-import Link from "next/link";
-import { BatteryCharging, ArrowUpRight, MapPin } from "lucide-react";
-import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
-export default function ChargePage(){ return <><p className="ra-eyebrow">Keep your Bali days moving</p><h1 className="ra-page-title">A little recharge.<br/>A lot more island.</h1><p className="ra-lead">Get the right charging guidance for your Wedison motorcycle before heading out.</p><section className="ra-charge-card"><BatteryCharging size={48}/><div><span className="ra-pill">Available now</span><h2>Know your bike’s charging setup.</h2><p>Wedison Bees uses home charging. Supercharge support depends on the model. Our team can help you plan for your rental.</p><Link className="ra-button" href="/supercharge">See charging guidance <ArrowUpRight size={18}/></Link></div></section><section className="ra-empty"><MapPin size={30}/><h2>Partner charging, in one place.</h2><p>A verified station directory is being prepared. No live station availability is shown here yet. Contact Werigo for a confirmed charging location.</p><a className="ra-text-link" href={buildSupportWhatsAppUrl()}>Ask the Werigo team <ArrowUpRight size={17}/></a></section><details className="ra-plan-preview"><summary>What’s planned for daily charging passes?</summary><p>Daily options at Rp35,000 and Rp50,000 are being evaluated. They are not available to buy or use yet. Station coverage, compatible bikes, fair-use rules and the difference between plans must be confirmed before launch.</p><p>The planned pass will be linked to an account and its assigned motorcycle. Unlimited charging is not an active benefit.</p></details></>; }
+import { ChargingDirectory } from "@/components/pwa/ChargingDirectory";
+
+export default function ChargePage() {
+  return <ChargingDirectory />;
+}

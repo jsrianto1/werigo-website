@@ -5,6 +5,7 @@ import { appGuides } from '../src/data/appGuides.ts';
 import { defaultAppDates, appCheckoutUrl } from '../src/lib/appRental.ts';
 import { APP_PICKUP_KEY, PICKUP_MAX_AGE, googleMapsSearch, googleMapsDirections, validMapsUrl, requestGps, readAppPickup, saveAppPickup, isBaliLocation } from '../src/lib/appPickup.ts';
 import { rentalExtras, sanitizeExtraQuantities } from '../src/data/extras.ts';
+import { appActivities } from '../src/data/appActivities.ts';
 
 const manifest=JSON.parse(readFileSync('public/app/manifest.webmanifest','utf8'));
 assert.ok(manifest.start_url.startsWith(manifest.scope));
@@ -49,7 +50,27 @@ assert.equal(gps.accuracy,12);
 await assert.rejects(requestGps({getCurrentPosition:(success,error)=>error({code:1})}), /denied/);
 await assert.rejects(requestGps({getCurrentPosition:(success,error)=>error({code:3})}), /timed out/);
 await assert.rejects(requestGps(undefined), /not supported/);
-for(const icon of manifest.icons) assert.ok(existsSync(`public${icon.src}`));
+for(const icon of manifest.icons) {
+  const image = readFileSync(`public${icon.src}`);
+  assert.equal(image.subarray(1, 4).toString(), 'PNG');
+  assert.equal(`${image.readUInt32BE(16)}x${image.readUInt32BE(20)}`, icon.sizes, 'Install icon dimensions must match the manifest');
+}
+const charging = JSON.parse(readFileSync('src/data/appChargingStations.json', 'utf8'));
+assert.equal(charging.stations.length, 15, 'The official source lists fifteen locations');
+assert.equal(new Set(charging.stations.map(station => station.name)).size, 15);
+for (const station of charging.stations) {
+  assert.ok(['DENPASAR', 'BADUNG', 'GIANYAR'].includes(station.area));
+  assert.ok(station.name && station.address);
+  assert.equal(validMapsUrl(station.mapsUrl), station.mapsUrl, 'Charging directions must use an approved Maps host');
+}
+for (const category of ['Surfing', 'Snorkeling', 'Parasailing', 'Rafting', 'Culture']) {
+  assert.ok(appActivities.some(activity => activity.category === category), `Missing activity category: ${category}`);
+}
+for (const activity of appActivities) {
+  assert.ok(existsSync(`public${activity.image}`), `Missing activity photo: ${activity.image}`);
+  assert.equal(new URL(activity.website).protocol, 'https:');
+  assert.ok(activity.tip && activity.photoLabel, 'Activities must explain visit arrangements and photo context');
+}
 for(const guide of appGuides) assert.ok(existsSync(`public${guide.image}`));
 assert.equal(new Set(appGuides.map(guide=>guide.slug)).size,appGuides.length);
 

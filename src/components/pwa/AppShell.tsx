@@ -1,9 +1,10 @@
 "use client";
 import { AppBrand } from "./AppBrand";
+import { InstallGuide } from "./InstallGuide";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { House, CalendarDays, Compass, KeyRound, UserRound, Download, ArrowUpRight, X } from "lucide-react";
+import { House, CalendarDays, Compass, KeyRound, UserRound, Download, ArrowUpRight, ArrowLeft } from "lucide-react";
 
 type InstallEvent = Event & { prompt(): Promise<void>; userChoice: Promise<{outcome: string}> };
 function subscribeOnline(callback: () => void) { window.addEventListener("online", callback); window.addEventListener("offline", callback); return () => { window.removeEventListener("online", callback); window.removeEventListener("offline", callback); }; }
@@ -33,21 +34,25 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     if (!standaloneSnapshot() && new URLSearchParams(window.location.search).get("install") === "1") setHelp(true);
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/app/sw.js", { scope: "/app/" }).catch(() => {});
     const onInstall = (event: Event) => { event.preventDefault(); setInstall(event as InstallEvent); };
-    const onInstalled = () => { setInstall(null); setMessage("Werigo is on your home screen."); };
+    const onInstalled = () => { setInstall(null); setHelp(false); setMessage("Werigo is on your home screen."); };
     window.addEventListener("beforeinstallprompt", onInstall);
     window.addEventListener("appinstalled", onInstalled);
     return () => { window.removeEventListener("beforeinstallprompt", onInstall); window.removeEventListener("appinstalled", onInstalled); };
   }, []);
   async function addToHome() {
     if (!install) { setHelp(value => !value); return; }
-    try { await install.prompt(); await install.userChoice; setInstall(null); }
-    catch { setMessage("Use your browser menu to add Werigo to your home screen."); }
+    try {
+      await install.prompt();
+      const choice = await install.userChoice;
+      setInstall(null);
+      setHelp(choice.outcome !== "accepted");
+    } catch { setInstall(null); setHelp(true); }
   }
   return <div className={`ride-app${isAuth ? " wr-auth-shell" : ""}`}>
-    <header className="ra-header"><Link href="/app/rent" aria-label="Werigo app home" className="wr-brand"><AppBrand /></Link>
+    <header className="ra-header">{isAuth ? <Link href="/" className="wr-auth-back"><ArrowLeft size={18} /><span>Website</span></Link> : <Link href="/app/rent" aria-label="Werigo app home" className="wr-brand"><AppBrand /></Link>}
       <div className="ra-header-actions"><span className="ra-location">Bali, Indonesia</span>{!standalone && <button onClick={() => void addToHome()} className="ra-install" aria-expanded={help} aria-controls="app-install-help"><Download size={16} /><span>Install app</span></button>}<Link href="/" className="ra-website" aria-label="Visit Werigo website"><ArrowUpRight size={20}/></Link></div>
     </header>
-    {help && <aside className="ra-install-help" id="app-install-help" aria-label="Install Werigo"><button className="wr-help-close" aria-label="Close installation instructions" onClick={() => setHelp(false)}><X size={20}/></button><strong>Werigo, on your home screen.</strong><p>Tap <b>Install app</b> above if your browser offers installation, or follow the steps below.</p><ol><li><b>iPhone:</b> Open in Safari → Share → Add to Home Screen → enable Open as Web App if shown → Add.</li><li><b>Android:</b> Open in Chrome → browser menu → Add to home screen → Install. Some versions show Install app directly.</li></ol><p>If you opened this link inside WhatsApp or Instagram, open it in Safari or Chrome first. Once installed, Werigo opens in its own app window. Booking and account services need an internet connection.</p></aside>}
+    {help && !standalone && <InstallGuide onClose={() => setHelp(false)} onInstall={install ? () => void addToHome() : undefined} />}
     {message && <p role="status" className="ra-install-help">{message}</p>}
     {!online && <p role="status" className="ra-install-help">You’re offline. Reconnect before opening another guide, checking bookings or using rewards. No booking or payment is sent while offline.</p>}
     <div className="ra-content">{children}</div>

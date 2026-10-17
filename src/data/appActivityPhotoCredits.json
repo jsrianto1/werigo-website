@@ -1,0 +1,29 @@
+[
+  {
+    "src": "/app/activities/ayung-rafting.jpg",
+    "title": "File:Ayung River Rafting 2, Bali.jpg",
+    "author": "Yoshi Canopus",
+    "source": "https://commons.wikimedia.org/wiki/File:Ayung_River_Rafting_2,_Bali.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "displayNote": "Displayed in cropped cards; original photo retained."
+  },
+  {
+    "src": "/app/activities/tanjung-benoa-parasailing.jpg",
+    "title": "File:Parasailing in Tanjung Benoa.jpg",
+    "author": "Christophe95",
+    "source": "https://commons.wikimedia.org/wiki/File:Parasailing_in_Tanjung_Benoa.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "displayNote": "Displayed in cropped cards; original photo retained."
+  },
+  {
+    "src": "/app/activities/padangbai.jpg",
+    "title": "File:Padangbai aerial 2026 01.jpg",
+    "author": "FBilula",
+    "source": "https://commons.wikimedia.org/wiki/File:Padangbai_aerial_2026_01.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "displayNote": "Displayed in cropped cards; original photo retained."
+  }
+]

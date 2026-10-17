@@ -1,0 +1,157 @@
+/* Mobile finish pass, scoped to the rental app. */
+.ride-app .wr-wordmark { align-items: center; gap: 10px; padding: 0; line-height: 1.12; letter-spacing: 0; }
+.ride-app .wr-wordmark > .wr-wordmark-name { font-family: var(--font-werigo), var(--font-inter), sans-serif; font-size: 32px; line-height: 1.12; font-weight: 650; letter-spacing: -.055em; color: #142b2b; }
+.ride-app .wr-wordmark > .wr-wordmark-name:last-of-type { color: #142b2b; }
+.ride-app .wr-route-mark { display: block; flex: 0 0 30px; width: 30px; height: 30px; color: #142b2b; }
+.ride-app .wr-app-brand { gap: 9px; }
+.ride-app .wr-app-brand-hero .wr-wordmark { gap: 16px; padding: 0; letter-spacing: 0; }
+.ride-app .wr-app-brand-hero .wr-wordmark-name { font-size: 64px; font-weight: 600; letter-spacing: -.06em; }
+.ride-app .wr-app-brand-hero .wr-route-mark { flex-basis: 56px; width: 56px; height: 56px; }
+.ride-app .wr-app-brand-hero { gap: 18px; }
+.ride-app.wr-auth-shell { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+.ride-app .wr-auth-back { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; color: var(--ink-soft); font-size: 12px; }
+.ride-app.wr-auth-shell .ra-header { height: calc(68px + env(safe-area-inset-top)); border-bottom: 0; }
+.ride-app.wr-auth-shell .ra-header .ra-location,
+.ride-app.wr-auth-shell .ra-header .ra-website { display: none; }
+.ride-app.wr-auth-shell .ra-content { padding-top: 14px; }
+.ride-app .wr-auth { margin-top: 0; }
+.ride-app .wr-auth-identity { margin-bottom: 26px; }
+.ride-app .wr-auth-intro { margin-bottom: 22px; font-size: 14px; line-height: 1.65; }
+.ride-app .wr-auth-tabs { margin-bottom: 20px; }
+.ride-app .wr-auth-tabs button { min-height: 46px; }
+.ride-app .ra-install { min-height: 44px; }
+.ride-app .ra-nav a { min-width: 0; flex: 1; }
+.ride-app .ra-nav a span { white-space: nowrap; }
+.ride-app input:not([type="checkbox"]):not([type="radio"]),
+.ride-app select,
+.ride-app textarea { font-size: 16px; }
+
+.wr-install-dialog { position: fixed; inset: auto 0 0; margin: auto auto 0; padding: 0; width: min(100%, 480px); max-width: 100%; max-height: min(92dvh, 790px); border: 0; border-radius: 26px 26px 0 0; background: #f8f9f7; color: #142b2b; overflow: auto; overscroll-behavior: contain; box-shadow: 0 -12px 70px #142b2b26; font-family: var(--font-inter), sans-serif; }
+.wr-install-dialog::backdrop { background: #10272570; backdrop-filter: blur(4px); }
+.wr-install-sheet { position: relative; padding: 30px 26px max(24px, env(safe-area-inset-bottom)); }
+.wr-install-close { position: absolute; top: 15px; right: 15px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid #dce5df; background: #fff; color: #142b2b; border-radius: 50%; cursor: pointer; }
+.wr-install-icon { display: block; border-radius: 14px; width: 56px; height: 56px; margin-bottom: 23px; }
+.wr-install-eyebrow { color: #007568; font-size: 10px; font-weight: 700; letter-spacing: .12em; margin: 0 0 10px; }
+.wr-install-sheet h2 { font-family: var(--font-manrope), sans-serif; font-size: 36px; font-weight: 800; letter-spacing: -.055em; line-height: 1.1; margin: 0; }
+.wr-install-intro { font-size: 13px; line-height: 1.7; color: #596a63; margin: 16px 0 22px; max-width: 350px; }
+.wr-install-native { display: flex; gap: 10px; align-items: center; justify-content: center; width: 100%; min-height: 50px; border: 0; border-radius: 12px; background: #142f2d; color: #fff; font-weight: 650; font-size: 14px; margin-bottom: 18px; }
+.wr-install-devices { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; background: #e8eeea; border-radius: 13px; margin-bottom: 24px; }
+.wr-install-devices button { min-height: 44px; border: 0; border-radius: 10px; color: #52665d; background: transparent; font-size: 13px; font-weight: 650; cursor: pointer; }
+.wr-install-devices button[aria-pressed="true"] { color: #142b2b; background: #fff; box-shadow: 0 1px 5px #142b2b0d; }
+.wr-install-steps { display: grid; gap: 19px; list-style: none; padding: 0; margin: 0; }
+.wr-install-steps li { display: flex; align-items: flex-start; gap: 13px; }
+.wr-install-steps li > span { display: grid; place-items: center; flex: 0 0 27px; width: 27px; height: 27px; background: #e6efea; color: #007568; font-size: 11px; font-weight: 700; border-radius: 50%; }
+.wr-install-steps p { margin: 2px 0 0; font-size: 13px; line-height: 1.7; color: #52665d; }
+.wr-install-steps b { color: #142b2b; font-weight: 650; }
+.wr-install-note { margin: 24px 0 0; padding-top: 19px; border-top: 1px solid #dce5df; font-size: 12px; line-height: 1.7; color: #52665d; }
+.wr-install-footnote { font-size: 10px; line-height: 1.7; color: #6a7971; margin: 12px 0 0; }
+.wr-install-dialog :focus-visible { outline: 3px solid #007568; outline-offset: 3px; }
+
+.ride-app .wr-charging { max-width: 720px; margin-inline: auto; }
+.ride-app .wr-charging .ra-filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; overflow: visible; }
+.ride-app .wr-charging .ra-filters button { padding-inline: 5px; font-size: 11px; }
+.ride-app .ra-search:focus-within { border-color: #007568; box-shadow: 0 0 0 2px #00756818; }
+.ride-app .ra-search input:focus-visible { outline: none; }
+.ride-app .wr-network-map { position: relative; display: flex; align-items: center; gap: 15px; padding: 23px 22px 57px; background: #163b36; color: #fff; border-radius: 19px; margin: 23px 0 17px; }
+.ride-app .wr-network-icon { display: grid; place-items: center; width: 52px; height: 52px; flex: 0 0 52px; border-radius: 15px; background: #ffffff12; color: #a0dfc3; }
+.ride-app .wr-network-map strong { display: block; font-size: 19px; font-weight: 700; letter-spacing: -.025em; }
+.ride-app .wr-network-map small { display: block; color: #c5dbd1; margin-top: 6px; font-size: 11px; }
+.ride-app .wr-network-map > svg { margin-left: auto; flex-shrink: 0; }
+.ride-app .wr-network-map-label { position: absolute; left: 22px; bottom: 19px; font-size: 11px; color: #d2e6dc; }
+.ride-app .wr-charge-compatibility { font-size: 11px; line-height: 1.8; color: var(--ink-soft); margin: 0 0 23px; }
+.ride-app .wr-charging-list-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 23px; }
+.ride-app .wr-charging-list-heading h2 { font-size: 23px; font-weight: 750; letter-spacing: -.04em; }
+.ride-app .wr-charging-list-heading p { font-size: 11px; color: var(--ink-soft); white-space: nowrap; }
+.ride-app .wr-charge-status { font-size: 11px; line-height: 1.8; color: var(--ink-soft); margin: 10px 0 6px; max-width: 580px; }
+.ride-app .wr-charging-list { margin: 0 0 26px; }
+.ride-app .wr-charging-station { display: flex; gap: 14px; border-bottom: 1px solid var(--line); padding: 25px 0 20px; }
+.ride-app .wr-station-icon { display: grid; place-items: center; width: 41px; height: 41px; flex: 0 0 41px; border-radius: 12px; color: #007568; background: #e7efea; }
+.ride-app .wr-station-copy { min-width: 0; flex: 1; }
+.ride-app .wr-station-area { font-size: 9px; font-weight: 650; letter-spacing: .07em; color: #62746a; margin: 1px 0 7px; }
+.ride-app .wr-station-copy h3 { font-size: 19px; font-weight: 700; letter-spacing: -.03em; line-height: 1.35; margin: 0 0 9px; text-wrap: pretty; }
+.ride-app .wr-station-copy address { font-size: 12px; font-style: normal; line-height: 1.75; color: var(--ink-soft); max-width: 500px; }
+.ride-app .wr-station-copy > a { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; font-size: 11px; font-weight: 650; color: #007568; margin-top: 8px; }
+.ride-app .wr-wedison-charge-app { padding: 26px; border: 1px solid #d8e2da; background: #edf3ed; border-radius: 18px; margin: 30px 0 21px; }
+.ride-app .wr-wedison-charge-app h2 { font-size: 24px; font-weight: 750; letter-spacing: -.04em; margin: 17px 0 12px; }
+.ride-app .wr-wedison-charge-app p { font-size: 12px; color: var(--ink-soft); line-height: 1.8; }
+.ride-app .wr-wedison-charge-app > div { display: flex; gap: 11px; flex-wrap: wrap; margin-top: 20px; }
+.ride-app .wr-wedison-charge-app a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 10px 14px; background: #fff; border: 1px solid #d5dfd6; border-radius: 10px; font-size: 11px; font-weight: 600; }
+.ride-app .wr-charging-source { font-size: 10px; line-height: 1.9; color: var(--ink-soft); }
+.ride-app .wr-charging-source a { text-decoration: underline; text-underline-offset: 3px; }
+
+.ride-app .wr-explore { max-width: 1000px; margin-inline: auto; }
+.ride-app .wr-explore-feature { display: block; position: relative; isolation: isolate; height: 350px; border-radius: 22px; overflow: hidden; color: #fff; margin: 27px 0 30px; }
+.ride-app .wr-explore-feature > img { object-fit: cover; object-position: 50% 64%; }
+.ride-app .wr-explore-feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #192e27ae, #192e2733 80%); }
+.ride-app .wr-explore-feature > span { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; height: 100%; padding: 30px; }
+.ride-app .wr-explore-feature small { font-size: 9px; font-weight: 650; letter-spacing: .1em; margin-bottom: 14px; }
+.ride-app .wr-explore-feature strong { font-family: var(--font-manrope), sans-serif; font-size: 42px; font-weight: 800; line-height: 1.1; letter-spacing: -.05em; }
+.ride-app .wr-explore-feature > span > span { display: flex; align-items: center; gap: 14px; margin-top: 22px; font-size: 12px; font-weight: 550; }
+.ride-app .wr-activity-controls { scroll-margin-top: 22px; }
+.ride-app .wr-explore .ra-filters { scrollbar-width: none; padding-bottom: 4px; }
+.ride-app .wr-explore .ra-filters::-webkit-scrollbar { display: none; }
+.ride-app .wr-activity-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 27px 0 21px; }
+.ride-app .wr-activity-heading h2 { font-size: 24px; font-weight: 750; letter-spacing: -.045em; }
+.ride-app .wr-activity-heading > p { white-space: nowrap; font-size: 11px; color: var(--ink-soft); }
+.ride-app .wr-activity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 23px; }
+.ride-app .wr-activity-card { min-width: 0; border: 1px solid #e0e6df; background: #fff; border-radius: 19px; overflow: hidden; display: flex; flex-direction: column; }
+.ride-app .wr-activity-photo { position: relative; height: 240px; background: #e8eee8; flex-shrink: 0; }
+.ride-app .wr-activity-photo > img { object-fit: cover; }
+.ride-app .wr-activity-photo > span { position: absolute; top: 16px; left: 16px; padding: 7px 11px; border-radius: 7px; background: #fff; color: #142b2b; font-size: 10px; font-weight: 650; }
+.ride-app .wr-activity-copy { padding: 24px; display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.ride-app .wr-activity-photo-label { font-size: 9px; color: #748176; margin: -8px 0 17px; }
+.ride-app .wr-activity-area { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #66786c; margin: 0 0 10px; }
+.ride-app .wr-activity-copy h3 { font-family: var(--font-manrope), sans-serif; font-size: 24px; font-weight: 750; letter-spacing: -.045em; line-height: 1.2; margin: 0 0 13px; text-wrap: pretty; }
+.ride-app .wr-activity-description { font-size: 13px; color: var(--ink-soft); line-height: 1.8; margin: 0 0 18px; }
+.ride-app .wr-activity-tip { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; line-height: 1.75; padding: 13px; background: #f1f5f0; color: #596f60; border-radius: 10px; margin: 0 0 21px; }
+.ride-app .wr-activity-tip > svg { margin-top: 2px; flex-shrink: 0; }
+.ride-app .wr-activity-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 18px; margin-top: auto; }
+.ride-app .wr-activity-links a { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; font-size: 11px; font-weight: 600; }
+.ride-app .wr-activity-links a:first-child { background: #142f2d; color: #fff; padding: 10px 14px; border-radius: 10px; }
+.ride-app .wr-activity-links a:last-child { color: #007568; }
+.ride-app .wr-activity-compact { background: #f0f4ef; border-color: #dce5da; }
+.ride-app .wr-activity-mini-icon { display: grid; place-items: center; width: 45px; height: 45px; border-radius: 12px; background: #e2ebe1; color: #007568; margin-bottom: 24px; }
+.ride-app .wr-explore-charge { display: flex; align-items: center; gap: 15px; padding: 23px; border-radius: 17px; border: 1px solid #d9e4da; margin-top: 30px; }
+.ride-app .wr-explore-charge > span { flex: 1; min-width: 0; }
+.ride-app .wr-explore-charge strong { display: block; font-size: 14px; font-weight: 700; }
+.ride-app .wr-explore-charge small { display: block; font-size: 11px; color: var(--ink-soft); margin-top: 6px; }
+.ride-app .wr-explore-charge > svg { flex-shrink: 0; color: #007568; }
+.ride-app .wr-photo-credits { border-top: 1px solid var(--line); margin: 23px 0 30px; padding-top: 10px; font-size: 10px; color: var(--ink-soft); line-height: 1.9; }
+.ride-app .wr-photo-credits summary { min-height: 44px; cursor: pointer; display: list-item; padding-top: 12px; }
+.ride-app .wr-photo-credits p { margin: 10px 0; }
+.ride-app .wr-photo-credits a { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (min-width: 641px) {
+  .wr-install-dialog { inset: 0; margin: auto; border-radius: 26px; }
+  .wr-install-sheet { padding: 34px; }
+}
+@media (max-width: 760px) {
+  .ride-app .wr-wordmark > .wr-wordmark-name { font-size: 30px; }
+  .ride-app .wr-app-brand-hero .wr-wordmark-name { font-size: 58px; }
+  .ride-app .wr-app-brand-hero .wr-route-mark { flex-basis: 50px; width: 50px; height: 50px; }
+  .ride-app .wr-explore-feature { height: 310px; margin-top: 21px; }
+  .ride-app .wr-explore-feature > span { padding: 25px; }
+  .ride-app .wr-explore-feature strong { font-size: 36px; }
+  .ride-app .wr-activity-heading h2 { font-size: 21px; }
+  .ride-app .wr-activity-grid { grid-template-columns: minmax(0, 1fr); gap: 21px; }
+  .ride-app .wr-activity-copy { padding: 23px; }
+  .ride-app .wr-activity-photo { height: 238px; }
+  .ride-app .wr-explore-charge { padding: 20px; }
+  .ride-app .wr-auth-identity { margin-bottom: 24px; }
+  .ride-app .wr-app-brand-hero .wr-wordmark { font-size: 54px; }
+  .ride-app .wr-auth > h1 { font-size: 34px; }
+  .ride-app .wr-auth-intro { font-size: 13px; }
+  .ride-app .wr-auth-footer { margin-top: 22px; padding-top: 18px; }
+  .ride-app .ra-nav > div { padding-inline: 10px; gap: 2px; }
+  .ride-app .ra-nav a { font-size: 10px; }
+}
+@media (max-width: 360px) {
+  .ride-app .wr-wordmark > .wr-wordmark-name { font-size: 28px; }
+  .ride-app .wr-app-brand-hero .wr-wordmark-name { font-size: 52px; }
+  .ride-app .wr-app-brand-hero .wr-route-mark { flex-basis: 46px; width: 46px; height: 46px; }
+  .wr-install-sheet { padding-inline: 21px; }
+  .wr-install-sheet h2 { font-size: 32px; }
+  .ride-app .wr-app-brand-hero .wr-wordmark { font-size: 48px; }
+  .ride-app .wr-auth > h1 { font-size: 32px; }
+  .ride-app .ra-nav a { font-size: 9px; }
+}

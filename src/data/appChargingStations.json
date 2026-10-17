@@ -1,0 +1,113 @@
+{
+  "source": "https://wedison-bali.com/supercharge/",
+  "sourceDate": "September 2026",
+  "checkedOn": "2026-10-18",
+  "networkMap": "https://www.google.com/maps/d/viewer?mid=1Ji2BTMaJOGL1XDs8DcWZNmDcg99WZ98",
+  "stations": [
+    {
+      "address": "Jl. Tukad Barito Timur No.7x, Renon, Denpasar Selatan, Kota Denpasar, Bali 80117",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Obrigado%20Billiard%20Renon%20Jl.%20Tukad%20Barito%20Timur%20No.7x%2C%20Renon%2C%20Denpasar%20Selatan%2C%20Kota%20Denpasar%2C%20Bali%2080117",
+      "name": "Obrigado Billiard Renon"
+    },
+    {
+      "address": "Sekitar Zein Billiard & Bistro by CPD, Jl. Teuku Umar Barat No.7, Pemecutan Klod, Denpasar Barat, Kota Denpasar, Bali 80119",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=-8.6813145%2C115.1952449",
+      "name": "Area Zein Billiard & Bistro"
+    },
+    {
+      "address": "Jl. Diponegoro No.103, Dauh Puri, Denpasar Barat, Kota Denpasar, Bali 80113",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ramayana%20Mal%20Bali%20Jl.%20Diponegoro%20No.103%2C%20Dauh%20Puri%2C%20Denpasar%20Barat%2C%20Kota%20Denpasar%2C%20Bali%2080113",
+      "name": "Ramayana Mal Bali"
+    },
+    {
+      "address": "Jl. Bypass Ngurah Rai No.99a, Pemogan, Denpasar Selatan, Kota Denpasar, Bali 80221",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bypass%20Ngurah%20Rai%2099A%20Jl.%20Bypass%20Ngurah%20Rai%20No.99a%2C%20Pemogan%2C%20Denpasar%20Selatan%2C%20Kota%20Denpasar%2C%20Bali%2080221",
+      "name": "Bypass Ngurah Rai 99A"
+    },
+    {
+      "address": "Jl. Gatot Subroto Tengah No.93, Dangin Puri Kaja, Denpasar Utara, Kota Denpasar, Bali 80118",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://maps.app.goo.gl/og4ovnG2FgCAQAWt8",
+      "name": "Wedison Showroom Gatot Subroto"
+    },
+    {
+      "address": "Jl. WR Supratman No.311, Kesiman Kertalangu, Denpasar Timur, Kota Denpasar, Bali 80237",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=JCO%20%26%20BreadTalk%20Tohpati%20Jl.%20WR%20Supratman%20No.311%2C%20Kesiman%20Kertalangu%2C%20Denpasar%20Timur%2C%20Kota%20Denpasar%2C%20Bali%2080237",
+      "name": "JCO & BreadTalk Tohpati"
+    },
+    {
+      "address": "Jl. Bypass Ngurah Rai No.15, Sanur, Denpasar Selatan, Kota Denpasar, Bali 80227",
+      "area": "DENPASAR",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=JCO%20Donuts%20%26%20Coffee%20Sanur%20Jl.%20Bypass%20Ngurah%20Rai%20No.15%2C%20Sanur%2C%20Denpasar%20Selatan%2C%20Kota%20Denpasar%2C%20Bali%2080227",
+      "name": "JCO Donuts & Coffee Sanur"
+    },
+    {
+      "address": "Jl. Sunset Road No.88-99, Kerobokan Kelod, Kuta Utara, Kabupaten Badung, Bali 80361",
+      "area": "BADUNG",
+      "category": "Pilihan lokasi",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sunset%20Point%20Shopping%20Centre%20Jl.%20Sunset%20Road%20No.88-99%2C%20Kerobokan%20Kelod%2C%20Kuta%20Utara%2C%20Kabupaten%20Badung%2C%20Bali%2080361",
+      "name": "Sunset Point Shopping Centre"
+    },
+    {
+      "address": "Jl. Cokroaminoto No.126, Kec. Denpasar Utara, Kota Denpasar, Bali",
+      "area": "DENPASAR",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Ubung%20Jl.%20Cokroaminoto%20No.126%2C%20Kec.%20Denpasar%20Utara%2C%20Kota%20Denpasar%2C%20Bali",
+      "name": "Kantor Pos KCP Ubung"
+    },
+    {
+      "address": "Jl. Raya Abiansemal, Kec. Abiansemal, Kabupaten Badung, Bali",
+      "area": "BADUNG",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Blahkiuh%20Jl.%20Raya%20Abiansemal%2C%20Kec.%20Abiansemal%2C%20Kabupaten%20Badung%2C%20Bali",
+      "name": "Kantor Pos KCP Blahkiuh"
+    },
+    {
+      "address": "Jl. Raya Sesetan No.142, Kec. Denpasar Selatan, Kota Denpasar, Bali",
+      "area": "DENPASAR",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Sesetan%20Jl.%20Raya%20Sesetan%20No.142%2C%20Kec.%20Denpasar%20Selatan%2C%20Kota%20Denpasar%2C%20Bali",
+      "name": "Kantor Pos KCP Sesetan"
+    },
+    {
+      "address": "Jl. Raya Petang, Kec. Petang, Kabupaten Badung, Bali",
+      "area": "BADUNG",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Petang%20Jl.%20Raya%20Petang%2C%20Kec.%20Petang%2C%20Kabupaten%20Badung%2C%20Bali",
+      "name": "Kantor Pos KCP Petang"
+    },
+    {
+      "address": "Jl. Raya Dalung, Kec. Mengwi, Kabupaten Badung, Bali",
+      "area": "BADUNG",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Sempidi%20Jl.%20Raya%20Dalung%2C%20Kec.%20Mengwi%2C%20Kabupaten%20Badung%2C%20Bali",
+      "name": "Kantor Pos KCP Sempidi"
+    },
+    {
+      "address": "Jl. Ciung Wanara, Kec. Gianyar, Kabupaten Gianyar, Bali",
+      "area": "GIANYAR",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Ciungwanara%20Jl.%20Ciung%20Wanara%2C%20Kec.%20Gianyar%2C%20Kabupaten%20Gianyar%2C%20Bali",
+      "name": "Kantor Pos KCP Ciungwanara"
+    },
+    {
+      "address": "Jl. Raya Sukawati, Kec. Sukawati, Kabupaten Gianyar, Bali",
+      "area": "GIANYAR",
+      "category": "PT Pos Indonesia",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kantor%20Pos%20KCP%20Sukawati%20Jl.%20Raya%20Sukawati%2C%20Kec.%20Sukawati%2C%20Kabupaten%20Gianyar%2C%20Bali",
+      "name": "Kantor Pos KCP Sukawati"
+    }
+  ]
+}
