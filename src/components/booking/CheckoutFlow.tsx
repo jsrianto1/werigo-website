@@ -253,13 +253,13 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
   useEffect(() => {
     if (showroomPickup) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCustomer(current => ({ ...current, hotelName: "Werigo showroom", address: site.address.display }));
       return;
     }
     try {
       const pin = readAppPickup(sessionStorage, pickup);
       // Restore the explicitly confirmed pin from temporary tab storage.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAppPin(pin);
       if (pin) setCustomer(current => current.address && !validMapsUrl(current.address) ? current : { ...current, address: pin.mapsUrl });
     } catch { /* Address entry remains available. */ }
@@ -268,7 +268,6 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   // Signed-in customers: pre-fill contact details once, never overwrite typing.
   useEffect(() => {
     if (!sessionUser) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCustomer((c) => {
       const next = { ...c };
       if (!c.firstName && !c.lastName && sessionUser.name) {
