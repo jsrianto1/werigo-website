@@ -19,6 +19,7 @@ export function BookingSummary({
   days,
   extras,
   pickupName,
+  pickupLabel = "Delivery",
   returnName,
   estimate,
   addOnBreakdown,
@@ -31,6 +32,7 @@ export function BookingSummary({
   days: number;
   extras: { id: string; quantity: number }[];
   pickupName: string;
+  pickupLabel?: string;
   returnName?: string;
   estimate?: RentalQuoteEstimate | null;
   addOnBreakdown?: AddOnBreakdown | null;
@@ -82,7 +84,7 @@ export function BookingSummary({
           </dd>
         </div>
         <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-ink-soft"><T>{"Delivery"}</T></dt>
+          <dt className="text-ink-soft"><T>{pickupLabel}</T></dt>
           <dd className="text-right font-medium text-ink">{pickupName}</dd>
         </div>
         {returnName ? (

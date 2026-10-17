@@ -1476,6 +1476,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
               quantity: q,
             }))}
             pickupName={area?.name ?? pickup}
+            pickupLabel={showroomPickup ? "Pick-up & return" : "Delivery"}
             returnName={ret !== pickup ? returnArea?.name : undefined}
             estimate={estimate}
             addOnBreakdown={addOnBreakdown}
