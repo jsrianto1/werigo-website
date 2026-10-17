@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -71,6 +71,21 @@ try {
   // A committed, fingerprinted snapshot works without network in a shallow clone.
   const cachedDates = writeHistoryCache(root);
   commit('2026-07-01T10:00:00Z');
+  // Source uploads have no .git: verify every source/media byte, including file additions.
+  const archiveRoot = path.join(root, '.next/archive-checkout');
+  mkdirSync(archiveRoot, { recursive: true });
+  for (const file of ['src', 'public', 'scripts', 'next.config.ts']) cpSync(path.join(root, file), path.join(archiveRoot, file), { recursive: true });
+  assert.deepEqual(readHistoryCache(archiveRoot), cachedDates, 'archive must preserve authored dates without Git');
+  prepareHistory(archiveRoot);
+  writeFileSync(path.join(archiveRoot, 'next.config.ts'), 'export default { output: "standalone", images: { unoptimized: true } };\n');
+  assert.deepEqual(readHistoryCache(archiveRoot), cachedDates, 'archive verifies original hosting settings against content hashes');
+  const extraSource = path.join(archiveRoot, 'src/app/extra.ts');
+  writeFileSync(extraSource, 'export const changed = true;');
+  assert.equal(readHistoryCache(archiveRoot), null, 'new source must invalidate archive snapshot');
+  assert.throws(() => prepareHistory(archiveRoot), /matching verified sitemap/);
+  rmSync(extraSource);
+  writeFileSync(path.join(archiveRoot, 'public/media/a.webp'), 'tampered image');
+  assert.equal(readHistoryCache(archiveRoot), null, 'changed media must invalidate archive snapshot');
   const cachedRoot = path.join(root, '.next/cached-checkout');
   git('clone', '--quiet', '--depth', '1', pathToFileURL(root).href, cachedRoot);
   mkdirSync(path.join(cachedRoot, '.next/server/app'), { recursive: true });

@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { readFileSync, existsSync, mkdirSync, writeFileSync, copyFileSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, copyFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
@@ -11,12 +11,28 @@ const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
 
 
 const historyCachePath = 'scripts/sitemap-dates-cache.json';
+const relevantInput = file => file !== historyCachePath && (/^(src|public|scripts)\//.test(file) || /^(next\.config\.[cm]?[jt]s)$/.test(file));
+
+function archiveInputs(root) {
+  const files = [];
+  function walk(directory) {
+    for (const entry of readdirSync(path.join(root, directory), { withFileTypes: true })) {
+      const file = slash(path.join(directory, entry.name));
+      if (entry.isSymbolicLink()) throw new Error(`Archive source must not contain symlinks: ${file}`);
+      if (entry.isDirectory()) walk(file);
+      else if (relevantInput(file)) files.push(file);
+    }
+  }
+  for (const directory of ['src', 'public', 'scripts']) if (existsSync(path.join(root, directory))) walk(directory);
+  for (const entry of readdirSync(root, { withFileTypes: true })) if (entry.isFile() && relevantInput(entry.name)) files.push(entry.name);
+  return files;
+}
 
 /** A content fingerprint makes verified dates portable to hosting clones. */
 export function historyFingerprint(root, inputs = []) {
-  const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
-    .split('\0').filter(file => file && file !== historyCachePath &&
-      (/^(src|public|scripts)\//.test(file) || /^(next\.config\.[cm]?[jt]s)$/.test(file))).sort();
+  const files = (existsSync(path.join(root, '.git'))
+    ? execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' }).split('\0').filter(relevantInput)
+    : archiveInputs(root)).sort();
   const hash = createHash('sha256');
   for (const file of files) {
     let bytes = readFileSync(path.join(root, file));
@@ -39,7 +55,9 @@ function verifiedHostingSettings(root, cache, inputs, changed) {
   try {
     const verified = new Map();
     for (const file of changed) {
-      let bytes = execFileSync('git', ['show', `HEAD:${file}`], { cwd: root, maxBuffer: 4 * 1024 * 1024 });
+      let bytes = existsSync(path.join(root, '.git'))
+        ? execFileSync('git', ['show', `HEAD:${file}`], { cwd: root, maxBuffer: 4 * 1024 * 1024 })
+        : Buffer.from(cache.hostingSettings?.[file] ?? '', 'utf8');
       if (/\.(?:[cm]?[jt]sx?|json|css|svg|md|txt|sql|ya?ml|htaccess)$/.test(file)) bytes = Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'));
       const digest = createHash('sha256').update(bytes).digest('hex');
       if (digest !== expected.get(file)) return false;
@@ -81,7 +99,10 @@ export function writeHistoryCache(root) {
   mkdirSync(path.dirname(path.join(root, historyCachePath)), { recursive: true });
   const inputs = [];
   const fingerprint = historyFingerprint(root, inputs);
-  writeFileSync(path.join(root, historyCachePath), JSON.stringify({ version: 1, fingerprint, inputs, dates }, null, 2) + '\n');
+  const hostingSettings = Object.fromEntries(['next.config.ts', 'public/media/.htaccess']
+    .filter(file => existsSync(path.join(root, file)))
+    .map(file => [file, readFileSync(path.join(root, file), 'utf8')]));
+  writeFileSync(path.join(root, historyCachePath), JSON.stringify({ version: 1, fingerprint, inputs, dates, hostingSettings }, null, 2) + '\n');
   return dates;
 }
 
@@ -103,6 +124,7 @@ export function prepareHistory(root) {
     console.log('Sitemap: using verified content-history snapshot.');
     return;
   }
+  if (!existsSync(path.join(root, '.git'))) throw new Error('Archive deployment requires a matching verified sitemap content-history snapshot. Build and refresh the snapshot in the full-history source checkout first.');
   const options = { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } };
   if (execFileSync('git', ['rev-parse', '--is-shallow-repository'], options).trim() === 'true') {
     console.log('Sitemap: fetching complete source history for accurate modification dates.');
