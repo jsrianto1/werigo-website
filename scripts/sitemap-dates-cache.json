@@ -1,10 +1,34 @@
 {
   "version": 1,
-  "fingerprint": "884a12297bd7d6a0c4231ed4efb38dedc856c34e62584ab7e2c4baf5911b72ab",
+  "fingerprint": "d4704ad301b3ca9828b81c86bd1dea512394853dcdc8a5ffef0287b73e38d5ad",
   "inputs": [
     {
       "file": "next.config.ts",
       "hash": "193a9869ef7e48e7229a26ef1f35703f4f6e1dc3b9378ce22d6db74589f43ca8"
+    },
+    {
+      "file": "public/app/icon-192.png",
+      "hash": "4d6f71b1e395476bd0d87cf244fd7730e4648bda4e78405814729d11bc1680a2"
+    },
+    {
+      "file": "public/app/icon-512.png",
+      "hash": "4c4e32c8f9bc7ffb17a985190ad54475d1b1d0d02de934d62c19c9c632a6ee9a"
+    },
+    {
+      "file": "public/app/icon-maskable-512.png",
+      "hash": "4c4e32c8f9bc7ffb17a985190ad54475d1b1d0d02de934d62c19c9c632a6ee9a"
+    },
+    {
+      "file": "public/app/manifest.webmanifest",
+      "hash": "4922afc5825c1255042732e14e3177d9f293a83faf051994e36164deab287d13"
+    },
+    {
+      "file": "public/app/offline.html",
+      "hash": "9f41c37ef4c6be19b5ecc508ca8e69be97fd721a3627963553f0416158bc0af5"
+    },
+    {
+      "file": "public/app/sw.js",
+      "hash": "77f11ee6ca36dedbb4936cda5c348aa8220ed093da111aac8e84f2455d40ebe9"
     },
     {
       "file": "public/brand/og-image.png",
@@ -10907,6 +10931,10 @@
       "hash": "7a303d071099df4b9bbe89bdf7a9de7a8acdd0fa203499ab6e55635e5fde9378"
     },
     {
+      "file": "scripts/pwa-test.mjs",
+      "hash": "bae2d1cc6885cb534ef113abc5bdbf4909dd4a1712d460b7bf53feb5f62f1066"
+    },
+    {
       "file": "scripts/ride-club-schema.py",
       "hash": "8404babdc6da784cc125f384102f3fe901c6ea5783daa9b511bd8f104cc63cef"
     },
@@ -11193,6 +11221,42 @@
     {
       "file": "src/app/api/saga/stats/route.ts",
       "hash": "1b4ce3aab635f9b606b1b0809021f5ad010b0e54c4700917a8684892ccf967e8"
+    },
+    {
+      "file": "src/app/app/account/page.tsx",
+      "hash": "4b4f279cb75ed868bb73f5fccd9aae3b9d129e11c906bd278cead7dbbf02dad8"
+    },
+    {
+      "file": "src/app/app/app.css",
+      "hash": "44bd81d8cb4a0a3fa74a6c77a6cd32e4952ca9f055665a98a3687a75f3d4ea23"
+    },
+    {
+      "file": "src/app/app/charge/page.tsx",
+      "hash": "5b00f6c1b37cb83f563790629802e03282376f0cd6b6f9eecae0e000099c770c"
+    },
+    {
+      "file": "src/app/app/explore/page.tsx",
+      "hash": "a01a095f183bf748f2ed793c8f01b0cf60f98130437c1e9be2d00b7c2dfed98f"
+    },
+    {
+      "file": "src/app/app/layout.tsx",
+      "hash": "cc3bfa22a22d0c1c2b6995408e0beba61a980ce0fcde29138f0c135643d57cda"
+    },
+    {
+      "file": "src/app/app/page.tsx",
+      "hash": "c303582bfb80a27805a73245bbddd4cb164b80ae96302ca2e099ca9db241dbd7"
+    },
+    {
+      "file": "src/app/app/places/[slug]/page.tsx",
+      "hash": "763c1d0d1af709c242991273d29ac5d242052237ff5c8e6066964a5ded8d59f2"
+    },
+    {
+      "file": "src/app/app/rent/page.tsx",
+      "hash": "47c3b507ad62780cd477712aa0b7955957393f3af21b03d55f062ba25f169b0f"
+    },
+    {
+      "file": "src/app/app/rewards/page.tsx",
+      "hash": "8ad845766970a990cc4efae584b56ff5d70a9a0092e8288a2dd39328247a11ee"
     },
     {
       "file": "src/app/apple-icon.png",
@@ -11524,7 +11588,7 @@
     },
     {
       "file": "src/components/layout/HideOnAdmin.tsx",
-      "hash": "eeef58ef2df53f37cb142b726acde95fb63e873226d8d6d47be54d29712fe855"
+      "hash": "dd49740b207eb1df1e1935b3d5204e4af65cf0764f39faf2bcbdaf8f76f7628b"
     },
     {
       "file": "src/components/layout/MobileDrawer.tsx",
@@ -11532,7 +11596,7 @@
     },
     {
       "file": "src/components/marketing/WelcomeOffer.tsx",
-      "hash": "10c610294ed93523deb466cfa218354d0b6f7a23c39c26733dfbdfb93194b79e"
+      "hash": "3ffde5e9301ca9aa89f78b3dd135d02774894842021a65a7bdbad634bdfdb67d"
     },
     {
       "file": "src/components/media/MediaImage.tsx",
@@ -11541,6 +11605,14 @@
     {
       "file": "src/components/media/MediaVideo.tsx",
       "hash": "2ca100d7d50ca594428da7989dac1b7f0b48e99abb2cecd85755ad8d0f14ced6"
+    },
+    {
+      "file": "src/components/pwa/AppShell.tsx",
+      "hash": "e76ef1aa76c220e2bbc00984ba630c365189ea46e0944c387a58e0144402226c"
+    },
+    {
+      "file": "src/components/pwa/Explore.tsx",
+      "hash": "6fc057826eaa329da3e97521cb13fb1b0a58b8e1fecf8996b192e6a61321f7a2"
     },
     {
       "file": "src/components/saga/EpisodeExtras.tsx",
@@ -11609,6 +11681,10 @@
     {
       "file": "src/components/ui/Section.tsx",
       "hash": "71c7bc3c46a49fc8fbcb0cc988b1571bd992630bb928989943c6a0760e157ce4"
+    },
+    {
+      "file": "src/data/appGuides.ts",
+      "hash": "c21b2b1405521d33d94f5f9fc43dc9400abcaed2cbcb800e102537c47e844de8"
     },
     {
       "file": "src/data/areaMedia.ts",
@@ -11928,51 +12004,51 @@
     }
   ],
   "dates": {
-    "/": "2026-10-16T18:05:04+08:00",
-    "/about": "2026-10-16T18:05:04+08:00",
-    "/book": "2026-10-16T18:05:04+08:00",
-    "/contact": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/canggu": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/denpasar": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/jimbaran": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/kuta": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/sanur": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/seminyak": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/ubud": "2026-10-16T18:05:04+08:00",
-    "/delivery-areas/uluwatu": "2026-10-16T18:05:04+08:00",
-    "/fleet": "2026-10-16T18:05:04+08:00",
-    "/fleet/athena": "2026-10-16T18:05:04+08:00",
-    "/fleet/bees": "2026-10-16T18:05:04+08:00",
-    "/fleet/edpower": "2026-10-16T18:05:04+08:00",
-    "/fleet/victory": "2026-10-16T18:05:04+08:00",
-    "/help-center": "2026-10-16T18:05:04+08:00",
-    "/how-it-works": "2026-10-16T18:05:04+08:00",
-    "/monthly-scooter-rental-bali": "2026-10-16T18:05:04+08:00",
-    "/partners": "2026-10-16T18:05:04+08:00",
-    "/saga": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-1": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-10": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-11": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-12": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-13": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-14": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-15": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-16": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-17": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-18": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-19": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-2": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-20": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-21": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-22": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-3": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-4": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-5": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-6": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-7": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-8": "2026-10-16T18:05:04+08:00",
-    "/saga/chapter-9": "2026-10-16T18:05:04+08:00",
-    "/supercharge": "2026-10-16T18:05:04+08:00"
+    "/": "2026-10-17T19:54:13+08:00",
+    "/about": "2026-10-17T19:54:13+08:00",
+    "/book": "2026-10-17T19:54:13+08:00",
+    "/contact": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/canggu": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/denpasar": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/jimbaran": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/kuta": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/sanur": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/seminyak": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/ubud": "2026-10-17T19:54:13+08:00",
+    "/delivery-areas/uluwatu": "2026-10-17T19:54:13+08:00",
+    "/fleet": "2026-10-17T19:54:13+08:00",
+    "/fleet/athena": "2026-10-17T19:54:13+08:00",
+    "/fleet/bees": "2026-10-17T19:54:13+08:00",
+    "/fleet/edpower": "2026-10-17T19:54:13+08:00",
+    "/fleet/victory": "2026-10-17T19:54:13+08:00",
+    "/help-center": "2026-10-17T19:54:13+08:00",
+    "/how-it-works": "2026-10-17T19:54:13+08:00",
+    "/monthly-scooter-rental-bali": "2026-10-17T19:54:13+08:00",
+    "/partners": "2026-10-17T19:54:13+08:00",
+    "/saga": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-1": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-10": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-11": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-12": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-13": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-14": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-15": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-16": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-17": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-18": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-19": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-2": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-20": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-21": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-22": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-3": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-4": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-5": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-6": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-7": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-8": "2026-10-17T19:54:13+08:00",
+    "/saga/chapter-9": "2026-10-17T19:54:13+08:00",
+    "/supercharge": "2026-10-17T19:54:13+08:00"
   }
 }
