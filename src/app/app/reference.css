@@ -72,11 +72,12 @@
 .wr-home-showroom strong { display: block; font-size: 13px; font-weight: 650; }
 .wr-home-showroom small { display: block; font-size: 10px; color: var(--ink-soft); margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .wr-home-showroom > svg { flex-shrink: 0; }
-.wr-home-club { display: flex; position: relative; isolation: isolate; min-height: 186px; background: #087c44; color: #fff; border-radius: 17px; overflow: hidden; margin-bottom: 25px; }
+.wr-home-club { display: flex; position: relative; isolation: isolate; min-height: 186px; background: var(--app-card); color: var(--ink); border: 1px solid var(--line); border-radius: 17px; overflow: hidden; margin-bottom: 25px; }
 .wr-home-club > span { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; width: 59%; padding: 22px 0 22px 20px; position: relative; z-index: 1; }
 .wr-home-club strong { font-size: 23px; font-weight: 750; letter-spacing: -.035em; line-height: 1.2; }
-.wr-home-club small { font-size: 10px; line-height: 1.6; margin-top: 10px; color: #e5f5ea; }
-.wr-home-club b { display: inline-flex; align-items: center; min-height: 37px; padding: 9px 14px; background: #fff; color: #111; border-radius: 30px; font-size: 11px; font-weight: 600; margin-top: 15px; }
+.wr-home-club small { font-size: 10px; line-height: 1.6; margin-top: 10px; color: var(--ink-soft); }
+.wr-home-club b { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 14px; background: var(--ink); color: var(--app-background); border-radius: 30px; font-size: 11px; font-weight: 600; margin-top: 15px; transition: opacity .18s ease; }
+.wr-home-club:hover b { opacity: .82; }
 .wr-home-club > img { position: absolute; right: 2px; bottom: 13px; width: 43%; height: 155px; object-fit: contain; object-position: center; padding: 4px; }
 .wr-home-section-heading { display: flex; align-items: center; gap: 6px; margin-bottom: 17px; }
 .wr-home-section-heading h2 { font-size: 18px; font-weight: 700; letter-spacing: -.025em; }
