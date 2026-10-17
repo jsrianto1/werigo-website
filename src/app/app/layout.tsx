@@ -4,6 +4,7 @@ import { AppShell } from "@/components/pwa/AppShell";
 import "./app.css";
 import "./rental.css";
 import "./mobile.css";
+import "./reference.css";
 import "leaflet/dist/leaflet.css";
 const appBrandFont = Plus_Jakarta_Sans({ variable: "--font-werigo", subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {

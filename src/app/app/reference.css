@@ -1,0 +1,217 @@
+/* App-only layout follows the supplied mobile reference. */
+.ride-app {
+  --wr-charcoal: #111; --wr-teal: #111; --wr-teal-dark: #333;
+  --wr-paper: #fff; --wr-mist: #f3f3f3; --wr-border: #e8e8e8;
+  --ra-ink: #111; --ra-muted: #666; --ra-line: #e8e8e8; --ra-teal: #111;
+  --brand-primary: #111; --brand-primary-strong: #333; --brand-primary-soft: #eee; --brand-primary-faint: #f6f6f6;
+  --brand-accent: #111; --brand-accent-strong: #333; --surface-sunken: #f3f3f3;
+  --ink: #111; --ink-soft: #666; --ink-faint: #777; --line: #e8e8e8; --line-strong: #ccc;
+  --app-card: #f3f3f3; --app-background: #fff; --app-floating: #ffffffed;
+  --surface-page: var(--app-background); --surface-card: var(--app-card); --ink-inverse: var(--app-background);
+  --brand-accent-soft: var(--app-card);
+  --app-action-bottom: calc(99px + env(safe-area-inset-bottom));
+  background: var(--app-background); color: var(--ink); padding-bottom: calc(130px + env(safe-area-inset-bottom));
+}
+.ride-app[data-theme="dark"] {
+  --wr-charcoal: #f5f5f5; --wr-teal: #f5f5f5; --wr-teal-dark: #ddd;
+  --wr-paper: #1c1c1c; --wr-mist: #282828; --wr-border: #383838;
+  --ra-ink: #f5f5f5; --ra-muted: #bcbcbc; --ra-line: #383838; --ra-teal: #f5f5f5;
+  --brand-primary: #f5f5f5; --brand-primary-strong: #ddd; --brand-primary-soft: #333; --brand-primary-faint: #282828;
+  --brand-accent: #f5f5f5; --brand-accent-strong: #ddd; --surface-sunken: #292929;
+  --ink: #f5f5f5; --ink-soft: #bbb; --ink-faint: #aaa; --line: #383838; --line-strong: #555;
+  --app-card: #292929; --app-background: #1c1c1c; --app-floating: #1c1c1ced;
+  color-scheme: dark;
+}
+.ride-app .ra-content { max-width: 760px; padding: 25px 20px 20px; }
+.ride-app .ra-page-title { font-family: var(--font-werigo), var(--font-inter), sans-serif; font-size: 34px; font-weight: 750; letter-spacing: -.045em; line-height: 1.15; }
+.ride-app .ra-lead { color: var(--ink-soft); }
+.ride-app.wr-hub-shell .ra-header { display: none; }
+.ride-app.wr-hub-shell .ra-content { padding-top: calc(27px + env(safe-area-inset-top)); }
+.ride-app .ra-header { border: 0; background: var(--app-background); }
+.ride-app .ra-nav { width: calc(100% - 80px); min-width: 260px; max-width: 570px; left: 50%; right: auto; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom)); padding: 6px 9px; border: 1px solid var(--line); border-radius: 60px; background: var(--app-floating); box-shadow: 0 2px 9px #0000000b; backdrop-filter: blur(18px); }
+.ride-app .ra-nav > div { max-width: none; padding: 0; gap: 4px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ride-app .ra-nav a, .ride-app .ra-nav a.is-active { min-height: 54px; width: auto; min-width: 0; flex: 1; gap: 4px; border-radius: 38px; color: var(--ink-soft); font-size: 10px; flex-direction: column; }
+.ride-app .ra-nav a.is-active { color: var(--ink); background: var(--app-card); font-weight: 700; }
+.ride-app .ra-nav a:hover { background: var(--app-card); }
+.ride-app .wr-wizard-footer { bottom: var(--app-action-bottom); padding-bottom: 13px; background: var(--app-background); border-color: var(--line); }
+.ride-app .wr-checkout .fixed.bottom-0 { bottom: var(--app-action-bottom); padding-bottom: 12px !important; background: var(--app-background); }
+.ride-app.has-booking-bar { padding-bottom: calc(220px + env(safe-area-inset-bottom)); }
+.ride-app .wr-primary, .ride-app .wr-done, .ride-app .wr-confirm-pin, .ride-app .ra-button, .ride-app .ra-install { background: var(--ink); color: var(--app-background); border-color: var(--ink); }
+.ride-app .wr-primary:hover, .ride-app .wr-done:hover, .ride-app .wr-confirm-pin:hover, .ride-app .ra-button:hover, .ride-app .ra-install:hover { background: var(--ink); color: var(--app-background); filter: brightness(.94); }
+.ride-app .bg-primary, .ride-app .bg-accent { color: var(--app-background); }
+.ride-app[data-theme="dark"] :focus-visible { outline-color: #8cd8b7; }
+.ride-app .wr-wordmark > .wr-wordmark-name:last-of-type { color: var(--ink); }
+.ride-app .wr-route-mark { color: #111; }
+.ride-app[data-theme="dark"] .wr-route-mark { color: #343434; }
+.ride-app .wr-auth-tabs, .ride-app .wr-where, .ride-app .wr-when { background: var(--app-card); color: var(--ink); }
+.ride-app .wr-auth-tabs button[aria-pressed="true"] { background: var(--app-background); color: var(--ink); }
+.ride-app .wr-auth input, .ride-app .wr-fields input, .ride-app .wr-fields select, .ride-app .ra-search { background: var(--app-background); color: var(--ink); border-color: var(--line-strong); }
+.ride-app .wr-auth-back, .ride-app .wr-auth-intro { color: var(--ink-soft); }
+.ride-app .wr-auth-footer { color: var(--ink-soft); border-color: var(--line); }
+
+.wr-reference-home { max-width: 700px; margin-inline: auto; }
+.wr-home-location { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 20px; }
+.wr-home-location button { min-width: 0; display: flex; gap: 7px; align-items: center; min-height: 44px; padding: 0; background: transparent; border: 0; color: var(--ink-soft); font-size: 12px; }
+.wr-home-location button > span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wr-gps-dot { width: 9px; height: 9px; flex-shrink: 0; border-radius: 50%; background: #2878ef; box-shadow: 0 0 0 3px #2878ef20; margin-inline: 3px; }
+.wr-home-location > a { display: flex; align-items: center; gap: 5px; min-height: 44px; font-size: 12px; color: var(--ink-soft); }
+.wr-home-wordmark { display: flex; justify-content: center; margin-bottom: 22px; }
+.ride-app .wr-home-wordmark .wr-app-brand { align-items: center; gap: 8px; }
+.ride-app .wr-home-wordmark .wr-route-mark { display: none; }
+.ride-app .wr-home-wordmark .wr-wordmark-name { font-size: 37px; font-weight: 650; }
+.ride-app .wr-home-wordmark .wr-endorsement > img { width: 66px; }
+.ride-app .wr-home-wordmark .wr-endorsement > span { font-size: 7px; }
+.wr-home-search { display: flex; align-items: center; gap: 10px; min-height: 61px; padding: 6px 10px 6px 18px; border: 1px solid var(--line); border-radius: 40px; box-shadow: 0 2px 6px #00000009; margin-bottom: 18px; }
+.wr-home-search-main { display: flex; flex: 1; min-width: 0; align-items: center; gap: 12px; min-height: 46px; text-align: left; border: 0; background: transparent; padding: 0; color: var(--ink); }
+.wr-home-search-main > svg { color: var(--ink-soft); flex-shrink: 0; }
+.wr-home-search-main > span { font-size: 17px; letter-spacing: -.025em; font-weight: 550; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wr-home-later { display: flex; align-items: center; gap: 7px; min-height: 44px; border: 0; border-radius: 24px; padding: 10px 13px; background: var(--app-card); color: var(--ink); font-size: 12px; white-space: nowrap; }
+.wr-home-showroom { display: flex; align-items: center; width: 100%; gap: 12px; border: 1px solid var(--line); border-radius: 17px; padding: 13px; background: transparent; text-align: left; color: var(--ink); margin-bottom: 24px; }
+.wr-home-showroom > span:first-child { display: grid; place-items: center; flex: 0 0 37px; height: 37px; border-radius: 12px; background: var(--app-card); }
+.wr-home-showroom > span:nth-child(2) { min-width: 0; flex: 1; }
+.wr-home-showroom strong { display: block; font-size: 13px; font-weight: 650; }
+.wr-home-showroom small { display: block; font-size: 10px; color: var(--ink-soft); margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wr-home-showroom > svg { flex-shrink: 0; }
+.wr-home-club { display: flex; position: relative; isolation: isolate; min-height: 186px; background: #087c44; color: #fff; border-radius: 17px; overflow: hidden; margin-bottom: 25px; }
+.wr-home-club > span { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; width: 59%; padding: 22px 0 22px 20px; position: relative; z-index: 1; }
+.wr-home-club strong { font-size: 23px; font-weight: 750; letter-spacing: -.035em; line-height: 1.2; }
+.wr-home-club small { font-size: 10px; line-height: 1.6; margin-top: 10px; color: #e5f5ea; }
+.wr-home-club b { display: inline-flex; align-items: center; min-height: 37px; padding: 9px 14px; background: #fff; color: #111; border-radius: 30px; font-size: 11px; font-weight: 600; margin-top: 15px; }
+.wr-home-club > img { position: absolute; right: 2px; bottom: 13px; width: 43%; height: 155px; object-fit: contain; object-position: center; padding: 4px; }
+.wr-home-section-heading { display: flex; align-items: center; gap: 6px; margin-bottom: 17px; }
+.wr-home-section-heading h2 { font-size: 18px; font-weight: 700; letter-spacing: -.025em; }
+.wr-home-section-heading a { display: grid; place-items: center; width: 44px; height: 44px; }
+.wr-home-service-circles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; }
+.wr-home-service-circles > a, .wr-home-service-circles > button { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; border: 0; padding: 0; background: transparent; color: var(--ink); min-width: 0; }
+.wr-home-service-circles > * > span { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--app-card); overflow: hidden; }
+.wr-home-service-circles img { width: 90%; height: 82px; padding: 7px; object-fit: contain; }
+.wr-home-service-circles b { font-size: 12px; font-weight: 550; }
+.wr-home-caption { display: flex; gap: 6px; align-items: flex-start; margin-top: 25px; font-size: 10px; line-height: 1.7; color: var(--ink-soft); }
+.wr-home-caption svg { flex-shrink: 0; margin-top: 2px; }
+
+.wr-services-page > h2 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; margin: 30px 0 24px; }
+.wr-service-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.wr-service-tiles > a { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; min-height: 116px; padding: 13px 6px 11px; border-radius: 14px; background: var(--app-card); gap: 11px; }
+.wr-service-tiles img { width: 83px; height: 64px; object-fit: contain; }
+.wr-service-tiles > a > svg { margin-block: 10px 12px; }
+.wr-service-tiles strong { font-size: 12px; font-weight: 550; }
+.wr-services-membership { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--line); margin-top: 36px; padding-top: 24px; }
+.wr-services-membership > span { flex: 1; }
+.wr-services-membership strong { display: block; font-size: 15px; font-weight: 650; }
+.wr-services-membership small { display: block; color: var(--ink-soft); font-size: 11px; line-height: 1.7; margin-top: 6px; }
+
+.wr-account-name { display: flex; align-items: flex-start; justify-content: space-between; gap: 17px; margin: 3px 0 22px; }
+.wr-account-name > div { min-width: 0; flex: 1; }
+.wr-account-name h1 { font-family: var(--font-werigo), sans-serif; font-size: 34px; font-weight: 750; letter-spacing: -.045em; line-height: 1.15; margin: 0 0 12px; overflow-wrap: anywhere; }
+.wr-account-club-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 25px; padding: 4px 6px; border-radius: 4px; background: var(--app-card); font-size: 10px; font-weight: 550; }
+.wr-account-avatar { display: grid; place-items: center; width: 63px; height: 63px; flex: 0 0 63px; border-radius: 50%; background: #777; color: #fff; }
+.wr-account-signin { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 13px; font-weight: 600; margin: -6px 0 17px; }
+.wr-account-personal { display: flex; align-items: center; justify-content: space-between; padding: 21px 18px; min-height: 65px; border-radius: 14px; background: var(--app-card); margin-bottom: 9px; }
+.wr-account-personal > span { display: flex; align-items: center; gap: 9px; font-size: 15px; }
+.wr-account-quick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-bottom: 22px; }
+.wr-account-quick > * { display: flex; align-items: center; gap: 11px; min-height: 59px; padding: 14px; border-radius: 14px; background: var(--app-card); font-size: 15px; }
+.wr-account-quick svg { flex-shrink: 0; }
+.wr-account-privacy { display: flex; align-items: center; gap: 12px; background: var(--app-card); border-radius: 15px; min-height: 96px; padding: 19px 16px; margin-bottom: 10px; overflow: hidden; }
+.wr-account-privacy > span { flex: 1; min-width: 0; }
+.wr-account-privacy strong { display: block; font-size: 15px; font-weight: 550; line-height: 1.4; }
+.wr-account-privacy small { display: block; color: var(--ink-soft); font-size: 12px; line-height: 1.6; margin-top: 4px; }
+.wr-account-privacy > svg { color: #2878ef; flex-shrink: 0; transform: rotate(-12deg); }
+.wr-account-rows > a, .wr-account-appearance { display: flex; align-items: center; gap: 17px; min-height: 62px; padding: 12px 8px; }
+.wr-account-rows > a > span, .wr-account-appearance > span { flex: 1; font-size: 15px; }
+.wr-account-rows > a > svg, .wr-account-appearance > svg { flex-shrink: 0; }
+.wr-account-appearance select { width: 92px; min-height: 44px; border: 0; background: transparent; color: var(--ink-soft); font-size: 13px; padding: 5px; }
+.wr-account-endorsement { margin: 35px 0 10px; }
+.wr-reference-activity > h1 { margin-bottom: 28px; }
+.wr-activity-signed-out h2 { font-size: 20px; font-weight: 650; margin-bottom: 22px; }
+.wr-activity-signed-out > p, .wr-reference-activity-empty > p { font-size: 16px; color: var(--ink); line-height: 1.7; margin-bottom: 24px; }
+.wr-activity-list-top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 25px; }
+.wr-activity-list-top h2 { font-size: 20px; font-weight: 650; }
+.wr-activity-list-top > button { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--app-card); }
+.wr-activity-filter { position: absolute; top: 50px; right: 0; z-index: 4; display: flex; flex-direction: column; width: 150px; border: 1px solid var(--line); border-radius: 12px; padding: 6px; background: var(--app-background); box-shadow: 0 8px 25px #00000014; }
+.wr-activity-filter button { min-height: 44px; background: transparent; border: 0; border-radius: 8px; text-align: left; padding: 8px 14px; font-size: 13px; }
+.wr-activity-filter button[aria-pressed="true"] { background: var(--app-card); font-weight: 650; }
+
+.ride-app[data-theme="dark"] .wr-activity-card, .ride-app[data-theme="dark"] .wr-handover-options > label, .ride-app[data-theme="dark"] .wr-bike-option, .ride-app[data-theme="dark"] .wr-wedison-charge-app { background: var(--app-card); color: var(--ink); border-color: var(--line); }
+.ride-app[data-theme="dark"] .wr-activity-card h3, .ride-app[data-theme="dark"] .wr-station-copy h3 { color: var(--ink); }
+.ride-app[data-theme="dark"] .wr-activity-tip, .ride-app[data-theme="dark"] .wr-member-rules, .ride-app[data-theme="dark"] .wr-nearby { background: #292929; border-color: var(--line); color: var(--ink-soft); }
+.ride-app[data-theme="dark"] .wr-station-icon { background: #2a2a2a; color: #78d2ad; }
+.ride-app[data-theme="dark"] .wr-bike-option.is-selected { background: #303030; border-color: #999; }
+.ride-app[data-theme="dark"] .wr-tier-card:not(.wr-tier-platinum) { color: #111; }
+.ride-app[data-theme="dark"] .wr-tier-card:not(.wr-tier-platinum) .wr-tier-entry { color: #59665e; }
+.ride-app[data-theme="dark"] .ra-filters button { background: var(--app-card); color: var(--ink); border-color: var(--line); }
+.ride-app[data-theme="dark"] .ra-filters button[aria-pressed="true"] { background: #f5f5f5; color: #111; }
+.ride-app[data-theme="dark"] .wr-activity-area, .ride-app[data-theme="dark"] .wr-activity-photo-label, .ride-app[data-theme="dark"] .wr-station-area { color: var(--ink-soft); }
+.ride-app[data-theme="dark"] .wr-nearby a, .ride-app[data-theme="dark"] .wr-wedison-charge-app a { background: #383838; color: var(--ink); border-color: var(--line); }
+.ride-app .wr-location-actions > button { min-height: 44px; }
+.ride-app[data-theme="dark"] .wr-back,
+.ride-app[data-theme="dark"] .wr-location-actions > button,
+.ride-app[data-theme="dark"] .wr-area-field select,
+.ride-app[data-theme="dark"] .wr-showroom,
+.ride-app[data-theme="dark"] .wr-date-summary,
+.ride-app[data-theme="dark"] .wr-pin,
+.ride-app[data-theme="dark"] .wr-checkout-pin,
+.ride-app[data-theme="dark"] .wr-rider-policy { background: var(--app-card); color: var(--ink); border-color: var(--line); }
+.ride-app[data-theme="dark"] .wr-location-actions > button:last-child { background: transparent; }
+.ride-app[data-theme="dark"] .wr-choice-dot { background: #f5f5f5; border-color: #f5f5f5; color: #111; }
+.ride-app[data-theme="dark"] .wr-handover-options > label:not(.is-selected) .wr-choice-dot { background: transparent; border-color: #777; }
+.ride-app[data-theme="dark"] .wr-step-intro,
+.ride-app[data-theme="dark"] .wr-estimate-note,
+.ride-app[data-theme="dark"] .wr-location-note,
+.ride-app[data-theme="dark"] .wr-date-summary p,
+.ride-app[data-theme="dark"] .wr-bike-info > small,
+.ride-app[data-theme="dark"] .wr-bike-price small,
+.ride-app[data-theme="dark"] .wr-showroom p,
+.ride-app[data-theme="dark"] .wr-pin p,
+.ride-app[data-theme="dark"] .wr-checkout-pin p,
+.ride-app[data-theme="dark"] .wr-map-confirm p,
+.ride-app[data-theme="dark"] .wr-handover-options small,
+.ride-app[data-theme="dark"] .wr-policy p { color: var(--ink-soft); }
+.ride-app[data-theme="dark"] .wr-route-price { background: #183d2b; border-color: #325640; }
+.ride-app[data-theme="dark"] .wr-route-price > span,
+.ride-app[data-theme="dark"] .wr-route-price > p { color: #c1d7c7; }
+.ride-app[data-theme="dark"] .wr-station-copy > a,
+.ride-app[data-theme="dark"] .wr-activity-links a:last-child,
+.ride-app[data-theme="dark"] .wr-showroom a { color: #8cd8b7; }
+.ride-app[data-theme="dark"] .wr-endorsement > img { background: #fff; border-radius: 3px; padding: 3px 5px; box-sizing: content-box; }
+.ride-app[data-theme="dark"] .wr-endorsement > span { color: #bbb; }
+.ride-app[data-theme="dark"] .ra-search:focus-within { border-color: #8cd8b7; }
+.ride-app[data-theme="dark"] .wr-map-loading,
+.ride-app[data-theme="dark"] .wr-map-unavailable { color: #111; }
+.ride-app[data-theme="dark"] .wr-checkout .wr-unit-option,
+.ride-app[data-theme="dark"] .wr-checkout .wr-extra-options > li { background: var(--app-card); }
+.ride-app[data-theme="dark"] .wr-checkout .wr-unit-option button,
+.ride-app[data-theme="dark"] .wr-checkout .wr-extra-options button { background: #444; color: var(--ink); }
+.ride-app .wr-checkout .wr-unit-option button,
+.ride-app .wr-checkout .wr-extra-options button { width: 44px; height: 44px; }
+.ride-app .wr-checkout .wr-unit-option,
+.ride-app .wr-checkout .wr-extra-options > li { gap: 10px; padding-inline: 14px; }
+@media (max-width: 360px) {
+  .ride-app .wr-checkout .wr-unit-option,
+  .ride-app .wr-checkout .wr-extra-options > li { grid-template-columns: minmax(0, 1fr); }
+  .ride-app .wr-checkout .wr-unit-option > div:last-child,
+  .ride-app .wr-checkout .wr-extra-options > li > div:last-child { justify-self: end; }
+}
+
+@media (min-width: 761px) {
+  .wr-reference-home { max-width: 600px; }
+  .wr-home-club { min-height: 220px; }
+  .wr-home-club strong { font-size: 30px; }
+  .wr-home-club > img { height: 200px; }
+  .wr-home-service-circles { max-width: 420px; }
+  .wr-service-tiles { max-width: 580px; }
+  .wr-service-tiles > a { min-height: 155px; }
+}
+@media (max-width: 360px) {
+  .ride-app .ra-content { padding-inline: 15px; }
+  .wr-home-location button, .wr-home-location > a { font-size: 10px; }
+  .wr-home-search { padding-left: 14px; }
+  .wr-home-search-main > span { font-size: 15px; }
+  .wr-home-later { font-size: 11px; padding-inline: 10px; }
+  .wr-home-club strong { font-size: 20px; }
+  .wr-home-club > span { padding-left: 17px; }
+  .wr-home-service-circles { gap: 13px; }
+  .wr-service-tiles { gap: 9px; }
+  .wr-service-tiles strong { font-size: 11px; }
+  .wr-account-name h1 { font-size: 30px; }
+  .wr-account-quick > * { padding-inline: 12px; gap: 9px; font-size: 13px; }
+}

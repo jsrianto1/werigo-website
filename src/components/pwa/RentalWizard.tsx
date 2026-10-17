@@ -1,21 +1,21 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, CalendarDays, Check, MapPin, Store, Truck, Zap, Compass, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays, Check, MapPin, Store, Truck } from "lucide-react";
 import { serviceAreas, airportPoints, getPickupPoint, deliveryPricingNote } from "@/data/locations";
 import { estimateRental, formatIdr, isValidPeriod, rentalDays } from "@/lib/pricing";
 import { appCheckoutUrl, type AppRentalSearch } from "@/lib/appRental";
 import { clearAppPickup, readAppPickup } from "@/lib/appPickup";
 import { site as siteConfig } from "@/lib/config";
 import { PickupLocation } from "./PickupLocation";
+import { AppHome } from "./AppHome";
 export interface AppBike { id: string; modelSlug: string; model: string; displayName: string; bestFor: string; supercharge: boolean; }
 
 type Step = "home" | "handover" | "location" | "dates" | "bikes";
 const stages: Step[] = ["handover", "location", "dates", "bikes"];
 const titles = { home: "Where we go?", handover: "How will you get your bike?", location: "Where should we deliver?", dates: "When’s your Bali ride?", bikes: "Choose your Wedison." };
-export function RentalHome({ bikes, initial, today, begin = false }: { bikes: AppBike[]; initial: AppRentalSearch; today: string; begin?: boolean }) {
+export function RentalHome({ bikes, initial, today, begin = false, firstName }: { bikes: AppBike[]; initial: AppRentalSearch; today: string; begin?: boolean; firstName?: string }) {
   const router = useRouter();
   const [search, setSearch] = useState(initial);
   const [step, setStep] = useState<Step>(begin ? "handover" : "home");
@@ -53,12 +53,7 @@ export function RentalHome({ bikes, initial, today, begin = false }: { bikes: Ap
     }
   }
   function back() { go(step === "bikes" ? "dates" : step === "dates" ? method === "pickup" ? "handover" : "location" : step === "location" ? "handover" : "home"); }
-  if (step === "home") return <div className="wr-dashboard">
-    <div className="wr-home-top"><div><p className="wr-kicker">Bali, at your own pace.</p><h1>Where we go?</h1></div><span className="wr-bali"><MapPin size={14}/> Bali</span></div>
-    <section className="wr-rent-hero"><div><span className="wr-kicker">Electric motorcycle rental</span><h2>Your next ride.<br/>Your kind of Bali.</h2><p>Pick up at Werigo or get your Wedison delivered to your stay.</p></div><div className="wr-bike-stage"><Image src="/media/fleet/victory/catalog.webp" alt="Wedison Victory electric motorcycle, shown in full" width={760} height={720} sizes="(max-width:760px) 80vw, 310px" priority/></div><button className="wr-rent-float" onClick={() => go("handover")}>RENT <ArrowRight size={22}/></button></section>
-    <section className="wr-home-services" aria-label="Werigo services"><Link href="/app/activity"><CalendarDays size={25}/><strong>My bookings</strong><ChevronRight size={18}/></Link><Link href="/app/charge"><Zap size={25}/><strong>Charging</strong><ChevronRight size={18}/></Link><Link href="/app/rewards"><Check size={25}/><strong>Ride Club</strong><ChevronRight size={18}/></Link></section>
-    <Link className="wr-discover" href="/app/explore"><Image src="/media/areas/uluwatu/hero.webp" alt="Uluwatu coastline in Bali" fill sizes="(max-width:760px) 100vw, 700px"/><span><small>A little inspiration</small><strong>What to do?</strong><span>Find your next Bali stop <Compass size={18}/></span></span></Link>
-  </div>;
+  if (step === "home") return <AppHome firstName={firstName} onRent={() => go("handover")} />;
   return <div className={`wr-wizard wr-step-${step}`}>
     <div className="wr-step-top"><button className="wr-back" onClick={back} aria-label="Back one step"><ArrowLeft size={23}/></button><span>RENT · {step === "handover" ? "Pick-up" : step === "location" ? "Location" : step === "dates" ? "Dates" : "Your ride"}</span><span>Bali</span></div>
     <div className="wr-step-progress" aria-hidden="true">{stages.map((name, index) => <i key={name} className={index <= stages.indexOf(step) ? "is-done" : ""}/>)}</div>

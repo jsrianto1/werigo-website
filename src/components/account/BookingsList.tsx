@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { CalendarDays, CreditCard, Inbox, MessageCircle, RefreshCw } from "lucide-react";
+import { CalendarDays, CreditCard, Inbox, MessageCircle, RefreshCw, SlidersHorizontal } from "lucide-react";
 import { T } from "@/components/i18n/LanguageProvider";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { toCustomerEntry } from "@/data/vehicles";
@@ -41,10 +41,12 @@ export function canPay(b: PublicBooking): boolean {
   );
 }
 
-export function BookingsList({ bookingBase = "/book" }: { bookingBase?: "/book" | "/app/rent" }) {
+export function BookingsList({ bookingBase = "/book", appMode = false }: { bookingBase?: "/book" | "/app/rent"; appMode?: boolean }) {
   const [bookings, setBookings] = useState<PublicBooking[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [paying, setPaying] = useState<string | null>(null);
+  const [view, setView] = useState<"All" | "Current" | "Past">("All");
+  const [filterOpen, setFilterOpen] = useState(false);
   const { pay } = useSnap();
 
   const load = useCallback(async () => {
@@ -99,23 +101,26 @@ export function BookingsList({ bookingBase = "/book" }: { bookingBase?: "/book" 
     );
   }
 
+  if (appMode && error) return <div className="wr-activity-load-error" role="alert"><p>{error}</p><Button variant="outline" onClick={() => void load()}>Try again</Button></div>;
+  const shownBookings = bookings.filter(booking => view === "All" || ((booking.status === "completed" || booking.status === "cancelled") ? view === "Past" : view === "Current"));
   return (
-    <div>
+    <div className={appMode ? "wr-app-bookings" : undefined}>
+      {appMode && <div className="wr-activity-list-top"><h2>{view === "All" ? "Your rentals" : view}</h2><button type="button" aria-label="Filter bookings" aria-expanded={filterOpen} onClick={() => setFilterOpen(value => !value)}><SlidersHorizontal size={20} /></button>{filterOpen && <div className="wr-activity-filter" role="group" aria-label="Booking status">{(["All", "Current", "Past"] as const).map(value => <button type="button" key={value} aria-pressed={view === value} onClick={() => { setView(value); setFilterOpen(false); }}>{value}</button>)}</div>}</div>}
       {error ? (
         <p role="alert" className="mb-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
           <T>{error}</T>
         </p>
       ) : null}
-      {bookings.length === 0 ? (
-        <div className="rounded-[14px] border border-dashed border-line-strong bg-card p-10 text-center">
-          <Inbox className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />
-          <h2 className="mt-3 font-display text-xl text-ink"><T>{"No bookings yet"}</T></h2>
-          <p className="mx-auto mt-1 max-w-sm text-sm text-ink-soft"><T>{"Your bookings and payments will appear here."}</T></p>
+      {shownBookings.length === 0 ? (
+        <div className={appMode ? "wr-reference-activity-empty" : "rounded-[14px] border border-dashed border-line-strong bg-card p-10 text-center"}>
+          {!appMode && <Inbox className="mx-auto h-6 w-6 text-ink-faint" aria-hidden="true" />}
+          {!appMode && <h2 className="mt-3 font-display text-xl text-ink"><T>{"No bookings yet"}</T></h2>}
+          <p className={appMode ? "" : "mx-auto mt-1 max-w-sm text-sm text-ink-soft"}><T>{appMode ? view === "All" ? "You don’t have any recent rentals." : "No rentals in this view." : "Your bookings and payments will appear here."}</T></p>
           <ButtonLink href={bookingBase} variant="accent" className="mt-5"><T>{"Find a ride"}</T></ButtonLink>
         </div>
       ) : (
         <ul className="space-y-4">
-          {bookings.map((b) => {
+          {shownBookings.map((b) => {
             const badge = bookingBadge(b);
             const entry = toCustomerEntry(b.vehicleModel);
             return (
