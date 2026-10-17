@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "caa4eaefd59d4719be79010864fa6541e64bb924226214c2fe2388e46f4c1298",
+  "fingerprint": "5e0b47acd67e3b3cd897d51fb796008fb17100a6b98c4e1aad6a0cf366d253ce",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -10899,6 +10899,10 @@
       "hash": "016c00617400cd6aa468ffe2ffdbfef2d08130e29c38c89d02f809a5ce4e2ad0"
     },
     {
+      "file": "scripts/auth-errors-test.mjs",
+      "hash": "52a8bf2e793870d0c2df31df2d1cb2768519e89b9a888e711b8b88ad28f62bb2"
+    },
+    {
       "file": "scripts/color-check.mjs",
       "hash": "2b1f17226106e410815d49799744577a316b862682ebd0e70ccd7b624d8e7400"
     },
@@ -10921,6 +10925,10 @@
     {
       "file": "scripts/delivery-distance-test.mjs",
       "hash": "832f3d2f12936c7dcbf5ffc792b14b8a457a99f7e3a06f3312763a1ec62d119e"
+    },
+    {
+      "file": "scripts/delivery-places-test.mjs",
+      "hash": "b5923040da4b5eb343d32e8514c26c8082cf3a331928f13d7beb14285432aa56"
     },
     {
       "file": "scripts/delivery-test.mjs",
@@ -11000,7 +11008,7 @@
     },
     {
       "file": "src/app/account/login/page.tsx",
-      "hash": "590e39c8bc0ac495845bed0f8e1f51dba6be98accb625fd1efe11e0c3aeda7f8"
+      "hash": "ab96e5874e4323834fa2c06e664c8ad2d7d15bd0ec452dcd0ed8a7ba9384172c"
     },
     {
       "file": "src/app/account/membership/page.tsx",
@@ -11235,6 +11243,10 @@
       "hash": "c9dd2dc3598d8252d3b76dbb9f999c73e5045ce7dea1483b810a5b5af5fb4f87"
     },
     {
+      "file": "src/app/api/delivery/search/route.ts",
+      "hash": "c9f7c7e2b18d72d9e02577218aa50edf776931de1c8189ea1374770bd638d2e7"
+    },
+    {
       "file": "src/app/api/exchange-rate/route.ts",
       "hash": "85ae367e6da4cc6be96aed3a9af8ce27bd5706fb4ecbc025a7a1ea1a1e917d0f"
     },
@@ -11284,7 +11296,7 @@
     },
     {
       "file": "src/app/app/login/page.tsx",
-      "hash": "a32782eec6b826e71db60396b388b8779830ab429c3288d091cb0fc8bfb7df78"
+      "hash": "44a6dd518e28e2eea9db3c4e106d25c202e21eab6a115d1a57dba2b9e3b8797f"
     },
     {
       "file": "src/app/app/mobile.css",
@@ -11304,7 +11316,7 @@
     },
     {
       "file": "src/app/app/reference.css",
-      "hash": "cd1583f874c7240da4992b8cf5e0a7c5c4b406b6b2a08cf9a9cfa2468b16f76f"
+      "hash": "537c40884b99d4c10d2945306c61a49bb29d99833bcdad6f3e01c3905c25d5ac"
     },
     {
       "file": "src/app/app/rent/checkout/page.tsx",
@@ -11428,7 +11440,7 @@
     },
     {
       "file": "src/app/privacy/page.tsx",
-      "hash": "fdf544b76a4a276400b3acef265bf60471a3823d1bbe1cdec530c2c502bd139a"
+      "hash": "9d8e4788acc07f7233b25d6cdccc528dde3cd60f00c2ae1a9646cb1305037aab"
     },
     {
       "file": "src/app/ride-club/page.tsx",
@@ -11472,7 +11484,7 @@
     },
     {
       "file": "src/components/account/AuthForm.tsx",
-      "hash": "f0a5c44e46bbe356c889d8e5684b377d3cfde5787bbbf174e4abb9701223d5ed"
+      "hash": "8a8edeb5e113f8b354b17bed4eb30876a08d267b37427731ddcfd19f5d9e2fdd"
     },
     {
       "file": "src/components/account/BookingsList.tsx",
@@ -11604,11 +11616,11 @@
     },
     {
       "file": "src/components/booking/DeliveryFeePicker.module.css",
-      "hash": "25c62b0b0f4bdf47e0aa4f6aff83e4dad1930b5aa2c1c011616df9fa3fbfa499"
+      "hash": "30a00190a9ec8570c9e926ed04238fffff791270897e971e648fa1638a96eb65"
     },
     {
       "file": "src/components/booking/DeliveryFeePicker.tsx",
-      "hash": "b9e4394a6963e8155f3ebbf8f26429d9ec9ea8d5896c34ab0442991c1a1e552c"
+      "hash": "81bccfa42c0949fab568c25cdc2a88a98431442ced341a7a4be8ff4334565597"
     },
     {
       "file": "src/components/booking/SearchWidget.tsx",
@@ -11732,11 +11744,11 @@
     },
     {
       "file": "src/components/pwa/PickupLocation.tsx",
-      "hash": "09b6645329e396ba8fc3af94261baf0aa9f47d428967db61759e45018b0beb65"
+      "hash": "d37090884d0279c670ad61a13af86b95bda8ce6132a61ee738279086140abb9c"
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
-      "hash": "dff1d6080f10b6d873152ace4c62e413c75f370dc99cf23aefa54e239b42c7af"
+      "hash": "518d2843855e59ba0aaa48f287394e9a7891a77be3e0324c0371754588a1c373"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
@@ -11928,7 +11940,7 @@
     },
     {
       "file": "src/lib/appPickup.ts",
-      "hash": "5d28ff56eca81cb605ea21274662ece67cc5cf5a1f5fc4ee6e72bf86e9d3b764"
+      "hash": "4299aa0ac5c13edb02c8064731c1f720cc6307fcfe994633ba65d748bfd4a968"
     },
     {
       "file": "src/lib/appRental.ts",
@@ -11949,6 +11961,10 @@
     {
       "file": "src/lib/auth.ts",
       "hash": "4d4f784f77a903a56c36f2206fb5b2e1ebff912d077815dbbc6f67db6a6ccf34"
+    },
+    {
+      "file": "src/lib/authErrors.ts",
+      "hash": "f86570ad60ede6f68251d9ec953a5c7914255ecfae88365674daa4d54603a27d"
     },
     {
       "file": "src/lib/booking.ts",
@@ -11993,6 +12009,10 @@
     {
       "file": "src/lib/db.ts",
       "hash": "884b6b0350c38dd5c41b376cc673b2f135546b1ec5333d126b4cf83c2cf8ea81"
+    },
+    {
+      "file": "src/lib/deliveryPlaces.ts",
+      "hash": "d06faec90fcf2d602d758de1ec95493d08eacf494490d345cff437e382f46e57"
     },
     {
       "file": "src/lib/deliveryPricing.ts",
