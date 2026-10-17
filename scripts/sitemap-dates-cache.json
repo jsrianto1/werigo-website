@@ -1,34 +1,42 @@
 {
   "version": 1,
-  "fingerprint": "e9cc6c4b49cd8c85ec4d098e70ecc454074971ce25b0c11ec0b72b6b676cd69d",
+  "fingerprint": "24199e0c1388864670a5d6c59e2419c30d081a118f1a685a1b6610a2fdf454f9",
   "inputs": [
     {
       "file": "next.config.ts",
-      "hash": "e0f9b2d4c88877db9e84f0f3662bff81118365c0ee4174b162d402e95f998980"
+      "hash": "8f12efdadab5c407879a87c60ebb5722f5dba2278295c9d97ac44188fe099de0"
     },
     {
       "file": "public/app/icon-192.png",
-      "hash": "4d6f71b1e395476bd0d87cf244fd7730e4648bda4e78405814729d11bc1680a2"
+      "hash": "d61745e6962f23825b5363e79c7de3d09cfdd057652c78330f26f25c0be6a5e2"
     },
     {
       "file": "public/app/icon-512.png",
-      "hash": "4c4e32c8f9bc7ffb17a985190ad54475d1b1d0d02de934d62c19c9c632a6ee9a"
+      "hash": "5f738c20f833814545c79710f6fa4c0e9de231a3e5e8ea43a0e96d29540ec5f4"
     },
     {
       "file": "public/app/icon-maskable-512.png",
-      "hash": "4c4e32c8f9bc7ffb17a985190ad54475d1b1d0d02de934d62c19c9c632a6ee9a"
+      "hash": "a10754040d71ad89c3d77c8fcf566abc1f07d8c9a8a5a2ea5d5daaf3b6cd611f"
     },
     {
       "file": "public/app/manifest.webmanifest",
-      "hash": "5d66af994d6d0d7ec76aeae14f88286d6564c9d977ac7d03aeafae517b8e8ba1"
+      "hash": "f61c6b9aaaaaf49038cc60077341e904f94405127186d934de0c9ecf4fe96ae5"
     },
     {
       "file": "public/app/offline.html",
-      "hash": "9f41c37ef4c6be19b5ecc508ca8e69be97fd721a3627963553f0416158bc0af5"
+      "hash": "dc7f7239f292e00cedeffa157d51ab2bafdc5c727e68eb6674acd0fb6677f811"
     },
     {
       "file": "public/app/sw.js",
-      "hash": "77f11ee6ca36dedbb4936cda5c348aa8220ed093da111aac8e84f2455d40ebe9"
+      "hash": "905fdb30b0a1161d615222d752396db42d29d72583147dc5938dfc7bb4a5a62c"
+    },
+    {
+      "file": "public/app/wedison-official.png",
+      "hash": "d469733d86eada0098367dcb74fc852ea00dea678a1095cc449c86e5d47b79cb"
+    },
+    {
+      "file": "public/app/werigo-mark.svg",
+      "hash": "6f2a30fdc8640b4f6019c038aef492bf289ee33b9bf9aea2b836e4f775f4deb5"
     },
     {
       "file": "public/brand/og-image.png",
@@ -10888,15 +10896,19 @@
     },
     {
       "file": "scripts/db-flow-test.mjs",
-      "hash": "bd2fe87030da125c27beb3bd6b87cb9f4f6704b7674759cb2ca9aa8eec7d3adc"
+      "hash": "18b448a1686c2c9f73fd9d2e4f7bc5d2abd4b8cee58dd552599ad75bca67a808"
     },
     {
       "file": "scripts/db-migrate.mjs",
       "hash": "6e27d0c13523bd55e8916f876e55d6339c2e23ce4fb1c84a58609b62dcb44092"
     },
     {
+      "file": "scripts/delivery-distance-test.mjs",
+      "hash": "832f3d2f12936c7dcbf5ffc792b14b8a457a99f7e3a06f3312763a1ec62d119e"
+    },
+    {
       "file": "scripts/delivery-test.mjs",
-      "hash": "df76446687c26635bde3fffaf69e03c4d569ac0d4f1ab0c126d8ecbef8efe0e9"
+      "hash": "2d393dc0d1a77a3d17a4675df24af2f32602a7c478fb1b993b4f7ad2399ff27c"
     },
     {
       "file": "scripts/entries-test.mjs",
@@ -10964,7 +10976,7 @@
     },
     {
       "file": "src/app/account/complete/page.tsx",
-      "hash": "b43a05fc385b999dade752890af487d334666f34bf38fcf3eb6d036e6072b0ab"
+      "hash": "d8336f14c3191a18cfa55800cf0cdffdb2ff994d77f1c6869f888057921d38f1"
     },
     {
       "file": "src/app/account/forgot-password/page.tsx",
@@ -10976,7 +10988,7 @@
     },
     {
       "file": "src/app/account/membership/page.tsx",
-      "hash": "f75727ebc9c1fa4b879aea3c8b8bbec284a7f76ea9b4314a8c9d9fc66aeebdf0"
+      "hash": "04f32848fd8d91f997514fde53590ccb64de67875c8d8bfb0a4b6cc56638ae8a"
     },
     {
       "file": "src/app/account/page.tsx",
@@ -11040,7 +11052,7 @@
     },
     {
       "file": "src/app/admin/settings/page.tsx",
-      "hash": "bae8c4c43b3a3de3c7f0aebc802087ef3f50d039ef0bc457f633dee2c67024db"
+      "hash": "22fe111256d0966cfc87cbef16942c255de43f8ec94e634096db3862ff31b74d"
     },
     {
       "file": "src/app/admin/staff/page.tsx",
@@ -11147,6 +11159,10 @@
       "hash": "9e12b5cd6bdcef18c4770f32504226a4bddcb9d51a8b04da9a6a821f0c6c2e35"
     },
     {
+      "file": "src/app/api/admin/rental-identity/setup/route.ts",
+      "hash": "ca32ac549a858c05df74db6d6b592c0d578762641baf7940b79e1e30a7aaed14"
+    },
+    {
       "file": "src/app/api/admin/settings/notifications/route.ts",
       "hash": "fd53b7e40f769509c662b8f1804aff1e90c8d93418132c2dd9b7328b772d39f0"
     },
@@ -11180,7 +11196,7 @@
     },
     {
       "file": "src/app/api/bookings/route.ts",
-      "hash": "dff2203895fa55487a34a5842e3f5365df9c5ff4a864871d1ebc0ca377f6d2bf"
+      "hash": "5211ad9fd5fc4626adbeb5d23bfc099a3bc2ccc2abc07578e3ee5747c9d71354"
     },
     {
       "file": "src/app/api/checkout/discounts/route.ts",
@@ -11197,6 +11213,10 @@
     {
       "file": "src/app/api/cron/notifications/route.ts",
       "hash": "dba0f4643ae15b1f5eb1f3d7983094ee951468e553ddbc564c0314b28bf2c246"
+    },
+    {
+      "file": "src/app/api/delivery/quote/route.ts",
+      "hash": "c9dd2dc3598d8252d3b76dbb9f999c73e5045ce7dea1483b810a5b5af5fb4f87"
     },
     {
       "file": "src/app/api/exchange-rate/route.ts",
@@ -11244,11 +11264,11 @@
     },
     {
       "file": "src/app/app/layout.tsx",
-      "hash": "7c5df5577ba858a00dd11fb0039f15fac5a9e1f5dbaa15bc35261cdd9a2bfc49"
+      "hash": "84a1abcb25321869501756352abf42e776c3e3a22c2036da52f3e262d40044bc"
     },
     {
       "file": "src/app/app/login/page.tsx",
-      "hash": "15c328bd519449a1cbb5eddb1c2375cd1a4ca6b1ac91639295c576bd0a4282dd"
+      "hash": "80eaecb232b33391b8aa3e8e8a3b35194b2726b5a316b09310b2c717a6b62e99"
     },
     {
       "file": "src/app/app/page.tsx",
@@ -11276,11 +11296,11 @@
     },
     {
       "file": "src/app/app/rental.css",
-      "hash": "ea3b92d763f182f216f3f2fa5ff70352f0827a4ea7a97352e04cf39f685ce276"
+      "hash": "2315a4a9cd464f0d6fbd9c74584b17671ef42c70bfce2572dcde8d6312ab39cc"
     },
     {
       "file": "src/app/app/rewards/page.tsx",
-      "hash": "1c58547db4ccfa89b495dd07f233dcfbdb3a3b349f0a98581e380e5790f196ad"
+      "hash": "c404a79488365091f1072c1ef9ec32f93af2628417a97de1f9792197ef0692e0"
     },
     {
       "file": "src/app/apple-icon.png",
@@ -11304,11 +11324,11 @@
     },
     {
       "file": "src/app/delivery-areas/[slug]/page.tsx",
-      "hash": "07522b998f254c87315866cd9bee81570c14e0f3f4a7d158f79ea179eb40156e"
+      "hash": "962ac4143b159130a51b05cf40c9c6baaf3ef85da60cc31f1cd2aa345c1ef8d9"
     },
     {
       "file": "src/app/delivery-areas/page.tsx",
-      "hash": "237a51c418405ae5056e88949c3481b5fa8e1b54b5e7812f7d56e6efa687f80a"
+      "hash": "4878b92ccfe2938ca7de5d074056825e9fdc99f8aeb0115e0293f583a9a6fa16"
     },
     {
       "file": "src/app/favicon.ico",
@@ -11380,11 +11400,11 @@
     },
     {
       "file": "src/app/privacy/page.tsx",
-      "hash": "2d67d9305ce800177c9bc0f772593ede7ed967a9e4c494945cb5bdfcb37ca6b3"
+      "hash": "fdf544b76a4a276400b3acef265bf60471a3823d1bbe1cdec530c2c502bd139a"
     },
     {
       "file": "src/app/ride-club/page.tsx",
-      "hash": "24ab1fcbc05454066f06371ebc547fe506e58890de6ecc8e69d5a3df7f02d6ea"
+      "hash": "ad4608092da143396e286c4593033ea47b48982af4b34005814704d3677705d3"
     },
     {
       "file": "src/app/robots.ts",
@@ -11412,7 +11432,7 @@
     },
     {
       "file": "src/app/terms/page.tsx",
-      "hash": "3dce058caf4f003e3d0d9d52f5290873bac9e6e8920ac6f584ea303e9df41433"
+      "hash": "28efeb558c6b2f258332a9f64e9edb872342639909151a629e2e5ae3d9247d49"
     },
     {
       "file": "src/components/account/AccountMenu.tsx",
@@ -11424,7 +11444,7 @@
     },
     {
       "file": "src/components/account/AuthForm.tsx",
-      "hash": "9a071a7a153776dced2b6cf631c2b57d8e44bcb5cd4536d1498f1f5ab8d14009"
+      "hash": "f0a5c44e46bbe356c889d8e5684b377d3cfde5787bbbf174e4abb9701223d5ed"
     },
     {
       "file": "src/components/account/BookingsList.tsx",
@@ -11432,11 +11452,11 @@
     },
     {
       "file": "src/components/account/CompleteIdentity.tsx",
-      "hash": "f26b000d83b15dc53dde8d6db478b188243581f7c23397c036bc91cf43b19b8e"
+      "hash": "084bc1fe8190f9dde04fdcb2f96e30401381be0f2b570fd319d05ccdf18f064e"
     },
     {
       "file": "src/components/account/IdentityForm.tsx",
-      "hash": "4c2c2a1d59624a559671c37c68aa4c0f47bdf44914c278f5c336fbe7f024101b"
+      "hash": "79a86e7fe3da5c04476e2af1dd799b4f857e383bb37c248f793a0db4c76a6373"
     },
     {
       "file": "src/components/account/PasswordResetForms.tsx",
@@ -11452,7 +11472,7 @@
     },
     {
       "file": "src/components/admin/AdminDashboard.tsx",
-      "hash": "309dbf645fa74a4cd00759097bfb77c35da39a131db10d97d26e77a95dfa0c23"
+      "hash": "c9826783e269ca07bb83eafd2ccff8a24d98d2ecf79f5f14fb9d0f0f69d81372"
     },
     {
       "file": "src/components/admin/AdminHome.tsx",
@@ -11476,7 +11496,7 @@
     },
     {
       "file": "src/components/admin/CustomerDetail.tsx",
-      "hash": "1a8561f8b15b73107c885304d3cc9f95e2eefa970c0b5c8cc7e1a70eff478ccd"
+      "hash": "d235b9600ead61f4028c9886dba33877640ffc4677a3526c5d3be274a8ba7d76"
     },
     {
       "file": "src/components/admin/CustomersList.tsx",
@@ -11497,6 +11517,10 @@
     {
       "file": "src/components/admin/ReferralsAdmin.tsx",
       "hash": "bd9a1cb0cb7237094edd753842b1814e9ddb668e07c6807aaa62b5dad90ba718"
+    },
+    {
+      "file": "src/components/admin/RentalIdentitySetup.tsx",
+      "hash": "b99e304e974610d3b93b4148833939b90b05ea5cccb5f1bd0fed6d5c88400762"
     },
     {
       "file": "src/components/admin/StaffManager.tsx",
@@ -11544,11 +11568,19 @@
     },
     {
       "file": "src/components/booking/CheckoutFlow.tsx",
-      "hash": "44a4ee719327291851c274bdb9f35ce2e03b59d0d25cb21e2aba136a92411309"
+      "hash": "35a95ed2268dfa80d4b38c540f81fa0d7562dd8080284f4001d551856e2c56d3"
     },
     {
       "file": "src/components/booking/ConfirmationView.tsx",
       "hash": "9ce7564f80fa1abb393918b3bab62cff2090642ce9674ba882262057891a4c0c"
+    },
+    {
+      "file": "src/components/booking/DeliveryFeePicker.module.css",
+      "hash": "b062c712d7913b7cb507232970815784373fe379e566f9685edb19ab9760c109"
+    },
+    {
+      "file": "src/components/booking/DeliveryFeePicker.tsx",
+      "hash": "67afbf24664ea5934fade81a3291559ad8aa0ee246930d4d069e60e52735392e"
     },
     {
       "file": "src/components/booking/SearchWidget.tsx",
@@ -11631,8 +11663,12 @@
       "hash": "2ca100d7d50ca594428da7989dac1b7f0b48e99abb2cecd85755ad8d0f14ced6"
     },
     {
+      "file": "src/components/pwa/AppBrand.tsx",
+      "hash": "58c8b54dd333aeb41c1e21a1bb99609302210f5591437527022037220610a1a3"
+    },
+    {
       "file": "src/components/pwa/AppShell.tsx",
-      "hash": "a7213e94b3953343dacff3ab160716728719d70c3239ab935626309f0299c22f"
+      "hash": "49bd81a8f0c5d457a726869e3b04013035f97c381afe64abb3c4a00d3784de2c"
     },
     {
       "file": "src/components/pwa/AppSignOut.tsx",
@@ -11647,12 +11683,16 @@
       "hash": "6fc057826eaa329da3e97521cb13fb1b0a58b8e1fecf8996b192e6a61321f7a2"
     },
     {
+      "file": "src/components/pwa/MembershipBenefits.tsx",
+      "hash": "479d59f78de6ac984051a01d01c154c79f862e726faa36c5ac5dde9744dfe1e3"
+    },
+    {
       "file": "src/components/pwa/PickupLocation.tsx",
-      "hash": "ac54350d31783f33d4ec667655b95c31a7325c5562366e09f4d375af90764b3d"
+      "hash": "315a5a6f094ad0463441cfce40e0a99d2e540376a213212f377b0a4be3efdaf5"
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
-      "hash": "054d3501e54c45b2373af83127bf39f88c01a332eee0fa5e754b4845f87e1589"
+      "hash": "30ac793a331e334c1289047893e5ee43dec88cc404a7f215cd99b0991696af72"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
@@ -11752,11 +11792,11 @@
     },
     {
       "file": "src/data/faqs.ts",
-      "hash": "10ff7212251169114a7cfacd3101d455113ee5b0e29334ee836fdf4bf9020df5"
+      "hash": "e7a65fb45d073fcdc658131579cf57d93089133881cae0f128539217bfe94a79"
     },
     {
       "file": "src/data/locations.ts",
-      "hash": "9346232d35ffe769faa7749e8ede6828fcfd3c64858f69c7c4214eda0b8e5ecb"
+      "hash": "5df295caf68b9e278293062a3f8c6ac5e2fd738b3722c850e38c7c6c758e5717"
     },
     {
       "file": "src/data/marketingFaqs.ts",
@@ -11769,6 +11809,10 @@
     {
       "file": "src/data/partners.ts",
       "hash": "fc86f9e5d078e1d616c7fe957a422ebc84f6949ea94844145ca554c14652cc57"
+    },
+    {
+      "file": "src/data/riderPolicy.ts",
+      "hash": "67a210acb58799f6485a47efdc9345c463c711308f30c723e76db851485f0199"
     },
     {
       "file": "src/data/saga.ts",
@@ -11800,7 +11844,7 @@
     },
     {
       "file": "src/data/translations.json",
-      "hash": "fa652251b90ee4ac4b40c5c709ecdb8bc1f7ceb938caf4f0b161efbd4fc61ee7"
+      "hash": "28988c448cbc8364599e47fd7e25f5d25b99b5baef9eaa755ad9e3016c8991d4"
     },
     {
       "file": "src/data/vehicles.ts",
@@ -11828,7 +11872,7 @@
     },
     {
       "file": "src/lib/appPickup.ts",
-      "hash": "caed6bf5be82aba0be65836d911c468b541ab9697081e3f1cc7d7d013f7aeb5b"
+      "hash": "5d28ff56eca81cb605ea21274662ece67cc5cf5a1f5fc4ee6e72bf86e9d3b764"
     },
     {
       "file": "src/lib/appRental.ts",
@@ -11860,7 +11904,7 @@
     },
     {
       "file": "src/lib/bookingSchema.ts",
-      "hash": "179e5d6274f23c827cee96e0eabc3172cdaf957fea368c5edc4dd9706e8056bb"
+      "hash": "39f9dbc5eaacd451a5651329c96f70fe11cc9d9d1b9a8de7e71ed6e1f5b0c537"
     },
     {
       "file": "src/lib/bookingStore.ts",
@@ -11884,7 +11928,7 @@
     },
     {
       "file": "src/lib/customerGate.ts",
-      "hash": "a42d40c569eab588c2b775aecc94d8b5168c3e64ecb2e3d7010741765fbe38d9"
+      "hash": "821f69ecdedb5325883eab9e002f3d38e6133e70320cae612ca204bf1071ec08"
     },
     {
       "file": "src/lib/customers.ts",
@@ -11893,6 +11937,18 @@
     {
       "file": "src/lib/db.ts",
       "hash": "884b6b0350c38dd5c41b376cc673b2f135546b1ec5333d126b4cf83c2cf8ea81"
+    },
+    {
+      "file": "src/lib/deliveryPricing.ts",
+      "hash": "11edf10761133d2f3fd27f0b40979b778cce8d5452b2aac54367a540516fc4d0"
+    },
+    {
+      "file": "src/lib/deliveryRoute.ts",
+      "hash": "5053e82826cd8992ffd39564d7fc6ea90d35ee43aab32ea543c88a469766414f"
+    },
+    {
+      "file": "src/lib/deliveryToken.ts",
+      "hash": "f458f86b54381776c8df897b5b2483034bf3ae487222abe13cb67902027abb0f"
     },
     {
       "file": "src/lib/discounts.ts",
@@ -11912,7 +11968,7 @@
     },
     {
       "file": "src/lib/identitySchema.ts",
-      "hash": "a76b363dab242a6fb1a389c87993176976bf0e681a6e66e18e6b56631bec5ddf"
+      "hash": "f167603018d8022e46db2bbeb04d0b044a49b34d458a215a4482454ad53a82e5"
     },
     {
       "file": "src/lib/mailer.ts",
@@ -11960,11 +12016,15 @@
     },
     {
       "file": "src/lib/quote.ts",
-      "hash": "47984b503d671b42ffff1dfb7c77da6c7bebb10e93e8ce9ffed4b6857f31ee38"
+      "hash": "5eb44c2d0484728a2a612cb28926f8e421cae0ecf260d74c410cbe09960864b0"
     },
     {
       "file": "src/lib/referrals.ts",
       "hash": "1e998affaa4977313d285495b77d200937032f2c9b58492d4e5b39e3bbb91b72"
+    },
+    {
+      "file": "src/lib/rentalIdentitySchema.ts",
+      "hash": "7b0cf456828a56ad5cb557925b692fd474e21b4f3c9d30989eb38e230a522a85"
     },
     {
       "file": "src/lib/rideClub.ts",
@@ -12060,51 +12120,51 @@
     }
   ],
   "dates": {
-    "/": "2026-10-17T22:00:24+08:00",
-    "/about": "2026-10-17T22:00:24+08:00",
-    "/book": "2026-10-17T22:00:24+08:00",
-    "/contact": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/canggu": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/denpasar": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/jimbaran": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/kuta": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/sanur": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/seminyak": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/ubud": "2026-10-17T22:00:24+08:00",
-    "/delivery-areas/uluwatu": "2026-10-17T22:00:24+08:00",
-    "/fleet": "2026-10-17T22:00:24+08:00",
-    "/fleet/athena": "2026-10-17T22:00:24+08:00",
-    "/fleet/bees": "2026-10-17T22:00:24+08:00",
-    "/fleet/edpower": "2026-10-17T22:00:24+08:00",
-    "/fleet/victory": "2026-10-17T22:00:24+08:00",
-    "/help-center": "2026-10-17T22:00:24+08:00",
-    "/how-it-works": "2026-10-17T22:00:24+08:00",
-    "/monthly-scooter-rental-bali": "2026-10-17T22:00:24+08:00",
-    "/partners": "2026-10-17T22:00:24+08:00",
-    "/saga": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-1": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-10": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-11": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-12": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-13": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-14": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-15": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-16": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-17": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-18": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-19": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-2": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-20": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-21": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-22": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-3": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-4": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-5": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-6": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-7": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-8": "2026-10-17T22:00:24+08:00",
-    "/saga/chapter-9": "2026-10-17T22:00:24+08:00",
-    "/supercharge": "2026-10-17T22:00:24+08:00"
+    "/": "2026-10-17T23:02:12+08:00",
+    "/about": "2026-10-17T23:02:12+08:00",
+    "/book": "2026-10-17T23:02:12+08:00",
+    "/contact": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/canggu": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/denpasar": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/jimbaran": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/kuta": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/sanur": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/seminyak": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/ubud": "2026-10-17T23:02:12+08:00",
+    "/delivery-areas/uluwatu": "2026-10-17T23:02:12+08:00",
+    "/fleet": "2026-10-17T23:02:12+08:00",
+    "/fleet/athena": "2026-10-17T23:02:12+08:00",
+    "/fleet/bees": "2026-10-17T23:02:12+08:00",
+    "/fleet/edpower": "2026-10-17T23:02:12+08:00",
+    "/fleet/victory": "2026-10-17T23:02:12+08:00",
+    "/help-center": "2026-10-17T23:02:12+08:00",
+    "/how-it-works": "2026-10-17T23:02:12+08:00",
+    "/monthly-scooter-rental-bali": "2026-10-17T23:02:12+08:00",
+    "/partners": "2026-10-17T23:02:12+08:00",
+    "/saga": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-1": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-10": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-11": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-12": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-13": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-14": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-15": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-16": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-17": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-18": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-19": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-2": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-20": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-21": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-22": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-3": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-4": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-5": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-6": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-7": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-8": "2026-10-17T23:02:12+08:00",
+    "/saga/chapter-9": "2026-10-17T23:02:12+08:00",
+    "/supercharge": "2026-10-17T23:02:12+08:00"
   }
 }
