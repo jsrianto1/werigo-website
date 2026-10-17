@@ -8,6 +8,7 @@ export function DeliveryMap({ center, onMove }: { center: MapPoint; onMove: (poi
   const map = useRef<LeafletMap | null>(null);
   const onMoveRef = useRef(onMove);
   const initial = useRef(center);
+  const synchronizing = useRef(false);
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { onMoveRef.current = onMove; }, [onMove]);
@@ -22,7 +23,7 @@ export function DeliveryMap({ center, onMove }: { center: MapPoint; onMove: (poi
         const point = instance.getCenter();
         // Restoring a saved pin or centering on GPS is not a new user choice.
         // Leaflet emits moveend for setView too; keep the confirmed quote intact.
-        if (Math.abs(point.lat - initial.current.latitude) < 0.0000001 && Math.abs(point.lng - initial.current.longitude) < 0.0000001) return;
+        if (synchronizing.current) return;
         onMoveRef.current({ latitude: point.lat, longitude: point.lng });
       });
       instance.on("click", event => instance.panTo(event.latlng));
@@ -32,7 +33,11 @@ export function DeliveryMap({ center, onMove }: { center: MapPoint; onMove: (poi
   useEffect(() => {
     // GPS or a restored pin may arrive while the map library is still loading.
     initial.current = { latitude: center.latitude, longitude: center.longitude };
-    map.current?.setView([center.latitude, center.longitude], Math.max(15, map.current.getZoom()), { animate: false });
+    if (map.current) {
+      synchronizing.current = true;
+      try { map.current.setView([center.latitude, center.longitude], Math.max(15, map.current.getZoom()), { animate: false }); }
+      finally { synchronizing.current = false; }
+    }
   }, [center.latitude, center.longitude]);
   return <div className="wr-map-wrap"><div ref={container} className="wr-delivery-map" role="region" aria-label="Interactive delivery map. Drag the map, tap a point or use the arrow keys to choose your location."/><span className="wr-map-center" aria-hidden="true"><MapPin size={39} fill="#171717" color="white"/><i/></span><span className="wr-map-instruction">Move map to set your pin</span>{!loaded && !failed && <span role="status" className="wr-map-loading">Loading map…</span>}{failed && <p className="wr-map-unavailable" role="status">Map tiles could not load. Try GPS or add your Google Maps share link below.</p>}</div>;
 }
