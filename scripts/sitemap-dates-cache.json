@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "f1ce9c505c060682f7ce71e151d737c2c90be39656ae0601b32e13b748df1c0e",
+  "fingerprint": "b2a1239f3549809a845df47e869a944375c9cc63674e838b8ea478f05c0d2217",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11027,6 +11027,10 @@
       "hash": "016c00617400cd6aa468ffe2ffdbfef2d08130e29c38c89d02f809a5ce4e2ad0"
     },
     {
+      "file": "scripts/app-bikes-test.mjs",
+      "hash": "786c09f1fe71547b742b3def74ba178bbe5e2f767bd0692e4917a104b3d677d1"
+    },
+    {
       "file": "scripts/app-icons.mjs",
       "hash": "d1d917d234eddde72e0e540f3f6ef7f39884b42d2385c0e2849a4d3d2d2630db"
     },
@@ -11423,6 +11427,10 @@
       "hash": "44bd81d8cb4a0a3fa74a6c77a6cd32e4952ca9f055665a98a3687a75f3d4ea23"
     },
     {
+      "file": "src/app/app/bike-selection.css",
+      "hash": "6fbbd3d4c8c60ca3c92aaecca0833f594ce0352c6701231471aac0982768441a"
+    },
+    {
       "file": "src/app/app/cafes/page.tsx",
       "hash": "b507f0a6f9083b53591e10aa8c6827bf47aa4ac0a8327827346205c65abce3c4"
     },
@@ -11436,7 +11444,7 @@
     },
     {
       "file": "src/app/app/guides.css",
-      "hash": "552927e9214e2580461170aaf8b8ed1c437e98121babfd2bbcd91c6baf660929"
+      "hash": "81ea31fb0fc13cde4b0097ddc5430223a0216eebebf1ae70e95ae07aaf54449e"
     },
     {
       "file": "src/app/app/identity.css",
@@ -11444,7 +11452,7 @@
     },
     {
       "file": "src/app/app/layout.tsx",
-      "hash": "eb92474b3db38f8447c163e4422f9fa81f815348f276a6b08f00ad445e5ba7ed"
+      "hash": "a10892d1bd8498234054a8a66a245cf750a009ad01df68d0c2d27048d2a224db"
     },
     {
       "file": "src/app/app/login/page.tsx",
@@ -11480,7 +11488,7 @@
     },
     {
       "file": "src/app/app/rent/page.tsx",
-      "hash": "4164925d44b340ec0c4cacf4076f16e349c9a1104c6502d41c82afc3f4ed07c8"
+      "hash": "4a18088f3b445eab2073a266450b44aee44ecd060f5b81a444edb0a47184226b"
     },
     {
       "file": "src/app/app/rental.css",
@@ -11492,7 +11500,7 @@
     },
     {
       "file": "src/app/app/services/page.tsx",
-      "hash": "aa2c3bcf3f5feb31e82a7c4f2fdedbba47ecfce37702ae39dc58e493939cc071"
+      "hash": "3591e8c2c92430f9b9f8f19152aad64bf36bb2919257e30b1c73accf3793b365"
     },
     {
       "file": "src/app/app/shop/page.tsx",
@@ -11876,7 +11884,7 @@
     },
     {
       "file": "src/components/pwa/AppHome.tsx",
-      "hash": "48e7e67ec37196a459c38bc48f4448a2660a7b8a27472c567caa7c417fe2671a"
+      "hash": "8c3952f528abe31226b9f988ae9d26fc58ccd5e53ab4fa6174986df6bcf419ee"
     },
     {
       "file": "src/components/pwa/AppShell.tsx",
@@ -11885,6 +11893,10 @@
     {
       "file": "src/components/pwa/AppSignOut.tsx",
       "hash": "2542e6be05f2c1f154241b4d16f7d337b5e5409004d36813edc5b6bc6b4b7056"
+    },
+    {
+      "file": "src/components/pwa/BikeSelection.tsx",
+      "hash": "5c2d984e37ee5b4e66be860d8f761488ec3197cdfda227b57ea66fa9b1d2a996"
     },
     {
       "file": "src/components/pwa/ChargingDirectory.tsx",
@@ -11900,7 +11912,7 @@
     },
     {
       "file": "src/components/pwa/ExploreGuideNav.tsx",
-      "hash": "43707c2b712a4918c9b2abd838c989c0b28169f4ef9bcccfcbc7c1253e9dcc80"
+      "hash": "b30eb50beb8bd445257b8c9d9bd55d4eaacae16e831259b4da96041f6d2ef92c"
     },
     {
       "file": "src/components/pwa/InstallGuide.tsx",
@@ -11928,7 +11940,7 @@
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
-      "hash": "518d2843855e59ba0aaa48f287394e9a7891a77be3e0324c0371754588a1c373"
+      "hash": "c06859b824a84a8fc19fada3518b67aefc72946b7472323111be7b524bf048fd"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
@@ -12021,6 +12033,10 @@
     {
       "file": "src/data/appActivityPhotoCredits.json",
       "hash": "1b88f11b0157e406790d576f512570e24390ebee52d0c5e1014e7c92671737f5"
+    },
+    {
+      "file": "src/data/appBikes.ts",
+      "hash": "80bfb508deb03821693394a2b42133fd108e6d9e19584d565f4fbb59b23a29a4"
     },
     {
       "file": "src/data/appCafes.ts",
