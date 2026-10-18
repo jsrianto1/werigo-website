@@ -2,19 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, ChevronDown, ChevronRight, Compass, MessageCircle, Search, Store } from "lucide-react";
-import { AppBrand } from "./AppBrand";
+import { ArrowRight, ArrowUpRight, BatteryCharging, Compass, Gift, MapPin, MessageCircle } from "lucide-react";
+import { AppBrand, WerigoWing } from "./AppBrand";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 
 export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?: string }) {
-  return <section className="wr-reference-home">
-    <h1 className="sr-only">Where we go?</h1>
-    <div className="wr-home-location"><button type="button" onClick={onRent}><span className="wr-gps-dot" /><span>Bali, Indonesia</span><ChevronDown size={15} /></button><a href={buildSupportWhatsAppUrl()} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} />Help</a></div>
-    <div className="wr-home-wordmark"><AppBrand /></div>
-    <div className="wr-home-search"><button type="button" className="wr-home-search-main" onClick={onRent}><Search size={23} /><span>{firstName ? `Hi, ${firstName}` : "Where we go?"}</span></button><button type="button" className="wr-home-later" onClick={onRent}><CalendarDays size={16} />Later</button></div>
-    <button type="button" className="wr-home-showroom" onClick={onRent}><span><Store size={23} /></span><span><strong>Pick up at Werigo</strong><small>Gatot Subroto Tengah No.93, Denpasar</small></span><ChevronRight size={20} /></button>
-    <Link className="wr-home-club" href="/app/rewards"><span><strong>Every ride.<br />More rewards.</strong><small>Discover Werigo Ride Club</small><b>View membership</b></span><Image src="/app/edpower-red.webp" alt="Red Wedison EdPower electric motorcycle, shown in full" width={760} height={720} sizes="(max-width:760px) 42vw, 250px" priority /></Link>
-    <div className="wr-home-section-heading"><h2>For you</h2><Link href="/app/services" aria-label="See all Werigo services"><ChevronRight size={18} /></Link></div>
-    <div className="wr-home-service-circles"><button type="button" onClick={onRent}><span><Image src="/app/edpower-red.webp" alt="" width={150} height={130} /></span><b>Rent</b></button><Link href="/app/charge"><span><Image src="/media/supercharge/supercharge-unit.webp" alt="" width={120} height={160} /></span><b>Charging</b></Link><Link href="/app/explore"><span><Compass size={40} /></span><b>What to do?</b></Link></div>
+  return <section className="wg-home">
+    <div className="wg-home-masthead"><AppBrand/><a className="wg-help" href={buildSupportWhatsAppUrl()} target="_blank" rel="noopener noreferrer" aria-label="Get help from Werigo"><MessageCircle size={20}/></a></div>
+    <div className="wg-greeting"><p>{firstName ? `Good to see you, ${firstName}.` : "A little more Bali. A lot more freedom."}</p><span><MapPin size={13}/>Bali</span></div>
+    <div className="wg-home-grid">
+      <section className="wg-ride-hero" aria-labelledby="werigo-home-title">
+        <svg className="wg-hero-route" viewBox="0 0 400 460" aria-hidden="true"><path d="M420 34H302c-91 0-91 109 0 109h12c91 0 91 120 0 120H151c-108 0-108 123 0 123h278"/><circle cx="302" cy="34" r="8"/></svg>
+        <p className="wg-overline">YOUR ISLAND. YOUR PACE.</p><h1 id="werigo-home-title">Where<br/>we go<span>?</span></h1>
+        <p className="wg-hero-description">Bali is better on a Wedison.</p>
+        <div className="wg-hero-bike"><Image src="/app/edpower-red.webp" alt="Red Wedison EdPower electric motorcycle, shown in full" width={1100} height={922} sizes="(max-width:600px) 85vw, 470px" priority/></div>
+        <span className="wg-bike-caption"><i/>EDPOWER · FULLY ELECTRIC</span>
+        <button type="button" className="wg-rent-button" onClick={onRent}><span>Find my ride</span><ArrowRight size={22}/></button>
+      </section>
+      <div className="wg-home-side">
+        <div className="wg-section-heading"><div><p className="wg-overline">BEYOND THE RIDE</p><h2>Make it a Bali day.</h2></div><Link href="/app/services" aria-label="Explore Werigo services"><ArrowUpRight size={22}/></Link></div>
+        <div className="wg-shortcuts"><Link href="/app/charge"><span className="wg-service-symbol"><BatteryCharging size={26}/></span><strong>Charge & go</strong><small>Find your next stop</small><ArrowUpRight size={17}/></Link><Link href="/app/explore"><span className="wg-service-symbol"><Compass size={26}/></span><strong>What to do?</strong><small>Find your kind of Bali</small><ArrowUpRight size={17}/></Link></div>
+        <Link className="wg-discover-card" href="/app/explore"><Image src="/media/areas/canggu/hero.webp" alt="A surfer carrying a board on Canggu beach at sunset" fill sizes="(max-width:600px) 90vw, 460px"/><span className="wg-discover-shade"/><span className="wg-discover-copy"><small>THE ISLAND EDIT</small><strong>Chase a wave.<br/>Find a new favourite.</strong><span>Explore Bali<ArrowUpRight size={18}/></span></span></Link>
+      </div>
+    </div>
+    <Link className="wg-club-ticket" href="/app/rewards"><span className="wg-ticket-icon"><Gift size={26}/></span><span><small>WERIGO RIDE CLUB</small><strong>Every ride takes you further.</strong><p>Earn points. Unlock your next level.</p></span><ArrowUpRight size={23}/><WerigoWing className="wg-ticket-wing"/></Link>
+    <div className="wg-home-footnote"><span>Electric rides. Island freedom.</span><button type="button" onClick={onRent}>Showroom pickup or delivery<ArrowRight size={14}/></button></div>
   </section>;
 }

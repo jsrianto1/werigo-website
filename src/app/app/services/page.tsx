@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Compass, Gift } from "lucide-react";
+import { ArrowUpRight, BatteryCharging, Compass, Gift } from "lucide-react";
 
 export default function ServicesPage() {
-  return <section className="wr-services-page"><h1 className="ra-page-title">Services</h1><h2>Go somewhere good.</h2><div className="wr-service-tiles">
-    <Link href="/app/rent?start=1"><Image src="/app/edpower-red.webp" alt="Red Wedison EdPower" width={150} height={130} /><strong>Rent</strong></Link>
-    <Link href="/app/charge"><Image src="/media/supercharge/supercharge-unit.webp" alt="Wedison SuperCharge" width={120} height={160} /><strong>Charging</strong></Link>
-    <Link href="/app/explore"><Compass size={42} /><strong>What to do?</strong></Link>
-  </div><Link className="wr-services-membership" href="/app/rewards"><Gift size={28} /><span><strong>Werigo Ride Club</strong><small>Your membership, points and benefits</small></span><ArrowRight size={20} /></Link></section>;
+  return <section className="wg-services"><p className="wg-overline">THE WERIGO WAY</p><h1 className="ra-page-title">A ride. A recharge.<br/>A reason to go.</h1><p className="ra-lead">Everything for your next Bali day, in one place.</p>
+    <div className="wg-services-grid"><Link className="wg-service-rent" href="/app/rent?start=1"><span className="wg-service-number">01 / RIDE</span><h2>Your own<br/>electric escape.</h2><p>Pick a Wedison. Make Bali yours.</p><Image src="/app/edpower-red.webp" alt="Red Wedison EdPower, shown in full" width={1100} height={922} sizes="(max-width:600px) 85vw, 400px"/><span className="wg-service-cta">Rent a motorcycle<ArrowUpRight size={21}/></span></Link>
+    <Link className="wg-service-charge" href="/app/charge"><span className="wg-service-number">02 / RECHARGE</span><BatteryCharging size={32}/><h2>Charge & go.</h2><p>Find Wedison SuperCharge locations.</p><ArrowUpRight className="wg-service-arrow" size={22}/></Link>
+    <Link className="wg-service-explore" href="/app/explore"><Image src="/media/areas/uluwatu/hero.webp" alt="The Uluwatu coastline in Bali" fill sizes="(max-width:600px) 85vw, 420px"/><span className="wg-discover-shade"/><div><span className="wg-service-number">03 / DISCOVER</span><Compass size={29}/><h2>What to do?</h2><p>A new corner of Bali is calling.</p><ArrowUpRight className="wg-service-arrow" size={22}/></div></Link></div>
+    <Link className="wg-services-club" href="/app/rewards"><Gift size={24}/><span><strong>Your rides come with a little extra.</strong><small>Discover Werigo Ride Club</small></span><ArrowUpRight size={22}/></Link>
+  </section>;
 }

@@ -1,5 +1,10 @@
 import Image from "next/image";
 
+/** Wing silhouette from Werigo's existing identity. Wedison artwork stays unmodified. */
+export function WerigoWing({ className = "" }: { className?: string }) {
+  return <svg className={className} viewBox="0 0 780 280" fill="currentColor" aria-hidden="true"><path d="M14 14 235 74 300 181 94 88 309 264 353 264 390 164 427 264 471 264 687 88 481 181 546 74 766 14 546 151 481 181 390 72 300 181 235 151Z"/></svg>;
+}
+
 /** App identity only. The endorsement uses the original, unmodified Wedison artwork. */
 export function PoweredByWedison({ className = "" }: { className?: string }) {
   return <span className={`wr-endorsement ${className}`}>
@@ -11,8 +16,8 @@ export function PoweredByWedison({ className = "" }: { className?: string }) {
 export function AppBrand({ hero = false }: { hero?: boolean }) {
   return <span className={`wr-app-brand${hero ? " wr-app-brand-hero" : ""}`}>
     <span className="wr-wordmark" aria-label="WERIGO">
-      <svg className="wr-route-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="currentColor"/><path d="m8.5 13 6 14 5.5-11.5L25.5 27l6-14" fill="none" stroke="#f8f9f7" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="31.5" cy="13" r="2.8" fill="#5bd4b2"/></svg>
-      <span className="wr-wordmark-name" aria-hidden="true">werigo</span>
+      <WerigoWing className="wr-route-mark" />
+      <span className="wr-wordmark-name" aria-hidden="true">WERIGO<span className="wg-wordmark-stop">.</span></span>
     </span>
     <PoweredByWedison />
   </span>;

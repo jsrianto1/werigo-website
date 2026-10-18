@@ -16,8 +16,8 @@ const standaloneSnapshot = () => window.matchMedia("(display-mode: standalone)")
 const serverStandaloneSnapshot = () => false;
 const navigation = [
   { href: "/app/rent", label: "Home", icon: House },
-  { href: "/app/services", label: "Services", icon: LayoutGrid },
-  { href: "/app/activity", label: "Activity", icon: ReceiptText },
+  { href: "/app/services", label: "Discover", icon: LayoutGrid },
+  { href: "/app/activity", label: "My rides", icon: ReceiptText },
   { href: "/app/account", label: "Account", icon: UserRound },
 ];
 export function AppShell({ children }: { children: React.ReactNode }) {
