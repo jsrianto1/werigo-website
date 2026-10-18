@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "5e0b47acd67e3b3cd897d51fb796008fb17100a6b98c4e1aad6a0cf366d253ce",
+  "fingerprint": "9791d0ba0798bf0d8a0ea440fe81bd0ce01b67582035db53934b0ed0fa2f5e19",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -24,27 +24,27 @@
     },
     {
       "file": "public/app/icon-192.png",
-      "hash": "d61745e6962f23825b5363e79c7de3d09cfdd057652c78330f26f25c0be6a5e2"
+      "hash": "6011dc082b7d8f0d2b8373a8276886da779bfbfb8c7634343667ff4538df1d21"
     },
     {
       "file": "public/app/icon-512.png",
-      "hash": "5f738c20f833814545c79710f6fa4c0e9de231a3e5e8ea43a0e96d29540ec5f4"
+      "hash": "8e3eecb50816ef4ea5dc1deff77ea3d40ef5761a1f79d636b70aaf6caad0e2b5"
     },
     {
       "file": "public/app/icon-maskable-512.png",
-      "hash": "a10754040d71ad89c3d77c8fcf566abc1f07d8c9a8a5a2ea5d5daaf3b6cd611f"
+      "hash": "8e3eecb50816ef4ea5dc1deff77ea3d40ef5761a1f79d636b70aaf6caad0e2b5"
     },
     {
       "file": "public/app/manifest.webmanifest",
-      "hash": "f61c6b9aaaaaf49038cc60077341e904f94405127186d934de0c9ecf4fe96ae5"
+      "hash": "98797e15df302a4c7d8c9d1a4625007b30480265ba478b679dde64ad538b0e02"
     },
     {
       "file": "public/app/offline.html",
-      "hash": "dc7f7239f292e00cedeffa157d51ab2bafdc5c727e68eb6674acd0fb6677f811"
+      "hash": "f81b33c5a566b665783ee595857ad83fd80acd6cfd01602c851277f3156003b5"
     },
     {
       "file": "public/app/sw.js",
-      "hash": "905fdb30b0a1161d615222d752396db42d29d72583147dc5938dfc7bb4a5a62c"
+      "hash": "d96e7af1eadd57a83462047b600dbba32f7447a57977c4beef490865b3e6e1e3"
     },
     {
       "file": "public/app/wedison-official.png",
@@ -52,7 +52,7 @@
     },
     {
       "file": "public/app/werigo-mark.svg",
-      "hash": "6f2a30fdc8640b4f6019c038aef492bf289ee33b9bf9aea2b836e4f775f4deb5"
+      "hash": "ad650f274d8b7bd30d1e56509824f6839d17987b99f54cf20c3b4c6e38dfb89a"
     },
     {
       "file": "public/brand/og-image.png",
@@ -10899,6 +10899,10 @@
       "hash": "016c00617400cd6aa468ffe2ffdbfef2d08130e29c38c89d02f809a5ce4e2ad0"
     },
     {
+      "file": "scripts/app-icons.mjs",
+      "hash": "d1d917d234eddde72e0e540f3f6ef7f39884b42d2385c0e2849a4d3d2d2630db"
+    },
+    {
       "file": "scripts/auth-errors-test.mjs",
       "hash": "52a8bf2e793870d0c2df31df2d1cb2768519e89b9a888e711b8b88ad28f62bb2"
     },
@@ -11276,7 +11280,7 @@
     },
     {
       "file": "src/app/app/activity/page.tsx",
-      "hash": "87deebf8f513b6a0b237c46d531a34c623f9db2a2d0a8fe4d2c2f26ad5232263"
+      "hash": "83bcb1b79f95e6c7e688eb92ce2bf3cc00fb84694fa66d1319e57cbfa2358a2e"
     },
     {
       "file": "src/app/app/app.css",
@@ -11291,12 +11295,16 @@
       "hash": "2573f0cfb84d39bce9b157a9994ccefecb40b45a8f54acf11a30118efe78372b"
     },
     {
+      "file": "src/app/app/identity.css",
+      "hash": "21a177d7dc92517e570476df9d4167771719f6adde8f643f2b4924efdb5d4d6d"
+    },
+    {
       "file": "src/app/app/layout.tsx",
-      "hash": "9a943a0510125dbe58fb8ae1b41bca9edaa3259a51337a33abdde2161eace921"
+      "hash": "f5a66496cf399f59e988aae38f0f7cdd57601a9827e969f66b9428c012ca3703"
     },
     {
       "file": "src/app/app/login/page.tsx",
-      "hash": "44a6dd518e28e2eea9db3c4e106d25c202e21eab6a115d1a57dba2b9e3b8797f"
+      "hash": "7941352d6a863b1ed512795b3fe6994346869e3469d4a16c0c69cbbc866b2145"
     },
     {
       "file": "src/app/app/mobile.css",
@@ -11340,7 +11348,7 @@
     },
     {
       "file": "src/app/app/services/page.tsx",
-      "hash": "bce46f07257f5b3fcf9af1e5951e509cf82833ea328076ff9bb878d9c9f5dd2f"
+      "hash": "4f7ada0a465247340882e20395f38d8a4cee2770144f9f4566afb7d919190e71"
     },
     {
       "file": "src/app/apple-icon.png",
@@ -11708,15 +11716,15 @@
     },
     {
       "file": "src/components/pwa/AppBrand.tsx",
-      "hash": "35f49de6ccd2cb2605ab301b644c2880bbacecd0b29152a9974aa32af853bd34"
+      "hash": "23bd9191a3aa4c45279a60fcb12d8959c2a54f2ca1785993e338c2b4091c5c62"
     },
     {
       "file": "src/components/pwa/AppHome.tsx",
-      "hash": "5b9f10ad0e869c3fb641f41ffa68a2241c72c3cb327eed9f909ecf02a2175c13"
+      "hash": "9b42668f4c04ebcaa12ee30039b10752ac4f44c024f7b021a0c192bbe4d70431"
     },
     {
       "file": "src/components/pwa/AppShell.tsx",
-      "hash": "912f0ebe806856bd0bb78688820f5199b4a3ad4ea09b125632495e909ab4fc6b"
+      "hash": "f87bb8c49d4fb43230c666db97b5120033e31de356c4fd5536c374da2f2b1b54"
     },
     {
       "file": "src/components/pwa/AppSignOut.tsx",
