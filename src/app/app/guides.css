@@ -1,4 +1,40 @@
 /* Island guides reuse the WERIGO app tokens. No marketing-site selectors. */
+.ride-app .wg-guide-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; }
+.ride-app .wg-guide-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); border-radius: 21px; overflow: hidden; background: var(--app-card); }
+.ride-app .wg-guide-card:hover { border-color: var(--wg-brand); }
+.ride-app .wg-guide-card:focus-visible { outline: 3px solid var(--wg-brand); outline-offset: 4px; }
+.ride-app .wg-guide-card-photo { display: block; position: relative; height: 175px; background: var(--surface-sunken); }
+.ride-app .wg-guide-card-photo img { object-fit: cover; }
+.ride-app .wg-guide-card-copy { display: flex; flex-direction: column; justify-content: center; gap: 9px; padding: 20px 17px; }
+.ride-app .wg-guide-card-copy strong { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; color: var(--ink); font-size: 18px; font-weight: 550; line-height: 1.35; letter-spacing: -.025em; }
+.ride-app .wg-guide-card-copy svg { flex-shrink: 0; margin-top: 4px; color: var(--wg-brand); }
+.ride-app .wg-guide-card-copy small { font-size: 11px; line-height: 1.7; color: var(--ink-soft); }
+.ride-app .wg-guide-card:last-child { grid-column: span 2; display: grid; grid-template-columns: 1.15fr 1fr; }
+.ride-app .wg-guide-card:last-child .wg-guide-card-photo { height: 100%; min-height: 190px; }
+.ride-app .wg-home-side .wg-guide-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+.ride-app .wg-home-side .wg-guide-card-photo { height: 125px; }
+.ride-app .wg-home-side .wg-guide-card-copy { padding: 15px 13px; }
+.ride-app .wg-home-side .wg-guide-card-copy strong { font-size: 15px; }
+.ride-app .wg-home-side .wg-guide-card:last-child .wg-guide-card-photo { min-height: 145px; height: 100%; }
+.ride-app .wg-guide-charge { display: flex; align-items: center; gap: 15px; padding: 20px; border: 1px solid var(--line); background: var(--app-card); border-radius: 18px; }
+.ride-app .wg-guide-charge > span { display: grid; flex: 1; gap: 6px; }
+.ride-app .wg-guide-charge strong { font-size: 16px; font-weight: 550; }
+.ride-app .wg-guide-charge small { color: var(--ink-soft); font-size: 11px; line-height: 1.6; }
+.ride-app .wg-guide-charge svg { flex-shrink: 0; color: var(--wg-brand); }
+@media (max-width:760px) {
+  .ride-app .wg-guide-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .ride-app .wg-guide-card-photo { height: 125px; }
+  .ride-app .wg-guide-card-copy { padding: 16px 13px; }
+  .ride-app .wg-guide-card-copy strong { font-size: 15px; gap: 7px; }
+  .ride-app .wg-guide-card-copy small { font-size: 10px; }
+  .ride-app .wg-guide-card-copy svg { width: 14px; height: 14px; margin-top: 3px; }
+  .ride-app .wg-guide-card:last-child .wg-guide-card-photo { min-height: 150px; }
+}
+@media (max-width:359px) {
+  .ride-app .wg-guide-card-copy strong { font-size: 13px; gap: 4px; }
+  .ride-app .wg-guide-card-copy { padding-inline: 10px; }
+  .ride-app .wg-guide-card-photo { height: 110px; }
+}
 .ride-app .wg-shop-photo { margin: 0 0 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 23px; background: var(--app-card); }
 .ride-app .wg-shop-photo figcaption { padding: 15px 20px; font-size: 12px; line-height: 1.7; color: var(--ink-soft); }
 .ride-app .wg-shop-photo .wr-activity-photo { height: auto; aspect-ratio: 16/9; }

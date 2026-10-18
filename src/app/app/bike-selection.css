@@ -1,0 +1,65 @@
+/* Model-first rental selection. Scoped to the WERIGO PWA. */
+.ride-app .wr-wizard h1:focus { outline: none; }
+.ride-app .wg-bike-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ride-app .wg-bike-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 2px solid var(--line); border-radius: 20px; background: var(--app-card); cursor: pointer; position: relative; }
+.ride-app .wg-bike-card.is-selected { border-color: var(--wg-brand); box-shadow: 0 0 0 1px var(--wg-brand); }
+.ride-app .wg-bike-card:has(input:focus-visible) { outline: 3px solid var(--wg-brand); outline-offset: 5px; }
+.ride-app .wg-bike-card > input { position: absolute; opacity: 0; width: 1px; height: 1px; left: 12px; top: 12px; }
+.ride-app .wg-bike-photo { display: block; position: relative; background: #f5f8f5; height: 180px; }
+.ride-app .wg-bike-photo > img { object-fit: contain; padding: 18px 12px; }
+.ride-app .wg-bike-check { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 23px; height: 23px; border: 1px solid #a9c4b9; border-radius: 50%; background: #fff; color: #fff; }
+.ride-app .wg-bike-card.is-selected .wg-bike-check { background: #006b60; border-color: #006b60; }
+.ride-app .wg-bike-card-copy { display: flex; flex-direction: column; align-items: flex-start; padding: 19px 18px 18px; flex: 1; }
+.ride-app .wg-bike-card-copy > strong { font-size: 25px; line-height: 1.2; font-weight: 600; letter-spacing: -.04em; }
+.ride-app .wg-bike-character { display: block; font-size: 12px; line-height: 1.6; color: var(--ink-soft); margin-top: 7px; }
+.ride-app .wg-bike-key-point { display: block; margin-top: 13px; font-size: 11px; line-height: 1.6; color: var(--ink); }
+.ride-app .wg-bike-charging { display: flex; align-items: flex-start; gap: 6px; font-size: 10px; line-height: 1.6; margin-top: 14px; color: var(--wg-brand); }
+.ride-app .wg-bike-charging svg { flex-shrink: 0; margin-top: 1px; }
+.ride-app .wg-bike-daily { display: block; margin-top: auto; padding-top: 16px; font-size: 14px; font-variant-numeric: tabular-nums; font-weight: 550; }
+.ride-app .wg-bike-daily > small { font-size: 11px; color: var(--ink-soft); font-weight: 400; margin-left: 3px; }
+.ride-app .wg-bike-rate-note { font-size: 11px; line-height: 1.8; color: var(--ink-soft); margin: 20px 2px 28px; }
+.ride-app .wg-bike-story { margin: 35px 0 22px; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: var(--app-card); scroll-margin-top: 25px; }
+.ride-app .wg-bike-story-heading { padding: 27px 26px 0; }
+.ride-app .wg-bike-story h2 { font-size: clamp(28px, 5vw, 36px); letter-spacing: -.04em; line-height: 1.2; font-weight: 550; margin: 12px 0 15px; }
+.ride-app .wg-bike-story-heading > p:last-child { font-size: 13px; line-height: 1.8; color: var(--ink-soft); }
+.ride-app .wg-bike-story-photo { position: relative; background: #f5f8f5; margin-top: 25px; height: 290px; }
+.ride-app .wg-bike-story-photo img { object-fit: contain; padding: 18px 25px; }
+.ride-app .wg-bike-best-for { display: grid; gap: 9px; padding: 23px 26px; font-size: 14px; line-height: 1.6; border-bottom: 1px solid var(--line); }
+.ride-app .wg-bike-best-for > span { font-size: 9px; letter-spacing: .13em; color: var(--wg-brand); font-weight: 600; }
+.ride-app .wg-bike-highlights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding: 26px; }
+.ride-app .wg-bike-highlights dt { font-size: 16px; line-height: 1.4; font-weight: 550; margin-bottom: 9px; }
+.ride-app .wg-bike-highlights dd { font-size: 11px; line-height: 1.8; color: var(--ink-soft); margin: 0; }
+.ride-app .wg-bike-age { padding: 0 26px; font-size: 12px; line-height: 1.7; color: var(--wg-brand); }
+.ride-app .wg-bike-spec-note { padding: 20px 26px 26px; font-size: 10px; line-height: 1.8; color: var(--ink-soft); }
+.ride-app .wg-selected-bike { display: flex; gap: 14px; align-items: center; border: 1px solid var(--line); background: var(--app-card); border-radius: 15px; padding: 12px; margin-top: 22px; }
+.ride-app .wg-selected-bike img { width: 75px; height: 58px; object-fit: contain; padding: 3px; border-radius: 9px; background: #f5f8f5; flex-shrink: 0; }
+.ride-app .wg-selected-bike > span { display: grid; gap: 5px; min-width: 0; flex: 1; }
+.ride-app .wg-selected-bike small { font-size: 8px; letter-spacing: .09em; color: var(--ink-soft); }
+.ride-app .wg-selected-bike strong { font-size: 17px; font-weight: 550; }
+.ride-app .wg-selected-bike button { min-height: 44px; padding: 7px; font-size: 11px; color: var(--wg-brand); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 760px) {
+  .ride-app .wg-bike-picker { gap: 11px; }
+  .ride-app .wg-bike-photo { height: 145px; }
+  .ride-app .wg-bike-photo > img { padding: 23px 8px 12px; }
+  .ride-app .wg-bike-check { width: 20px; height: 20px; right: 9px; top: 9px; }
+  .ride-app .wg-bike-card-copy { padding: 15px 12px; }
+  .ride-app .wg-bike-card-copy > strong { font-size: 21px; }
+  .ride-app .wg-bike-character { font-size: 11px; min-height: 35px; }
+  .ride-app .wg-bike-charging { font-size: 9px; margin-top: 11px; }
+  .ride-app .wg-bike-daily { font-size: 12px; padding-top: 13px; }
+  .ride-app .wg-bike-daily > small { font-size: 9px; }
+  .ride-app .wg-bike-story-heading { padding: 24px 20px 0; }
+  .ride-app .wg-bike-story-photo { height: 230px; }
+  .ride-app .wg-bike-story-photo img { padding: 22px 18px; }
+  .ride-app .wg-bike-best-for { padding: 22px 20px; }
+  .ride-app .wg-bike-highlights { gap: 23px 18px; padding: 23px 20px; }
+  .ride-app .wg-bike-highlights dt { font-size: 14px; }
+  .ride-app .wg-bike-spec-note { padding: 20px 20px 23px; }
+  .ride-app .wg-bike-age { padding-inline: 20px; }
+}
+@media (max-width: 359px) {
+  .ride-app .wg-bike-picker { grid-template-columns: minmax(0, 1fr); }
+  .ride-app .wg-bike-photo { height: 160px; }
+  .ride-app .wg-bike-character { min-height: 0; }
+  .ride-app .wg-bike-highlights { grid-template-columns: minmax(0, 1fr); }
+}
