@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "20ce578fd83c046318a9af5bad4696a6dcacea94f1b955e523ea94d1741fe526",
+  "fingerprint": "f1ce9c505c060682f7ce71e151d737c2c90be39656ae0601b32e13b748df1c0e",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -41,6 +41,118 @@
     {
       "file": "public/app/offline.html",
       "hash": "f81b33c5a566b665783ee595857ad83fd80acd6cfd01602c851277f3156003b5"
+    },
+    {
+      "file": "public/app/places/body-factory.jpg",
+      "hash": "bac7456661d7323eec733cf24c6607e5b4336ed9c2b32c4b4229e91653923d0f"
+    },
+    {
+      "file": "public/app/places/cretya.webp",
+      "hash": "8f29f8a45fc8998405e342bb9dca41e826977439abad181d2eb9ea4de13cfce6"
+    },
+    {
+      "file": "public/app/places/expat-petitenget.jpg",
+      "hash": "166875159566e5c1c566bc987c26629bd16563033fd1fd9ede1d6ca8f65b68c3"
+    },
+    {
+      "file": "public/app/places/finns.jpg",
+      "hash": "5189f94670ba6a7fba310cb86c9a413187a044462d94404c39eb69f3bad71639"
+    },
+    {
+      "file": "public/app/places/fondue.webp",
+      "hash": "0ebd08c4c7862e66186570e3277e2d16eaf0e906ace644e68d5d498f1a5db145"
+    },
+    {
+      "file": "public/app/places/gigi-susu.jpg",
+      "hash": "2efa46401fb6254dfd5b2d1a292e30156d0a52039c5a950b5f71760a19fa545d"
+    },
+    {
+      "file": "public/app/places/harris-denpasar.jpg",
+      "hash": "ead2916a5dbd52c0518560280e1fc405e3b0778ee89acc35377e5644906d68a4"
+    },
+    {
+      "file": "public/app/places/harris-riverview.jpg",
+      "hash": "2b49539049ddb4edae406e709a6179e3d6ecd1836342fb0fced3493aca624e58"
+    },
+    {
+      "file": "public/app/places/harris-seminyak.jpg",
+      "hash": "c087bd9c2437a956ac5ea0f10c3deea67cc085bacdea54764b9ca7489725cd3c"
+    },
+    {
+      "file": "public/app/places/harris-sunset.jpg",
+      "hash": "58356616bf45371ed93d3e9e3e5534ee0dba30351234151d68105cf8c28d9bd5"
+    },
+    {
+      "file": "public/app/places/harris-tuban.jpg",
+      "hash": "99e5e074960c83fbb4d0423ee121c32e14a73047ebc791d48c968a1229541f83"
+    },
+    {
+      "file": "public/app/places/la-brisa.jpg",
+      "hash": "3aca623439a12bf117a38ed946d58d077bb6a6ed8248fc3b902eba3130e8180d"
+    },
+    {
+      "file": "public/app/places/milk-madu-berawa.webp",
+      "hash": "255e183834a2e2f87143262cb608b86c5aa98822dbabd77eb0bb214defe915bb"
+    },
+    {
+      "file": "public/app/places/nirvana-life.webp",
+      "hash": "9cd85319cc02ea36110c1119efdc2b5c6a0b78918e3452bd93e903710624a281"
+    },
+    {
+      "file": "public/app/places/paradise.jpg",
+      "hash": "9ff70acb5667c8b2345afed5711d77c08b42d4626009385e73b8a681a98864b4"
+    },
+    {
+      "file": "public/app/places/pepito.webp",
+      "hash": "451bb3e42e761d72293e2e8c8708fec24b999965866d6e3af664f5bebc4c9b67"
+    },
+    {
+      "file": "public/app/places/pilates-project.jpg",
+      "hash": "3f7b37b43c72b22a656aee3019fcb8e53e56b139cabf7de054636cb85f7f5d39"
+    },
+    {
+      "file": "public/app/places/pison-petitenget.webp",
+      "hash": "34f55d30ba0a4fbf687cb187a27c39db868880327e198d833e7dde6ddb5024af"
+    },
+    {
+      "file": "public/app/places/pison-ubud.webp",
+      "hash": "24d091e6bb4f1d1ca076bdd642e993a4c9a07bf7d9dee41ef1c555dc0796d9fc"
+    },
+    {
+      "file": "public/app/places/pop-kuta.jpg",
+      "hash": "97c0399635037c2b1efad768d9bd7ffefd013064d9ad62ebcffdffa940b78473"
+    },
+    {
+      "file": "public/app/places/practice.jpg",
+      "hash": "51ff36888e019618265ae187d6bdd2b292764b629514ae7550ce0948b9d2f3ea"
+    },
+    {
+      "file": "public/app/places/revolver-seminyak.jpg",
+      "hash": "f56bb8428140d7a34ebcf2345cdd03c408b5818788ef9a6699a5ce1278112088"
+    },
+    {
+      "file": "public/app/places/savaya.jpg",
+      "hash": "19909fdd477f05eac0ef0023a225707e03156b5d5c7d71efff7194b4b56ca02e"
+    },
+    {
+      "file": "public/app/places/sunset-berawa.webp",
+      "hash": "9751dc012305847a4344f1562c563c64cc2cfd29ef0887dbe9e3f02f23c681c4"
+    },
+    {
+      "file": "public/app/places/sunset-sanur.webp",
+      "hash": "02b47927c2abd2caba21b1a8d105aee138c5c58e354a020103779e594d8ca16a"
+    },
+    {
+      "file": "public/app/places/titi-batu.jpg",
+      "hash": "1d0b76995ada7d24e80b99cc00d98034f85bbb5d85640eeb8e79d947fd1a7c17"
+    },
+    {
+      "file": "public/app/places/ubud-fitness.webp",
+      "hash": "1f74628d7dbebc9e5f0122670d9e76997c857a5187b7428bd83ec1449ff99137"
+    },
+    {
+      "file": "public/app/places/yoga-barn.jpg",
+      "hash": "35ded135d407188fa7b47d461a079780d860f3206fb328b3173e98ee3c246e02"
     },
     {
       "file": "public/app/stays/citadines-berawa.jpg",
@@ -10956,7 +11068,7 @@
     },
     {
       "file": "scripts/discover-test.mjs",
-      "hash": "507334a5fe0caebd25b994ba4e3e9b3227449e8aca68cdcd5811e7fa689639c4"
+      "hash": "939ddafbba5cd0dccb9376df5443594c1d4771c57a0b648fd6d9b1e370bee4ca"
     },
     {
       "file": "scripts/entries-test.mjs",
@@ -11324,7 +11436,7 @@
     },
     {
       "file": "src/app/app/guides.css",
-      "hash": "a447f201e4769e3f48af2ce4f06f46d69c6bdbf138e4fa005f03550c414c3191"
+      "hash": "552927e9214e2580461170aaf8b8ed1c437e98121babfd2bbcd91c6baf660929"
     },
     {
       "file": "src/app/app/identity.css",
@@ -11807,24 +11919,32 @@
       "hash": "d37090884d0279c670ad61a13af86b95bda8ce6132a61ee738279086140abb9c"
     },
     {
+      "file": "src/components/pwa/PlacePhoto.tsx",
+      "hash": "3950a217c59cb603735484275055570f0c32340589a556ca615714a6a62a86ea"
+    },
+    {
+      "file": "src/components/pwa/PlacePhotoCredits.tsx",
+      "hash": "669a0f7f437fec47121c029a980b29a0498ddf021eaa7674e0f8e105534ed228"
+    },
+    {
       "file": "src/components/pwa/RentalWizard.tsx",
       "hash": "518d2843855e59ba0aaa48f287394e9a7891a77be3e0324c0371754588a1c373"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
-      "hash": "472e0d0d0d65a51c62d720b8a3efa5a12ae9fd888fc877c41084cb07c20e194a"
+      "hash": "22ee8d09520db75fb5b4a073a4bb3c7ef810130c156fd38301245c98939faf63"
     },
     {
       "file": "src/components/pwa/WhereToShop.tsx",
-      "hash": "9d701f7a59739543a1bc9a3b6c113c611170f4c07699b61329efa66b36971e69"
+      "hash": "b964f16144a91a4d936a80f98e40884d48f58c26778f86b04c58626303bb32c3"
     },
     {
       "file": "src/components/pwa/WhereToStay.tsx",
-      "hash": "5e644f26dda5c89915564a3a8fba0ae8e0fb20d250a128d97b64b8c8f669c04b"
+      "hash": "e19d242016749862d1fe7a8f1adff80ed9f9d427de80f5ffb9f6a8f5e2ac3ea3"
     },
     {
       "file": "src/components/pwa/WorkoutWellness.tsx",
-      "hash": "0c64ba5c8bbb9251ece8767e9102688519e27d84a9241a1cb40bf5c4b97dfd56"
+      "hash": "7a7407ad0fbf2285bf7625d7f8e171de8f445d571465d25a637e94ac15fb7f1e"
     },
     {
       "file": "src/components/saga/EpisodeExtras.tsx",
@@ -11915,8 +12035,16 @@
       "hash": "c21b2b1405521d33d94f5f9fc43dc9400abcaed2cbcb800e102537c47e844de8"
     },
     {
+      "file": "src/data/appPlacePhotos.json",
+      "hash": "d01daf610b7bc5e99da7435367297d7d5b5f676667a45bf35fed6e01b3f9502d"
+    },
+    {
+      "file": "src/data/appPlacePhotos.ts",
+      "hash": "34cb08938aa75744b1446487cacde5b84d463d5fa7cc0ad8ca3dba51b67912ef"
+    },
+    {
       "file": "src/data/appPlaces.ts",
-      "hash": "57b03042dab4db559f53df57fcc2313b9024016af3eb197abad0910313a471af"
+      "hash": "efe74813a2d871c6c97a533d12503619a7f4578031cc6158d3cdd18906442058"
     },
     {
       "file": "src/data/appStayPhotoCredits.json",
@@ -11928,7 +12056,7 @@
     },
     {
       "file": "src/data/appWellness.ts",
-      "hash": "d8705deac1b3af0b7549339bf437079ec611e0790279ec0469f8bb0f77981451"
+      "hash": "f614fd31ead0bb0dabb99d82de1660f5af99e35d716436a9b9c54029925b0202"
     },
     {
       "file": "src/data/areaMedia.ts",
