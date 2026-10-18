@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "13eefba71797051dedd3a96d11322b915be166b6e73d8e7531a636594ffa661e",
+  "fingerprint": "8020364d49cc76b4e5832bb191a815b459d0c6b325f1e20755ee9bb8201cb489",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11432,7 +11432,7 @@
     },
     {
       "file": "src/app/app/bike-selection.css",
-      "hash": "eb357525396e17fc01023bc1202c302493dd691a31bb73664e47931f16ea8ddd"
+      "hash": "f43e0303ea4c812cbec115d865448becf921b3480cee3e8ef45724cebad1138d"
     },
     {
       "file": "src/app/app/cafes/page.tsx",
@@ -11900,7 +11900,7 @@
     },
     {
       "file": "src/components/pwa/BikeSelection.tsx",
-      "hash": "342ab06faa5df6af79b5c11dcf9b6a65f299eee51db1c2b33fbf5fd694dbb55a"
+      "hash": "72da727f9def075de20420896ae1b86e7cf8914612a2d92bc289463c48f299da"
     },
     {
       "file": "src/components/pwa/ChargingDirectory.tsx",
