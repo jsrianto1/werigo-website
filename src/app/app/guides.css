@@ -1,0 +1,68 @@
+/* Island guides reuse the WERIGO app tokens. No marketing-site selectors. */
+.ride-app .wg-guide-nav { display: flex; flex-wrap: wrap; gap: 9px; margin: 24px 0 30px; }
+.ride-app .wg-guide-nav a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--app-card); padding: 10px 14px; font-size: 12px; font-weight: 550; color: var(--ink); }
+.ride-app .wg-guide-nav a[aria-current="page"] { background: var(--wg-mint); border-color: var(--wg-route); color: var(--ink); }
+.ride-app .wg-guide-nav a:hover { border-color: var(--wg-brand); }
+.ride-app .wr-activity-area,.ride-app .wr-activity-photo-label { color: var(--ink-soft); }
+.ride-app .wr-activity-mini-icon { background: var(--wg-mint); color: var(--wg-brand); }
+.ride-app .wg-guide-nav svg { flex-shrink: 0; color: var(--wg-brand); }
+.ride-app .wg-services-guides { margin: 30px 0; }
+.ride-app .wg-services-guides h2,.ride-app .wg-hop-section > h2,.ride-app .wg-shop-areas > h2 { font-size: 25px; line-height: 1.2; letter-spacing: -.035em; margin: 8px 0 19px; font-weight: 550; }
+.ride-app .wg-services-guides .wg-guide-nav { margin: 0; }
+.ride-app .wg-partner-intro,.ride-app .wg-wellness-intro { border: 1px solid var(--line); border-radius: 24px; background: var(--surface-sunken); padding: 30px; margin-bottom: 26px; }
+.ride-app .wg-partner-intro { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 24px; }
+.ride-app .wg-guide-emblem { display: grid; place-items: center; color: var(--wg-brand); background: var(--wg-mint); border-radius: 17px; width: 64px; height: 64px; }
+.ride-app .wg-partner-intro h2,.ride-app .wg-wellness-intro h2 { font-size: clamp(34px,5vw,49px); font-weight: 550; line-height: 1.08; letter-spacing: -.045em; margin: 13px 0 16px; }
+.ride-app .wg-partner-intro p:not(.wg-overline),.ride-app .wg-wellness-intro > p:not(.wg-overline) { max-width: 540px; font-size: 14px; color: var(--ink-soft); line-height: 1.8; }
+.ride-app .wg-partner-intro a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; font-size: 12px; color: var(--wg-brand); margin-top: 14px; }
+.ride-app .wg-wellness-intro { position: relative; }
+.ride-app .wg-wellness-intro > .wg-guide-emblem { float: right; margin-left: 18px; }
+.ride-app .wg-guide-tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; list-style: none; margin: 0 0 20px; }
+.ride-app .wg-guide-tags li { border: 1px solid var(--line); color: var(--ink-soft); background: var(--surface-sunken); border-radius: 7px; padding: 6px 9px; font-size: 10px; line-height: 1.4; }
+.ride-app .wg-wellness-intro .wg-guide-tags { margin: 22px 0 0; }
+.ride-app .wg-stay-headline { font-size: 14px; color: var(--wg-brand); line-height: 1.6; margin: 0 0 14px; }
+.ride-app .wg-guide-address { font-size: 11px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 15px; }
+.ride-app .wg-stay-card h3 { font-size: 24px; }
+.ride-app .wg-nearby-panel { border: 1px solid var(--line); border-radius: 20px; padding: 25px; background: var(--app-card); margin: 24px 0 30px; }
+.ride-app .wg-nearby-panel > div:first-child { display: flex; align-items: center; gap: 11px; }
+.ride-app .wg-nearby-panel h2 { font-size: 21px; font-weight: 550; letter-spacing: -.03em; margin: 0; }
+.ride-app .wg-nearby-panel > p { font-size: 13px; line-height: 1.8; color: var(--ink-soft); margin: 13px 0 18px; }
+.ride-app .wg-nearby-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin: 19px 0; }
+.ride-app .wg-nearby-actions .ra-button { width: auto; padding: 13px 18px; font-size: 12px; min-height: 46px; }
+.ride-app .wg-nearby-actions > a,.ride-app .wg-nearby-result { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; font-size: 12px; color: var(--wg-brand); text-decoration: underline; text-underline-offset: 4px; }
+.ride-app .wg-nearby-panel > small { display: block; max-width: 650px; color: var(--ink-soft); font-size: 11px; line-height: 1.8; }
+.ride-app .wg-location-error { padding: 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface-sunken); }
+.ride-app .wg-hop-section { margin: 29px 0 35px; }
+.ride-app .wg-hop-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.ride-app .wg-hop-card { border: 1px solid var(--line); border-radius: 23px; padding: 25px; background: var(--surface-sunken); }
+.ride-app .wg-hop-card h3 { font-size: 24px; font-weight: 550; line-height: 1.15; letter-spacing: -.035em; margin: 0 0 14px; }
+.ride-app .wg-hop-card > p:not(.wr-activity-area) { font-size: 13px; line-height: 1.8; color: var(--ink-soft); }
+.ride-app .wg-hop-card ol { margin: 20px 0 12px; padding-left: 21px; list-style-type: decimal; font-size: 12px; }
+.ride-app .wg-hop-card li { padding: 6px 0 6px 5px; }
+.ride-app .wg-hop-card > a,.ride-app .wg-guide-note > a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 12px; color: var(--wg-brand); }
+.ride-app .wg-shop-areas { margin: 33px 0; }
+.ride-app .wg-shop-areas > p { font-size: 13px; line-height: 1.8; color: var(--ink-soft); margin: 0 0 20px; }
+.ride-app .wg-shop-areas > div { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.ride-app .wg-shop-areas a { display: flex; align-items: center; gap: 12px; padding: 20px; border: 1px solid var(--line); background: var(--app-card); border-radius: 15px; font-size: 13px; }
+.ride-app .wg-shop-areas a span { flex: 1; }
+.ride-app .wg-shop-areas svg { flex-shrink: 0; color: var(--wg-brand); }
+.ride-app .wg-guide-note { padding: 24px; border: 1px solid var(--line); border-radius: 20px; margin: 25px 0 30px; }
+.ride-app .wg-guide-note h2 { font-size: 21px; font-weight: 550; letter-spacing: -.025em; margin: 0 0 14px; }
+.ride-app .wg-guide-note p,.ride-app .wg-venue-highlights { font-size: 12px; line-height: 1.8; color: var(--ink-soft); margin: 0 0 19px; }
+.ride-app .wg-venue-highlights { color: var(--wg-brand); }
+.ride-app .wg-guide-nav a:focus-visible,.ride-app .wg-hop-card a:focus-visible,.ride-app .wg-shop-areas a:focus-visible { outline: 3px solid var(--wg-brand); outline-offset: 4px; }
+@media (max-width:760px) {
+  .ride-app .wg-guide-nav { gap: 8px; margin: 22px 0 27px; }
+  .ride-app .wg-guide-nav a { font-size: 11px; padding-inline: 11px; }
+  .ride-app .wg-partner-intro { display: block; padding: 24px; }
+  .ride-app .wg-partner-intro .wg-guide-emblem { margin-bottom: 22px; width: 52px; height: 52px; }
+  .ride-app .wg-wellness-intro { padding: 24px; }
+  .ride-app .wg-wellness-intro > .wg-guide-emblem { width: 48px; height: 48px; }
+  .ride-app .wg-hop-grid { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .ride-app .wg-shop-areas > div { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .ride-app .wg-shop-areas a { padding: 16px 13px; gap: 8px; font-size: 12px; }
+  .ride-app .wg-shop-areas a > svg:first-child { display: none; }
+  .ride-app .wg-nearby-panel { padding: 22px; }
+  .ride-app .wg-nearby-actions .ra-button { width: 100%; }
+  .ride-app .wg-services-guides h2 { font-size: 23px; }
+}

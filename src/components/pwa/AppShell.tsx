@@ -59,7 +59,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     {!online && <p role="status" className="ra-install-help">You’re offline. Reconnect before opening another guide, checking bookings or using rewards. No booking or payment is sent while offline.</p>}
     <div className="ra-content">{children}</div>
     {!isAuth && <nav className="ra-nav" aria-label="Werigo app"><div>{navigation.map(item => {
-      const active = item.href === "/app/rent" ? pathname.startsWith("/app/rent") : item.href === "/app/services" ? /^\/app\/(services|charge|explore|places)(\/|$)/.test(pathname) : item.href === "/app/account" ? /^\/app\/(account|profile|rewards)(\/|$)/.test(pathname) : pathname.startsWith(item.href);
+      const active = item.href === "/app/rent" ? pathname.startsWith("/app/rent") : item.href === "/app/services" ? /^\/app\/(services|charge|explore|places|cafes|stays|shop|wellness)(\/|$)/.test(pathname) : item.href === "/app/account" ? /^\/app\/(account|profile|rewards)(\/|$)/.test(pathname) : pathname.startsWith(item.href);
       return <Link key={item.href} href={item.href} aria-current={active ? "page" : undefined} className={active ? "is-active" : ""}><item.icon size={23}/><span>{item.label}</span></Link>;
     })}</div></nav>}
   </div>;

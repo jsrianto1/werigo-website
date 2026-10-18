@@ -24,14 +24,16 @@ export default function SagaPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ComicSeries",
+    "@id": `${site.baseUrl}/saga#series`,
     name: saga.title,
     description: saga.synopsis.join(" "),
     url: `${site.baseUrl}/saga`,
     inLanguage: ["en", "id"],
     isAccessibleForFree: true,
-    publisher: { "@type": "Organization", name: site.name, url: site.baseUrl },
+    publisher: { "@id": `${site.baseUrl}/#business` },
     hasPart: episodes.map((e) => ({
       "@type": "ComicIssue",
+      "@id": `${site.baseUrl}/saga/${e.slug}#issue`,
       issueNumber: e.number,
       name: `Chapter ${e.number}: ${e.title}`,
       url: `${site.baseUrl}/saga/${e.slug}`,

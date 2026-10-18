@@ -68,6 +68,7 @@ export default async function ChapterPage({ params }: Props) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ComicIssue",
+    "@id": `${site.baseUrl}/saga/${ep.slug}#issue`,
     name: `Chapter ${ep.number}: ${ep.title}`,
     issueNumber: ep.number,
     description: ep.logline,
@@ -75,8 +76,8 @@ export default async function ChapterPage({ params }: Props) {
     image: `${site.baseUrl}${ogSrc(ep)}`,
     inLanguage: ["en", "id"],
     isAccessibleForFree: true,
-    isPartOf: { "@type": "ComicSeries", name: saga.title, url: `${site.baseUrl}/saga` },
-    publisher: { "@type": "Organization", name: site.name, url: site.baseUrl },
+    isPartOf: { "@id": `${site.baseUrl}/saga#series`, "@type": "ComicSeries", name: saga.title, url: `${site.baseUrl}/saga` },
+    publisher: { "@id": `${site.baseUrl}/#business` },
   };
 
   return (

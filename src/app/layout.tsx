@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HideOnAdmin } from "@/components/layout/HideOnAdmin";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { site } from "@/lib/config";
-import { localBusinessSchema, jsonLd } from "@/lib/schema";
+import { siteIdentitySchema, jsonLd } from "@/lib/schema";
 import { MarketingEvents } from "@/components/analytics/MarketingEvents";
 import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { consentBootstrapScript } from "@/lib/consent";
@@ -100,7 +100,7 @@ export default function RootLayout({
         </LanguageProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd(localBusinessSchema()) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(siteIdentitySchema()) }}
         />
       </body>
     </html>

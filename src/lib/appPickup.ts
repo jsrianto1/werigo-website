@@ -5,6 +5,13 @@ export interface AppPickup { version: 1; area: string; mapsUrl: string; savedAt:
 export interface GpsPoint { latitude: number; longitude: number; accuracy: number; }
 export function googleMapsSearch(query: string) { return `https://www.google.com/maps/search/?${new URLSearchParams({ api: "1", query })}`; }
 export function googleMapsDirections(destination: string) { return `https://www.google.com/maps/dir/?${new URLSearchParams({ api: "1", destination, travelmode: "driving" })}`; }
+/** Small, ordered public-place itinerary; no customer GPS or API key needed. */
+export function googleMapsHop(stops: readonly string[]) {
+  if (stops.length < 2 || stops.length > 5 || stops.some(stop => !stop.trim())) throw new Error("Choose 2 to 5 café stops.");
+  const params = new URLSearchParams({ api: "1", origin: stops[0], destination: stops[stops.length - 1], travelmode: "driving" });
+  if (stops.length > 2) params.set("waypoints", stops.slice(1, -1).join("|"));
+  return `https://www.google.com/maps/dir/?${params}`;
+}
 export function validMapsUrl(raw: string): string | null {
   try {
     const url = new URL(raw.trim());

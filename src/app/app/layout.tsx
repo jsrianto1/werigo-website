@@ -6,6 +6,7 @@ import "./rental.css";
 import "./mobile.css";
 import "./reference.css";
 import "./identity.css";
+import "./guides.css";
 import "leaflet/dist/leaflet.css";
 const appBrandFont = Outfit({ variable: "--font-werigo", subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {

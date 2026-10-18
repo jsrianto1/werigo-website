@@ -16,7 +16,7 @@ import { getPrimaryCards } from "@/data/vehicles";
 import { serviceAreas } from "@/data/locations";
 import { confirmedBenefits } from "@/data/commercialTerms";
 import { marketingFaqs } from "@/data/marketingFaqs";
-import { faqSchema, jsonLd } from "@/lib/schema";
+import { faqSchema, homePageSchema, jsonLd } from "@/lib/schema";
 import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { SagaTeaser } from "@/components/home/SagaTeaser";
@@ -87,7 +87,7 @@ export default function HomePage() {
       <Section labelledBy="areas-heading"><div className="section-intro"><h2 id="areas-heading"><T>{"Your stay is our starting point."}</T></h2><p><T>{"Arrange scooter delivery to your hotel or villa in eight Bali service areas. Airport handover is also available by arrangement."}</T></p></div><div className="destination-grid">{["canggu", "ubud", "uluwatu"].map(slug => <Link key={slug} href={`/delivery-areas/${slug}`} className="destination-tile"><AreaImage slug={slug} className="h-full" sizes="(max-width: 640px) 100vw, 33vw" /><span><T>{serviceAreas.find(a => a.slug === slug)?.name}</T> <ArrowRight aria-hidden="true" className="h-5 w-5" /></span></Link>)}</div><div className="area-links">{serviceAreas.map(area => <Link href={`/delivery-areas/${area.slug}`} key={area.slug}><T>{area.name}</T></Link>)}</div><p className="mt-4 text-sm text-ink-soft"><T>{"Delivery timing and fees are confirmed for your booking."}</T></p></Section>
 
       <Section tone="wash" labelledBy="faq-heading"><div className="faq-layout"><div><h2 id="faq-heading" className="marketing-heading"><T>{"Good questions."}</T><br /><T>{"Clear answers."}</T></h2><p className="mt-5 text-ink-soft"><T>{"A little planning makes a better ride."}</T></p><Link href="/help-center" className="text-link mt-6"><T>{"Visit the Help Center"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div><Accordion items={marketingFaqs} /></div></Section>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd(faqSchema(marketingFaqs))}} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd({ "@context": "https://schema.org", "@graph": [homePageSchema(), faqSchema(marketingFaqs)] })}} />
 
       <Section labelledBy="cta-heading"><div className="closing-cta"><h2 id="cta-heading"><T>{"Give your Bali plans"}</T><br /><T>{"a ride of their own."}</T></h2><p><T>{"Choose your dates. We will help with the rest."}</T></p><ButtonLink href="/book" variant="accent" size="lg"><T>{"Check availability"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink></div></Section>
     </>

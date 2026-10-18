@@ -1,4 +1,5 @@
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { fleetCollectionSchema, jsonLd } from "@/lib/schema";
 
 import { T } from "@/components/i18n/LanguageProvider";
 import { pageMetadata } from "@/lib/seo";
@@ -24,6 +25,7 @@ export default async function FleetPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(fleetCollectionSchema(cards)) }} />
       <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Our Fleet", path: "/fleet" }]} />
       <Section labelledBy="fleet-title" className="!pb-8">
         <SectionHeading as="h1"
