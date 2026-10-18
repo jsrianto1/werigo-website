@@ -90,9 +90,8 @@ export const pricingUpdatedAt = "2026-08-19";
 
 /**
  * Retail one-month totals exactly as printed on the 2026-08-19 flyer.
- * The booking flow prices monthly rentals per actual day (rate above
- * times calendar days), so these totals are for display comparisons
- * only, such as the fleet partner table on /partners.
+ * EdPower uses its exact calendar-month package in the booking flow.
+ * Other models retain their approved monthly per-day calculation.
  */
 export const retailMonthlyIdr: Record<string, number> = {
   bees: 1500000,
@@ -140,10 +139,10 @@ export function isAtLeastOneCalendarMonth(period: RentalPeriod): boolean {
 }
 
 /** Add one calendar month, clamping to the last day of shorter months. */
-function addCalendarMonth(d: Date): Date {
+function addCalendarMonth(d: Date, months = 1): Date {
   const r = new Date(d.getTime());
   const day = r.getDate();
-  r.setMonth(r.getMonth() + 1);
+  r.setMonth(r.getMonth() + months);
   // JS overflows (e.g. Jan 31 + 1 month = Mar 3) — clamp back.
   if (r.getDate() !== day) r.setDate(0);
   return r;
@@ -170,11 +169,13 @@ export interface RentalQuoteEstimate {
   tier: PricingTier;
   ratePerDayIdr: number;
   totalIdr: number;
+  /** Exact EdPower calendar-month packages, plus any remaining days. */
+  monthlyPackage?: { priceIdr: number; months: number; extraDays: number };
 }
 
 /**
- * Estimated rental: applicable per-day rate multiplied by the actual
- * rental duration in days. Null when the period is invalid, below
+ * Estimated rental: applicable daily rate times days, except EdPower's
+ * exact calendar-month packages plus remaining days. Null when invalid, below
  * the two-day minimum, or the model has no approved rate.
  */
 export function estimateRental(
@@ -186,7 +187,25 @@ export function estimateRental(
   const rate = rateFor(modelSlug, tier.id);
   if (rate === null) return null;
   const days = rentalDays(period);
+  if (modelSlug === "edpower" && tier.id === "monthly") {
+    const start = new Date(`${period.startDate}T${period.startTime}:00`);
+    const end = new Date(`${period.endDate}T${period.endTime}:00`);
+    let months = (end.getFullYear() - start.getFullYear()) * 12 + end.getMonth() - start.getMonth();
+    // Anchor every anniversary to the original date, including month-end clamps.
+    if (addCalendarMonth(start, months).getTime() > end.getTime()) months--;
+    const extraDays = Math.ceil((end.getTime() - addCalendarMonth(start, months).getTime()) / 86400000);
+    const priceIdr = retailMonthlyIdr.edpower;
+    return { days, tier, ratePerDayIdr: rate, totalIdr: months * priceIdr + extraDays * rate,
+      monthlyPackage: { priceIdr, months, extraDays } };
+  }
   return { days, tier, ratePerDayIdr: rate, totalIdr: rate * days };
+}
+
+/** One accurate rate description for checkout and the WhatsApp quote. */
+export function rentalRateDescription(estimate: RentalQuoteEstimate): string {
+  const pack = estimate.monthlyPackage;
+  if (!pack) return `${formatIdr(estimate.ratePerDayIdr)}/day`;
+  return `${formatIdr(pack.priceIdr)}/calendar month · ${pack.months} month${pack.months === 1 ? "" : "s"}${pack.extraDays ? ` + ${pack.extraDays} extra day${pack.extraDays === 1 ? "" : "s"} at ${formatIdr(estimate.ratePerDayIdr)}/day` : ""}`;
 }
 
 /** "Rp 70,000" style formatting (tabular-friendly, no decimals). */

@@ -17,6 +17,14 @@
 .ride-app .wg-bike-charging svg { flex-shrink: 0; margin-top: 1px; }
 .ride-app .wg-bike-daily { display: block; margin-top: auto; padding-top: 16px; font-size: 14px; font-variant-numeric: tabular-nums; font-weight: 550; }
 .ride-app .wg-bike-daily > small { font-size: 11px; color: var(--ink-soft); font-weight: 400; margin-left: 3px; }
+.ride-app .wg-bike-rates { display: block; width: 100%; margin-top: auto; padding-top: 20px; font-variant-numeric: tabular-nums; }
+.ride-app .wg-bike-rates-heading { display: block; color: var(--wg-brand); font-size: 9px; letter-spacing: .1em; font-weight: 600; padding-bottom: 9px; }
+.ride-app .wg-bike-rate-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 3px 8px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 11px; line-height: 1.5; }
+.ride-app .wg-bike-rate-row > span:first-child { color: var(--ink-soft); }
+.ride-app .wg-bike-rate-row > span:last-child { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px; }
+.ride-app .wg-bike-rate-row b { font-size: 13px; font-weight: 550; white-space: nowrap; }
+.ride-app .wg-bike-rate-row small { font-size: 10px; color: var(--ink-soft); }
+.ride-app .wg-bike-rate-row.is-monthly-package b { color: var(--wg-brand); }
 .ride-app .wg-bike-rate-note { font-size: 11px; line-height: 1.8; color: var(--ink-soft); margin: 20px 2px 28px; }
 .ride-app .wg-bike-story { margin: 35px 0 22px; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: var(--app-card); scroll-margin-top: 25px; }
 .ride-app .wg-bike-story-heading { padding: 27px 26px 0; }
@@ -48,6 +56,9 @@
   .ride-app .wg-bike-charging { font-size: 9px; margin-top: 11px; }
   .ride-app .wg-bike-daily { font-size: 12px; padding-top: 13px; }
   .ride-app .wg-bike-daily > small { font-size: 9px; }
+  .ride-app .wg-bike-rates { padding-top: 17px; }
+  .ride-app .wg-bike-rate-row { display: grid; gap: 3px; padding: 8px 0; font-size: 10px; }
+  .ride-app .wg-bike-rate-row b { font-size: 13px; }
   .ride-app .wg-bike-story-heading { padding: 24px 20px 0; }
   .ride-app .wg-bike-story-photo { height: 230px; }
   .ride-app .wg-bike-story-photo img { padding: 22px 18px; }

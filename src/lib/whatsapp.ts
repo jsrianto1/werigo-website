@@ -103,7 +103,9 @@ export interface DirectBookingDetails {
   tierLabel: string;
   /** Approved IDR per-day rate for the applied tier. */
   ratePerDayIdr: number;
-  /** Base rental estimate: rate x actual days x quantity, IDR. */
+  /** Exact package description when the daily-rate formula does not apply. */
+  rateDescription?: string;
+  /** Base rental estimate including calendar-month packages, IDR. */
   estimatedTotalIdr: number;
   /** Approximate USD for the base estimate; null when no rate. */
   baseUsdApprox?: string | null;
@@ -155,7 +157,7 @@ export function buildDirectBookingWhatsAppUrl(d: DirectBookingDetails): string {
     ``,
     `*Pricing estimate*`,
     `Tier: ${d.tierLabel}`,
-    `Rate: ${idr(d.ratePerDayIdr)}/day`,
+    `Rate: ${d.rateDescription ?? `${idr(d.ratePerDayIdr)}/day`}`,
     `Base rental: ${idr(d.estimatedTotalIdr)}${d.baseUsdApprox ? ` (${d.baseUsdApprox})` : ""}${d.quantity > 1 ? ` for ${d.quantity} motorcycles` : ""}`,
     ...(d.areaFeeIdr > 0
       ? [

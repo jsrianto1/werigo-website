@@ -28,6 +28,7 @@ import {
   rentalDays,
   isValidPeriod,
   estimateRental,
+  rentalRateDescription,
   formatIdr,
   MIN_RENTAL_MESSAGE,
   minRiderAge,
@@ -512,6 +513,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
       days,
       tierLabel: `${t(estimate.tier.label)} (${t(estimate.tier.range)})`,
       ratePerDayIdr: estimate.ratePerDayIdr,
+      rateDescription: estimate.monthlyPackage ? rentalRateDescription(estimate) : undefined,
       estimatedTotalIdr: estimate.totalIdr * quantity,
       baseUsdApprox: formatUsdApprox(estimate.totalIdr * quantity, usdRate),
       areaFeeIdr: areaFeesIdr,
@@ -1200,7 +1202,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                         },
                         {
                           term: "Rate",
-                          detail: `${formatIdr(estimate.ratePerDayIdr)} ${t("per day")}${
+                          detail: estimate.monthlyPackage ? rentalRateDescription(estimate) : `${formatIdr(estimate.ratePerDayIdr)} ${t("per day")}${
                             formatUsdApprox(estimate.ratePerDayIdr, usdRate)
                               ? ` (${formatUsdApprox(estimate.ratePerDayIdr, usdRate)})`
                               : ""

@@ -223,7 +223,9 @@ export function ConfirmationView({ bookingBase = "/book", accountPath = "/accoun
                   term: "Price",
                   detail: [
                     b.baseIdr !== null && b.rentalDays !== null && b.ratePerDayIdr !== null
-                      ? `${formatIdr(b.ratePerDayIdr)} × ${b.rentalDays} days${b.quantity > 1 ? ` × ${b.quantity}` : ""} = ${formatIdr(b.baseIdr)}`
+                      ? b.ratePerDayIdr * b.rentalDays * b.quantity === b.baseIdr
+                        ? `${formatIdr(b.ratePerDayIdr)} × ${b.rentalDays} days${b.quantity > 1 ? ` × ${b.quantity}` : ""} = ${formatIdr(b.baseIdr)}`
+                        : `Rental for ${b.rentalDays} days${b.quantity > 1 ? ` × ${b.quantity} motorcycles` : ""}: ${formatIdr(b.baseIdr)}`
                       : "",
                     b.areaFeeIdr > 0 ? `Delivery & collection ${formatIdr(b.areaFeeIdr)}` : "",
                     b.discountIdr > 0 ? `Discount −${formatIdr(b.discountIdr)}` : "",

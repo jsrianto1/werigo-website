@@ -18,6 +18,7 @@ import { notifyBookingPaid } from "@/lib/notifications";
 import { syncReferralForBooking } from "@/lib/referrals";
 import { toCustomerEntry } from "@/data/vehicles";
 import { site } from "@/lib/config";
+import { bookingPaymentItems } from "@/lib/paymentItems";
 
 /** How long a customer has to complete payment (management decision). */
 export const PAYMENT_WINDOW_MINUTES = 60;
@@ -42,20 +43,7 @@ export async function openPayment(booking: StoredBooking, fallbackEmail?: string
   const attempt = await countPayments(booking.id);
   const orderId = attempt === 0 ? booking.booking_code : `${booking.booking_code}-${attempt + 1}`;
   const model = toCustomerEntry(booking.vehicle_model)?.displayName ?? booking.vehicle_model;
-  const items = [
-    {
-      id: `rental-${booking.vehicle_model}`,
-      price: booking.rate_per_day_idr * booking.rental_days,
-      quantity: booking.quantity,
-      name: `${model}, ${booking.rental_days} days`,
-    },
-  ];
-  if (booking.area_fee_idr > 0) {
-    items.push({ id: "area-fee", price: booking.area_fee_idr, quantity: 1, name: "Delivery & collection" });
-  }
-  if (booking.discount_idr > 0) {
-    items.push({ id: "discount", price: -booking.discount_idr, quantity: 1, name: `Discount ${booking.discount_code ?? ""}`.trim() });
-  }
+  const items = bookingPaymentItems({ ...booking, rental_days: booking.rental_days, rate_per_day_idr: booking.rate_per_day_idr }, model);
   const [firstName, ...rest] = booking.full_name.trim().split(/\s+/);
   const expiresAt = booking.payment_expires_at ? new Date(booking.payment_expires_at) : paymentDeadline();
   const minutes = Math.max(5, Math.round((expiresAt.getTime() - Date.now()) / 60_000));
