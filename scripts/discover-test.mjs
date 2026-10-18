@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { appCafes, cafeHops } from '../src/data/appCafes.ts';
+import { appPlaces } from '../src/data/appPlaces.ts';
+import photos from '../src/data/appPlacePhotos.json' with { type: 'json' };
 import { appStays } from '../src/data/appStays.ts';
 import { appWellness, wellnessCategories, wellnessMapsTerms } from '../src/data/appWellness.ts';
 import { googleMapsHop } from '../src/lib/appPickup.ts';
@@ -8,6 +10,17 @@ assert.equal(appStays.length,10);
 assert.equal(appCafes.length,6);
 assert.equal(appWellness.length,11);
 assert.equal(new Set([...appCafes,...appStays,...appWellness].map(venue=>venue.id)).size,27);
+const venueIds = [...appCafes,...appStays,...appWellness,...appPlaces].map(venue=>venue.id).concat('pepito');
+assert.equal(new Set(venueIds).size,32);
+assert.deepEqual(Object.keys(photos).sort(),venueIds.sort());
+for(const id of venueIds) {
+  const photo=photos[id];
+  assert.ok(existsSync(`public${photo.src}`),`Missing venue photo: ${id}`);
+  assert.ok(photo.width>=400 && photo.height>=300,`Insufficient photo resolution: ${id}`);
+  assert.ok(photo.alt && photo.credit && photo.checkedAt);
+  assert.equal(new URL(photo.source).protocol,'https:');
+  assert.equal(new URL(photo.page).protocol,'https:');
+}
 for (const stay of appStays) {
   assert.equal(new URL(stay.website).hostname, 'www.discoverasr.com');
   assert.ok(stay.address && stay.highlights.length);
@@ -37,4 +50,4 @@ for(const venue of [...appCafes,...appWellness]) {
   assert.equal(new URL(venue.website).protocol, 'https:');
   assert.ok(venue.description.length > 70);
 }
-console.log('PASS: 6 branch-specific cafés, 2 valid ordered Maps itineraries, 10 official Ascott properties with 4 photos, 11 independent workout/wellness venues with category coverage.');
+console.log('PASS: 6 cafés, 2 Maps itineraries, 10 Ascott properties, 11 workout/wellness venues, 4 beach clubs and Pepito; all 32 venues have credited local photos.');

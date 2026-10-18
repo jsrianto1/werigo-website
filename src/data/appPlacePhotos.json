@@ -1,0 +1,322 @@
+{
+  "pison-petitenget": {
+    "src": "/app/places/pison-petitenget.webp",
+    "alt": "Coffee being brewed at Pison Petitenget",
+    "width": 1600,
+    "height": 900,
+    "credit": "Pison Indonesia",
+    "source": "https://pisonindonesia.com/wp-content/uploads/2025/10/pison-seminyak-header.jpg.webp",
+    "page": "https://pisonindonesia.com/pison-seminyak/",
+    "checkedAt": "2026-10-18"
+  },
+  "revolver-seminyak": {
+    "src": "/app/places/revolver-seminyak.jpg",
+    "alt": "Revolver Seminyak café interior",
+    "width": 1080,
+    "height": 1920,
+    "credit": "Revolver Bali",
+    "source": "https://revolverbali.com/cdn/shop/files/seminyak_ambience_2048x2048.jpg?v=1787291194",
+    "page": "https://revolverbali.com/pages/seminyak",
+    "checkedAt": "2026-10-18"
+  },
+  "gigi-susu": {
+    "src": "/app/places/gigi-susu.jpg",
+    "alt": "Gigi Susu bakery and café storefront on Batu Bolong",
+    "width": 1280,
+    "height": 1706,
+    "credit": "Trip.com traveller",
+    "source": "https://ak-d.tripcdn.com/images/1mi4n224x939daak5506F.jpg?proc=source%2Ftrip",
+    "page": "https://www.trip.com/moments/poi-gigi-susu-148223504/",
+    "checkedAt": "2026-10-18"
+  },
+  "milk-madu-berawa": {
+    "src": "/app/places/milk-madu-berawa.webp",
+    "alt": "Open-air dining area at Milk & Madu Berawa",
+    "width": 1200,
+    "height": 960,
+    "credit": "Milk & Madu",
+    "source": "https://milkandmadu.com/wp-content/uploads/2026/02/Berawa-2.webp",
+    "page": "https://milkandmadu.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "pison-ubud": {
+    "src": "/app/places/pison-ubud.webp",
+    "alt": "Entrance to Pison Ubud on Jalan Hanoman",
+    "width": 1920,
+    "height": 2560,
+    "credit": "Pison Indonesia",
+    "source": "https://pisonindonesia.com/wp-content/uploads/2025/10/13-1-scaled-1.webp",
+    "page": "https://pisonindonesia.com/pison-ubud/",
+    "checkedAt": "2026-10-18"
+  },
+  "body-factory": {
+    "src": "/app/places/body-factory.jpg",
+    "alt": "Outdoor recovery pool at Body Factory Bali",
+    "width": 1920,
+    "height": 1280,
+    "credit": "Body Factory Bali",
+    "source": "https://www.bodyfactorybali.com/_next/image?url=https%3A%2F%2Fimages.10eggsdevelopment.com%2Fbodyfactory%2Fcms%2Fhome-page%2Fhero-carousel%2F01-hero-carousel-img-1.jpg%3Ft%3D1770597668633&w=1920&q=50",
+    "page": "https://www.bodyfactorybali.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "expat-petitenget": {
+    "src": "/app/places/expat-petitenget.jpg",
+    "alt": "Expat. Roasters Petitenget coffee bar interior",
+    "width": 800,
+    "height": 600,
+    "credit": "Otten Coffee",
+    "source": "https://d1r9hss9q19p18.cloudfront.net/uploads/2018/03/IMG_4562.jpg",
+    "page": "https://ottencoffee.co.id/majalah/expat-coffee-roasters-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "nirvana-life": {
+    "src": "/app/places/nirvana-life.webp",
+    "alt": "Nirvana Life Bali recovery facilities",
+    "width": 1024,
+    "height": 683,
+    "credit": "Nirvana Life Bali",
+    "source": "https://nirvanalife.com/bali/wp-content/uploads/2026/06/nirvana-life-bali-recovery-facilities-02-1024x683.webp",
+    "page": "https://nirvanalife.com/bali/",
+    "checkedAt": "2026-10-18"
+  },
+  "sunset-berawa": {
+    "src": "/app/places/sunset-berawa.webp",
+    "alt": "Sunset Pilates Berawa studio",
+    "width": 1280,
+    "height": 720,
+    "credit": "Sunset Pilates Bali",
+    "source": "https://sunsetpilatesbali.com/images/02_Studios/studio-berawa-card-16x9.webp",
+    "page": "https://sunsetpilatesbali.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "sunset-sanur": {
+    "src": "/app/places/sunset-sanur.webp",
+    "alt": "Sunset Pilates Sanur studio",
+    "width": 1280,
+    "height": 720,
+    "credit": "Sunset Pilates Bali",
+    "source": "https://sunsetpilatesbali.com/images/02_Studios/studio-sanur-card-16x9.webp",
+    "page": "https://sunsetpilatesbali.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "fondue": {
+    "src": "/app/places/fondue.webp",
+    "alt": "Studio Fondue Pilates space in Uluwatu",
+    "width": 2560,
+    "height": 1707,
+    "credit": "Studio Fondue",
+    "source": "https://studio-fondue.com/wp-content/uploads/2026/05/studio-fondue-pilates-uluwatu-bali.webp",
+    "page": "https://studio-fondue.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "pilates-project": {
+    "src": "/app/places/pilates-project.jpg",
+    "alt": "Inside The Pilates Project studio in Pererenan",
+    "width": 900,
+    "height": 1200,
+    "credit": "The Pilates Project",
+    "source": "https://www.wearetpp.com/_next/image?url=%2Fstudio-interior.jpg&w=3840&q=75",
+    "page": "https://www.wearetpp.com/studio",
+    "checkedAt": "2026-10-18"
+  },
+  "ubud-fitness": {
+    "src": "/app/places/ubud-fitness.webp",
+    "alt": "Training space at Ubud.Fitness",
+    "width": 1920,
+    "height": 1080,
+    "credit": "Ubud.Fitness",
+    "source": "https://ubud.fitness/_astro/hero.BR_uzJ9y_H7wKB.webp",
+    "page": "https://ubud.fitness/",
+    "checkedAt": "2026-10-18"
+  },
+  "yoga-barn": {
+    "src": "/app/places/yoga-barn.jpg",
+    "alt": "Yoga class at The Yoga Barn in Ubud",
+    "width": 600,
+    "height": 400,
+    "credit": "The Yoga Barn",
+    "source": "https://theyogabarn.com/wp-content/uploads/2024/07/featured-class.jpg",
+    "page": "https://theyogabarn.com/classes/daily-classes/",
+    "checkedAt": "2026-10-18"
+  },
+  "titi-batu": {
+    "src": "/app/places/titi-batu.jpg",
+    "alt": "Gym equipment at Titi Batu Ubud Club",
+    "width": 1024,
+    "height": 768,
+    "credit": "Titi Batu Ubud Club",
+    "source": "https://static.wixstatic.com/media/2480c3_ee6d4773cb63423b82f7587ee3e1962b~mv2.jpeg",
+    "page": "https://www.titibatu.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "practice": {
+    "src": "/app/places/practice.jpg",
+    "alt": "Bamboo-roof yoga shala at The Practice in Canggu",
+    "width": 4032,
+    "height": 3024,
+    "credit": "Vocus travel contributor",
+    "source": "https://images.vocus.cc/4e325db5-00c3-4c5a-92cf-2ac5ba18d9c5.jpg",
+    "page": "https://vocus.cc/article/64796049fd89780001943f4a",
+    "checkedAt": "2026-10-18"
+  },
+  "finns": {
+    "src": "/app/places/finns.jpg",
+    "alt": "FINNS Beach Club overlooking Berawa Beach",
+    "width": 1280,
+    "height": 775,
+    "credit": "FINNS Beach Club",
+    "source": "https://finnsbeachclub.com/wp-content/uploads/2023/11/Copy-of-2026.04.18_Absolut_Brand_Activation_Drone_Shoot_FJR_-2-1-Large.jpeg",
+    "page": "https://finnsbeachclub.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "la-brisa": {
+    "src": "/app/places/la-brisa.jpg",
+    "alt": "La Brisa beach club in Canggu",
+    "width": 2560,
+    "height": 1707,
+    "credit": "La Brisa Bali",
+    "source": "https://labrisa-bali.com/wp-content/uploads/2025/04/LB-Venue-JM050325-7-scaled.jpg",
+    "page": "https://labrisa-bali.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "cretya": {
+    "src": "/app/places/cretya.webp",
+    "alt": "Cretya Ubud pool and rice terraces",
+    "width": 1919,
+    "height": 1080,
+    "credit": "Cretya Ubud",
+    "source": "https://assets.alasharum.com/assets/2026/08/5c3ef2e0-664d-4e25-b330-0354324cd36e.webp",
+    "page": "https://cretyaubud.com/en/cretya-ubud",
+    "checkedAt": "2026-10-18"
+  },
+  "paradise": {
+    "src": "/app/places/paradise.jpg",
+    "alt": "The Paradise Bali gym in Sanur",
+    "width": 1592,
+    "height": 887,
+    "credit": "The Paradise Bali",
+    "source": "https://theparadisebali.com/wp-content/uploads/2023/12/Gym-tile-2023.jpg",
+    "page": "https://theparadisebali.com/",
+    "checkedAt": "2026-10-18"
+  },
+  "savaya": {
+    "src": "/app/places/savaya.jpg",
+    "alt": "Savaya Bali clifftop club and illuminated cube at sunset",
+    "width": 680,
+    "height": 680,
+    "credit": "OnBali",
+    "source": "https://onbali.com/assets/posts/7-best-beach-clubs-in-uluwatu/savaya-bali-1.jpg",
+    "page": "https://onbali.com/uluwatu/best-beach-clubs-in-uluwatu/",
+    "checkedAt": "2026-10-18"
+  },
+  "harris-sunset": {
+    "src": "/app/places/harris-sunset.jpg",
+    "alt": "HARRIS Hotel & Residence Sunset Road Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/harris-hotel-residence-sunset-road-bali/overview/HSRD-thumbnail-property.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/harris/indonesia/harris-hotel-residence-sunset-road-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "harris-denpasar": {
+    "src": "/app/places/harris-denpasar.jpg",
+    "alt": "HARRIS Hotel & Conventions Denpasar Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/harris-hotel-conventions-denpasar-bali/overview/thumbnail-new-hckr.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/harris/indonesia/harris-hotel-conventions-denpasar-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "harris-riverview": {
+    "src": "/app/places/harris-riverview.jpg",
+    "alt": "HARRIS Hotel & Residence Riverview Kuta Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/harris-hotel-residence-riverview-kuta-bali/overview/thumbnail-new-hrvb.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/harris/indonesia/harris-hotel-residence-riverview-kuta-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "harris-seminyak": {
+    "src": "/app/places/harris-seminyak.jpg",
+    "alt": "HARRIS Hotel Seminyak Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/harris-hotel-seminyak-bali/overview/HSMY-thumbnail.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/harris/indonesia/harris-hotel-seminyak-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "harris-tuban": {
+    "src": "/app/places/harris-tuban.jpg",
+    "alt": "HARRIS Hotel Kuta Tuban Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/harris-hotel-kuta-tuban-bali/overview/thumbnail-new-htbn.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/harris/indonesia/harris-hotel-kuta-tuban-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "pop-kuta": {
+    "src": "/app/places/pop-kuta.jpg",
+    "alt": "POP! Hotel Kuta Beach Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/pop-hotel-kuta-beach-bali/overview/thumbnail-new-pktb.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/pop-hotels/indonesia/pop-hotel-kuta-beach-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "citadines-berawa": {
+    "src": "/app/stays/citadines-berawa.jpg",
+    "alt": "Citadines Berawa Beach Bali Resort property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/citadines-berawa-beach-bali-resort/overview/thumbnail-cbbb-2026.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/citadines/indonesia/citadines-berawa-beach-bali-resort",
+    "checkedAt": "2026-10-18"
+  },
+  "maison-aurelia": {
+    "src": "/app/stays/maison-aurelia.jpg",
+    "alt": "Maison Aurelia Sanur, Bali - by Préférence property photo",
+    "width": 761,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/maison-aurelia-sanur-bali-by-preference/overview/rmas-thumbnail-camelliasuite.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/preference/indonesia/maison-aurelia-sanur-bali-by-preference",
+    "checkedAt": "2026-10-18"
+  },
+  "fox-jimbaran": {
+    "src": "/app/stays/fox-jimbaran.jpg",
+    "alt": "FOX Hotel Jimbaran Beach Bali property photo",
+    "width": 760,
+    "height": 428,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/fox-hotel-jimbaran-beach-bali/overview/thumbnail-new-fjbb.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/fox-hotels/indonesia/fox-hotel-jimbaran-beach-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "yello-beachwalk": {
+    "src": "/app/stays/yello-beachwalk.jpg",
+    "alt": "YELLO Hotel Kuta Beachwalk Bali property photo",
+    "width": 760,
+    "height": 475,
+    "credit": "Ascott",
+    "source": "https://www.discoverasr.com/assets/tal/media/images/properties/indonesia/bali/yello-hotel-kuta-beachwalk-bali/gallery/rooms/YKTB-gallery-14.jpg.transform/ascott-lowres/image.jpg",
+    "page": "https://www.discoverasr.com/en/yello/indonesia/yello-hotel-kuta-beachwalk-bali",
+    "checkedAt": "2026-10-18"
+  },
+  "pepito": {
+    "src": "/app/places/pepito.webp",
+    "alt": "Pepito Market Dewi Sri storefront",
+    "width": 960,
+    "height": 616,
+    "credit": "Cheers for Change",
+    "source": "https://www.cheersforchange.id/_astro/Pepito_Dewi_Sri.tpFNBav4_Znq08U.webp",
+    "page": "https://www.cheersforchange.id/",
+    "checkedAt": "2026-10-18"
+  }
+}

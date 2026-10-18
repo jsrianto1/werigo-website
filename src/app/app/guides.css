@@ -1,4 +1,8 @@
 /* Island guides reuse the WERIGO app tokens. No marketing-site selectors. */
+.ride-app .wg-shop-photo { margin: 0 0 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 23px; background: var(--app-card); }
+.ride-app .wg-shop-photo figcaption { padding: 15px 20px; font-size: 12px; line-height: 1.7; color: var(--ink-soft); }
+.ride-app .wg-shop-photo .wr-activity-photo { height: auto; aspect-ratio: 16/9; }
+.ride-app .wr-photo-credits a { overflow-wrap: anywhere; }
 .ride-app .wg-guide-nav { display: flex; flex-wrap: wrap; gap: 9px; margin: 24px 0 30px; }
 .ride-app .wg-guide-nav a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--app-card); padding: 10px 14px; font-size: 12px; font-weight: 550; color: var(--ink); }
 .ride-app .wg-guide-nav a[aria-current="page"] { background: var(--wg-mint); border-color: var(--wg-route); color: var(--ink); }

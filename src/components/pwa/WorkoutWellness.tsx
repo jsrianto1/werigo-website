@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Compass, Dumbbell, ExternalLink, Flower2, MapPin, Search, Waves } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Compass, ExternalLink, Flower2, MapPin, Search } from "lucide-react";
 import { appWellness, wellnessCategories, wellnessMapsTerms, type WellnessCategory } from "@/data/appWellness";
 import { googleMapsDirections } from "@/lib/appPickup";
+import { PlacePhoto } from "./PlacePhoto";
+import { PlacePhotoCredits } from "./PlacePhotoCredits";
 import { ExploreGuideNav } from "./ExploreGuideNav";
 import { NearbyPlaces } from "./NearbyPlaces";
 
@@ -17,9 +19,10 @@ export function WorkoutWellness() {
     <div className="ra-filters" role="group" aria-label="Filter workout and wellness">{wellnessCategories.map(value => <button key={value} type="button" aria-pressed={category === value} onClick={() => setCategory(value)}>{value}</button>)}</div>
     <NearbyPlaces key={category} search={wellnessMapsTerms[category]} label={category === "All" ? "workout & wellness places" : category.toLowerCase() + " places"}/>
     <div className="wr-activity-heading"><h2>{category === "All" ? "Your next good session." : `${category}, your way.`}</h2><p role="status">{venues.length} {venues.length === 1 ? "place" : "places"}</p></div>
-    <div className="wr-activity-grid">{venues.map(venue => <article className="wr-activity-card" key={venue.id}><div className="wr-activity-copy"><span className="wr-activity-mini-icon">{venue.categories.some(tag => tag === "Yoga" || tag === "Pilates") ? <Flower2 size={23}/> : venue.categories.some(tag => tag === "Recovery") ? <Waves size={23}/> : <Dumbbell size={23}/>}</span><p className="wr-activity-area"><MapPin size={13}/>{venue.neighbourhood}, {venue.area}</p><h3>{venue.name}</h3><ul className="wg-guide-tags">{venue.categories.map(tag => <li key={tag}>{tag}</li>)}</ul><p className="wr-activity-description">{venue.description}</p><p className="wg-venue-highlights">{venue.highlights.join(" · ")}</p><p className="wr-activity-tip"><Compass size={15}/><span>{venue.tip}</span></p><div className="wr-activity-links"><a href={googleMapsDirections(venue.query)} target="_blank" rel="noopener noreferrer">Get directions<ArrowUpRight size={14}/></a><a href={venue.website} target="_blank" rel="noopener noreferrer">Classes & details<ExternalLink size={14}/></a></div></div></article>)}</div>
+    <div className="wr-activity-grid">{venues.map(venue => <article className="wr-activity-card" key={venue.id}><PlacePhoto id={venue.id} label={venue.categories.join(" · ")}/><div className="wr-activity-copy"><p className="wr-activity-area"><MapPin size={13}/>{venue.neighbourhood}, {venue.area}</p><h3>{venue.name}</h3><ul className="wg-guide-tags">{venue.categories.map(tag => <li key={tag}>{tag}</li>)}</ul><p className="wr-activity-description">{venue.description}</p><p className="wg-venue-highlights">{venue.highlights.join(" · ")}</p><p className="wr-activity-tip"><Compass size={15}/><span>{venue.tip}</span></p><div className="wr-activity-links"><a href={googleMapsDirections(venue.query)} target="_blank" rel="noopener noreferrer">Get directions<ArrowUpRight size={14}/></a><a href={venue.website} target="_blank" rel="noopener noreferrer">Classes & details<ExternalLink size={14}/></a></div></div></article>)}</div>
     {!venues.length && <div className="ra-empty"><h2>Find a different kind of session.</h2><p>Try another activity or area.</p><button className="ra-button" onClick={() => {setCategory("All");setQuery("");}}>Show all places</button></div>}
     <p className="ra-footnote">Independent suggestions checked on 18 October 2026. These venues are not currently listed as Werigo partners. Book and pay directly with the venue; confirm schedules, access and pass inclusions. Werigo Ride Club benefits do not include classes or wellness treatments.</p>
+    <PlacePhotoCredits ids={venues.map(venue => venue.id)}/>
     <Link className="ra-button" href="/app/rent">Find a ride for your routine<ArrowRight size={18}/></Link>
   </section>;
 }
