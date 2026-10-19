@@ -5,7 +5,6 @@ import {
   ratesIdrPerDay,
   formatIdr,
   minRiderAge,
-  retailMonthlyIdr,
   type PricingTierId,
 } from "@/lib/pricing";
 import { formatUsdApprox, usdEstimateNote } from "@/lib/currency";
@@ -38,9 +37,7 @@ export async function RateTable({
   const age = minRiderAge[modelSlug];
   const noteId = `usd-note-${modelSlug}-${variant}`;
 
-  const isPackage = (tierId: PricingTierId) => modelSlug === "edpower" && tierId === "monthly";
-  const amount = (tierId: PricingTierId) => isPackage(tierId) ? retailMonthlyIdr.edpower : rates[tierId];
-  const unit = (tierId: PricingTierId) => isPackage(tierId) ? "/month" : "/day";
+  const amount = (tierId: PricingTierId) => rates[tierId];
   const usd = (tierId: PricingTierId) => formatUsdApprox(amount(tierId), fx?.rate);
 
   const primary: PricingTierId[] = ["daily", "weekly", "monthly"];
@@ -52,7 +49,7 @@ export async function RateTable({
       <thead>
         <tr className="text-[11px] uppercase tracking-wide text-ink-faint">
           <th scope="col" className="py-1 font-medium"><T>{"Duration"}</T>{" "}</th>
-          <th scope="col" className="py-1 text-right font-medium"><T>{modelSlug === "edpower" ? "Rate" : "Per day"}</T>{" "}</th>
+          <th scope="col" className="py-1 text-right font-medium"><T>{"Per day"}</T>{" "}</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-line">
@@ -65,13 +62,13 @@ export async function RateTable({
               </span>
             </th>
             <td className="tnum py-1.5 text-right text-sm font-semibold text-ink">
-              {formatIdr(amount(t.id))}<T>{unit(t.id)}</T>{" "}{usd(t.id) ? (
+              {formatIdr(amount(t.id))}<T>{"/day"}</T>{" "}{usd(t.id) ? (
                 <span
                   aria-describedby={noteId}
                   title={usdEstimateNote}
                   className="tnum block text-xs font-normal text-ink-faint"
                 >
-                  {usd(t.id)}<T>{unit(t.id)}</T>{" "}</span>
+                  {usd(t.id)}<T>{"/day"}</T>{" "}</span>
               ) : null}
             </td>
           </tr>
@@ -121,15 +118,15 @@ export async function RateTable({
                 <T>{t.label}</T>
               </p>
               <p className="tnum mt-1 text-[13px] font-bold leading-tight text-ink xl:text-sm">
-                {formatIdr(amount(id))}{isPackage(id) && <span className="block text-[10px] font-normal">/month</span>}
+                {formatIdr(amount(id))}
               </p>
               <p className="tnum text-[11px] text-ink-faint">
                 {usd(id) ? (
                   <span aria-describedby={noteId} title={usdEstimateNote}>
-                    {usd(id)}
+                    {usd(id)}<T>{"/day"}</T>
                   </span>
                 ) : (
-                  <T>{isPackage(id) ? "per calendar month" : "per day"}</T>
+                  <T>{"per day"}</T>
                 )}
               </p>
               {best ? (
@@ -151,6 +148,7 @@ export async function RateTable({
         </summary>
         <div className="mt-2 rounded-[10px] border border-line px-3 py-2">
           {fullTable}
+          <p className="mt-2 text-[11px] leading-relaxed text-ink-faint">Monthly rates apply per actual rental day. Displayed rates are rounded to whole rupiah.</p>
           {usdNote}
         </div>
       </details>

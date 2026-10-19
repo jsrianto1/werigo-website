@@ -10,7 +10,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
   return (
     <article className="vehicle-tile group">
       <Link href={`/fleet/${entry.modelSlug}`} aria-label={`View details for the ${entry.displayName}`} className="vehicle-photo">
-        <MediaImage id={`fleet-${entry.modelSlug}-main`} fallbackLabel={`${entry.displayName} product photo`} ratio="3/2" fit="contain" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" />
+        <MediaImage id={`fleet-${entry.modelSlug}-main`} fallbackLabel={`${entry.displayName} product photo`} ratio="3/2" fit="contain-bare" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" />
       </Link>
       <div className="vehicle-info">
         <h3 className="font-display text-xl text-ink"><Link href={`/fleet/${entry.modelSlug}`}>{entry.displayName}</Link></h3>

@@ -9,7 +9,7 @@ import { ArrowRight, Gauge, Route, SearchX, Zap } from "lucide-react";
 import { SearchWidget } from "@/components/booking/SearchWidget";
 import { BookingStepper } from "@/components/booking/BookingStepper";
 import { MediaImage } from "@/components/media/MediaImage";
-import { estimateRental, formatIdr, rentalRateDescription } from "@/lib/pricing";
+import { estimateRental, formatIdr } from "@/lib/pricing";
 import { formatUsdApprox } from "@/lib/currency";
 import { useUsdRate } from "@/lib/useUsdRate";
 import {
@@ -166,8 +166,8 @@ export function BookSearchResults() {
                     return est ? (
                       <p className="tnum mt-4 text-sm text-ink-soft">
                         <span className="font-semibold text-ink">
-                          {est.monthlyPackage ? rentalRateDescription(est) : <>{formatIdr(est.ratePerDayIdr)}<T>{"/day"}</T>{" "}</>}</span>
-                        {!est.monthlyPackage && formatUsdApprox(est.ratePerDayIdr, usdRate)
+                          <>{formatIdr(est.ratePerDayIdr)}<T>{"/day"}</T>{" "}</></span>
+                        {formatUsdApprox(est.ratePerDayIdr, usdRate)
                           ? ` (${formatUsdApprox(est.ratePerDayIdr, usdRate)})`
                           : ""}{" "}
                         · <T>{`${est.tier.label} rate`}</T>{" ("}<T>{est.tier.range}</T><T>{") · estimated"}</T>{" "}

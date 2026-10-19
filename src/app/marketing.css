@@ -42,7 +42,7 @@
 .section-intro h2 { max-width: 640px; }
 .section-intro > p { max-width: 400px; color: var(--ink-soft); font-size: .9375rem; line-height: 1.7; }
 .vehicle-tile { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--line); }
-.vehicle-photo { display: block; background: #f4f7f5; padding: 20px 8px; }
+.vehicle-photo { display: block; background: transparent; padding: 20px 8px; }
 .vehicle-photo > div { background: transparent; }
 .vehicle-photo img { transition: transform .25s ease; }
 .vehicle-photo:hover img { transform: scale(1.025); }
@@ -55,7 +55,7 @@
 .monthly-rate { display: grid; grid-template-columns: 82px 1fr auto; align-items: center; gap: 18px; padding: 24px 0; border-bottom: 1px solid var(--line-strong); font-size: .9375rem; }
 .monthly-rate:first-child { border-top: 1px solid var(--line-strong); }
 .monthly-rate:hover { color: var(--brand-primary); }
-.monthly-bike { width: 82px; height: 82px; object-fit: contain; background: white; border-radius: 8px; }
+.monthly-bike { width: 82px; height: 82px; object-fit: contain; background: transparent; border-radius: 8px; }
 .essentials-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: start; }
 .essentials-list { display: grid; gap: 20px; margin-top: 32px; }
 .essentials-list li { display: flex; gap: 14px; }

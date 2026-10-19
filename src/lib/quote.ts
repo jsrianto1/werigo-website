@@ -11,7 +11,7 @@ import { getArea } from "@/data/locations";
  * model, dates, quantity and pickup/return points.
  *
  * Rules (management-approved, see pricing.ts and locations.ts):
- *   base      = the shared rental estimate (daily or calendar-month package) × quantity
+ *   base      = the shared daily rental estimate × quantity
  *   area fee  = one delivery-and-collection fee from a verified road distance;
  *               monthly and <=5 km routes are waived. Area defaults are estimates
  *               only; the booking API blocks payment without required route proof.

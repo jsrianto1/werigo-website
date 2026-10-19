@@ -3,7 +3,7 @@ import { T, useLanguage } from "@/components/i18n/LanguageProvider";
 
 
 import { rentalExtras } from "@/data/extras";
-import { formatIdr, rentalRateDescription, type RentalQuoteEstimate } from "@/lib/pricing";
+import { formatIdr, type RentalQuoteEstimate } from "@/lib/pricing";
 import { formatUsdApprox } from "@/lib/currency";
 import { useUsdRate } from "@/lib/useUsdRate";
 import { formatUsdFee, usdToIdr, type AddOnBreakdown } from "@/lib/addons";
@@ -105,10 +105,10 @@ export function BookingSummary({
           <p className="flex items-baseline justify-between gap-3">
             <span className="text-ink-soft"><T>{`${estimate.tier.label} rate`}</T></span>
             <span className="tnum text-right font-semibold text-ink">
-              {estimate.monthlyPackage ? rentalRateDescription(estimate) : <>{formatIdr(estimate.ratePerDayIdr)}<T>{"/day"}</T>{" "}{formatUsdApprox(estimate.ratePerDayIdr, usdRate) ? (
+              <>{formatIdr(estimate.ratePerDayIdr)}<T>{"/day"}</T>{" "}{formatUsdApprox(estimate.ratePerDayIdr, usdRate) ? (
                 <span className="tnum block text-xs font-normal text-ink-faint">
                   {formatUsdApprox(estimate.ratePerDayIdr, usdRate)}<T>{"/day"}</T>{" "}</span>
-              ) : null}</>}
+              ) : null}</>
             </span>
           </p>
           <p className="flex items-baseline justify-between gap-3">
