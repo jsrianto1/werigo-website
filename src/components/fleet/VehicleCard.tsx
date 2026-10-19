@@ -14,7 +14,7 @@ export function VehicleCard({ entry }: { entry: WedisonEntry }) {
       </Link>
       <div className="vehicle-info">
         <h3 className="font-display text-xl text-ink"><Link href={`/fleet/${entry.modelSlug}`}>{entry.displayName}</Link></h3>
-        <p className="mt-2 min-h-10 text-sm leading-relaxed text-ink-soft"><T>{entry.bestFor}</T></p>
+        <p className="mt-2 min-h-12 text-sm leading-relaxed text-ink-soft"><T>{entry.bestFor}</T></p>
         <RateTable modelSlug={entry.modelSlug} className="mt-5" />
         <div className="mt-auto pt-5">
           <Link href={`/book?vehicle=${entry.id}`} className="vehicle-cta"><T>{"Check availability"}</T>{" "}<ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link>

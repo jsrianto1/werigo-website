@@ -117,7 +117,7 @@ export async function RateTable({
               <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
                 <T>{t.label}</T>
               </p>
-              <p className="tnum mt-1 text-[13px] font-bold leading-tight text-ink xl:text-sm">
+              <p className="tnum mt-1 whitespace-nowrap text-xs font-bold leading-tight text-ink 2xl:text-sm">
                 {formatIdr(amount(id))}
               </p>
               <p className="tnum text-[11px] text-ink-faint">
