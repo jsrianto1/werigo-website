@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "342d31f55c83473bdbeb24c544d3a7b768f3c014a68809e1dbd802ab4b694759",
+  "fingerprint": "7e468195dd51856b17e4a0c6045c3868647708da2d743d934c21afff6fb023ab",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11443,6 +11443,10 @@
       "hash": "3ed3c8294cb7414323291babcc8d6d31f1d0b0d1aff87a758d9b0fc1d278c551"
     },
     {
+      "file": "src/app/app/charging-feature.css",
+      "hash": "7b3b78c9d99e017c68fe287d4b9bd6bc14bb73438e3e702001469969279acfe7"
+    },
+    {
       "file": "src/app/app/explore/page.tsx",
       "hash": "2573f0cfb84d39bce9b157a9994ccefecb40b45a8f54acf11a30118efe78372b"
     },
@@ -11456,7 +11460,7 @@
     },
     {
       "file": "src/app/app/layout.tsx",
-      "hash": "a10892d1bd8498234054a8a66a245cf750a009ad01df68d0c2d27048d2a224db"
+      "hash": "c1d8bbadabf6089b8075b49b38bf8081cd8fb413e6b4cc10809e5d502bc004dd"
     },
     {
       "file": "src/app/app/login/page.tsx",
@@ -11504,7 +11508,7 @@
     },
     {
       "file": "src/app/app/services/page.tsx",
-      "hash": "3591e8c2c92430f9b9f8f19152aad64bf36bb2919257e30b1c73accf3793b365"
+      "hash": "3594c5b45257be538c78ce6202ab4ba627ae683fbae78aa578b8a4e762833826"
     },
     {
       "file": "src/app/app/shop/page.tsx",
@@ -11888,7 +11892,7 @@
     },
     {
       "file": "src/components/pwa/AppHome.tsx",
-      "hash": "8c3952f528abe31226b9f988ae9d26fc58ccd5e53ab4fa6174986df6bcf419ee"
+      "hash": "48c4ae8922117d2056dfae88c1e488344ee33783f2b73007da904d113cf560e4"
     },
     {
       "file": "src/components/pwa/AppShell.tsx",
@@ -11903,8 +11907,12 @@
       "hash": "509d8f30481a76d0f9f7b5b2878aaed43606b96598d2c0ca2eb5adcfa812ec53"
     },
     {
+      "file": "src/components/pwa/ChargeFeature.tsx",
+      "hash": "8ff3cd9df4167bf8a721b3747d1a13b9469a27b1dd5a70eea78833419738813a"
+    },
+    {
       "file": "src/components/pwa/ChargingDirectory.tsx",
-      "hash": "6ca55ae3fb14666ff38cd4a87e1db64063d4b3ddd9699374f23616aed93fd77a"
+      "hash": "54baa965206c6ad3dcfa611804f2262033c049b4b5201df984f6f9757c5b554e"
     },
     {
       "file": "src/components/pwa/DeliveryMap.tsx",
