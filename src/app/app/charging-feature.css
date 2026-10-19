@@ -1,0 +1,57 @@
+/* Charging follows rental in the app. All colours use WERIGO's existing themes. */
+.ride-app .wg-home-grid { align-items: start; }
+.ride-app .wg-home-side { grid-column: 2; grid-row: 1 / span 2; }
+.ride-app .wg-charge-feature { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 132px; align-items: center; gap: 18px; min-height: 254px; padding: 26px 22px 26px 27px; border: 1px solid var(--line); border-radius: 24px; background: var(--app-card); color: var(--ink); overflow: hidden; }
+.ride-app .wg-charge-feature:hover { border-color: var(--wg-brand); }
+.ride-app .wg-services-grid > .wg-charge-feature { display: grid; }
+.ride-app .wg-charge-feature-copy { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.ride-app .wg-charge-feature-copy > .wg-overline { font-size: 9px; letter-spacing: .1em; }
+.ride-app .wg-charge-feature strong { display: block; margin-top: 12px; font-size: clamp(26px, 3vw, 34px); line-height: 1.12; letter-spacing: -.045em; font-weight: 600; }
+.ride-app .wg-charge-feature-description { margin-top: 11px; font-size: 13px; line-height: 1.7; color: var(--ink-soft); }
+.ride-app .wg-charge-feature-cta { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 15px; font-size: 12px; font-weight: 550; color: var(--wg-brand); }
+.ride-app .wg-charge-feature-cta svg { flex-shrink: 0; }
+.ride-app .wg-charge-feature > img { width: 100%; height: 218px; object-fit: contain; }
+.ride-app .wg-services-guides { margin-top: 34px; }
+.ride-app .wg-services-guides .wg-section-heading { margin-bottom: 23px; }
+.ride-app .wg-charger-intro { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 27px; align-items: center; padding: 29px; margin: 27px 0 0; border: 1px solid var(--line); border-radius: 24px; background: var(--app-card); }
+.ride-app .wg-charger-intro h2 { font-size: 28px; line-height: 1.15; letter-spacing: -.04em; font-weight: 550; margin-top: 12px; }
+.ride-app .wg-charger-intro p:not(.wg-overline) { font-size: 13px; line-height: 1.8; color: var(--ink-soft); margin-top: 14px; }
+.ride-app .wg-charger-intro figure { margin: 0; min-width: 0; }
+.ride-app .wg-charger-intro img { width: 100%; height: 275px; object-fit: contain; }
+.ride-app .wg-charger-intro figcaption { font-size: 9px; line-height: 1.6; color: var(--ink-faint); text-align: center; margin-top: 10px; }
+.ride-app .wg-charging-how { padding: 0 20px; border: 1px solid var(--line); border-radius: 17px; background: var(--app-card); margin: 0 0 24px; }
+.ride-app .wg-charging-how summary { display: flex; align-items: center; justify-content: space-between; gap: 15px; list-style: none; cursor: pointer; min-height: 58px; font-size: 14px; font-weight: 550; }
+.ride-app .wg-charging-how summary::-webkit-details-marker { display: none; }
+.ride-app .wg-charging-how summary svg { flex-shrink: 0; color: var(--wg-brand); }
+.ride-app .wg-charging-how[open] summary svg { transform: rotate(180deg); }
+.ride-app .wg-charging-how ol { list-style: decimal; padding-left: 21px; margin: 5px 0 20px; }
+.ride-app .wg-charging-how li { padding-left: 5px; margin-top: 20px; }
+.ride-app .wg-charging-how li::marker { color: var(--wg-brand); font-size: 12px; }
+.ride-app .wg-charging-how strong { font-size: 13px; font-weight: 550; }
+.ride-app .wg-charging-how p { font-size: 12px; line-height: 1.8; color: var(--ink-soft); margin-top: 7px; }
+.ride-app .wg-charging-how > p { border-top: 1px solid var(--line); padding-top: 14px; margin-bottom: 18px; }
+.ride-app .wg-charging-how a { color: var(--wg-brand); text-decoration: underline; text-underline-offset: 3px; }
+.ride-app .wg-charging-how a:last-child { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; }
+.ride-app .wr-charging .wr-wedison-charge-app { background: var(--app-card); border-color: var(--line); }
+.ride-app .wr-charging .wr-wedison-charge-app a { background: var(--surface-sunken); color: var(--ink); border-color: var(--line); }
+.ride-app .wr-charging .wr-station-copy > a { color: var(--wg-brand); }
+@media (max-width: 760px) {
+  .ride-app .wg-home-side { grid-column: auto; grid-row: auto; }
+  .ride-app .wg-charge-feature { grid-template-columns: minmax(0, 1fr) 110px; gap: 12px; min-height: 227px; padding: 23px 18px 23px 22px; border-radius: 22px; }
+  .ride-app .wg-charge-feature > img { height: 198px; }
+  .ride-app .wg-charge-feature strong { font-size: 29px; }
+  .ride-app .wg-charge-feature-description { font-size: 12px; }
+  .ride-app .wg-charge-feature-cta { font-size: 11px; gap: 8px; }
+  .ride-app .wg-charger-intro { grid-template-columns: minmax(0, 1fr) 110px; padding: 22px 18px; gap: 16px; border-radius: 22px; }
+  .ride-app .wg-charger-intro h2 { font-size: 23px; }
+  .ride-app .wg-charger-intro p:not(.wg-overline) { font-size: 12px; line-height: 1.75; }
+  .ride-app .wg-charger-intro img { height: 225px; }
+}
+@media (max-width: 359px) {
+  .ride-app .wg-charge-feature { grid-template-columns: minmax(0, 1fr) 87px; gap: 10px; padding-inline: 17px; }
+  .ride-app .wg-charge-feature strong { font-size: 26px; }
+  .ride-app .wg-charge-feature-copy > .wg-overline { font-size: 8px; }
+  .ride-app .wg-charger-intro { grid-template-columns: minmax(0, 1fr); }
+  .ride-app .wg-charger-intro figure { grid-row: 1; }
+  .ride-app .wg-charger-intro img { height: 200px; }
+}

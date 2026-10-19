@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, BatteryCharging, Gift, MapPin, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Gift, MapPin, MessageCircle } from "lucide-react";
 import { AppBrand, WerigoWing } from "./AppBrand";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { ExploreGuideNav } from "./ExploreGuideNav";
+import { ChargeFeature } from "./ChargeFeature";
 
 export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?: string }) {
   return <section className="wg-home">
@@ -20,10 +21,10 @@ export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?:
         <span className="wg-bike-caption"><i/>EDPOWER · FULLY ELECTRIC</span>
         <button type="button" className="wg-rent-button" onClick={onRent}><span>Find my ride</span><ArrowRight size={22}/></button>
       </section>
+      <ChargeFeature/>
       <div className="wg-home-side">
         <div className="wg-section-heading"><div><p className="wg-overline">YOUR ISLAND GUIDE</p><h2>Make it a Bali day.</h2></div><Link href="/app/services" aria-label="Explore Werigo services"><ArrowUpRight size={22}/></Link></div>
         <ExploreGuideNav visual/>
-        <Link className="wg-guide-charge" href="/app/charge"><BatteryCharging size={25}/><span><strong>Charge & go</strong><small>Find Wedison charging locations</small></span><ArrowUpRight size={19}/></Link>
       </div>
     </div>
     <Link className="wg-club-ticket" href="/app/rewards"><span className="wg-ticket-icon"><Gift size={26}/></span><span><small>WERIGO RIDE CLUB</small><strong>Every ride takes you further.</strong><p>Earn points. Unlock your next level.</p></span><ArrowUpRight size={23}/><WerigoWing className="wg-ticket-wing"/></Link>

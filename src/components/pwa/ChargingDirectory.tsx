@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, BatteryCharging, MapPin, Navigation, Search } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, BatteryCharging, ChevronDown, MapPin, Navigation, Search } from "lucide-react";
 import charging from "@/data/appChargingStations.json";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -17,8 +18,12 @@ export function ChargingDirectory() {
 
   return <section className="wr-charging">
     <p className="wr-kicker">WEDISON SUPERCHARGE</p>
-    <h1 className="ra-page-title">Recharge.<br />Keep exploring.</h1>
+    <h1 className="ra-page-title">Charge &amp; go.</h1>
     <p className="ra-lead">Find a charging stop for your Bali day.</p>
+    <section className="wg-charger-intro" aria-labelledby="meet-supercharge">
+      <div><p className="wg-overline">MEET THE CHARGER</p><h2 id="meet-supercharge">This is Wedison SuperCharge.</h2><p>Wedison&apos;s fast-charging network for compatible electric motorcycles. Look for the Wedison name on the station.</p><p>Use the Wedison app to find a stop, check current pricing and manage your charging session.</p></div>
+      <figure><Image src="/media/supercharge/supercharge-unit.webp" alt="Wedison SuperCharge unit, showing the screen and charging connectors" width={1200} height={1600} sizes="(max-width:760px) 120px, 190px" priority/><figcaption>Official Wedison SuperCharge unit</figcaption></figure>
+    </section>
     <a className="wr-network-map" href={charging.networkMap} target="_blank" rel="noopener noreferrer">
       <span className="wr-network-icon"><BatteryCharging size={28} /></span>
       <span><strong>{charging.stations.length} listed locations</strong><small>Denpasar · Badung · Gianyar</small></span>
@@ -26,6 +31,11 @@ export function ChargingDirectory() {
       <span className="wr-network-map-label">Open network map</span>
     </a>
     <p className="wr-charge-compatibility">For <b>Athena, Victory &amp; EdPower</b>. Bees uses home charging.</p>
+    <details className="wg-charging-how">
+      <summary>How charging works<ChevronDown size={18} aria-hidden="true"/></summary>
+      <ol><li><strong>Find a supported stop.</strong><p>Check the location, access hours and availability in the Wedison app before you go.</p></li><li><strong>Connect &amp; start.</strong><p>Park and switch off your motorcycle. Follow the station and Wedison app instructions to connect the correct charger and start your session.</p></li><li><strong>Monitor &amp; finish.</strong><p>Follow progress in the Wedison app. End the session using the app or station instructions, then disconnect and return the connector.</p></li></ol>
+      <p>Need a hand? <a href={buildSupportWhatsAppUrl("Hi Werigo! Please help me use a compatible Wedison SuperCharge station.")}>Ask Werigo before starting.</a> <a href="https://wedison.co/en/super-charge/" target="_blank" rel="noopener noreferrer">Official charging guide<ArrowUpRight size={13} aria-hidden="true"/></a></p>
+    </details>
     <label className="ra-search"><Search size={19} aria-hidden="true" /><input aria-label="Search charging locations" value={query} onChange={event => setQuery(event.target.value)} placeholder="Location, area or address" /></label>
     <div className="ra-filters" role="group" aria-label="Charging area">{areas.map(value => <button key={value} type="button" aria-pressed={area === value} onClick={() => setArea(value)}>{value}</button>)}</div>
     <div className="wr-charging-list-heading"><h2>Charging spots</h2><p role="status">{stations.length} location{stations.length === 1 ? "" : "s"}</p></div>
