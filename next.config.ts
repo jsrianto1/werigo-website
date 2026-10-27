@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Hostinger reports host CPU count; keep static generation within its process limit.
+  experimental: { cpus: 1 },
   images: { formats: ["image/avif", "image/webp"] },
   async headers() {
     return [
