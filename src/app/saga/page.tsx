@@ -8,13 +8,13 @@ import { jsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "WERIGO SAGA, the Werigo Webtoon Set in Bali",
   description:
-    "Read WERIGO SAGA free in English or Indonesian. Follow Arya, a delivery rider in Bali, and a guild of electric riders through every chapter.",
+    "Read WERIGO SAGA free in English or Indonesian. Follow Arya, Ody and the Werigo team through island life, friendship and the mysteries of Bali.",
   alternates: { canonical: "/saga" },
   openGraph: {
     title: "WERIGO SAGA, the Werigo Webtoon Set in Bali",
     description: saga.tagline,
     url: `${site.baseUrl}/saga`,
-    images: [{ url: "/media/saga/covers/ep-3-og.jpg", width: 1200, height: 630, alt: "WERIGO SAGA key art" }],
+    images: [{ url: "/media/saga/reboot-20261027/series-og.jpg", width: 1200, height: 630, alt: "WERIGO SAGA key art" }],
   },
 };
 
@@ -41,7 +41,7 @@ export default function SagaPage() {
   };
   return (
     <>
-      <div className="bg-[#0b100f]"><Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "WERIGO SAGA", path: "/saga" }]} dark /></div>
+      <div className="bg-[#0b1421]"><Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "WERIGO SAGA", path: "/saga" }]} dark /></div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
       <SagaSeries />
     </>

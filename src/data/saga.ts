@@ -57,21 +57,21 @@ export interface SagaCharacter {
 
 export const saga = {
   title: "WERIGO SAGA",
-  tagline: "A Bali webtoon about the day the ride changed.",
-  taglineId: "Webtoon dari Bali tentang hari ketika perjalanan berubah.",
+  tagline: "Some roads lead home. Others lead somewhere stranger.",
+  taglineId: "Ada jalan yang membawa pulang. Ada yang menyimpan cerita lain.",
   synopsis: [
-    "Arya delivers food across Denpasar on a petrol bike that barely starts. The night he switches to an olive Wedison Athena, a System only he can see starts handing him quests.",
-    "It turns out he is not the only one. There is a guild of riders, a storm that shuts the island's petrol stations, and a best friend who wants in. Every bike you see in the story is a real Wedison you can rent from us.",
+    "Arya delivers across Bali. Ody and the Werigo team build a real electric mobility business, one customer and one partnership at a time.",
+    "Beneath the ordinary island, promises leave strange traces. Friendship, humour and local mysteries follow the riders home. The story is fiction; the Wedison motorcycles are real.",
   ],
   synopsisId: [
-    "Arya mengantar makanan keliling Denpasar dengan motor bensin yang susah dinyalakan. Malam ketika dia beralih ke Wedison Athena hijau zaitun, sebuah System yang hanya bisa dia lihat mulai memberinya quest.",
-    "Ternyata dia bukan satu-satunya. Ada guild para pengendara, badai yang menutup SPBU di seluruh pulau, dan sahabat yang ingin ikut. Setiap motor di cerita ini adalah Wedison asli yang bisa kamu sewa di Werigo.",
+    "Arya mengantar pesanan keliling Bali. Ody dan tim Werigo membangun usaha mobilitas listrik, dari satu pelanggan dan satu kemitraan ke yang berikutnya.",
+    "Di balik keseharian pulau ini, janji meninggalkan jejak yang ganjil. Persahabatan, humor, dan misteri lokal ikut bersama para pengendara. Ceritanya fiksi; motor Wedison-nya nyata.",
   ],
   instagram: "https://www.instagram.com/werigo.official/",
   disclaimer:
-    "WERIGO SAGA is fiction. The System, the auras and the flood scenes are made up. The bikes, the charging and the rental service are real. Always wear a helmet, ride within your licence and never ride through floodwater.",
+    "WERIGO SAGA is fiction. Its System, magical reflections and Bale Sore guesthouse are invented. The bikes, charging equipment and rental service are real. Always wear a helmet, ride within your licence and never ride through floodwater.",
   disclaimerId:
-    "WERIGO SAGA adalah fiksi. System, aura dan adegan banjir hanyalah karangan. Motor, cara mengisi daya dan layanan sewanya nyata. Selalu pakai helm, berkendara sesuai SIM kamu dan jangan pernah menerobos banjir.",
+    "WERIGO SAGA adalah fiksi. System, pantulan magis, dan penginapan Bale Sore adalah rekaan. Motor, peralatan pengisian, dan layanan sewa nyata. Selalu pakai helm, berkendara sesuai SIM, dan jangan menerobos banjir.",
 };
 
 const allEpisodes: SagaEpisode[] = [
@@ -426,39 +426,37 @@ const allEpisodes: SagaEpisode[] = [
     key: "episode-21",
     title: "The Customer Who Never Came",
     titleId: "Pelanggan yang Tak Pernah Datang",
-    logline: "A fake customer scouts the Werigo network for a Veyr invasion. New combat profiles cannot replace experience; Ody must buy time for an evacuation he cannot finish alone.",
-    loglineId: "Pelanggan palsu mengincar jaringan Werigo untuk invasi Veyr. Profil tempur baru bukan pengalaman bertarung; Ody harus mengulur waktu untuk evakuasi yang tidak bisa ia selesaikan sendirian.",
-    featuredModels: [
-      "edpower",
-      "athena",
-      "victory",
-      "bees"
-    ],
-    commentPrompt: {
-      en: "Can Ody get the five remaining civilians out before the invaders capture him?",
-      id: "Bisakah Ody membawa lima warga yang tersisa keluar sebelum ia ditangkap penyerang?"
-    },
-    published: true,
-    assetVersion: "story-v2"
-  },
-  {
-    number: 22,
-    slug: "chapter-22",
-    key: "episode-22",
-    title: "Forty-Five Seconds",
-    titleId: "Empat Puluh Lima Detik",
-    logline: "Three wary elf survivors help Werigo escape in forty-five seconds. A coordinated scout fight and a last-second interception save all nine civilians, but Ody still carries the Veyr tracking seal.",
-    loglineId: "Tiga elf penyintas yang masih dicurigai membantu Werigo lolos dalam empat puluh lima detik. Pertarungan terkoordinasi dan penyergapan bilah di detik terakhir menyelamatkan sembilan warga, tetapi segel pelacak Veyr masih melekat pada Ody.",
+    logline: "An introduction from Pak Chan brings Atum into the team. Then tomorrow’s testimonial leads Werigo to a real guest at Bale Sore, where one room promises a holiday that never ends.",
+    loglineId: "Pak Chan memperkenalkan Pak Atum ke tim. Lalu testimoni dari besok membawa Werigo pada tamu sungguhan di Bale Sore, tempat satu kamar menjanjikan liburan yang tak pernah berakhir.",
     featuredModels: [
       "edpower",
       "athena"
     ],
     commentPrompt: {
-      en: "Can two inexperienced humans and three wounded elves break a command relay before the nine civilians are tracked?",
-      id: "Bisakah dua manusia yang belum berpengalaman dan tiga elf yang terluka memutus relay sebelum sembilan warga terlacak?"
+      en: "Would you trust a perfect review if its writer had never been there?",
+      id: "Lo percaya ulasan sempurna kalau penulisnya belum pernah datang?"
     },
     published: true,
-    assetVersion: "story-v2"
+    assetVersion: "bali-v3"
+  },
+  {
+    number: 22,
+    slug: "chapter-22",
+    key: "episode-22",
+    title: "The Room Without Morning",
+    titleId: "Kamar Tanpa Pagi",
+    logline: "A borrowed voice and a promise of perfect rest trap Ody, Arya and Maya in a copy of Bale Sore. Their escape depends on people outside. Two weeks later, a new Bali leadership team arrives.",
+    loglineId: "Suara curian dan janji istirahat sempurna mengurung Ody, Arya, dan Maya dalam salinan Bale Sore. Jalan keluarnya bergantung pada orang-orang di luar. Dua minggu kemudian, tim pimpinan Bali yang baru datang.",
+    featuredModels: [
+      "edpower",
+      "athena"
+    ],
+    commentPrompt: {
+      en: "What makes a place worth returning to: perfection, or people who show up?",
+      id: "Apa yang bikin lo mau kembali: tempat sempurna, atau orang yang selalu hadir?"
+    },
+    published: true,
+    assetVersion: "bali-v3"
   },
 ];
 
@@ -560,6 +558,39 @@ export const characters: SagaCharacter[] = [
     model: null,
     modelNote: "Still on petrol",
     modelNoteId: "Masih pakai bensin",
+  },
+  {
+    "id": "atum",
+    "name": "Pak Atum",
+    "role": "Head of Sales & Marketing National",
+    "roleId": "Head of Sales & Marketing National",
+    "about": "Calm and in his late thirties. Recruited by Pak Chan, he starts by listening to customers before changing the plan.",
+    "aboutId": "Tenang, di akhir usia tiga puluhan. Direkrut Pak Chan, ia mulai dengan mendengar pelanggan sebelum mengubah rencana.",
+    "model": null,
+    "modelNote": "National sales and marketing",
+    "modelNoteId": "Sales dan marketing nasional"
+  },
+  {
+    "id": "raeh",
+    "name": "Ibu Raeh",
+    "role": "Branch Manager",
+    "roleId": "Branch Manager",
+    "about": "Thirty-eight. She joins the Bali team two weeks after Atum and starts with the guest handover, not the office furniture.",
+    "aboutId": "38 tahun. Bergabung dua minggu setelah Pak Atum dan mulai dari serah terima tamu, bukan menata ulang meja.",
+    "model": null,
+    "modelNote": "Bali branch",
+    "modelNoteId": "Cabang Bali"
+  },
+  {
+    "id": "ira",
+    "name": "Pak Ira",
+    "role": "Sales Manager",
+    "roleId": "Sales Manager",
+    "about": "The new Sales Manager in the position Yoko left. He starts with unanswered enquiries and promises the team can keep.",
+    "aboutId": "Sales Manager baru yang mengisi posisi Yoko. Ia mulai dari pertanyaan yang belum dijawab dan janji yang sanggup dilayani.",
+    "model": null,
+    "modelNote": "Bali sales team",
+    "modelNoteId": "Tim sales Bali"
   },
 ];
 
