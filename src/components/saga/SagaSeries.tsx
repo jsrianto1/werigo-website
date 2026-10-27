@@ -27,7 +27,7 @@ export function SagaSeries() {
   const filtered = episodes.filter(e => e.number >= arcs[arc].min && e.number <= arcs[arc].max && (!q || `${e.number} ${e.title} ${e.titleId} ${e.logline} ${e.loglineId}`.toLocaleLowerCase().includes(q)));
   const shown = order === "desc" ? [...filtered].reverse() : filtered;
   const recent = episodes.filter(e => e.number >= 21);
-  const castPhoto = (key: string) => ["ody", "arya", "atum", "raeh", "ira"].includes(key) ? `/media/saga/reboot-20261027/${key}-portrait.webp` : `/media/saga/characters/${key}.webp`;
+  const castPhoto = (key: string) => ["ody", "arya", "atum", "raeh", "ira"].includes(key) ? `/media/saga/reboot-20261027/${key}-portrait${["ody","arya"].includes(key)?"-v2":""}.webp` : `/media/saga/characters/${key}.webp`;
   return <div className={styles.series}>
     <section className={styles.hero} aria-labelledby="saga-title">
       <div className={styles.heroArt} aria-hidden="true"><Image src="/media/saga/reboot-20261027/keyart.webp" alt="" fill priority sizes="(min-width: 900px) 70vw, 100vw" /></div>
