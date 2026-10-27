@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "cf58fee83f802b433644fcc81db591e8ba85e8fd0bd119795aa002285fdd7b71",
+  "fingerprint": "d4b20e2b36c1de1d7366105398ddba00d117b3e9031788062fab11f474cc64b5",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -11647,8 +11647,8 @@
       "hash": "355b89d43e95edd50a58dad2029689c56027ef19cf9f2f03c9d3605e87ee182e"
     },
     {
-      "file": "public/media/saga/reboot-20261027/arya-portrait.webp",
-      "hash": "ececa14cbf30bf8d1267e7a30f2ea2df71b5338b4205ea2ea73f566ac04caa31"
+      "file": "public/media/saga/reboot-20261027/arya-portrait-v2.webp",
+      "hash": "2582cab3456dbe6286fcd79defc43543458a74e17cdb76158ea54fab7268b1dc"
     },
     {
       "file": "public/media/saga/reboot-20261027/atum-portrait.webp",
@@ -11663,8 +11663,8 @@
       "hash": "4ea2e13db5918859818f64311955c3d8857425200ba70d1fc1495e3dc535b892"
     },
     {
-      "file": "public/media/saga/reboot-20261027/ody-portrait.webp",
-      "hash": "f59999322dc2ff5f4f0cc15112c6cefdcbb6fa809a854fb2b5c4bb6e21879122"
+      "file": "public/media/saga/reboot-20261027/ody-portrait-v2.webp",
+      "hash": "0a6ad7c283eb6cdf3ef363cc1726ab18147d50f5074a4508451d741f09f3ff5f"
     },
     {
       "file": "public/media/saga/reboot-20261027/raeh-portrait.webp",
@@ -12676,7 +12676,7 @@
     },
     {
       "file": "src/components/saga/SagaSeries.tsx",
-      "hash": "777ee0f93aba93bbc525dc3398aa4907bd71b9309ef1b457eb1461b4d171f8e8"
+      "hash": "679a29b1183aca6561c885e44d77871f729c459cf50633cb3538faa21043bc5f"
     },
     {
       "file": "src/components/saga/SagaSocial.tsx",
@@ -13150,7 +13150,7 @@
     "/how-it-works": "2026-10-19T10:17:25+08:00",
     "/monthly-scooter-rental-bali": "2026-10-19T10:17:25+08:00",
     "/partners": "2026-10-19T10:17:25+08:00",
-    "/saga": "2026-10-28T00:34:55+08:00",
+    "/saga": "2026-10-28T00:50:30+08:00",
     "/saga/chapter-1": "2026-10-28T00:34:55+08:00",
     "/saga/chapter-10": "2026-10-28T00:34:55+08:00",
     "/saga/chapter-11": "2026-10-28T00:34:55+08:00",
