@@ -12605,5 +12605,596 @@
    "text": "The Unfinished Map",
    "lines": []
   }
+ ],
+ "23": [
+  {
+   "label": "Title card",
+   "text": "WERIGO SAGA CHAPTER 23: The Unfinished Map",
+   "lines": []
+  },
+  {
+   "label": "PANEL 1",
+   "text": "The next morning. Werigo’s office. The map Ratih found behind the mirror is open on the table.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Dy… the map is drawing another road."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 2",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "I see it. Keep your hands clear."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 3",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU RAEH",
+     "text": "Find out where it leads. I’ll keep the branch running."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 4",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Ratih knows the warung on this map. Its owner is still in Munduk."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 5",
+   "text": "EdPower and Athena. The bikes go north with the operations vehicle; the local survey starts in Munduk.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 6",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY · NARRATION",
+     "text": "A real route first. A travel offer later."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 7",
+   "text": "Munduk, the following morning. Cool air, coffee and clove gardens.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 8",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "I drove the support van. I’m claiming the first coffee."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 9",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "Ratih called. I’m Wening. Come in before the mist drinks your coffee."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 10",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "We brought her map. And a friend who takes coffee very seriously."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 11",
+   "text": "A small veranda. Warm cups. A valley that needs no filter.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 12",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "This one tastes like peace. Mine usually tastes like overdue bills."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 13",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "My father drew this. That bridge has been gone for years."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 14",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Then why is the line still moving?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 15",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "He wanted one perfect route. He kept redrawing it after the bridge fell."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 16",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "We’ll look from the garden path. The bikes stay here."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 17",
+   "text": "The bikes are parked at the warung. Komang stays with the vehicle. Wening leads the walk.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 18",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "The map stays folded until we stop."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 19",
+   "text": "Twenty minutes up the garden path. The old bridge lies beyond the safe stone landing.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 20",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "Stop here. No one crosses."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 21",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 22",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Dy. Behind us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 23",
+   "text": "The path back folds upward like a sheet of paper.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 24",
+   "text": "Ody sets the open map on a stone block beside them.",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Nobody moves alone. Stay on the stone."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 25",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 26",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "That is not my father."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 27",
+   "text": "",
+   "lines": [
+    {
+     "who": "THE MAP",
+     "text": "NO MORE WRONG TURNS."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 28",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "It’s drawing the garden out of existence."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 29",
+   "text": "Rain hits the stone. One golden line dissolves where it touches a puddle.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 30",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "The ink. Water takes it off."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 31",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Try a corner. Just a corner."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 32",
+   "text": "A handspan-sized slit opens in the wall, then starts drawing itself shut. A wet corner is not enough.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 33",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "The garden channel. There’s running water under that stone lip."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 34",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Arya takes the map to the water. I’ll keep its attention here."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 35",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 36",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "DOWN!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 37",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 38",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "It won’t let the map reach the water."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 39",
+   "text": "",
+   "lines": [
+    {
+     "who": "THE MAP",
+     "text": "EVERYONE ARRIVES. NOTHING IS LEFT BEHIND."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 40",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "You’re erasing the places people came for!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 41",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "He drew this so people could find us."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 42",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "Not so the road could keep them. Wash it off."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 43",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Now, Arya!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 44",
+   "text": "The map leaves the stone block in Arya’s hands. Ody stays between the paper and the channel.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 45",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 46",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Almost there!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 47",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 48",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Arya—NOW!"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 49",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 50",
+   "text": "The whole map goes into the running water. The golden route breaks.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 51",
+   "text": "",
+   "lines": []
+  },
+  {
+   "label": "PANEL 52",
+   "text": "Trees regain their depth. The stone path leads back to the warung.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 53",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Everyone still here?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 54",
+   "text": "",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Next time we take the road that stays on the ground."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 55",
+   "text": "",
+   "lines": [
+    {
+     "who": "KOMANG",
+     "text": "I heard thunder. Then half the valley turned into stationery."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 56",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "And you still brought coffee?"
+    },
+    {
+     "who": "KOMANG",
+     "text": "Panic is worse on an empty stomach."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 57",
+   "text": "Back at the warung, the map dries under a cloth. Its drawing is gone.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 58",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "The paper can go blank. The place is still here."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 59",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "If you bring guests, let them meet the growers. We’re more than a photo stop."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 60",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY",
+     "text": "Coffee, a guided garden walk, time to sit. Start with two guests."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 61",
+   "text": "Munduk is real. Its coffee and clove landscapes are part of northern Bali. Wening’s warung and the magical path are fictional.",
+   "lines": []
+  },
+  {
+   "label": "PANEL 62",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY · NARRATION",
+     "text": "For a lake or forest walk around Tamblingan, go with a local guide. The footpaths are for walking."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 63",
+   "text": "",
+   "lines": [
+    {
+     "who": "ODY · PHONE",
+     "text": "Two guests first. Count the guide, coffee and transport costs before calling it profit."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 64",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU RAEH · PHONE",
+     "text": "Ira can offer the trial after you finish testing the route. No rush to promise a package."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 65",
+   "text": "",
+   "lines": [
+    {
+     "who": "PAK IRA",
+     "text": "I’ll talk to two guests who actually want a slow day. No mass promo yet."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 66",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU RAEH",
+     "text": "Good. Let’s learn from the first trip before we add another."
+    }
+   ]
+  },
+  {
+   "label": "PANEL 67",
+   "text": "",
+   "lines": [
+    {
+     "who": "IBU WENING",
+     "text": "My father, with the woman who used to help him keep the paths. Do you know her?"
+    }
+   ]
+  },
+  {
+   "label": "PANEL 68",
+   "text": "A photograph dated 1963. Long before Werigo.",
+   "lines": [
+    {
+     "who": "ARYA",
+     "text": "Dy… the woman beside her father. That’s my grandmother."
+    }
+   ]
+  },
+  {
+   "label": "Next chapter",
+   "text": "Those Who Kept the Roads",
+   "lines": []
+  }
  ]
 }

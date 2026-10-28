@@ -26,7 +26,7 @@ export function SagaSeries() {
   const q = query.trim().toLocaleLowerCase();
   const filtered = episodes.filter(e => e.number >= arcs[arc].min && e.number <= arcs[arc].max && (!q || `${e.number} ${e.title} ${e.titleId} ${e.logline} ${e.loglineId}`.toLocaleLowerCase().includes(q)));
   const shown = order === "desc" ? [...filtered].reverse() : filtered;
-  const recent = episodes.filter(e => e.number >= 21);
+  const recent = episodes.slice(-2);
   const castPhoto = (key: string) => ["ody", "arya", "atum", "raeh", "ira"].includes(key) ? `/media/saga/reboot-20261027/${key}-portrait${["ody","arya"].includes(key)?"-v2":""}.webp` : `/media/saga/characters/${key}.webp`;
   return <div className={styles.series}>
     <section className={styles.hero} aria-labelledby="saga-title">
@@ -45,7 +45,7 @@ export function SagaSeries() {
 
     <div className={styles.inner}>
       <section className={styles.latest} aria-labelledby="latest-heading">
-        <div className={styles.sectionHead}><div><p className={styles.kicker}>{id ? "KISAH TERBARU" : "THE LATEST STORY"}</p><h2 id="latest-heading">{id ? "Ada yang salah\ndi Bale Sore.".split("\n").map((s,i)=><span key={s}>{i>0&&<br />}{s}</span>) : <>Something is wrong<br />at Bale Sore.</>}</h2></div><p>{id ? "Sebuah video dari besok. Tamu yang belum pernah memberi ulasan. Dan satu kamar yang tak mau melepas malam." : "A video from tomorrow. A guest who never wrote the review. And a room that refuses to let the night end."}</p></div>
+        <div className={styles.sectionHead}><div><p className={styles.kicker}>{id ? "KISAH TERBARU" : "THE LATEST STORY"}</p><h2 id="latest-heading">{id ? "Peta terbuka.\nJalan pulang menghilang.".split("\n").map((s,i)=><span key={s}>{i>0&&<br />}{s}</span>) : <>The map opens.<br />The way home vanishes.</>}</h2></div><p>{id ? "Rahasia dari Bale Sore membawa Ody dan Arya ke Munduk. Di antara kebun kopi dan kabut, sebuah peta mulai melipat jalan yang nyata." : "A secret from Bale Sore leads Ody and Arya to Munduk. Between coffee gardens and mountain mist, a map begins folding the real road."}</p></div>
         <div className={styles.latestGrid}>{recent.map(e=><Link key={e.slug} href={`/saga/${e.slug}?lang=${lang}`} className={styles.feature}>
           <div className={styles.featureArt}><Image src={coverSrc(e)} alt={title(e)} fill sizes="(min-width: 900px) 45vw, 92vw" /><span className={styles.featureNumber}>CH.{e.number}</span></div>
           <div className={styles.featureCopy}><p className={styles.kicker}>{getPages(e).length} {t.pages} · ID / EN</p><h3>{title(e)}</h3><p>{id?e.loglineId:e.logline}</p><span className={styles.readLink}>{t.readEp(e.number)}<ArrowRight size={19}/></span></div>

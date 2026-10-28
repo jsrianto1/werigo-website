@@ -458,6 +458,25 @@ const allEpisodes: SagaEpisode[] = [
     published: true,
     assetVersion: "bali-v3"
   },
+  {
+    number: 23,
+    slug: "chapter-23",
+    key: "episode-23",
+    title: "The Unfinished Map",
+    titleId: "Peta yang Belum Selesai",
+    logline: "A map found at Bale Sore leads Ody and Arya to a coffee warung in Munduk. When its golden route starts folding the real footpath, a local woman must choose what to keep of her father’s work.",
+    loglineId: "Peta dari Bale Sore membawa Ody dan Arya ke warung kopi di Munduk. Saat garis emasnya mulai melipat jalan setapak, seorang warga harus memilih apa yang ingin ia pertahankan dari peninggalan ayahnya.",
+    featuredModels: [
+      "edpower",
+      "athena"
+    ],
+    commentPrompt: {
+      en: "Would you follow the quickest route if it erased everything along the way?",
+      id: "Masih pilih jalan tercepat kalau semua yang dilewati ikut hilang?"
+    },
+    published: true,
+    assetVersion: "munduk-v1"
+  },
 ];
 
 export const characters: SagaCharacter[] = [
