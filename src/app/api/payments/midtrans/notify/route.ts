@@ -7,8 +7,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Midtrans HTTP notification (webhook). Set in the Midtrans dashboard
- * as `${NEXT_PUBLIC_SITE_URL}/api/payments/midtrans/notify`.
+ * Midtrans HTTP notification (webhook). Each Snap transaction points
+ * here via X-Override-Notification (see createSnapTransaction), as
+ * `${NEXT_PUBLIC_SITE_URL}/api/payments/midtrans/notify`; the dashboard
+ * notification URL belongs to another app on the same account.
  *
  * Trust model: the signature must match AND the status is re-fetched
  * from Midtrans before anything changes. Midtrans retries on non-2xx,

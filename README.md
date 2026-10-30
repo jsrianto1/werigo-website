@@ -92,9 +92,11 @@ only temporary form drafts.
   `WRG-…-2`).
 - `POST /api/payments/midtrans/notify` is the webhook. A notification
   is applied only when its `signature_key` verifies **and** the Get
-  Status API confirms it; replays never downgrade a paid booking. Set
-  it in the Midtrans dashboard as
-  `https://werigo.co/api/payments/midtrans/notify`.
+  Status API confirms it; replays never downgrade a paid booking. The
+  URL (`https://werigo.co/api/payments/midtrans/notify`) is sent with
+  every Snap transaction as `X-Override-Notification`, so the Midtrans
+  dashboard notification URL is left to the other app sharing the
+  account. Do not change it there.
 - **Rider documents** are mandatory before booking: identity document
   (passport or Indonesian KTP number) and driving licence number, entered
   in the registration form (email sign-up) or on `/account/complete`
