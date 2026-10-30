@@ -13,7 +13,11 @@ export interface ServiceArea {
   vibe: string;
   /** Longer intro for the area detail page */
   description: string;
-  /** Base fee for both delivery and collection; route surcharge confirmed before payment. */
+  /**
+   * Delivery & collection fee in IDR: one fee per booking covering
+   * both legs ("antar jemput"), charged online at checkout. The app
+   * replaces it with a road-distance fee when a map pin is confirmed.
+   */
   deliveryFee: number;
   /** Typical delivery window shown to customers */
   deliveryWindow: string;
@@ -128,10 +132,16 @@ export function getArea(slug: string): ServiceArea | undefined {
 
 /**
  * Approved wording for the delivery-fee waiver, used verbatim across
- * surfaces. Distance uses the verified road route from the showroom.
+ * surfaces. The waiver is distance-based (5 km radius from the
+ * showroom), so it is always confirmed by the team on WhatsApp.
  */
 export const deliveryFeeWaiverNote =
-  "Free on monthly rentals and for road routes up to 5 km from the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar. A confirmed map pin is needed to calculate the route.";
+  "Free on rentals of one month or longer. Also free within 5 km of the Wedison showroom on Jl. Gatot Subroto Tengah, Denpasar, confirmed with your quote on WhatsApp.";
+
+/** Website delivery pricing: the service-area fee, paid online with the rental. */
+export const deliveryFeeNote =
+  "Delivery and collection cost one fee per booking, covering both the drop-off and the pick-up: Rp100,000 in tourist service areas and Rp75,000 in Denpasar. The fee is shown at checkout and paid online with your rental. " +
+  deliveryFeeWaiverNote;
 
 /* ================= Airport pickup points ================= */
 
@@ -179,9 +189,5 @@ export function getPickupPoint(
   return area ? { slug: area.slug, name: area.name, isAirport: false } : undefined;
 }
 
+/** App (PWA) delivery pricing: road distance from a confirmed map pin. */
 export const deliveryPricingNote = deliveryTariff;
-
-/** Missing route proof or different return locations require a manual quote. */
-export function needsDeliveryConfirmation(pickup: string, ret: string, monthly: boolean, distanceMeters?: number): boolean {
-  return !monthly && (pickup !== "showroom" || ret !== "showroom") && (pickup !== ret || !Number.isFinite(distanceMeters) || distanceMeters! < 0);
-}

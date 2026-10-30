@@ -1,4 +1,3 @@
-import { deliveryPricingNote } from "@/data/locations";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
@@ -6,8 +5,8 @@ import { MapPin, ArrowRight, Truck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { RidingMotorcycle } from "@/components/ui/RidingMotorcycle";
 import { AreaImage } from "@/components/areas/AreaImage";
-import { serviceAreas } from "@/data/locations";
-
+import { serviceAreas, deliveryFeeWaiverNote } from "@/data/locations";
+import { formatIdr } from "@/lib/pricing";
 
 export const metadata = pageMetadata("Bali Scooter Rental with Hotel & Villa Delivery", "Electric scooter delivery in Canggu, Seminyak, Ubud, Uluwatu, Kuta, Sanur, Jimbaran and Denpasar. Check rental rates and arrange your handover.", "/delivery-areas");
 
@@ -42,7 +41,7 @@ export default function DeliveryAreasPage() {
                   </span>
                 ) : (
                   <span className="rounded-full bg-sunken px-2.5 py-0.5 text-xs font-medium text-ink-soft">
-                    Fee calculated by road distance
+                    {formatIdr(area.deliveryFee)} delivery & collection
                   </span>
                 )}
               </div>
@@ -69,7 +68,8 @@ export default function DeliveryAreasPage() {
         ))}
       </ul>
       <p className="mt-10 rounded-[14px] border border-line bg-primary-faint p-5 text-sm leading-relaxed text-ink-soft">
-        {deliveryPricingNote} Staying somewhere else? We
+        One fee covers both delivery and collection, once per
+        booking. {deliveryFeeWaiverNote} Staying somewhere else? We
         regularly arrange custom deliveries beyond these zones.{" "}
         <Link
           href="/contact"

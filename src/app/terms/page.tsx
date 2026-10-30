@@ -1,5 +1,5 @@
 import { riderLicenceNotice, riderFinesNotice } from "@/data/riderPolicy";
-import { deliveryPricingNote } from "@/data/locations";
+import { deliveryFeeNote } from "@/data/locations";
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/Section";
 
@@ -47,7 +47,7 @@ export default function TermsPage() {
               both fees apply for US$2.00 in total.
             </li>
             <li>
-              {deliveryPricingNote}
+              {deliveryFeeNote}
             </li>
             <li>{riderLicenceNotice}</li>
             <li>{riderFinesNotice}</li>

@@ -10,7 +10,8 @@ import { AreaImage } from "@/components/areas/AreaImage";
 import { getAreaMedia } from "@/data/areaMedia";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { ButtonLink } from "@/components/ui/Button";
-import { serviceAreas, getArea, deliveryPricingNote } from "@/data/locations";
+import { serviceAreas, getArea, deliveryFeeWaiverNote } from "@/data/locations";
+import { formatIdr } from "@/lib/pricing";
 import { getPrimaryCards } from "@/data/vehicles";
 
 interface Props {
@@ -108,7 +109,11 @@ export default async function AreaPage({ params }: Props) {
                 <div className="flex justify-between gap-3">
                   <dt className="text-ink-soft">Delivery & collection</dt>
                   <dd className="font-semibold text-ink">
-                    <span>By road distance</span>
+                    {area.deliveryFee === 0 ? (
+                      <span className="text-ok">Free</span>
+                    ) : (
+                      <span className="tnum">{formatIdr(area.deliveryFee)}</span>
+                    )}
                   </dd>
                 </div>
                 <div className="flex justify-between gap-3">
@@ -120,7 +125,7 @@ export default async function AreaPage({ params }: Props) {
               </dl>
               <p className="mt-3 border-t border-line pt-3 text-xs leading-relaxed text-ink-faint">
                 One fee per booking, covering both delivery and
-                collection. {deliveryPricingNote}
+                collection. {deliveryFeeWaiverNote}
               </p>
             </div>
             <div className="rounded-[14px] border border-line bg-card p-5">
