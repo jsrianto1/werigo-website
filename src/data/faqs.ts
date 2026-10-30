@@ -1,4 +1,4 @@
-import { deliveryPricingNote } from "./locations.ts";
+import { deliveryFeeNote } from "./locations.ts";
 /**
  * Help Center content — original Werigo answers.
  * Answers directing customers to WhatsApp are interim wording for
@@ -61,7 +61,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Can I change the delivery location after booking?",
         answer:
-          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. Delivery fees depend on the service area and route distance; our team confirms any change before payment.",
+          "Yes. Let us know on WhatsApp at least a few hours before your delivery window and we will update it. Delivery fees depend on the service area; if the new area has a different fee, our team confirms the difference with you.",
       },
     ],
   },
@@ -176,12 +176,12 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Is delivery free?",
         answer:
-          deliveryPricingNote,
+          deliveryFeeNote,
       },
       {
         question: "Can I return the motorcycle in a different area?",
         answer:
-          "Yes. Choose a different return location during booking. Our team confirms both addresses and a delivery-and-collection quote on WhatsApp before payment. The automatic road-distance fee applies when delivery and collection use the same location.",
+          "Yes. Choose a different return location during booking. One delivery and collection fee per booking covers both legs, even when they are in different areas; the higher of the two area fees applies.",
       },
       {
         question: "What battery level should the motorcycle have at return?",

@@ -13,7 +13,6 @@ import { openPayment, paymentDeadline } from "@/lib/payments";
 import { latestPayment } from "@/lib/paymentStore";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
 import { pickDiscount, resolveDiscounts } from "@/lib/discounts";
-import { needsDeliveryConfirmation } from "@/data/locations";
 import { hasIdentity } from "@/lib/identity";
 
 export const runtime = "nodejs";
@@ -139,7 +138,8 @@ export async function POST(req: NextRequest) {
 
   // The server prices the booking from approved data only: first the
   // rental, then the one discount (best available, or the customer's
-  // own choice among the valid ones).
+  // own choice among the valid ones). A verified route prices delivery
+  // by distance; without one the service-area fee applies.
   const pricingInput = {
     modelSlug: submission.vehicleModel,
     period: periodFromIso(submission.startAt, submission.endAt),
@@ -149,9 +149,6 @@ export async function POST(req: NextRequest) {
     deliveryDistanceMeters: submission.pickupArea === submission.returnArea ? deliveryRoute?.distanceMeters : undefined,
   };
   const undiscounted = computeQuote(pricingInput);
-  if (undiscounted && needsDeliveryConfirmation(submission.pickupArea, submission.returnArea, undiscounted.tierId === "monthly", pricingInput.deliveryDistanceMeters)) {
-    return NextResponse.json({ ok: false, error: "delivery_quote_required", message: "Please confirm the route distance and final delivery total with Werigo on WhatsApp before payment." }, { status: 409 });
-  }
   let discount = null;
   if (undiscounted) {
     try {

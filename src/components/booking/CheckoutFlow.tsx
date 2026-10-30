@@ -44,7 +44,6 @@ import {
 } from "@/lib/addons";
 import { trackMarketingEvent } from "@/lib/analytics";
 import { buildDirectBookingWhatsAppUrl } from "@/lib/whatsapp";
-import { needsDeliveryConfirmation, deliveryPricingNote } from "@/data/locations";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 import { riderLicenceNotice, riderFinesNotice, RIDER_POLICY_VERSION } from "@/data/riderPolicy";
 import { computeQuote } from "@/lib/quote";
@@ -184,8 +183,9 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   }, [appPin]);
   const deliveryDistanceMeters = appPin?.route?.distanceMeters;
   const deliveryQuoteToken = appPin?.route?.token ?? null;
-  const manualDeliveryQuote = needsDeliveryConfirmation(pickup, ret, Boolean(entry && isValidPeriod(period) && estimateRental(entry.modelSlug, period)?.tier.id === "monthly"), deliveryQuoteToken ? deliveryDistanceMeters : undefined);
-  const whatsappCheckout = WHATSAPP_FIRST_BOOKING || manualDeliveryQuote;
+  // Every booking pays online in database mode. Without a verified
+  // route (website checkout, different return) the area fee applies.
+  const whatsappCheckout = WHATSAPP_FIRST_BOOKING;
 
   const [phase, setPhase] = useState<Phase>("extras");
   const [quantity, setQuantity] = useState(1);
@@ -257,7 +257,8 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
       return;
     }
     try {
-      const pin = readAppPickup(sessionStorage, pickup);
+      // Only the app checkout uses map pins; the website prices by area.
+      const pin = bookingBase === "/app/rent" ? readAppPickup(sessionStorage, pickup) : null;
       // Restore the explicitly confirmed pin from temporary tab storage.
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setAppPin(pin);
@@ -536,7 +537,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
       flightNumber: customer.flightNumber || undefined,
       batteryAck: customer.batteryAck,
       ageConfirmed: needsAgeCheck ? customer.ageConfirmed : undefined,
-      notes: [manualDeliveryQuote ? deliveryPricingNote : "", customer.specialRequest.trim(), promoCode ? `Promo code: ${promoCode}` : ""]
+      notes: [customer.specialRequest.trim(), promoCode ? `Promo code: ${promoCode}` : ""]
         .filter(Boolean)
         .join("\n") || undefined,
     });
@@ -783,11 +784,10 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   {returnArea?.isAirport ? `collection fee ${formatUsdFee(1)}` : ""}<T>{", once per booking."}</T>{" "}</p>
               ) : null}
 
-              {!showroomPickup && pickup === ret && <DeliveryFeePicker key={pickup} area={pickup} pin={appPin} onConfirmed={onDeliveryConfirmed}/>}
-              {manualDeliveryQuote && bookingBase === "/book" && <p className="mt-3 text-sm text-ink-soft">{deliveryPricingNote}</p>}
+              {bookingBase === "/app/rent" && !showroomPickup && pickup === ret && <DeliveryFeePicker key={pickup} area={pickup} pin={appPin} onConfirmed={onDeliveryConfirmed}/>}
               {areaFeesIdr > 0 ? (
                 <p className="tnum mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
-                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{bookingBase === "/app/rent" ? "Calculated by road distance from our showroom; delivery and collection included." : deliveryFeeWaiverNote}</T>
+                  <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery & collection:"}</T>{" "}{formatIdr(areaFeesIdr)}<T>{", once per booking."}</T>{" "}<T>{bookingBase === "/app/rent" && deliveryDistanceMeters !== undefined ? "Calculated by road distance from our showroom; delivery and collection included." : deliveryFeeWaiverNote}</T>
                 </p>
               ) : deliveryDistanceMeters !== undefined && deliveryDistanceMeters <= 5000 ? (<p className="mt-4 rounded-xl bg-primary-faint px-4 py-3 text-sm">Delivery & collection are free: your road route is within 5 km of Werigo.</p>) : areaFeeWaivedMonthly ? (
                 <p className="mt-4 rounded-[10px] bg-primary-faint px-4 py-2.5 text-sm text-ink-soft">
@@ -1220,7 +1220,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                     ? [
                         {
                           term: "Delivery & collection",
-                          detail: `${formatIdr(areaFeesIdr)} ${t("once per booking.")} ${t(deliveryFeeWaiverNote)}`,
+                          detail: `${formatIdr(areaFeesIdr)} ${t("once per booking.")} ${t(bookingBase === "/app/rent" && deliveryDistanceMeters !== undefined ? "Calculated by road distance from our showroom; delivery and collection included." : deliveryFeeWaiverNote)}`,
                         },
                       ]
                     : areaFeeWaivedMonthly
@@ -1390,7 +1390,6 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   />
                 </div>
               ) : null}
-              {manualDeliveryQuote && <p role="status" className="mt-4 rounded-xl border border-line p-4 text-sm">Your delivery fee is a base estimate. We will confirm the route distance, any surcharge and your final total on WhatsApp before payment. This sends an enquiry; your booking is confirmed by our team.</p>}
               {bookingBase === "/app/rent" && <section className="wr-policy"><h2>{whatsappCheckout ? "Confirm quote before payment" : "Payment"}</h2><p>{whatsappCheckout ? "Send your request to Werigo first. Our team confirms availability, the final total and applicable cancellation terms before arranging payment. No charge is made by this request." : "Continue to secure Midtrans checkout to choose from the payment methods available for your booking, including cards and QRIS when supported."}</p></section>}
               {submitError ? (
                 <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">
