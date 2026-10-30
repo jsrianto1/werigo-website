@@ -93,6 +93,12 @@ export async function createSnapTransaction(input: {
   items: SnapItem[];
   expiryMinutes: number;
   finishUrl: string;
+  /**
+   * Sent as X-Override-Notification so this transaction's webhook goes
+   * here instead of the account's dashboard URL (the Midtrans account
+   * is shared with another app that owns that setting).
+   */
+  notificationUrl: string;
 }): Promise<{ token: string; redirectUrl: string; expiresAt: Date }> {
   const itemsTotal = input.items.reduce((s, i) => s + i.price * i.quantity, 0);
   if (itemsTotal !== input.grossAmount) {
@@ -122,6 +128,7 @@ export async function createSnapTransaction(input: {
         Authorization: authHeader(),
         "Content-Type": "application/json",
         Accept: "application/json",
+        "X-Override-Notification": input.notificationUrl,
       },
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(20_000),

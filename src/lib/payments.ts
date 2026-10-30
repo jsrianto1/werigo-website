@@ -60,6 +60,7 @@ export async function openPayment(booking: StoredBooking, fallbackEmail?: string
     items,
     expiryMinutes: minutes,
     finishUrl: `${siteUrl()}/book/confirmation?code=${encodeURIComponent(booking.booking_code)}`,
+    notificationUrl: `${siteUrl()}/api/payments/midtrans/notify`,
   });
   return createPayment({
     bookingId: booking.id,
