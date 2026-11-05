@@ -121,13 +121,12 @@ export async function RateTable({
                 {formatIdr(amount(id))}
               </p>
               <p className="tnum text-[11px] text-ink-faint">
+                <T>{"per day"}</T>
                 {usd(id) ? (
-                  <span aria-describedby={noteId} title={usdEstimateNote} className="whitespace-nowrap text-[10px]">
-                    {usd(id)}<T>{"/day"}</T>
+                  <span aria-describedby={noteId} title={usdEstimateNote} className="block whitespace-nowrap text-[10px]">
+                    {usd(id)}
                   </span>
-                ) : (
-                  <T>{"per day"}</T>
-                )}
+                ) : null}
               </p>
               {monthly ? (
                 <p className="mt-1">
