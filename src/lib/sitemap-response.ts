@@ -2,6 +2,7 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { site } from "@/lib/config";
 import { cmsPublicationDate } from "@/lib/cms";
+import { articleSitemapEntries } from "@/lib/articles";
 import { extractSitemapEntry, isPublicPage, renderSitemap, type SitemapEntry, type SitemapKind } from "./sitemap-content";
 
 interface PrerenderManifest {
@@ -59,7 +60,7 @@ async function readPublishedEntries(): Promise<SitemapEntry[]> {
 
 export async function sitemapResponse(kind: SitemapKind): Promise<Response> {
   try {
-    const entries = kind === "index" ? [] : await readPublishedEntries();
+    const entries = kind === "index" ? [] : [...await readPublishedEntries(),...await articleSitemapEntries()];
     if (kind !== "index" && entries.length === 0) throw new Error("Published page output is missing.");
     return new Response(renderSitemap(kind, entries, site.baseUrl), {
       headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, max-age=0, s-maxage=300" },

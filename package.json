@@ -18,9 +18,13 @@
     "db:migrate": "node scripts/db-migrate.mjs",
     "db:status": "node scripts/db-migrate.mjs --status",
     "auth:generate": "better-auth generate --config src/lib/auth.ts --output db/migrations/0002_auth.sql -y",
-    "create-admin": "node scripts/create-admin.mjs"
+    "create-admin": "node scripts/create-admin.mjs",
+    "test:articles": "node scripts/articles-test.mjs"
   },
   "dependencies": {
+    "@tiptap/pm": "3.23.5",
+    "@tiptap/react": "3.23.5",
+    "@tiptap/starter-kit": "3.23.5",
     "better-auth": "^1.7.7",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.26.0",
@@ -47,5 +51,35 @@
     "puppeteer-core": "^25.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@tiptap/core": "3.23.5",
+    "@tiptap/extension-blockquote": "3.23.5",
+    "@tiptap/extension-bold": "3.23.5",
+    "@tiptap/extension-bubble-menu": "3.23.5",
+    "@tiptap/extension-bullet-list": "3.23.5",
+    "@tiptap/extension-code": "3.23.5",
+    "@tiptap/extension-code-block": "3.23.5",
+    "@tiptap/extension-document": "3.23.5",
+    "@tiptap/extension-dropcursor": "3.23.5",
+    "@tiptap/extension-floating-menu": "3.23.5",
+    "@tiptap/extension-gapcursor": "3.23.5",
+    "@tiptap/extension-hard-break": "3.23.5",
+    "@tiptap/extension-heading": "3.23.5",
+    "@tiptap/extension-horizontal-rule": "3.23.5",
+    "@tiptap/extension-italic": "3.23.5",
+    "@tiptap/extension-link": "3.23.5",
+    "@tiptap/extension-list": "3.23.5",
+    "@tiptap/extension-list-item": "3.23.5",
+    "@tiptap/extension-list-keymap": "3.23.5",
+    "@tiptap/extension-ordered-list": "3.23.5",
+    "@tiptap/extension-paragraph": "3.23.5",
+    "@tiptap/extension-strike": "3.23.5",
+    "@tiptap/extension-text": "3.23.5",
+    "@tiptap/extension-underline": "3.23.5",
+    "@tiptap/extensions": "3.23.5",
+    "@tiptap/pm": "3.23.5",
+    "@tiptap/react": "3.23.5",
+    "@tiptap/starter-kit": "3.23.5"
   }
 }
