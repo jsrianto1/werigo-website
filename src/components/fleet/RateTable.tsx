@@ -122,7 +122,7 @@ export async function RateTable({
               </p>
               <p className="tnum text-[11px] text-ink-faint">
                 {usd(id) ? (
-                  <span aria-describedby={noteId} title={usdEstimateNote}>
+                  <span aria-describedby={noteId} title={usdEstimateNote} className="whitespace-nowrap text-[10px]">
                     {usd(id)}<T>{"/day"}</T>
                   </span>
                 ) : (
