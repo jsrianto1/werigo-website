@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "5d7281189ab5058e2b769fd8f2a4a98b060e5959db22d6d05d3911e318dadfd9",
+  "fingerprint": "20d951b42e21137ca8d177d2dda4b395e128a1b61a78e519c6d98306a43f3b8b",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12860,7 +12860,7 @@
     },
     {
       "file": "src/components/fleet/RateTable.tsx",
-      "hash": "bf934423af0cfba71f1d330520c382cf86ad55ac10928b42535f9e4eaa3217d4"
+      "hash": "084a0785e1667672d96e51da88535d151d5f746daa9f1ffffac8be02fc027128"
     },
     {
       "file": "src/components/fleet/VehicleCard.tsx",
@@ -13480,24 +13480,24 @@
     }
   ],
   "dates": {
-    "/": "2026-11-05T12:22:42+08:00",
+    "/": "2026-11-05T12:27:05+08:00",
     "/about": "2026-11-05T12:22:42+08:00",
     "/book": "2026-11-05T12:22:42+08:00",
     "/contact": "2026-11-05T12:22:42+08:00",
     "/delivery-areas": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/canggu": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/denpasar": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/jimbaran": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/kuta": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/sanur": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/seminyak": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/ubud": "2026-11-05T12:22:42+08:00",
-    "/delivery-areas/uluwatu": "2026-11-05T12:22:42+08:00",
-    "/fleet": "2026-11-05T12:22:42+08:00",
-    "/fleet/athena": "2026-11-05T12:22:42+08:00",
-    "/fleet/bees": "2026-11-05T12:22:42+08:00",
-    "/fleet/edpower": "2026-11-05T12:22:42+08:00",
-    "/fleet/victory": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/canggu": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/denpasar": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/jimbaran": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/kuta": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/sanur": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/seminyak": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/ubud": "2026-11-05T12:27:05+08:00",
+    "/delivery-areas/uluwatu": "2026-11-05T12:27:05+08:00",
+    "/fleet": "2026-11-05T12:27:05+08:00",
+    "/fleet/athena": "2026-11-05T12:27:05+08:00",
+    "/fleet/bees": "2026-11-05T12:27:05+08:00",
+    "/fleet/edpower": "2026-11-05T12:27:05+08:00",
+    "/fleet/victory": "2026-11-05T12:27:05+08:00",
     "/help-center": "2026-11-05T12:22:42+08:00",
     "/how-it-works": "2026-11-05T12:22:42+08:00",
     "/monthly-scooter-rental-bali": "2026-11-05T12:22:42+08:00",
