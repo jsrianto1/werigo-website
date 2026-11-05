@@ -7,7 +7,7 @@ import { faqCategories, helpGroups } from "@/data/faqs";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { faqSchema, jsonLd } from "@/lib/schema";
 
-export const metadata = pageMetadata("Bali Electric Scooter Rental: FAQs & Charging Help", "Find answers about Werigo rental rates, delivery, charging, rider requirements and monthly rentals. Plan your Bali electric scooter rental with confidence.", "/help-center");
+export const metadata = pageMetadata("Bali Electric Motorcycle Rental: FAQs & Charging Help", "Find answers about Werigo rental rates, delivery, charging, rider requirements and monthly rentals. Plan your Bali electric motorcycle rental with confidence.", "/help-center");
 
 export default function HelpCenterPage() {
   const allItems = faqCategories.flatMap((c) => c.items);

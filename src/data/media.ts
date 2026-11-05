@@ -58,7 +58,7 @@ export const media = {
   },
 
   // ---- Fleet (per model: main, side, detail) ----
-  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/catalog.webp", alt: "Wedison Bees electric scooter available for rent through Werigo in Bali, main product photo", width: 760, height: 694, available: true },
+  "fleet-bees-main": { kind: "image", src: "/media/fleet/bees/catalog.webp", alt: "Wedison Bees electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 694, available: true },
   "fleet-bees-side": { kind: "image", src: "/media/fleet/bees/side.jpg", alt: "Side view of the Wedison Bees", width: 1600, height: 1200, available: false },
   "fleet-bees-detail": { kind: "image", src: "/media/fleet/bees/detail.jpg", alt: "Detail view of the Wedison Bees", width: 1600, height: 1200, available: false },
   "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/catalog.webp", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 720, available: true },
@@ -131,7 +131,7 @@ export const modelColors: Record<string, ColorVariant[]> = {
       name: "Red",
       image: "/media/fleet/bees/colors/red.webp",
       thumb: "/media/fleet/bees/colors/red-thumb.webp",
-      alt: "Red Wedison Bees electric scooter available for rent through Werigo in Bali",
+      alt: "Red Wedison Bees electric motorcycle available for rent through Werigo in Bali",
       width: 1920,
       height: 706,
     },
@@ -139,7 +139,7 @@ export const modelColors: Record<string, ColorVariant[]> = {
       name: "White",
       image: "/media/fleet/bees/colors/white.webp",
       thumb: "/media/fleet/bees/colors/white-thumb.webp",
-      alt: "White Wedison Bees electric scooter available for rent through Werigo in Bali",
+      alt: "White Wedison Bees electric motorcycle available for rent through Werigo in Bali",
       width: 1920,
       height: 1080,
     },

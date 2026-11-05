@@ -33,12 +33,12 @@ export const serviceAreas: ServiceArea[] = [
     slug: "canggu",
     vibe: "Surf mornings, laptop afternoons and an easy way through the sunset traffic.",
     description:
-      "Canggu is Werigo's home turf. Between Batu Bolong, Berawa and Pererenan, an electric scooter is the difference between watching the shortcut jam and gliding through it. Charge at your villa overnight and the whole coast is yours.",
+      "Canggu is Werigo's home turf. Between Batu Bolong, Berawa and Pererenan, an electric motorcycle is the difference between watching the shortcut jam and gliding through it. Charge at your villa overnight and the whole coast is yours.",
     deliveryFee: 100000,
     deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Batu Bolong Beach", "Berawa", "Pererenan", "La Brisa", "Tanah Lot (day trip)"],
     ridingNotes:
-      "Short distances, heavy scooter traffic at peak hours. The quiet torque of an electric ride makes the shortcut lanes far more pleasant.",
+      "Short distances, heavy motorcycle traffic at peak hours. The quiet torque of an electric ride makes the shortcut lanes far more pleasant.",
   },
   {
     name: "Seminyak",
@@ -50,7 +50,7 @@ export const serviceAreas: ServiceArea[] = [
     deliveryWindow: "Within 60 minutes, 08:00 to 20:00",
     landmarks: ["Seminyak Beach", "Petitenget", "Eat Street", "Potato Head", "Double Six"],
     ridingNotes:
-      "Dense one-way streets and valet-only parking at clubs. A scooter parks anywhere; an electric one does it without waking the whole street.",
+      "Dense one-way streets and valet-only parking at clubs. Use designated motorcycle parking and follow local parking rules.",
   },
   {
     name: "Kuta",

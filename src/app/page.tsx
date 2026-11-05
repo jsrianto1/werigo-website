@@ -21,7 +21,7 @@ import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { SagaTeaser } from "@/components/home/SagaTeaser";
 
-export const metadata = pageMetadata("Electric Scooter Rental Bali | Daily & Monthly", "Rent a Wedison electric scooter in Bali from Rp90,000/day. Hotel and villa delivery, helmets available on request, plus weekly and monthly rates. Check your dates.", "/");
+export const metadata = pageMetadata("Electric Motorcycle Rental Bali | Daily & Monthly", "Rent a Wedison electric motorcycle in Bali from Rp90,000/day. Hotel and villa delivery, helmets available on request, plus weekly and monthly rates. Check your dates.", "/");
 
 const proof = [
   { icon: Truck, title: "Delivered to your stay", detail: "Hotel and villa handover" },
@@ -43,9 +43,9 @@ export default function HomePage() {
       <section className="home-video-hero" aria-labelledby="home-title">
         <HeroBackdrop />
         <div className="home-hero-inner"><div className="hero-copy">
-          <p className="eyebrow"><T>{"Electric scooter rental in Bali"}</T></p>
+          <p className="eyebrow"><T>{"Electric motorcycle rental in Bali"}</T></p>
           <h1 id="home-title"><T>{"Your Bali."}</T><br /><T>{"Your own ride."}</T></h1>
-          <p className="hero-lede"><T>{"Electric scooters delivered to your stay. Helmets on request. Daily, weekly and monthly rates."}</T></p>
+          <p className="hero-lede"><T>{"Electric motorcycles delivered to your stay. Helmets on request. Daily, weekly and monthly rates."}</T></p>
           <div className="hero-actions"><ButtonLink href="#hero-booking" variant="accent" size="lg"><T>{"Check availability"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><Link href="/monthly-scooter-rental-bali" className="text-link"><T>{"Monthly rentals"}</T></Link></div>
         </div>
         </div>
@@ -68,7 +68,7 @@ export default function HomePage() {
 
       <Section tone="wash" labelledBy="monthly-heading">
         <div className="monthly-feature">
-          <div className="monthly-story"><p className="eyebrow"><T>{"Stay a little longer"}</T></p><h2 id="monthly-heading" className="marketing-heading"><T>{"Make it your"}</T><br /><T>{"everyday ride."}</T></h2><p><T>{"Your coffee run, coworking commute and sunset stop. Monthly electric scooter rental gives your Bali routine a ride of its own."}</T></p><ButtonLink href="/monthly-scooter-rental-bali" variant="accent" size="lg"><T>{"Explore monthly rentals"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><AreaImage slug="ubud" className="mt-8 h-56 rounded-[14px]" sizes="(max-width: 768px) 100vw, 45vw" /></div>
+          <div className="monthly-story"><p className="eyebrow"><T>{"Stay a little longer"}</T></p><h2 id="monthly-heading" className="marketing-heading"><T>{"Make it your"}</T><br /><T>{"everyday ride."}</T></h2><p><T>{"Your coffee run, coworking commute and sunset stop. Monthly electric motorcycle rental gives your Bali routine a ride of its own."}</T></p><ButtonLink href="/monthly-scooter-rental-bali" variant="accent" size="lg"><T>{"Explore monthly rentals"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></ButtonLink><AreaImage slug="ubud" className="mt-8 h-56 rounded-[14px]" sizes="(max-width: 768px) 100vw, 45vw" /></div>
           <MonthlyRates />
         </div>
       </Section>
@@ -84,7 +84,7 @@ export default function HomePage() {
 
       <Section labelledBy="how-heading" tone="wash"><div className="section-intro"><h2 id="how-heading"><T>{"A few steps. Then you are off."}</T></h2><p><T>{"Check your estimate online. Finalise the details with a real person."}</T></p></div><ol className="rental-steps">{steps.map(([title, detail], i) => <li key={title}><span className="step-number" aria-hidden="true">0{i+1}</span><h3><T>{title}</T></h3><p><T>{detail}</T></p></li>)}</ol><Link href="/how-it-works" className="text-link mt-8"><T>{"How it works"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></Section>
 
-      <Section labelledBy="areas-heading"><div className="section-intro"><h2 id="areas-heading"><T>{"Your stay is our starting point."}</T></h2><p><T>{"Arrange scooter delivery to your hotel or villa in eight Bali service areas. Airport handover is also available by arrangement."}</T></p></div><div className="destination-grid">{["canggu", "ubud", "uluwatu"].map(slug => <Link key={slug} href={`/delivery-areas/${slug}`} className="destination-tile"><AreaImage slug={slug} className="h-full" sizes="(max-width: 640px) 100vw, 33vw" /><span><T>{serviceAreas.find(a => a.slug === slug)?.name}</T> <ArrowRight aria-hidden="true" className="h-5 w-5" /></span></Link>)}</div><div className="area-links">{serviceAreas.map(area => <Link href={`/delivery-areas/${area.slug}`} key={area.slug}><T>{area.name}</T></Link>)}</div><p className="mt-4 text-sm text-ink-soft"><T>{"Delivery timing and fees are confirmed for your booking."}</T></p></Section>
+      <Section labelledBy="areas-heading"><div className="section-intro"><h2 id="areas-heading"><T>{"Your stay is our starting point."}</T></h2><p><T>{"Arrange motorcycle delivery to your hotel or villa in eight Bali service areas. Airport handover is also available by arrangement."}</T></p></div><div className="destination-grid">{["canggu", "ubud", "uluwatu"].map(slug => <Link key={slug} href={`/delivery-areas/${slug}`} className="destination-tile"><AreaImage slug={slug} className="h-full" sizes="(max-width: 640px) 100vw, 33vw" /><span><T>{serviceAreas.find(a => a.slug === slug)?.name}</T> <ArrowRight aria-hidden="true" className="h-5 w-5" /></span></Link>)}</div><div className="area-links">{serviceAreas.map(area => <Link href={`/delivery-areas/${area.slug}`} key={area.slug}><T>{area.name}</T></Link>)}</div><p className="mt-4 text-sm text-ink-soft"><T>{"Delivery timing and fees are confirmed for your booking."}</T></p></Section>
 
       <Section tone="wash" labelledBy="faq-heading"><div className="faq-layout"><div><h2 id="faq-heading" className="marketing-heading"><T>{"Good questions."}</T><br /><T>{"Clear answers."}</T></h2><p className="mt-5 text-ink-soft"><T>{"A little planning makes a better ride."}</T></p><Link href="/help-center" className="text-link mt-6"><T>{"Visit the Help Center"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div><Accordion items={marketingFaqs} /></div></Section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: jsonLd({ "@context": "https://schema.org", "@graph": [homePageSchema(), faqSchema(marketingFaqs)] })}} />

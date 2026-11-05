@@ -13,7 +13,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { RouteLine } from "@/components/ui/RouteLine";
 import { ButtonLink } from "@/components/ui/Button";
 
-export const metadata = pageMetadata("How to Rent an Electric Scooter in Bali", "Choose your dates and electric scooter, review your estimate and confirm with Werigo on WhatsApp. Hotel delivery, charging guidance and local support.", "/how-it-works");
+export const metadata = pageMetadata("How to Rent an Electric Motorcycle in Bali", "Choose your dates and electric motorcycle, review your estimate and confirm with Werigo on WhatsApp. Hotel delivery, charging guidance and local support.", "/how-it-works");
 
 const journey = [
   {
@@ -60,7 +60,7 @@ export default function HowItWorksPage() {
         <SectionHeading as="h1"
           eyebrow="How it works"
           title="Your ride, from first click to handover."
-          lede="Choose your electric scooter, check the estimate and arrange delivery with our local team. Here is what happens next."
+          lede="Choose your electric motorcycle, check the estimate and arrange delivery with our local team. Here is what happens next."
         />
       </Section>
       <RouteLine />

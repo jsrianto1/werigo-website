@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = getModel(slug);
   if (!entry) return {};
   return pageMetadata(
-    `${entry.displayName} Electric Scooter Rental Bali`,
+    `${entry.displayName} Electric Motorcycle Rental Bali`,
     `Rent the ${entry.displayName} in Bali from ${formatIdr(ratesIdrPerDay[slug].daily)}/day for 2 to 6 days. Monthly rates available. Optional helmets and hotel delivery by arrangement.`,
     `/fleet/${slug}`,
     `/media/fleet/${slug}/main.webp`,

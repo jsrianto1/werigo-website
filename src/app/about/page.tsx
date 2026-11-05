@@ -6,7 +6,7 @@ import { RouteLine } from "@/components/ui/RouteLine";
 import { ButtonLink } from "@/components/ui/Button";
 import { MediaImage } from "@/components/media/MediaImage";
 
-export const metadata = pageMetadata("About Werigo: Electric Scooter Rentals in Bali", "Meet Werigo, powered by Wedison. Official electric motorcycles for your Bali holiday or longer stay, with hotel delivery and a local WhatsApp team.", "/about");
+export const metadata = pageMetadata("About Werigo: Electric Motorcycle Rentals in Bali", "Meet Werigo, powered by Wedison. Official electric motorcycles for your Bali holiday or longer stay, with hotel delivery and a local WhatsApp team.", "/about");
 
 const values = [
   {

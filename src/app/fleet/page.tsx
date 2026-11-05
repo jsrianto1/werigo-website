@@ -17,7 +17,7 @@ import { pricingTiers, ratesIdrPerDay, formatIdr } from "@/lib/pricing";
 import { formatUsdApprox, usdEstimateNote } from "@/lib/currency";
 import { getUsdIdrRate } from "@/lib/exchangeRate";
 
-export const metadata = pageMetadata("Compare Electric Scooters & Rates in Bali", "Compare four Wedison electric scooters in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Helmets on request; hotel delivery by arrangement.", "/fleet");
+export const metadata = pageMetadata("Compare Electric Motorcycles & Rates in Bali", "Compare four Wedison electric motorcycles in Bali. Daily rates from Rp90,000, plus weekly and monthly options. Helmets on request; hotel delivery by arrangement.", "/fleet");
 
 export default async function FleetPage() {
   const cards = getPrimaryCards();
@@ -31,7 +31,7 @@ export default async function FleetPage() {
         <SectionHeading as="h1"
           eyebrow="Our fleet · Powered by Wedison"
           title="Find your Bali ride."
-          lede="Compare electric scooters for beach days, everyday trips and a longer stay. Choose your dates for a rental estimate."
+          lede="Compare electric motorcycles for beach days, everyday trips and a longer stay. Choose your dates for a rental estimate."
           id="fleet-title"
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">

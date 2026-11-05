@@ -8,7 +8,7 @@ import { AreaImage } from "@/components/areas/AreaImage";
 import { serviceAreas, deliveryFeeWaiverNote } from "@/data/locations";
 import { formatIdr } from "@/lib/pricing";
 
-export const metadata = pageMetadata("Bali Scooter Rental with Hotel & Villa Delivery", "Electric scooter delivery in Canggu, Seminyak, Ubud, Uluwatu, Kuta, Sanur, Jimbaran and Denpasar. Check rental rates and arrange your handover.", "/delivery-areas");
+export const metadata = pageMetadata("Bali Motorcycle Rental with Hotel & Villa Delivery", "Electric motorcycle delivery in Canggu, Seminyak, Ubud, Uluwatu, Kuta, Sanur, Jimbaran and Denpasar. Check rental rates and arrange your handover.", "/delivery-areas");
 
 export default function DeliveryAreasPage() {
   return (

@@ -7,7 +7,7 @@ import { BookSearchResults } from "@/components/booking/BookSearchResults";
 export const metadata: Metadata = {
   title: "Book Your Electric Motorcycle in Bali",
   description:
-    "Book a Wedison electric scooter in Bali. Choose your area and dates, compare rental rates and confirm availability with Werigo on WhatsApp.",
+    "Book a Wedison electric motorcycle in Bali. Choose your area and dates, compare rental rates and confirm availability with Werigo on WhatsApp.",
   alternates: { canonical: "/book" },
 };
 
@@ -15,7 +15,7 @@ export default function BookPage() {
   return (
     <Section>
       <div className="mx-auto mb-8 max-w-3xl">
-        <h1 className="font-display text-3xl text-ink md:text-4xl"><T>Book an electric scooter in Bali</T></h1>
+        <h1 className="font-display text-3xl text-ink md:text-4xl"><T>Book an electric motorcycle in Bali</T></h1>
         <p className="mt-3 text-ink-soft"><T>Choose your delivery area and rental dates, then compare Wedison models and daily, weekly or monthly rates. Minimum rental is 2 days. Our team confirms availability and your final quote on WhatsApp.</T></p>
       </div>
       <Suspense
