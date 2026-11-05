@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "47093f25c210ccf503eb6f66c88628721e1bfe230413d1b090715e61c981c928",
+  "fingerprint": "ca78ad1d16fd5bc8933e473f7ab7923fd454ac8c281ac4a6ea88192f17efc51b",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12072,7 +12072,7 @@
     },
     {
       "file": "scripts/cms-test.mjs",
-      "hash": "865ae857e12809e80ae55c32967f88da4b5630233318edd8f03e28da30608868"
+      "hash": "c9b2a5c6b1a3f5d84d210e480d05aeb7bdddbf68ec55e3cbd906b297c81ce2d5"
     },
     {
       "file": "scripts/color-check.mjs",
@@ -13316,7 +13316,7 @@
     },
     {
       "file": "src/lib/cmsAccess.ts",
-      "hash": "21e1c5172d457333b2772f947c5c49562da6dd0b62cdb4102d55577c46e101b9"
+      "hash": "0188e58beef021b1d50ba9d15990a860336a0ea00ec26bf248e1128115b3f201"
     },
     {
       "file": "src/lib/cmsRules.ts",
