@@ -56,7 +56,7 @@ const upload = await import("../src/app/api/admin/content/media/route.ts");
 const media = await import("../src/app/api/media/[id]/route.ts");
 const { CMS_SQL } = await import("../src/lib/cmsSchema.ts");
 const admin = { id: "cms-admin", email: "editor@example.test", name: "Test editor", role: "admin", mustChangePassword: false };
-const origin = "https://cms.example.test";
+const origin = "https://werigo.co";
 const request = (body, headers = {}) => new Request(origin + "/api/admin/content", { method: "POST", headers: { origin, "content-type": "application/json", ...headers }, body: JSON.stringify(body) });
 const command = (key, payload, version = 0, action = "draft") => ({ key, payload, version, action });
 let checks = 0;
@@ -67,6 +67,13 @@ function invalid(fn) { assert.throws(fn); checks++; }
 const clone = value => structuredClone(value);
 
 try {
+  const proxyRequest = value => new Request("http://127.0.0.1:3000/api/admin/content/setup", { headers: value ? { origin: value } : {} });
+  equal(access.sameOrigin(proxyRequest(origin)), true, "Public HTTPS origin survives reverse-proxy HTTP transport");
+  equal(access.sameOrigin(proxyRequest("https://wrong-origin.example")), false);
+  equal(access.sameOrigin(proxyRequest("null")), false);
+  equal(access.sameOrigin(proxyRequest("http://werigo.co")), false);
+  equal(access.sameOrigin(proxyRequest()), false);
+  equal(access.sameOrigin(new Request("https://wrong-origin.example/api", { headers: { origin: "https://wrong-origin.example", "x-forwarded-host": "werigo.co" } })), false, "Request URL and forwarded host cannot authorize an untrusted origin");
   equal(CMS_SQL, readFileSync("db/migrations/0015_content_management.sql", "utf8").replace(/\r\n/g, "\n"));
   parseContent("home", cmsDefaults.home, true); parseContent("places", cmsDefaults.places, true); checks += 2;
   for (const place of cmsDefaults.places.items) ok(existsSync(resolve("public", "." + place.image)), "Seed photo exists: " + place.id);
