@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "ca78ad1d16fd5bc8933e473f7ab7923fd454ac8c281ac4a6ea88192f17efc51b",
+  "fingerprint": "7c1442f59fb5a5593905dd0c2825c5d3f6a3a91e929b94b0b5ba67cb79fc9791",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12067,6 +12067,10 @@
       "hash": "d1d917d234eddde72e0e540f3f6ef7f39884b42d2385c0e2849a4d3d2d2630db"
     },
     {
+      "file": "scripts/articles-test.mjs",
+      "hash": "6e4ecd2feadb182697ff290c828254379a361c7b1de6461f7d3eeb951b51d50f"
+    },
+    {
       "file": "scripts/auth-errors-test.mjs",
       "hash": "52a8bf2e793870d0c2df31df2d1cb2768519e89b9a888e711b8b88ad28f62bb2"
     },
@@ -12223,6 +12227,14 @@
       "hash": "b04d2b4f4792823686d7f714d6e9ecb262c77bede4831e8cf6a9bb42d48d2a6a"
     },
     {
+      "file": "src/app/admin/articles/page.tsx",
+      "hash": "6b297aeae9ab78edfdb893c2c15c227d23580d1fea4b6810996c1b07760e19a6"
+    },
+    {
+      "file": "src/app/admin/articles/preview/page.tsx",
+      "hash": "60ea805c57907acf392285bc0cbb7f080cd34b0fe5914a44310a31f67837ebc9"
+    },
+    {
       "file": "src/app/admin/audit/page.tsx",
       "hash": "b0f913deec88e799034f8d764072a5c3c32113e753d295bd5fb1dd0216c008eb"
     },
@@ -12293,6 +12305,14 @@
     {
       "file": "src/app/api/account/referral/route.ts",
       "hash": "b8ff8da614232891f1ec123d150ffda9ed2aa4aa20d500c9f6c4df4215458012"
+    },
+    {
+      "file": "src/app/api/admin/articles/route.ts",
+      "hash": "1a0dbe806bc97538322a4139b32cca87c4fc0355ff7a1c9e8109dd3a0c01491c"
+    },
+    {
+      "file": "src/app/api/admin/articles/setup/route.ts",
+      "hash": "b16111540409a9ef38e05e9ff66d428d69e78b80bc23775f8fde862df6d7ec83"
     },
     {
       "file": "src/app/api/admin/audit/route.ts",
@@ -12631,6 +12651,14 @@
       "hash": "6961eafe21fd599319a202a0e4dba6a5f33169c27ce86ec65f18edd91ee7db2d"
     },
     {
+      "file": "src/app/guides/[slug]/page.tsx",
+      "hash": "265a95238103de5e740b6438a0844d246326d0f0e34997b8aa77e914d99fcc84"
+    },
+    {
+      "file": "src/app/guides/page.tsx",
+      "hash": "0186be3431f9bf3948679ce4d7bed3c52d424b91655c76109a6a1e4631211426"
+    },
+    {
       "file": "src/app/help-center/page.tsx",
       "hash": "5911bdd6b6dc55eaeb508889e4d81fd8eb14c845262de2e5642886e61aa89649"
     },
@@ -12771,12 +12799,20 @@
       "hash": "8f7680c5d3ad5556fc74e66da73880364509cbdbcccb373aa3bb4903910bd094"
     },
     {
+      "file": "src/components/admin/ArticleEditor.tsx",
+      "hash": "76d57053b9b4cece68af60c172f17f8573c6fcf1f931cbb895319e73fadcff60"
+    },
+    {
+      "file": "src/components/admin/ArticlesManager.tsx",
+      "hash": "bc4323ada623ffc1df12010a969b433ad09930b0a4c064d06e5600a3bfece48e"
+    },
+    {
       "file": "src/components/admin/AuditViewer.tsx",
       "hash": "064d497e7c028e6819de2b9b4fc6e373424118a79c601a4c7acd0a97a60f28b2"
     },
     {
       "file": "src/components/admin/ContentManager.tsx",
-      "hash": "b219de842a44d82b064dd6fd0a2fe9fc055f6d537b9b1ac853c1d821cc9f4a64"
+      "hash": "06410119513c89a1fe282d89dcc4f57134a1ab752485a36c3eaba368e6f8df04"
     },
     {
       "file": "src/components/admin/CustomerDetail.tsx",
@@ -12785,6 +12821,10 @@
     {
       "file": "src/components/admin/CustomersList.tsx",
       "hash": "7e751d5e74a52116d9fde8ec0c4a90ffcc16874f4d48e10116ce75859af36ba2"
+    },
+    {
+      "file": "src/components/admin/MediaPicker.tsx",
+      "hash": "7c7fa2c056a4aa560b04f1b00aac82a80add656ccacd239eb830637cf8e7b7ec"
     },
     {
       "file": "src/components/admin/MembershipManager.tsx",
@@ -12815,8 +12855,12 @@
       "hash": "fcb1d3f17fe13a2456cc3e762f6a5cebd57bdac057c1b24c0330b7d21022f5c7"
     },
     {
+      "file": "src/components/admin/article-editor.css",
+      "hash": "834e2851b8801eab899404fbc2b889a8e2dfcffed2064b4bf2c545484a4865e7"
+    },
+    {
       "file": "src/components/admin/modules.ts",
-      "hash": "ee2b50477aa54fc851aa8e6162f0c2643726500becdd24bc550ff3c86a8d0dde"
+      "hash": "13643eca9eb6b121049cafc6a94d9f8d46b658c5678dd15d1b8a4792b911cb2f"
     },
     {
       "file": "src/components/analytics/CookieConsent.tsx",
@@ -12837,6 +12881,14 @@
     {
       "file": "src/components/areas/AreaImage.tsx",
       "hash": "b70d45aba0037de3e146c98abb3ee6389b149a87721c7e60880119c1621daed8"
+    },
+    {
+      "file": "src/components/articles/ArticleBody.tsx",
+      "hash": "7e1bac7aa15fa7f0d9e1fa3dbf79f65264f436f4ed4e779988c3fbc2e9cd5a38"
+    },
+    {
+      "file": "src/components/articles/ArticleView.tsx",
+      "hash": "7a5494fb8dd4c36aad0a02f33b8870aff6fa59e732c820952c6862a74419b69d"
     },
     {
       "file": "src/components/booking/BookSearchResults.tsx",
@@ -12928,7 +12980,7 @@
     },
     {
       "file": "src/components/layout/Footer.tsx",
-      "hash": "213a324da8ea2c1c4262ca2028ad91bb5e2aef918e17e5c060e2a9e8cae20ead"
+      "hash": "e81606dd7ebf5a5bbb0f6068638c849cd6f3bfe1313003473b8213b15bfc3ec0"
     },
     {
       "file": "src/components/layout/Header.tsx",
@@ -13271,6 +13323,26 @@
       "hash": "ee1dba916a159024942d50c2dcffec5f97b3ef79e8522dad0a9d0295427adb96"
     },
     {
+      "file": "src/lib/articleHealth.ts",
+      "hash": "aecf5be6ebbdfd31c19c8219f3cdab09340992f538613319198ce6125d15ed61"
+    },
+    {
+      "file": "src/lib/articleRichText.ts",
+      "hash": "347e69d53a0fe79b3f6afa90a769bdecbfe3dae8a9e97cb73f635de72327dcb2"
+    },
+    {
+      "file": "src/lib/articleRules.ts",
+      "hash": "5682cff0ad977cfbad6bc24aa80d420637db9c25964dc51dee5428be19519f9e"
+    },
+    {
+      "file": "src/lib/articleSchema.ts",
+      "hash": "b443e29e3a942dde691711969a50623934a8b04a526128a92e86bcfd59ebc6b1"
+    },
+    {
+      "file": "src/lib/articles.ts",
+      "hash": "f1c35db3dbdcb3bae41bafbbae8d6b3397585ba69b7bd8dbd1cdd6cf79e2213e"
+    },
+    {
       "file": "src/lib/audit.ts",
       "hash": "c5214b3ff7e618513709beb42f1f88cb56105fd14591908c425451591aea7531"
     },
@@ -13500,7 +13572,7 @@
     },
     {
       "file": "src/lib/sitemap-response.ts",
-      "hash": "329b3b68eb2ed6c2994e3583d36f5dcc5b41b80640f9cf86dcc7f5e7246034cd"
+      "hash": "b94b7ea4b644f08af910bf041bc9b6435a227651f3a5347f2ba5e1987d636672"
     },
     {
       "file": "src/lib/staff.ts",
@@ -13540,53 +13612,53 @@
     }
   ],
   "dates": {
-    "/": "2026-11-05T13:28:02+08:00",
-    "/about": "2026-11-05T13:28:02+08:00",
-    "/book": "2026-11-05T13:28:02+08:00",
-    "/contact": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/canggu": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/denpasar": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/jimbaran": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/kuta": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/sanur": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/seminyak": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/ubud": "2026-11-05T13:28:02+08:00",
-    "/delivery-areas/uluwatu": "2026-11-05T13:28:02+08:00",
-    "/fleet": "2026-11-05T13:28:02+08:00",
-    "/fleet/athena": "2026-11-05T13:28:02+08:00",
-    "/fleet/bees": "2026-11-05T13:28:02+08:00",
-    "/fleet/edpower": "2026-11-05T13:28:02+08:00",
-    "/fleet/victory": "2026-11-05T13:28:02+08:00",
-    "/help-center": "2026-11-05T13:28:02+08:00",
-    "/how-it-works": "2026-11-05T13:28:02+08:00",
-    "/monthly-scooter-rental-bali": "2026-11-05T13:28:02+08:00",
-    "/partners": "2026-11-05T13:28:02+08:00",
-    "/saga": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-1": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-10": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-11": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-12": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-13": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-14": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-15": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-16": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-17": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-18": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-19": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-2": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-20": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-21": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-22": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-23": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-3": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-4": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-5": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-6": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-7": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-8": "2026-11-05T13:28:02+08:00",
-    "/saga/chapter-9": "2026-11-05T13:28:02+08:00",
-    "/supercharge": "2026-11-05T13:28:02+08:00"
+    "/": "2026-11-05T18:25:59+08:00",
+    "/about": "2026-11-05T18:25:59+08:00",
+    "/book": "2026-11-05T18:25:59+08:00",
+    "/contact": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/canggu": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/denpasar": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/jimbaran": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/kuta": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/sanur": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/seminyak": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/ubud": "2026-11-05T18:25:59+08:00",
+    "/delivery-areas/uluwatu": "2026-11-05T18:25:59+08:00",
+    "/fleet": "2026-11-05T18:25:59+08:00",
+    "/fleet/athena": "2026-11-05T18:25:59+08:00",
+    "/fleet/bees": "2026-11-05T18:25:59+08:00",
+    "/fleet/edpower": "2026-11-05T18:25:59+08:00",
+    "/fleet/victory": "2026-11-05T18:25:59+08:00",
+    "/help-center": "2026-11-05T18:25:59+08:00",
+    "/how-it-works": "2026-11-05T18:25:59+08:00",
+    "/monthly-scooter-rental-bali": "2026-11-05T18:25:59+08:00",
+    "/partners": "2026-11-05T18:25:59+08:00",
+    "/saga": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-1": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-10": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-11": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-12": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-13": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-14": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-15": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-16": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-17": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-18": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-19": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-2": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-20": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-21": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-22": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-23": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-3": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-4": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-5": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-6": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-7": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-8": "2026-11-05T18:25:59+08:00",
+    "/saga/chapter-9": "2026-11-05T18:25:59+08:00",
+    "/supercharge": "2026-11-05T18:25:59+08:00"
   },
   "hostingSettings": {
     "next.config.ts": "import type { NextConfig } from \"next\";\r\n\r\nconst nextConfig: NextConfig = {\r\n  poweredByHeader: false,\r\n  // Hostinger reports host CPU count; keep static generation within its process limit.\r\n  experimental: { cpus: 1 },\r\n  images: { formats: [\"image/avif\", \"image/webp\"] },\r\n  async headers() {\r\n    return [\r\n      {\r\n        source: \"/:path*\",\r\n        headers: [\r\n          { key: \"Strict-Transport-Security\", value: \"max-age=31536000\" },\r\n          { key: \"X-Frame-Options\", value: \"SAMEORIGIN\" },\r\n          { key: \"X-Content-Type-Options\", value: \"nosniff\" },\r\n          { key: \"Referrer-Policy\", value: \"strict-origin-when-cross-origin\" },\r\n          { key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=()\" },\r\n          { key: \"Content-Security-Policy\", value: \"base-uri 'self'; object-src 'none'; frame-ancestors 'self'\" },\r\n          // Stage script restrictions without disrupting Next hydration, GTM or Meta.\r\n          { key: \"Content-Security-Policy-Report-Only\", value: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'\" },\r\n        ],\r\n      },\r\n      { source: \"/media/:path*.webm\", headers: [{ key: \"Content-Type\", value: \"video/webm\" }] },\r\n      { source: \"/media/:path*.mp4\", headers: [{ key: \"Content-Type\", value: \"video/mp4\" }] },\r\n      { source: \"/book/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n      { source: \"/app/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n    ];\r\n  },\r\n  async redirects() {\r\n    return [\r\n      // WERIGO SAGA installments are \"chapters\" (it is a comic, not a series).\r\n      // Old /saga/episode-N links keep working; ?lang=id passes through.\r\n      {\r\n        source: \"/saga/episode-:n(\\\\d{1,})\",\r\n        destination: \"/saga/chapter-:n\",\r\n        permanent: true,\r\n      },\r\n    ];\r\n  },\r\n};\r\n\r\nexport default nextConfig;\r\n",

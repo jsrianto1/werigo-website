@@ -20,6 +20,13 @@ export type ModuleGroup = (typeof MODULE_GROUPS)[number];
 
 export const MODULES: readonly AdminModule[] = [
   {
+    href: "/admin/articles",
+    label: "Articles",
+    description: "Create Bali guides, check content health, preview, schedule and publish.",
+    icon: FilePenLine,
+    group: "Growth",
+  },
+  {
     href: "/admin/content",
     label: "Content Studio",
     description: "Website copy, FAQs, SEO and recommended places. Draft, preview and publish.",
