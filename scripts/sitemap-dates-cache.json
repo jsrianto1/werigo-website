@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "1b70741edb460620f38023acbff91c102c33df6db4665210eb293ad657f8c929",
+  "fingerprint": "5d7281189ab5058e2b769fd8f2a4a98b060e5959db22d6d05d3911e318dadfd9",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12100,7 +12100,7 @@
     },
     {
       "file": "scripts/delivery-test.mjs",
-      "hash": "2d393dc0d1a77a3d17a4675df24af2f32602a7c478fb1b993b4f7ad2399ff27c"
+      "hash": "122a64f8deeae2b4fce35dd618b9518aa06cdc38136bb2f1f232e3d5935cba93"
     },
     {
       "file": "scripts/discover-test.mjs",
@@ -12176,7 +12176,7 @@
     },
     {
       "file": "src/app/about/page.tsx",
-      "hash": "93e4935163d67c7b80a2e7a57ec64adee87027e53e954445599008832caeb746"
+      "hash": "fecc089d12ea98c68639ede6cb66d02d2b24f8fdc411723fedb1827a002ddd20"
     },
     {
       "file": "src/app/account/complete/page.tsx",
@@ -12400,7 +12400,7 @@
     },
     {
       "file": "src/app/api/bookings/route.ts",
-      "hash": "5211ad9fd5fc4626adbeb5d23bfc099a3bc2ccc2abc07578e3ee5747c9d71354"
+      "hash": "f2f2876859553a677855acd9e6469f9bd1fb3b29c25d6743a236932ecd4a34c5"
     },
     {
       "file": "src/app/api/checkout/discounts/route.ts",
@@ -12436,7 +12436,7 @@
     },
     {
       "file": "src/app/api/payments/midtrans/notify/route.ts",
-      "hash": "5c49b1d0c4d99b67a71f4ccdb786e26be73cb46aec1e4d2a23e9197b45dd4255"
+      "hash": "35284a6c359c4c54601c5957938e46ef15cd39ab15a198c7f7ffde939b798320"
     },
     {
       "file": "src/app/api/promotions/featured/route.ts",
@@ -12568,19 +12568,19 @@
     },
     {
       "file": "src/app/book/page.tsx",
-      "hash": "4b588f07ce33adf2cdd18d5563ff9f020d11ee5c2b1055e5755a9d756acd647a"
+      "hash": "2f6c858cba43f2edf6770d9dc9e1b9eaa4f08e801eccf818fcf53fa1b5e79b3d"
     },
     {
       "file": "src/app/contact/page.tsx",
-      "hash": "9a643c6a8080620d15231668a00a730cabf9d3df625f6525573eb1f80d59a5d9"
+      "hash": "eaca4c68be81d02f98348d57993d41debe152506f9f531e78bb7809bc2386826"
     },
     {
       "file": "src/app/delivery-areas/[slug]/page.tsx",
-      "hash": "962ac4143b159130a51b05cf40c9c6baaf3ef85da60cc31f1cd2aa345c1ef8d9"
+      "hash": "f25b9768f80e2cade2295ff782a668f755e0b64350d199cc33e08b74e7855478"
     },
     {
       "file": "src/app/delivery-areas/page.tsx",
-      "hash": "4878b92ccfe2938ca7de5d074056825e9fdc99f8aeb0115e0293f583a9a6fa16"
+      "hash": "9829ccf27bfa77e38f5099a68d076567b5b42e644ffacf7ffd967e9b7878735a"
     },
     {
       "file": "src/app/favicon.ico",
@@ -12592,11 +12592,11 @@
     },
     {
       "file": "src/app/fleet/[slug]/page.tsx",
-      "hash": "661a49ffb5fab50f5962b21fc6137d6048c088e66023f55fd0bd4daef6ef2931"
+      "hash": "699e3b4f3257e2d5b484969c3d3c99572cd6d126eb2e3717a0401883d5ccf211"
     },
     {
       "file": "src/app/fleet/page.tsx",
-      "hash": "dde5abd712b4ca5a05b6660aa3dfc7afb9d627d3b3b7e316168e80954143f495"
+      "hash": "37b7600d90d94f3f19bec1a08742e39a5a2d0a55c06c67bc88325d1a5d8e4a61"
     },
     {
       "file": "src/app/globals.css",
@@ -12604,11 +12604,11 @@
     },
     {
       "file": "src/app/help-center/page.tsx",
-      "hash": "2950b48c57390cc0b0d234f7c8534b940dba9a30e22d4d37633a3c77148baffa"
+      "hash": "5911bdd6b6dc55eaeb508889e4d81fd8eb14c845262de2e5642886e61aa89649"
     },
     {
       "file": "src/app/how-it-works/page.tsx",
-      "hash": "2ed020fa0de06b5035b84529f84c74b6c21a5cc0d5c493076680eead4bdd4f88"
+      "hash": "150f4105546a73ba2954c44fdccf22132ebb36ef5afe0ede35252d2490cd551d"
     },
     {
       "file": "src/app/icon.png",
@@ -12632,7 +12632,7 @@
     },
     {
       "file": "src/app/monthly-scooter-rental-bali/page.tsx",
-      "hash": "7850fc9dc7339b2559f16048e3e292ca8b09d35c26dc1adfa43d59785915ebd3"
+      "hash": "affbc6dfca6c442f57d358fc61aaf3d336747be83d0fdca9442bce2e317c98b6"
     },
     {
       "file": "src/app/not-found.tsx",
@@ -12644,7 +12644,7 @@
     },
     {
       "file": "src/app/page.tsx",
-      "hash": "7a325298d1ab186a6f552249d1531eab324cb92b5fe7a437dfbcb404e72ee49a"
+      "hash": "d045ef6abd0ed1a52555bafcc039a045b89b3c9d7b18b24bb327c5ea75194038"
     },
     {
       "file": "src/app/partners/page.tsx",
@@ -12656,7 +12656,7 @@
     },
     {
       "file": "src/app/ride-club/page.tsx",
-      "hash": "ad4608092da143396e286c4593033ea47b48982af4b34005814704d3677705d3"
+      "hash": "ae9c7d26160b6ad3a2ed0912797da8e7622c0284145fd9b588a1dea6f5e19de0"
     },
     {
       "file": "src/app/robots.ts",
@@ -12684,7 +12684,7 @@
     },
     {
       "file": "src/app/terms/page.tsx",
-      "hash": "28efeb558c6b2f258332a9f64e9edb872342639909151a629e2e5ae3d9247d49"
+      "hash": "74c0009228981cafafee18f4e91a2266e8482cc53acba56087ee853e6d7589f2"
     },
     {
       "file": "src/components/account/AccountMenu.tsx",
@@ -12720,7 +12720,7 @@
     },
     {
       "file": "src/components/account/ReferralDashboard.tsx",
-      "hash": "6c330cacaa1e9a8763fae31f31f4ba96315eaa651aeb6d988e74c051e62787d4"
+      "hash": "1d03ef8ad1f5093e46567e82cccc6b6508910d7373deb263ec9010ef34c3981f"
     },
     {
       "file": "src/components/admin/AdminDashboard.tsx",
@@ -12820,7 +12820,7 @@
     },
     {
       "file": "src/components/booking/CheckoutFlow.tsx",
-      "hash": "3da95fd6952a37a872fcc524d1d93613949a3270b15046bb5b92e1d9f15fc460"
+      "hash": "426995afcb7899c905cd7702493ea4c3a24c8066943e9f2a7c33479f58b9dec4"
     },
     {
       "file": "src/components/booking/ConfirmationView.tsx",
@@ -12860,7 +12860,7 @@
     },
     {
       "file": "src/components/fleet/RateTable.tsx",
-      "hash": "629c637962e8b0db4341c299844b04a6d5a2ca625878e75011ba355cb7183098"
+      "hash": "bf934423af0cfba71f1d330520c382cf86ad55ac10928b42535f9e4eaa3217d4"
     },
     {
       "file": "src/components/fleet/VehicleCard.tsx",
@@ -12904,7 +12904,7 @@
     },
     {
       "file": "src/components/marketing/WelcomeOffer.tsx",
-      "hash": "3ffde5e9301ca9aa89f78b3dd135d02774894842021a65a7bdbad634bdfdb67d"
+      "hash": "134266f5aaa47f570692966d62d3723832cf415485e88edd616205d5cb4d844d"
     },
     {
       "file": "src/components/media/MediaImage.tsx",
@@ -13140,19 +13140,19 @@
     },
     {
       "file": "src/data/faqs.ts",
-      "hash": "e7a65fb45d073fcdc658131579cf57d93089133881cae0f128539217bfe94a79"
+      "hash": "4a508ecf491586067a4dae2c9c7c5ecbd44532e10a0ad347082ba90bba88e5c3"
     },
     {
       "file": "src/data/locations.ts",
-      "hash": "5df295caf68b9e278293062a3f8c6ac5e2fd738b3722c850e38c7c6c758e5717"
+      "hash": "01bdf3d1a07ec12776de2023d7a4f8bd7cbf29413e60765db19d463dfc5815bc"
     },
     {
       "file": "src/data/marketingFaqs.ts",
-      "hash": "5f564024a814c558be28ed3104afbebf75ab63af6493e9d9e54671e901c22c5d"
+      "hash": "62241c35dfe74d7bfd56b58ce781280e89702c7fa120915c2ffb5d7747c4e8be"
     },
     {
       "file": "src/data/media.ts",
-      "hash": "7ee6a63db6cdb2e8e39c9c398910fd478dfb749e0431df43008c928b54425141"
+      "hash": "c3d61bf035eb4f7133bf40403e250df0ef95257d6dfa802a1f5834dc088a64ce"
     },
     {
       "file": "src/data/partners.ts",
@@ -13192,11 +13192,11 @@
     },
     {
       "file": "src/data/translations.json",
-      "hash": "7a17744898d81516785c7b67e664df6764dfc35b8bbf3a16741c14dbfeb3d97a"
+      "hash": "6dc96b4f898dc85f76d9e6565338c9b13eff0828d9029b9a4b959a0e4a49d0c8"
     },
     {
       "file": "src/data/vehicles.ts",
-      "hash": "a6291e3468ec844b156d22621208a88e36f0e3f24f14d21e1192ecb5a09b0937"
+      "hash": "7e9d0c15a3d125d74d30383fc92197b5ba2efeb24691d538838f41c5c1f8e66a"
     },
     {
       "file": "src/lib/addons.ts",
@@ -13268,7 +13268,7 @@
     },
     {
       "file": "src/lib/config.ts",
-      "hash": "ca76688ecbbc68c6f4e099f6c90624d143152deb406f12bdbb67c048095f4c24"
+      "hash": "115d6aad3fc9707ad128b3e3b3ccb75215236bd2eacb6f8c990636f9bc9ae944"
     },
     {
       "file": "src/lib/consent.ts",
@@ -13296,7 +13296,7 @@
     },
     {
       "file": "src/lib/deliveryPricing.ts",
-      "hash": "11edf10761133d2f3fd27f0b40979b778cce8d5452b2aac54367a540516fc4d0"
+      "hash": "7ce372917669544116184fd94c3d091a6cdd19f85464126d7d2b1f5b74ea3c1a"
     },
     {
       "file": "src/lib/deliveryRoute.ts",
@@ -13332,7 +13332,7 @@
     },
     {
       "file": "src/lib/midtrans.ts",
-      "hash": "31536ea63504cc5adedda83cd2acecf08eeb975a548d56390a80b3878093c0c0"
+      "hash": "26422e7eea6295a6c7a1aef7644fc22d3d3a8178cedd2b3ae07a1126d83ca825"
     },
     {
       "file": "src/lib/notifications.ts",
@@ -13348,7 +13348,7 @@
     },
     {
       "file": "src/lib/payments.ts",
-      "hash": "74417dc55184e58dc9508996a9c1a2a07c8e9df2e44b87966daa3365f71621cb"
+      "hash": "89c4992088c17d50b0504dd5c85165449aee4389701c63fe69487592835dfc24"
     },
     {
       "file": "src/lib/permissions.ts",
@@ -13420,7 +13420,7 @@
     },
     {
       "file": "src/lib/schema.ts",
-      "hash": "402a0bcfbf43673e17244d3faf766445b20678bc7d0788d497ff8c6351f9ff47"
+      "hash": "2fe0be15b623222991d52de0abedf3a67fd3ca36973fa17dd00e07ab4d77ce46"
     },
     {
       "file": "src/lib/seo.ts",
@@ -13480,56 +13480,56 @@
     }
   ],
   "dates": {
-    "/": "2026-10-28T21:15:16+08:00",
-    "/about": "2026-10-19T10:17:25+08:00",
-    "/book": "2026-10-19T10:17:25+08:00",
-    "/contact": "2026-10-19T10:17:25+08:00",
-    "/delivery-areas": "2026-10-19T10:17:25+08:00",
-    "/delivery-areas/canggu": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/denpasar": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/jimbaran": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/kuta": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/sanur": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/seminyak": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/ubud": "2026-10-19T10:22:25+08:00",
-    "/delivery-areas/uluwatu": "2026-10-19T10:22:25+08:00",
-    "/fleet": "2026-10-19T10:22:25+08:00",
-    "/fleet/athena": "2026-10-19T10:22:25+08:00",
-    "/fleet/bees": "2026-10-19T10:22:25+08:00",
-    "/fleet/edpower": "2026-10-19T10:22:25+08:00",
-    "/fleet/victory": "2026-10-19T10:22:25+08:00",
-    "/help-center": "2026-10-19T10:17:25+08:00",
-    "/how-it-works": "2026-10-19T10:17:25+08:00",
-    "/monthly-scooter-rental-bali": "2026-10-19T10:17:25+08:00",
-    "/partners": "2026-10-19T10:17:25+08:00",
-    "/saga": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-1": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-10": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-11": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-12": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-13": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-14": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-15": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-16": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-17": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-18": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-19": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-2": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-20": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-21": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-22": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-23": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-3": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-4": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-5": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-6": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-7": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-8": "2026-10-28T21:15:16+08:00",
-    "/saga/chapter-9": "2026-10-28T21:15:16+08:00",
-    "/supercharge": "2026-10-19T10:17:25+08:00"
+    "/": "2026-11-05T12:22:42+08:00",
+    "/about": "2026-11-05T12:22:42+08:00",
+    "/book": "2026-11-05T12:22:42+08:00",
+    "/contact": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/canggu": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/denpasar": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/jimbaran": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/kuta": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/sanur": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/seminyak": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/ubud": "2026-11-05T12:22:42+08:00",
+    "/delivery-areas/uluwatu": "2026-11-05T12:22:42+08:00",
+    "/fleet": "2026-11-05T12:22:42+08:00",
+    "/fleet/athena": "2026-11-05T12:22:42+08:00",
+    "/fleet/bees": "2026-11-05T12:22:42+08:00",
+    "/fleet/edpower": "2026-11-05T12:22:42+08:00",
+    "/fleet/victory": "2026-11-05T12:22:42+08:00",
+    "/help-center": "2026-11-05T12:22:42+08:00",
+    "/how-it-works": "2026-11-05T12:22:42+08:00",
+    "/monthly-scooter-rental-bali": "2026-11-05T12:22:42+08:00",
+    "/partners": "2026-11-05T12:22:42+08:00",
+    "/saga": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-1": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-10": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-11": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-12": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-13": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-14": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-15": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-16": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-17": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-18": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-19": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-2": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-20": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-21": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-22": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-23": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-3": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-4": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-5": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-6": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-7": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-8": "2026-11-05T12:22:42+08:00",
+    "/saga/chapter-9": "2026-11-05T12:22:42+08:00",
+    "/supercharge": "2026-11-05T12:22:42+08:00"
   },
   "hostingSettings": {
-    "next.config.ts": "import type { NextConfig } from \"next\";\r\n\r\nconst nextConfig: NextConfig = {\r\n  poweredByHeader: false,\n  // Hostinger reports host CPU count; keep static generation within its process limit.\n  experimental: { cpus: 1 },\r\n  images: { formats: [\"image/avif\", \"image/webp\"] },\r\n  async headers() {\r\n    return [\r\n      {\r\n        source: \"/:path*\",\r\n        headers: [\r\n          { key: \"Strict-Transport-Security\", value: \"max-age=31536000\" },\r\n          { key: \"X-Frame-Options\", value: \"SAMEORIGIN\" },\r\n          { key: \"X-Content-Type-Options\", value: \"nosniff\" },\r\n          { key: \"Referrer-Policy\", value: \"strict-origin-when-cross-origin\" },\r\n          { key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=()\" },\r\n          { key: \"Content-Security-Policy\", value: \"base-uri 'self'; object-src 'none'; frame-ancestors 'self'\" },\r\n          // Stage script restrictions without disrupting Next hydration, GTM or Meta.\r\n          { key: \"Content-Security-Policy-Report-Only\", value: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'\" },\r\n        ],\r\n      },\r\n      { source: \"/media/:path*.webm\", headers: [{ key: \"Content-Type\", value: \"video/webm\" }] },\r\n      { source: \"/media/:path*.mp4\", headers: [{ key: \"Content-Type\", value: \"video/mp4\" }] },\r\n      { source: \"/book/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n      { source: \"/app/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n    ];\r\n  },\r\n  async redirects() {\r\n    return [\r\n      // WERIGO SAGA installments are \"chapters\" (it is a comic, not a series).\r\n      // Old /saga/episode-N links keep working; ?lang=id passes through.\r\n      {\r\n        source: \"/saga/episode-:n(\\\\d{1,})\",\r\n        destination: \"/saga/chapter-:n\",\r\n        permanent: true,\r\n      },\r\n    ];\r\n  },\r\n};\r\n\r\nexport default nextConfig;\r\n",
+    "next.config.ts": "import type { NextConfig } from \"next\";\r\n\r\nconst nextConfig: NextConfig = {\r\n  poweredByHeader: false,\r\n  // Hostinger reports host CPU count; keep static generation within its process limit.\r\n  experimental: { cpus: 1 },\r\n  images: { formats: [\"image/avif\", \"image/webp\"] },\r\n  async headers() {\r\n    return [\r\n      {\r\n        source: \"/:path*\",\r\n        headers: [\r\n          { key: \"Strict-Transport-Security\", value: \"max-age=31536000\" },\r\n          { key: \"X-Frame-Options\", value: \"SAMEORIGIN\" },\r\n          { key: \"X-Content-Type-Options\", value: \"nosniff\" },\r\n          { key: \"Referrer-Policy\", value: \"strict-origin-when-cross-origin\" },\r\n          { key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=()\" },\r\n          { key: \"Content-Security-Policy\", value: \"base-uri 'self'; object-src 'none'; frame-ancestors 'self'\" },\r\n          // Stage script restrictions without disrupting Next hydration, GTM or Meta.\r\n          { key: \"Content-Security-Policy-Report-Only\", value: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'\" },\r\n        ],\r\n      },\r\n      { source: \"/media/:path*.webm\", headers: [{ key: \"Content-Type\", value: \"video/webm\" }] },\r\n      { source: \"/media/:path*.mp4\", headers: [{ key: \"Content-Type\", value: \"video/mp4\" }] },\r\n      { source: \"/book/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n      { source: \"/app/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n    ];\r\n  },\r\n  async redirects() {\r\n    return [\r\n      // WERIGO SAGA installments are \"chapters\" (it is a comic, not a series).\r\n      // Old /saga/episode-N links keep working; ?lang=id passes through.\r\n      {\r\n        source: \"/saga/episode-:n(\\\\d{1,})\",\r\n        destination: \"/saga/chapter-:n\",\r\n        permanent: true,\r\n      },\r\n    ];\r\n  },\r\n};\r\n\r\nexport default nextConfig;\r\n",
     "public/media/.htaccess": "AddType video/webm webm\r\n"
   }
 }
