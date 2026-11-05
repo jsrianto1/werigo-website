@@ -5,7 +5,7 @@ import { site } from "@/lib/config";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { ContactForm } from "@/components/contact/ContactForm";
 
-export const metadata = pageMetadata("Contact Werigo for Electric Scooter Rental in Bali", "Ask the Werigo Bali team about electric scooter availability, monthly rentals and hotel delivery. WhatsApp support daily, 08:00 to 20:00 WITA.", "/contact");
+export const metadata = pageMetadata("Contact Werigo for Electric Motorcycle Rental in Bali", "Ask the Werigo Bali team about electric motorcycle availability, monthly rentals and hotel delivery. WhatsApp support daily, 08:00 to 20:00 WITA.", "/contact");
 
 export default function ContactPage() {
   return (

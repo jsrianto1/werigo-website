@@ -25,7 +25,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What is Werigo?",
         answer:
-          "Werigo is a premium electric motorcycle rental service based in Bali. We deliver electric motorcycles and scooters with at least 80% battery to hotels and villas across the island's south and centre, so you can explore Bali quietly, cleanly and on your own schedule.",
+          "Werigo is a premium electric motorcycle rental service based in Bali. We deliver electric motorcycles with at least 80% battery to hotels and villas across the island's south and centre, so you can explore Bali quietly, cleanly and on your own schedule.",
       },
       {
         question: "Why does electric riding suit Bali?",
@@ -106,7 +106,7 @@ export const faqCategories: FaqCategory[] = [
           "Indonesian law requires a motorcycle licence valid in Indonesia. For most visitors that means an International Driving Permit (IDP) with the motorcycle category (A) endorsed, carried together with your home licence.",
       },
       {
-        question: "My home licence covers scooters. Is that enough?",
+        question: "Does my home motorcycle licence cover riding in Bali?",
         answer:
           "A home-country licence alone is generally not valid in Indonesia without an accompanying International Driving Permit. Police checks do occur in tourist areas, so we strongly recommend arranging an IDP before your trip.",
       },
@@ -124,7 +124,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "I've never ridden an electric motorcycle. Is it hard?",
         answer:
-          "If you can ride a scooter, you can ride electric. There are no gears and no clutch. The main difference is instant, smooth acceleration, so we walk every first-time rider through a short briefing at delivery.",
+          "If you can ride an automatic motorcycle, we can introduce you to riding electric. There are no gears and no clutch. The main difference is instant, smooth acceleration, so we walk every first-time rider through a short briefing at delivery.",
       },
       {
         question: "How does the throttle feel compared to petrol?",

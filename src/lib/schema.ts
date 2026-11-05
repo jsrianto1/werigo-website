@@ -59,7 +59,7 @@ export function homePageSchema() {
   return {
     "@context": "https://schema.org", "@type": "WebPage",
     "@id": `${site.baseUrl}/#webpage`, url: `${site.baseUrl}/`,
-    name: "Electric Scooter Rental Bali | Daily & Monthly", inLanguage: "en",
+    name: "Electric Motorcycle Rental Bali | Daily & Monthly", inLanguage: "en",
     isPartOf: { "@id": `${site.baseUrl}/#website` },
     about: { "@id": `${site.baseUrl}/#business` },
     description: site.description,
@@ -71,7 +71,7 @@ export function fleetCollectionSchema(entries: WedisonEntry[]) {
   return {
     "@context": "https://schema.org", "@type": "CollectionPage",
     "@id": `${site.baseUrl}/fleet#webpage`, url: `${site.baseUrl}/fleet`,
-    name: "Compare Electric Scooters & Rates in Bali", inLanguage: "en",
+    name: "Compare Electric Motorcycles & Rates in Bali", inLanguage: "en",
     isPartOf: { "@id": `${site.baseUrl}/#website` },
     about: { "@id": `${site.baseUrl}/#business` },
     breadcrumb: { "@id": `${site.baseUrl}/fleet#breadcrumb` },

@@ -73,10 +73,10 @@ export const wedisonFleet: WedisonEntry[] = [
     variant: null,
     displayName: "Wedison Bees",
     primaryCard: true,
-    positioning: "Compact and lightweight urban electric scooter",
+    positioning: "Compact and lightweight urban electric motorcycle",
     bestFor: "Short hops between beach clubs, cafés and warungs",
     description:
-      "The Wedison Bees is a light, nimble urban electric scooter. It is made for short hops between beach clubs, coworking spots and warungs. It is easy to park, simple to handle in traffic, and quiet enough to hear the ocean on the way.",
+      "The Wedison Bees is a light, nimble urban electric motorcycle. It is made for short hops between beach clubs, coworking spots and warungs. It is easy to park, simple to handle in traffic, and quiet enough to hear the ocean on the way.",
     motorW: 1200,
     topSpeedKmh: 55,
     batteryWh: 1600,

@@ -1,6 +1,7 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { site } from "@/lib/config";
+import { cmsPublicationDate } from "@/lib/cms";
 import { extractSitemapEntry, isPublicPage, renderSitemap, type SitemapEntry, type SitemapKind } from "./sitemap-content";
 
 interface PrerenderManifest {
@@ -8,8 +9,7 @@ interface PrerenderManifest {
 }
 
 /**
- * Content currently ships as Next prerendered pages, not a CMS collection.
- * Reading that release's HTML keeps publication, canonical and robots decisions
+ * Reading the release's HTML keeps publication, canonical and robots decisions
  * identical to the page itself. A new published chapter/area needs no sitemap edit.
  * Requires the full .next/server/app output used by our Node/Hostinger deployment.
  */
@@ -17,6 +17,7 @@ async function readPublishedEntries(): Promise<SitemapEntry[]> {
   const root = process.cwd();
   const manifest: PrerenderManifest = JSON.parse(await readFile(path.join(root, ".next/prerender-manifest.json"), "utf8"));
   const dates: Record<string, string> = JSON.parse(await readFile(path.join(root, ".next/sitemap-dates.json"), "utf8"));
+  const homePublishedAt = await cmsPublicationDate("home");
   const entries = await Promise.all(Object.entries(manifest.routes).map(async ([route, info]) => {
     if (!isPublicPage(route) || (info.initialStatus ?? 200) !== 200) return null;
     const headers = Object.entries(info.initialHeaders ?? {});
@@ -36,7 +37,8 @@ async function readPublishedEntries(): Promise<SitemapEntry[]> {
     if (!modified || !Number.isFinite(Date.parse(modified)) || Date.parse(modified) > Date.now()) {
       throw new Error(`Missing or invalid content date for ${route}; run the complete production build.`);
     }
-    entry.lastModified = modified;
+    entry.lastModified = route === "/" && homePublishedAt && Date.parse(homePublishedAt) > Date.parse(modified)
+      ? homePublishedAt : modified;
     const validImages = await Promise.all(entry.images.map(async src => {
       const pathname = decodeURIComponent(new URL(src).pathname);
       const publicRoot = path.resolve(root, "public");

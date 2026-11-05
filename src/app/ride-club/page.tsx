@@ -8,7 +8,7 @@ import { formatIdr } from "@/lib/pricing";
 export const dynamic="force-dynamic";
 async function available(){try{return await rideClubReady();}catch{return false;}}
 export async function generateMetadata():Promise<Metadata>{
-  return {title:"Werigo Ride Club | Rental Rewards in Bali",description:"Earn Ride Points on completed electric scooter rentals in Bali. Silver, Gold and Platinum rewards for your next rental or extension.",alternates:{canonical:"/ride-club"},robots:{index:await available(),follow:true}};
+  return {title:"Werigo Ride Club | Rental Rewards in Bali",description:"Earn Ride Points on completed electric motorcycle rentals in Bali. Silver, Gold and Platinum rewards for your next rental or extension.",alternates:{canonical:"/ride-club"},robots:{index:await available(),follow:true}};
 }
 export default async function RideClubPage(){
   const ready=await available();

@@ -173,7 +173,7 @@ export function WelcomeOffer() {
               </div>
               <Image
                 src="/media/fleet/athena/cutout-green.webp"
-                alt="Wedison Athena electric scooter in green"
+                alt="Wedison Athena electric motorcycle in green"
                 width={1380}
                 height={1380}
                 sizes="(min-width: 768px) 400px, 60vw"
@@ -203,7 +203,7 @@ export function WelcomeOffer() {
                 </p>
               )}
               <p className="mt-2 text-base font-semibold text-primary-strong md:mt-3 md:text-lg">
-                <T>{promo!.firstBookingOnly ? "your first electric scooter rental" : "your electric scooter rental"}</T>
+                <T>{promo!.firstBookingOnly ? "your first electric motorcycle rental" : "your electric motorcycle rental"}</T>
               </p>
               <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink-soft md:mt-3"><T>{"Create your Werigo account and make your first Bali ride a little sweeter."}</T></p>
               <Link

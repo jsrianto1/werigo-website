@@ -78,7 +78,7 @@ export function ReferralDashboard({ siteUrl }: { siteUrl: string }) {
   if (!data) return <div className="h-72 animate-pulse rounded-[14px] bg-sunken" aria-busy="true" />;
 
   const link = `${siteUrl}/book?ref=${encodeURIComponent(data.code)}`;
-  const shareText = `Rent an electric scooter in Bali with Werigo and get ${data.refereeDiscountPercent}% off your first rental with my code ${data.code}: ${link}`;
+  const shareText = `Rent an electric motorcycle in Bali with Werigo and get ${data.refereeDiscountPercent}% off your first rental with my code ${data.code}: ${link}`;
   const canRequest = data.availableIdr >= data.minPayoutIdr && !data.payouts.some((p) => p.status === "requested");
 
   async function copy(kind: "code" | "link") {

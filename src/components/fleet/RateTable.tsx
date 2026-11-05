@@ -18,8 +18,8 @@ import { getUsdIdrRate } from "@/lib/exchangeRate";
  *
  * variant="card": a three-tier strip (Daily / Weekly / Monthly) with
  * the 2 Weeks and 3 Weeks tiers inside an accessible
- * "View all duration rates" expander. Monthly carries a small
- * "Best rate" tag because it is factually the lowest per-day rate.
+ * "View all duration rates" expander. The monthly rate states its
+ * qualifying duration without comparing the model with other bikes.
  * variant="full": the complete five-tier table for detail pages.
  */
 export async function RateTable({
@@ -106,12 +106,12 @@ export async function RateTable({
       >
         {primary.map((id, i) => {
           const t = tier(id);
-          const best = id === "monthly";
+          const monthly = id === "monthly";
           return (
             <div
               key={id}
               className={`min-w-0 px-1.5 py-2.5 text-center ${i > 0 ? "border-l border-line" : ""} ${
-                best ? "bg-primary-faint" : ""
+                monthly ? "bg-primary-faint" : ""
               }`}
             >
               <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
@@ -121,17 +121,16 @@ export async function RateTable({
                 {formatIdr(amount(id))}
               </p>
               <p className="tnum text-[11px] text-ink-faint">
+                <T>{"per day"}</T>
                 {usd(id) ? (
-                  <span aria-describedby={noteId} title={usdEstimateNote}>
-                    {usd(id)}<T>{"/day"}</T>
+                  <span aria-describedby={noteId} title={usdEstimateNote} className="block whitespace-nowrap text-[10px]">
+                    {usd(id)}
                   </span>
-                ) : (
-                  <T>{"per day"}</T>
-                )}
+                ) : null}
               </p>
-              {best ? (
+              {monthly ? (
                 <p className="mt-1">
-                  <span className="rounded-full bg-primary px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide text-white"><T>{"Best rate"}</T>{" "}</span>
+                  <span className="text-[10px] font-medium text-ink-soft"><T>{"1 month+"}</T></span>
                 </p>
               ) : null}
             </div>
