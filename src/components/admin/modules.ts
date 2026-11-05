@@ -1,4 +1,4 @@
-import { Award, BadgePercent, Bell, Boxes, ClipboardList, ScrollText, Share2, UserCog, Users } from "lucide-react";
+import { Award, BadgePercent, Bell, Boxes, ClipboardList, FilePenLine, ScrollText, Share2, UserCog, Users } from "lucide-react";
 
 /**
  * Staff modules, in menu order. Adding an entry here puts it in the
@@ -19,6 +19,13 @@ export const MODULE_GROUPS = ["Operations", "Growth", "Administration"] as const
 export type ModuleGroup = (typeof MODULE_GROUPS)[number];
 
 export const MODULES: readonly AdminModule[] = [
+  {
+    href: "/admin/content",
+    label: "Content Studio",
+    description: "Website copy, FAQs, SEO and recommended places. Draft, preview and publish.",
+    icon: FilePenLine,
+    group: "Growth",
+  },
   {
     href: "/admin/bookings",
     label: "Bookings",

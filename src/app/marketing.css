@@ -63,10 +63,16 @@
 .essentials-list li span span { display: block; font-size: .8125rem; margin-top: 4px; color: var(--ink-soft); }
 .charging-panel { background: var(--brand-primary-faint); padding: 32px; border-radius: 16px; }
 .charging-photo { display: block; object-fit: contain; width: 100%; height: 300px; margin-bottom: 24px; border-radius: 8px; }
-.rental-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
-.step-number { display: block; padding-bottom: 18px; border-bottom: 1px solid var(--line-strong); font-size: .75rem; font-weight: 700; color: var(--brand-primary); }
-.rental-steps h3 { font-family: var(--font-manrope), sans-serif; font-weight: 700; font-size: 1.125rem; margin-top: 22px; }
-.rental-steps p { color: var(--ink-soft); font-size: .875rem; line-height: 1.75; margin-top: 12px; }
+.rental-guide { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 36px 32px; }
+.rental-guide-heading { max-width: 720px; }
+.rental-guide-heading h2 { margin-top: 14px; }
+.rental-guide-intro { margin-top: 14px; color: var(--ink-soft); font-size: .9375rem; line-height: 1.7; }
+.rental-guide-action { grid-column: 2; grid-row: 1; justify-self: end; }
+.rental-steps { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px; }
+.rental-steps li { min-width: 0; border-top: 1px solid var(--line-strong); padding-top: 20px; }
+.step-number { display: block; margin-bottom: 18px; font-size: .75rem; font-weight: 700; color: var(--brand-primary); font-variant-numeric: tabular-nums; }
+.rental-steps h3 { font-family: var(--font-manrope), sans-serif; font-weight: 700; font-size: 1.125rem; line-height: 1.4; }
+.rental-steps p { color: var(--ink-soft); font-size: .875rem; line-height: 1.7; margin-top: 10px; max-width: 32ch; }
 .destination-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .destination-tile { position: relative; height: 340px; overflow: hidden; border-radius: 12px; background: #102a31; }
 .destination-tile > span { position: absolute; top: 20px; left: 20px; right: 20px; padding: 14px 16px; border-radius: 8px; color: #102a31; background: #fff; display: flex; justify-content: space-between; align-items: center; font-weight: 650; }
@@ -110,7 +116,15 @@
   .charging-panel { padding: 24px; }
   .destination-grid { grid-template-columns: 1fr; gap: 20px; }
   .destination-tile { height: 300px; }
-  .rental-steps { gap: 32px 24px; }
+  .rental-guide { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  .rental-guide-heading h2 { font-size: clamp(1.8rem,7.5vw,2.5rem); }
+  .rental-guide-action { grid-column: 1; grid-row: 3; justify-self: stretch; }
+  .rental-steps { grid-template-columns: minmax(0,1fr); gap: 0; }
+  .rental-steps li { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 14px; border-top: 0; border-bottom: 1px solid var(--line); padding: 20px 0; }
+  .rental-steps li:first-child { border-top: 1px solid var(--line-strong); }
+  .step-number { margin: 4px 0 0; }
+  .rental-steps h3 { font-size: 1.0625rem; }
+  .rental-steps p { margin-top: 6px; max-width: none; }
 }
 @media (prefers-reduced-motion: reduce) { .vehicle-photo img { transition: none; } }
 
