@@ -7,10 +7,10 @@ import { randomUUID } from "node:crypto";
 import ts from "typescript";
 const require=createRequire(import.meta.url);
 function load(file,mocks={},extra={}) {
-  const module={exports:{}};
+  const compiledModule={exports:{}};
   const code=ts.transpileModule(readFileSync(file,"utf8"),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
-  vm.runInNewContext(code,{module,exports:module.exports,require:key=>key in mocks?mocks[key]:require(key),Response,Request,Headers,URL,TextDecoder,Uint8Array,console:{warn:()=>{}},...extra},{filename:file});
-  return module.exports;
+  vm.runInNewContext(code,{module:compiledModule,exports:compiledModule.exports,require:key=>key in mocks?mocks[key]:require(key),Response,Request,Headers,URL,TextDecoder,Uint8Array,console:{warn:()=>{}},...extra},{filename:file});
+  return compiledModule.exports;
 }
 const {createSupportHandler,SUPPORT_RECIPIENTS}=load("src/lib/support.ts");
 const origin="https://werigo.co";

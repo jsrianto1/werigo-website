@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "fd8d5f72a88f4ca5979b8e2ed29d24accfdcd5b5b81448fd458723f3a43a6fc6",
+  "fingerprint": "6e3f3067d3cdac21d2f0d5c8459f514e70c0211cf1791d2777d5fcce48e1e74a",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -193,6 +193,10 @@
     {
       "file": "public/brand/riding-motorcycle.png",
       "hash": "61e29273861cee80defae78eda7413e8eea7c7fac889319eabaaca53dda79aa3"
+    },
+    {
+      "file": "public/brand/werigo-concierge-polo.png",
+      "hash": "26750d321bebfcb64f9a3a396f444b9e8e2244cde77c66af9b7897095ae843e4"
     },
     {
       "file": "public/brand/werigo-logo-compact.png",
@@ -12183,6 +12187,10 @@
       "hash": "d2ccca393f06f9f078798bc4ad3911df209c1ecb3f036f5ebe1a183c91fbc3ce"
     },
     {
+      "file": "scripts/support-test.mjs",
+      "hash": "15a1968957203cb9a32fd6843ca59182ad75c8680d46784deaa44b8592cd572a"
+    },
+    {
       "file": "scripts/ux-check.mjs",
       "hash": "91337b1aa582f4986610dc8a00bfbab04876372ac6e940059e320a01429911fa"
     },
@@ -12501,6 +12509,10 @@
     {
       "file": "src/app/api/saga/stats/route.ts",
       "hash": "1b4ce3aab635f9b606b1b0809021f5ad010b0e54c4700917a8684892ccf967e8"
+    },
+    {
+      "file": "src/app/api/support/route.ts",
+      "hash": "a460dc0fa1f3d5378c72819c81eb8479c0208353f3920916fa86bf782f1b5ff1"
     },
     {
       "file": "src/app/app/account/page.tsx",
@@ -12968,7 +12980,7 @@
     },
     {
       "file": "src/components/contact/ContactForm.tsx",
-      "hash": "8b9d2c145cbaa538caf4062567c4ff9f629820fcbe98a7add2ae20a9da3598b5"
+      "hash": "12bdb1f67d6cfaa5deccaa31fde98a7f1e49d7e96ab5292417f4cf61769cb598"
     },
     {
       "file": "src/components/fleet/BenefitChips.tsx",
@@ -13015,8 +13027,16 @@
       "hash": "3dd2d8f1e196fbf0f8ca451411c7584c5d030720eee5efc9e35ae5deae064a11"
     },
     {
+      "file": "src/components/layout/Header.module.css",
+      "hash": "40107fc5391413545e2575fd177327395c2fe1f0f5e47dbef64b81ef7b1f940b"
+    },
+    {
       "file": "src/components/layout/Header.tsx",
-      "hash": "bc2cb920db12f640fa3171f14f6ee1c53b34525528bca67cb56a2360a5675ae1"
+      "hash": "e0c1c5d9366bd4c13876c7f4ee2e5bb6b462f1c761cd54b40cf0745042de6fd3"
+    },
+    {
+      "file": "src/components/layout/HeaderNavigation.tsx",
+      "hash": "5080d155fa020273d94e26a0e71fc367b939c89e5b02ece17d11679da1ebbc13"
     },
     {
       "file": "src/components/layout/HideOnAdmin.tsx",
@@ -13024,7 +13044,11 @@
     },
     {
       "file": "src/components/layout/MobileDrawer.tsx",
-      "hash": "a5a210c80c5cb8fb9dd006399eba369bace07109da14f199b59b7aa79e559397"
+      "hash": "0f847e76d67ad571c407a482af8d3e84085ccd719be1e7cd5793af4b44302221"
+    },
+    {
+      "file": "src/components/layout/header-navigation-data.ts",
+      "hash": "52174e8a4e92401804dcfaa27864d1a8a24acc617aaab75b8ac59ff90f77c7a0"
     },
     {
       "file": "src/components/marketing/WelcomeOffer.tsx",
@@ -13163,6 +13187,18 @@
       "hash": "5b279857f9d5724121eebd6f14dad4c01930896e81812ce4549c31dab56beafc"
     },
     {
+      "file": "src/components/support/Support.module.css",
+      "hash": "a14c25145cbce96e2527a902464a8d7395fec5ece8ae5529ea7b32811339ce41"
+    },
+    {
+      "file": "src/components/support/SupportForm.tsx",
+      "hash": "4e76de0449e278cb1e785718f52a9e7309bda6eedb5ea357527d7130f210cf24"
+    },
+    {
+      "file": "src/components/support/WerigoConcierge.tsx",
+      "hash": "60931ee54e51a7b74e18d51b2a43c8ec16ba7fca14c48967ff1308fdd0f8620e"
+    },
+    {
       "file": "src/components/ui/Accordion.tsx",
       "hash": "cedb13f3872dd68f68611c6078358e41d2adcb5f43b35e0ea33f422ab8efaa87"
     },
@@ -13176,7 +13212,7 @@
     },
     {
       "file": "src/components/ui/FloatingWhatsApp.tsx",
-      "hash": "aa5b2764e3c614fc7b2966f3381a341cd85daae777882c4bf8afbcb1fe1810f1"
+      "hash": "b27e6a58f5d7c2c8488cf9b74d4a346048b6c303ac7b46d70def3b1e2a14c075"
     },
     {
       "file": "src/components/ui/Logo.tsx",
@@ -13319,8 +13355,16 @@
       "hash": "cb0aa443a650c92c4f91ede636d1a0fd2f232c487bd140a930a47b2c850da089"
     },
     {
+      "file": "src/data/supportFaqs.ts",
+      "hash": "8d066986c5ca1d6b245cf86a73591245d2915fd600ba25bd5f60c62ea30a556c"
+    },
+    {
+      "file": "src/data/supportTranslations.json",
+      "hash": "da3bdfffd3c977ae0fadd20b8dbf71cbefa52fbcd2d2c1d96e505209669ac89e"
+    },
+    {
       "file": "src/data/translations.json",
-      "hash": "973bd679579ca3b43a5ea529567a323ba50496b241df1be0c07cd18b98c9acfc"
+      "hash": "633eae03537e29c5a33ac6a0b73160a135c90231e5209059b3cdf824fdcce319"
     },
     {
       "file": "src/data/vehicles.ts",
@@ -13480,7 +13524,7 @@
     },
     {
       "file": "src/lib/i18n.ts",
-      "hash": "54f33e152b34d2a0197fd56b483becab315a7c014bbbc4de1fe7aa3723ddb1c2"
+      "hash": "abc796437cfb8957cbf5e7874f49c37ca6b8acdf7bd2b74ebe4776dcb7cea3a3"
     },
     {
       "file": "src/lib/identity.ts",
@@ -13492,7 +13536,7 @@
     },
     {
       "file": "src/lib/mailer.ts",
-      "hash": "4f3a825a674ae151a2a6e07880aa3bb252c9513aed7a669d7f3208a25fe14075"
+      "hash": "67309f9e0309d0bdb835f8cfa684c4c2f090d07f387ae8b10c06ec6676dfa660"
     },
     {
       "file": "src/lib/midtrans.ts",
@@ -13619,6 +13663,10 @@
       "hash": "7bb1517193da73ed2635306a24615b7942a2545b253771340d4d6dd5dbd360ae"
     },
     {
+      "file": "src/lib/support.ts",
+      "hash": "664b93d33b879051907bf1a02eed72aba2b37651559e7a09e3871532427db378"
+    },
+    {
       "file": "src/lib/useSagaLang.ts",
       "hash": "1b5db61e9d4e61430fb2430dd53ca8a3548da068f8e92a5538941742c422956e"
     },
@@ -13644,53 +13692,53 @@
     }
   ],
   "dates": {
-    "/": "2026-11-08T13:28:16+08:00",
-    "/about": "2026-11-08T13:28:16+08:00",
-    "/book": "2026-11-08T13:28:16+08:00",
-    "/contact": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/canggu": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/denpasar": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/jimbaran": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/kuta": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/sanur": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/seminyak": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/ubud": "2026-11-08T13:28:16+08:00",
-    "/delivery-areas/uluwatu": "2026-11-08T13:28:16+08:00",
-    "/fleet": "2026-11-08T13:28:16+08:00",
-    "/fleet/athena": "2026-11-08T13:28:16+08:00",
-    "/fleet/bees": "2026-11-08T13:28:16+08:00",
-    "/fleet/edpower": "2026-11-08T13:28:16+08:00",
-    "/fleet/victory": "2026-11-08T13:28:16+08:00",
-    "/help-center": "2026-11-08T13:28:16+08:00",
-    "/how-it-works": "2026-11-08T13:28:16+08:00",
-    "/monthly-scooter-rental-bali": "2026-11-08T13:28:16+08:00",
-    "/partners": "2026-11-08T13:28:16+08:00",
-    "/saga": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-1": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-10": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-11": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-12": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-13": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-14": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-15": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-16": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-17": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-18": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-19": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-2": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-20": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-21": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-22": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-23": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-3": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-4": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-5": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-6": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-7": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-8": "2026-11-08T13:28:16+08:00",
-    "/saga/chapter-9": "2026-11-08T13:28:16+08:00",
-    "/supercharge": "2026-11-08T13:28:16+08:00"
+    "/": "2026-11-08T23:05:09+08:00",
+    "/about": "2026-11-08T23:05:09+08:00",
+    "/book": "2026-11-08T23:05:09+08:00",
+    "/contact": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/canggu": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/denpasar": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/jimbaran": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/kuta": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/sanur": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/seminyak": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/ubud": "2026-11-08T23:05:09+08:00",
+    "/delivery-areas/uluwatu": "2026-11-08T23:05:09+08:00",
+    "/fleet": "2026-11-08T23:05:09+08:00",
+    "/fleet/athena": "2026-11-08T23:05:09+08:00",
+    "/fleet/bees": "2026-11-08T23:05:09+08:00",
+    "/fleet/edpower": "2026-11-08T23:05:09+08:00",
+    "/fleet/victory": "2026-11-08T23:05:09+08:00",
+    "/help-center": "2026-11-08T23:05:09+08:00",
+    "/how-it-works": "2026-11-08T23:05:09+08:00",
+    "/monthly-scooter-rental-bali": "2026-11-08T23:05:09+08:00",
+    "/partners": "2026-11-08T23:05:09+08:00",
+    "/saga": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-1": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-10": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-11": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-12": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-13": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-14": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-15": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-16": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-17": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-18": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-19": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-2": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-20": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-21": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-22": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-23": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-3": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-4": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-5": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-6": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-7": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-8": "2026-11-08T23:05:09+08:00",
+    "/saga/chapter-9": "2026-11-08T23:05:09+08:00",
+    "/supercharge": "2026-11-08T23:05:09+08:00"
   },
   "hostingSettings": {
     "next.config.ts": "import type { NextConfig } from \"next\";\r\n\r\nconst nextConfig: NextConfig = {\r\n  poweredByHeader: false,\r\n  // Hostinger reports host CPU count; keep static generation within its process limit.\r\n  experimental: { cpus: 1 },\r\n  images: { formats: [\"image/avif\", \"image/webp\"] },\r\n  async headers() {\r\n    return [\r\n      {\r\n        source: \"/:path*\",\r\n        headers: [\r\n          { key: \"Strict-Transport-Security\", value: \"max-age=31536000\" },\r\n          { key: \"X-Frame-Options\", value: \"SAMEORIGIN\" },\r\n          { key: \"X-Content-Type-Options\", value: \"nosniff\" },\r\n          { key: \"Referrer-Policy\", value: \"strict-origin-when-cross-origin\" },\r\n          { key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=()\" },\r\n          { key: \"Content-Security-Policy\", value: \"base-uri 'self'; object-src 'none'; frame-ancestors 'self'\" },\r\n          // Stage script restrictions without disrupting Next hydration, GTM or Meta.\r\n          { key: \"Content-Security-Policy-Report-Only\", value: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://app.sandbox.midtrans.com https://app.midtrans.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.google-analytics.com https://*.googletagmanager.com https://www.facebook.com https://*.midtrans.com https://lh3.googleusercontent.com; font-src 'self'; media-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com; frame-src https://www.googletagmanager.com https://app.sandbox.midtrans.com https://app.midtrans.com https://api.sandbox.midtrans.com https://api.midtrans.com https://accounts.google.com; base-uri 'self'; object-src 'none'\" },\r\n        ],\r\n      },\r\n      { source: \"/media/:path*.webm\", headers: [{ key: \"Content-Type\", value: \"video/webm\" }] },\r\n      { source: \"/media/:path*.mp4\", headers: [{ key: \"Content-Type\", value: \"video/mp4\" }] },\r\n      { source: \"/book/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n      { source: \"/app/:path*\", headers: [{ key: \"Permissions-Policy\", value: \"camera=(), microphone=(), geolocation=(self)\" }] },\r\n    ];\r\n  },\r\n  async redirects() {\r\n    return [\r\n      // WERIGO SAGA installments are \"chapters\" (it is a comic, not a series).\r\n      // Old /saga/episode-N links keep working; ?lang=id passes through.\r\n      {\r\n        source: \"/saga/episode-:n(\\\\d{1,})\",\r\n        destination: \"/saga/chapter-:n\",\r\n        permanent: true,\r\n      },\r\n    ];\r\n  },\r\n};\r\n\r\nexport default nextConfig;\r\n",
