@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "6e3f3067d3cdac21d2f0d5c8459f514e70c0211cf1791d2777d5fcce48e1e74a",
+  "fingerprint": "44c9fdb6ca3c16a83d23e0fc314c942dce355db4788b0ebed272b38082b5cfe0",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12188,7 +12188,7 @@
     },
     {
       "file": "scripts/support-test.mjs",
-      "hash": "15a1968957203cb9a32fd6843ca59182ad75c8680d46784deaa44b8592cd572a"
+      "hash": "39989093b0978d68f186c6c00de82cdca89aa8f34ef2a760fa398e9aa28c221c"
     },
     {
       "file": "scripts/ux-check.mjs",
