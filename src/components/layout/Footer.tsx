@@ -69,7 +69,6 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Logo variant="footer" />
-            <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.14em] text-ink-inverse/50"><T>{"Powered by Wedison"}</T>{" "}</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-inverse/70"><T>{"Werigo is Wedison's electric motorcycle rental and mobility service in Bali. Official Wedison electric motorcycles, delivered to your door with at least 80% battery, ready to ride."}</T>{" "}</p>
             <div className="mt-5 flex gap-3">
               <a

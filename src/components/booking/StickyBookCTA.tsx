@@ -32,7 +32,7 @@ export function StickyBookCTA({ targetId }: { targetId: string }) {
 
   return (
     <div
-      className="rise-in fixed inset-x-0 bottom-0 z-40 border-t border-line bg-page/95 px-4 pt-3 backdrop-blur-sm md:hidden"
+      className="site-booking-dock rise-in fixed inset-x-0 bottom-0 z-40 border-t border-line bg-page/95 px-4 pt-3 backdrop-blur-sm md:hidden"
       style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))" }}
     >
       <div className="flex items-center gap-3">

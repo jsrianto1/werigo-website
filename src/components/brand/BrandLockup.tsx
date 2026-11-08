@@ -5,5 +5,5 @@ export function WedisonEndorsement({ className = "" }: { className?: string }) {
   return <span className={`brand-endorsement ${className}`}><span>Powered by</span><Image src="/app/wedison-official.png" alt="WEDISON" width={2838} height={381} unoptimized /></span>;
 }
 export function BrandLockup({ className = "" }: { className?: string }) {
-  return <span className={`brand-lockup ${className}`}><span className="brand-wordmark">WERIGO<span aria-hidden="true">.</span></span><WedisonEndorsement /></span>;
+  return <span className={`brand-lockup ${className}`}><Image className="brand-logo-art" src="/brand/werigo-logo-compact.png" alt="WERIGO" width={1217} height={482} unoptimized /><WedisonEndorsement /></span>;
 }
