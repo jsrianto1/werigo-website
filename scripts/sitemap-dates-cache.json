@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "44c9fdb6ca3c16a83d23e0fc314c942dce355db4788b0ebed272b38082b5cfe0",
+  "fingerprint": "dc80bda47832708d60b939b3ce562b53c9bf74f6168b26029e812f4fb6be9719",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12188,7 +12188,7 @@
     },
     {
       "file": "scripts/support-test.mjs",
-      "hash": "39989093b0978d68f186c6c00de82cdca89aa8f34ef2a760fa398e9aa28c221c"
+      "hash": "76d848a31ade419c079ebc776dfc2c09e44375b852f370aa3058a624a0d09f01"
     },
     {
       "file": "scripts/ux-check.mjs",
@@ -13664,7 +13664,7 @@
     },
     {
       "file": "src/lib/support.ts",
-      "hash": "664b93d33b879051907bf1a02eed72aba2b37651559e7a09e3871532427db378"
+      "hash": "9dd7473ec6adb4cbc740e5b6880c8ee37e04fd4fb24fd9de32ec7a2beab4fa83"
     },
     {
       "file": "src/lib/useSagaLang.ts",
