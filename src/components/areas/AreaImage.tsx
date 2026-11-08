@@ -43,12 +43,12 @@ export function AreaImage({
         {/* Navy/teal overlay for text contrast */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-deep/85 via-deep/35 to-transparent"
+          className="area-hero-shade absolute inset-0 bg-gradient-to-t from-deep/85 via-deep/35 to-transparent"
         />
         {children ? (
           <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">{children}</div>
         ) : null}
-        <p className="absolute right-2 top-2 rounded bg-black/35 px-1.5 py-0.5 text-[10px] text-white/75">
+        <p className="area-photo-credit absolute right-2 top-2 rounded bg-deep px-2 py-1 text-[11px] text-white">
           {media.credit}
         </p>
       </div>

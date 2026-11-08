@@ -50,7 +50,7 @@ export function PlaceholderImage({
         <span className="text-xs font-medium uppercase tracking-wider text-ink-faint">
           {label}
         </span>
-        <span className="text-[10px] text-ink-faint/70">
+        <span className="text-[10px] text-ink-soft">
           Official photography in production
         </span>
       </div>

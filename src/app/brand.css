@@ -107,3 +107,5 @@ html:has(.ride-app) { scroll-padding-bottom:calc(120px + env(safe-area-inset-bot
   .closing-cta > a { width:100%; max-width:310px; }
   body:has(.site-booking-dock) > footer { padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
 }
+
+.area-hero-shade { background:linear-gradient(0deg,#103c3bf2 0%,#103c3b80 55%,#103c3b14 100%); }
