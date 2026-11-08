@@ -1,0 +1,91 @@
+/* Electric Island: shared public identity, approved 8 November 2026. */
+:root {
+  --brand-primary:#007565; --brand-primary-strong:#00594f;
+  --brand-primary-soft:#e4f2e9; --brand-primary-faint:#eeeee5;
+  --brand-accent:#007565; --brand-accent-strong:#00594f; --brand-accent-soft:#e4f2e9;
+  --surface-page:#f5f1eb; --surface-card:#fff; --surface-sunken:#edece4; --surface-deep:#103c3b;
+  --ink:#102e2d; --ink-soft:#516765; --ink-faint:#5e716d; --ink-inverse:#f5f1eb;
+  --line:#d5ddd5; --line-strong:#afc3b7; --ring:#007565;
+  --electric-mint:#b7f5d9; --electric-gradient:linear-gradient(130deg,#34e89e -45%,#007565 28%,#103c3b 85%);
+  --brand-ease:cubic-bezier(.22,1,.36,1);
+  --font-brand-heading:var(--font-brand-display),var(--font-manrope),sans-serif;
+}
+body { --font-brand-heading:var(--font-brand-display),var(--font-manrope),sans-serif; font-family:var(--font-manrope),sans-serif; }
+.font-display,.marketing-heading,.section-intro h2,.closing-cta h2,.hero-copy h1 { font-family:var(--font-brand-heading); font-variation-settings:normal; font-weight:650; letter-spacing:-.035em; text-wrap:balance; }
+html:lang(ru) body { --font-brand-heading:var(--font-manrope),sans-serif; }
+.brand-lockup { display:inline-flex; flex-direction:column; align-items:flex-start; gap:5px; line-height:1; }
+.brand-wordmark { font-family:var(--font-brand-display),var(--font-manrope),sans-serif; font-size:31px; font-weight:750; letter-spacing:-.055em; line-height:1; color:inherit; white-space:nowrap; }
+.brand-wordmark > span { color:#007565; }
+.brand-endorsement { display:flex; align-items:center; gap:5px; white-space:nowrap; color:inherit; }
+.brand-endorsement > span { font-family:var(--font-manrope),sans-serif; font-size:7px; font-weight:600; line-height:1.4; letter-spacing:0; }
+.brand-endorsement > img { display:block; width:82px; height:auto; max-height:none; object-fit:contain; padding:3px 4px; background:#fff; border-radius:2px; }
+.brand-site-logo { display:inline-flex; align-items:center; min-height:48px; flex-shrink:0; color:#103c3b; }
+.brand-site-logo-footer { color:#f5f1eb; }
+.brand-site-logo-footer .brand-wordmark { font-size:37px; }
+.brand-site-logo-footer .brand-wordmark > span { color:#b7f5d9; }
+.brand-site-logo-footer .brand-endorsement { margin-top:3px; }
+header:has(.brand-site-logo-header) { background:#f5f1ebf5; border-color:var(--line); }
+.home-video-hero { border-radius:0 0 30px 30px; background:#103c3b; }
+.home-video-hero .hero-copy { position:relative; z-index:2; max-width:730px; }
+.home-video-hero .hero-copy h1 { font-size:clamp(3.2rem,5.7vw,5.8rem); line-height:1.04; letter-spacing:-.04em; }
+.home-video-hero .hero-lede { color:#f5f1eb; line-height:1.75; max-width:430px; }
+.home-video-hero .hero-video-scrim { background:linear-gradient(90deg,#072d30d9 0%,#082d308a 43%,#082d301a 78%); }
+.home-video-hero .hero-actions > a:first-child { background:#b7f5d9; color:#103c3b; border-radius:12px; }
+.home-video-hero .hero-actions > a:first-child:hover { background:#d5fbe7; }
+.home-brand-route { position:absolute; z-index:1; right:-6%; top:0; width:60%; height:100%; opacity:.17; pointer-events:none; color:#b7f5d9; }
+.brand-electric-route { fill:none; stroke:currentColor; stroke-width:1.2; pointer-events:none; }
+.brand-route-track { opacity:.4; }
+.brand-route-draw { opacity:.5; }
+.brand-electric-route circle { fill:currentColor; stroke:none; }
+.brand-electric-route[data-route-entered] .brand-route-draw { stroke-dasharray:1; animation:brand-route-enter 1.4s var(--brand-ease) both; }
+.proof-strip { padding-block:30px; border-top:0; border-bottom-color:var(--line); }
+.proof-strip strong { font-weight:700; }
+.vehicle-tile { border-top:0; }
+.vehicle-info { padding-top:12px; }
+.vehicle-info h2,.vehicle-info h3 { font-family:var(--font-brand-heading); font-weight:600; font-size:1.5rem; letter-spacing:-.035em; }
+.vehicle-cta { border-radius:12px; min-height:50px; }
+.charging-panel { background:#e4eee3; border-radius:24px; }
+.destination-tile { border-radius:22px; }
+#werigo-saga > div > div { background:var(--electric-gradient); border-radius:28px; }
+#werigo-saga h2 { font-family:var(--font-brand-heading); }
+#werigo-saga a.bg-\[\#2ee0b0\] { background:#b7f5d9; color:#103c3b; }
+.closing-cta { background:var(--electric-gradient); border-radius:26px; }
+.closing-cta h2 { color:#f5f1eb; }
+/* Brief reveals, not animations on payment or form controls. */
+@media (prefers-reduced-motion:no-preference) {
+  [data-brand-reveal="pending"] { opacity:0; transform:translateY(14px); }
+  [data-brand-reveal="visible"] { animation:brand-content-enter .7s var(--brand-ease) both; }
+  .vehicle-photo img,.destination-tile img { transition:transform .4s var(--brand-ease); }
+  .vehicle-cta,.hero-actions>a { transition:transform .22s var(--brand-ease),background-color .22s; }
+  .vehicle-cta:hover,.hero-actions>a:hover { transform:translateY(-2px); }
+}
+html[data-brand-paused] [data-brand-reveal],html[data-brand-paused] .brand-route-draw { animation-play-state:paused; }
+@keyframes brand-content-enter { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+@keyframes brand-route-enter { from { stroke-dashoffset:1; opacity:0; } to { stroke-dashoffset:0; opacity:.5; } }
+@media(max-width:767px) {
+  .brand-site-logo .brand-wordmark { font-size:27px; }
+  .brand-site-logo .brand-endorsement > img { width:70px; }
+  .brand-site-logo .brand-endorsement > span { font-size:6px; }
+  .home-video-hero { border-radius:0 0 24px 24px; }
+  .home-hero-inner { min-height:650px; padding:50px 22px 65px; }
+  .home-video-hero .hero-copy h1 { font-size:clamp(2.9rem,10.8vw,4.3rem); line-height:1.04; }
+  .home-video-hero .hero-lede { font-size:.95rem; max-width:310px; }
+  .home-video-hero .hero-video-scrim { background:linear-gradient(0deg,#082e32eb 0%,#082e3280 65%,#082e322a 100%); }
+  .home-brand-route { width:100%; right:-25%; opacity:.13; }
+  .hero-actions { gap:18px; margin-top:26px; }
+  .proof-strip { gap:24px 15px; padding:28px 20px; }
+  .proof-strip strong { font-size:.78rem; line-height:1.5; }
+  .proof-strip p > span { font-size:.68rem; line-height:1.6; }
+  .proof-strip svg { width:21px; }
+  .section-intro { gap:18px; margin-bottom:28px; }
+  .section-intro h2,.marketing-heading,.closing-cta h2 { font-size:clamp(2rem,8vw,2.7rem); }
+  .section-intro > p { font-size:.87rem; }
+  .charging-panel { padding:25px; border-radius:22px; }
+  .rental-date-grid { gap:20px; }
+  .rental-search-card { border-radius:20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  [data-brand-reveal],.brand-route-draw { opacity:1!important; transform:none!important; animation:none!important; }
+  .brand-electric-route .brand-route-draw { stroke-dashoffset:0; opacity:.5!important; }
+}

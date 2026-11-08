@@ -1,0 +1,123 @@
+/* Electric Island PWA. Existing rental, auth and appearance choices are retained. */
+.ride-app {
+  --font-werigo:var(--font-manrope);
+  --wg-brand:#007565; --wg-brand-strong:#00594f; --wg-deep:#103c3b;
+  --wg-mint:#b7f5d9; --wg-hero:#e4f2e9; --wg-route:#9dddc3;
+  --app-background:#f5f1eb; --app-card:#fff; --app-floating:#fffffff5;
+  --ink:#102e2d; --ink-soft:#516765; --ink-faint:#5e716d; --ink-inverse:#fff;
+  --line:#d5ddd5; --line-strong:#afc3b7; --surface-sunken:#eaece2;
+  --brand-primary:var(--wg-brand); --brand-primary-strong:var(--wg-brand-strong);
+  --brand-primary-soft:#e4f2e9; --brand-primary-faint:#eeeee5;
+  --brand-accent:var(--wg-brand); --brand-accent-strong:var(--wg-brand-strong);
+  font-family:var(--font-manrope),sans-serif;
+  padding-bottom:calc(132px + env(safe-area-inset-bottom));
+}
+.ride-app[data-theme="dark"] {
+  --wg-brand:#b7f5d9; --wg-brand-strong:#d3fae7; --wg-deep:#103c3b;
+  --wg-mint:#224d45; --wg-hero:#174640; --wg-route:#79bea5;
+  --app-background:#10302f; --app-card:#173e3a; --app-floating:#173e3af5;
+  --ink:#f5f1eb; --ink-soft:#c0d8cd; --ink-faint:#b0c9be; --ink-inverse:#103c3b;
+  --line:#39605a; --line-strong:#63877c; --surface-sunken:#224940;
+  --brand-primary-soft:#20483e; --brand-primary-faint:#183d36;
+}
+.ride-app :is(h1,h2,h3,.wg-charge-feature strong) { font-family:var(--font-brand-heading); font-weight:600; letter-spacing:-.035em; }
+.ride-app .brand-lockup { gap:6px; align-items:flex-start; color:var(--ink); }
+.ride-app .brand-wordmark { color:var(--ink); font-size:31px; }
+.ride-app[data-theme="dark"] .brand-wordmark > span { color:#b7f5d9; }
+.ride-app .brand-endorsement { gap:5px; color:var(--ink-soft); }
+.ride-app .brand-endorsement > img,.ride-app[data-theme="dark"] .brand-endorsement > img { width:82px; max-height:none; padding:3px 4px; background:#fff; }
+.ride-app .ra-content { max-width:1180px; padding:30px 28px 24px; }
+.ride-app .wg-home-masthead { margin-bottom:24px; }
+.ride-app .wg-greeting { margin-bottom:23px; line-height:1.7; }
+.ride-app .wg-home-grid { gap:26px; }
+.ride-app .wg-ride-hero {
+  display:flex; flex-direction:column; min-height:650px; padding:30px; border-radius:28px;
+  background:var(--electric-gradient); color:#f5f1eb;
+}
+.ride-app .wg-ride-hero > .wg-overline { color:#b7f5d9; font-size:9px; margin-bottom:22px; }
+.ride-app .wg-ride-hero h1 { color:#f5f1eb; font-size:clamp(46px,5vw,62px); line-height:1.02; letter-spacing:-.04em; font-weight:650; max-width:490px; }
+.ride-app .wg-ride-hero h1 > span { color:#b7f5d9; }
+.ride-app .wg-hero-description { color:#dbefe3; max-width:320px; font-size:13px; line-height:1.8; margin-top:20px; }
+.ride-app .wg-hero-route { inset:0; width:100%; height:100%; color:#b7f5d9; stroke:currentColor; stroke-width:1; opacity:.35; }
+.ride-app .wg-hero-route circle { fill:currentColor; }
+.ride-app .wg-hero-bike { position:relative; inset:auto; width:100%; height:280px; margin:15px 0 0; flex-shrink:0; isolation:isolate; }
+.ride-app .wg-hero-bike img { position:relative; width:100%; height:100%; object-fit:contain; z-index:1; filter:drop-shadow(0 18px 12px #062e3040); }
+.ride-app .wg-hero-model { position:absolute; left:0; right:0; top:5px; text-align:center; font-family:var(--font-brand-display),sans-serif; font-size:clamp(45px,6vw,77px); line-height:1; font-weight:700; letter-spacing:-.05em; color:#b7f5d928; }
+.ride-app .wg-bike-caption { position:static; color:#d6efdf; margin:16px 0 20px; font-size:8px; }
+.ride-app .wg-bike-caption i { background:#b7f5d9; }
+.ride-app .wg-rent-button,.ride-app[data-theme="dark"] .wg-rent-button { position:static; width:100%; margin-top:auto; background:#b7f5d9; color:#103c3b; min-height:55px; border-radius:12px; padding:15px 20px; font-size:14px; font-weight:700; }
+.ride-app .wg-rent-button:hover,.ride-app[data-theme="dark"] .wg-rent-button:hover { background:#d6fbea; }
+.ride-app .wg-home-side { gap:25px; }
+.ride-app .wg-section-heading h2 { font-size:31px; }
+.ride-app .wg-charge-feature { border-radius:24px; }
+.ride-app .wg-charge-feature strong { font-size:34px; }
+.ride-app .wg-club-ticket { background:var(--app-card); border-radius:24px; margin-top:26px; }
+.ride-app .wg-club-ticket strong { font-family:var(--font-brand-heading); font-weight:600; }
+.ride-app .wg-ticket-wing { display:none; }
+.ride-app .ra-nav { border:1px solid var(--line); background:var(--app-floating); box-shadow:0 8px 30px #103c3b14; border-radius:25px; width:calc(100% - 32px); max-width:530px; bottom:calc(16px + env(safe-area-inset-bottom)); padding:7px; }
+.ride-app .ra-nav a,.ride-app .ra-nav a.is-active { color:var(--ink-soft); min-height:57px; font-size:10px; font-weight:600; border-radius:18px; }
+.ride-app .ra-nav a.is-active { color:#00594f; background:#dff3e7; font-weight:750; }
+.ride-app .ra-nav a:hover { color:var(--wg-brand); background:var(--surface-sunken); }
+.ride-app .ra-nav a.is-active:hover { color:#00594f; background:#ccebdc; }
+.ride-app .ra-nav a:focus-visible { outline-color:var(--wg-brand); }
+.ride-app .wg-auth-story { background:var(--electric-gradient); color:#f5f1eb; border-radius:28px; }
+.ride-app .wg-auth-story .brand-lockup,.ride-app .wg-auth-story .brand-wordmark { color:#f5f1eb; }
+.ride-app .wg-auth-story .brand-endorsement { color:#d6efdf; }
+.ride-app .wg-auth-story .brand-wordmark > span { color:#b7f5d9; }
+.ride-app .wg-auth-story h1 { color:#f5f1eb; font-family:var(--font-brand-heading); }
+.ride-app .wg-auth-story h1 > span { color:#b7f5d9; }
+.ride-app .wg-auth-story .wr-auth-intro { color:#d6efdf; }
+.ride-app .wg-auth-story .wg-overline { color:#b7f5d9; }
+.ride-app .wg-auth-form input:not([type="checkbox"]) { background-color:var(--app-card); color:var(--ink); -webkit-text-fill-color:var(--ink); }
+.ride-app .wg-auth-form input:autofill { box-shadow:0 0 0 1000px var(--app-card) inset; -webkit-text-fill-color:var(--ink); caret-color:var(--ink); }
+.ride-app :is(input,select,textarea) { min-width:0; font-family:var(--font-manrope),sans-serif; }
+.ride-app :is(.wg-bike-photo,.wg-bike-story-photo) { background:transparent; }
+.ride-app .wg-bike-photo img,.ride-app .wg-bike-story-photo img { object-fit:contain; }
+.ride-app .wr-date-grid { gap:20px; }
+.ride-app .wr-price-caption { color:var(--ink-soft); }
+.ride-app .wr-price-caption strong { color:var(--ink); }
+@media(min-width:900px) {
+  .ride-app .wg-ride-hero { min-height:580px; padding:27px; }
+  .ride-app .wg-ride-hero h1 { font-size:56px; }
+  .ride-app .wg-hero-bike { height:210px; }
+}
+@media(max-width:760px) {
+  .ride-app .ra-content { padding:22px 20px 24px; }
+  .ride-app.wr-hub-shell .ra-content { padding-top:calc(25px + env(safe-area-inset-top)); }
+  .ride-app .brand-wordmark { font-size:29px; }
+  .ride-app .wg-greeting { font-size:11px; gap:15px; margin-bottom:22px; }
+  .ride-app .wg-home-grid { gap:22px; }
+  .ride-app .wg-ride-hero { min-height:0; padding:27px 23px 23px; border-radius:25px; }
+  .ride-app .wg-ride-hero h1 { font-size:clamp(40px,11.6vw,55px); line-height:1.04; letter-spacing:-.04em; }
+  .ride-app .wg-ride-hero > .wg-overline { font-size:8px; margin-bottom:18px; letter-spacing:.11em; }
+  .ride-app .wg-hero-description { font-size:12px; margin-top:17px; max-width:270px; }
+  .ride-app .wg-hero-bike { position:relative; inset:auto; height:245px; margin:19px 0 0; }
+  .ride-app .wg-hero-model { font-size:clamp(40px,13vw,63px); top:11px; }
+  .ride-app .wg-bike-caption { position:static; margin:17px 0 19px; font-size:7px; }
+  .ride-app .wg-rent-button,.ride-app[data-theme="dark"] .wg-rent-button { position:static; width:100%; min-height:54px; font-size:14px; margin-top:0; }
+  .ride-app .wg-section-heading h2 { font-size:29px; }
+  .ride-app .wg-club-ticket { padding:24px 20px; gap:16px; }
+  .ride-app .wg-club-ticket strong { font-size:23px; line-height:1.15; }
+  .ride-app .wg-ticket-icon { width:43px; height:43px; }
+  .ride-app .wg-charge-feature strong { font-size:30px; }
+  .ride-app .wg-auth-story { padding:23px; min-height:300px; }
+  .ride-app .wg-auth h1 { font-size:clamp(31px,9vw,37px); line-height:1.04; max-width:62%; }
+  .ride-app .wg-auth-bike { width:35%; height:175px; top:108px; bottom:auto; left:auto; right:10px; }
+  .ride-app .wg-auth .wr-auth-intro { max-width:58%; font-size:11px; }
+}
+@media(max-width:359px) {
+  .ride-app .ra-content { padding-inline:16px; }
+  .ride-app .wg-ride-hero { padding:24px 19px; }
+  .ride-app .wg-ride-hero h1 { font-size:38px; }
+  .ride-app .wg-hero-bike { height:215px; }
+  .ride-app .wg-greeting { align-items:flex-start; }
+  .ride-app .wg-greeting p { max-width:210px; }
+  .ride-app .ra-nav { width:calc(100% - 24px); }
+  .ride-app .ra-nav a { font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ride-app :is(a,button,img,svg) { animation:none!important; transition:none!important; }
+}
+
+.ride-app .wg-auth-perks > span { color:#d6efdf; }
+.ride-app .wg-bike-check { background:var(--app-card); border-color:var(--line-strong); }

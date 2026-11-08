@@ -17,6 +17,7 @@ import { serviceAreas } from "@/data/locations";
 import { confirmedBenefits } from "@/data/commercialTerms";
 import { faqSchema, homePageSchema, jsonLd } from "@/lib/schema";
 import { ratesIdrPerDay, formatIdr } from "@/lib/pricing";
+import { ElectricRoute } from "@/components/brand/ElectricRoute";
 import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { SagaTeaser } from "@/components/home/SagaTeaser";
 
@@ -32,6 +33,7 @@ export function HomeContent({ content }: { content: HomeContentData }) {
     <>
       <section className="home-video-hero" aria-labelledby="home-title">
         <HeroBackdrop />
+        <ElectricRoute className="home-brand-route"/>
         <div className="home-hero-inner"><div className="hero-copy">
           <p className="eyebrow"><CmsText value={content.copy.heroEyebrow}/></p>
           <h1 id="home-title"><CmsText value={content.copy.heroTitle1}/><br /><CmsText value={content.copy.heroTitle2}/></h1>
