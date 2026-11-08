@@ -4,9 +4,9 @@
   --brand-primary-soft:#e4f2e9; --brand-primary-faint:#eeeee5;
   --brand-accent:#007565; --brand-accent-strong:#00594f; --brand-accent-soft:#e4f2e9;
   --surface-page:#f5f1eb; --surface-card:#fff; --surface-sunken:#edece4; --surface-deep:#103c3b;
-  --ink:#102e2d; --ink-soft:#516765; --ink-faint:#5e716d; --ink-inverse:#f5f1eb;
+  --ink:#102e2d; --ink-soft:#516765; --ink-faint:#526963; --ink-inverse:#f5f1eb;
   --line:#d5ddd5; --line-strong:#afc3b7; --ring:#007565;
-  --electric-mint:#b7f5d9; --electric-gradient:linear-gradient(130deg,#34e89e -45%,#007565 28%,#103c3b 85%);
+  --electric-mint:#b7f5d9; --electric-gradient:linear-gradient(130deg,#007565 0%,#005f54 45%,#103c3b 100%);
   --brand-ease:cubic-bezier(.22,1,.36,1);
   --font-brand-heading:var(--font-brand-display),var(--font-manrope),sans-serif;
 }
@@ -88,4 +88,30 @@ html[data-brand-paused] [data-brand-reveal],html[data-brand-paused] .brand-route
   html { scroll-behavior:auto; }
   [data-brand-reveal],.brand-route-draw { opacity:1!important; transform:none!important; animation:none!important; }
   .brand-electric-route .brand-route-draw { stroke-dashoffset:0; opacity:.5!important; }
+}
+
+/* Contrast-safe branded panels and restored official WERIGO artwork. */
+.brand-logo-art { display:block; width:114px; height:auto; max-height:none; object-fit:contain; background:#fff; border-radius:5px; }
+.brand-site-logo-footer .brand-logo-art { width:150px; }
+.closing-cta { padding:48px 26px; color:#f5f1eb; }
+.closing-cta p { color:#e0f2e8; max-width:42ch; margin:24px auto; line-height:1.7; text-wrap:pretty; }
+.closing-cta > a { background:#b7f5d9; color:#103c3b; border-radius:12px; height:auto; min-height:52px; padding:14px 20px; }
+.closing-cta > a:hover { background:#d6fbea; }
+html:has(.brand-site-logo-header) { scroll-padding-top:100px; }
+html:has(.ride-app) { scroll-padding-bottom:calc(120px + env(safe-area-inset-bottom)); }
+@media(max-width:767px) {
+  .brand-site-logo-header .brand-logo-art { width:106px; }
+  .closing-cta { padding:36px 22px; border-radius:24px; }
+  .closing-cta h2 { font-size:clamp(1.85rem,8vw,2.7rem); }
+  .closing-cta p { font-size:15px; }
+  .closing-cta > a { width:100%; max-width:310px; }
+  body:has(.site-booking-dock) > footer { padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
+}
+
+.area-hero-shade { background:linear-gradient(0deg,#103c3bf2 0%,#103c3b80 55%,#103c3b14 100%); }
+
+@media(max-width:480px) {
+  .site-booking-dock > div { display:block; }
+  .site-booking-dock p { display:none; }
+  .site-booking-dock button { width:100%; justify-content:center; white-space:normal; min-height:48px; height:auto; padding-block:12px; }
 }
