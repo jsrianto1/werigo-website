@@ -18,7 +18,8 @@ html:lang(ru) body { --font-brand-heading:var(--font-manrope),sans-serif; }
 .brand-wordmark > span { color:#007565; }
 .brand-endorsement { display:flex; align-items:center; gap:5px; white-space:nowrap; color:inherit; }
 .brand-endorsement > span { font-family:var(--font-manrope),sans-serif; font-size:7px; font-weight:600; line-height:1.4; letter-spacing:0; }
-.brand-endorsement > img { display:block; width:82px; height:auto; max-height:none; object-fit:contain; padding:3px 4px; background:#fff; border-radius:2px; }
+.brand-endorsement > img { display:block; width:82px; height:auto; max-height:none; object-fit:contain; padding:0; background:transparent; border-radius:0; }
+.brand-endorsement > .brand-wedison-white { display:none; }
 .brand-site-logo { display:inline-flex; align-items:center; min-height:48px; flex-shrink:0; color:#103c3b; }
 .brand-site-logo-footer { color:#f5f1eb; }
 .brand-site-logo-footer .brand-wordmark { font-size:37px; }
@@ -91,8 +92,11 @@ html[data-brand-paused] [data-brand-reveal],html[data-brand-paused] .brand-route
 }
 
 /* Contrast-safe branded panels and restored official WERIGO artwork. */
-.brand-logo-art { display:block; width:114px; height:auto; max-height:none; object-fit:contain; background:#fff; border-radius:5px; }
+.brand-logo-art { display:block; width:114px; height:auto; max-height:none; object-fit:contain; background:transparent; border-radius:0; }
 .brand-site-logo-footer .brand-logo-art { width:150px; }
+.brand-site-logo-footer .brand-logo-art { filter:brightness(0) invert(1); }
+.brand-site-logo-footer .brand-wedison-colour { display:none; }
+.brand-site-logo-footer .brand-wedison-white { display:block; }
 .closing-cta { padding:48px 26px; color:#f5f1eb; }
 .closing-cta p { color:#e0f2e8; max-width:42ch; margin:24px auto; line-height:1.7; text-wrap:pretty; }
 .closing-cta > a { background:#b7f5d9; color:#103c3b; border-radius:12px; height:auto; min-height:52px; padding:14px 20px; }

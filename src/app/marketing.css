@@ -149,7 +149,13 @@
 .rental-search-grid { display: grid; gap: 24px; }
 .rental-search-grid > * { min-width: 0; }
 .rental-date-grid { display: grid; gap: 24px; }
-.rental-date-inputs { display: grid; grid-template-columns: minmax(0,1fr) 92px; gap: 12px; }
+/* A definite flex basis keeps Safari's native date field inside its own slot. */
+.rental-date-grid > fieldset { display:block; min-inline-size:0; width:100%; max-width:100%; }
+.rental-date-inputs { display:flex; gap:12px; width:100%; min-width:0; }
+.rental-date-inputs > input[type="date"] { display:block; flex:1 1 0; width:0; min-width:0; max-width:100%; min-height:48px; box-sizing:border-box; appearance:none; -webkit-appearance:none; overflow:hidden; font-size:16px; }
+.rental-date-inputs > input[type="date"]::-webkit-date-and-time-value { text-align:left; min-width:0; }
+.rental-date-inputs > input[type="date"]::-webkit-datetime-edit { padding:0; min-width:0; }
+.rental-date-inputs > select { display:block; flex:0 0 96px; width:96px; min-width:0; max-width:96px; min-height:48px; box-sizing:border-box; font-size:16px; }
 .rental-search-submit { display: flex; justify-content: flex-end; }
 .rental-search-submit > button { width: 100%; white-space: normal; }
 .language-selector { display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
@@ -164,4 +170,7 @@
   .rental-search-compact .rental-search-submit { grid-column: 1/-1; }
 }
 
-@media (max-width: 359px) { .rental-date-inputs { grid-template-columns: minmax(0,1fr); } .rental-date-inputs select { width: 100%; } }
+@media (max-width: 359px) {
+  .rental-date-inputs { flex-direction:column; }
+  .rental-date-inputs > input[type="date"],.rental-date-inputs > select { flex:0 0 auto; width:100%; max-width:100%; }
+}
