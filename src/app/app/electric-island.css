@@ -67,6 +67,9 @@
 .ride-app .wg-auth-story h1 { color:#f5f1eb; font-family:var(--font-brand-heading); }
 .ride-app .wg-auth-story h1 > span { color:#b7f5d9; }
 .ride-app .wg-auth-story .wr-auth-intro { color:#d6efdf; }
+.ride-app .wg-auth-story .wg-overline { color:#b7f5d9; }
+.ride-app .wg-auth-form input:not([type="checkbox"]) { background-color:var(--app-card); color:var(--ink); -webkit-text-fill-color:var(--ink); }
+.ride-app .wg-auth-form input:autofill { box-shadow:0 0 0 1000px var(--app-card) inset; -webkit-text-fill-color:var(--ink); caret-color:var(--ink); }
 .ride-app :is(input,select,textarea) { min-width:0; font-family:var(--font-manrope),sans-serif; }
 .ride-app :is(.wg-bike-photo,.wg-bike-story-photo) { background:transparent; }
 .ride-app .wg-bike-photo img,.ride-app .wg-bike-story-photo img { object-fit:contain; }
