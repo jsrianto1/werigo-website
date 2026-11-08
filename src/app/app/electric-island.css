@@ -30,7 +30,10 @@
 .werigo-app-root .ride-app .brand-wordmark { color:var(--ink); font-size:31px; }
 .werigo-app-root .ride-app[data-theme="dark"] .brand-wordmark > span { color:#b7f5d9; }
 .werigo-app-root .ride-app .brand-endorsement { gap:5px; color:var(--ink-soft); }
-.werigo-app-root .ride-app .brand-endorsement > img,.werigo-app-root .ride-app[data-theme="dark"] .brand-endorsement > img { width:82px; max-height:none; padding:3px 4px; background:#fff; }
+.werigo-app-root .ride-app .brand-endorsement > img,.werigo-app-root .ride-app[data-theme="dark"] .brand-endorsement > img { width:82px; max-height:none; padding:0; background:transparent; }
+.werigo-app-root .ride-app[data-theme="dark"] .brand-logo-art,.werigo-app-root .ride-app .wg-auth-story .brand-logo-art { filter:brightness(0) invert(1); }
+.werigo-app-root .ride-app[data-theme="dark"] .brand-wedison-colour,.werigo-app-root .ride-app .wg-auth-story .brand-wedison-colour { display:none; }
+.werigo-app-root .ride-app[data-theme="dark"] .brand-wedison-white,.werigo-app-root .ride-app .wg-auth-story .brand-wedison-white { display:block; }
 .werigo-app-root .ride-app .ra-content { max-width:1180px; padding:30px 28px 24px; }
 .werigo-app-root .ride-app .wg-home-masthead { margin-bottom:24px; }
 .werigo-app-root .ride-app .wg-greeting { margin-bottom:23px; line-height:1.7; }
@@ -59,8 +62,11 @@
 .werigo-app-root .ride-app .wg-club-ticket { background:var(--app-card); border-radius:24px; margin-top:26px; }
 .werigo-app-root .ride-app .wg-club-ticket strong { font-family:var(--font-brand-heading); font-weight:600; }
 .werigo-app-root .ride-app .wg-ticket-wing { display:none; }
-.werigo-app-root .ride-app .ra-nav { border:1px solid var(--line); background:var(--app-floating); box-shadow:0 8px 30px #103c3b14; border-radius:25px; width:calc(100% - 32px); max-width:530px; bottom:calc(16px + env(safe-area-inset-bottom)); padding:7px; }
-.werigo-app-root .ride-app .ra-nav a,.werigo-app-root .ride-app .ra-nav a.is-active { color:var(--ink-soft); min-height:57px; font-size:10px; font-weight:600; border-radius:18px; }
+.werigo-app-root .ride-app .ra-nav { border:1px solid var(--line); background:var(--app-floating); box-shadow:0 8px 30px #103c3b14; border-radius:25px; left:50%; right:auto; transform:translateX(-50%); margin:0; width:calc(100% - 32px); min-width:0; max-width:530px; bottom:calc(16px + env(safe-area-inset-bottom)); padding:7px; }
+.werigo-app-root .ride-app .ra-nav > div { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); width:100%; max-width:none; margin:0; padding:0; gap:4px; }
+.werigo-app-root .ride-app .ra-nav a,.werigo-app-root .ride-app .ra-nav a.is-active { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; min-width:0; min-height:58px; margin:0; padding:7px 2px; gap:5px; color:var(--ink-soft); font-size:10px; font-weight:600; line-height:1; border-radius:18px; text-align:center; }
+.werigo-app-root .ride-app .ra-nav a > svg { display:block; width:23px; height:23px; flex:none; margin:0; }
+.werigo-app-root .ride-app .ra-nav a > span { display:block; line-height:14px; white-space:nowrap; }
 .werigo-app-root .ride-app .ra-nav a.is-active { color:#00594f; background:#dff3e7; font-weight:750; }
 .werigo-app-root .ride-app .ra-nav a:hover { color:var(--wg-brand); background:var(--surface-sunken); }
 .werigo-app-root .ride-app .ra-nav a.is-active:hover { color:#00594f; background:#ccebdc; }
