@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "a47389087f834773bfe2d72da60f3db30e3f05369cc8720096580a26fee3a853",
+  "fingerprint": "9eef1fcf981a20d504a106fd2e97335d834b7614338622b293d53435930abd25",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12528,7 +12528,7 @@
     },
     {
       "file": "src/app/app/electric-island.css",
-      "hash": "0c1435342e1b2a7d0953dc24781bb8de688f4a5d6b26f3222409552df03de316"
+      "hash": "e0eb49a6e5b1c8b5e78e8bfddec183f5f7b11f00d382f20cc91b1f3b934ee598"
     },
     {
       "file": "src/app/app/explore/page.tsx",
