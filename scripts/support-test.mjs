@@ -12,7 +12,7 @@ function load(file,mocks={},extra={}) {
   vm.runInNewContext(code,{module:compiledModule,exports:compiledModule.exports,require:key=>key in mocks?mocks[key]:require(key),Response,Request,Headers,URL,TextDecoder,Uint8Array,console:{warn:()=>{}},...extra},{filename:file});
   return compiledModule.exports;
 }
-const {createSupportHandler,SUPPORT_RECIPIENTS}=load("src/lib/support.ts");
+const {createSupportHandler,SUPPORT_RECIPIENTS,supportFailureDiagnostic}=load("src/lib/support.ts");
 const origin="https://werigo.co";
 const payload=(changes={})=>({kind:"question",name:"Website test",email:"sender@example.test",phone:"",company:"",message:"A test enquiry about rental dates.",locale:"en",source:"/contact",submissionId:randomUUID(),website:"",...changes});
 const request=(data,headers={})=>new Request(origin+"/api/support",{method:"POST",headers:{origin,"content-type":"application/json","x-forwarded-for":"192.0.2.1",...headers},body:JSON.stringify(data)});
@@ -21,6 +21,12 @@ const equal=(actual,expected,message)=>{assert.deepEqual(actual,expected,message
 const ok=(value,message)=>{assert.ok(value,message);checks++;};
 const status=async(response,expected,message)=>equal((await response).status,expected,message);
 function fixture(overrides={}) { const sent=[]; return {sent,handler:createSupportHandler({trustedOrigin:origin,allowLocalOrigins:false,isConfigured:()=>true,send:async mail=>{sent.push(mail);},...overrides})}; }
+{
+  equal(JSON.parse(JSON.stringify(supportFailureDiagnostic({code:"EAUTH",responseCode:535,message:"private provider text",response:"private server reply"}))),{code:"EAUTH",responseCode:535},"Diagnostics retain only known code and numeric SMTP status");
+  equal(JSON.parse(JSON.stringify(supportFailureDiagnostic({code:"secret credential",responseCode:"secret reply"}))),{code:"UNKNOWN"},"Unrecognised diagnostic values are never logged");
+  equal(JSON.parse(JSON.stringify(supportFailureDiagnostic({code:"ETIMEDOUT",responseCode:200}))),{code:"ETIMEDOUT"},"Non-error status is excluded");
+  equal(JSON.parse(JSON.stringify(supportFailureDiagnostic(null))),{code:"UNKNOWN"},"Missing error safely produces an unknown code");
+}
 {
   const f=fixture(); await status(f.handler(request(payload())),200,"Valid enquiries send");
   equal([...f.sent[0].to],[...SUPPORT_RECIPIENTS],"Both fixed business recipients are used");

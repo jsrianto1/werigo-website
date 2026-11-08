@@ -37,6 +37,15 @@ export function buildSupportMail(input: SupportInput): SupportMail {
 type Dependencies = { trustedOrigin: string; allowLocalOrigins: boolean; isConfigured: () => boolean; send: (mail: SupportMail) => Promise<void>; now?: () => number };
 const json = (status: number, value: object) => Response.json(value, { status, headers:{ "Cache-Control":"no-store" } });
 
+/** Log only known transport codes; never log provider text, credentials or messages. */
+export function supportFailureDiagnostic(error: unknown) {
+  const detail = error && typeof error === "object" ? error as { code?: unknown; responseCode?: unknown } : {};
+  const known = ["EAUTH", "ECONNECTION", "ETIMEDOUT", "ESOCKET", "EENVELOPE", "EMESSAGE", "ECONNREFUSED", "ENOTFOUND", "EAI_AGAIN", "CERT_HAS_EXPIRED", "ERR_TLS_CERT_ALTNAME_INVALID", "DEPTH_ZERO_SELF_SIGNED_CERT"];
+  const code = typeof detail.code === "string" && known.includes(detail.code) ? detail.code : "UNKNOWN";
+  const responseCode = typeof detail.responseCode === "number" && Number.isInteger(detail.responseCode) && detail.responseCode >= 400 && detail.responseCode <= 599 ? detail.responseCode : undefined;
+  return { code, ...(responseCode ? { responseCode } : {}) };
+}
+
 /** Bounded public form; no customer database, arbitrary recipients or personal-data logs. */
 export function createSupportHandler(deps: Dependencies) {
   const clock = deps.now ?? Date.now;
@@ -93,9 +102,9 @@ export function createSupportHandler(deps: Dependencies) {
     const sending = Promise.resolve().then(() => deps.send(buildSupportMail(parsed.data)));
     submissions.set(key,{fingerprint,expires:now+1_800_000,sending});
     try { await sending; return json(200,{ok:true}); }
-    catch {
+    catch (error) {
       submissions.delete(key);
-      console.warn("[support] Email relay did not accept the request.");
+      console.warn("[support] Email relay did not accept the request.", supportFailureDiagnostic(error));
       return json(502,{ok:false,error:"send_failed",message:"We couldn’t send your message. Please try again or use WhatsApp."});
     }
   };
