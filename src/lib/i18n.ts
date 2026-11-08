@@ -1,6 +1,7 @@
 import messages from "@/data/translations.json";
+import supportMessages from "@/data/supportTranslations.json";
 export type Locale = "en" | "id" | "ru";
-const dictionary = messages as Record<string, string[]>;
+const dictionary = { ...messages, ...supportMessages } as Record<string, string[]>;
 export function translate(text: string, locale: Locale): string {
   if (locale === "en") return text;
   const key = text.replace(/\s+/g, " ").trim();
