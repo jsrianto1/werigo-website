@@ -38,7 +38,8 @@ export function HeaderNavigation({ pathname }: { pathname: string }) {
         onClick={event => {
           // A mouse click must not immediately undo the preceding hover-open.
           if (event.detail > 0 && window.matchMedia("(hover:hover)").matches) show(item.id);
-          else open === item.id ? setOpen(null) : show(item.id);
+          else if (open === item.id) setOpen(null);
+          else show(item.id);
         }}
         onPointerEnter={event => { if (event.pointerType === "mouse" && window.matchMedia("(hover:hover)").matches) show(item.id); }}
         onKeyDown={event => { if (event.key === "ArrowDown") { event.preventDefault(); show(item.id); requestAnimationFrame(() => panel.current?.querySelector<HTMLAnchorElement>("a")?.focus()); } }}
