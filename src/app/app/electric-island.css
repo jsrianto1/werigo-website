@@ -129,7 +129,7 @@
 
 /* Keep legacy page rules from assigning faint text to labels and confirmation panels. */
 .werigo-app-root .ride-app :is(.wr-activity-area,.wr-activity-photo-label,.wr-photo-credits,.wg-bike-rate-note) { color:var(--ink-soft); }
-.werigo-app-root .ride-app :is(.wr-primary,.wr-confirm-pin,.wr-done,.ra-button,.ra-install) { background:var(--wg-brand); color:var(--ink-inverse); }
+.werigo-app-root .ride-app :is(.wr-primary,.wr-confirm-pin,.wr-done,.ra-button,.ra-install,.ra-quick-rent) { background:var(--wg-brand); color:var(--ink-inverse); }
 .werigo-app-root .ride-app .brand-logo-art { width:114px; height:auto; max-height:none; }
 .werigo-app-root .ride-app .wg-hero-bike { height:235px; }
 .werigo-app-root .ride-app .ra-content { min-width:0; }
@@ -143,3 +143,13 @@
 .werigo-app-root .ride-app :is(.wr-photo-credits a,.wr-charging-how a,.wr-station-copy>a,.ra-text-link,.wg-home-footnote button) { color:var(--wg-brand); }
 .werigo-app-root .ride-app .ra-nav a>span { color:inherit; }
 .werigo-app-root .ride-app :is(a,button) { transition:transform .2s var(--brand-ease),border-color .2s; }
+
+.werigo-app-root .ride-app :is(.wg-partner-intro a,.wg-wellness-intro a,.wg-hop-card>a,.wg-guide-note>a,.wr-activity-actions a) { color:var(--wg-brand); }
+.werigo-app-root .ride-app .wg-guide-charge { background:var(--app-card); color:var(--ink); }
+.werigo-app-root .ride-app .ra-points { background:var(--electric-gradient); color:#f5f1eb; border-color:#4d8578; }
+.werigo-app-root .ride-app .ra-points > span { color:#b7f5d9; }
+.werigo-app-root .ride-app .ra-points p { color:#e0f2e8; }
+
+.werigo-app-root .ride-app .wr-step-top > span:last-child { color:var(--ink-soft); opacity:1; }
+
+.werigo-app-root .ride-app .wr-station-area { color:var(--wg-brand); }
