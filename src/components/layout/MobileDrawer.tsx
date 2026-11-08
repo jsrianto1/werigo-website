@@ -2,12 +2,14 @@
 import { T, useLanguage } from "@/components/i18n/LanguageProvider";
 
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { X, ChevronDown, MapPin, Download } from "lucide-react";
-import { ButtonLink } from "@/components/ui/Button";
-import { serviceAreas } from "@/data/locations";
+import { X, ChevronDown, ArrowUpRight, Zap } from "lucide-react";
+import Image from "next/image";
+import { Logo } from "@/components/ui/Logo";
+import { headerGroups, type HeaderGroupId } from "./header-navigation-data";
+import styles from "./Header.module.css";
 import { LanguageSelector } from "@/components/i18n/LanguageSelector";
 import { AccountMenu } from "@/components/account/AccountMenu";
 
@@ -33,7 +35,16 @@ export function MobileDrawer({
   const { t } = useLanguage();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const [areasOpen, setAreasOpen] = useState(false);
+  const [groupOpen, setGroupOpen] = useState<HeaderGroupId | null>(null);
+  const id = useId();
+
+  useEffect(() => {
+    if (!open) return;
+    const desktop = window.matchMedia("(min-width:1280px)");
+    const resize = () => { if (desktop.matches) onClose(); };
+    desktop.addEventListener("change", resize);
+    return () => desktop.removeEventListener("change", resize);
+  }, [open, onClose]);
 
   // Body scroll lock only while open
   useEffect(() => {
@@ -84,130 +95,33 @@ export function MobileDrawer({
 
   if (!open || typeof document === "undefined") return null;
 
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/fleet", label: "Our Fleet" },
-    { href: "/monthly-scooter-rental-bali", label: "Monthly Rentals" },
-    { href: "/supercharge", label: "SuperCharge" },
-    { href: "/how-it-works", label: "How It Works" },
-  ];
-  const navItemsAfterAreas = [
-    { href: "/saga", label: "WERIGO SAGA (webtoon)" },
-    { href: "/about", label: "About Werigo" },
-    { href: "/partners", label: "Partners" },
-    { href: "/help-center", label: "Help Center" },
-    { href: "/contact", label: "Contact" },
-  ];
-
-  const linkClass =
-    "block rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-sunken";
-
   return createPortal(
-    <div className="fixed inset-0 z-[100] xl:hidden">
-      {/* Overlay — tapping outside closes */}
-      <button
-        aria-label={t("Close menu")}
-        onClick={onClose}
-        className="absolute inset-0 h-full w-full cursor-default bg-black/50"
-        tabIndex={-1}
-      />
-      {/* Panel */}
-      <div
-        ref={panelRef}
-        id="mobile-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu"
-        className="drawer-panel absolute bottom-0 right-0 top-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-page shadow-2xl"
-      >
-        <div className="flex items-center justify-between border-b border-line px-4 py-3">
-          <span className="text-sm font-semibold uppercase tracking-wider text-ink-soft"><T>{"Menu"}</T>{" "}</span>
-          <button
-            ref={closeRef}
-            onClick={onClose}
-            aria-label={t("Close menu")}
-            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-ink hover:bg-sunken"
-          >
-            <X className="h-5 w-5" aria-hidden="true" />
-          </button>
+    <div className={styles.drawerOverlay}>
+      <button aria-label={t("Close menu")} onClick={onClose} className={styles.drawerBackdrop} tabIndex={-1}/>
+      <div ref={panelRef} id="mobile-drawer" role="dialog" aria-modal="true" aria-label={t("Menu")} className={styles.drawer}>
+        <div className={styles.drawerTop}>
+          <span onClick={onClose}><Logo /></span>
+          <button ref={closeRef} type="button" onClick={onClose} aria-label={t("Close menu")} className={styles.closeButton}><X size={20} aria-hidden="true"/></button>
         </div>
-
-        <div className="border-b border-line px-3 py-2">
-          <AccountMenu className="w-full justify-start" />
-        </div>
-
-        <nav aria-label="Primary mobile" className="flex-1 px-3 py-3">
-          <ul>
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={onClose} className={linkClass}>
-                  <T>{item.label}</T>
-                </Link>
-              </li>
-            ))}
-
-            {/* Delivery Areas — nested accordion */}
-            <li>
-              <button
-                aria-expanded={areasOpen}
-                aria-controls="drawer-areas"
-                onClick={() => setAreasOpen((v) => !v)}
-                className="flex w-full cursor-pointer items-center justify-between rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-sunken"
-              ><T>{"Delivery Areas"}</T>{" "}<ChevronDown
-                  aria-hidden="true"
-                  className={`h-4 w-4 text-ink-faint transition-transform duration-200 ${
-                    areasOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              <div id="drawer-areas" hidden={!areasOpen}>
-                <ul className="mb-1 ml-2 border-l border-line pl-2">
-                  <li>
-                    <Link
-                      href="/delivery-areas"
-                      onClick={onClose}
-                      className="block rounded-md px-3 py-2.5 text-sm font-medium text-primary hover:bg-sunken"
-                    ><T>{"All delivery areas"}</T>{" "}</Link>
-                  </li>
-                  {serviceAreas.map((area) => (
-                    <li key={area.slug}>
-                      <Link
-                        href={`/delivery-areas/${area.slug}`}
-                        onClick={onClose}
-                        className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-ink-soft hover:bg-sunken hover:text-ink"
-                      >
-                        <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                        <T>{area.name}</T>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-
-            {navItemsAfterAreas.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={onClose} className={linkClass}>
-                  <T>{item.label}</T>
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className={styles.drawerAccount}><AccountMenu /></div>
+        <Link href="/fleet" onClick={onClose} className={styles.mobileFeature}>
+          <span><small><T>YOUR ISLAND. YOUR PACE.</T></small><strong><T>Meet your Wedison.</T></strong></span>
+          <Image src="/app/edpower-red.webp" alt="Red Wedison EdPower electric motorcycle" width={300} height={250} sizes="160px"/>
+        </Link>
+        <nav aria-label={t("Primary mobile")} className={styles.drawerNav}>
+          {headerGroups.map(group => <div className={styles.mobileGroup} key={group.id}>
+            <button type="button" aria-expanded={groupOpen === group.id} aria-controls={`${id}-${group.id}`} onClick={() => setGroupOpen(value => value === group.id ? null : group.id)}><T>{group.label}</T><ChevronDown aria-hidden="true"/></button>
+            <ul className={styles.mobileLinks} id={`${id}-${group.id}`} hidden={groupOpen !== group.id}>
+              {group.links.map(item => <li key={item.href}><Link href={item.href} onClick={onClose}><span><strong><T>{item.label}</T></strong><small><T>{item.description}</T></small></span><ArrowUpRight aria-hidden="true"/></Link></li>)}
+            </ul>
+          </div>)}
+          <div className={styles.mobileQuickLinks}><Link href="/supercharge" onClick={onClose}><Zap size={15} aria-hidden="true"/>SuperCharge</Link><Link href="/" onClick={onClose}><T>Home</T></Link><Link href="/app/login?install=1" onClick={onClose}><T>Get the app</T></Link></div>
         </nav>
-
-        <div className="border-t border-line px-4 py-4">
-          <ButtonLink href="/app/login?install=1" variant="outline" size="lg" className="mb-3 w-full" onClick={onClose}><Download size={18} aria-hidden="true"/><T>Get the app</T></ButtonLink>
-          <ButtonLink
-            href="/book"
-            variant="accent"
-            size="lg"
-            className="w-full"
-            onClick={onClose}
-          ><T>{"Check availability"}</T>{" "}</ButtonLink>
-          <div className="mt-4"><LanguageSelector mobile /></div>
+        <div className={styles.drawerBottom}>
+          <Link href="/book" className={styles.bookButton} onClick={onClose}><span><T>Find your ride</T></span><span className={styles.arrowCircle}><ArrowUpRight size={17} aria-hidden="true"/></span></Link>
+          <LanguageSelector mobile/>
         </div>
       </div>
-    </div>,
-    document.body
+    </div>, document.body
   );
 }

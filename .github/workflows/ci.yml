@@ -36,5 +36,8 @@ jobs:
       - name: Article publishing checks
         run: npm run test:articles
 
+      - name: Website support delivery checks
+        run: npm run test:support
+
       - name: Production build
         run: npm run build

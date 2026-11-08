@@ -1,4 +1,5 @@
 import nodemailer, { type Transporter } from "nodemailer";
+import type { SupportMail } from "@/lib/support";
 
 /**
  * Outgoing email through the Hostinger mailbox (SMTP_*). Used for
@@ -49,6 +50,17 @@ export async function sendMail(msg: { to: string; subject: string; text: string;
   }
   transport ??= nodemailer.createTransport(cfg);
   await transport.sendMail({ from: from(), ...msg });
+}
+
+/** A public enquiry is successful only when SMTP accepts every fixed recipient. */
+export async function sendRequiredSupportMail(msg: SupportMail): Promise<void> {
+  const cfg = smtpConfig();
+  if (!cfg) throw new Error("support_email_not_configured");
+  transport ??= nodemailer.createTransport(cfg);
+  const result = await transport.sendMail({ from: from(), ...msg });
+  if (result.rejected?.length || !Array.isArray(result.accepted) || result.accepted.length !== msg.to.length) {
+    throw new Error("support_email_not_fully_accepted");
+  }
 }
 
 /* ================= Templates ================= */

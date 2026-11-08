@@ -19,7 +19,8 @@
     "db:status": "node scripts/db-migrate.mjs --status",
     "auth:generate": "better-auth generate --config src/lib/auth.ts --output db/migrations/0002_auth.sql -y",
     "create-admin": "node scripts/create-admin.mjs",
-    "test:articles": "node scripts/articles-test.mjs"
+    "test:articles": "node scripts/articles-test.mjs",
+    "test:support": "node scripts/support-test.mjs"
   },
   "dependencies": {
     "@tiptap/pm": "3.23.5",
