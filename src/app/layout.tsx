@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MetaPageViews } from "@/components/analytics/MetaPageViews";
 import { Manrope, Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { BrandMotion } from "@/components/brand/BrandMotion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HideOnAdmin } from "@/components/layout/HideOnAdmin";
@@ -14,7 +16,10 @@ import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { consentBootstrapScript } from "@/lib/consent";
 import "./globals.css";
 import "./marketing.css";
+import "./brand.css";
 import { WelcomeOffer } from "@/components/marketing/WelcomeOffer";
+
+const brandDisplay = localFont({ src: "./fonts/BricolageGrotesque.ttf", variable: "--font-brand-display", weight: "200 800", display: "swap" });
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -72,13 +77,14 @@ export default function RootLayout({
         <script id="werigo-consent" dangerouslySetInnerHTML={{ __html: consentBootstrapScript() }} />
       </head>
       <body
-        className={`${manrope.variable} ${inter.variable} flex min-h-dvh flex-col antialiased`}
+        className={`${manrope.variable} ${inter.variable} ${brandDisplay.variable} flex min-h-dvh flex-col antialiased`}
       >
         <Suspense fallback={null}>
           <MetaPageViews />
           <MarketingEvents />
         </Suspense>
         <LanguageProvider>
+        <BrandMotion />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink focus:shadow-lg"

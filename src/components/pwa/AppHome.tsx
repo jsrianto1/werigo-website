@@ -6,6 +6,7 @@ import { ArrowRight, ArrowUpRight, Gift, MapPin, MessageCircle } from "lucide-re
 import { AppBrand, WerigoWing } from "./AppBrand";
 import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { ExploreGuideNav } from "./ExploreGuideNav";
+import { ElectricRoute } from "@/components/brand/ElectricRoute";
 import { ChargeFeature } from "./ChargeFeature";
 
 export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?: string }) {
@@ -14,10 +15,10 @@ export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?:
     <div className="wg-greeting"><p>{firstName ? `Good to see you, ${firstName}.` : "A little more Bali. A lot more freedom."}</p><span><MapPin size={13}/>Bali</span></div>
     <div className="wg-home-grid">
       <section className="wg-ride-hero" aria-labelledby="werigo-home-title">
-        <svg className="wg-hero-route" viewBox="0 0 400 460" aria-hidden="true"><path d="M420 34H302c-91 0-91 109 0 109h12c91 0 91 120 0 120H151c-108 0-108 123 0 123h278"/><circle cx="302" cy="34" r="8"/></svg>
-        <p className="wg-overline">YOUR ISLAND. YOUR PACE.</p><h1 id="werigo-home-title">Where<br/>we go<span>?</span></h1>
-        <p className="wg-hero-description">Bali is better on a Wedison.</p>
-        <div className="wg-hero-bike"><Image src="/app/edpower-red.webp" alt="Red Wedison EdPower electric motorcycle, shown in full" width={1100} height={922} sizes="(max-width:600px) 85vw, 470px" priority/></div>
+        <ElectricRoute className="wg-hero-route"/>
+        <p className="wg-overline">ELECTRIC MOTORCYCLE RENTAL · BALI</p><h1 id="werigo-home-title">Your island.<br/>Your <span>own ride.</span></h1>
+        <p className="wg-hero-description">From your first coffee to the last light. Make the day yours on a Wedison.</p>
+        <div className="wg-hero-bike"><span className="wg-hero-model" aria-hidden="true">EDPOWER</span><Image src="/app/edpower-red.webp" alt="Red Wedison EdPower electric motorcycle, shown in full" width={1100} height={922} sizes="(max-width:600px) 85vw, 470px" priority/></div>
         <span className="wg-bike-caption"><i/>EDPOWER · FULLY ELECTRIC</span>
         <button type="button" className="wg-rent-button" onClick={onRent}><span>Find my ride</span><ArrowRight size={22}/></button>
       </section>

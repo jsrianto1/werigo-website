@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BrandLockup, WedisonEndorsement } from "@/components/brand/BrandLockup";
 
 /** Wing silhouette from Werigo's existing identity. Wedison artwork stays unmodified. */
 export function WerigoWing({ className = "" }: { className?: string }) {
@@ -7,18 +7,9 @@ export function WerigoWing({ className = "" }: { className?: string }) {
 
 /** App identity only. The endorsement uses the original, unmodified Wedison artwork. */
 export function PoweredByWedison({ className = "" }: { className?: string }) {
-  return <span className={`wr-endorsement ${className}`}>
-    <span>Powered by</span>
-    <Image src="/app/wedison-official.png" width={2838} height={381} alt="WEDISON" unoptimized />
-  </span>;
+  return <WedisonEndorsement className={`wr-endorsement ${className}`}/>;
 }
 
 export function AppBrand({ hero = false }: { hero?: boolean }) {
-  return <span className={`wr-app-brand${hero ? " wr-app-brand-hero" : ""}`}>
-    <span className="wr-wordmark" aria-label="WERIGO">
-      <WerigoWing className="wr-route-mark" />
-      <span className="wr-wordmark-name" aria-hidden="true">WERIGO<span className="wg-wordmark-stop">.</span></span>
-    </span>
-    <PoweredByWedison />
-  </span>;
+  return <BrandLockup className={`wr-app-brand${hero ? " wr-app-brand-hero" : ""}`}/>;
 }
