@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "428fced693cc73d231ba05cfc4f0fe67435236c55fa8d434da3904be6aaef5f6",
+  "fingerprint": "2683817b37ccf77825c479d0b21e6bbb145d9c24c1b6336524c925c2b4c25a7b",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12624,7 +12624,7 @@
     },
     {
       "file": "src/app/brand.css",
-      "hash": "f5b630cd6560204562d606d2f83bb184737ef592f932b930702cdb03185d3f25"
+      "hash": "b1651299f7ce6b46329ae1508f37d9686d51036fe7568198fc28c9510ad6facb"
     },
     {
       "file": "src/app/contact/page.tsx",
