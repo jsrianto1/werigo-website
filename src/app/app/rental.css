@@ -27,7 +27,8 @@
 .ride-app .wr-wordmark>i{position:absolute;right:0;bottom:2px;width:5px;height:5px;border-radius:50%;background:var(--wr-teal)}
 .ride-app .wr-endorsement{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;line-height:1}
 .ride-app .wr-endorsement>span{font-size:8px;color:#5b6e64;font-weight:500;letter-spacing:.01em}
-.ride-app .wr-endorsement>img{display:block;width:70px;height:auto;object-fit:contain;flex-shrink:0}
+/* Brand/theme styles control which official endorsement artwork is visible. */
+.ride-app .wr-endorsement>img{width:70px;height:auto;object-fit:contain;flex-shrink:0}
 .ride-app .ra-install{background:var(--wr-charcoal);border-color:var(--wr-charcoal)}
 .ride-app .ra-install:hover{background:#294743}
 .ride-app .ra-website{height:40px;width:40px;align-items:center;justify-content:center;border:1px solid var(--wr-border);border-radius:50%}
