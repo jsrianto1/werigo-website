@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "dc80bda47832708d60b939b3ce562b53c9bf74f6168b26029e812f4fb6be9719",
+  "fingerprint": "64dc3056868240f7d0b0b324f5a8dec2de38d735f6968c214729c5be47290fdf",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12600,7 +12600,7 @@
     },
     {
       "file": "src/app/app/rental.css",
-      "hash": "2315a4a9cd464f0d6fbd9c74584b17671ef42c70bfce2572dcde8d6312ab39cc"
+      "hash": "b8c6d3eccf9d5510ef4082463f3c0ea5bdf048294adb0852ab4e08aea34f7eb4"
     },
     {
       "file": "src/app/app/rewards/page.tsx",
