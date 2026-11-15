@@ -159,3 +159,20 @@
 .werigo-app-root .ride-app .wr-step-top > span:last-child { color:var(--ink-soft); opacity:1; }
 
 .werigo-app-root .ride-app .wr-station-area { color:var(--wg-brand); }
+
+/* Keep each handover choice's surface and foreground in the same theme. */
+.werigo-app-root .ride-app .wr-handover-options > label {
+  background:var(--app-card); color:var(--ink); border-color:var(--line);
+}
+.werigo-app-root .ride-app .wr-handover-options > label.is-selected {
+  background:var(--brand-primary-soft); color:var(--ink); border-color:var(--wg-brand);
+}
+.werigo-app-root .ride-app .wr-handover-options :is(strong,b) { color:var(--ink); }
+.werigo-app-root .ride-app .wr-handover-options small { color:var(--ink-soft); }
+.werigo-app-root .ride-app .wr-handover-options > label > svg { color:var(--wg-brand); }
+.werigo-app-root .ride-app .wr-handover-options > label:not(.is-selected) .wr-choice-dot {
+  background:transparent; border-color:var(--ink-soft);
+}
+.werigo-app-root .ride-app .wr-handover-options > label.is-selected .wr-choice-dot {
+  background:var(--wg-brand); color:var(--ink-inverse); border-color:var(--wg-brand);
+}

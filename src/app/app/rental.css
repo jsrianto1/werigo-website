@@ -37,8 +37,8 @@
 .ride-app .wr-rent-hero h2{color:var(--wr-charcoal)}
 .ride-app .wr-rent-float,.ride-app .wr-primary,.ride-app .wr-done,.ride-app .wr-confirm-pin{background:var(--wr-charcoal)}
 .ride-app .wr-rent-float:hover,.ride-app .wr-primary:hover{background:#24423d}
-.ride-app .wr-handover-options>label,.ride-app .wr-home-services>a{background:#fff;border:1px solid var(--wr-border)}
-.ride-app .wr-handover-options>label.is-selected,.ride-app .wr-bike-option.is-selected{border-color:var(--wr-teal);background:#f0f7f3}
+.ride-app .wr-handover-options>label,.ride-app .wr-home-services>a{background:var(--app-card);border:1px solid var(--wr-border)}
+.ride-app .wr-handover-options>label.is-selected,.ride-app .wr-bike-option.is-selected{border-color:var(--wr-teal);background:var(--brand-primary-soft);color:var(--ink)}
 .ride-app .wr-choice-dot,.ride-app .wr-step-progress>i.is-done{background:var(--wr-teal)}
 .ride-app .wr-choice-dot{border-color:var(--wr-teal);color:white}
 .ride-app .wr-handover-options>label:not(.is-selected) .wr-choice-dot{background:white;border-color:#bbc9c0}
