@@ -1,3 +1,4 @@
+import {OpsInventoryError,syncOpsBooking} from "@/lib/opsInventory";
 import { verifyDeliveryQuote } from "@/lib/deliveryToken";
 import { RIDER_POLICY_VERSION } from "@/data/riderPolicy";
 import { NextRequest, NextResponse } from "next/server";
@@ -244,10 +245,19 @@ export async function POST(req: NextRequest) {
     try {
       payment = await openPayment(booking, user.email);
     } catch (err) {
+      if (err instanceof OpsInventoryError) {
+        // A conflict is definitive; a timeout has an unknown outcome and must be retried with the same submission.
+        if(err.code==='stock_unavailable'){
+          await store.setPaymentState(booking.id,{payment_status:'failed',status:'expired'},'system','Ops fleet unavailable');
+          await syncOpsBooking(booking.id).catch(()=>undefined);
+        }
+        return NextResponse.json({ok:false,error:err.code,message:err.code==='stock_unavailable'?'This motorcycle is no longer available for these dates. Please choose another model or dates.':'We could not confirm the motorcycle reservation. No payment was started. Please retry or contact our team.'},{status:err.code==='stock_unavailable'?409:503});
+      }
       const message = err instanceof MidtransError ? err.message : err instanceof Error ? err.message : String(err);
       console.error(`[payments] snap create failed for ${booking.booking_code}: ${message.slice(0, 200)}`);
       // Release the units: the customer keeps the form and can retry.
       await store.setPaymentState(booking.id, { payment_status: "failed", status: "expired" }, "system", "payment provider unavailable").catch(() => null);
+      await syncOpsBooking(booking.id).catch(()=>undefined);
       return NextResponse.json(
         {
           ok: false,

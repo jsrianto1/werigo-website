@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "64dc3056868240f7d0b0b324f5a8dec2de38d735f6968c214729c5be47290fdf",
+  "fingerprint": "11ae59eaba1e19f73df1e52210b44b9ed3011b52c64f2caeef888690c0553b8c",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12147,6 +12147,10 @@
       "hash": "846aa4d1fce73aa7ee5043b0a1d2e030a4a9f3542ddd1dad16d1240a47ebb6fb"
     },
     {
+      "file": "scripts/ops-inventory-test.mjs",
+      "hash": "cbaf4dfd86cd7e75dc165b19bfb529a5856e946587ad52f2cace6230ce1d048b"
+    },
+    {
       "file": "scripts/phone-test.mjs",
       "hash": "ef891738f9bedead7089fba617445e1b2f03ac2fd00030dc11634a1dc54d304c"
     },
@@ -12332,7 +12336,7 @@
     },
     {
       "file": "src/app/api/admin/bookings/[id]/route.ts",
-      "hash": "63f2e588b3c219c5cb452f316cbb67068fd903db0384a507bb6aa9290a8a6a1d"
+      "hash": "abaa87bab965d1ea54927ed1285e0c582cf9b270238e7c7730c320e417d6336c"
     },
     {
       "file": "src/app/api/admin/bookings/export/route.ts",
@@ -12399,6 +12403,10 @@
       "hash": "b41320abd1f3df84125f0a1b7cdcdcd492c829bee1cc9e44d9b86fdf3ef67575"
     },
     {
+      "file": "src/app/api/admin/ops-sync/route.ts",
+      "hash": "ddd9046344abf77bb7c7b8f2e1e4cb5d3b802402ac5283d8f2877049c2324a07"
+    },
+    {
       "file": "src/app/api/admin/promotions/[id]/grants/route.ts",
       "hash": "6a4ee0ccda95056655d60bebb310f8a34ac2c5b62a42434f6897ec1772c92638"
     },
@@ -12440,7 +12448,7 @@
     },
     {
       "file": "src/app/api/admin/stock/route.ts",
-      "hash": "f8f0d665ba2e5f50a17e78518fb662aebd69004e937ee8e12049910904ac2299"
+      "hash": "a8328e8f167cdf4d50e0bb801d0b1216a4942ae18b145a9e6113ee0de766abcf"
     },
     {
       "file": "src/app/api/auth/[...all]/route.ts",
@@ -12448,7 +12456,7 @@
     },
     {
       "file": "src/app/api/bookings/[code]/pay/route.ts",
-      "hash": "86abe17749dbc13c79aeea2a3c1094be2c2fb3f1e1438e3bd44453ffa51fae58"
+      "hash": "ac4e95bc03aba2f635d491f53fdc36ba557b59c96e2d6b9e6b7f229dae5b4f05"
     },
     {
       "file": "src/app/api/bookings/[code]/route.ts",
@@ -12456,7 +12464,7 @@
     },
     {
       "file": "src/app/api/bookings/route.ts",
-      "hash": "f2f2876859553a677855acd9e6469f9bd1fb3b29c25d6743a236932ecd4a34c5"
+      "hash": "b5abd3f6a4930fe11d6a665d0a9531d4d0959ef9eb9276c289cd110ea50549ca"
     },
     {
       "file": "src/app/api/checkout/discounts/route.ts",
@@ -12468,7 +12476,7 @@
     },
     {
       "file": "src/app/api/cron/expire-bookings/route.ts",
-      "hash": "dc8cf6c88d5e88a75d21c3f1cc028dbb842f817c8ff560781c86c76f2378f805"
+      "hash": "6e8de4a1f81a27bbe1926e35e39c252ff4198702e96f93dc61dbc0541e2556af"
     },
     {
       "file": "src/app/api/cron/notifications/route.ts",
@@ -12485,6 +12493,10 @@
     {
       "file": "src/app/api/exchange-rate/route.ts",
       "hash": "85ae367e6da4cc6be96aed3a9af8ce27bd5706fb4ecbc025a7a1ea1a1e917d0f"
+    },
+    {
+      "file": "src/app/api/fleet/availability/route.ts",
+      "hash": "7c82f027e584bc6feadd3ff3339d6a0ddb4460cba4f049846ad10495bb1fe152"
     },
     {
       "file": "src/app/api/health/db/route.ts",
@@ -12867,6 +12879,10 @@
       "hash": "d6982a56926c240ba7926484af51f8ff8d582d4a4745b57ec369c2170afbc1e7"
     },
     {
+      "file": "src/components/admin/OpsSyncPanel.tsx",
+      "hash": "865428483b1a4abf21e4e5fbf2d67e77a351260cfdfe3ae31e9991cb23369e16"
+    },
+    {
       "file": "src/components/admin/PromotionsManager.tsx",
       "hash": "bd1747eea7a3e2e8d26dedda6dc3af6dd6b41aaf2da8893a4aa6bf7b070bf735"
     },
@@ -12884,7 +12900,7 @@
     },
     {
       "file": "src/components/admin/StockManager.tsx",
-      "hash": "fcb1d3f17fe13a2456cc3e762f6a5cebd57bdac057c1b24c0330b7d21022f5c7"
+      "hash": "0a4aed8c50ffe9dd361bf5332da594db45830f166e23252c5e5e6b4ca5eebd37"
     },
     {
       "file": "src/components/admin/article-editor.css",
@@ -12924,7 +12940,7 @@
     },
     {
       "file": "src/components/booking/BookSearchResults.tsx",
-      "hash": "d0b4195a124166358811ac4f703506f254d1f2e82b57fcba0affeafd5439e3dc"
+      "hash": "cd0fe282136c9295c759a68b2ddb9addb99286db134878f72fd839ac753197d8"
     },
     {
       "file": "src/components/booking/BookingStepper.tsx",
@@ -13132,7 +13148,7 @@
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
-      "hash": "c06859b824a84a8fc19fada3518b67aefc72946b7472323111be7b524bf048fd"
+      "hash": "84a35e9198d923eb540b042b3c8509561137f8e3cd94fe3f418ba2a5dd6d215e"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
@@ -13452,7 +13468,7 @@
     },
     {
       "file": "src/lib/bookingStore.ts",
-      "hash": "00d8cfdf21bfaf02ddd0749803d37abeba34cb88ad43f8d11cce4c38c64a8d42"
+      "hash": "77ae310e1a1e235907160048b95b1d6b632cf68b1a1c5f5d4d5b914adab5b443"
     },
     {
       "file": "src/lib/bookingView.ts",
@@ -13547,6 +13563,18 @@
       "hash": "753477649fa9853c24cda41302892d65fb2409b7f39fdcf4ebc92eb36a4f46ef"
     },
     {
+      "file": "src/lib/opsInventory.ts",
+      "hash": "f647c94927630308d455a7dd588019b740140644bf957e35301e28b80e9d1d50"
+    },
+    {
+      "file": "src/lib/opsInventoryPayload.ts",
+      "hash": "5b3aa4e1e67fd3a9d0cc55bd672f027f68682c784cd289ca6fa5927b786e4fd3"
+    },
+    {
+      "file": "src/lib/opsInventorySchema.ts",
+      "hash": "b39812ba68eb990afebb559869c4731e6afeebeebdfce4cd8c9dbc8e69782546"
+    },
+    {
       "file": "src/lib/paymentItems.ts",
       "hash": "7cd804895e1fcddd09af81d9efcb1417cf0239930c45c8a14cf5bcc0148094d0"
     },
@@ -13556,7 +13584,7 @@
     },
     {
       "file": "src/lib/payments.ts",
-      "hash": "89c4992088c17d50b0504dd5c85165449aee4389701c63fe69487592835dfc24"
+      "hash": "f1afd9259225f100401f9b582ca26a8cb7ccd5ab347483143981e05731590c45"
     },
     {
       "file": "src/lib/permissions.ts",
@@ -13656,7 +13684,7 @@
     },
     {
       "file": "src/lib/stock.ts",
-      "hash": "378cc863500637475c556907a4c23e1e55bd0e1233d48c2b1b3260dd23e4df90"
+      "hash": "8aaf147a3c506bc28b4cdf04ae28d58366805af7b59af2f560930186193f06bb"
     },
     {
       "file": "src/lib/storageErrors.ts",
@@ -13665,6 +13693,10 @@
     {
       "file": "src/lib/support.ts",
       "hash": "9dd7473ec6adb4cbc740e5b6880c8ee37e04fd4fb24fd9de32ec7a2beab4fa83"
+    },
+    {
+      "file": "src/lib/useFleetAvailability.ts",
+      "hash": "71aea425df4fefd28005aab3aec9304675ccfc8b243d23b29812dbfb3d0e678f"
     },
     {
       "file": "src/lib/useSagaLang.ts",
@@ -13694,7 +13726,7 @@
   "dates": {
     "/": "2026-11-08T23:05:09+08:00",
     "/about": "2026-11-08T23:05:09+08:00",
-    "/book": "2026-11-08T23:05:09+08:00",
+    "/book": "2026-11-15T16:15:14+08:00",
     "/contact": "2026-11-08T23:05:09+08:00",
     "/delivery-areas": "2026-11-08T23:05:09+08:00",
     "/delivery-areas/canggu": "2026-11-08T23:05:09+08:00",

@@ -1,3 +1,4 @@
+import {syncOpsBooking} from "@/lib/opsInventory";
 import { NextRequest, NextResponse } from "next/server";
 import { getBookingStore, StockUnavailableError } from "@/lib/bookingStore";
 import { getSessionUser } from "@/lib/session";
@@ -72,6 +73,7 @@ export async function POST(_req: NextRequest, ctx: Ctx) {
       } catch (err) {
         console.error(`[payments] snap reopen failed for ${booking.booking_code}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
         await store.setPaymentState(booking.id, { payment_status: "failed", status: "expired" }, "system", "payment provider unavailable").catch(() => null);
+        await syncOpsBooking(booking.id).catch(()=>undefined);
         return NextResponse.json({ ok: false, error: "payment_unavailable" }, { status: 503 });
       }
     }

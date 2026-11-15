@@ -2,6 +2,7 @@ import "server-only";
 import type { PoolClient } from "pg";
 import { getPool } from "@/lib/db";
 import { storageErrorFromThrown } from "@/lib/storageErrors";
+import {opsEnabled,opsAvailability} from '@/lib/opsInventory';
 
 /**
  * Per-model unit stock (v1). `total_units` NULL means the model is
@@ -20,6 +21,10 @@ export interface StockRow {
 }
 
 export async function listStock(): Promise<StockRow[]> {
+  if(await opsEnabled()){
+    const now=Date.now();const stock=await opsAvailability(new Date(now).toISOString(),new Date(now+2*86400000).toISOString());
+    return stock.map(r=>({model:r.model as ModelSlug,total_units:r.total,updated_at:new Date().toISOString()}));
+  }
   try {
     const res = await getPool().query(
       "select model, total_units, updated_at from vehicle_stock order by model"
@@ -31,6 +36,7 @@ export async function listStock(): Promise<StockRow[]> {
 }
 
 export async function setStock(model: ModelSlug, totalUnits: number | null): Promise<StockRow> {
+  if(await opsEnabled())throw new Error('Stock is managed in Werigo Ops.');
   try {
     const res = await getPool().query(
       `insert into vehicle_stock (model, total_units) values ($1::vehicle_model, $2)
@@ -88,6 +94,11 @@ export async function availableUnitsLocked(
 
 /** Read-only availability check (no lock), for the UI before checkout. */
 export async function availableUnits(model: string, startAt: string, endAt: string): Promise<Availability> {
+  if(await opsEnabled()){
+    const stock=await opsAvailability(startAt,endAt);const item=stock.find(r=>r.model===model);
+    if(!item)throw new Error('Missing model in Ops inventory.');
+    return {total:item.total,available:item.available,committed:item.total-item.available};
+  }
   try {
     const pool = getPool();
     const [stock, committedRes] = await Promise.all([
