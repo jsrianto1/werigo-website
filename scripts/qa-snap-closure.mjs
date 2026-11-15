@@ -12,3 +12,10 @@ export function coreClosedOrAbsent(response, orderId) {
  if (response.http === 404 && String(response.data.status_code) === '404') return true;
  return response.http === 200 && response.data.order_id === orderId && ['cancel','expire','deny','failure'].includes(response.data.transaction_status);
 }
+
+// Midtrans uses 407 for an expired transaction (not a proxy-auth challenge).
+// This applies only to a fresh GET of the exact QA Snap token; Core is checked
+// independently afterwards because a payment method can outlive the page.
+export function snapExplicitlyExpired(response) {
+ return response?.http === 407 && Array.isArray(response.data?.error_messages) && response.data.error_messages.some(message => typeof message === 'string' && /\bexpired\b/i.test(message));
+}
