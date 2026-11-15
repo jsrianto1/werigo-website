@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {snapExpiredAtProvider,coreClosedOrAbsent} from './qa-snap-closure.mjs';
+const scope={token:'test-token',orderId:'qa-only',grossAmount:570000};
+const data={token:scope.token,transaction_details:{order_id:scope.orderId,gross_amount:scope.grossAmount},expiry_time:'2026-11-15 15:34:13 +0000',server_time:Date.parse('2026-11-15T15:34:14Z')/1000};
+assert.equal(snapExpiredAtProvider(data,scope),true);
+for(const invalid of [null,{}, {...data,token:'other'}, {...data,transaction_details:{...data.transaction_details,order_id:'other'}}, {...data,transaction_details:{...data.transaction_details,gross_amount:1}}, {...data,server_time:data.server_time-2}, {...data,server_time:undefined}, {...data,expiry_time:'unknown'}]) assert.equal(snapExpiredAtProvider(invalid,scope),false);
+assert.equal(coreClosedOrAbsent({http:404,data:{status_code:'404'}},scope.orderId),true);
+assert.equal(coreClosedOrAbsent({http:200,data:{order_id:scope.orderId,transaction_status:'expire'}},scope.orderId),true);
+for(const invalid of [{http:404,data:null},{http:404,data:{}},{http:401,data:{status_code:'404'}},{http:200,data:{order_id:'other',transaction_status:'expire'}},{http:200,data:{order_id:scope.orderId,transaction_status:'settlement'}},{http:200,data:{order_id:scope.orderId,transaction_status:'pending'}}]) assert.equal(coreClosedOrAbsent(invalid,scope.orderId),false);
+console.log('QA Snap closure: 17 checks passed; no network or database calls.');

@@ -3,6 +3,7 @@
 // synthetic bookings after Midtrans confirms the Snap session is cancelled.
 import {Pool} from 'pg';
 import {readFileSync} from 'node:fs';
+import {snapExpiredAtProvider,coreClosedOrAbsent} from './qa-snap-closure.mjs';
 const mode=process.argv[2]||'audit',tag=process.argv[3]||'';
 if(!['audit','--release-qa'].includes(mode))throw new Error('INVALID_AUDIT_MODE');
 if(mode==='--release-qa'&&!/^WERIGO-QA-[a-f0-9-]{36}$/.test(tag))throw new Error('INVALID_QA_MARKER');
@@ -57,16 +58,21 @@ async function gateway(path,method='GET',snap=false,rawAuth=false){
  const data=await response.json().catch(()=>null);
  return {http:response.status,data};
 }
-async function closeQaSnap(token){
- for(const action of ['cancel','expire'])for(const rawAuth of [false,true]){
-  const r=await gateway('/transactions/'+encodeURIComponent(token)+'/'+action,'POST',true,rawAuth);
+async function closeQaSnap(token,orderId,grossAmount){
+ for(const rawAuth of [false,true]){
+  const r=await gateway('/transactions/'+encodeURIComponent(token)+'/cancel','POST',true,rawAuth);
   const already=r.data?.error_messages?.some(x=>/token (?:already |has been )?cancell?ed/i.test(x));
   if(r.http===200&&(r.data?.canceled_at||r.data?.expired_at||['cancel','expire'].includes(r.data?.transaction_status))||already)return true;
+  emit({qa_snap_cancel_http:r.http,authentication:rawAuth?'raw':'basic'});
  }
+ const snapshot=await gateway('/transactions/'+encodeURIComponent(token),'GET',true);
+ const expired=snapshot.http===200&&snapExpiredAtProvider(snapshot.data,{token,orderId,grossAmount});
+ emit({qa_snap_snapshot_http:snapshot.http,provider_confirms_page_expired:expired});
+ if(expired)return true;
  return false;
 }
 async function releaseQa(){
- const rows=(await pool.query(`SELECT b.id,b.booking_code,b.status,b.payment_status,b.user_id,b.start_at,u.email,u.name,
+ const rows=(await pool.query(`SELECT b.id,b.booking_code,b.status,b.payment_status,b.user_id,b.start_at,b.total_idr,u.email,u.name,
   (SELECT count(*)::int FROM ops.handovers h WHERE h.booking_id='web:'||b.id::text) AS handovers,
   (SELECT count(*)::int FROM ops.payments p WHERE p.booking_id='web:'||b.id::text) AS receipts
   FROM public.bookings b JOIN public."user" u ON u.id=b.user_id WHERE b.customer_notes LIKE $1`,[tag+'%'])).rows;
@@ -80,7 +86,7 @@ async function releaseQa(){
    const state=status.data.transaction_status;
    if(['capture','settlement','refund','partial_refund','chargeback','partial_chargeback'].includes(state))throw new Error('QA_HAS_PAYMENT_REQUIRES_REVIEW');
    if(p.snap_token){
-    if(!await closeQaSnap(p.snap_token)){
+    if(!await closeQaSnap(p.snap_token,p.order_id,b.total_idr)){
      if(state==='pending'){
       await gateway('/'+encodeURIComponent(p.order_id)+'/expire','POST');
       const expired=await gateway('/'+encodeURIComponent(p.order_id)+'/status');
@@ -88,6 +94,14 @@ async function releaseQa(){
      }else if(!terminal.includes(state))throw new Error('QA_SNAP_CANCELLATION_UNCONFIRMED');
     }
    }else if(state&&!terminal.includes(state))throw new Error('QA_GATEWAY_NOT_CLOSED');
+   // A payment method can outlive the Snap page: independently verify Core
+   // again, then expire a still-pending method before any stock is released.
+   let final=await gateway('/'+encodeURIComponent(p.order_id)+'/status');
+   if(final.data?.transaction_status==='pending'){
+    await gateway('/'+encodeURIComponent(p.order_id)+'/expire','POST');
+    final=await gateway('/'+encodeURIComponent(p.order_id)+'/status');
+   }
+   if(!coreClosedOrAbsent(final,p.order_id))throw new Error('QA_FINAL_PAYMENT_STATE_UNCONFIRMED');
   }
   const c=await pool.connect();
   try{
@@ -97,7 +111,7 @@ async function releaseQa(){
    if(!['pending','failed','expired'].includes(current.payment_status))throw new Error('QA_PAYMENT_STATE_CHANGED');
    await c.query("UPDATE public.payments SET transaction_status='cancel' WHERE booking_id=$1 AND (transaction_status IS NULL OR transaction_status NOT IN ('capture','settlement','refund','partial_refund','chargeback','partial_chargeback'))",[b.id]);
    await c.query("UPDATE public.bookings SET status='cancelled',payment_status='failed' WHERE id=$1",[b.id]);
-   await c.query("INSERT INTO public.booking_events(booking_id,event_type,note,actor) SELECT $1,'qa_released',$2,'qa:owner-authorized' WHERE NOT EXISTS(SELECT 1 FROM public.booking_events WHERE booking_id=$1 AND event_type='qa_released')",[b.id,tag+' unpaid test; Snap session cancelled; no funds charged']);
+   await c.query("INSERT INTO public.booking_events(booking_id,event_type,note,actor) SELECT $1,'qa_released',$2,'qa:owner-authorized' WHERE NOT EXISTS(SELECT 1 FROM public.booking_events WHERE booking_id=$1 AND event_type='qa_released')",[b.id,tag+' unpaid test; gateway closure verified; no funds charged']);
    await c.query('COMMIT');emit({qa_released:b.booking_code,payment_charged:false});
   }catch(e){await c.query('ROLLBACK').catch(()=>{});throw e;}finally{c.release();}
  }
