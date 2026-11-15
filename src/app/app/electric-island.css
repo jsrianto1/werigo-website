@@ -139,7 +139,7 @@
 .werigo-app-root .ride-app .wg-bike-check { background:var(--app-card); border-color:var(--line-strong); }
 
 /* Keep legacy page rules from assigning faint text to labels and confirmation panels. */
-.werigo-app-root .ride-app :is(.wr-activity-area,.wr-activity-photo-label,.wr-photo-credits,.wg-bike-rate-note) { color:var(--ink-soft); }
+.werigo-app-root .ride-app :is(.wr-activity-area,.wr-activity-photo-label,.wr-photo-credits,.wg-bike-rate-note,.wr-google-unavailable) { color:var(--ink-soft); }
 .werigo-app-root .ride-app :is(.wr-primary,.wr-confirm-pin,.wr-done,.ra-button,.ra-install,.ra-quick-rent) { background:var(--wg-brand); color:var(--ink-inverse); }
 .werigo-app-root .ride-app .brand-logo-art { width:114px; height:auto; max-height:none; }
 .werigo-app-root .ride-app .wg-hero-bike { height:235px; }
