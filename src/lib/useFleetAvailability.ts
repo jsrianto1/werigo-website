@@ -4,7 +4,7 @@ export function useFleetAvailability(start:string,end:string){
  const [result,setResult]=useState<{key:string;enabled:boolean;stock:Record<string,number>;error:boolean}|null>(null);
  const key=start+'|'+end;
  useEffect(()=>{
-  if(!start||!end||!Number.isFinite(Date.parse(start))||Date.parse(end)-Date.parse(start)<2*86400000)return;
+  if(!start||!end||!Number.isFinite(Date.parse(start))||Math.ceil((Date.parse(end)-Date.parse(start))/86400000)<2)return;
   const controller=new AbortController();
   async function load(){try{
    const response=await fetch('/api/fleet/availability?'+new URLSearchParams({start,end}),{signal:controller.signal,cache:'no-store'});
