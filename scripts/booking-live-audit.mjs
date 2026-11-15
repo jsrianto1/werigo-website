@@ -3,7 +3,7 @@
 // synthetic bookings after Midtrans confirms the Snap session is cancelled.
 import {Pool} from 'pg';
 import {readFileSync} from 'node:fs';
-import {snapExpiredAtProvider,coreClosedOrAbsent} from './qa-snap-closure.mjs';
+import {snapExpiredAtProvider,coreClosedOrAbsent,snapExplicitlyExpired} from './qa-snap-closure.mjs';
 const mode=process.argv[2]||'audit',tag=process.argv[3]||'';
 if(!['audit','--release-qa'].includes(mode))throw new Error('INVALID_AUDIT_MODE');
 if(mode==='--release-qa'&&!/^WERIGO-QA-[a-f0-9-]{36}$/.test(tag))throw new Error('INVALID_QA_MARKER');
@@ -66,7 +66,7 @@ async function closeQaSnap(token,orderId,grossAmount){
   emit({qa_snap_cancel_http:r.http,authentication:rawAuth?'raw':'basic'});
  }
  const snapshot=await gateway('/transactions/'+encodeURIComponent(token),'GET',true);
- const expired=snapshot.http===200&&snapExpiredAtProvider(snapshot.data,{token,orderId,grossAmount});
+ const expired=snapExplicitlyExpired(snapshot)||(snapshot.http===200&&snapExpiredAtProvider(snapshot.data,{token,orderId,grossAmount}));
  emit({qa_snap_snapshot_http:snapshot.http,provider_confirms_page_expired:expired});
  if(expired)return true;
  return false;
