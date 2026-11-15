@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "7d283bc85205c922cee5c52dcff10606a4d0c8b3591ae57613e0351eaf73e226",
+  "fingerprint": "f616dc8e91d0de2c8cd169e6996f12dcc6cbe8454d343dd9be68420f894e9aea",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12148,7 +12148,11 @@
     },
     {
       "file": "scripts/ops-inventory-test.mjs",
-      "hash": "cbaf4dfd86cd7e75dc165b19bfb529a5856e946587ad52f2cace6230ce1d048b"
+      "hash": "bf0a63295ce3adba25417d5f4ff7581d39ec38dfecb4b016508821158be027e5"
+    },
+    {
+      "file": "scripts/ops-maintenance.mjs",
+      "hash": "d360b2a6088821b220597257251a532a87bd78396887d09c6713e4963fafa51b"
     },
     {
       "file": "scripts/phone-test.mjs",
@@ -12404,7 +12408,7 @@
     },
     {
       "file": "src/app/api/admin/ops-sync/route.ts",
-      "hash": "ddd9046344abf77bb7c7b8f2e1e4cb5d3b802402ac5283d8f2877049c2324a07"
+      "hash": "dd8755f1243370f6511ac768fb9a7924fe26e10b90348f2349741407e36b176b"
     },
     {
       "file": "src/app/api/admin/promotions/[id]/grants/route.ts",
@@ -12501,6 +12505,14 @@
     {
       "file": "src/app/api/health/db/route.ts",
       "hash": "b2ca6b8abceb78c930eae6bea9bb979d7f84ead9bd043109b8ee3937335e7d3c"
+    },
+    {
+      "file": "src/app/api/integrations/ops/key/route.ts",
+      "hash": "72268135f87f28aa72b222fc8ef4cfc938a6c6b9dd98cab6c0e6316d4aa32ef0"
+    },
+    {
+      "file": "src/app/api/integrations/ops/tick/route.ts",
+      "hash": "483a0c5c2b7be354e9f38ac211c4ead51f3ede98adb0dd5dad6f6348a52ab8a7"
     },
     {
       "file": "src/app/api/media/[id]/route.ts",
@@ -13564,7 +13576,7 @@
     },
     {
       "file": "src/lib/opsInventory.ts",
-      "hash": "e74b60fe5b7620c8a4dd724e2089a81a8426eb818725aa68120218fcf398c5b0"
+      "hash": "bacc1fb2f818fa2bb9530e06af2b25c2f543052996678412213427c9772f7bb0"
     },
     {
       "file": "src/lib/opsInventoryPayload.ts",
@@ -13572,7 +13584,15 @@
     },
     {
       "file": "src/lib/opsInventorySchema.ts",
-      "hash": "b39812ba68eb990afebb559869c4731e6afeebeebdfce4cd8c9dbc8e69782546"
+      "hash": "6442ec49b73044d4837f03aba3d0f9715867dd8a00f857ebf00046bfe21f2377"
+    },
+    {
+      "file": "src/lib/opsServiceProtocol.ts",
+      "hash": "2a97f19df212cb936e97f3b43262751eb5b8b7efdbdad4cc6e9b3e78de939ece"
+    },
+    {
+      "file": "src/lib/opsSyncWorker.ts",
+      "hash": "4293e0281c5d90dfa9ba850bb395891e286b30ed13c57fa35330b35352a6f00c"
     },
     {
       "file": "src/lib/paymentItems.ts",
