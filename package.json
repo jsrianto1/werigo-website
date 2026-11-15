@@ -16,7 +16,7 @@
     "test:cms": "node scripts/cms-test.mjs",
     "test:pricing": "node scripts/pricing-test.mjs && node scripts/monthly-daily-test.mjs",
     "test:rental": "node scripts/app-rental-flow-test.mjs",
-    "test:booking-payment": "node --experimental-transform-types scripts/booking-payment-flow-test.mjs",
+    "test:booking-payment": "node --experimental-transform-types scripts/booking-payment-flow-test.mjs && node scripts/qa-snap-closure-test.mjs",
     "build:booking-audit": "npm run build && node scripts/booking-live-audit.mjs audit",
     "build:booking-qa-cleanup": "npm run build && node scripts/booking-live-audit.mjs --release-qa WERIGO-QA-e3fab23d-268b-48c7-a501-4b8b7dffa60a",
     "db:migrate": "node scripts/db-migrate.mjs",
