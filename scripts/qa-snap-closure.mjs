@@ -9,7 +9,8 @@ export function snapExpiredAtProvider(data, {token, orderId, grossAmount}) {
 
 export function coreClosedOrAbsent(response, orderId) {
  if (!response?.data || response.http === 401 || response.http === 403 || response.http >= 500) return false;
- if (response.http === 404 && String(response.data.status_code) === '404') return true;
+ // Core reports absent transactions in JSON status_code even with HTTP200.
+ if ([200,404].includes(response.http) && String(response.data.status_code) === '404' && !response.data.transaction_status) return true;
  return response.http === 200 && response.data.order_id === orderId && ['cancel','expire','deny','failure'].includes(response.data.transaction_status);
 }
 
