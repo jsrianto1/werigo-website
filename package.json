@@ -20,7 +20,12 @@
     "auth:generate": "better-auth generate --config src/lib/auth.ts --output db/migrations/0002_auth.sql -y",
     "create-admin": "node scripts/create-admin.mjs",
     "test:articles": "node scripts/articles-test.mjs",
-    "test:support": "node scripts/support-test.mjs"
+    "test:support": "node scripts/support-test.mjs",
+    "build:ops-audit": "npm run build && node scripts/ops-maintenance.mjs audit",
+    "build:ops-inspect": "npm run build && node scripts/ops-consolidate.mjs inspect",
+    "build:ops-migrate": "npm run build && node scripts/ops-consolidate.mjs migrate",
+    "build:ops-verify": "npm run build && node scripts/ops-consolidate.mjs verify",
+    "test:ops": "node scripts/ops-consolidated-test.mjs"
   },
   "dependencies": {
     "@tiptap/pm": "3.23.5",

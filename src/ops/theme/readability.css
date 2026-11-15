@@ -1,0 +1,27 @@
+/* Product images occupy a bounded area and never overlap operational text. */
+.unit-card{display:flex;flex-direction:column;align-items:stretch;min-width:0;overflow:hidden;isolation:isolate;padding:20px 21px 0;text-align:left}
+.unit-card-top{min-height:30px;flex:0 0 auto}
+.unit-image{position:relative;display:block;flex:0 0 190px;height:190px;width:100%;max-width:none;min-width:0;min-height:0;margin:12px 0 16px;overflow:hidden}
+.unit-image>img{position:absolute;inset:8px;display:block;width:calc(100% - 16px);height:calc(100% - 16px);max-width:calc(100% - 16px);max-height:calc(100% - 16px);min-width:0;min-height:0;object-fit:contain}
+.unit-card-name,.unit-location,.unit-vin,.unit-next{position:relative;z-index:1;overflow-wrap:anywhere}
+.unit-card-name h3{font-size:20px;line-height:1.35;color:#173f36;margin:0}
+.unit-card-name>span,.unit-location,.unit-vin,.unit-next{font-size:13px;line-height:1.6;color:#435f55}
+.unit-card-name>span{margin-top:6px}.unit-location{align-items:flex-start;margin-top:12px}.unit-location>svg{flex-shrink:0;margin-top:3px}
+.unit-vin{padding:0;margin:8px 0 0;letter-spacing:.01em}.unit-next{margin:16px -21px 0;padding:14px 21px;min-height:53px;align-items:flex-start;background:#f6f9f5}.unit-next>svg{flex-shrink:0;margin-top:3px}
+.model-photo{min-height:0;overflow:hidden}.model-photo>img{display:block;min-height:0;object-fit:contain}
+.unit-detail-top>img{display:block;width:230px;height:190px;max-width:100%;object-fit:contain}
+/* Readable sizes and contrast for everyday operational data. */
+.nav-item{font-size:14px;color:#3f5c50}.nav-group{font-size:11px;color:#526a5a}.sidebar-profile small,.sidebar-profile strong{color:#365849}
+.page-heading p,.panel-heading p,.source-explanation,.table-note,.detail-note p,.guide-cards p,.team-guide-note,.team-access-steps p{font-size:14px;line-height:1.7;color:#425e52}
+.field>span,.field>label{font-size:14px;color:#294d40}.field small,.save-hint,.detail-item small{font-size:13px;line-height:1.6;color:#4d685b}
+.field input,.field select,.field textarea,.search input,.filter-select{font-size:14px}.field input::placeholder,.field textarea::placeholder,.search input::placeholder{color:#617466}
+.btn{font-size:14px}.sales-row-name small,.sales-row-name>span,.sales-row-status small,.source-marker{font-size:13px;line-height:1.6;color:#4b6558}.source-status{font-size:12px}
+.dashboard-sales-heading p,.sales-summary-note,.sales-metric>small,.sales-metric>span,.stat-card>small{font-size:13px;line-height:1.6;color:#496453}.stat-top>span:first-child{font-size:14px;color:#425f50}
+.sales-metric.net>span,.sales-metric.net>small{color:#e1f3e8}.welcome-copy>p{font-size:15px;line-height:1.7;color:#e1f0e9}.welcome-actions>span{color:#cce9da}
+td{font-size:14px}td small{font-size:13px;color:#4c6859}th{font-size:12px;color:#446151}.chart-y,.chart-column>small{font-size:11px;color:#4a6657}
+.rental-source-panel .filter-select{min-height:44px}.activity-events article small,.activity-events article p{font-size:13px;color:#466353}
+@media(max-width:680px){.unit-image{height:180px;flex-basis:180px}.unit-card-name h3{font-size:20px}.mobile-nav>button{font-size:12px;color:#3f6254}.sales-metric>span,.sales-metric>small{font-size:12px}.sales-metric.net>span,.sales-metric.net>small{font-size:13px}}
+
+.sales-summary span{font-size:12px;line-height:1.6;color:#4b6558}.badge{font-size:12px;line-height:1.4}.source-flags p{font-size:14px;line-height:1.6}.detail-note small,.login-card>small{font-size:12px;line-height:1.6;color:#4d685b}.workspace-footer{font-size:11px;color:#50695c}
+
+.fleet-image-pending{display:flex;height:100%;min-height:90px;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#567263}.fleet-image-pending small{font-size:13px;line-height:1.6;text-align:center}

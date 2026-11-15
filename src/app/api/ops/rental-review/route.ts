@@ -1,0 +1,7 @@
+import {db,currentStaff,permitted,sameOrigin,json,fail,AppError,auditedMutation} from '@/ops/lib/server';
+import {reviewRentalRows} from '@/ops/lib/rental-review';
+export async function POST(req:Request){try{sameOrigin(req);const member=await currentStaff();permitted(member,['owner']);const text=await req.text();if(text.length>500000)throw new AppError('Snapshot is too large.');const snapshot=JSON.parse(text);
+ const [r,s]=await Promise.all([db().prepare('SELECT * FROM rental_records').all(),db().prepare('SELECT * FROM sales_records').all()]);let changes;try{changes=reviewRentalRows(r.results,s.results,snapshot);}catch(e){throw new AppError((e as Error).message,409);}
+ let corrected=0,resolved=0;for(const c of changes){const fields=Object.keys(c.patch),now=Date.now();await auditedMutation(db().prepare(`UPDATE rental_records SET ${fields.map(f=>f+'=?').join(',')},updated_at=? WHERE id=? AND updated_at=?`).bind(...fields.map(f=>c.patch[f]),now,c.id,c.expected_updated_at),'rental.reviewed',c.id,{source_row:c.source_row,before:c.before,after:c.patch,evidence:c.notes},member.email);corrected++;if(JSON.parse((r.results.find((x:any)=>x.id===c.id) as any).flags).length>0&&JSON.parse(c.patch.flags??(r.results.find((x:any)=>x.id===c.id) as any).flags).length===0)resolved++;}
+ const pending=await db().prepare("SELECT COUNT(*) AS count FROM rental_records WHERE json_array_length(flags)>0").first<{count:number}>();return json({ok:true,reviewed:r.results.length,updated:corrected,cleared:resolved,pending:pending?.count||0});
+ }catch(e){return fail(e);}}
