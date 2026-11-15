@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "3502910da7dd86b10ba86490271a6d0c8252cacc41efb2c945e2f1c4991038e4",
+  "fingerprint": "11ae59eaba1e19f73df1e52210b44b9ed3011b52c64f2caeef888690c0553b8c",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12496,7 +12496,7 @@
     },
     {
       "file": "src/app/api/fleet/availability/route.ts",
-      "hash": "d1ffce303d0aaa15bdeb30e766e785aa83baba77124168f6975410fa8b9c430d"
+      "hash": "7c82f027e584bc6feadd3ff3339d6a0ddb4460cba4f049846ad10495bb1fe152"
     },
     {
       "file": "src/app/api/health/db/route.ts",
@@ -13696,7 +13696,7 @@
     },
     {
       "file": "src/lib/useFleetAvailability.ts",
-      "hash": "b7522912dfbbe007628b87680070aa9103b40e0849de31225cc077f071692c77"
+      "hash": "71aea425df4fefd28005aab3aec9304675ccfc8b243d23b29812dbfb3d0e678f"
     },
     {
       "file": "src/lib/useSagaLang.ts",
@@ -13726,7 +13726,7 @@
   "dates": {
     "/": "2026-11-08T23:05:09+08:00",
     "/about": "2026-11-08T23:05:09+08:00",
-    "/book": "2026-11-15T16:09:27+08:00",
+    "/book": "2026-11-15T16:15:14+08:00",
     "/contact": "2026-11-08T23:05:09+08:00",
     "/delivery-areas": "2026-11-08T23:05:09+08:00",
     "/delivery-areas/canggu": "2026-11-08T23:05:09+08:00",
