@@ -40,7 +40,7 @@ BEGIN
    ON CONFLICT(id) DO UPDATE SET name=excluded.name,phone=excluded.phone,email=excluded.email,address=excluded.address,updated_at=excluded.updated_at;
   IF previous.id IS NOT NULL THEN
    UPDATE ops.bookings SET unit_ids=to_jsonb(selected_ids)::text,start_at=start_ms,end_at=end_ms,
-    status=CASE WHEN previous.status IN ('active','completed') THEN previous.status WHEN hold_state='pending' THEN 'pending_payment' ELSE 'confirmed' END,
+    status=CASE WHEN previous.status IN ('active','completed') THEN previous.status WHEN b.status::text='active' THEN 'active' WHEN hold_state='pending' THEN 'pending_payment' ELSE 'confirmed' END,
     location=concat_ws(' · ',b.pickup_area,b.pickup_address,'Return: '||b.return_area,b.return_address),
     base_idr=coalesce(b.base_idr,0),discount_idr=b.discount_idr,fee_idr=b.area_fee_idr,updated_at=ts WHERE id=bid;
   ELSE
