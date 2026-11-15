@@ -17,7 +17,7 @@ async function opsRequest(method:'GET'|'POST',payload:object|string){
  if(!secret||secret.length<32)throw new OpsInventoryError('sync_not_ready');
  const body=typeof payload==='string'?payload:JSON.stringify(payload),time=String(Date.now());
  const signature=createHmac('sha256',secret).update(time+'.'+body).digest('hex');
- let response;try{response=await fetch(OPS_URL+(method==='GET'?body:''),{method,cache:'no-store',signal:AbortSignal.timeout(8000),headers:{'x-werigo-time':time,'x-werigo-signature':signature,...(method==='POST'?{'content-type':'application/json'}:{})},...(method==='POST'?{body}:{})});}catch{throw new OpsInventoryError('sync_unavailable');}
+ let response;try{response=await fetch(OPS_URL+(method==='GET'?body:''),{method,cache:'no-store',signal:AbortSignal.timeout(8000),headers:{'user-agent':'WerigoWebsite/1.0 (+https://werigo.co)','x-werigo-time':time,'x-werigo-signature':signature,...(method==='POST'?{'content-type':'application/json'}:{})},...(method==='POST'?{body}:{})});}catch{throw new OpsInventoryError('sync_unavailable');}
  if(!response.ok){const result=await response.json().catch(()=>null);throw new OpsInventoryError(response.status===409&&result?.error==='stock_unavailable'?'stock_unavailable':'sync_unavailable');}
  return response.json();
 }
