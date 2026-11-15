@@ -103,6 +103,7 @@ async function releaseQa(){
     await gateway('/'+encodeURIComponent(p.order_id)+'/expire','POST');
     final=await gateway('/'+encodeURIComponent(p.order_id)+'/status');
    }
+   emit({qa_core_status_http:final.http,qa_core_status_code:/^\d{3}$/.test(String(final.data?.status_code))?String(final.data.status_code):'unknown',qa_core_closed_or_absent:coreClosedOrAbsent(final,p.order_id)});
    if(!coreClosedOrAbsent(final,p.order_id))throw new Error('QA_FINAL_PAYMENT_STATE_UNCONFIRMED');
   }
   const c=await pool.connect();
