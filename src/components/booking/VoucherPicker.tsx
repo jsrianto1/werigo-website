@@ -65,8 +65,11 @@ export function VoucherPicker({
   codeStatus: { code: string; ok: boolean; message?: string } | null;
 }) {
   const [open, setOpen] = useState(false);
+  const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
   const [staged, setStaged] = useState<string | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
   // Set when the customer presses Apply in the sheet, so only a freshly
   // applied code is pre-selected (reopening the sheet keeps their choice).
   const justApplied = useRef(false);
@@ -75,6 +78,7 @@ export function VoucherPicker({
   const applied = options.find((o) => o.key === activeKey) ?? null;
 
   function openSheet() {
+    setPortalHost(triggerRef.current?.closest<HTMLElement>(".ride-app") ?? document.body);
     setStaged(activeKey);
     setOpen(true);
   }
@@ -82,13 +86,26 @@ export function VoucherPicker({
   useEffect(() => {
     if (!open) return;
     closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setOpen(false); return; }
+      if (e.key !== "Tab") return;
+      const items = Array.from(sheetRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled):not([tabindex="-1"]), input:not(:disabled), a[href], [tabindex="0"]') ?? []).filter(el => el.getClientRects().length);
+      const first = items[0], last = items.at(-1);
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    };
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const appRoot = triggerRef.current?.closest(".ride-app");
+    const background = Array.from(appRoot?.children ?? []).filter((el): el is HTMLElement => el instanceof HTMLElement && el !== sheetRef.current);
+    const previousInert = background.map(el => el.inert);
+    background.forEach(el => { el.inert = true; });
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      background.forEach((el, index) => { el.inert = previousInert[index]; });
+      triggerRef.current?.focus();
     };
   }, [open]);
 
@@ -124,8 +141,11 @@ export function VoucherPicker({
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={openSheet}
+        aria-expanded={open}
+        aria-controls={open ? "voucher-sheet" : undefined}
         className="group flex w-full cursor-pointer items-center gap-3 rounded-[14px] border border-line bg-card p-4 text-left transition-colors hover:border-primary"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[#c14a05]">
@@ -172,7 +192,7 @@ export function VoucherPicker({
 
       {open
         ? createPortal(
-            <div className="fixed inset-0 z-[120] flex items-end justify-center sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="voucher-sheet-title">
+            <div ref={sheetRef} id="voucher-sheet" className="wr-voucher-sheet fixed inset-0 z-[120] flex items-end justify-center sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="voucher-sheet-title">
               <button type="button" aria-label="Close" tabIndex={-1} onClick={() => setOpen(false)} className="absolute inset-0 h-full w-full cursor-default bg-black/50" />
               <div className="relative flex max-h-[88dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-[20px] bg-page shadow-2xl sm:rounded-[20px]">
                 <div className="flex items-center justify-between border-b border-line px-5 py-4">
@@ -331,7 +351,7 @@ export function VoucherPicker({
                 </div>
               </div>
             </div>,
-            document.body
+            portalHost ?? document.body
           )
         : null}
     </>

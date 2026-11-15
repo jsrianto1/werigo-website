@@ -2,6 +2,23 @@
 export interface AppRentalSearch {
   pickup: string; startDate: string; startTime: string; endDate: string; endTime: string; vehicle: string; ref: string;
 }
+/** The shorter plan screen must keep every original booking gate. */
+export function rentalPlanError(plan: {
+  validDates: boolean;
+  hasArea: boolean;
+  delivery: boolean;
+  confirmedPin: boolean;
+  savedPin: boolean;
+  availability: "loading" | "error" | "ready";
+  remaining?: number;
+}): string | null {
+  if (!plan.validDates) return "Choose at least 2 days, starting today or later. Pick-up and return times are 08:00–20:00 WITA.";
+  if (!plan.hasArea || plan.delivery && (!plan.confirmedPin || !plan.savedPin)) return "Search for your address or use GPS, then confirm your delivery location and fee.";
+  if (plan.availability === "loading") return "Checking availability for your dates. Please try again in a moment.";
+  if (plan.availability === "error") return "Availability could not be confirmed. Please retry or contact Werigo.";
+  if (plan.remaining === 0) return "This motorcycle is fully booked for these dates. Choose another model or dates.";
+  return null;
+}
 export function defaultAppDates(now = new Date()) {
   const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Makassar", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now);
   const part = (name: string) => parts.find(value => value.type === name)!.value;

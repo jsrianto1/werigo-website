@@ -93,6 +93,7 @@ const phaseToStep: Record<Phase, number> = {
 
 export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: { googleEnabled?: boolean; bookingBase?: "/book" | "/app/rent" }) {
   const { t } = useLanguage();
+  const isApp = bookingBase === "/app/rent";
   const params = useSearchParams();
   const router = useRouter();
   // Database mode: payment needs an account. The session is read on
@@ -187,7 +188,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   // route (website checkout, different return) the area fee applies.
   const whatsappCheckout = WHATSAPP_FIRST_BOOKING;
 
-  const [phase, setPhase] = useState<Phase>("extras");
+  const [phase, setPhase] = useState<Phase>(isApp ? "details" : "extras");
   const mobileTotal = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (bookingBase !== "/app/rent") return;
@@ -450,6 +451,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
     startTime: period.startTime,
     endDate: period.endDate,
     endTime: period.endTime,
+    ...(referralCode ? { ref: referralCode } : {}),
   }).toString();
 
 
@@ -689,7 +691,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
   return (
     <div>
-      {bookingBase === "/app/rent" ? <nav aria-label="Booking progress" className="wr-app-progress"><Link href={`${bookingBase}?${searchQs}&vehicle=${entryId}`} aria-label="Back to your rental"><ArrowLeft size={18}/></Link><strong>{phase === "extras" ? "Your rental · Options" : phase === "details" ? "Your rental · Rider details" : phase === "review" ? "Your rental · Review & payment" : "Your rental · Request ready"}</strong><span>{phase === "extras" ? "1 / 3" : phase === "details" ? "2 / 3" : "3 / 3"}</span></nav> : <BookingStepper current={phaseToStep[phase]} />}
+      {isApp ? <nav aria-label="Booking progress" className="wr-app-progress"><Link href={`${bookingBase}?${searchQs}&vehicle=${entryId}&edit=plan`} aria-label="Edit dates and delivery"><ArrowLeft size={18}/></Link><strong>{phase === "review" ? "Review & pay" : phase === "sent" ? "Request ready" : "Rider & helmets"}</strong><span>{phase === "review" || phase === "sent" ? "4 / 4" : "3 / 4"}</span></nav> : <BookingStepper current={phaseToStep[phase]} />}
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0">
@@ -704,19 +706,19 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
             {returnArea && ret !== pickup ? ` → ${returnArea.name}` : ""} ·{" "}
             {bookingBase === "/app/rent" ? `${days} days` : `${period.startDate} ${period.startTime} → ${period.endDate} ${period.endTime}`}
             <Link
-              href={`${bookingBase}?${searchQs}&vehicle=${entryId}`}
+              href={`${bookingBase}?${searchQs}&vehicle=${entryId}${isApp ? "&edit=plan" : ""}`}
               className="ml-2 font-semibold text-primary hover:text-primary-strong"
             ><T>{"Change"}</T>{" "}</Link>
           </p>
 
           {/* ============ PHASE: EXTRAS ============ */}
-          {phase === "extras" ? (
+          {phase === "extras" || isApp && phase === "details" ? (
             <div>
               <h1
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
-              ><T>{"Make it yours"}</T>{" "}</h1>
+              ><T>{isApp ? "Your rental, your way." : "Make it yours"}</T>{" "}</h1>
               <p className="mt-2 text-ink-soft"><T>{bookingBase === "/app/rent" ? "Choose how many motorcycles and helmets you need." : "Choose your motorcycle quantity and any helmets you need. Helmets are optional, with a maximum of 2 per booking. A phone holder is installed on the motorcycle."}</T>{" "}</p>
 
 
@@ -807,7 +809,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   <Truck className="mr-1.5 inline h-4 w-4 text-primary" aria-hidden="true" /><T>{"Delivery and collection are free on this rental because it is one month or longer."}</T>{" "}</p>
               ) : null}
 
-              {bookingBase === "/app/rent" && <section className="wr-policy"><h2>Before you book</h2><p><strong>Cancellation & refunds.</strong> {cancellationPolicy.approved ? cancellationPolicy.summary : "Ask Werigo to confirm the applicable cancellation fee and refund terms before you pay."}</p><p className="mt-3"><strong>Return battery.</strong> {batteryReturnNote}</p><Link href="/terms" target="_blank" className="mt-3 inline-flex text-xs">Read rental terms ↗</Link></section>}
+              {bookingBase === "/app/rent" && <details className="wr-policy wr-rental-disclosure"><summary>Cancellation & return policy</summary><p><strong>Cancellation & refunds.</strong> {cancellationPolicy.approved ? cancellationPolicy.summary : "Ask Werigo to confirm the applicable cancellation fee and refund terms before you pay."}</p><p className="mt-3"><strong>Return battery.</strong> {batteryReturnNote}</p><Link href="/terms" target="_blank" className="mt-3 inline-flex text-xs">Read rental terms ↗</Link></details>}
               {/* Included with every rental */}
               {bookingBase === "/book" && <><h2 className="mt-8 font-display text-2xl text-ink"><T>{"Included with every rental"}</T>{" "}</h2>
               <ul className="mt-3 flex flex-wrap gap-2">
@@ -880,17 +882,17 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
               </div>
               )}
 
-              <div className="wr-checkout-actions mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
+              {!isApp && <div className="wr-checkout-actions mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
                 <Link
-                  href={`${bookingBase}?${searchQs}&vehicle=${entryId}`}
+                  href={`${bookingBase}?${searchQs}&vehicle=${entryId}${isApp ? "&edit=plan" : ""}`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-4 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Back to rides"}</T>{" "}</Link>
                 <Button variant="accent" size="lg" onClick={() => setPhase("details")}><T>{"Continue to your details"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Button>
-              </div>
+              </div>}
 
-              {/* Compact mobile summary bar (services step only) */}
+              {/* Website extras bar; the PWA bar submits the combined rider form. */}
               <div
                 ref={mobileTotal}
                 className={`wr-checkout-total fixed inset-x-0 z-30 border-t border-line bg-page/95 px-4 py-3 backdrop-blur-sm lg:hidden ${bookingBase === "/app/rent" ? "wr-app-total" : "bottom-0"}`}
@@ -919,7 +921,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                       </>
                     )}
                   </p>
-                  <Button className="wr-checkout-total-action" variant="accent" onClick={() => setPhase("details")}><T>{"Continue"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <Button className="wr-checkout-total-action" variant="accent" {...(isApp ? { type: "submit" as const, form: "rider-details" } : { onClick: () => setPhase("details") })}><T>{isApp ? "Review" : "Continue"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </div>
@@ -929,15 +931,16 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
           {/* ============ PHASE: DETAILS ============ */}
           {phase === "details" ? (
             <div>
-              <h1
+              {isApp ? <h2 className="wr-rider-heading mt-8 font-display text-2xl text-ink"><T>{"Who's riding?"}</T></h2> : <h1
                 ref={headingRef}
                 tabIndex={-1}
                 className="font-display text-3xl text-ink outline-none"
-              ><T>{"Who's riding?"}</T>{" "}</h1>
+              ><T>{"Who's riding?"}</T>{" "}</h1>}
               <p className="mt-2 text-ink-soft"><T>{"We use these details for delivery and to reply to your booking request, and for nothing else."}</T>{" "}</p>
               <p className="mt-2 text-xs leading-relaxed text-ink-faint"><T>{"Your passport, KTP or KITAS number is required before submitting a rental. A driving licence number is optional. Please do not upload document photos here."}</T>{" "}</p>
 
               <form
+                id="rider-details"
                 className="mt-6 grid gap-5 sm:grid-cols-2"
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -945,7 +948,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                 }}
                 noValidate
               >
-                {appPin && <div className="wr-checkout-pin sm:col-span-2"><strong>Delivery location saved</strong><a href={appPin.mapsUrl} target="_blank" rel="noopener noreferrer">Open in Google Maps</a><p>Add your hotel, villa or room details below. Your saved pin is already included with your booking request.</p></div>}
+                {!isApp && appPin && <div className="wr-checkout-pin sm:col-span-2"><strong>Delivery location saved</strong><a href={appPin.mapsUrl} target="_blank" rel="noopener noreferrer">Open in Google Maps</a><p>Add your hotel, villa or room details below. Your saved pin is already included with your booking request.</p></div>}
                 {(
                   [
                     {
@@ -1082,7 +1085,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   />
                 </div>
 
-                <section className="sm:col-span-2 wr-rider-policy" aria-label="Rider responsibilities"><h2 className="text-base font-semibold">Rider responsibilities</h2><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderLicenceNotice}</p><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderFinesNotice}</p><small className="mt-2 block text-ink-faint">Policy {RIDER_POLICY_VERSION}</small></section>
+                {isApp ? <details className="sm:col-span-2 wr-rider-policy wr-rental-disclosure"><summary>Rider responsibilities · read before accepting</summary><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderLicenceNotice}</p><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderFinesNotice}</p><small className="mt-2 block text-ink-faint">Policy {RIDER_POLICY_VERSION}</small></details> : <section className="sm:col-span-2 wr-rider-policy" aria-label="Rider responsibilities"><h2 className="text-base font-semibold">Rider responsibilities</h2><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderLicenceNotice}</p><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderFinesNotice}</p><small className="mt-2 block text-ink-faint">Policy {RIDER_POLICY_VERSION}</small></section>}
                 <div className="sm:col-span-2">
                   <label className="wr-checkout-consent flex cursor-pointer items-start gap-3">
                     <input
@@ -1155,13 +1158,13 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                 ) : null}
 
                 <div className="wr-checkout-actions flex justify-between gap-3 sm:col-span-2">
-                  <Button
+                  {isApp ? <Link href={`${bookingBase}?${searchQs}&vehicle=${entryId}&edit=plan`} className="inline-flex items-center justify-center gap-2 text-primary"><ArrowLeft size={16}/><T>{"Edit dates & delivery"}</T></Link> : <Button
                     type="button"
                     variant="ghost"
                     onClick={() => setPhase("extras")}
                   >
-                    <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Back to extras"}</T>{" "}</Button>
-                  <Button type="submit" variant="accent" size="lg"><T>{"Review booking"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" /><T>{"Back to extras"}</T>{" "}</Button>}
+                  <Button className={isApp ? "wr-inline-review" : undefined} type="submit" variant="accent" size="lg"><T>{"Review booking"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </form>
@@ -1504,7 +1507,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
         </div>
 
         {/* Sidebar selection summary */}
-        <aside aria-label={t("Booking summary")} className="lg:sticky lg:top-24 lg:self-start">
+        <aside aria-label={t("Booking summary")} className={`lg:sticky lg:top-24 lg:self-start ${isApp ? "wr-checkout-sidebar" : ""}`}>
           <BookingSummary
             vehicleName={entry!.displayName}
             quantity={quantity}
