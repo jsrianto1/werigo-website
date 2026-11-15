@@ -1,3 +1,4 @@
+import {syncOpsBooking} from "@/lib/opsInventory";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAdmin } from "@/lib/adminAuth";
@@ -68,6 +69,7 @@ export async function PATCH(req: NextRequest, ctx: Ctx) {
   }
   try {
     const booking = await getBookingStore().update(id, parsed.data, admin.email);
+    if(booking)await syncOpsBooking(booking.id);
     if (!booking) {
       return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
     }

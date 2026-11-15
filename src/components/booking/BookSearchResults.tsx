@@ -3,6 +3,7 @@ import { T } from "@/components/i18n/LanguageProvider";
 
 
 import { useMemo } from "react";
+import {useFleetAvailability} from "@/lib/useFleetAvailability";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Gauge, Route, SearchX, Zap } from "lucide-react";
@@ -53,6 +54,8 @@ export function BookSearchResults() {
     Boolean(period.startDate) &&
     Boolean(period.endDate) &&
     isValidPeriod(period);
+
+  const availability=useFleetAvailability(hasSearch?`${period.startDate}T${period.startTime}:00+08:00`:"",hasSearch?`${period.endDate}T${period.endTime}:00+08:00`:"");
 
   // ---- Step 1: no search yet — show the widget ----
   if (!hasSearch) {
@@ -182,10 +185,11 @@ export function BookSearchResults() {
                 </div>
                 <div className="flex flex-col items-stretch gap-3 md:items-end">
                   <p className="text-sm text-ink-soft md:max-w-[190px] md:text-right">
-                    <span className="block font-semibold text-ink"><T>{"Available by request"}</T>{" "}</span><T>{"Estimate confirmed with availability on WhatsApp."}</T>{" "}</p>
+                    <span className="block font-semibold text-ink">{availability?.enabled?(availability.error?"Please retry availability":availability.stock[model.modelSlug]===0?"Fully booked":`${availability.stock[model.modelSlug]??0} available`):<T>{"Available by request"}</T>}</span>{!availability?.enabled&&<T>{"Estimate confirmed with availability on WhatsApp."}</T>}</p>
                   <button
                     onClick={() => goToCheckout(model.id)}
-                    className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
+                    disabled={availability?.error || availability?.enabled && availability.stock[model.modelSlug]===0}
+                    className="inline-flex min-h-11 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
                   ><T>{"Check availability and rates"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </div>

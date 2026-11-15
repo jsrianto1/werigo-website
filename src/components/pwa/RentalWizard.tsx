@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import {useFleetAvailability} from "@/lib/useFleetAvailability";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, CalendarDays, Check, MapPin, Store, Truck } from "lucide-react";
@@ -28,6 +29,8 @@ export function RentalHome({ bikes, initial, today, begin = false, firstName }: 
   const selected = bikes.find(bike => bike.id === search.vehicle) ?? bikes[0];
   const period = { startDate: search.startDate, endDate: search.endDate, startTime: search.startTime, endTime: search.endTime };
   const valid = isValidPeriod(period) && search.startDate >= today && [search.startTime, search.endTime].every(time => time >= "08:00" && time <= "20:00");
+  const availability=useFleetAvailability(valid?`${search.startDate}T${search.startTime}:00+08:00`:"",valid?`${search.endDate}T${search.endTime}:00+08:00`:"");
+  const remaining=selected&&availability?.enabled?availability.stock[selected.modelSlug]:undefined;
   const estimate = selected && valid ? estimateRental(selected.modelSlug, period) : null;
   const area = getPickupPoint(search.pickup);
   const stages: Step[] = method === "pickup" ? ["bikes", "handover", "dates"] : ["bikes", "handover", "location", "dates"];
@@ -52,6 +55,8 @@ export function RentalHome({ bikes, initial, today, begin = false, firstName }: 
       if (method === "delivery") {
         try { if (!readAppPickup(sessionStorage, search.pickup)) { go("location"); setError("Your delivery pin expired. Please confirm it again."); return; } } catch { go("location"); return; }
       }
+      if(availability?.error){setError("Availability could not be confirmed. Please retry or contact Werigo.");return;}
+      if(remaining===0){setError("This motorcycle is fully booked for these dates. Choose another model or dates.");return;}
       setLeaving(true); router.push(appCheckoutUrl({ ...search, vehicle: selected.id }));
     }
   }
@@ -69,6 +74,7 @@ export function RentalHome({ bikes, initial, today, begin = false, firstName }: 
     {step === "location" && <><p className="wr-step-intro">Search for your stay, use GPS or move the pin to your delivery entrance.</p><PickupLocation area={search.pickup === "showroom" ? "" : search.pickup} autoArea onConfirmed={setPinConfirmed} onSaved={pin => { update("pickup", pin.area); }}/><p className="wr-estimate-note">{deliveryPricingNote}</p></>}
     {step === "dates" && <><p className="wr-step-intro">Minimum 2 days. All times are Bali time (WITA).</p><div className="wr-fields wr-rental-dates"><div className="wr-date-row"><label>Start date<input type="date" min={today} value={search.startDate} onInput={e => update("startDate", e.currentTarget.value)} onChange={e => update("startDate", e.target.value)}/></label><label>Return date<input type="date" min={search.startDate || today} value={search.endDate} onInput={e => update("endDate", e.currentTarget.value)} onChange={e => update("endDate", e.target.value)}/></label></div><div className="wr-date-row"><label>Start time<input type="time" min="08:00" max="20:00" value={search.startTime} onInput={e => update("startTime", e.currentTarget.value)} onChange={e => update("startTime", e.target.value)}/></label><label>Return time<input type="time" min="08:00" max="20:00" value={search.endTime} onInput={e => update("endTime", e.currentTarget.value)} onChange={e => update("endTime", e.target.value)}/></label></div></div><div className="wr-date-summary"><CalendarDays size={23}/><div><strong>{valid ? `${rentalDays(period)} days in Bali` : "Set your rental dates"}</strong><p>{method === "pickup" ? "Pick-up & return at the Werigo showroom" : `Delivery & collection · ${area?.name || "Choose an area"}`}</p></div></div></>}
     {step === "bikes" && <BikeSelection bikes={bikes} selected={selected} onSelect={id => update("vehicle", id)}/>}
+    {step==="dates"&&availability?.enabled&&<p className="wr-estimate-note" aria-live="polite">{availability.error?"Availability temporarily unavailable. Please try again.":remaining===0?"Fully booked for these dates. Please change dates or motorcycle.":`${remaining??0} motorcycle${remaining===1?'':'s'} available for these dates. Reserved when checkout is confirmed.`}</p>}
     {error && <p role="alert" className="wr-error">{error}</p>}
     <div className="wr-wizard-footer">{step === "dates" && estimate && <div className="wr-price-caption"><span>{selected?.model} · {estimate.days} days · rental only</span><strong>{formatIdr(estimate.totalIdr)}</strong></div>}<button className="wr-primary" onClick={next} disabled={leaving || step === "bikes" && !selected}>{leaving ? "Opening your rental…" : step === "location" ? "Continue with this location" : step === "bikes" ? `Continue with ${selected?.model ?? "your ride"}` : step === "dates" ? "Continue to rental details" : "Continue"}<ArrowRight size={21}/></button></div>
   </div>;

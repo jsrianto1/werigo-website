@@ -1,4 +1,5 @@
 import "server-only";
+import {syncOpsBooking} from "@/lib/opsInventory";
 import { getBookingStore, type StoredBooking } from "@/lib/bookingStore";
 import {
   countPayments,
@@ -40,6 +41,8 @@ export async function openPayment(booking: StoredBooking, fallbackEmail?: string
   if (booking.total_idr === null || booking.rental_days === null || booking.rate_per_day_idr === null) {
     throw new Error("booking has no price snapshot");
   }
+  // Never offer payment before the authoritative fleet has reserved real units.
+  await syncOpsBooking(booking.id);
   const attempt = await countPayments(booking.id);
   const orderId = attempt === 0 ? booking.booking_code : `${booking.booking_code}-${attempt + 1}`;
   const model = toCustomerEntry(booking.vehicle_model)?.displayName ?? booking.vehicle_model;
@@ -134,6 +137,7 @@ export async function syncPaymentStatus(
       `${status.transaction_status} (${orderId})`
     )) ?? booking;
   }
+  await syncOpsBooking(booking.id);
   return { booking, outcome };
 }
 

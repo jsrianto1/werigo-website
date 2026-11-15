@@ -39,5 +39,8 @@ jobs:
       - name: Website support delivery checks
         run: npm run test:support
 
+      - name: Inventory sync and booking outbox checks
+        run: node scripts/ops-inventory-test.mjs
+
       - name: Production build
         run: npm run build

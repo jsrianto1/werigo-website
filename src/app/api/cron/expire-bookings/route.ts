@@ -1,3 +1,6 @@
+import {getPool} from "@/lib/db";
+import {refreshPendingPayment} from "@/lib/payments";
+import {drainOpsQueue,opsEnabled,pullOpsRideStatus} from "@/lib/opsInventory";
 import { NextRequest, NextResponse } from "next/server";
 import { getBookingStore } from "@/lib/bookingStore";
 import { isDatabaseConfigured } from "@/lib/db";
@@ -30,8 +33,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, expired: 0 });
   }
   try {
+    if(await opsEnabled()){
+      // A gateway outage must never release a potentially paid bike.
+      const pending=await getPool().query("select id from bookings where payment_status='pending' and payment_expires_at<now() order by payment_expires_at limit 5");
+      for(const row of pending.rows){const current=await getBookingStore().get(row.id);if(current)await refreshPendingPayment(current.booking);}
+    }
     const expired = await getBookingStore().expirePending();
-    return NextResponse.json({ ok: true, expired: expired.length });
+    const rides=await pullOpsRideStatus();
+    const sync=await drainOpsQueue(5);
+    return NextResponse.json({ ok: sync.failed===0, expired: expired.length, rides_updated:rides, ops_sync:sync },{status:sync.failed?503:200});
   } catch (err) {
     logStorageError(storageErrorFromThrown("expire_pending", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });

@@ -1,5 +1,6 @@
 import "server-only";
 import type { PoolClient } from "pg";
+import {opsEnabled} from "@/lib/opsInventory";
 import type { BookingSubmission } from "@/lib/bookingSchema";
 import { getPool, isDatabaseConfigured, withTransaction } from "@/lib/db";
 import { StorageError, storageErrorFromThrown } from "@/lib/storageErrors";
@@ -217,6 +218,7 @@ function likePattern(s: string): string {
 
 class PostgresBookingStore implements BookingStore {
   async create(submission: BookingSubmission, opts?: CreateOptions) {
+    const centralStock = await opsEnabled();
     const row = submissionToRow(submission, opts);
     const cols = Object.keys(row);
     const values = Object.values(row);
@@ -241,7 +243,7 @@ class PostgresBookingStore implements BookingStore {
           return { booking: normalizeRow<StoredBooking>(existing.rows[0]), duplicate: true };
         }
 
-        if (opts?.payment) {
+        if (opts?.payment && !centralStock) {
           const avail = await availableUnitsLocked(client, submission.vehicleModel, submission.startAt, submission.endAt);
           if (avail.available !== null && avail.available < submission.quantity) {
             throw new StockUnavailableError(avail.available);
@@ -477,12 +479,13 @@ class PostgresBookingStore implements BookingStore {
   }
 
   async reopenPayment(id: string, expiresAt: Date) {
+    const centralStock = await opsEnabled();
     try {
       return await withTransaction(async (client) => {
         const before = await client.query("select * from bookings where id = $1::uuid for update", [id]);
         const prev = before.rows[0] as StoredBooking | undefined;
         if (!prev) return null;
-        const avail = await availableUnitsLocked(client, prev.vehicle_model, prev.start_at, prev.end_at);
+        const avail = centralStock ? {available:null} : await availableUnitsLocked(client, prev.vehicle_model, prev.start_at, prev.end_at);
         if (avail.available !== null && avail.available < prev.quantity) {
           throw new StockUnavailableError(avail.available);
         }
@@ -505,6 +508,7 @@ class PostgresBookingStore implements BookingStore {
   }
 
   async expirePending() {
+    const centralStock=await opsEnabled();
     try {
       return await withTransaction(async (client) => {
         await client.query("select set_config('werigo.actor', 'system', true)");
@@ -513,6 +517,7 @@ class PostgresBookingStore implements BookingStore {
              set payment_status = 'expired',
                  status = case when status = 'pending_payment' then 'expired'::booking_status else status end
            where payment_status = 'pending' and payment_expires_at < now()
+           ${centralStock?"and not exists(select 1 from payments p where p.booking_id=bookings.id)":""}
            returning *`
         );
         for (const r of res.rows) {

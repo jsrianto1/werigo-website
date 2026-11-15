@@ -5,6 +5,7 @@ import { listStock, MODELS, setStock } from "@/lib/stock";
 import { logAudit, requestIp } from "@/lib/audit";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
+import {opsEnabled} from '@/lib/opsInventory';
 
 export const runtime = "nodejs";
 
@@ -21,7 +22,7 @@ export async function GET() {
   const admin = await getAdmin();
   if (!admin) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   try {
-    return NextResponse.json({ ok: true, stock: await listStock() });
+    return NextResponse.json({ ok: true, source:await opsEnabled()?'ops':'website', stock: await listStock() });
   } catch (err) {
     logStorageError(storageErrorFromThrown("admin_stock_list", err));
     return NextResponse.json({ ok: false, error: "storage_failed" }, { status: 503 });
@@ -37,6 +38,7 @@ export async function PUT(req: NextRequest) {
   const parsed = putSchema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   try {
+    if(await opsEnabled())return NextResponse.json({ok:false,error:'ops_managed',message:'Manage physical units in Werigo Ops.'},{status:409});
     const row = await setStock(parsed.data.model, parsed.data.totalUnits);
     await logAudit({
       actor: admin,

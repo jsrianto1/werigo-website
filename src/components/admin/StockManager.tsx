@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { getPrimaryCards } from "@/data/vehicles";
+import {OpsSyncPanel} from './OpsSyncPanel';
 
 interface StockRow {
   model: string;
@@ -23,6 +24,7 @@ export function StockManager() {
   const [busy, setBusy] = useState<string | null>(null);
   const [saved, setSaved] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [managed,setManaged]=useState(false);
 
   useEffect(() => {
     void (async () => {
@@ -30,6 +32,7 @@ export function StockManager() {
         const res = await fetch("/api/admin/stock");
         const data = await res.json();
         if (!data.ok) throw new Error();
+        setManaged(data.source==='ops');
         const map: Record<string, StockRow> = {};
         const d: Record<string, string> = {};
         for (const r of data.stock as StockRow[]) {
@@ -80,10 +83,11 @@ export function StockManager() {
       <p className="eyebrow">Werigo admin</p>
       <h1 className="font-display text-3xl text-ink">Stock per model</h1>
       <p className="mt-2 max-w-xl text-sm text-ink-soft">
-        Total rentable units of each model. Leave a field blank to stop tracking that
+        {managed?'Stock is managed in Werigo Ops. Add or update physical bikes there; availability follows their condition and booking schedule.':<>Total rentable units of each model. Leave a field blank to stop tracking that
         model (it never sells out online). The checkout counts paid bookings and
-        bookings awaiting payment that overlap the requested dates.
+        bookings awaiting payment that overlap the requested dates.</>}
       </p>
+      <OpsSyncPanel/>
 
       {error ? (
         <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">{error}</p>
@@ -108,6 +112,7 @@ export function StockManager() {
                   <td className="px-4 py-3">
                     <input
                       type="number"
+                      disabled={managed}
                       min={0}
                       step={1}
                       inputMode="numeric"
@@ -120,7 +125,7 @@ export function StockManager() {
                   </td>
                   <td className="tnum px-4 py-3 text-ink-soft">{row ? fmt(row.updated_at) : "—"}</td>
                   <td className="px-4 py-3 text-right">
-                    <Button size="sm" variant="outline" disabled={busy === m.modelSlug} onClick={() => void save(m.modelSlug)}>
+                    <Button size="sm" variant="outline" disabled={managed || busy === m.modelSlug} onClick={() => void save(m.modelSlug)}>
                       {saved === m.modelSlug ? <Check className="h-4 w-4" aria-hidden="true" /> : null}
                       {busy === m.modelSlug ? "Saving…" : saved === m.modelSlug ? "Saved" : "Save"}
                     </Button>
