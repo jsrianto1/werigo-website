@@ -4,42 +4,55 @@ Ops owns physical units and allocation. The website owns customer accounts,
 identity verification, the payment ledger and membership. The public availability
 API returns only model names and available counts for the selected dates.
 
-## New configuration (existing env values must remain unchanged)
+## Configuration without replacing Hostinger env
 
-Add one dedicated random secret of at least 32 characters to each production app:
+The website signs requests with a domain-separated Ed25519 key derived locally
+from its existing server authentication secret. Only the public key is exposed at
+`/api/integrations/ops/key`. No authentication secret is sent to Ops or logged.
+Ops pins that public key in the new `WERIGO_WEBSITE_SYNC_PUBLIC_KEY` entry.
 
-- Website / Hostinger: `WERIGO_OPS_SYNC_SECRET`
-- Ops / Sites: `WERIGO_WEBSITE_SYNC_SECRET`
+Ops similarly exposes its public signing identity at `/api/website-sync/key`,
+derived locally from its existing dedicated sync secret. The website pins this
+public key in migration 0018 settings. Both directions bind the signature to the
+role, HTTP method, exact route, timestamp and body. Requests expire after five
+minutes. Published public keys cannot sign requests.
 
-Both values must match. Never use a staff password, auth secret, SIWC bypass
-token or payment credential. Never commit the value. Messages use timestamped
-HMAC signatures, idempotent IDs and monotonic revisions.
+All original Hostinger environment entries remain unchanged. Never use the full
+replace environment operation with masked values. Legacy HMAC support remains
+available for the already configured dedicated key; no key is rotated by this
+release.
 
-Configuration alone does not activate the integration. Deploy and validate both
-apps first. In website **Admin > Stock > Werigo Ops connection**:
+Unattended updates use one Hostinger cron job, once per minute, calling the Ops
+`/api/website-sync/tick` endpoint with a new dedicated scheduler token stored as
+`WERIGO_SYNC_CRON_TOKEN` in Sites. This token can only request a bounded sync tick;
+it cannot change booking data or invoke administrative migrations. Ops signs the
+subsequent request to the website, where the pinned public identity is verified.
+Handover changes also request a tick immediately; the cron is the retry path.
 
-1. Prepare the database (super admin only). This installs migration 0017 and
-   queues existing future website commitments. Preparation does not enable sync.
-2. Review real units and open imported rentals in Ops. Sold/internal/inactive or
-   maintenance units never count as available. A model missing physical units
-   has zero availability; it must not be replaced with an unlimited count.
-3. Reconcile bookings. This pauses new online payments while existing commitments
-   are allocated. Repeat bounded batches until no updates remain. A conflict
-   stays pending and prevents activation. Resolve exact source ownership with
-   staff; do not falsely mark an active rental returned or invent another unit.
-4. Activate only after reviewing existing website bookings against imported Ops
-   rentals, and after verifying the existing authenticated expiry cron runs at
-   least every minute. Keep its existing `CRON_SECRET` unchanged.
-5. Verify `GET /api/cron/expire-bookings` with its existing bearer authentication:
-   it polls expired pending Midtrans transactions, pulls signed Ops handover
-   statuses into customer ride history, and retries five queue entries per run.
-   A gateway outage keeps uncertain payment holds reserved.
+## Controlled hosting activation
 
-Do not deactivate into the old independent stock pool while Ops holds exist.
-There is deliberately no automatic fallback to unlimited stock on connection
-failure. Existing vehicle_stock settings remain stored, but writes are blocked
-after the bridge is active. Only explicit website booking IDs link customer
-history; manual Ops bookings are not matched to accounts by name/email.
+1. Deploy both apps with the integration still inactive. Read the real website
+   public key and append only the new Ops public-key and scheduler-token entries.
+2. Inspect existing cron jobs before creating the minute job. Preserve every
+   existing environment entry and job.
+3. In the exact existing werigo.co Node application, run the explicit
+   `build:ops-activate` build script for one deployment. Normal `build` never runs
+   migration/activation. This maintenance entry point checks the target domain,
+   applies only migrations 0017 and 0018 with checksum and transaction guards,
+   pins the Ops public key, and reports aggregate future commitments.
+4. It verifies the signed connection and waits to observe the real authenticated
+   scheduler before pausing new checkout. Existing website commitments are then
+   reconciled through the same atomic Ops allocator. A conflict is reported by
+   booking code and prevents activation; never invent stock or falsely mark a
+   physical return to clear one.
+5. Only an empty durable queue and a recent authenticated scheduler heartbeat
+   allow activation. Read back live availability and both database health states.
+   Keep normal stored build settings on `build`; the one-off script is supplied
+   only to that explicit hosting build.
+
+Schema preparation or key publication alone never activates reservations. There
+is no automatic fallback to independent/unlimited stock after activation. A model
+without a recorded physical rental unit correctly has zero availability.
 
 ## Lifecycle and recovery
 
@@ -57,7 +70,7 @@ history; manual Ops bookings are not matched to accounts by name/email.
 - A timed-out reservation is retried with the same booking ID. No payment is
   started when fleet confirmation is uncertain. Failed updates remain in the
   Postgres outbox with error codes only. Admin > Stock exposes pending/error
-  counts and a **Sync now** action; the cron must provide unattended retries.
+  counts and a **Sync now** action; the authenticated scheduler provides unattended retries.
 - A very late paid order whose released unit was allocated elsewhere is a visible
   conflict. Do not overwrite the other booking; staff must arrange another bike
   or the appropriate payment resolution.
@@ -68,5 +81,5 @@ Website: `node scripts/ops-inventory-test.mjs`, TypeScript, lint, production bui
 Ops: all `tests/*.test.ts`, TypeScript, Sites build helper. Integration tests use
 local in-memory Postgres/SQLite and synthetic data; never real payment transactions.
 
-Live activation is incomplete until credentials, historical reconciliation,
-cron execution and the authenticated availability handshake are verified.
+Live activation is incomplete until public-key pins, historical reconciliation,
+scheduler execution and the authenticated availability handshake are verified.

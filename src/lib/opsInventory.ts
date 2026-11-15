@@ -1,23 +1,24 @@
 import 'server-only';
 import {createHmac} from 'node:crypto';
+import {websiteServiceHeaders} from '@/lib/opsServiceProtocol';
 import {getPool,withTransaction} from '@/lib/db';
 import {opsPayload} from '@/lib/opsInventoryPayload';
 import type {StoredBooking} from '@/lib/bookingStore';
 const OPS_URL='https://werigo-team-ops.veyaworkspace.chatgpt.site/api/website-sync';
 export class OpsInventoryError extends Error {constructor(public code:'stock_unavailable'|'sync_unavailable'|'sync_not_ready'){super(code);this.name='OpsInventoryError';}}
-export function opsConfigured(){return Boolean(process.env.WERIGO_OPS_SYNC_SECRET?.trim());}
+export function opsConfigured(){return Boolean(process.env.BETTER_AUTH_SECRET?.trim()||process.env.WERIGO_OPS_SYNC_SECRET?.trim());}
 export async function opsEnabled(){
  if(!opsConfigured())return false;
- const result=await getPool().query('select enabled,ready from werigo_ops_sync_settings where id=1');
+ let result;try{result=await getPool().query('select enabled,ready from werigo_ops_sync_settings where id=1');}catch(e){if((e as {code?:string})?.code==='42P01')return false;throw e;}
  if(result.rows[0]?.enabled&&!result.rows[0]?.ready)throw new OpsInventoryError('sync_not_ready');
  return result.rows[0]?.enabled===true;
 }
 async function opsRequest(method:'GET'|'POST',payload:object|string){
- const secret=process.env.WERIGO_OPS_SYNC_SECRET?.trim();
+ const secret=(process.env.BETTER_AUTH_SECRET||process.env.WERIGO_OPS_SYNC_SECRET)?.trim();
  if(!secret||secret.length<32)throw new OpsInventoryError('sync_not_ready');
  const body=typeof payload==='string'?payload:JSON.stringify(payload),time=String(Date.now());
- const signature=createHmac('sha256',secret).update(time+'.'+body).digest('hex');
- let response;try{response=await fetch(OPS_URL+(method==='GET'?body:''),{method,cache:'no-store',signal:AbortSignal.timeout(8000),headers:{'user-agent':'WerigoWebsite/1.0 (+https://werigo.co)','x-werigo-time':time,'x-werigo-signature':signature,...(method==='POST'?{'content-type':'application/json'}:{})},...(method==='POST'?{body}:{})});}catch{throw new OpsInventoryError('sync_unavailable');}
+ const headers=process.env.BETTER_AUTH_SECRET?websiteServiceHeaders(secret,method,body):{'user-agent':'WerigoWebsite/1.0 (+https://werigo.co)','x-werigo-time':time,'x-werigo-signature':createHmac('sha256',secret).update(time+'.'+body).digest('hex')};
+ let response;try{response=await fetch(OPS_URL+(method==='GET'?body:''),{method,cache:'no-store',signal:AbortSignal.timeout(8000),headers:{...headers,...(method==='POST'?{'content-type':'application/json'}:{})},...(method==='POST'?{body}:{})});}catch{throw new OpsInventoryError('sync_unavailable');}
  if(!response.ok){const result=await response.json().catch(()=>null);throw new OpsInventoryError(response.status===409&&result?.error==='stock_unavailable'?'stock_unavailable':'sync_unavailable');}
  return response.json();
 }

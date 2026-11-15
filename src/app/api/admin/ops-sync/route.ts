@@ -2,7 +2,7 @@ import {NextResponse} from 'next/server';
 import {requireAdmin,isResponse} from '@/lib/adminApi';
 import {sameOrigin} from '@/lib/cmsAccess';
 import {withTransaction,getPool} from '@/lib/db';
-import {OPS_SYNC_SQL} from '@/lib/opsInventorySchema';
+import {OPS_SYNC_SQL,OPS_OBSERVABILITY_SQL} from '@/lib/opsInventorySchema';
 import {createHash} from 'node:crypto';
 import {opsConfigured,drainOpsQueue,opsAvailability,pullOpsRideStatus} from '@/lib/opsInventory';
 export const runtime='nodejs';
@@ -10,7 +10,7 @@ export const dynamic='force-dynamic';
 export async function GET(){
  const admin=await requireAdmin({superOnly:true});if(isResponse(admin))return admin;
  try{
-  const settings=await getPool().query('select enabled,ready from werigo_ops_sync_settings where id=1');
+  const settings=await getPool().query('select enabled,ready,cron_verified_at,last_sync_at,last_sync_error from werigo_ops_sync_settings where id=1');
   const queue=await getPool().query('select count(*)::int pending,count(*) filter(where last_error is not null)::int failed from werigo_ops_sync_queue where revision>synced_revision');
   return NextResponse.json({ok:true,configured:opsConfigured(),prepared:true,...settings.rows[0],...queue.rows[0]});
  }catch(e){if((e as {code?:string})?.code==='42P01')return NextResponse.json({ok:true,configured:opsConfigured(),prepared:false,enabled:false,ready:false,pending:0,failed:0});return NextResponse.json({ok:false,error:'storage_unavailable'},{status:503});}
@@ -24,15 +24,18 @@ export async function POST(req:Request){
   if(action==='prepare'){
    await withTransaction(async client=>{
     await client.query("set local lock_timeout='5s'");await client.query('select pg_advisory_xact_lock(76017)');
-    const checksum=createHash('sha256').update(OPS_SYNC_SQL).digest('hex').slice(0,16);
-    const old=await client.query("select checksum from schema_migrations where name='0017_ops_inventory_sync.sql'");
-    if(old.rows[0]){if(old.rows[0].checksum!==checksum)throw new Error();return;}
-    await client.query(OPS_SYNC_SQL);
-    await client.query("insert into schema_migrations(name,checksum) values('0017_ops_inventory_sync.sql',$1)",[checksum]);
+    for(const [name,sql] of [['0017_ops_inventory_sync.sql',OPS_SYNC_SQL],['0018_ops_service_observability.sql',OPS_OBSERVABILITY_SQL]]){
+    const checksum=createHash('sha256').update(sql).digest('hex').slice(0,16);
+    const old=await client.query('select checksum from schema_migrations where name=$1',[name]);
+    if(old.rows[0]){if(old.rows[0].checksum!==checksum)throw new Error();continue;}
+    await client.query(sql);
+    await client.query('insert into schema_migrations(name,checksum) values($1,$2)',[name,checksum]);
+    }
     await client.query("insert into audit_log(actor_id,actor_email,actor_role,action,entity_type) values($1,$2,$3,'ops-sync.prepare','inventory')",[admin.id,admin.email,admin.role]);
    });
   }else if(action==='reconcile'){
    if(!opsConfigured())throw new Error();
+   const heartbeat=(await getPool().query("select 1 from werigo_ops_sync_settings where id=1 and ops_public_key is not null and cron_verified_at>now()-interval '3 minutes'")).rows[0];if(!heartbeat)throw new Error();
    await opsAvailability(new Date().toISOString(),new Date(Date.now()+2*86400000).toISOString());
    // Pause new online checkouts until existing commitments have been reconciled.
    await getPool().query('update werigo_ops_sync_settings set enabled=true,ready=false,updated_at=now() where id=1');
@@ -41,6 +44,7 @@ export async function POST(req:Request){
    return NextResponse.json({ok:true,rides_updated:await pullOpsRideStatus(),...await drainOpsQueue(5)});
   }else if(action==='activate'){
    if(!opsConfigured())throw new Error();
+   const heartbeat=(await getPool().query("select 1 from werigo_ops_sync_settings where id=1 and ops_public_key is not null and cron_verified_at>now()-interval '3 minutes'")).rows[0];if(!heartbeat)throw new Error();
    await opsAvailability(new Date().toISOString(),new Date(Date.now()+2*86400000).toISOString());
    await withTransaction(async client=>{
     const count=await client.query('select count(*)::int n from werigo_ops_sync_queue where revision>synced_revision');
