@@ -57,7 +57,7 @@ export default function OpsApp({ displayName }: {
     finally {
         setLoading(false);
     } }
-    useEffect(() => { load(); const online = () => setOnline(navigator.onLine); online(); window.addEventListener("online", online); window.addEventListener("offline", online); const installer = (e: Event) => { e.preventDefault(); setInstall(e); }; window.addEventListener("beforeinstallprompt", installer); const timer = setInterval(() => { if (document.visibilityState === "visible")
+    useEffect(() => { load(); if('serviceWorker' in navigator)void navigator.serviceWorker.register('/ops-sw.js',{scope:'/ops'}).catch(()=>{}); const online = () => setOnline(navigator.onLine); online(); window.addEventListener("online", online); window.addEventListener("offline", online); const installer = (e: Event) => { e.preventDefault(); setInstall(e); }; window.addEventListener("beforeinstallprompt", installer); const timer = setInterval(() => { if (document.visibilityState === "visible")
         load(); }, 60000); return () => { window.removeEventListener("online", online); window.removeEventListener("offline", online); window.removeEventListener("beforeinstallprompt", installer); clearInterval(timer); }; }, []);
     useEffect(() => { if (!toast)
         return; const t = setTimeout(() => setToast(""), 4500); return () => clearTimeout(t); }, [toast]);

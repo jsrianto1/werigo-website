@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "a1aa0b327137d5d00293716c128c7214e0ebfbacf15a68dfff230584cf692aff",
+  "fingerprint": "a3208de511ded4fc59754be8cc397e563562b6baa850825638ed8954139275d9",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12179,12 +12179,32 @@
       "hash": "03fbbe2911d6a99be2018aeb2ffe31e8fe0773fa73ebb2e4bb6c404153f6bb46"
     },
     {
+      "file": "public/ops-assets/icon-192.png",
+      "hash": "a0ea957068855777c8b0db5e9bee0df9908fca1a936d209b7e9b6631d2c0cd78"
+    },
+    {
+      "file": "public/ops-assets/icon-512.png",
+      "hash": "28665de2286422d2cceb3df928695222ff43e6af7cbb27a27e22611d22fde591"
+    },
+    {
       "file": "public/ops-assets/werigo-logo.png",
       "hash": "d30c5bd7867785a21dbbd481d5933e18ff4990a1ac120908e3a9e0c8c14fc458"
     },
     {
       "file": "public/ops-assets/werigo-symbol.png",
       "hash": "fe2b2d1399029167b26ee07f3482388ce36ae52c3dfe1ec85f270a094169e64f"
+    },
+    {
+      "file": "public/ops-sw.js",
+      "hash": "7a93afc4567cfacf192c78f29c4e175fc9c01276efdaf04a15d16bdc94b58027"
+    },
+    {
+      "file": "public/ops/manifest.webmanifest",
+      "hash": "6d80af1ffd987c2147aaf3ee9241d343c0249bbed16755d54d1b0caa254f4400"
+    },
+    {
+      "file": "public/ops/offline.html",
+      "hash": "0d3cbb22316471a0124835402efd359c0a4afa0629703b187d655bff83900747"
     },
     {
       "file": "public/vercel.svg",
@@ -12960,7 +12980,7 @@
     },
     {
       "file": "src/app/ops/layout.tsx",
-      "hash": "6103bf0a924ef14e15598203e32aa63e69aec2caee6001d18fbe051fa7550338"
+      "hash": "ce0e510738a0b703131ec1d1427e519aaf98c5379c8b83a2542916e1cf24deb8"
     },
     {
       "file": "src/app/ops/ops.css",
@@ -14156,7 +14176,7 @@
     },
     {
       "file": "src/ops/ui/ops-app.tsx",
-      "hash": "fb389f63b62ab9cfe5ebd2e21746169913649f9a09244120d22784440986715f"
+      "hash": "894dc9a6c6432b12cf693e33b651bb2638c9214d5bd604ad2633b0da719fab08"
     },
     {
       "file": "src/ops/ui/rental-actions.tsx",
