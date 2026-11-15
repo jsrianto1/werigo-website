@@ -33,15 +33,18 @@ async function audit(){
    WHERE a.status IN ('pending_payment','confirmed','active') AND b.status IN ('pending_payment','confirmed','active')
    AND a.start_at<b.end_at+3600000 AND a.end_at+3600000>b.start_at
    AND EXISTS(SELECT 1 FROM ops.json_each(a.unit_ids) x,ops.json_each(b.unit_ids) y WHERE x.value=y.value)`)).rows[0].n;
+  const unreconciled=(await c.query(`SELECT count(*)::int n FROM public.bookings b WHERE b.payment_status IN ('pending','unpaid','failed','expired')
+   AND EXISTS(SELECT 1 FROM public.payments p WHERE p.booking_id=b.id AND p.gross_amount=b.total_idr
+    AND (p.transaction_status='settlement' OR (p.transaction_status='capture' AND coalesce(p.fraud_status,'accept')='accept')))`)).rows[0].n;
   const qa=tag?(await c.query(`SELECT b.booking_code,b.status,b.payment_status,o.status AS ops_status,w.payment_state,
    ops.json_array_length(o.unit_ids) AS allocated_units,
    (SELECT count(*)::int FROM public.payments p WHERE p.booking_id=b.id) AS payment_attempts,
    (SELECT count(*)::int FROM ops.payments p WHERE p.booking_id=o.id) AS receipts
    FROM public.bookings b LEFT JOIN ops.website_bookings w ON w.website_id=b.id::text LEFT JOIN ops.bookings o ON o.id=w.booking_id
    WHERE b.customer_notes LIKE $1`,[tag+'%'])).rows:[];
-  emit({ready,inventory_triggers:triggers,function_definitions_match:definitions,...linkage,overlapping_unit_assignments:conflicts,qa,environment_changes:0});
+  emit({ready,inventory_triggers:triggers,function_definitions_match:definitions,...linkage,overlapping_unit_assignments:conflicts,unreconciled_paid_bookings:unreconciled,qa,environment_changes:0});
   await c.query('COMMIT');
-  if(!ready||triggers!==3||Object.values(definitions).some(v=>!v)||linkage.missing_or_inconsistent||conflicts)throw new Error('LIVE_BOOKING_INVARIANT_FAILED');
+  if(!ready||triggers!==3||Object.values(definitions).some(v=>!v)||linkage.missing_or_inconsistent||conflicts||unreconciled)throw new Error('LIVE_BOOKING_INVARIANT_FAILED');
   return qa;
  }catch(e){await c.query('ROLLBACK').catch(()=>{});throw e;}finally{c.release();}
 }
@@ -115,5 +118,5 @@ async function releaseQa(){
 try{
  await audit().catch(e=>{if(mode==='audit')throw e;emit({before_invariant_failed:true});});
  if(mode==='--release-qa'){const released=await releaseQa();await audit();emit({qa_cleanup_complete:true,released});}
-}catch(e){console.error(JSON.stringify({step:'booking.audit',ok:false,error:/^[A-Z_]+$/.test(e.message)?e.message:'BOOKING_AUDIT_FAILED'}));process.exitCode=1;}
+}catch(e){console.error(JSON.stringify({step:'booking.audit',ok:false,error:/^[A-Z_]+$/.test(e.message)?e.message:'BOOKING_AUDIT_FAILED',...(/^[A-Z0-9_]{3,40}$/.test(e.code||'')?{code:e.code}:{})}));process.exitCode=1;}
 finally{await pool.end();}
