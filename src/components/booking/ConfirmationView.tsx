@@ -162,7 +162,7 @@ export function ConfirmationView({ bookingBase = "/book", accountPath = "/accoun
             : "Booking request received";
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="wr-confirmation mx-auto max-w-2xl">
       <div className="text-center">
         {paid ? (
           <CheckCircle2 className="mx-auto h-12 w-12 text-ok" aria-hidden="true" />
@@ -204,7 +204,7 @@ export function ConfirmationView({ bookingBase = "/book", accountPath = "/accoun
         </div>
       ) : null}
 
-      <dl className="mt-8 space-y-3 rounded-[14px] border border-line bg-card p-6">
+      <dl className="wr-confirmation-details mt-8 space-y-3 rounded-[14px] border border-line bg-card p-6">
         {[
           { term: "Ride", detail: `${entry?.displayName ?? b.vehicleModel} × ${b.quantity}` },
           { term: "Period", detail: `${fmt(b.startAt)} → ${fmt(b.endAt)}` },
@@ -244,7 +244,7 @@ export function ConfirmationView({ bookingBase = "/book", accountPath = "/accoun
         ))}
       </dl>
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+      <div className="wr-confirmation-actions mt-8 grid gap-3 sm:grid-cols-2">
         <a
           href={data!.whatsappUrl}
           target="_blank"
