@@ -6,7 +6,7 @@ import { formatIdr, ratesIdrPerDay } from "@/lib/pricing";
 
 export function BikeSelection({ bikes, selected, onSelect }: { bikes: AppBike[]; selected?: AppBike; onSelect: (id: string) => void }) {
   return <>
-    <p className="wr-step-intro">Start with the ride that fits your Bali plans. Then choose pick-up or delivery and your dates.</p>
+    <p className="wr-step-intro">Pick your ride. Dates and delivery are next.</p>
     <div className="wg-bike-picker" role="radiogroup" aria-label="Choose a Wedison motorcycle">{bikes.map(bike => {
       const checked = selected?.id === bike.id;
       const rates = ratesIdrPerDay[bike.modelSlug];
@@ -36,14 +36,14 @@ export function BikeSelection({ bikes, selected, onSelect }: { bikes: AppBike[];
       </div>;
     })}</div>
     <p className="wg-bike-rate-note">IDR per motorcycle. Your dates set the rate and total. Open “See all rates” to compare longer stays.</p>
-    {selected && <section className="wg-bike-story" aria-labelledby="selected-bike-title">
+    {selected && <details key={selected.id} className="wg-bike-story wr-rental-disclosure"><summary>Why choose {selected.model}?<ChevronDown size={18} aria-hidden="true"/></summary>
       <div className="wg-bike-story-heading"><p className="wg-overline">MEET YOUR WEDISON</p><h2 id="selected-bike-title">Why choose {selected.model}?</h2><p>{selected.introduction}</p></div>
       <div className="wg-bike-story-photo"><Image src={selected.image} alt={selected.imageAlt} fill sizes="(max-width: 760px) 90vw, 660px"/></div>
       <p className="wg-bike-best-for"><span>BEST FOR</span>{selected.bestFor}</p>
       <dl className="wg-bike-highlights">{selected.highlights.map(highlight => <div key={highlight.title}><dt>{highlight.title}</dt><dd>{highlight.detail}</dd></div>)}</dl>
       {selected.minimumAge && <p className="wg-bike-age">{selected.model} is available to riders aged {selected.minimumAge} and over.</p>}
       <p className="wg-bike-spec-note">{specDisclaimer}</p>
-    </section>}
+    </details>}
     <p className="wg-bike-rate-note">Photos show the motorcycle model. Colour is subject to fleet availability and cannot be selected at this stage. Model availability is confirmed when you book.</p>
   </>;
 }

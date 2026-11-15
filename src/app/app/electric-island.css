@@ -12,6 +12,7 @@
   --brand-primary:var(--wg-brand); --brand-primary-strong:var(--wg-brand-strong);
   --brand-primary-soft:#e4f2e9; --brand-primary-faint:#eeeee5;
   --brand-accent:var(--wg-brand); --brand-accent-strong:var(--wg-brand-strong);
+  --ok:#177a4c; --ok-soft:#e5f3ec; --danger:#a52f24; --danger-soft:#fbeae8;
   --wr-charcoal:var(--ink); --wr-teal:var(--wg-brand); --wr-teal-dark:var(--wg-brand-strong);
   --wr-paper:var(--app-background); --wr-mist:var(--surface-sunken); --wr-border:var(--line);
   --ra-ink:var(--ink); --ra-muted:var(--ink-soft); --ra-line:var(--line); --ra-teal:var(--wg-brand);
@@ -27,6 +28,7 @@
   --ink:#f5f1eb; --ink-soft:#c0d8cd; --ink-faint:#b0c9be; --ink-inverse:#103c3b;
   --line:#39605a; --line-strong:#63877c; --surface-sunken:#224940;
   --brand-primary-soft:#20483e; --brand-primary-faint:#183d36; color-scheme:dark;
+  --ok:#b7f5d9; --ok-soft:#20483e; --danger:#ffc5b9; --danger-soft:#512c29;
 }
 .werigo-app-root .ride-app :is(h1,h2,h3,.wg-charge-feature strong) { font-family:var(--font-brand-heading); font-weight:600; letter-spacing:-.035em; }
 .werigo-app-root .ride-app .brand-lockup { gap:6px; align-items:flex-start; color:var(--ink); }
@@ -214,4 +216,73 @@
 @media(min-width:640px) {
   .werigo-app-root .ride-app :is(.wr-checkout-review,.wr-confirmation-details) > div { grid-template-columns:160px minmax(0,1fr); }
   .werigo-app-root .ride-app .wr-confirmation-actions { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+/* One theme and one action zone across the entire four-stage rental. */
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation) { min-width:0; max-width:100%; overflow-wrap:anywhere; }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation,.wr-voucher-sheet) { --line-strong:#718c7f; }
+.werigo-app-root .ride-app[data-theme="dark"] :is(.wr-wizard,.wr-checkout,.wr-confirmation,.wr-voucher-sheet) { --line-strong:#80a496; }
+.werigo-app-root .ride-app .wr-wizard { padding-bottom:calc(var(--wr-footer-height,112px) + 24px); }
+.werigo-app-root .ride-app .wr-wizard-footer { bottom:var(--app-action-bottom); background:var(--app-card); color:var(--ink); padding:14px 20px; border-color:var(--line); }
+.werigo-app-root .ride-app :is(.wr-step-top,.wr-price-caption,.wr-location-actions,.wr-handover-options) { min-width:0; }
+.werigo-app-root .ride-app :is(.wr-step-intro,.wr-estimate-note,.wr-location-note,.wr-showroom p,.wr-date-summary p,.wr-policy p,.wr-checkout-pin p) { color:var(--ink-soft); }
+.werigo-app-root .ride-app :is(.wr-showroom,.wr-date-summary,.wr-checkout-pin,.wr-rider-policy,.wr-route-price) { color:var(--ink); background:var(--app-card); border-color:var(--line); }
+.werigo-app-root .ride-app .wr-route-price :is(span,p) { color:var(--ink-soft); }
+.werigo-app-root .ride-app :is(.wr-policy h2,.wr-rider-policy h2,.wr-date-summary strong,.wr-map-confirm strong) { color:var(--ink); }
+.werigo-app-root .ride-app :is(.wr-error,.text-danger) { color:var(--danger); }
+.werigo-app-root .ride-app .wr-error { background:var(--danger-soft); }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation,.wr-voucher-sheet) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea) { min-width:0; max-width:100%; box-sizing:border-box; background:var(--app-card); color:var(--ink); font-size:16px; border-color:var(--line-strong); }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation,.wr-voucher-sheet) :is(input,select,textarea)::placeholder { color:var(--ink-faint); opacity:1; }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation,.wr-voucher-sheet) :is(button,a,summary,input,select,textarea):focus-visible { outline:2px solid var(--wg-brand); outline-offset:3px; }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation) :is(input,textarea,select,button,a,summary) { scroll-margin-block:24px calc(var(--app-action-bottom) + 160px); }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation) :is(button,a) { white-space:normal; overflow-wrap:anywhere; }
+.werigo-app-root .ride-app :is(.wr-wizard,.wr-checkout,.wr-confirmation) svg { flex-shrink:0; }
+.werigo-app-root .ride-app .wr-price-caption { flex-wrap:wrap; gap:8px 16px; }
+.werigo-app-root .ride-app .wr-price-caption > span { min-width:0; flex:1 1 140px; }
+.werigo-app-root .ride-app .wr-primary { min-width:0; line-height:1.5; }
+.werigo-app-root .ride-app :is(.wr-plan-handover,.wr-plan-location) { margin-block-start:28px; }
+.werigo-app-root .ride-app .wr-plan-handover h2 { color:var(--ink); font-size:22px; line-height:1.35; margin-bottom:16px; }
+.werigo-app-root .ride-app .wr-rental-dates { padding-top:0; }
+.werigo-app-root .ride-app .wr-rental-dates .wr-date-row { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-bottom:18px; }
+.werigo-app-root .ride-app .wr-rental-dates label { display:grid; min-width:0; gap:9px; color:var(--ink); }
+.werigo-app-root .ride-app .wr-rental-dates input { min-height:52px; padding:12px; line-height:1.5; }
+.werigo-app-root .ride-app .wr-handover-options > label > span:not(.wr-choice-dot) { min-width:0; }
+.werigo-app-root .ride-app .wr-handover-options > label:has(input:focus-visible) { outline:2px solid var(--wg-brand); outline-offset:4px; }
+.werigo-app-root .ride-app .wr-checkout label:has(input[type="radio"]:focus-visible) { outline:2px solid var(--wg-brand); outline-offset:4px; }
+.werigo-app-root .ride-app .wg-selected-bike { flex-wrap:wrap; }
+.werigo-app-root .ride-app .wg-selected-bike > span { min-width:75px; }
+.werigo-app-root .ride-app .wr-location-actions { display:flex; flex-wrap:wrap; gap:12px; }
+.werigo-app-root .ride-app .wr-location-actions button { min-height:44px; }
+.werigo-app-root .ride-app .wr-map-confirm > div { min-width:0; }
+.werigo-app-root .ride-app :is(.wr-map-loading,.wr-map-unavailable) { background:var(--app-card); color:var(--ink); }
+.werigo-app-root .ride-app .wr-map-instruction { max-width:calc(100% - 24px); white-space:normal; text-align:center; }
+.werigo-app-root .ride-app .wr-map-confirm :is(p,a) { overflow-wrap:anywhere; }
+.werigo-app-root .ride-app .wr-rental-disclosure { min-width:0; margin-block:18px; border:1px solid var(--line); border-radius:14px; padding:0 16px; background:var(--app-card); color:var(--ink); }
+.werigo-app-root .ride-app .wr-rental-disclosure > summary { min-height:48px; padding:13px 0; line-height:1.6; cursor:pointer; font-size:13px; font-weight:650; color:var(--wg-brand); }
+.werigo-app-root .ride-app .wr-rental-disclosure > p { font-size:12px; line-height:1.8; color:var(--ink-soft); margin:10px 0 16px; }
+.werigo-app-root .ride-app .wr-rider-policy { padding:0 16px 14px; }
+.werigo-app-root .ride-app .wr-rider-policy:not([open]) { padding-bottom:0; }
+.werigo-app-root .ride-app .wr-rider-policy small { display:block; margin-bottom:6px; }
+.werigo-app-root .ride-app .wg-bike-story > summary { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.werigo-app-root .ride-app .wg-bike-story[open] > summary { border-bottom:1px solid var(--line); }
+.werigo-app-root .ride-app .wg-bike-story[open] > summary svg { transform:rotate(180deg); }
+.werigo-app-root .ride-app .wg-bike-story img { object-fit:contain; }
+.werigo-app-root .ride-app .wr-checkout-actions { padding-bottom:0; }
+.werigo-app-root .ride-app .wr-checkout :is(.wr-unit-option,.wr-extra-options > li) { background:var(--app-card); color:var(--ink); }
+.werigo-app-root .ride-app .wr-checkout :is(.wr-unit-option,.wr-extra-options > li) > div { min-width:0; }
+.werigo-app-root .ride-app .wr-checkout :is(.wr-unit-option,.wr-extra-options) button { background:var(--surface-sunken); color:var(--ink); width:44px; height:44px; }
+.werigo-app-root .ride-app :is(.wr-checkout,.wr-confirmation,.wr-voucher-sheet) :is(.bg-primary,.bg-accent) { color:var(--ink-inverse); }
+.werigo-app-root .ride-app .wr-checkout-sidebar :is(p,dl > div) { flex-wrap:wrap; }
+.werigo-app-root .ride-app .wr-checkout-sidebar :is(dd,p > span) { min-width:0; overflow-wrap:anywhere; }
+.werigo-app-root .ride-app .wr-checkout-sidebar .whitespace-nowrap { white-space:normal; }
+.werigo-app-root .ride-app .wr-voucher-sheet { color:var(--ink); }
+.werigo-app-root .ride-app .wr-voucher-sheet :is(p,span) { min-width:0; overflow-wrap:anywhere; }
+.werigo-app-root .ride-app .wr-voucher-sheet button { min-height:44px; white-space:normal; overflow-wrap:anywhere; }
+.werigo-app-root .ride-app .wr-voucher-sheet > div { padding-bottom:env(safe-area-inset-bottom); }
+@media(max-width:1023px) {
+  .werigo-app-root .ride-app .wr-inline-review,.werigo-app-root .ride-app .wr-checkout-sidebar { display:none; }
+}
+@media(max-width:399px) {
+  .werigo-app-root .ride-app .wr-rental-dates .wr-date-row { grid-template-columns:minmax(0,1fr); }
+  .werigo-app-root .ride-app .wr-checkout :is(.wr-unit-option,.wr-extra-options > li) { grid-template-columns:minmax(0,1fr); }
 }
