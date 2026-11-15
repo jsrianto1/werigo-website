@@ -188,6 +188,19 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
   const whatsappCheckout = WHATSAPP_FIRST_BOOKING;
 
   const [phase, setPhase] = useState<Phase>("extras");
+  const mobileTotal = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (bookingBase !== "/app/rent") return;
+    const bar = mobileTotal.current;
+    const checkout = bar?.closest<HTMLElement>(".wr-checkout");
+    if (!bar || !checkout) return;
+    const measure = () => checkout.style.setProperty("--wr-total-height", `${Math.ceil(bar.getBoundingClientRect().height)}px`);
+    measure();
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(measure);
+    observer?.observe(bar);
+    window.addEventListener("resize", measure);
+    return () => { observer?.disconnect(); window.removeEventListener("resize", measure); checkout.style.removeProperty("--wr-total-height"); };
+  }, [phase, bookingBase]);
   const [quantity, setQuantity] = useState(1);
   const [extraQty, setExtraQty] = useState<Record<string, number>>({});
   // Protection is withdrawn. Never restore a previously selected option.
@@ -867,7 +880,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
               </div>
               )}
 
-              <div className="mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
+              <div className="wr-checkout-actions mt-8 flex justify-between gap-3 pb-20 lg:pb-0">
                 <Link
                   href={`${bookingBase}?${searchQs}&vehicle=${entryId}`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-4 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
@@ -879,15 +892,16 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
               {/* Compact mobile summary bar (services step only) */}
               <div
-                className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-page/95 px-4 py-3 backdrop-blur-sm lg:hidden"
-                style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))" }}
+                ref={mobileTotal}
+                className={`wr-checkout-total fixed inset-x-0 z-30 border-t border-line bg-page/95 px-4 py-3 backdrop-blur-sm lg:hidden ${bookingBase === "/app/rent" ? "wr-app-total" : "bottom-0"}`}
+                style={bookingBase === "/app/rent" ? undefined : { paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))" }}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <p className="tnum min-w-0 text-sm leading-snug text-ink-soft">
+                  <p className="wr-checkout-total-copy tnum min-w-0 text-sm leading-snug text-ink-soft">
                     {!whatsappCheckout && quote ? (
                       <>
                         <span className="block text-xs"><T>{"Total to pay"}</T></span>
-                        <span className="font-bold text-ink">{formatIdr(quote.totalIdr)}</span>
+                        <span className="wr-checkout-total-amount font-bold text-ink">{formatIdr(quote.totalIdr)}</span>
                         {quote.discountIdr > 0 ? (
                           <span className="ml-1.5 text-xs text-ink-faint line-through">{formatIdr(quote.baseIdr + quote.areaFeeIdr)}</span>
                         ) : null}
@@ -895,7 +909,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                     ) : (
                       <>
                         <span className="block text-xs"><T>{"Estimated total"}</T></span>
-                        <span className="font-bold text-ink">
+                        <span className="wr-checkout-total-amount font-bold text-ink">
                           {grandTotalIdr !== null
                             ? formatIdr(grandTotalIdr)
                             : estimate
@@ -905,7 +919,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                       </>
                     )}
                   </p>
-                  <Button variant="accent" onClick={() => setPhase("details")}><T>{"Continue"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <Button className="wr-checkout-total-action" variant="accent" onClick={() => setPhase("details")}><T>{"Continue"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </div>
@@ -1070,7 +1084,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
                 <section className="sm:col-span-2 wr-rider-policy" aria-label="Rider responsibilities"><h2 className="text-base font-semibold">Rider responsibilities</h2><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderLicenceNotice}</p><p className="mt-2 text-sm leading-relaxed text-ink-soft">{riderFinesNotice}</p><small className="mt-2 block text-ink-faint">Policy {RIDER_POLICY_VERSION}</small></section>
                 <div className="sm:col-span-2">
-                  <label className="flex cursor-pointer items-start gap-3">
+                  <label className="wr-checkout-consent flex cursor-pointer items-start gap-3">
                     <input
                       id="field-termsAccepted"
                       type="checkbox"
@@ -1108,7 +1122,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
                 {needsAgeCheck ? (
                   <div className="sm:col-span-2">
-                    <label className="flex cursor-pointer items-start gap-3">
+                    <label className="wr-checkout-consent flex cursor-pointer items-start gap-3">
                       <input
                         id="field-ageConfirmed"
                         type="checkbox"
@@ -1140,7 +1154,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                   </div>
                 ) : null}
 
-                <div className="flex justify-between gap-3 sm:col-span-2">
+                <div className="wr-checkout-actions flex justify-between gap-3 sm:col-span-2">
                   <Button
                     type="button"
                     variant="ghost"
@@ -1166,7 +1180,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                 ? "Check everything below, then send your request. We confirm availability and your rate on WhatsApp, usually quickly."
                 : "Check everything below, then pay to confirm your ride. Our team arranges delivery with you on WhatsApp."}</T>{" "}</p>
 
-              <dl className="mt-6 space-y-4 rounded-[14px] border border-line bg-card p-6">
+              <dl className="wr-checkout-review mt-6 space-y-4 rounded-[14px] border border-line bg-card p-6">
                 {[
                   { term: "Ride", detail: `${entry!.displayName} × ${quantity}` },
                   {
@@ -1321,7 +1335,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
                 <p className="text-sm leading-relaxed text-ink">
                   <T>{batteryReturnNote}</T>
                 </p>
-                <label className="mt-3 flex cursor-pointer items-start gap-3">
+                <label className="wr-checkout-consent mt-3 flex cursor-pointer items-start gap-3">
                   <input
                     id="field-batteryAck"
                     type="checkbox"
@@ -1338,7 +1352,7 @@ export function CheckoutFlow({ googleEnabled = false, bookingBase = "/book" }: {
 
               {/* Privacy consent — required before submission */}
               <div className="mt-6">
-                <label className="flex cursor-pointer items-start gap-3">
+                <label className="wr-checkout-consent flex cursor-pointer items-start gap-3">
                   <input
                     id="field-privacyConsent"
                     type="checkbox"
