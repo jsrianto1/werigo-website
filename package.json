@@ -16,7 +16,8 @@
     "test:cms": "node scripts/cms-test.mjs",
     "test:pricing": "node scripts/pricing-test.mjs && node scripts/monthly-daily-test.mjs",
     "test:rental": "node scripts/app-rental-flow-test.mjs",
-    "test:booking-payment": "node --experimental-transform-types scripts/booking-payment-flow-test.mjs && node scripts/qa-snap-closure-test.mjs",
+    "test:booking-payment": "node --experimental-transform-types scripts/booking-payment-flow-test.mjs && node scripts/qa-snap-closure-test.mjs && node --experimental-transform-types scripts/fleet-availability-refresh-test.mjs",
+    "build:ops-reverse-audit": "npm run build && node scripts/ops-reverse-live-audit.mjs",
     "build:booking-audit": "npm run build && node scripts/booking-live-audit.mjs audit",
     "build:booking-qa-cleanup": "npm run build && node scripts/booking-live-audit.mjs --release-qa WERIGO-QA-e3fab23d-268b-48c7-a501-4b8b7dffa60a",
     "db:migrate": "node scripts/db-migrate.mjs",
@@ -29,7 +30,7 @@
     "build:ops-inspect": "npm run build && node scripts/ops-consolidate.mjs inspect",
     "build:ops-migrate": "npm run build && node scripts/ops-consolidate.mjs migrate",
     "build:ops-verify": "npm run build && node scripts/ops-consolidate.mjs verify",
-    "test:ops": "node scripts/ops-consolidated-test.mjs"
+    "test:ops": "node scripts/ops-consolidated-test.mjs && node scripts/ops-reverse-audit-test.mjs"
   },
   "dependencies": {
     "@tiptap/pm": "3.23.5",

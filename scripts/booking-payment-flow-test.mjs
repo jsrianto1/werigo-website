@@ -11,20 +11,23 @@ const require=createRequire(import.meta.url),root=new URL('../',import.meta.url)
 const db=new PGlite();let checks=0,queue=Promise.resolve(),requestNumber=0,connectionNumber=0;const paymentLocks=new Map();
 function check(value,message){assert.ok(value,message);checks++;}
 function queued(fn){const result=queue.then(fn);queue=result.catch(()=>{});return result;}
+async function pgQuery(sql,params){const result=await db.query(sql,params);return {...result,command:sql.trim().split(/\s/)[0].toUpperCase(),rowCount:result.affectedRows??result.rows.length};}
 globalThis.__paymentTestDb={
  connect:async()=>{const connection=++connectionNumber;return {query:async(sql,params)=>{
   // PGlite has one backend session. Model only connection-scoped advisory
   // ownership here; every business query and trigger still runs in Postgres.
   if(sql.includes('pg_try_advisory_lock')){const owner=paymentLocks.get(params[0]);if(owner&&owner!==connection)return {rows:[{locked:false}]};paymentLocks.set(params[0],connection);return {rows:[{locked:true}]};}
   if(sql.includes('pg_advisory_unlock')){if(paymentLocks.get(params[0])===connection)paymentLocks.delete(params[0]);return {rows:[{pg_advisory_unlock:true}]};}
-  return queued(()=>db.query(sql,params));
+  return queued(()=>pgQuery(sql,params));
  },release:()=>{for(const [key,owner] of paymentLocks)if(owner===connection)paymentLocks.delete(key);}};},
- query:(...args)=>queued(()=>db.query(...args)),
- transaction:fn=>queued(async()=>{await db.exec('BEGIN');try{const result=await fn({query:(...args)=>db.query(...args)});await db.exec('COMMIT');return result;}catch(e){await db.exec('ROLLBACK');throw e;}}),
+ query:(...args)=>queued(()=>pgQuery(...args)),
+ transaction:fn=>queued(async()=>{await db.exec('BEGIN');try{const result=await fn({query:(...args)=>pgQuery(...args)});await db.exec('COMMIT');return result;}catch(e){await db.exec('ROLLBACK');throw e;}}),
 };
 globalThis.__paymentTestUser={id:'payment-test-user',name:'Local QA',email:'qa@example.invalid',role:'customer'};
+globalThis.__opsReverseStaff={id:'local-ops',name:'Local Ops',email:'ops-qa@example.invalid',role:'owner'};
 globalThis.__paymentTestGateway={calls:[],statuses:new Map(),expiredSnaps:new Set(),error:null,signature:true};
 const asModule=source=>'data:text/javascript,'+encodeURIComponent(source);
+const opsAuthMock=asModule('export const resolveMember=async()=>globalThis.__opsReverseStaff;');
 const mocks={
  'server-only':asModule('export default {};'),
  '@/lib/db':asModule('export const getPool=()=>globalThis.__paymentTestDb;export const isDatabaseConfigured=()=>true;export const withTransaction=fn=>globalThis.__paymentTestDb.transaction(fn);'),
@@ -44,6 +47,7 @@ const mocks={
  export const createSnapTransaction=async input=>{const g=globalThis.__paymentTestGateway;g.calls.push(input);if(g.onCreate)await g.onCreate(input);if(g.error)throw g.error;return {token:'local-token-'+input.orderId,redirectUrl:'https://example.invalid/payment',expiresAt:new Date()};};`),
 };
 registerHooks({resolve(specifier,context,next){
+ if(specifier==='./auth'&&context.parentURL?.endsWith('/src/ops/lib/server.ts'))return {url:opsAuthMock,shortCircuit:true};
  if(mocks[specifier])return {url:mocks[specifier],shortCircuit:true};
  if(specifier==='next/server')return next(pathToFileURL(require.resolve('next/server.js')).href,context);
  if(specifier.startsWith('@/'))return next(new URL('src/'+specifier.slice(2)+'.ts',root).href,context);
@@ -61,6 +65,8 @@ const {NextRequest}=await import('next/server');
 const {POST:createBooking}=await import('../src/app/api/bookings/route.ts');
 const {POST:payBooking}=await import('../src/app/api/bookings/[code]/pay/route.ts');
 const {POST:notification}=await import('../src/app/api/payments/midtrans/notify/route.ts');
+const {POST:opsMutation}=await import('../src/app/api/ops/data/route.ts');
+const {GET:fleetAvailability}=await import('../src/app/api/fleet/availability/route.ts');
 const {syncPaymentStatus,refreshPendingPayment}=await import('../src/lib/payments.ts');
 const {getBookingStore}=await import('../src/lib/bookingStore.ts');
 const realFetch=globalThis.fetch;
@@ -157,5 +163,30 @@ try{
  gateway.expiredSnaps.add(delayed.data.payment.snapToken);gateway.statuses.set(delayedOrder,status(delayedOrder,'pending'));
  await refreshPendingPayment(delayedBooking);
  check(await available()===0&&(await bookingRow(delayedBooking.booking_code)).payment_status==='pending','A pending payment method keeps its hold even when the Snap page expired');
+
+ // Reverse direction: real Ops API validation, transaction adapter and SQL
+ // guards feed the exact availability endpoint used by website and PWA.
+ await reset();
+ const opsPost=async(action,data)=>{const response=await opsMutation(new Request('https://werigo.co/api/ops/data',{method:'POST',headers:{Origin:'https://werigo.co','Content-Type':'application/json'},body:JSON.stringify({action,data})}));return {http:response.status,data:await response.json()};};
+ const publicStock=async()=>{const response=await fleetAvailability(new Request('https://werigo.co/api/fleet/availability?'+new URLSearchParams({start:payload().startAt,end:payload().endAt})));const data=await response.json();check(response.headers.get('Cache-Control')==='no-store','Availability responses cannot be cached');return data.stock.find(r=>r.model==='edpower').available;};
+ const customer=await opsPost('saveCustomer',{name:'Local reverse QA',phone:'+12025550123'});
+ check(customer.http===200,'Ops API creates the local fixture customer');
+ const manual={customer_id:customer.data.id,unit_ids:['qa-unit'],start_at:Date.parse(payload().startAt),end_at:Date.parse(payload().endAt),source:'Walk-in',status:'draft',discount_idr:0,fee_idr:0};
+ const draft=await opsPost('createBooking',manual);
+ check(draft.http===200&&await publicStock()===1,'An Ops draft does not reserve website/PWA stock');
+ const confirmed=await opsPost('changeBooking',{id:draft.data.id,mode:'confirm'});
+ check(confirmed.http===200&&await publicStock()===0,'Confirming a manual Ops booking immediately reduces public stock');
+ check((await opsPost('createBooking',{...manual,status:'confirmed'})).http===409,'Another Ops booking cannot take the held unit');
+ check((await post(createBooking,payload())).http===409&&gateway.calls.length===0,'Website checkout rejects an Ops-held bike before starting payment');
+ globalThis.__opsReverseStaff.role='ops';
+ check((await opsPost('changeBooking',{id:draft.data.id,mode:'cancel',reason:'Local QA cleanup'})).http===403,'Cancellation still requires the existing manager/owner permission');
+ check(await publicStock()===0,'An unauthorized cancellation cannot release website/PWA stock');
+ globalThis.__opsReverseStaff.role='owner';
+ const cancelled=await opsPost('changeBooking',{id:draft.data.id,mode:'cancel',reason:'Local QA cleanup'});
+ check(cancelled.http===200&&await publicStock()===1,'Cancelling an Ops booking immediately restores public stock');
+ const online=await post(createBooking,payload());
+ check(online.http===201&&await publicStock()===0,'Online checkout can reserve the unit after Ops cancellation');
+ check((await opsPost('createBooking',{...manual,status:'confirmed'})).http===409,'An Ops booking cannot take a website/PWA-held bike');
+ check((await db.query('SELECT count(*)::int n FROM ops.payments')).rows[0].n===0,'Manual reverse-direction tests create no false payment receipts');
  console.log(`${checks} real-handler booking/payment/Ops checks passed; gateway simulated; no env changed or external payment made.`);
 }finally{globalThis.fetch=realFetch;await queue;await db.close();}
