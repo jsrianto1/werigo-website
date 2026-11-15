@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fingerprint": "5e9ec9f5f24529f46827b9c2f1ae2ccfad3366328d8f2dd5a0fcc1179ed3580d",
+  "fingerprint": "6069a3c34814b0d8bea799f5fe813f02bf214e27cbb71cced9851220ba6d90b3",
   "inputs": [
     {
       "file": "next.config.ts",
@@ -12227,6 +12227,10 @@
       "hash": "d1d917d234eddde72e0e540f3f6ef7f39884b42d2385c0e2849a4d3d2d2630db"
     },
     {
+      "file": "scripts/app-rental-flow-test.mjs",
+      "hash": "d2354c7cca86419b8ca529a5999656e5d6ec1cef1a15b3b29f1a8645aa7f8e52"
+    },
+    {
       "file": "scripts/articles-test.mjs",
       "hash": "6e4ecd2feadb182697ff290c828254379a361c7b1de6461f7d3eeb951b51d50f"
     },
@@ -12792,7 +12796,7 @@
     },
     {
       "file": "src/app/app/electric-island.css",
-      "hash": "3abc0674d1128418e1170c916f13fa62783dfa37f5f52013faccd7461527477e"
+      "hash": "1cc25cddb46b416a4ca71175ef472032c72a03c509247391d849e553b65fe19f"
     },
     {
       "file": "src/app/app/explore/page.tsx",
@@ -12844,7 +12848,7 @@
     },
     {
       "file": "src/app/app/rent/page.tsx",
-      "hash": "4a18088f3b445eab2073a266450b44aee44ecd060f5b81a444edb0a47184226b"
+      "hash": "3e7849fc53f65aa9b32a8a8afc6f9cf0367b7051cf315d705ca98de0dcd72619"
     },
     {
       "file": "src/app/app/rental.css",
@@ -13204,7 +13208,7 @@
     },
     {
       "file": "src/components/booking/CheckoutFlow.tsx",
-      "hash": "2ec9315ecfe22f147d42d0bf615b4fcd26daca58c4e0aabe517797294e6cadb5"
+      "hash": "548abfb2d6de8c486adb07fa8adcb514510203c8f9885be294672b158a20e2be"
     },
     {
       "file": "src/components/booking/ConfirmationView.tsx",
@@ -13228,7 +13232,7 @@
     },
     {
       "file": "src/components/booking/VoucherPicker.tsx",
-      "hash": "273d7db5323faf849e95fba38ff90cc1c2237a804397ec1a726a417819876838"
+      "hash": "b3eb882382e29115ef1741c427222e6894158be9884c3f37b47cdf45b3883d69"
     },
     {
       "file": "src/components/brand/BrandLockup.tsx",
@@ -13356,7 +13360,7 @@
     },
     {
       "file": "src/components/pwa/BikeSelection.tsx",
-      "hash": "509d8f30481a76d0f9f7b5b2878aaed43606b96598d2c0ca2eb5adcfa812ec53"
+      "hash": "fbef60adda0ea23f870e18ee8cbc407cb47d521743b23c0407611e6970f05e66"
     },
     {
       "file": "src/components/pwa/ChargeFeature.tsx",
@@ -13392,7 +13396,7 @@
     },
     {
       "file": "src/components/pwa/PickupLocation.tsx",
-      "hash": "d37090884d0279c670ad61a13af86b95bda8ce6132a61ee738279086140abb9c"
+      "hash": "1e05c58a7b85b74ea809e909f072205bba08ef75329de73e866fcad0e4b2e01d"
     },
     {
       "file": "src/components/pwa/PlacePhoto.tsx",
@@ -13404,7 +13408,7 @@
     },
     {
       "file": "src/components/pwa/RentalWizard.tsx",
-      "hash": "84a35e9198d923eb540b042b3c8509561137f8e3cd94fe3f418ba2a5dd6d215e"
+      "hash": "b173b41f1bac1c819e16e4db4d4fea2b2da84f41160cbd2ad51e021c6492262b"
     },
     {
       "file": "src/components/pwa/WhatToDo.tsx",
@@ -13668,7 +13672,7 @@
     },
     {
       "file": "src/lib/appRental.ts",
-      "hash": "ee1dba916a159024942d50c2dcffec5f97b3ef79e8522dad0a9d0295427adb96"
+      "hash": "5cd1a70b21d15fa13be1a8ce8157ebaf445177eafa476c9d1c2946fde4c22fbf"
     },
     {
       "file": "src/lib/articleHealth.ts",
