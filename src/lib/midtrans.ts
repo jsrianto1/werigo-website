@@ -1,5 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
+import { readSnapSnapshot } from "./midtransSnapHttp.mjs";
 
 /**
  * Midtrans Snap (server side).
@@ -180,15 +181,11 @@ export async function fetchTransactionStatus(orderId: string): Promise<MidtransT
 
 /** A fresh, explicit provider expiry response; never infer expiry from 404. */
 export async function isSnapPageExpired(token: string): Promise<boolean> {
-  const response = await fetch(`${hosts().snap}/transactions/${encodeURIComponent(token)}`, {
-    headers: { Authorization: authHeader(), Accept: "application/json" },
-    cache: "no-store",
-    signal: AbortSignal.timeout(15_000),
-  });
-  const data = await response.json().catch(() => null) as { error_messages?: unknown } | null;
+  const response = await readSnapSnapshot(token, midtransEnv() === "production");
+  const data = response.data;
   // Midtrans's 407 means expired transaction. A 404, auth failure, timeout,
   // or the local booking deadline alone cannot prove a Snap session closed.
-  return response.status === 407 && Array.isArray(data?.error_messages)
+  return response.http === 407 && Array.isArray(data?.error_messages)
     && data.error_messages.some((message: unknown) => typeof message === "string" && /\bexpired\b/i.test(message));
 }
 

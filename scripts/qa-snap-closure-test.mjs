@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import {snapExpiredAtProvider,coreClosedOrAbsent,snapExplicitlyExpired} from './qa-snap-closure.mjs';
+import {EventEmitter} from 'node:events';
+import {readSnapSnapshot} from '../src/lib/midtransSnapHttp.mjs';
 const scope={token:'test-token',orderId:'qa-only',grossAmount:570000};
 const data={token:scope.token,transaction_details:{order_id:scope.orderId,gross_amount:scope.grossAmount},expiry_time:'2026-11-15 15:34:13 +0000',server_time:Date.parse('2026-11-15T15:34:14Z')/1000};
 assert.equal(snapExpiredAtProvider(data,scope),true);
@@ -9,4 +11,12 @@ assert.equal(coreClosedOrAbsent({http:200,data:{order_id:scope.orderId,transacti
 for(const invalid of [{http:404,data:null},{http:404,data:{}},{http:401,data:{status_code:'404'}},{http:200,data:{order_id:'other',transaction_status:'expire'}},{http:200,data:{order_id:scope.orderId,transaction_status:'settlement'}},{http:200,data:{order_id:scope.orderId,transaction_status:'pending'}}]) assert.equal(coreClosedOrAbsent(invalid,scope.orderId),false);
 assert.equal(snapExplicitlyExpired({http:407,data:{error_messages:['transaction expired']}}),true);
 for(const invalid of [{http:404,data:{error_messages:['token not found']}},{http:401,data:{error_messages:['expired']}},{http:407,data:{error_messages:['unknown']}},{http:407,data:null}]) assert.equal(snapExplicitlyExpired(invalid),false);
-console.log('QA Snap closure: 22 checks passed; no network or database calls.');
+let seen;
+function fakeTransport(url,options,callback){seen={url,options};const req=new EventEmitter();req.setTimeout=()=>{};req.destroy=()=>{};req.end=()=>queueMicrotask(()=>{const res=new EventEmitter();res.statusCode=407;callback(res);res.emit('data',Buffer.from(JSON.stringify({error_messages:['transaction expired']})));res.emit('end');});return req;}
+const snapshot=await readSnapSnapshot('qa/token',true,fakeTransport);
+assert.equal(snapshot.http,407);
+assert.equal(snapExplicitlyExpired(snapshot),true);
+assert.equal(seen.url.host,'app.midtrans.com');
+assert.equal(seen.url.pathname,'/snap/v1/transactions/qa%2Ftoken');
+assert.equal(seen.options.headers.Authorization,undefined);
+console.log('QA Snap closure: 27 checks passed; no network or database calls.');
