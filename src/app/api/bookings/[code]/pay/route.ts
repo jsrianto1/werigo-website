@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getBookingStore, StockUnavailableError } from "@/lib/bookingStore";
 import { getSessionUser } from "@/lib/session";
 import { latestPayment } from "@/lib/paymentStore";
-import { openPayment, paymentDeadline, refreshPendingPayment } from "@/lib/payments";
+import { definitivePaymentRejection, openPayment, paymentDeadline, refreshPendingPayment } from "@/lib/payments";
 import { isMidtransConfigured } from "@/lib/midtrans";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
 import { logStorageError, storageErrorFromThrown } from "@/lib/storageErrors";
@@ -54,11 +54,15 @@ export async function POST(_req: NextRequest, ctx: Ctx) {
       booking.payment_status === "pending" &&
       booking.payment_expires_at !== null &&
       new Date(booking.payment_expires_at).getTime() > Date.now() + 60_000;
-    let payment = windowOpen ? await latestPayment(booking.id) : null;
+    const previousPayment = await latestPayment(booking.id);
+    if (!windowOpen && previousPayment && booking.payment_status === "pending") {
+      return NextResponse.json({ok:false,error:"payment_pending_verification",message:"The previous payment is still being verified. Your motorcycle remains reserved; do not start another payment yet."},{status:409});
+    }
+    let payment = windowOpen ? previousPayment : null;
 
     if (!payment || !payment.snap_token) {
       try {
-        booking = (await store.reopenPayment(booking.id, paymentDeadline())) ?? booking;
+        if (!windowOpen) booking = (await store.reopenPayment(booking.id, paymentDeadline())) ?? booking;
       } catch (err) {
         if (err instanceof StockUnavailableError) {
           return NextResponse.json(
@@ -72,11 +76,16 @@ export async function POST(_req: NextRequest, ctx: Ctx) {
         payment = await openPayment(booking, user.email);
       } catch (err) {
         console.error(`[payments] snap reopen failed for ${booking.booking_code}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`);
+        if (!definitivePaymentRejection(err)) {
+          return NextResponse.json({ok:false,error:"payment_pending_verification",message:"The payment session could not be confirmed yet. Your motorcycle remains reserved. Retry or contact Werigo."},{status:503});
+        }
         await store.setPaymentState(booking.id, { payment_status: "failed", status: "expired" }, "system", "payment provider unavailable").catch(() => null);
         await syncOpsBooking(booking.id).catch(()=>undefined);
         return NextResponse.json({ ok: false, error: "payment_unavailable" }, { status: 503 });
       }
     }
+
+    booking = (await store.get(booking.id))?.booking ?? booking;
 
     return NextResponse.json({
       ok: true,

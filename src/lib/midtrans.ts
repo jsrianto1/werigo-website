@@ -172,6 +172,9 @@ export async function fetchTransactionStatus(orderId: string): Promise<MidtransT
   if (!data) return null;
   // 404 = unknown order (never paid, never created)
   if (data.status_code === "404") return null;
+  if (!res.ok || data.order_id !== orderId || typeof data.transaction_status !== "string" || !Number.isFinite(Number(data.gross_amount))) {
+    throw new MidtransError("request_failed", "Payment status could not be verified", res.status);
+  }
   return data;
 }
 
@@ -199,9 +202,9 @@ export type PaymentOutcome = "paid" | "pending" | "expired" | "failed" | "refund
 export function mapTransactionStatus(transactionStatus: string, fraudStatus?: string): PaymentOutcome {
   switch (transactionStatus) {
     case "capture":
-      return fraudStatus === "challenge" ? "pending" : fraudStatus === "deny" ? "failed" : "paid";
+      return fraudStatus === "challenge" ? "pending" : fraudStatus === "deny" ? "failed" : !fraudStatus || fraudStatus === "accept" ? "paid" : "unknown";
     case "settlement":
-      return "paid";
+      return !fraudStatus || fraudStatus === "accept" ? "paid" : "unknown";
     case "pending":
     case "authorize":
       return "pending";
@@ -212,10 +215,12 @@ export function mapTransactionStatus(transactionStatus: string, fraudStatus?: st
     case "failure":
       return "failed";
     case "refund":
-    case "partial_refund":
     case "chargeback":
-    case "partial_chargeback":
       return "refunded";
+    case "partial_refund":
+    case "partial_chargeback":
+      // A partial adjustment does not cancel the remaining paid rental.
+      return "paid";
     default:
       return "unknown";
   }
