@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import postcss from 'postcss';
-const root=new URL('../../../werigo-ops/site/app/',import.meta.url);
+const root=new URL('../src/ops/theme/',import.meta.url);
 const list=readFileSync(new URL('globals.css',root),'utf8').matchAll(/@import '\.\/(.*?)';/g);
 let css='/* Scoped Ops workspace; marketing and customer PWA styles are unchanged. */\n';
 function selectors(s){let depth=0,quote='',part='',items=[];for(const ch of s){if(quote){part+=ch;if(ch===quote)quote='';continue;}if(ch==='"'||ch==="'")quote=ch;if(ch==='('||ch==='[')depth++;if(ch===')'||ch===']')depth--;if(ch===','&&depth===0){items.push(part);part='';}else part+=ch;}items.push(part);return items;}

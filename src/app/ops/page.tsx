@@ -1,1 +1,2 @@
-export {default,dynamic} from '@/ops/ui/home';
+export {default} from '@/ops/ui/home';
+export const dynamic='force-dynamic';
