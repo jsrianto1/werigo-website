@@ -1,0 +1,3 @@
+import {db,currentStaff,sameOrigin,json,fail,auditStatement} from '@/ops/lib/server';
+import {authCookie,SESSION_COOKIE,SIGNED_OUT_COOKIE} from '@/ops/lib/auth';
+export async function POST(req:Request){try{sameOrigin(req);let m:any=null;try{m=await currentStaff();}catch{}if(m){const statements=[auditStatement('auth.logout',m.id,{},m.email)];if(m.session_id)statements.unshift(db().prepare('DELETE FROM auth_sessions WHERE id=?').bind(m.session_id));await db().batch(statements);}const r=json({ok:true});r.headers.append('Set-Cookie',authCookie(SESSION_COOKIE,'',req,0));r.headers.append('Set-Cookie',authCookie(SIGNED_OUT_COOKIE,'1',req,7*86400));return r;}catch(e){return fail(e);}}

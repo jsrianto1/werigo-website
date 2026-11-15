@@ -8,6 +8,7 @@ import { BrandMotion } from "@/components/brand/BrandMotion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HideOnAdmin } from "@/components/layout/HideOnAdmin";
+import { HideOnOps } from "@/components/layout/HideOnOps";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { site } from "@/lib/config";
 import { siteIdentitySchema, jsonLd } from "@/lib/schema";
@@ -80,18 +81,17 @@ export default function RootLayout({
         className={`${manrope.variable} ${inter.variable} ${brandDisplay.variable} flex min-h-dvh flex-col antialiased`}
       >
         <Suspense fallback={null}>
-          <MetaPageViews />
-          <MarketingEvents />
+          <HideOnOps><MetaPageViews /><MarketingEvents /></HideOnOps>
         </Suspense>
         <LanguageProvider>
-        <BrandMotion />
+        <HideOnOps><BrandMotion /></HideOnOps>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink focus:shadow-lg"
         >
           Skip to main content
         </a>
-        <WelcomeOffer />
+        <HideOnOps><WelcomeOffer /></HideOnOps>
         <HideOnAdmin>
           <Header />
         </HideOnAdmin>
@@ -102,7 +102,7 @@ export default function RootLayout({
           <Footer />
           <FloatingWhatsApp />
         </HideOnAdmin>
-        <CookieConsent />
+        <HideOnOps><CookieConsent /></HideOnOps>
         </LanguageProvider>
         <script
           type="application/ld+json"

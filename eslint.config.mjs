@@ -5,6 +5,9 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // Ops retains its schema-driven Row model and its existing data-loading /
+  // persisted-language effects. Keep the rules of hooks and all other checks.
+  {files:["src/ops/**/*.{ts,tsx}","src/app/api/ops/**/*.ts","src/app/ops/**/*.tsx"],rules:{"@typescript-eslint/no-explicit-any":"off","react-hooks/set-state-in-effect":"off"}},
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

@@ -2,10 +2,13 @@ import "server-only";
 import type { PoolClient } from "pg";
 import {opsEnabled} from "@/lib/opsInventory";
 import type { BookingSubmission } from "@/lib/bookingSchema";
-import { getPool, isDatabaseConfigured, withTransaction } from "@/lib/db";
+import { getPool, isDatabaseConfigured, withTransaction as databaseTransaction } from "@/lib/db";
 import { StorageError, storageErrorFromThrown } from "@/lib/storageErrors";
 import { availableUnitsLocked } from "@/lib/stock";
 import type { Quote } from "@/lib/quote";
+// Acquire the shared inventory lock before any booking row lock. Ops follows
+// the same order, so a payment callback cannot deadlock a handover.
+function withTransaction<T>(fn:(client:PoolClient)=>Promise<T>):Promise<T>{return databaseTransaction(async client=>{await client.query('SELECT pg_advisory_xact_lock(76019)');return fn(client);});}
 
 /**
  * Server-side booking storage.
@@ -274,6 +277,7 @@ class PostgresBookingStore implements BookingStore {
       });
     } catch (err) {
       if (err instanceof StockUnavailableError) throw err;
+      if(err instanceof Error && /stock_unavailable|BOOKING_CONFLICT|UNIT_NOT_READY|SOURCE_RENTAL_OPEN|ACTIVE_UNIT/.test(err.message))throw new StockUnavailableError(0);
       throw storageErrorFromThrown("insert_booking", err);
     }
   }
@@ -503,6 +507,7 @@ class PostgresBookingStore implements BookingStore {
       });
     } catch (err) {
       if (err instanceof StockUnavailableError) throw err;
+      if(err instanceof Error && /stock_unavailable|BOOKING_CONFLICT|UNIT_NOT_READY|SOURCE_RENTAL_OPEN|ACTIVE_UNIT/.test(err.message))throw new StockUnavailableError(0);
       throw storageErrorFromThrown("reopen_payment", err);
     }
   }
