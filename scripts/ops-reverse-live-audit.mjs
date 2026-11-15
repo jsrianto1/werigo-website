@@ -8,10 +8,10 @@ import {pathToFileURL} from 'node:url';
 function ensure(value,code){if(!value)throw new Error(code);}
 export async function runReverseAudit(client){
  const start=Date.parse('2028-03-08T09:00:00+08:00'),end=start+3*86400000;
- const marker='qa-reverse:'+randomUUID(),customer=marker+':customer',manual=marker+':booking',website=randomUUID();
+ const marker='qa-reverse:'+randomUUID(),customer=marker+':customer',manual=marker+':booking',website=randomUUID(),scheduleId=marker+':schedule',futureId=randomUUID(),rebookId=randomUUID();
  const sources={};for(const f of ['0019_consolidated_ops.sql','0020_ops_atomic_inventory.sql'])sources[f]=readFileSync(new URL('../db/migrations/'+f,import.meta.url),'utf8').replace(/\r\n/g,'\n');
  let result,rollback=false;
- const count=async(model)=>(await client.query("SELECT count(*)::int n FROM ops.available_units($1,'',$2,$3)",[model,end,start])).rows[0].n;
+ const count=async(model,begin=start,finish=end)=>(await client.query("SELECT count(*)::int n FROM ops.available_units($1,'',$2,$3)",[model,finish,begin])).rows[0].n;
  async function expectedConflict(fn,pattern){
   await client.query('SAVEPOINT reverse_probe');let rejected=false;
   try{await fn();}catch(e){rejected=pattern.test(e.message);}
@@ -44,7 +44,7 @@ export async function runReverseAudit(client){
   await client.query("UPDATE ops.bookings SET status='confirmed' WHERE id=$1",[manual]);
   ensure(await count(unit.model)===before-1,'REVERSE_CONFIRM_NOT_HELD');
   const manualConflict=await expectedConflict(()=>client.query("INSERT INTO ops.bookings(id,code,customer_id,unit_ids,start_at,end_at,status,source,base_idr,pricing_snapshot,created_at,updated_at) VALUES($1,$2,$3,$4,$5,$6,'confirmed','Walk-in',0,'{}',$7,$7)",[marker+':conflict','QA-CONFLICT-'+randomUUID(),customer,JSON.stringify([unit.id]),start,end,now]),/BOOKING_CONFLICT/);
-  const websiteInsert=()=>client.query("INSERT INTO public.bookings(id,client_submission_id,full_name,whatsapp_number,pickup_area,return_area,start_at,end_at,vehicle_model,privacy_consent_at,status,payment_status,base_idr,total_idr,quantity,customer_notes) VALUES($1,$2,'INTERNAL QA ROLLBACK ONLY','+12025550123','showroom','showroom',$3,$4,$5,now(),'confirmed','unpaid',0,0,1,'Uncommitted reverse inventory test')",[website,randomUUID(),new Date(start).toISOString(),new Date(end).toISOString(),unit.model]);
+  const websiteInsert=(id=website,begin=start,finish=end)=>client.query("INSERT INTO public.bookings(id,client_submission_id,full_name,whatsapp_number,pickup_area,return_area,start_at,end_at,vehicle_model,privacy_consent_at,status,payment_status,base_idr,total_idr,quantity,customer_notes) VALUES($1,$2,'INTERNAL QA ROLLBACK ONLY','+12025550123','showroom','showroom',$3,$4,$5,now(),'confirmed','unpaid',0,0,1,'Uncommitted reverse inventory test')",[id,randomUUID(),new Date(begin).toISOString(),new Date(finish).toISOString(),unit.model]);
   let websiteConflict=false,websiteAvoidsManualUnit=false;
   if(before===1)websiteConflict=await expectedConflict(websiteInsert,/stock_unavailable/);
   else{
@@ -58,9 +58,29 @@ export async function runReverseAudit(client){
   await websiteInsert();
   const allocated=JSON.parse((await client.query('SELECT unit_ids FROM ops.bookings WHERE id=$1',['web:'+website])).rows[0].unit_ids)[0];
   const reverseConflict=await expectedConflict(()=>client.query("UPDATE ops.bookings SET unit_ids=$2,status='confirmed' WHERE id=$1",[manual,JSON.stringify([allocated])]),/BOOKING_CONFLICT/);
-  result={ready,guard_functions_match:definitions,enabled_manual_booking_triggers:triggers,model:unit.model,available_before:before,available_after_draft:before,available_after_confirm:before-1,available_after_cancel:before,manual_conflict_rejected:manualConflict,website_last_unit_conflict_rejected:websiteConflict,website_avoids_manual_unit:websiteAvoidsManualUnit,manual_rejects_website_held_unit:reverseConflict,real_payments:0,environment_changes:0};
+  // Schedule probes are uncommitted too. A later website reservation must not
+  // be displaced by extending or moving a manual booking into its slot.
+  const day=86400000,hour=3600000,begin=start+30*day,finish=begin+3*day,nextBegin=finish+4*day,nextFinish=nextBegin+3*day,movedBegin=begin+30*day,movedFinish=movedBegin+5*day;
+  await websiteInsert(futureId,nextBegin,nextFinish);
+  const pinned=JSON.parse((await client.query('SELECT unit_ids FROM ops.bookings WHERE id=$1',['web:'+futureId])).rows[0].unit_ids)[0];
+  for(const [a,b] of [[begin,finish+2*day],[movedBegin,movedFinish]])ensure((await client.query("SELECT 1 FROM ops.available_units($1,'',$2,$3) WHERE id=$4",[unit.model,b,a,pinned])).rows.length===1,'SCHEDULE_PROBE_DATES_UNAVAILABLE');
+  const oldBefore=await count(unit.model,begin,finish),tailBefore=await count(unit.model,finish+hour,finish+3*day+hour),newBefore=await count(unit.model,movedBegin,movedFinish);
+  await client.query("INSERT INTO ops.bookings(id,code,customer_id,unit_ids,start_at,end_at,status,source,base_idr,pricing_snapshot,created_at,updated_at) VALUES($1,$2,$3,$4,$5,$6,'confirmed','Walk-in',0,'{}',$7,$7)",[scheduleId,'QA-SCHEDULE-'+randomUUID(),customer,JSON.stringify([pinned]),begin,finish,now]);
+  ensure(await count(unit.model,finish+hour,finish+3*day+hour)===tailBefore,'SCHEDULE_ORIGINAL_TAIL_NOT_FREE');
+  await client.query('UPDATE ops.bookings SET end_at=$2 WHERE id=$1',[scheduleId,finish+2*day]);
+  ensure(await count(unit.model,finish+hour,finish+3*day+hour)===tailBefore-1,'SCHEDULE_EXTENSION_NOT_HELD');
+  const extensionConflict=await expectedConflict(()=>client.query('UPDATE ops.bookings SET end_at=$2 WHERE id=$1',[scheduleId,nextBegin+hour]),/BOOKING_CONFLICT/);
+  ensure(Number((await client.query('SELECT end_at FROM ops.bookings WHERE id=$1',[scheduleId])).rows[0].end_at)===finish+2*day,'SCHEDULE_CONFLICT_CHANGED_END');
+  await client.query('UPDATE ops.bookings SET start_at=$2,end_at=$3 WHERE id=$1',[scheduleId,movedBegin,movedFinish]);
+  ensure(await count(unit.model,begin,finish)===oldBefore,'SCHEDULE_OLD_DATES_NOT_RELEASED');
+  ensure(await count(unit.model,movedBegin,movedFinish)===newBefore-1,'SCHEDULE_NEW_DATES_NOT_HELD');
+  const moveConflict=await expectedConflict(()=>client.query('UPDATE ops.bookings SET start_at=$2,end_at=$3 WHERE id=$1',[scheduleId,nextBegin,nextBegin+5*day]),/BOOKING_CONFLICT/);
+  ensure(Number((await client.query('SELECT start_at FROM ops.bookings WHERE id=$1',[scheduleId])).rows[0].start_at)===movedBegin,'SCHEDULE_CONFLICT_MOVED_BOOKING');
+  await websiteInsert(rebookId,begin,finish);
+  ensure(await count(unit.model,begin,finish)===oldBefore-1,'SCHEDULE_RELEASED_DATES_NOT_BOOKABLE');
+  result={ready,guard_functions_match:definitions,enabled_manual_booking_triggers:triggers,model:unit.model,available_before:before,available_after_draft:before,available_after_confirm:before-1,available_after_cancel:before,manual_conflict_rejected:manualConflict,website_last_unit_conflict_rejected:websiteConflict,website_avoids_manual_unit:websiteAvoidsManualUnit,manual_rejects_website_held_unit:reverseConflict,schedule:{extension_tail_before:tailBefore,extension_tail_after:tailBefore-1,conflicting_extension_rejected:extensionConflict,old_dates_released:true,new_dates_held:true,conflicting_move_rejected:moveConflict,conflict_preserves_previous_schedule:true,released_dates_rebookable_by_website:true},real_payments:0,environment_changes:0};
  }finally{await client.query('ROLLBACK');rollback=true;}
- const remaining=(await client.query("SELECT (SELECT count(*) FROM ops.customers WHERE id=$1)+(SELECT count(*) FROM ops.bookings WHERE id=$2)+(SELECT count(*) FROM public.bookings WHERE id=$3)::int AS n",[customer,manual,website])).rows[0].n;
+ const remaining=(await client.query("SELECT (SELECT count(*) FROM ops.customers WHERE id=$1)+(SELECT count(*) FROM ops.bookings WHERE id=ANY($2::text[]))+(SELECT count(*) FROM public.bookings WHERE id=ANY($3::uuid[]))::int AS n",[customer,[manual,scheduleId],[website,futureId,rebookId]])).rows[0].n;
  ensure(Number(remaining)===0,'REVERSE_FIXTURE_NOT_ROLLED_BACK');
  return {...result,rolled_back:rollback,persisted_test_rows:Number(remaining),available_after_rollback:await count(result.model)};
 }

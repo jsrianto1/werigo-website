@@ -4,6 +4,7 @@ export const RATES:Record<string,number[]>={bees:[90000,80000,70000,60000,50000]
 export const PARTNER_RATES:Record<string,number>={bees:1200000,victory:1400000,athena:1650000,edpower:2200000};
 export const TIER_NAMES=["2–6 hari","7–13 hari","14–20 hari","21 hari–<1 bulan","≥1 bulan kalender"];
 export const DAY=86400000;
+export const PREPARATION_MS=3600000;
 export const HANDOVER_CONSENT={
  en:"I have reviewed the rental summary, motorcycle condition and accessories recorded in this handover.",
  id:"Saya telah memeriksa ringkasan, kondisi motor dan kelengkapan yang tercatat pada bukti serah terima ini.",

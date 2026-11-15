@@ -1,7 +1,7 @@
 import type {OpsPreparedStatement,OpsDatabase} from '@/ops/lib/database';
 import {currentStaff,db,sameOrigin,one,txt,num,uid,checkFiles,json,fail,AppError} from '@/ops/lib/server';
 import {rentalUpdatePlan} from '@/ops/lib/rental-workflow';
-import type {Row} from '@/ops/lib/domain';
+import {PREPARATION_MS,type Row} from '@/ops/lib/domain';
 import {extensionPaymentInput} from '@/ops/lib/extension-payments';
 import {extensionChargeInsert} from '@/ops/lib/extension-server';
 export async function POST(req:Request){try{
@@ -12,7 +12,7 @@ export async function POST(req:Request){try{
  let payment;if(plan.mode==='extend'&&d.extra_idr>0){try{payment=extensionPaymentInput(d,now);}catch(e){throw new AppError((e as Error).message);}Object.assign(plan.detail,{payment_status:payment.paid_at==null?'unpaid':'paid',...payment});}
  const guard='EXISTS(SELECT 1 FROM rental_events WHERE id=?)',statements:OpsPreparedStatement[]=[];
  let conflict='';const bind:unknown[]=[eventId,r.id,plan.mode,JSON.stringify(plan.detail),member.email,now,r.id,r.updated_at];
- if(plan.conflictEnd){conflict=" AND NOT EXISTS(SELECT 1 FROM bookings b,json_each(b.unit_ids) bu WHERE b.status IN ('pending_payment','confirmed','active') AND b.end_at>=? AND b.start_at<? AND bu.value IN (SELECT value FROM json_each(?)))";bind.push(now,plan.conflictEnd,JSON.stringify(plan.rentalUnitIds));}
+ if(plan.conflictEnd){conflict=" AND NOT EXISTS(SELECT 1 FROM bookings b,json_each(b.unit_ids) bu WHERE b.status IN ('pending_payment','confirmed','active') AND (b.status='active' OR (b.end_at>? AND b.start_at<?)) AND bu.value IN (SELECT value FROM json_each(?)))";bind.push(now-PREPARATION_MS,plan.conflictEnd+PREPARATION_MS,JSON.stringify(plan.rentalUnitIds));}
  if(plan.mode==='return'&&plan.unitState==='ready'){conflict+=" AND NOT EXISTS(SELECT 1 FROM notes WHERE unit_id IN (SELECT value FROM json_each(?)) AND status!='resolved' AND kind IN ('damage','service'))";bind.push(JSON.stringify(plan.rentalUnitIds));}
  statements.push(db().prepare('INSERT INTO rental_events(id,rental_id,kind,detail,actor,created_at) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM rental_records WHERE id=? AND updated_at=?)'+conflict).bind(...bind));
  const patch={...plan.patch,updated_at:version},fields=Object.keys(patch);

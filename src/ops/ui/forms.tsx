@@ -2,6 +2,7 @@
 import {useOpsClock} from "./use-ops-clock";
 import {FleetPhoto} from "./fleet-photo";
 import {ExtensionPaymentFields} from './extension-payments';
+import {rescheduleQuote} from '@/ops/lib/booking-schedule';
 import { openSourceRentals } from "@/ops/lib/rental-source";
 import { useLanguage } from "./language";
 import { useRef, useState } from "react";
@@ -61,6 +62,24 @@ export function PromotionForm({ onClose, save }: Props) {const renderTime=useOps
 export function StaffForm({item,onClose,save}:Props){const {language}=useLanguage(),l=(en:string,id:string)=>language==='en'?en:id;return <SimpleForm onClose={onClose} label={item?l("Save changes","Simpan perubahan"):l("Create activation link","Buat link aktivasi")} onSave={d=>save("saveStaff",{...d,enabled:d.enabled==="on"})}><input type="hidden" name="id" value={item?.id||""}/><Section title={l("Team member details","Data anggota tim")} body={l("The user sets their own password through a private activation link. No email required.","User membuat password sendiri lewat link aktivasi pribadi. Tidak perlu email.")}><Field label={l("Full name *","Nama lengkap *")} hint={l("The person’s display name.","Nama orangnya, untuk tampilan di aplikasi.")}><Input name="name" required defaultValue={item?.name} autoComplete="name"/></Field><Field label="Username *" hint={l("Used to sign in. 3–24 letters, numbers, dots, hyphens or underscores.","Dipakai untuk login. 3–24 huruf, angka, titik, tanda hubung atau garis bawah.")}><Input name="username" autoCapitalize="none" autoComplete="off" minLength={3} maxLength={24} required defaultValue={item?.username}/></Field><Field label={l("Role","Peran")}><select name="role" defaultValue={item?.role||"ops"}><option value="ops">Staff</option><option value="finance">Finance</option><option value="manager">Admin</option></select></Field><label className="check-row"><input type="checkbox" name="enabled" defaultChecked={item?!!item.enabled:true}/><span>{l("User access enabled","Akses user aktif")}</span></label></Section></SimpleForm>;}
 
 export function ExtendForm({ item, onClose, save }: Props) { const { t: tr, language, formatDate } = useLanguage(); const [extra,setExtra]=useState(0); return <SimpleForm onClose={onClose} label={tr("Simpan perpanjangan")} onSave={d => save("changeBooking", { ...d, id: item!.id, mode: "extend", expected_updated_at:item!.updated_at, end_at: parseWita(d.end_at), extra_idr: Number(d.extra_idr), paid_at:d.paid_at?parseWita(d.paid_at):undefined })}><Section title={tr("Perpanjang rental")} body={tr("Jadwal akan diperiksa kembali. Bukti serah terima sebelumnya tetap disimpan.")}><Field label={tr("Rencana kembali baru *")}><Input name="end_at" type="datetime-local" defaultValue={localInput(item!.end_at + 86400000)} required/></Field><Field label={tr("Tambahan biaya sewa disepakati (Rp) *")}><Input name="extra_idr" type="number" min={0} defaultValue={0} onChange={(e:any)=>setExtra(Number(e.target.value))} required/></Field><Field label={tr("Kesepakatan / alasan *")} wide><textarea name="reason" rows={3} required/></Field><ExtensionPaymentFields enabled={extra>0}/></Section></SimpleForm>; }
+export function RescheduleForm({data,item,onClose,save}:Props){
+ const {language,formatDate}=useLanguage();const l=(en:string,id:string)=>language==='en'?en:id;
+ const [start,setStart]=useState(localInput(item!.start_at));
+ const [end,setEnd]=useState(localInput(item!.end_at));
+ const [confirmed,setConfirmed]=useState(false);
+ let pricing:ReturnType<typeof rescheduleQuote>|null=null,error='';
+ try{pricing=rescheduleQuote(item!,JSON.parse(item!.unit_ids).map((id:string)=>data.units.find((u:Row)=>u.id===id)?.model).filter(Boolean),parseWita(start),parseWita(end));}catch(e){error=(e as Error).message;}
+ return <SimpleForm onClose={onClose} label={l('Save new dates','Simpan tanggal baru')} onSave={d=>{if(!pricing)throw new Error(error);return save('changeBooking',{id:item!.id,mode:'reschedule',expected_updated_at:item!.updated_at,start_at:parseWita(d.start_at),end_at:parseWita(d.end_at),expected_total_idr:pricing.total,confirm_schedule:d.confirm_schedule==='on',reason:d.reason});}}>
+  <Section title={l('Change booking dates','Ubah tanggal booking')} body={l('Change dates or duration before handover. Review the price adjustment before saving; existing discounts, payments and extension records are preserved.','Ubah tanggal atau durasi sebelum serah terima. Periksa penyesuaian tagihan; diskon, pembayaran dan catatan perpanjangan tetap tersimpan.')}>
+   <p className="muted wide">{l('Current schedule: ','Jadwal sekarang: ')}{formatDate(item!.start_at)} → {formatDate(item!.end_at)}</p>
+   <Field label={l('New start *','Mulai baru *')}><input name="start_at" type="datetime-local" value={start} onChange={e=>{const next=parseWita(e.target.value),duration=parseWita(end)-parseWita(start);setStart(e.target.value);setConfirmed(false);if(Number.isFinite(next)&&Number.isFinite(duration)&&duration>0)setEnd(localInput(next+duration));}} required/></Field>
+   <Field label={l('New return *','Kembali baru *')}><input name="end_at" type="datetime-local" value={end} onChange={e=>{setEnd(e.target.value);setConfirmed(false);}} required/></Field>
+   {pricing?<p className="wide">{pricing.days} {l('days','hari')} · {l('Current total','Total sekarang')} <strong>{idr(totalBooking(item!))}</strong><br/>{l('New total','Total baru')} <strong>{idr(pricing.total)}</strong> ({pricing.adjustment>=0?'+':''}{idr(pricing.adjustment)}){pricing.adjustment<0&&<small className="muted"> · {l('Manager approval required for a lower total.','Penurunan tagihan perlu persetujuan pengelola.')}</small>}</p>:<p className="form-error wide" role="alert">{error}</p>}
+   <Field label={l('Reason / agreement *','Alasan / kesepakatan *')} wide><textarea name="reason" rows={3} required maxLength={1000}/></Field>
+   <label className="check-row wide"><input name="confirm_schedule" type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)} required/><span>{l('I confirm the new dates and total. Recorded payments remain unchanged.','Saya konfirmasi tanggal dan total baru. Pembayaran yang tercatat tidak diubah.')}</span></label>
+  </Section>
+ </SimpleForm>;
+}
 export function HandoverForm({ data, item, onClose, save }: {
     data: Row;
     item: Row;
