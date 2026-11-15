@@ -1,4 +1,4 @@
-import {parseWita,DAY,type Row} from './domain';
+import {parseWita,DAY,PREPARATION_MS,type Row} from './domain';
 export const effectiveRentalEnd=(r:Row)=>r.operational_end_date||r.end_date||'';
 const validDate=(v:unknown):v is string=>typeof v==='string'&&/^20\d\d-\d\d-\d\d$/.test(v)&&Number.isFinite(Date.parse(v))&&new Date(Date.parse(v)).toISOString().slice(0,10)===v;
 const text=(v:unknown,max=2000)=>{if(typeof v!=='string'||v.trim().length>max)throw new Error('Please check the note. / Periksa catatan.');return v.trim();};
@@ -34,6 +34,6 @@ export function rentalUpdatePlan(r:Row,d:Row,context:{role:string;now:number;uni
   newNote={kind:d.kind,body:note,unit_id:unitId||null};if(d.hold){unitState='maintenance';unitIds=[unitId];}Object.assign(detail,{kind:d.kind,unit_id:unitId,hold:!!d.hold});
  }else throw new Error('Unknown rental action. / Tindakan tidak dikenal.');
  const conflictEnd=mode==='extend'?parseWita(d.end_date+'T00:00')+DAY:mode==='reopen'?4102444800000:null;
- if(conflictEnd)insist(!context.bookings.some(b=>['pending_payment','confirmed','active'].includes(b.status)&&JSON.parse(b.unit_ids).some((id:string)=>ids.includes(id))&&b.end_at>=now&&b.start_at<conflictEnd),'A motorbike already has another booking. Ask an Admin to reconcile the schedule. / Motor sudah punya booking lain. Minta Admin cek jadwal.');
+ if(conflictEnd)insist(!context.bookings.some(b=>['pending_payment','confirmed','active'].includes(b.status)&&JSON.parse(b.unit_ids).some((id:string)=>ids.includes(id))&&(b.status==='active'||b.end_at>now-PREPARATION_MS&&b.start_at<conflictEnd+PREPARATION_MS)),'A motorbike already has another booking. Allow one hour for preparation. / Motor punya booking lain. Beri jeda persiapan satu jam.');
  return {mode,patch,detail,newNote,unitState,unitIds,conflictEnd,rentalUnitIds:ids};
 }

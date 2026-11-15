@@ -5,6 +5,7 @@ import {usernameValue,sha256,sessionToken} from '@/ops/lib/password';
 import {teamProjection} from '@/ops/lib/privacy';
 import {extensionPaymentInput} from '@/ops/lib/extension-payments';
 import {extensionChargeInsert,nativeExtensionReceipt} from '@/ops/lib/extension-server';
+import {rescheduleQuote} from '@/ops/lib/booking-schedule';
 export const dynamic="force-dynamic";
 const management=["owner","manager"], finance=["owner","manager","finance"], operations=["owner","manager","ops"];
 
@@ -42,7 +43,7 @@ export async function POST(req:Request){try{
   if(discount&&(!reason||!approver))throw new AppError("Isi alasan diskon dan nama pemberi persetujuan.");if(discount)permitted(member,management);
   await saveRow("bookings",{id:entityId,code:"WRG-"+new Date(now+28800000).toISOString().slice(2,10).replaceAll("-","")+"-"+entityId.slice(0,5).toUpperCase(),customer_id:customer.id,unit_ids:JSON.stringify(unitIds),start_at:start,end_at:end,status:choice(d.status,["draft","confirmed"]),source:choice(d.source,["WhatsApp","Website → WhatsApp","Walk-in","Partner","Lainnya"]),location:txt(d.location,800),pic:txt(d.pic,160),base_idr:estimate.total,discount_idr:discount,fee_idr:fee,discount_reason:reason,discount_approver:approver,notes:txt(d.notes),pricing_snapshot:JSON.stringify({...estimate,units:units.map(u=>({id:u.id,code:u.code,plate:u.plate,model:u.model})),customer_name:customer.name,verified_at:"2026-11-12"}),created_at:now,updated_at:now},actor);
  }else if(action==="changeBooking"){
-  permitted(member,operations);const b=await one("bookings",entityId);if(b.source==="Website")throw new AppError("Manage website booking dates/cancellation in Werigo website admin to keep the payment and reservation in sync.",409);const mode=choice(d.mode,["confirm","cancel","extend"]);
+  permitted(member,operations);const b=await one("bookings",entityId);if(b.source==="Website")throw new AppError("Manage website booking dates/cancellation in Werigo website admin to keep the payment and reservation in sync.",409);const mode=choice(d.mode,["confirm","cancel","extend","reschedule"]);
   if(mode==="confirm"){if(b.status!=="draft")throw new AppError("Hanya draft yang dapat dikonfirmasi.");await auditedMutation(db().prepare("UPDATE bookings SET status='confirmed',updated_at=? WHERE id=? AND status='draft' AND updated_at=?").bind(now,b.id,b.updated_at),"booking.confirmed",b.id,{},actor);}
   if(mode==="cancel"){
    permitted(member,management);if(!["draft","confirmed"].includes(b.status))throw new AppError("Booking yang sudah berjalan tidak dapat dibatalkan. Selesaikan pengembalian.");
@@ -51,12 +52,26 @@ export async function POST(req:Request){try{
   if(mode==="extend"){
    permitted(member,operations);if(!["confirmed","active"].includes(b.status))throw new AppError("Hanya booking terkonfirmasi/berjalan yang dapat diperpanjang.");const end=timestamp(d.end_at);if(end<=b.end_at)throw new AppError("Tanggal kembali baru harus lebih lama.");const extra=num(d.extra_idr,0,100000000);const why=txt(d.reason,1000,true);
    if(d.expected_updated_at!=null&&d.expected_updated_at!==b.updated_at)throw new AppError('Booking changed. Reload first. / Booking berubah. Muat ulang dulu.',409);
-   if(extra===0){await auditedMutation(db().prepare("UPDATE bookings SET end_at=?,updated_at=? WHERE id=? AND status IN ('confirmed','active') AND end_at=? AND updated_at=?").bind(end,now,b.id,b.end_at,b.updated_at),'booking.extended',b.id,{old_end:b.end_at,new_end:end,extra_idr:0,reason:why},actor);}
+   if(extra===0){await auditedMutation(db().prepare("UPDATE bookings SET end_at=?,updated_at=? WHERE id=? AND status IN ('confirmed','active') AND end_at=? AND updated_at=?").bind(end,Math.max(now,b.updated_at+1),b.id,b.end_at,b.updated_at),'booking.extended',b.id,{old_end:b.end_at,new_end:end,extra_idr:0,reason:why},actor);}
    else {let payment;try{payment=extensionPaymentInput(d,now);}catch(e){throw new AppError((e as Error).message);}const charge={id:uid(),rental_id:null,booking_id:b.id,amount:extra,old_end:String(b.end_at),new_end:String(end),note:why,...payment,actor,paid_by:payment.paid_at==null?null:actor,created_at:now},guard='EXISTS(SELECT 1 FROM rental_extensions WHERE id=?)';
     const statements=[extensionChargeInsert(charge,"EXISTS(SELECT 1 FROM bookings WHERE id=? AND updated_at=? AND end_at=? AND status IN ('confirmed','active'))",[b.id,b.updated_at,b.end_at]),db().prepare(`UPDATE bookings SET end_at=?,base_idr=base_idr+?,updated_at=? WHERE id=? AND ${guard}`).bind(end,extra,Math.max(now,b.updated_at+1),b.id,charge.id)];
     if(payment.paid_at!=null)statements.push(nativeExtensionReceipt(charge,guard,[charge.id]));
     statements.push(db().prepare(`INSERT INTO audit(id,action,entity_id,detail,actor,created_at) SELECT ?,'booking.extended',?,?,?,? WHERE ${guard}`).bind(uid(),b.id,JSON.stringify({old_end:b.end_at,new_end:end,extra_idr:extra,reason:why,payment_status:payment.paid_at==null?'unpaid':'paid',...payment,extension_id:charge.id}),actor,now,charge.id));const result=await db().batch(statements);if(!result[0].meta.changes)throw new AppError('Booking changed. Reload first. / Booking berubah. Muat ulang dulu.',409);
    }
+  }
+  if(mode==="reschedule"){
+   if(!['draft','confirmed'].includes(b.status))throw new AppError('Only bookings before handover can change dates. / Ubah tanggal hanya sebelum serah terima.',409);
+   if(d.expected_updated_at!==b.updated_at)throw new AppError('Booking changed. Reload first. / Booking berubah. Muat ulang dulu.',409);
+   const start=timestamp(d.start_at),end=timestamp(d.end_at),why=txt(d.reason,1000,true);
+   if(d.confirm_schedule!==true)throw new AppError('Confirm the new dates and total. / Konfirmasi tanggal dan total baru.');
+   const units=await Promise.all((JSON.parse(b.unit_ids) as string[]).map(id=>one('units',id)));
+   let pricing;try{pricing=rescheduleQuote(b,units.map(u=>u.model),start,end);}catch(e){throw new AppError((e as Error).message);}
+   if(d.expected_total_idr!==pricing.total)throw new AppError('The quote changed. Reload before saving. / Penawaran berubah. Muat ulang sebelum menyimpan.',409);
+   if(pricing.adjustment<0)permitted(member,management);
+   if(await db().prepare('SELECT 1 FROM handovers WHERE booking_id=? LIMIT 1').bind(b.id).first())throw new AppError('Handover evidence already exists. / Bukti serah terima sudah tercatat.',409);
+   const minimum=await db().prepare("SELECT COALESCE((SELECT SUM(amount) FROM rental_extensions WHERE booking_id=?),0)+GREATEST(0,COALESCE((SELECT SUM(CASE WHEN kind='rental' THEN amount WHEN kind='refund' THEN -amount ELSE 0 END) FROM payments WHERE booking_id=? AND extension_id IS NULL),0)) AS amount").bind(b.id,b.id).first<{amount:number}>();
+   if(pricing.total<(minimum?.amount||0))throw new AppError('New total is below recorded payments or agreed extensions. Record actual refunds or reconcile extension charges first. / Total baru di bawah pembayaran atau biaya perpanjangan. Catat refund aktual atau rekonsiliasi biaya dulu.',409);
+   await auditedMutation(db().prepare("UPDATE bookings SET start_at=?,end_at=?,base_idr=?,updated_at=? WHERE id=? AND updated_at=? AND start_at=? AND end_at=? AND status IN ('draft','confirmed') AND NOT EXISTS(SELECT 1 FROM handovers WHERE booking_id=?) AND ?-discount_idr+fee_idr >= COALESCE((SELECT SUM(amount) FROM rental_extensions e WHERE e.booking_id=bookings.id),0)+GREATEST(0,COALESCE((SELECT SUM(CASE WHEN p.kind='rental' THEN p.amount WHEN p.kind='refund' THEN -p.amount ELSE 0 END) FROM payments p WHERE p.booking_id=bookings.id AND p.extension_id IS NULL),0))").bind(start,end,pricing.base,Math.max(now,b.updated_at+1),b.id,b.updated_at,b.start_at,b.end_at,b.id,pricing.base),'booking.rescheduled',b.id,{old_start:b.start_at,old_end:b.end_at,new_start:start,new_end:end,old_base:b.base_idr,new_base:pricing.base,price_adjustment:pricing.adjustment,previous_tariff:pricing.previousTariff,new_tariff:pricing.nextTariff,reason:why},actor);
   }
  }else if(action==="recordPayment"){
   permitted(member,finance);const b=await one("bookings",txt(d.booking_id,80,true));const kind=choice(d.kind,["rental","deposit","refund","deposit_refund"]);if(b.source==="Website"&&kind==="rental")throw new AppError("Online rental payments are recorded automatically. Check the website payment record before recording another receipt.",409);
