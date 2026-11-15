@@ -14,6 +14,7 @@ import {
 import {
   createSnapTransaction,
   fetchTransactionStatus,
+  isSnapPageExpired,
   mapTransactionStatus,
   MidtransError,
   type MidtransTransactionStatus,
@@ -187,8 +188,23 @@ export async function refreshPendingPayment(booking: StoredBooking): Promise<Sto
   const payment = await latestPayment(booking.id);
   if (!payment) return booking;
   try {
-    const status = await fetchTransactionStatus(payment.order_id);
-    if (!status) return booking;
+    let status = await fetchTransactionStatus(payment.order_id);
+    if (!status) {
+      const deadline = payment.expires_at ? new Date(payment.expires_at).getTime() : NaN;
+      if (!payment.snap_token || !Number.isFinite(deadline) || deadline > Date.now() || !await isSnapPageExpired(payment.snap_token)) return booking;
+      // A selected payment method can outlive the Snap page. Re-fetch Core
+      // after page expiry proof; use its real status if one now exists.
+      status = await fetchTransactionStatus(payment.order_id);
+      if (!status) {
+        const latest = await latestPayment(booking.id);
+        if (latest?.id !== payment.id) return booking;
+        status = {
+          order_id: payment.order_id, transaction_status: "expire", status_code: "407",
+          gross_amount: String(payment.gross_amount),
+          status_message: "Snap API confirmed expired page; Core API confirmed no transaction",
+        };
+      }
+    }
     const { booking: updated } = await syncPaymentStatus(payment.order_id, status, "midtrans:poll");
     return updated ?? booking;
   } catch (err) {

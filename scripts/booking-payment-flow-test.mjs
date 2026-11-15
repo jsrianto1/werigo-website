@@ -23,7 +23,7 @@ globalThis.__paymentTestDb={
  transaction:fn=>queued(async()=>{await db.exec('BEGIN');try{const result=await fn({query:(...args)=>db.query(...args)});await db.exec('COMMIT');return result;}catch(e){await db.exec('ROLLBACK');throw e;}}),
 };
 globalThis.__paymentTestUser={id:'payment-test-user',name:'Local QA',email:'qa@example.invalid',role:'customer'};
-globalThis.__paymentTestGateway={calls:[],statuses:new Map(),error:null,signature:true};
+globalThis.__paymentTestGateway={calls:[],statuses:new Map(),expiredSnaps:new Set(),error:null,signature:true};
 const asModule=source=>'data:text/javascript,'+encodeURIComponent(source);
 const mocks={
  'server-only':asModule('export default {};'),
@@ -40,6 +40,7 @@ const mocks={
  export const isMidtransConfigured=()=>true;
  export const verifyNotificationSignature=()=>globalThis.__paymentTestGateway.signature;
  export const fetchTransactionStatus=async id=>globalThis.__paymentTestGateway.statuses.get(id)||null;
+ export const isSnapPageExpired=async token=>globalThis.__paymentTestGateway.expiredSnaps.has(token);
  export const createSnapTransaction=async input=>{const g=globalThis.__paymentTestGateway;g.calls.push(input);if(g.onCreate)await g.onCreate(input);if(g.error)throw g.error;return {token:'local-token-'+input.orderId,redirectUrl:'https://example.invalid/payment',expiresAt:new Date()};};`),
 };
 registerHooks({resolve(specifier,context,next){
@@ -60,7 +61,7 @@ const {NextRequest}=await import('next/server');
 const {POST:createBooking}=await import('../src/app/api/bookings/route.ts');
 const {POST:payBooking}=await import('../src/app/api/bookings/[code]/pay/route.ts');
 const {POST:notification}=await import('../src/app/api/payments/midtrans/notify/route.ts');
-const {syncPaymentStatus}=await import('../src/lib/payments.ts');
+const {syncPaymentStatus,refreshPendingPayment}=await import('../src/lib/payments.ts');
 const {getBookingStore}=await import('../src/lib/bookingStore.ts');
 const realFetch=globalThis.fetch;
 globalThis.fetch=async()=>{throw new Error('UNEXPECTED_EXTERNAL_NETWORK_IN_LOCAL_TEST');};
@@ -143,5 +144,18 @@ try{
  await syncPaymentStatus(wo,status(wo,'expire'),'verified-expiry');
  check(await available()===1,'Provider-verified expiry releases the physical unit');
  check((await db.query('SELECT status FROM ops.bookings WHERE id=$1',['web:'+wb.id])).rows[0].status==='cancelled','Expiry is reflected in Ops');
+ await reset();const abandoned=await post(createBooking,payload()),ab=await bookingRow(abandoned.data.booking.bookingCode);
+ await db.query("UPDATE public.payments SET expires_at=now()-interval '1 minute' WHERE booking_id=$1",[ab.id]);
+ await refreshPendingPayment(ab);
+ check(await available()===0,'An unknown Core transaction alone never releases an abandoned checkout');
+ gateway.expiredSnaps.add(abandoned.data.payment.snapToken);
+ await refreshPendingPayment(ab);
+ check((await bookingRow(ab.booking_code)).payment_status==='expired'&&await available()===1,'Confirmed Snap expiry plus absent Core releases an abandoned checkout');
+ check((await db.query('SELECT count(*)::int n FROM ops.payments')).rows[0].n===0,'Snap expiry creates no false payment receipt');
+ await reset();const delayed=await post(createBooking,payload()),delayedBooking=await bookingRow(delayed.data.booking.bookingCode),delayedOrder=delayed.data.payment.orderId;
+ await db.query("UPDATE public.payments SET expires_at=now()-interval '1 minute' WHERE booking_id=$1",[delayedBooking.id]);
+ gateway.expiredSnaps.add(delayed.data.payment.snapToken);gateway.statuses.set(delayedOrder,status(delayedOrder,'pending'));
+ await refreshPendingPayment(delayedBooking);
+ check(await available()===0&&(await bookingRow(delayedBooking.booking_code)).payment_status==='pending','A pending payment method keeps its hold even when the Snap page expired');
  console.log(`${checks} real-handler booking/payment/Ops checks passed; gateway simulated; no env changed or external payment made.`);
 }finally{globalThis.fetch=realFetch;await queue;await db.close();}

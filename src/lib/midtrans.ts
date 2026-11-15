@@ -178,6 +178,20 @@ export async function fetchTransactionStatus(orderId: string): Promise<MidtransT
   return data;
 }
 
+/** A fresh, explicit provider expiry response; never infer expiry from 404. */
+export async function isSnapPageExpired(token: string): Promise<boolean> {
+  const response = await fetch(`${hosts().snap}/transactions/${encodeURIComponent(token)}`, {
+    headers: { Authorization: authHeader(), Accept: "application/json" },
+    cache: "no-store",
+    signal: AbortSignal.timeout(15_000),
+  });
+  const data = await response.json().catch(() => null) as { error_messages?: unknown } | null;
+  // Midtrans's 407 means expired transaction. A 404, auth failure, timeout,
+  // or the local booking deadline alone cannot prove a Snap session closed.
+  return response.status === 407 && Array.isArray(data?.error_messages)
+    && data.error_messages.some((message: unknown) => typeof message === "string" && /\bexpired\b/i.test(message));
+}
+
 /** SHA512(order_id + status_code + gross_amount + ServerKey) must equal signature_key. */
 export function verifyNotificationSignature(n: {
   order_id: string;
