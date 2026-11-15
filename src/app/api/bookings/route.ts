@@ -10,7 +10,7 @@ import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 import { getSessionUser } from "@/lib/session";
 import { computeQuote, periodFromIso } from "@/lib/quote";
 import { isMidtransConfigured, MidtransError } from "@/lib/midtrans";
-import { openPayment, paymentDeadline } from "@/lib/payments";
+import { definitivePaymentRejection, openPayment, paymentDeadline } from "@/lib/payments";
 import { latestPayment } from "@/lib/paymentStore";
 import { toPublicBooking, toPublicPayment } from "@/lib/bookingView";
 import { pickDiscount, resolveDiscounts } from "@/lib/discounts";
@@ -241,7 +241,7 @@ export async function POST(req: NextRequest) {
     booking.payment_expires_at !== null &&
     new Date(booking.payment_expires_at).getTime() > Date.now();
 
-  if (!payment && booking.payment_status === "pending" && windowOpen) {
+  if ((!payment || !payment.snap_token) && booking.payment_status === "pending" && windowOpen) {
     try {
       payment = await openPayment(booking, user.email);
     } catch (err) {
@@ -255,7 +255,10 @@ export async function POST(req: NextRequest) {
       }
       const message = err instanceof MidtransError ? err.message : err instanceof Error ? err.message : String(err);
       console.error(`[payments] snap create failed for ${booking.booking_code}: ${message.slice(0, 200)}`);
-      // Release the units: the customer keeps the form and can retry.
+      if (!definitivePaymentRejection(err)) {
+        return NextResponse.json({ok:false,error:"payment_pending_verification",message:`We could not confirm the payment session yet. Booking ${booking.booking_code} remains reserved while we check. Retry with the same details or contact Werigo.`},{status:503});
+      }
+      // A definitive rejection proves no payable session was started.
       await store.setPaymentState(booking.id, { payment_status: "failed", status: "expired" }, "system", "payment provider unavailable").catch(() => null);
       await syncOpsBooking(booking.id).catch(()=>undefined);
       return NextResponse.json(
@@ -267,6 +270,11 @@ export async function POST(req: NextRequest) {
         { status: 503 }
       );
     }
+  }
+
+  try { booking = (await store.get(booking.id))?.booking ?? booking; }
+  catch {
+    return NextResponse.json({ok:false,error:"payment_pending_verification",message:"Your reservation is saved. We could not refresh its payment status yet; retry with the same details or check My rides."},{status:503});
   }
 
   return NextResponse.json(

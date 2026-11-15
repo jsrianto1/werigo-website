@@ -453,6 +453,12 @@ class PostgresBookingStore implements BookingStore {
         const before = await client.query("select * from bookings where id = $1::uuid for update", [id]);
         const prev = before.rows[0] as StoredBooking | undefined;
         if (!prev) return null;
+        // Recheck inside the locked transaction: a verified settlement may
+        // have won the race after an expiry worker read the pending snapshot.
+        if (prev.payment_status === "refunded" && patch.payment_status !== "refunded" ||
+            prev.payment_status === "paid" && !["paid", "refunded"].includes(patch.payment_status)) {
+          return normalizeRow<StoredBooking>(prev);
+        }
         await client.query("select set_config('werigo.actor', $1, true)", [actor]);
         const sets = ["payment_status = $2::payment_status"];
         const params: unknown[] = [id, patch.payment_status];

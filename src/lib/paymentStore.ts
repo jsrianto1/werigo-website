@@ -1,4 +1,5 @@
 import "server-only";
+import type { PoolClient } from "pg";
 import { getPool } from "@/lib/db";
 import { storageErrorFromThrown } from "@/lib/storageErrors";
 import type { MidtransTransactionStatus } from "@/lib/midtrans";
@@ -37,16 +38,17 @@ function normalize(row: Record<string, unknown>): PaymentRow {
 export async function createPayment(p: {
   bookingId: string;
   orderId: string;
-  snapToken: string;
-  redirectUrl: string;
+  snapToken: string | null;
+  redirectUrl: string | null;
   grossAmount: number;
   expiresAt: Date;
-}): Promise<PaymentRow> {
+  status?: "pending" | "initializing";
+}, db: Pick<PoolClient, "query"> = getPool()): Promise<PaymentRow> {
   try {
-    const res = await getPool().query(
+    const res = await db.query(
       `insert into payments (booking_id, order_id, snap_token, redirect_url, gross_amount, expires_at, transaction_status)
-       values ($1::uuid, $2, $3, $4, $5, $6::timestamptz, 'pending') returning *`,
-      [p.bookingId, p.orderId, p.snapToken, p.redirectUrl, p.grossAmount, p.expiresAt.toISOString()]
+       values ($1::uuid, $2, $3, $4, $5, $6::timestamptz, $7) returning *`,
+      [p.bookingId, p.orderId, p.snapToken, p.redirectUrl, p.grossAmount, p.expiresAt.toISOString(), p.status ?? "pending"]
     );
     return normalize(res.rows[0]);
   } catch (err) {
@@ -54,9 +56,9 @@ export async function createPayment(p: {
   }
 }
 
-export async function latestPayment(bookingId: string): Promise<PaymentRow | null> {
+export async function latestPayment(bookingId: string, db: Pick<PoolClient, "query"> = getPool()): Promise<PaymentRow | null> {
   try {
-    const res = await getPool().query(
+    const res = await db.query(
       "select * from payments where booking_id = $1::uuid order by created_at desc limit 1",
       [bookingId]
     );
@@ -66,13 +68,20 @@ export async function latestPayment(bookingId: string): Promise<PaymentRow | nul
   }
 }
 
-export async function countPayments(bookingId: string): Promise<number> {
+export async function countPayments(bookingId: string, db: Pick<PoolClient, "query"> = getPool()): Promise<number> {
   try {
-    const res = await getPool().query("select count(*)::int as n from payments where booking_id = $1::uuid", [bookingId]);
+    const res = await db.query("select count(*)::int as n from payments where booking_id = $1::uuid", [bookingId]);
     return res.rows[0]?.n ?? 0;
   } catch (err) {
     throw storageErrorFromThrown("count_payments", err);
   }
+}
+
+/** Save the session on the existing intent, never create a second order on retry. */
+export async function completePaymentSession(orderId: string, token: string, redirectUrl: string, db: Pick<PoolClient, "query">): Promise<PaymentRow> {
+  const result = await db.query("UPDATE payments SET snap_token=$2,redirect_url=$3,transaction_status='pending' WHERE order_id=$1 RETURNING *", [orderId, token, redirectUrl]);
+  if (!result.rows[0]) throw new Error("PAYMENT_INTENT_MISSING");
+  return normalize(result.rows[0]);
 }
 
 export async function findPaymentByOrderId(orderId: string): Promise<PaymentRow | null> {
@@ -97,7 +106,12 @@ export async function recordTransactionStatus(orderId: string, s: MidtransTransa
          transaction_time = coalesce($7::timestamptz, transaction_time),
          settlement_time = coalesce($8::timestamptz, settlement_time),
          last_notification = $9::jsonb
-       where order_id = $1 returning *`,
+       where order_id = $1
+       and not ((transaction_status='settlement' or (transaction_status='capture' and coalesce(fraud_status,'accept')='accept'))
+         and $3 not in ('capture','settlement','refund','partial_refund','chargeback','partial_chargeback'))
+       and not (transaction_status in ('refund','partial_refund','chargeback','partial_chargeback')
+         and $3 not in ('refund','partial_refund','chargeback','partial_chargeback'))
+       returning *`,
       [
         orderId,
         s.transaction_id ?? null,
