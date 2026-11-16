@@ -185,10 +185,10 @@ export function BookSearchResults() {
                 </div>
                 <div className="flex flex-col items-stretch gap-3 md:items-end">
                   <p className="text-sm text-ink-soft md:max-w-[190px] md:text-right">
-                    <span className="block font-semibold text-ink">{availability?.enabled?(availability.error?"Please retry availability":availability.stock[model.modelSlug]===0?"Fully booked":`${availability.stock[model.modelSlug]??0} available`):<T>{"Available by request"}</T>}</span>{!availability?.enabled&&<T>{"Estimate confirmed with availability on WhatsApp."}</T>}</p>
+                    <span className="block font-semibold text-ink">{availability===null?"Checking availability…":availability.enabled?(availability.error?"Please retry availability":(availability.stock[model.modelSlug]??0)===0?"Not available for these dates":"Available for your dates"):<T>{"Available by request"}</T>}</span>{!availability?.enabled&&<T>{"Estimate confirmed with availability on WhatsApp."}</T>}</p>
                   <button
                     onClick={() => goToCheckout(model.id)}
-                    disabled={availability?.error || availability?.enabled && availability.stock[model.modelSlug]===0}
+                    disabled={!availability || availability.error || availability.enabled && (availability.stock[model.modelSlug]??0)===0}
                     className="inline-flex min-h-11 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 items-center justify-center gap-2 rounded-[10px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
                   ><T>{"Check availability and rates"}</T>{" "}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </button>
