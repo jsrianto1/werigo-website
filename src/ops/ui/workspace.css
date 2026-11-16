@@ -1,0 +1,24 @@
+.werigo-ops.workspace-chrome{min-height:0;background:transparent;isolation:auto}
+.workspace-chrome .app-shell{min-height:0}
+.website-workspace{min-height:100dvh;background:#f4f7f5;color:var(--ink);width:100%;isolation:isolate}
+.website-workspace-main{width:min(100%,1440px);margin:0 auto;padding:104px 32px 148px;min-width:0}
+.workspace-context{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:24px;font-size:12px;color:#527366;overflow-wrap:anywhere}
+.workspace-context>a{font-weight:650;letter-spacing:.08em;color:#176e57}
+.workspace-notice{padding:16px 20px;margin-bottom:20px;border:1px solid #c6dfd1;background:#edf6ef;border-radius:16px;color:#274d3e;font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.workspace-notice>a{font-weight:650;text-decoration:underline;text-underline-offset:3px}
+.workspace-chrome .header-brand{width:auto;max-width:210px}
+.workspace-chrome .header-brand>span{font-size:9px}
+.werigo-ops .header-brand{width:auto;max-width:210px}
+.werigo-ops .header-brand>span{font-size:9px}
+.werigo-ops.workspace-chrome .topbar,.werigo-ops.workspace-chrome .island-dock{z-index:30}
+.website-workspace-main{padding-top:calc(104px + env(safe-area-inset-top,0px));padding-bottom:calc(148px + env(safe-area-inset-bottom,0px));overflow-wrap:anywhere}
+.werigo-ops .workspace-access-note{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 20px;margin-bottom:20px;border:1px solid var(--line);border-radius:16px;background:#fff;color:#365b4a;font-size:13px;overflow-wrap:anywhere}
+.werigo-ops .workspace-access-note a{color:#086c53;font-weight:650;text-decoration:underline;text-underline-offset:3px}
+.werigo-ops .workspace-login-options{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.werigo-ops .workspace-login-options button{min-height:44px;flex:1;padding:10px;border:1px solid #cfdfd3;border-radius:10px;background:#f3f8f3;color:#234d3a}
+.werigo-ops .workspace-login-options button[aria-pressed=true]{background:#176e57;color:#fff;border-color:#176e57}
+@media(max-width:680px){.website-workspace-main{padding:96px 18px 140px}.workspace-context{align-items:flex-start;flex-direction:column;gap:6px}.workspace-chrome .topbar{padding-left:18px;padding-right:18px}.workspace-chrome .header-brand>span{display:none}.workspace-chrome .topbar-right{gap:10px}.workspace-notice{padding:14px 16px;font-size:13px}.werigo-ops .workspace-access-note{padding:14px 16px}}
+@media(max-width:680px){.website-workspace-main{padding-top:calc(96px + env(safe-area-inset-top,0px));padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}}
+@media(max-width:680px){.werigo-ops .header-brand>span{display:none}.workspace-chrome .topbar-right>.icon-btn{display:none}.workspace-chrome .language-select{max-width:125px;min-width:0}.workspace-chrome .language-select select{max-width:90px}}
+
+@media(min-width:1024px){.website-workspace-main .sticky,.website-workspace-main .lg\:sticky{top:calc(96px + env(safe-area-inset-top,0px))}}

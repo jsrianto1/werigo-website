@@ -8,24 +8,26 @@ export type NavigationItem = { id: string; label: string; icon: ComponentType<an
 type Props = {
   page: string; items: NavigationItem[]; open: boolean; onOpenChange: (open: boolean) => void;
   onNavigate: (page: string) => void; name: string; role: string;
-  onInstall: () => void; onSignOut: () => void;
+  onInstall?: () => void; onSignOut: () => void;
+  accountPage?:string; dockItems?:NavigationItem[];
 };
 
 function AllApps({size=22}:{size?:number}) {
   return <svg className="ops-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><rect x="3.5" y="3.5" width="6" height="6" rx="2"/><rect x="14.5" y="3.5" width="6" height="6" rx="2"/><rect x="3.5" y="14.5" width="6" height="6" rx="2"/><rect x="14.5" y="14.5" width="6" height="6" rx="2"/></svg>;
 }
 
-export function IslandNavigation({page,items,open,onOpenChange,onNavigate,name,role,onInstall,onSignOut}: Props) {
+export function IslandNavigation({page,items,open,onOpenChange,onNavigate,name,role,onInstall,onSignOut,accountPage="account",dockItems}: Props) {
   const {language,t}=useLanguage();
   const dialog=useRef<HTMLDialogElement>(null);
   const [visible,setVisible]=useState(false);
-  const dock=[
+  const defaultDock=[
     {id:'dashboard',label:language==='en'?'Home':'Beranda',icon:LayoutDashboard},
     {id:'rentals',label:language==='en'?'Rentals':'Rental',icon:CalendarDays},
     {id:'fleet',label:language==='en'?'Fleet':'Unit',icon:Bike},
     {id:'notes',label:language==='en'?'Notes':'Catatan',icon:NotebookPen},
     {id:'more',label:language==='en'?'More':'Lainnya',icon:AllApps},
   ];
+  const dock=dockItems?[...dockItems,{id:'more',label:language==='en'?'More':'Lainnya',icon:AllApps}]:defaultDock;
   const dockIndex=dock.findIndex(n=>n.id===page);
   const selected=open||dockIndex===-1?4:dockIndex;
   useEffect(()=>{
@@ -55,8 +57,8 @@ export function IslandNavigation({page,items,open,onOpenChange,onNavigate,name,r
       <nav className="island-page-grid" aria-label={t('Menu utama')}>
         {items.map(({id,label,icon:Icon,count})=><button key={id} type="button" className={id===page?'is-current':''} aria-current={id===page?'page':undefined} onClick={()=>go(id)}><span className="island-page-icon"><Icon size={21}/></span><span>{t(label)}</span>{count? <b>{count}</b>:<ArrowUpRight className="island-page-arrow" size={15}/>}</button>)}
       </nav>
-      <div className="island-account"><span className="avatar">{name.slice(0,1).toUpperCase()}</span><div><strong>{name}</strong><small>{role}</small></div><button type="button" className="text-btn" onClick={()=>go('account')}><LockKeyhole size={15}/>{t('Login saya')}</button></div>
-      <div className="island-sheet-foot"><button type="button" onClick={()=>{onOpenChange(false);onInstall();}}><Smartphone size={17}/>{t('Pasang aplikasi')}</button><button type="button" onClick={onSignOut}><LogOut size={17}/>{t('Keluar dari aplikasi')}</button></div>
+      <div className="island-account"><span className="avatar">{name.slice(0,1).toUpperCase()}</span><div><strong>{name}</strong><small>{role}</small></div><button type="button" className="text-btn" onClick={()=>go(accountPage)}><LockKeyhole size={15}/>{t('Login saya')}</button></div>
+      <div className="island-sheet-foot">{onInstall&&<button type="button" onClick={()=>{onOpenChange(false);onInstall();}}><Smartphone size={17}/>{t('Pasang aplikasi')}</button>}<button type="button" onClick={onSignOut}><LogOut size={17}/>{t('Keluar dari aplikasi')}</button></div>
     </dialog>
   </>;
 }

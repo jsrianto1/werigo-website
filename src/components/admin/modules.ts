@@ -102,5 +102,6 @@ export const MODULES: readonly AdminModule[] = [
 ];
 
 export function modulesFor(role: string): AdminModule[] {
+  if (!["admin", "super_admin"].includes(role)) return [];
   return MODULES.filter((m) => !m.superOnly || role === "super_admin");
 }

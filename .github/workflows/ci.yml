@@ -42,6 +42,9 @@ jobs:
       - name: Consolidated inventory and booking checks
         run: npm run test:ops
 
+      - name: Unified workspace access and feature preservation
+        run: npm run test:workspace
+
       - name: PWA rental flow and pricing checks
         run: npm run test:rental && npm run test:pricing
 
