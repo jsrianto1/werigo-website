@@ -10,7 +10,7 @@ for(const role of ['manager','finance'])check(['settings','activity'].every(id=>
 check(['settings','activity'].every(id=>opsPageIds('owner').includes(id)),'Owner retains team management and activity');
 for(const role of ['admin','super_admin']){
  const paths=modulesFor(role).map(m=>m.href);
- check(['articles','content','membership','promotions','referrals','customers','bookings','stock'].every(m=>paths.includes('/admin/'+m)),`${role} retains articles/content health, membership and all existing business modules`);
+ check(['overview','articles','content','membership','promotions','referrals','customers','bookings','stock'].every(m=>paths.includes('/admin/'+m)),`${role} retains articles/content health, membership and all existing business modules`);
  check(new Set(paths).size===paths.length,`${role} has no duplicate website modules`);
 }
 check(modulesFor('admin').every(m=>!m.superOnly),'Regular website admin never gets super-admin modules');
