@@ -47,6 +47,9 @@ check((await db.query('SELECT status FROM public.bookings WHERE id=$1',[id])).ro
 const second=await website();await db.query("UPDATE public.bookings SET status='expired',payment_status='expired' WHERE id=$1",[second]);
 check((await db.query("SELECT count(*)::int n FROM ops.available_units('edpower','',$1,$2)",[end,start])).rows[0].n===1,'Verified expiry releases a pending hold');
 await rejects(()=>website({model:'bees'}),/stock_unavailable/);
+await db.query("UPDATE ops.units SET usage='sold',state='ready' WHERE id='test-red'");
+check((await db.query("SELECT count(*)::int n FROM ops.available_units('edpower','',$1,$2)",[end,start])).rows[0].n===0,'Sold / RTO never counts as available even when its condition says ready');
+await rejects(()=>website(),/stock_unavailable/);
 await db.query("UPDATE ops.units SET usage='internal' WHERE id='test-red'");
 await rejects(()=>website(),/stock_unavailable/);
 await db.query("UPDATE ops.units SET usage='rental',state='maintenance' WHERE id='test-red'");
