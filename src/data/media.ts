@@ -64,7 +64,7 @@ export const media = {
   "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/catalog.webp", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 720, available: true },
   "fleet-victory-side": { kind: "image", src: "/media/fleet/victory/side.jpg", alt: "Side view of the Wedison Victory", width: 1600, height: 1200, available: false },
   "fleet-victory-detail": { kind: "image", src: "/media/fleet/victory/detail.jpg", alt: "Detail view of the Wedison Victory", width: 1600, height: 1200, available: false },
-  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/catalog.webp", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 639, available: true },
+  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/catalog-clean.webp", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 639, available: true },
   "fleet-athena-side": { kind: "image", src: "/media/fleet/athena/side.jpg", alt: "Side view of the Wedison Athena", width: 1600, height: 1200, available: false },
   "fleet-athena-detail": { kind: "image", src: "/media/fleet/athena/detail.jpg", alt: "Detail view of the Wedison Athena", width: 1600, height: 1200, available: false },
   "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/catalog.webp", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 639, available: true },
@@ -157,8 +157,8 @@ export const modelColors: Record<string, ColorVariant[]> = {
   athena: [
     {
       name: "Green",
-      image: "/media/fleet/athena/colors/green.webp",
-      thumb: "/media/fleet/athena/colors/green-thumb.webp",
+      image: "/media/fleet/athena/colors/green-clean.webp",
+      thumb: "/media/fleet/athena/colors/green-thumb-clean.webp",
       alt: "Green Wedison Athena electric motorcycle available for rent through Werigo in Bali",
       width: 1920,
       height: 706,
