@@ -30,8 +30,9 @@
     "build:ops-inspect": "npm run build && node scripts/ops-consolidate.mjs inspect",
     "build:ops-migrate": "npm run build && node scripts/ops-consolidate.mjs migrate",
     "build:ops-verify": "npm run build && node scripts/ops-consolidate.mjs verify",
-    "test:ops": "node scripts/ops-consolidated-test.mjs && node scripts/ops-reverse-audit-test.mjs",
-    "test:workspace": "node --experimental-transform-types scripts/workspace-access-test.mjs && node scripts/workspace-entry-test.mjs"
+    "test:ops": "node scripts/ops-consolidated-test.mjs && node scripts/ops-reverse-audit-test.mjs && node scripts/ops-athena-rto-test.mjs",
+    "test:workspace": "node --experimental-transform-types scripts/workspace-access-test.mjs && node scripts/workspace-entry-test.mjs",
+    "build:athena-rto-reserve": "npm run build && node scripts/ops-reserve-athena-rto.mjs --apply-2026-11-16"
   },
   "dependencies": {
     "@tiptap/pm": "3.23.5",
