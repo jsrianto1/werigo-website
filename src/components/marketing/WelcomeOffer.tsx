@@ -172,7 +172,7 @@ export function WelcomeOffer() {
                 </p>
               </div>
               <Image
-                src="/media/fleet/athena/cutout-green-clean.webp"
+                src="/media/fleet/athena/cutout-green-v20261117.webp"
                 alt="Wedison Athena electric motorcycle in green"
                 width={1380}
                 height={1380}

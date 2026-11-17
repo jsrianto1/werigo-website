@@ -4,7 +4,7 @@ const aliases:Record<string,string>={merah:'red',putih:'white',hitam:'black',hij
 const defaults:Record<string,string>={edpower:'red-glossy',athena:'white-glossy',victory:'silver-glossy',bees:'grey-glossy'};
 export function fleetColorImage(model:string,color?:string,catalog=false){
  const choices=FLEET_COLORS[model];if(!choices)return null;let key=String(color||'').trim().toLowerCase().replace(/\s+/g,'-');
- if(!key&&catalog)key=defaults[model];if(choices.includes(key))return '/ops-assets/fleet/colors/'+model+'-'+key+(model==='athena'?'-clean':'')+'.webp';
+ if(!key&&catalog)key=defaults[model];if(choices.includes(key))return '/ops-assets/fleet/colors/'+model+'-'+key+(model==='athena'?'-v20261117':'')+'.webp';
  const finish=key.endsWith('-matte')?'matte':'glossy';key=key.replace(/-(matte|glossy)$/,'');key=aliases[key]||key;if(model==='victory'&&key==='grey')key='silver';key+='-'+finish;
- return choices.includes(key)?'/ops-assets/fleet/colors/'+model+'-'+key+(model==='athena'?'-clean':'')+'.webp':null;
+ return choices.includes(key)?'/ops-assets/fleet/colors/'+model+'-'+key+(model==='athena'?'-v20261117':'')+'.webp':null;
 }

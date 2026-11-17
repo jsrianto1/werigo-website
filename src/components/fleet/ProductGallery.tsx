@@ -10,7 +10,7 @@ import type { ColorVariant } from "@/data/media";
  * Changing colour only swaps the displayed photo — model,
  * specifications, rate status and booking flow are unaffected.
  * Uses native radio inputs for full keyboard and screen-reader
- * support. Images are official Wedison colour photography,
+ * support. Images use reviewed Wedison colour assets,
  * rendered uncropped (object-contain).
  */
 export function ProductGallery({
@@ -31,7 +31,7 @@ export function ProductGallery({
     <div className="space-y-4">
       {/* Main image */}
       {active ? (
-        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[14px] bg-white">
+        <div className={`relative aspect-[3/2] w-full overflow-hidden rounded-[14px] ${modelSlug === "athena" ? "bg-transparent" : "bg-white"}`}>
           <Image
             key={active.name}
             src={active.image}
@@ -46,7 +46,7 @@ export function ProductGallery({
           id={`fleet-${modelSlug}-main`}
           fallbackLabel={`${displayName} main product photo`}
           ratio="3/2"
-          fit="contain"
+          fit={modelSlug === "athena" ? "contain-bare" : "contain"}
           sizes="(max-width: 1024px) 100vw, 55vw"
           priority
         />
@@ -92,7 +92,7 @@ export function ProductGallery({
                 onChange={() => setSelected(c.name)}
                 className="sr-only"
               />
-              <span className="relative h-8 w-12 overflow-hidden rounded-md bg-white">
+              <span className={`relative h-8 w-12 overflow-hidden rounded-md ${modelSlug === "athena" ? "bg-transparent" : "bg-white"}`}>
                 <Image
                   src={c.thumb}
                   alt=""

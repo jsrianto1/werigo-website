@@ -70,7 +70,7 @@ export function getAppBikes(): AppBike[] {
     return {
       id: bike.id, modelSlug: bike.modelSlug, model: bike.model, displayName: bike.displayName,
       bestFor: bike.bestFor, supercharge: bike.supercharge,
-      image: bike.modelSlug === "edpower" ? "/app/edpower-red.webp" : `/media/fleet/${bike.modelSlug}/catalog.webp`,
+      image: bike.modelSlug === "edpower" ? "/app/edpower-red.webp" : bike.modelSlug === "athena" ? "/media/fleet/athena/catalog-v20261117.webp" : `/media/fleet/${bike.modelSlug}/catalog.webp`,
       imageAlt: bike.modelSlug === "edpower" ? "Red Wedison EdPower motorcycle" : bike.displayName,
       minimumAge: minRiderAge[bike.modelSlug], ...profiles[bike.modelSlug],
     };
