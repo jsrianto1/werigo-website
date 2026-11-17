@@ -1,0 +1,442 @@
+{
+  "date": "2026-11-17",
+  "version": "v20261117",
+  "source_master_dimensions": [
+    3840,
+    3320
+  ],
+  "method": "Resize approved 3840x3320 transparent masters only; preserve aspect ratio with contain, alpha and safe margins. No new generation or recolouring.",
+  "master_checksums": {
+    "green": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5",
+    "white": "8007e8296c672c3f88f794b2f7a34fe2cc8ccbe3913ffb25851098966c88bd77",
+    "black": "e271a9bb04608673d0bed86653f81d26c1908cc54e77da224c7482722c1598f8",
+    "pink": "e0608c66ea25db87f84bd8c934e53b5284c825ea92fe3fdc8f22cc3ec231b29d",
+    "yellow": "7b9407dba268fb03c55154e83acc556bfdc422f370b5c888e15be06af66f340a"
+  },
+  "derivatives": [
+    {
+      "path": "public/media/fleet/athena/catalog.webp",
+      "color": "green",
+      "width": 760,
+      "height": 639,
+      "bytes": 92782,
+      "sha256": "b254360be813ec4052d617bfe66afb131790ef8991f4e361eb5bc87fd974e227",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/catalog-clean.webp",
+      "color": "green",
+      "width": 760,
+      "height": 639,
+      "bytes": 92782,
+      "sha256": "b254360be813ec4052d617bfe66afb131790ef8991f4e361eb5bc87fd974e227",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/catalog-v20261117.webp",
+      "color": "green",
+      "width": 1520,
+      "height": 1278,
+      "bytes": 229988,
+      "sha256": "7a90f4ac452496da1cd1b8b6e29a074ef3def1f9f34c9c634c77520589b2189d",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/cutout.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/cutout-clean.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/cutout-v20261117.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/cutout-green.webp",
+      "color": "green",
+      "width": 1380,
+      "height": 1380,
+      "bytes": 212270,
+      "sha256": "d15bcb761387520a62de34af702bc494d0559c3b3ca3fb1208b68faaf22cc0a3",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/cutout-green-clean.webp",
+      "color": "green",
+      "width": 1380,
+      "height": 1380,
+      "bytes": 212270,
+      "sha256": "d15bcb761387520a62de34af702bc494d0559c3b3ca3fb1208b68faaf22cc0a3",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/cutout-green-v20261117.webp",
+      "color": "green",
+      "width": 1380,
+      "height": 1380,
+      "bytes": 212270,
+      "sha256": "d15bcb761387520a62de34af702bc494d0559c3b3ca3fb1208b68faaf22cc0a3",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/main.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/main-clean.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/main-v20261117.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/athena.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/athena-original.webp",
+      "color": "green",
+      "width": 1101,
+      "height": 952,
+      "bytes": 163892,
+      "sha256": "0ec92102720a4f0ce49c487b99e51afd1c02a808500fa3b13872abe4a35f2096",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/athena-clean.png",
+      "color": "green",
+      "width": 1349,
+      "height": 1166,
+      "bytes": 1583936,
+      "sha256": "45edca1f67653f0591912aa67171a48888fbd480e5ec797eabd5806de67eb133",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/saga/bikes/athena.webp",
+      "color": "green",
+      "width": 900,
+      "height": 758,
+      "bytes": 118684,
+      "sha256": "8585810118f2d05707c5b67a3859cea95b3cc668f682401f1678e2c46baea29c",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/saga/bikes/athena-clean.webp",
+      "color": "green",
+      "width": 900,
+      "height": 758,
+      "bytes": 118684,
+      "sha256": "8585810118f2d05707c5b67a3859cea95b3cc668f682401f1678e2c46baea29c",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/saga/bikes/athena-v20261117.webp",
+      "color": "green",
+      "width": 900,
+      "height": 758,
+      "bytes": 118684,
+      "sha256": "8585810118f2d05707c5b67a3859cea95b3cc668f682401f1678e2c46baea29c",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-green-glossy.webp",
+      "color": "green",
+      "width": 760,
+      "height": 639,
+      "bytes": 92782,
+      "sha256": "b254360be813ec4052d617bfe66afb131790ef8991f4e361eb5bc87fd974e227",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-green-glossy-clean.webp",
+      "color": "green",
+      "width": 760,
+      "height": 639,
+      "bytes": 92782,
+      "sha256": "b254360be813ec4052d617bfe66afb131790ef8991f4e361eb5bc87fd974e227",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-green-glossy-v20261117.webp",
+      "color": "green",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 253218,
+      "sha256": "d1c29cfcbfc213d9e0b7b5aac04ef508c1dc63680e8ea9037bedfc0cf454bf2d",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-white-glossy.webp",
+      "color": "white",
+      "width": 1100,
+      "height": 924,
+      "bytes": 152202,
+      "sha256": "d4864b72330e7a1bbbf84f3c93a532348f353fb3da0e21f5423482d07a80c07d",
+      "master_sha256": "8007e8296c672c3f88f794b2f7a34fe2cc8ccbe3913ffb25851098966c88bd77"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-white-glossy-clean.webp",
+      "color": "white",
+      "width": 1100,
+      "height": 924,
+      "bytes": 152202,
+      "sha256": "d4864b72330e7a1bbbf84f3c93a532348f353fb3da0e21f5423482d07a80c07d",
+      "master_sha256": "8007e8296c672c3f88f794b2f7a34fe2cc8ccbe3913ffb25851098966c88bd77"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-white-glossy-v20261117.webp",
+      "color": "white",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 243248,
+      "sha256": "9a297b4a57efa1579a00553b68bb68a18d22dcd14148c61fc8ae7840b3717cbf",
+      "master_sha256": "8007e8296c672c3f88f794b2f7a34fe2cc8ccbe3913ffb25851098966c88bd77"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-black-glossy.webp",
+      "color": "black",
+      "width": 1100,
+      "height": 924,
+      "bytes": 156082,
+      "sha256": "e6d6e036e82ab14b8ad5099af9c56d82abd9fa5ddef29ef67d45841dd6af1bce",
+      "master_sha256": "e271a9bb04608673d0bed86653f81d26c1908cc54e77da224c7482722c1598f8"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-black-glossy-clean.webp",
+      "color": "black",
+      "width": 1100,
+      "height": 924,
+      "bytes": 156082,
+      "sha256": "e6d6e036e82ab14b8ad5099af9c56d82abd9fa5ddef29ef67d45841dd6af1bce",
+      "master_sha256": "e271a9bb04608673d0bed86653f81d26c1908cc54e77da224c7482722c1598f8"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-black-glossy-v20261117.webp",
+      "color": "black",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 251534,
+      "sha256": "6b604ce853098982b1c6ccc4fea1e5c2d0e3cf3dd2a8692b23da4df976d82e1f",
+      "master_sha256": "e271a9bb04608673d0bed86653f81d26c1908cc54e77da224c7482722c1598f8"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-pink-glossy.webp",
+      "color": "pink",
+      "width": 1100,
+      "height": 924,
+      "bytes": 169954,
+      "sha256": "726a1b04130d4b4e001e4056301c64fb9d07385c380a05e722911a892b6cf33d",
+      "master_sha256": "e0608c66ea25db87f84bd8c934e53b5284c825ea92fe3fdc8f22cc3ec231b29d"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-pink-glossy-clean.webp",
+      "color": "pink",
+      "width": 1100,
+      "height": 924,
+      "bytes": 169954,
+      "sha256": "726a1b04130d4b4e001e4056301c64fb9d07385c380a05e722911a892b6cf33d",
+      "master_sha256": "e0608c66ea25db87f84bd8c934e53b5284c825ea92fe3fdc8f22cc3ec231b29d"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-pink-glossy-v20261117.webp",
+      "color": "pink",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 274640,
+      "sha256": "2f36319c9ee13522f76ff36044491af7ceffd8135fdd996129522a78ac8217c6",
+      "master_sha256": "e0608c66ea25db87f84bd8c934e53b5284c825ea92fe3fdc8f22cc3ec231b29d"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-yellow-glossy.webp",
+      "color": "yellow",
+      "width": 1100,
+      "height": 924,
+      "bytes": 170206,
+      "sha256": "1984e533e0b7ac7647159f6b829387610d717f5aa60114d8cf282b01491acdca",
+      "master_sha256": "7b9407dba268fb03c55154e83acc556bfdc422f370b5c888e15be06af66f340a"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-yellow-glossy-clean.webp",
+      "color": "yellow",
+      "width": 1100,
+      "height": 924,
+      "bytes": 170206,
+      "sha256": "1984e533e0b7ac7647159f6b829387610d717f5aa60114d8cf282b01491acdca",
+      "master_sha256": "7b9407dba268fb03c55154e83acc556bfdc422f370b5c888e15be06af66f340a"
+    },
+    {
+      "path": "public/ops-assets/fleet/colors/athena-yellow-glossy-v20261117.webp",
+      "color": "yellow",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 274462,
+      "sha256": "332eae07261b6488e278f8142ee40eae555cbbdbbb7d936cb8e16dfe63f96582",
+      "master_sha256": "7b9407dba268fb03c55154e83acc556bfdc422f370b5c888e15be06af66f340a"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/green.webp",
+      "color": "green",
+      "width": 1600,
+      "height": 588,
+      "bytes": 83480,
+      "sha256": "9ce007b521486ab08a3a6580adc9113ef274a214227ffd3ceb2ff90515ce8dbb",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/green-clean.webp",
+      "color": "green",
+      "width": 1600,
+      "height": 588,
+      "bytes": 83480,
+      "sha256": "9ce007b521486ab08a3a6580adc9113ef274a214227ffd3ceb2ff90515ce8dbb",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/green-v20261117.webp",
+      "color": "green",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 253218,
+      "sha256": "d1c29cfcbfc213d9e0b7b5aac04ef508c1dc63680e8ea9037bedfc0cf454bf2d",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/green-thumb.webp",
+      "color": "green",
+      "width": 320,
+      "height": 118,
+      "bytes": 8980,
+      "sha256": "f40b6cf337461b349bc8420b7c8cdc6c422f343efc364b99a3cf06ebab8b736f",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/green-thumb-clean.webp",
+      "color": "green",
+      "width": 320,
+      "height": 118,
+      "bytes": 8980,
+      "sha256": "f40b6cf337461b349bc8420b7c8cdc6c422f343efc364b99a3cf06ebab8b736f",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/green-thumb-v20261117.webp",
+      "color": "green",
+      "width": 320,
+      "height": 277,
+      "bytes": 28386,
+      "sha256": "a5d6dac9cddd5d253e4b00a9dedf9b9c92b172cd704fe61b755367fcc8e43126",
+      "master_sha256": "56ad9b3b64dd6607132a0f4095613f6c1e2d581cdfb993555defe617655499c5"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/white-v20261117.webp",
+      "color": "white",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 243248,
+      "sha256": "9a297b4a57efa1579a00553b68bb68a18d22dcd14148c61fc8ae7840b3717cbf",
+      "master_sha256": "8007e8296c672c3f88f794b2f7a34fe2cc8ccbe3913ffb25851098966c88bd77"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/white-thumb-v20261117.webp",
+      "color": "white",
+      "width": 320,
+      "height": 277,
+      "bytes": 27280,
+      "sha256": "80f8cdc5880216efeb12aa3ce8adfee3de0a785659a031a87dbfc4412c978c99",
+      "master_sha256": "8007e8296c672c3f88f794b2f7a34fe2cc8ccbe3913ffb25851098966c88bd77"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/black-v20261117.webp",
+      "color": "black",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 251534,
+      "sha256": "6b604ce853098982b1c6ccc4fea1e5c2d0e3cf3dd2a8692b23da4df976d82e1f",
+      "master_sha256": "e271a9bb04608673d0bed86653f81d26c1908cc54e77da224c7482722c1598f8"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/black-thumb-v20261117.webp",
+      "color": "black",
+      "width": 320,
+      "height": 277,
+      "bytes": 27130,
+      "sha256": "3baa1c06202f02ef86ca62a2e2b6d0a84f2ae5973615e54dd41811678472601b",
+      "master_sha256": "e271a9bb04608673d0bed86653f81d26c1908cc54e77da224c7482722c1598f8"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/pink-v20261117.webp",
+      "color": "pink",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 274640,
+      "sha256": "2f36319c9ee13522f76ff36044491af7ceffd8135fdd996129522a78ac8217c6",
+      "master_sha256": "e0608c66ea25db87f84bd8c934e53b5284c825ea92fe3fdc8f22cc3ec231b29d"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/pink-thumb-v20261117.webp",
+      "color": "pink",
+      "width": 320,
+      "height": 277,
+      "bytes": 30046,
+      "sha256": "f6af0f5df98d9ce267f37a20b7df14aca3aa50399191fecd8e68161e471684ad",
+      "master_sha256": "e0608c66ea25db87f84bd8c934e53b5284c825ea92fe3fdc8f22cc3ec231b29d"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/yellow-v20261117.webp",
+      "color": "yellow",
+      "width": 1600,
+      "height": 1383,
+      "bytes": 274462,
+      "sha256": "332eae07261b6488e278f8142ee40eae555cbbdbbb7d936cb8e16dfe63f96582",
+      "master_sha256": "7b9407dba268fb03c55154e83acc556bfdc422f370b5c888e15be06af66f340a"
+    },
+    {
+      "path": "public/media/fleet/athena/colors/yellow-thumb-v20261117.webp",
+      "color": "yellow",
+      "width": 320,
+      "height": 277,
+      "bytes": 30394,
+      "sha256": "4e78a796b8572ee938847d1e9f1eb116e56d2f6096a03f398123abdcd8482438",
+      "master_sha256": "7b9407dba268fb03c55154e83acc556bfdc422f370b5c888e15be06af66f340a"
+    }
+  ],
+  "protected_scope": "No changes to opening video/poster, story panels, other motorcycle models, stock, pricing, booking/payment code or env."
+}

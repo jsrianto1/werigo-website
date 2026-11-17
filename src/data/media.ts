@@ -64,7 +64,7 @@ export const media = {
   "fleet-victory-main": { kind: "image", src: "/media/fleet/victory/catalog.webp", alt: "Wedison Victory electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 720, available: true },
   "fleet-victory-side": { kind: "image", src: "/media/fleet/victory/side.jpg", alt: "Side view of the Wedison Victory", width: 1600, height: 1200, available: false },
   "fleet-victory-detail": { kind: "image", src: "/media/fleet/victory/detail.jpg", alt: "Detail view of the Wedison Victory", width: 1600, height: 1200, available: false },
-  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/catalog-clean.webp", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 639, available: true },
+  "fleet-athena-main": { kind: "image", src: "/media/fleet/athena/catalog-v20261117.webp", alt: "Wedison Athena electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 639, available: true },
   "fleet-athena-side": { kind: "image", src: "/media/fleet/athena/side.jpg", alt: "Side view of the Wedison Athena", width: 1600, height: 1200, available: false },
   "fleet-athena-detail": { kind: "image", src: "/media/fleet/athena/detail.jpg", alt: "Detail view of the Wedison Athena", width: 1600, height: 1200, available: false },
   "fleet-edpower-main": { kind: "image", src: "/media/fleet/edpower/catalog.webp", alt: "Wedison EdPower electric motorcycle available for rent through Werigo in Bali, main product photo", width: 760, height: 639, available: true },
@@ -157,15 +157,44 @@ export const modelColors: Record<string, ColorVariant[]> = {
   athena: [
     {
       name: "Green",
-      image: "/media/fleet/athena/colors/green-clean.webp",
-      thumb: "/media/fleet/athena/colors/green-thumb-clean.webp",
-      alt: "Green Wedison Athena electric motorcycle available for rent through Werigo in Bali",
-      width: 1920,
-      height: 706,
+      image: "/media/fleet/athena/colors/green-v20261117.webp",
+      thumb: "/media/fleet/athena/colors/green-thumb-v20261117.webp",
+      alt: "Green Wedison Athena electric motorcycle with WEDISON front plate and body emblem",
+      width: 1600,
+      height: 1383,
     },
-    // Pink and Yellow are referenced on the official Athena page but
-    // have no downloadable official product images yet — do not add
-    // until official assets exist.
+    {
+      name: "White",
+      image: "/media/fleet/athena/colors/white-v20261117.webp",
+      thumb: "/media/fleet/athena/colors/white-thumb-v20261117.webp",
+      alt: "White Wedison Athena electric motorcycle with WEDISON front plate and body emblem",
+      width: 1600,
+      height: 1383,
+    },
+    {
+      name: "Black",
+      image: "/media/fleet/athena/colors/black-v20261117.webp",
+      thumb: "/media/fleet/athena/colors/black-thumb-v20261117.webp",
+      alt: "Black Wedison Athena electric motorcycle with WEDISON front plate and body emblem",
+      width: 1600,
+      height: 1383,
+    },
+    {
+      name: "Pink",
+      image: "/media/fleet/athena/colors/pink-v20261117.webp",
+      thumb: "/media/fleet/athena/colors/pink-thumb-v20261117.webp",
+      alt: "Pink Wedison Athena electric motorcycle with WEDISON front plate and body emblem",
+      width: 1600,
+      height: 1383,
+    },
+    {
+      name: "Yellow",
+      image: "/media/fleet/athena/colors/yellow-v20261117.webp",
+      thumb: "/media/fleet/athena/colors/yellow-thumb-v20261117.webp",
+      alt: "Yellow Wedison Athena electric motorcycle with WEDISON front plate and body emblem",
+      width: 1600,
+      height: 1383,
+    },
   ],
   edpower: [
     // Colour naming awaiting official confirmation.
