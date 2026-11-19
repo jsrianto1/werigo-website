@@ -186,7 +186,7 @@ export function WelcomeOffer() {
 
             {/* Offer panel */}
             <div className="relative px-5 py-5 text-center md:px-10 md:py-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c14a05]"><T>{"Your Bali welcome offer"}</T></p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#00594f]"><T>{"Your Bali welcome offer"}</T></p>
               <h2 id="welcome-offer-title" className="mt-2 font-display text-2xl font-extrabold text-primary-strong md:mt-4 md:text-[34px]">
                 <T>{"The island is calling."}</T>
               </h2>
@@ -209,7 +209,7 @@ export function WelcomeOffer() {
               <Link
                 href={registerHref}
                 onClick={() => setModal(false)}
-                className="mt-4 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#c14a05] px-8 text-base font-semibold text-white transition-colors hover:bg-[#a83f04] md:mt-6 md:min-h-14"
+                className="mt-4 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#00594f] px-8 text-base font-semibold text-white transition-colors hover:bg-[#043e38] md:mt-6 md:min-h-14"
               >
                 <T>{"Create account & save"}</T> {valueLabel}
                 <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
