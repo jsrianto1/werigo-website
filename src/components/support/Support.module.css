@@ -66,6 +66,7 @@
 .widget :is(button,a,summary):focus-visible { outline:2px solid #00594f; outline-offset:3px; }
 @media(max-width:767px) {
   .launcher { width:70px; height:96px; right:16px; bottom:calc(92px + env(safe-area-inset-bottom)); }
+  .widget[data-booking-visible="true"] .launcher { display:none; }
   .widget[data-checkout="true"] .launcher { bottom:calc(170px + env(safe-area-inset-bottom)); }
   .panel { right:12px; bottom:max(12px,env(safe-area-inset-bottom)); width:calc(100% - 24px); max-width:390px; max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); border-radius:24px; }
   .greeting { min-height:142px; }
