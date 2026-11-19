@@ -1,0 +1,14 @@
+/* Shared brand identity; operational warning/error/status colours are retained. */
+.werigo-ops,.website-workspace {
+  --teal:#00594f; --deep:#061e20; --mint:#e9efeb; --pale:#faf6ee; --ink:#061e20; --muted:#47665f; --line:#ccdad4;
+  background:#faf6ee; color:#061e20; font-family:var(--font-geist),var(--font-inter),sans-serif;
+}
+.werigo-ops :is(input,select,textarea,button) { font-family:inherit; }
+.werigo-ops .header-brand>img,.werigo-ops .island-workspace .header-brand>img { width:136px; height:40px; max-width:100%; object-fit:contain; }
+.werigo-ops .login-top>img { width:160px; height:auto; object-fit:contain; }
+.werigo-ops .evidence-brand>img { width:160px; height:auto; object-fit:contain; }
+.website-workspace .workspace-context>a,.werigo-ops .workspace-access-note a { color:#00594f; }
+.werigo-ops .workspace-login-options button[aria-pressed=true] { background:#00594f; color:#fff; border-color:#00594f; }
+@media(max-width:680px) {
+  .werigo-ops .header-brand>img,.werigo-ops .island-workspace .header-brand>img { width:120px; height:36px; }
+}

@@ -4,13 +4,13 @@
   --app-dock-bottom:calc(16px + env(safe-area-inset-bottom));
   --app-action-bottom:calc(var(--app-dock-bottom) + var(--app-dock-height) + 12px);
   --font-werigo:var(--font-manrope);
-  --wg-brand:#007565; --wg-brand-strong:#00594f; --wg-deep:#103c3b;
-  --wg-mint:#b7f5d9; --wg-hero:#e4f2e9; --wg-route:#9dddc3;
-  --app-background:#f5f1eb; --app-card:#fff; --app-floating:#fffffff5;
-  --ink:#102e2d; --ink-soft:#516765; --ink-faint:#526963; --ink-inverse:#fff;
-  --line:#d5ddd5; --line-strong:#afc3b7; --surface-sunken:#eaece2;
+  --wg-brand:#00594f; --wg-brand-strong:#043e38; --wg-deep:#061e20;
+  --wg-mint:#89afa7; --wg-hero:#e9efeb; --wg-route:#89afa7;
+  --app-background:#faf6ee; --app-card:#fff; --app-floating:#fffffff5;
+  --ink:#061e20; --ink-soft:#47665f; --ink-faint:#47665f; --ink-inverse:#fff;
+  --line:#ccdad4; --line-strong:#89afa7; --surface-sunken:#e9efeb;
   --brand-primary:var(--wg-brand); --brand-primary-strong:var(--wg-brand-strong);
-  --brand-primary-soft:#e4f2e9; --brand-primary-faint:#eeeee5;
+  --brand-primary-soft:#e9efeb; --brand-primary-faint:#e9efeb;
   --brand-accent:var(--wg-brand); --brand-accent-strong:var(--wg-brand-strong);
   --ok:#177a4c; --ok-soft:#e5f3ec; --danger:#a52f24; --danger-soft:#fbeae8;
   --wr-charcoal:var(--ink); --wr-teal:var(--wg-brand); --wr-teal-dark:var(--wg-brand-strong);
@@ -22,21 +22,21 @@
   padding-bottom:calc(var(--app-dock-height) + 58px + env(safe-area-inset-bottom));
 }
 .werigo-app-root .ride-app[data-theme="dark"] {
-  --wg-brand:#b7f5d9; --wg-brand-strong:#d3fae7; --wg-deep:#103c3b;
+  --wg-brand:#89afa7; --wg-brand-strong:#89afa7; --wg-deep:#061e20;
   --wg-mint:#224d45; --wg-hero:#174640; --wg-route:#79bea5;
-  --app-background:#10302f; --app-card:#173e3a; --app-floating:#173e3af5;
-  --ink:#f5f1eb; --ink-soft:#c0d8cd; --ink-faint:#b0c9be; --ink-inverse:#103c3b;
+  --app-background:#10302f; --app-card:#0c2d2e; --app-floating:#0c2d2ef5;
+  --ink:#faf6ee; --ink-soft:#c0d8cd; --ink-faint:#b0c9be; --ink-inverse:#061e20;
   --line:#39605a; --line-strong:#63877c; --surface-sunken:#224940;
   --brand-primary-soft:#20483e; --brand-primary-faint:#183d36; color-scheme:dark;
-  --ok:#b7f5d9; --ok-soft:#20483e; --danger:#ffc5b9; --danger-soft:#512c29;
+  --ok:#89afa7; --ok-soft:#20483e; --danger:#ffc5b9; --danger-soft:#512c29;
 }
 .werigo-app-root .ride-app :is(h1,h2,h3,.wg-charge-feature strong) { font-family:var(--font-brand-heading); font-weight:600; letter-spacing:-.035em; }
 .werigo-app-root .ride-app .brand-lockup { gap:6px; align-items:flex-start; color:var(--ink); }
 .werigo-app-root .ride-app .brand-wordmark { color:var(--ink); font-size:31px; }
-.werigo-app-root .ride-app[data-theme="dark"] .brand-wordmark > span { color:#b7f5d9; }
+.werigo-app-root .ride-app[data-theme="dark"] .brand-wordmark > span { color:#89afa7; }
 .werigo-app-root .ride-app .brand-endorsement { gap:5px; color:var(--ink-soft); }
 .werigo-app-root .ride-app .brand-endorsement > img,.werigo-app-root .ride-app[data-theme="dark"] .brand-endorsement > img { width:82px; max-height:none; padding:0; background:transparent; }
-.werigo-app-root .ride-app[data-theme="dark"] .brand-logo-art,.werigo-app-root .ride-app .wg-auth-story .brand-logo-art { filter:brightness(0) invert(1); }
+
 .werigo-app-root .ride-app[data-theme="dark"] .brand-wedison-colour,.werigo-app-root .ride-app .wg-auth-story .brand-wedison-colour { display:none; }
 .werigo-app-root .ride-app[data-theme="dark"] .brand-wedison-white,.werigo-app-root .ride-app .wg-auth-story .brand-wedison-white { display:block; }
 .werigo-app-root .ride-app .ra-content { max-width:1180px; padding:30px 28px 24px; }
@@ -45,20 +45,20 @@
 .werigo-app-root .ride-app .wg-home-grid { gap:26px; }
 .werigo-app-root .ride-app .wg-ride-hero {
   display:flex; flex-direction:column; min-height:650px; padding:30px; border-radius:28px;
-  background:var(--electric-gradient); color:#f5f1eb;
+  background:var(--electric-gradient); color:#faf6ee;
 }
-.werigo-app-root .ride-app .wg-ride-hero > .wg-overline { color:#b7f5d9; font-size:9px; margin-bottom:22px; }
-.werigo-app-root .ride-app .wg-ride-hero h1 { color:#f5f1eb; font-size:clamp(46px,5vw,62px); line-height:1.02; letter-spacing:-.04em; font-weight:650; max-width:490px; }
-.werigo-app-root .ride-app .wg-ride-hero h1 > span { color:#b7f5d9; }
+.werigo-app-root .ride-app .wg-ride-hero > .wg-overline { color:#89afa7; font-size:9px; margin-bottom:22px; }
+.werigo-app-root .ride-app .wg-ride-hero h1 { color:#faf6ee; font-size:clamp(46px,5vw,62px); line-height:1.02; letter-spacing:-.04em; font-weight:650; max-width:490px; }
+.werigo-app-root .ride-app .wg-ride-hero h1 > span { color:#89afa7; }
 .werigo-app-root .ride-app .wg-hero-description { color:#dbefe3; max-width:320px; font-size:13px; line-height:1.8; margin-top:20px; }
-.werigo-app-root .ride-app .wg-hero-route { inset:0; width:100%; height:100%; color:#b7f5d9; stroke:currentColor; stroke-width:1; opacity:.35; }
+.werigo-app-root .ride-app .wg-hero-route { inset:0; width:100%; height:100%; color:#89afa7; stroke:currentColor; stroke-width:1; opacity:.35; }
 .werigo-app-root .ride-app .wg-hero-route circle { fill:currentColor; }
 .werigo-app-root .ride-app .wg-hero-bike { position:relative; inset:auto; width:100%; height:280px; margin:15px 0 0; flex-shrink:0; isolation:isolate; }
 .werigo-app-root .ride-app .wg-hero-bike img { position:relative; width:100%; height:100%; object-fit:contain; z-index:1; filter:drop-shadow(0 18px 12px #062e3040); }
-.werigo-app-root .ride-app .wg-hero-model { position:absolute; left:0; right:0; top:5px; text-align:center; font-family:var(--font-brand-display),sans-serif; font-size:clamp(45px,6vw,77px); line-height:1; font-weight:700; letter-spacing:-.05em; color:#b7f5d928; }
-.werigo-app-root .ride-app .wg-bike-caption { position:static; color:#d6efdf; margin:16px 0 20px; font-size:8px; }
-.werigo-app-root .ride-app .wg-bike-caption i { background:#b7f5d9; }
-.werigo-app-root .ride-app .wg-rent-button,.werigo-app-root .ride-app[data-theme="dark"] .wg-rent-button { position:static; width:100%; margin-top:auto; background:#b7f5d9; color:#103c3b; min-height:55px; border-radius:12px; padding:15px 20px; font-size:14px; font-weight:700; }
+.werigo-app-root .ride-app .wg-hero-model { position:absolute; left:0; right:0; top:5px; text-align:center; font-family:var(--font-brand-display),sans-serif; font-size:clamp(45px,6vw,77px); line-height:1; font-weight:700; letter-spacing:-.05em; color:#89afa728; }
+.werigo-app-root .ride-app .wg-bike-caption { position:static; color:#e9efeb; margin:16px 0 20px; font-size:8px; }
+.werigo-app-root .ride-app .wg-bike-caption i { background:#89afa7; }
+.werigo-app-root .ride-app .wg-rent-button,.werigo-app-root .ride-app[data-theme="dark"] .wg-rent-button { position:static; width:100%; margin-top:auto; background:#89afa7; color:#061e20; min-height:55px; border-radius:12px; padding:15px 20px; font-size:14px; font-weight:700; }
 .werigo-app-root .ride-app .wg-rent-button:hover,.werigo-app-root .ride-app[data-theme="dark"] .wg-rent-button:hover { background:#d6fbea; }
 .werigo-app-root .ride-app .wg-home-side { gap:25px; }
 .werigo-app-root .ride-app .wg-section-heading h2 { font-size:31px; }
@@ -67,23 +67,23 @@
 .werigo-app-root .ride-app .wg-club-ticket { background:var(--app-card); border-radius:24px; margin-top:26px; }
 .werigo-app-root .ride-app .wg-club-ticket strong { font-family:var(--font-brand-heading); font-weight:600; }
 .werigo-app-root .ride-app .wg-ticket-wing { display:none; }
-.werigo-app-root .ride-app .ra-nav { border:1px solid var(--line); background:var(--app-floating); box-shadow:0 8px 30px #103c3b14; border-radius:25px; left:50%; right:auto; transform:translateX(-50%); margin:0; width:calc(100% - 32px); min-width:0; max-width:530px; bottom:calc(16px + env(safe-area-inset-bottom)); padding:7px; }
+.werigo-app-root .ride-app .ra-nav { border:1px solid var(--line); background:var(--app-floating); box-shadow:0 8px 30px #061e2014; border-radius:25px; left:50%; right:auto; transform:translateX(-50%); margin:0; width:calc(100% - 32px); min-width:0; max-width:530px; bottom:calc(16px + env(safe-area-inset-bottom)); padding:7px; }
 .werigo-app-root .ride-app .ra-nav > div { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); width:100%; max-width:none; margin:0; padding:0; gap:4px; }
 .werigo-app-root .ride-app .ra-nav a,.werigo-app-root .ride-app .ra-nav a.is-active { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; min-width:0; min-height:58px; margin:0; padding:7px 2px; gap:5px; color:var(--ink-soft); font-size:10px; font-weight:600; line-height:1; border-radius:18px; text-align:center; }
 .werigo-app-root .ride-app .ra-nav a > svg { display:block; width:23px; height:23px; flex:none; margin:0; }
 .werigo-app-root .ride-app .ra-nav a > span { display:block; line-height:14px; white-space:nowrap; }
-.werigo-app-root .ride-app .ra-nav a.is-active { color:#00594f; background:#dff3e7; font-weight:750; }
+.werigo-app-root .ride-app .ra-nav a.is-active { color:#043e38; background:#dff3e7; font-weight:750; }
 .werigo-app-root .ride-app .ra-nav a:hover { color:var(--wg-brand); background:var(--surface-sunken); }
-.werigo-app-root .ride-app .ra-nav a.is-active:hover { color:#00594f; background:#ccebdc; }
+.werigo-app-root .ride-app .ra-nav a.is-active:hover { color:#043e38; background:#ccebdc; }
 .werigo-app-root .ride-app .ra-nav a:focus-visible { outline-color:var(--wg-brand); }
-.werigo-app-root .ride-app .wg-auth-story { background:var(--electric-gradient); color:#f5f1eb; border-radius:28px; }
-.werigo-app-root .ride-app .wg-auth-story .brand-lockup,.werigo-app-root .ride-app .wg-auth-story .brand-wordmark { color:#f5f1eb; }
-.werigo-app-root .ride-app .wg-auth-story .brand-endorsement { color:#d6efdf; }
-.werigo-app-root .ride-app .wg-auth-story .brand-wordmark > span { color:#b7f5d9; }
-.werigo-app-root .ride-app .wg-auth-story h1 { color:#f5f1eb; font-family:var(--font-brand-heading); }
-.werigo-app-root .ride-app .wg-auth-story h1 > span { color:#b7f5d9; }
-.werigo-app-root .ride-app .wg-auth-story .wr-auth-intro { color:#d6efdf; }
-.werigo-app-root .ride-app .wg-auth-story .wg-overline { color:#b7f5d9; }
+.werigo-app-root .ride-app .wg-auth-story { background:var(--electric-gradient); color:#faf6ee; border-radius:28px; }
+.werigo-app-root .ride-app .wg-auth-story .brand-lockup,.werigo-app-root .ride-app .wg-auth-story .brand-wordmark { color:#faf6ee; }
+.werigo-app-root .ride-app .wg-auth-story .brand-endorsement { color:#e9efeb; }
+.werigo-app-root .ride-app .wg-auth-story .brand-wordmark > span { color:#89afa7; }
+.werigo-app-root .ride-app .wg-auth-story h1 { color:#faf6ee; font-family:var(--font-brand-heading); }
+.werigo-app-root .ride-app .wg-auth-story h1 > span { color:#89afa7; }
+.werigo-app-root .ride-app .wg-auth-story .wr-auth-intro { color:#e9efeb; }
+.werigo-app-root .ride-app .wg-auth-story .wg-overline { color:#89afa7; }
 .werigo-app-root .ride-app .wg-auth-form input:not([type="checkbox"]) { background-color:var(--app-card); color:var(--ink); -webkit-text-fill-color:var(--ink); }
 .werigo-app-root .ride-app .wg-auth-form input:autofill { box-shadow:0 0 0 1000px var(--app-card) inset; -webkit-text-fill-color:var(--ink); caret-color:var(--ink); }
 .werigo-app-root .ride-app :is(input,select,textarea) { min-width:0; font-family:var(--font-manrope),sans-serif; }
@@ -135,7 +135,7 @@
   .werigo-app-root .ride-app :is(a,button,img,svg) { animation:none!important; transition:none!important; }
 }
 
-.werigo-app-root .ride-app .wg-auth-perks > span { color:#d6efdf; }
+.werigo-app-root .ride-app .wg-auth-perks > span { color:#e9efeb; }
 .werigo-app-root .ride-app .wg-bike-check { background:var(--app-card); border-color:var(--line-strong); }
 
 /* Keep legacy page rules from assigning faint text to labels and confirmation panels. */
@@ -157,8 +157,8 @@
 
 .werigo-app-root .ride-app :is(.wg-partner-intro a,.wg-wellness-intro a,.wg-hop-card>a,.wg-guide-note>a,.wr-activity-actions a) { color:var(--wg-brand); }
 .werigo-app-root .ride-app .wg-guide-charge { background:var(--app-card); color:var(--ink); }
-.werigo-app-root .ride-app .ra-points { background:var(--electric-gradient); color:#f5f1eb; border-color:#4d8578; }
-.werigo-app-root .ride-app .ra-points > span { color:#b7f5d9; }
+.werigo-app-root .ride-app .ra-points { background:var(--electric-gradient); color:#faf6ee; border-color:#4d8578; }
+.werigo-app-root .ride-app .ra-points > span { color:#89afa7; }
 .werigo-app-root .ride-app .ra-points p { color:#e0f2e8; }
 
 .werigo-app-root .ride-app .wr-step-top > span:last-child { color:var(--ink-soft); opacity:1; }
@@ -190,7 +190,7 @@
 .werigo-app-root .ride-app .wr-checkout:has(.wr-app-total) { padding-bottom:calc(var(--wr-total-height,88px) + 24px); }
 .werigo-app-root .ride-app .wr-checkout .wr-app-total {
   bottom:var(--app-action-bottom); background:var(--app-card); color:var(--ink);
-  border-color:var(--line); padding:14px 20px; box-shadow:0 -6px 24px #103c3b0d;
+  border-color:var(--line); padding:14px 20px; box-shadow:0 -6px 24px #061e200d;
 }
 .werigo-app-root .ride-app .wr-app-total > div { max-width:720px; margin-inline:auto; align-items:center; gap:16px; }
 .werigo-app-root .ride-app .wr-checkout-total-copy { color:var(--ink-soft); flex:1; overflow-wrap:anywhere; line-height:1.5; }

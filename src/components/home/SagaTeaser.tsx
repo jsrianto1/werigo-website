@@ -19,21 +19,21 @@ export function SagaTeaser() {
 
   return (
     <Section labelledBy="saga-teaser-heading" id="werigo-saga">
-      <div className="relative overflow-hidden rounded-[24px] bg-[#0b100f] text-ink-inverse">
+      <div className="relative overflow-hidden rounded-[24px] bg-[#061e20] text-ink-inverse">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_70%_at_85%_40%,rgba(46,224,176,0.2),transparent_70%)]"
         />
         <div className="relative grid items-center gap-10 p-6 sm:p-10 lg:grid-cols-[1fr_1fr] lg:p-14">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]"><T>{"Off the road. Into the story."}</T></p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#89afa7]"><T>{"Off the road. Into the story."}</T></p>
             <h2 id="saga-teaser-heading" className="mt-3 font-display text-3xl leading-tight text-white md:text-4xl"><T>{"Take a break and read"}</T>{" "}{saga.title}
             </h2>
             <p className="mt-4 max-w-lg leading-relaxed text-white/75"><T>{"A delivery rider in Denpasar, a bike that changes everything and a System only he can see. Free to read here in English and Indonesian, whenever you feel like taking a break."}</T>{" "}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href={`/saga/${episodes[0].slug}`}
-                className="inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-[#2ee0b0] px-6 text-base font-semibold text-[#06201a] transition-colors hover:bg-[#5ff0c8]"
+                className="inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-[#89afa7] px-6 text-base font-semibold text-[#061e20] transition-colors hover:bg-[#faf6ee]"
               >
                 <BookOpen className="h-5 w-5" aria-hidden="true" /><T>{"Read Chapter 1"}</T>{" "}</Link>
               <Link

@@ -203,7 +203,7 @@ export function SagaComments({ episode, prompt }: Props) {
 
   const heading = status === "ready" && total > 0 ? t.commentsCount(formatCount(total, lang)) : t.comments;
   const inputCls =
-    "w-full rounded-[10px] border border-white/15 bg-white/[0.06] px-3 text-base text-white placeholder:text-white/40 focus:border-[#2ee0b0] focus:outline-none focus:ring-2 focus:ring-[#2ee0b0]/40";
+    "w-full rounded-[10px] border border-white/15 bg-white/[0.06] px-3 text-base text-white placeholder:text-white/40 focus:border-[#89afa7] focus:outline-none focus:ring-2 focus:ring-[#89afa7]/40";
 
   return (
     <section
@@ -213,13 +213,13 @@ export function SagaComments({ episode, prompt }: Props) {
       className="mt-12 scroll-mt-20 rounded-[18px] border border-white/10 bg-white/[0.03] p-4 sm:p-6"
     >
       <h2 id="comments-heading" className="flex items-center gap-2 font-display text-2xl text-white">
-        <MessageCircle className="h-6 w-6 text-[#2ee0b0]" aria-hidden="true" />
+        <MessageCircle className="h-6 w-6 text-[#89afa7]" aria-hidden="true" />
         {heading}
       </h2>
 
       {prompt ? (
-        <div className="mt-4 rounded-[12px] border-l-4 border-[#2ee0b0] bg-[#2ee0b0]/10 px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2ee0b0]">{t.commentPromptLabel}</p>
+        <div className="mt-4 rounded-[12px] border-l-4 border-[#89afa7] bg-[#89afa7]/10 px-4 py-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#89afa7]">{t.commentPromptLabel}</p>
           <p className="mt-1 font-display text-lg leading-snug text-white sm:text-xl">
             {lang === "id" ? prompt.id : prompt.en}
           </p>
@@ -300,7 +300,7 @@ export function SagaComments({ episode, prompt }: Props) {
           <button
             type="submit"
             disabled={sending}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] bg-[#2ee0b0] px-5 text-sm font-semibold text-[#06201a] transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] bg-[#89afa7] px-5 text-sm font-semibold text-[#061e20] transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
           >
             <Send className="h-4 w-4" aria-hidden="true" />
             {sending ? t.commentPosting : t.commentPost}
@@ -324,7 +324,7 @@ export function SagaComments({ episode, prompt }: Props) {
               <li key={c.id} className="flex gap-3">
                 <span
                   aria-hidden="true"
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#2ee0b0]/15 text-sm font-bold uppercase text-[#2ee0b0]"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#89afa7]/15 text-sm font-bold uppercase text-[#89afa7]"
                 >
                   {Array.from(c.name)[0] ?? "?"}
                 </span>

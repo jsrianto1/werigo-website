@@ -26,7 +26,7 @@ export function LangToggle({ className = "" }: { className?: string }) {
       onClick={() => setSagaLang(l)}
       aria-pressed={lang === l}
       className={`min-h-9 min-w-9 cursor-pointer rounded-full px-2.5 text-xs font-bold tracking-wider transition-colors ${
-        lang === l ? "bg-[#2ee0b0] text-[#06201a]" : "text-white/70 hover:text-white"
+        lang === l ? "bg-[#89afa7] text-[#061e20]" : "text-white/70 hover:text-white"
       }`}
     >
       {label}
@@ -238,7 +238,7 @@ export function ShareBar({ slug, path, title }: { slug: string; path: string; ti
         ) : null}
       </div>
       {toast ? (
-        <p role="status" className="mt-3 text-sm font-semibold text-[#2ee0b0]">
+        <p role="status" className="mt-3 text-sm font-semibold text-[#89afa7]">
           {toast}
         </p>
       ) : null}

@@ -20,7 +20,7 @@ export function EpisodeExtras({ models, transcript }: { models: SagaModel[]; tra
   return (
     <>
       <section aria-labelledby="ride-heading" className="mt-14">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2ee0b0]">{t.bikesReal}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#89afa7]">{t.bikesReal}</p>
         <h2 id="ride-heading" className="mt-2 font-display text-2xl text-white sm:text-3xl">
           {t.rideWhat}
         </h2>

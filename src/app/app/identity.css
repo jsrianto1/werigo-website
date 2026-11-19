@@ -1,15 +1,15 @@
 /* WERIGO — island freedom, powered by WEDISON. App scope only. */
 .ride-app {
-  --wg-brand: #006c63; --wg-brand-strong: #00574f; --wg-deep: #123b3e;
-  --wg-mint: #d9f3e9; --wg-hero: #d9f3e9; --wg-route: #91cfbb;
-  --app-background: #f5f8f5; --app-card: #fff; --app-floating: #123b3ef5;
-  --ink: #123b3e; --ink-soft: #526c6a; --ink-faint: #607773; --ink-inverse: #fff;
-  --line: #dbe5de; --line-strong: #a9bfb5; --surface-sunken: #eaf0e9;
+  --wg-brand: #00594f; --wg-brand-strong: #043e38; --wg-deep: #061e20;
+  --wg-mint: #e9efeb; --wg-hero: #e9efeb; --wg-route: #91cfbb;
+  --app-background: #faf6ee; --app-card: #fff; --app-floating: #061e20f5;
+  --ink: #061e20; --ink-soft: #47665f; --ink-faint: #47665f; --ink-inverse: #fff;
+  --line: #dbe5de; --line-strong: #89afa7; --surface-sunken: #eaf0e9;
   --surface-card: var(--app-card); --surface-page: var(--app-background);
   --brand-primary: var(--wg-brand); --brand-primary-strong: var(--wg-brand-strong);
-  --brand-primary-soft: #e0f1e9; --brand-primary-faint: #eff7f1;
+  --brand-primary-soft: #e9efeb; --brand-primary-faint: #eff7f1;
   --brand-accent: var(--wg-brand); --brand-accent-strong: var(--wg-brand-strong);
-  --brand-accent-soft: #e0f1e9; --wr-charcoal: var(--ink); --wr-teal: var(--wg-brand);
+  --brand-accent-soft: #e9efeb; --wr-charcoal: var(--ink); --wr-teal: var(--wg-brand);
   --wr-teal-dark: var(--wg-brand-strong); --wr-paper: var(--app-background);
   --wr-mist: var(--surface-sunken); --wr-border: var(--line);
   --ra-ink: var(--ink); --ra-muted: var(--ink-soft); --ra-line: var(--line); --ra-teal: var(--wg-brand);
@@ -19,11 +19,11 @@
   padding-bottom: calc(132px + env(safe-area-inset-bottom));
 }
 .ride-app[data-theme="dark"] {
-  --wg-brand: #8ce7cb; --wg-brand-strong: #b4f2dc; --wg-deep: #09282b;
+  --wg-brand: #89afa7; --wg-brand-strong: #89afa7; --wg-deep: #061e20;
   --wg-mint: #1a4240; --wg-hero: #164442; --wg-route: #37776a;
-  --app-background: #09282b; --app-card: #113438; --app-floating: #113438f5;
-  --ink: #eef6ee; --ink-soft: #b6cbc0; --ink-faint: #a8c0b3; --ink-inverse: #09282b;
-  --line: #2d4e4d; --line-strong: #57766d; --surface-sunken: #173c3d;
+  --app-background: #061e20; --app-card: #0c2d2e; --app-floating: #0c2d2ef5;
+  --ink: #eef6ee; --ink-soft: #b6cbc0; --ink-faint: #a8c0b3; --ink-inverse: #061e20;
+  --line: #2d4e4d; --line-strong: #57766d; --surface-sunken: #0c2d2e;
   --brand-primary: var(--wg-brand); --brand-primary-strong: var(--wg-brand-strong);
   --brand-primary-soft: #164442; --brand-primary-faint: #103438;
   --brand-accent: var(--wg-brand); --brand-accent-strong: var(--wg-brand-strong); --brand-accent-soft: #164442;
@@ -65,9 +65,9 @@
 .ride-app .ra-nav { width: calc(100% - 32px); min-width: 0; max-width: 530px; padding: 7px; border-radius: 24px; border: 1px solid #ffffff20; background: var(--app-floating); box-shadow: 0 12px 34px #062b2a26; bottom: calc(16px + env(safe-area-inset-bottom)); }
 .ride-app .ra-nav > div { gap: 3px; }
 .ride-app .ra-nav a,.ride-app .ra-nav a.is-active { min-height: 57px; border-radius: 18px; gap: 5px; font-size: 10px; font-weight: 450; color: #c7ded3; padding: 7px 4px; }
-.ride-app .ra-nav a.is-active { color: #123b3e; background: #b9f0da; font-weight: 650; }
+.ride-app .ra-nav a.is-active { color: #061e20; background: #b9f0da; font-weight: 650; }
 .ride-app .ra-nav a:hover { background: #ffffff15; }
-.ride-app .ra-nav a.is-active:hover { background: #d3f6e6; }
+.ride-app .ra-nav a.is-active:hover { background: #89afa7; }
 .ride-app .ra-nav svg { width: 21px; height: 21px; stroke-width: 1.8; }
 .ride-app .ra-nav a:focus-visible { outline-color: #b9f0da; outline-offset: 2px; }
 
@@ -88,10 +88,10 @@
 .ride-app .wg-hero-bike img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 15px 12px #082f2a1c); }
 .ride-app .wg-bike-caption { position: absolute; left: 30px; bottom: 100px; font-size: 8px; font-weight: 550; letter-spacing: .1em; display: flex; align-items: center; gap: 7px; }
 .ride-app .wg-bike-caption i { width: 6px; height: 6px; border-radius: 50%; background: var(--wg-brand); }
-.ride-app .wg-rent-button { position: absolute; left: 25px; right: 25px; bottom: 24px; width: calc(100% - 50px); min-height: 57px; border: 0; border-radius: 17px; padding: 16px 21px; display: flex; justify-content: space-between; align-items: center; gap: 20px; background: #123b3e; color: #fff; font-size: 16px; font-weight: 550; }
-.ride-app .wg-rent-button:hover { background: #006c63; }
-.ride-app[data-theme="dark"] .wg-rent-button { background: #b9f0da; color: #123b3e; }
-.ride-app[data-theme="dark"] .wg-rent-button:hover { background: #d3f6e6; }
+.ride-app .wg-rent-button { position: absolute; left: 25px; right: 25px; bottom: 24px; width: calc(100% - 50px); min-height: 57px; border: 0; border-radius: 17px; padding: 16px 21px; display: flex; justify-content: space-between; align-items: center; gap: 20px; background: #061e20; color: #fff; font-size: 16px; font-weight: 550; }
+.ride-app .wg-rent-button:hover { background: #00594f; }
+.ride-app[data-theme="dark"] .wg-rent-button { background: #b9f0da; color: #061e20; }
+.ride-app[data-theme="dark"] .wg-rent-button:hover { background: #89afa7; }
 .ride-app .wg-home-side { display: flex; flex-direction: column; gap: 22px; }
 .ride-app .wg-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; margin-top: 8px; }
 .ride-app .wg-section-heading h2 { font-size: 28px; font-weight: 550; line-height: 1.2; letter-spacing: -.045em; margin-top: 7px; }
@@ -192,15 +192,15 @@
 .ride-app .wr-route-price,.ride-app[data-theme="dark"] .wr-route-price { background: var(--wg-hero); color: var(--ink); border-color: var(--line); border-radius: 18px; }
 .ride-app .wr-route-price > span,.ride-app .wr-route-price > p { color: var(--ink-soft); }
 .ride-app .wr-wizard-footer { background: var(--app-background); border-color: var(--line); }
-.ride-app .ra-points { position: relative; overflow: hidden; border-radius: 27px; background: #123b3e; color: #edf8ec; border: 1px solid #36625c; padding: 32px; }
+.ride-app .ra-points { position: relative; overflow: hidden; border-radius: 27px; background: #061e20; color: #edf8ec; border: 1px solid #36625c; padding: 32px; }
 .ride-app .ra-points::after { content: ""; position: absolute; width: 180px; height: 180px; border: 1px solid #5a95843d; border-radius: 50%; right: -50px; top: -80px; box-shadow: 0 0 0 30px #5a95840c,0 0 0 60px #5a95840c; pointer-events: none; }
 .ride-app .ra-points > span { color: #c0e8cf; font-size: 12px; letter-spacing: .02em; }
 .ride-app .ra-points h2 { font-weight: 550; font-size: clamp(36px,6vw,56px); letter-spacing: -.045em; }
 .ride-app .ra-points p { color: #d1e7d8; font-size: 13px; max-width: 550px; }
-.ride-app .ra-points .ra-light-button { background: #c5f2dc; color: #123b3e; border-radius: 13px; margin-top: 22px; }
+.ride-app .ra-points .ra-light-button { background: #c5f2dc; color: #061e20; border-radius: 13px; margin-top: 22px; }
 .ride-app .wr-tier-card { border-radius: 22px; }
 .ride-app .wr-tier-card h3,.ride-app .wr-membership-heading h2 { font-family: var(--font-werigo),sans-serif; font-weight: 550; }
-.ride-app .wr-tier-silver { background: #e9f0ec; color: #173c39; }
+.ride-app .wr-tier-silver { background: #e9f0ec; color: #061e20; }
 .ride-app .wr-tier-gold { background: #f2ecdd; color: #463c28; }
 .ride-app .wr-tier-platinum { background: #163b3c; color: #eef6e9; }
 .ride-app .wr-member-rules { background: var(--app-card); border-color: var(--line); border-radius: 20px; }

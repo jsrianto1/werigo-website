@@ -24,7 +24,7 @@ export function SagaBikeCard({
     return (
       <Link
         href={`/fleet/${model}`}
-        className="group flex items-center gap-4 rounded-[16px] border border-white/10 bg-white/[0.04] p-3 pr-4 transition-colors hover:border-[#2ee0b0]/50 hover:bg-white/[0.07]"
+        className="group flex items-center gap-4 rounded-[16px] border border-white/10 bg-white/[0.04] p-3 pr-4 transition-colors hover:border-[#89afa7]/50 hover:bg-white/[0.07]"
       >
         <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-[12px] bg-[radial-gradient(70%_70%_at_50%_60%,rgba(46,224,176,0.22),transparent_75%)]">
           <Image
@@ -40,7 +40,7 @@ export function SagaBikeCard({
           <p className="mt-0.5 text-sm text-white/60">{sub}</p>
         </div>
         <ArrowRight
-          className="h-5 w-5 shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-[#2ee0b0]"
+          className="h-5 w-5 shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-[#89afa7]"
           aria-hidden="true"
         />
       </Link>
@@ -50,11 +50,11 @@ export function SagaBikeCard({
   return (
     <Link
       href={`/fleet/${model}`}
-      className="group relative block overflow-hidden rounded-[18px] border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.015] p-4 transition-colors hover:border-[#2ee0b0]/50"
+      className="group relative block overflow-hidden rounded-[18px] border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.015] p-4 transition-colors hover:border-[#89afa7]/50"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-40 w-4/5 rounded-full bg-[#2ee0b0]/20 blur-3xl transition-opacity duration-300 group-hover:opacity-100 sm:opacity-70"
+        className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-40 w-4/5 rounded-full bg-[#89afa7]/20 blur-3xl transition-opacity duration-300 group-hover:opacity-100 sm:opacity-70"
       />
       <div className="relative aspect-[4/3]">
         <div
@@ -72,7 +72,7 @@ export function SagaBikeCard({
       <div className="relative mt-3 flex items-center justify-between gap-2">
         <p className="text-sm font-semibold text-white sm:text-base">{modelNames[model]}</p>
         <ArrowRight
-          className="h-4 w-4 shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-[#2ee0b0]"
+          className="h-4 w-4 shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-[#89afa7]"
           aria-hidden="true"
         />
       </div>

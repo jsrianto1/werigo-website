@@ -1,0 +1,35 @@
+/* App colours remain scoped; dark mode uses the same approved palette. */
+.werigo-app-root .ride-app {
+  --font-werigo:var(--font-geist); --wg-brand:#00594f; --wg-brand-strong:#043e38; --wg-deep:#061e20;
+  --wg-mint:#e9efeb; --wg-hero:#e9efeb; --wg-route:#89afa7;
+  --app-background:#faf6ee; --app-card:#fff; --app-floating:#fffffff5;
+  --ink:#061e20; --ink-soft:#47665f; --ink-faint:#47665f; --ink-inverse:#fff;
+  --line:#ccdad4; --line-strong:#65867d; --surface-sunken:#eeeae2;
+  --brand-primary:#00594f; --brand-primary-strong:#043e38; --brand-primary-soft:#e9efeb; --brand-primary-faint:#f2f4ee;
+  --brand-accent:#00594f; --brand-accent-strong:#043e38; --brand-accent-soft:#e9efeb;
+  font-family:var(--font-geist),var(--font-inter),sans-serif;
+}
+.werigo-app-root .ride-app[data-theme="dark"] {
+  --wg-brand:#faf6ee; --wg-brand-strong:#fff; --wg-deep:#061e20;
+  --wg-mint:#153c3a; --wg-hero:#0c2d2e; --wg-route:#89afa7;
+  --app-background:#061e20; --app-card:#0c2d2e; --app-floating:#0c2d2ef5;
+  --ink:#faf6ee; --ink-soft:#c1d5ce; --ink-faint:#c1d5ce; --ink-inverse:#061e20;
+  --line:#3c625b; --line-strong:#89afa7; --surface-sunken:#153c3a;
+  --brand-primary:#faf6ee; --brand-primary-strong:#fff; --brand-primary-soft:#153c3a; --brand-primary-faint:#0c2d2e;
+  --brand-accent:#faf6ee; --brand-accent-strong:#fff; --brand-accent-soft:#153c3a;
+}
+.werigo-app-root .ride-app .brand-lockup { gap:12px; }
+.werigo-app-root .ride-app .brand-lockup > .brand-logo-art { width:144px; height:auto; filter:none; }
+.werigo-app-root .ride-app .wg-auth-story .brand-endorsement { color:#faf6ee; }
+.werigo-app-root .ride-app .brand-logo-white { display:none; }
+.werigo-app-root .ride-app .brand-logo-teal { display:block; }
+.werigo-app-root .ride-app[data-theme="dark"] .brand-logo-teal,.werigo-app-root .ride-app .wg-auth-story .brand-logo-teal { display:none; }
+.werigo-app-root .ride-app[data-theme="dark"] .brand-logo-white,.werigo-app-root .ride-app .wg-auth-story .brand-logo-white { display:block; }
+.werigo-app-root .ride-app :is(.wg-hero,.wg-auth-story) { background:linear-gradient(130deg,#00594f,#061e20); color:#faf6ee; }
+.werigo-app-root .ride-app :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install) { background:#00594f; border-color:#00594f; color:#fff; }
+.werigo-app-root .ride-app :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install):hover { background:#043e38; border-color:#043e38; color:#fff; }
+.werigo-app-root .ride-app[data-theme="dark"] :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install) { background:#faf6ee; border-color:#faf6ee; color:#061e20; }
+.werigo-app-root .ride-app[data-theme="dark"] :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install):hover { background:#fff; border-color:#fff; color:#00594f; }
+.werigo-app-root .ride-app .ra-nav a.is-active { background:#e9efeb; color:#00594f; }
+.werigo-app-root .ride-app[data-theme="dark"] .ra-nav a.is-active { background:#faf6ee; color:#061e20; }
+.werigo-app-root .ride-app :is(input,select,textarea) { font-family:inherit; }

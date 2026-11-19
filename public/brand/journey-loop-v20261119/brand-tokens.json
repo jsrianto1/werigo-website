@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "identity": "WERIGO / Journey Loop / Concept 04",
+  "colors": {
+    "deep-petrol": "#061E20",
+    "journey-teal": "#00594F",
+    "warm-ivory": "#FAF6EE",
+    "white": "#FFFFFF",
+    "sea-mist": "#89AFA7"
+  },
+  "type": {
+    "family": "Geist",
+    "weights": [
+      400,
+      500,
+      700
+    ]
+  },
+  "clear_space": "x = i dot diameter. Minimum 1x; preferred 2x.",
+  "minimum_sizes": {
+    "wordmark_px": 120,
+    "wordmark_mm": 30,
+    "symbol_px": 24,
+    "symbol_mm": 8
+  }
+}

@@ -148,18 +148,18 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   return (
-    <div className="bg-[#0b100f] text-ink-inverse">
+    <div className="bg-[#061e20] text-ink-inverse">
       {/* Progress bar */}
       <div className="fixed inset-x-0 top-0 z-[60] h-1 bg-white/5" aria-hidden="true">
         <div
-          className="h-full origin-left bg-[#2ee0b0] transition-transform duration-150"
+          className="h-full origin-left bg-[#89afa7] transition-transform duration-150"
           style={{ transform: `scaleX(${progress})` }}
         />
       </div>
 
       {/* Toolbar */}
       <div
-        className={`sticky top-0 z-50 border-b border-white/10 bg-[#0b100f]/95 backdrop-blur-sm transition-transform duration-300 ${
+        className={`sticky top-0 z-50 border-b border-white/10 bg-[#061e20]/95 backdrop-blur-sm transition-transform duration-300 ${
           barHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
@@ -183,7 +183,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
             className="min-h-11 min-w-0 flex-1 cursor-pointer truncate rounded-md border border-white/15 bg-white/5 px-3 text-sm font-medium text-white sm:max-w-sm"
           >
             {episodes.map((e) => (
-              <option key={e.slug} value={e.slug} className="bg-[#0b100f]">
+              <option key={e.slug} value={e.slug} className="bg-[#061e20]">
                 {t.episode} {e.number}: {titleOf(e)}
               </option>
             ))}
@@ -244,7 +244,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
         {next ? (
           <Link
             href={`/saga/${next.slug}`}
-            className="group mt-6 flex items-center gap-4 rounded-[14px] border border-[#2ee0b0]/40 bg-[#2ee0b0]/10 p-3 transition-colors hover:bg-[#2ee0b0]/15"
+            className="group mt-6 flex items-center gap-4 rounded-[14px] border border-[#89afa7]/40 bg-[#89afa7]/10 p-3 transition-colors hover:bg-[#89afa7]/15"
           >
             <Image
               src={next.cover}
@@ -254,7 +254,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
               className="h-20 w-20 shrink-0 rounded-[10px] object-cover sm:h-24 sm:w-24"
             />
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2ee0b0]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#89afa7]">
                 {t.nextEpisode}
               </p>
               <p className="mt-1 font-display text-xl text-white sm:text-2xl">
@@ -262,7 +262,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
               </p>
             </div>
             <ArrowRight
-              className="mr-2 h-6 w-6 shrink-0 text-[#2ee0b0] transition-transform group-hover:translate-x-1"
+              className="mr-2 h-6 w-6 shrink-0 text-[#89afa7] transition-transform group-hover:translate-x-1"
               aria-hidden="true"
             />
           </Link>
@@ -276,7 +276,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
               href="https://www.instagram.com/werigo.official/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-white/25 px-5 text-sm font-semibold text-white hover:border-[#2ee0b0] hover:text-[#2ee0b0]"
+              className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-[10px] border border-white/25 px-5 text-sm font-semibold text-white hover:border-[#89afa7] hover:text-[#89afa7]"
             >
               {t.follow}
             </a>
@@ -319,7 +319,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
                     href={`/saga/${e.slug}`}
                     aria-current={current ? "page" : undefined}
                     className={`block rounded-[12px] p-1.5 transition-colors ${
-                      current ? "bg-[#2ee0b0]/15 ring-2 ring-[#2ee0b0]" : "hover:bg-white/5"
+                      current ? "bg-[#89afa7]/15 ring-2 ring-[#89afa7]" : "hover:bg-white/5"
                     }`}
                   >
                     <Image
@@ -355,7 +355,7 @@ export function SagaReader({ episode, pages, prev, next, episodes, children }: P
               setDismissed(true);
               window.scrollTo({ top: fractionToTop(savedPos), behavior: reduceMotion() ? "auto" : "smooth" });
             }}
-            className="inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-full bg-[#2ee0b0] px-4 font-semibold text-[#06201a]"
+            className="inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-full bg-[#89afa7] px-4 font-semibold text-[#061e20]"
           >
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
             {t.resume}

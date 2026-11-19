@@ -16,5 +16,5 @@ for(const [,file]of list){
  });
  css+=ast.toString()+'\n';
 }
-css+='\n.werigo-ops{min-height:100dvh;width:100%;font-family:var(--font-manrope),Segoe UI,sans-serif;color:#183a32;background:#f4f7f5;isolation:isolate}\n';
+css+='\n.werigo-ops{min-height:100dvh;width:100%;font-family:var(--font-geist),var(--font-inter),sans-serif;color:#061e20;background:#faf6ee;isolation:isolate}\n';
 writeFileSync(new URL('../src/app/ops/ops.css',import.meta.url),css);

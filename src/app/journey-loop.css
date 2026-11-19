@@ -1,0 +1,30 @@
+/* WERIGO Journey Loop. Exact artwork and palette from the selected brand system. */
+:root {
+  --journey-petrol:#061e20; --journey-teal:#00594f; --journey-ivory:#faf6ee; --journey-white:#fff; --journey-mist:#89afa7;
+  --brand-primary:var(--journey-teal); --brand-primary-strong:#043e38; --brand-primary-soft:#e9efeb; --brand-primary-faint:#f2f4ee;
+  --brand-accent:var(--journey-teal); --brand-accent-strong:#043e38; --brand-accent-soft:#e9efeb;
+  --surface-page:var(--journey-ivory); --surface-card:#fff; --surface-sunken:#eeeae2; --surface-deep:var(--journey-petrol);
+  --ink:var(--journey-petrol); --ink-soft:#47665f; --ink-faint:#47665f; --ink-inverse:#fff;
+  --line:#ccdad4; --line-strong:#65867d; --ring:var(--journey-teal); --electric-mint:var(--journey-mist);
+  --electric-gradient:linear-gradient(130deg,#00594f 0%,#061e20 100%);
+  --font-brand-heading:var(--font-geist),var(--font-manrope),sans-serif;
+}
+body { font-family:var(--font-geist),var(--font-inter),sans-serif; --font-brand-heading:var(--font-geist),var(--font-manrope),sans-serif; }
+.font-display,.marketing-heading,.section-intro h2,.closing-cta h2,.hero-copy h1 { font-family:var(--font-brand-heading); }
+.brand-lockup { gap:12px; }
+.brand-lockup > .brand-logo-art { width:144px; height:auto; max-height:none; object-fit:contain; filter:none; }
+.brand-lockup > .brand-logo-white { display:none; }
+.brand-lockup > .brand-logo-teal { display:block; }
+.brand-site-logo-footer .brand-lockup > .brand-logo-art { width:168px; filter:none; }
+.brand-site-logo-footer .brand-logo-teal { display:none; }
+.brand-site-logo-footer .brand-logo-white { display:block; }
+.brand-endorsement > span { font-family:var(--font-geist),sans-serif; }
+.home-video-hero .hero-video-scrim { background:linear-gradient(90deg,#061e20e6 0%,#061e208f 48%,#061e2020 100%); }
+.home-video-hero .hero-actions > a:first-child,.closing-cta > a { background:#faf6ee; color:#061e20; }
+.home-video-hero .hero-actions > a:first-child:hover,.closing-cta > a:hover { background:#fff; color:#00594f; }
+.closing-cta p { color:#faf6ee; }
+html:has(.brand-site-logo-header) { scroll-padding-top:120px; }
+@media(max-width:767px) {
+  .brand-site-logo-header .brand-lockup > .brand-logo-art { width:128px; }
+  .home-video-hero .hero-video-scrim { background:linear-gradient(0deg,#061e20ed 0%,#061e2090 65%,#061e2038 100%); }
+}

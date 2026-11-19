@@ -164,7 +164,7 @@ export function WelcomeOffer() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-[#e8f3f6] via-[#e8f3f6]/85 to-transparent md:via-[#e8f3f6]/70" />
               <div className="absolute left-5 top-5 right-6 md:left-8 md:top-8">
-                <Image src="/brand/werigo-logo-compact.png" alt="Werigo" width={128} height={52} className="h-8 w-auto md:h-11" />
+                <Image src="/brand/journey-loop-v20261119/wordmark-teal.svg" alt="Werigo" width={128} height={37} className="h-9 w-auto md:h-11" />
                 <p className="mt-3 font-display text-[24px] font-extrabold leading-[1.05] text-primary-strong md:mt-6 md:text-[38px]">
                   Less noise.
                   <br />

@@ -1,8 +1,9 @@
 import { BrandLockup, WedisonEndorsement } from "@/components/brand/BrandLockup";
+import Image from "next/image";
 
-/** Wing silhouette from Werigo's existing identity. Wedison artwork stays unmodified. */
+/** Approved Journey Loop symbol; retained export name keeps existing callers stable. */
 export function WerigoWing({ className = "" }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 780 280" fill="currentColor" aria-hidden="true"><path d="M14 14 235 74 300 181 94 88 309 264 353 264 390 164 427 264 471 264 687 88 481 181 546 74 766 14 546 151 481 181 390 72 300 181 235 151Z"/></svg>;
+  return <Image className={className} src="/brand/journey-loop-v20261119/symbol-teal.svg" width={168} height={163} alt="" aria-hidden="true" unoptimized/>;
 }
 
 /** App identity only. The endorsement uses the original, unmodified Wedison artwork. */
