@@ -146,12 +146,12 @@ export function VoucherPicker({
         onClick={openSheet}
         aria-expanded={open}
         aria-controls={open ? "voucher-sheet" : undefined}
-        className="group flex w-full cursor-pointer items-center gap-3 rounded-[14px] border border-line bg-card p-4 text-left transition-colors hover:border-primary"
+        className="voucher-picker-trigger group flex w-full cursor-pointer items-center gap-3 rounded-[14px] border border-line bg-card p-4 text-left transition-colors hover:border-primary"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[#00594f]">
           <Ticket className="h-5 w-5" aria-hidden="true" />
         </span>
-        <span className="min-w-0 flex-1">
+        <span className="voucher-picker-copy min-w-0 flex-1">
           {!signedIn ? (
             <>
               <span className="block text-sm font-semibold text-ink"><T>{"Vouchers and promo codes"}</T></span>
@@ -160,7 +160,7 @@ export function VoucherPicker({
               </span>
             </>
           ) : loading && options.length === 0 ? (
-            <span className="block h-9 w-48 animate-pulse rounded bg-sunken" aria-busy="true" />
+            <span className="block h-9 w-48 max-w-full animate-pulse rounded bg-sunken" aria-busy="true" />
           ) : applied ? (
             <>
               <span className="block truncate text-sm font-semibold text-ink">
@@ -184,7 +184,7 @@ export function VoucherPicker({
             </>
           )}
         </span>
-        <span className="inline-flex items-center gap-1 whitespace-nowrap text-sm font-semibold text-primary">
+        <span className="voucher-picker-action inline-flex items-center gap-1 whitespace-nowrap text-sm font-semibold text-primary">
           <T>{applied ? "Change" : "Select voucher"}</T>
           <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
         </span>
