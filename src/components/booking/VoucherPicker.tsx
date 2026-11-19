@@ -148,7 +148,7 @@ export function VoucherPicker({
         aria-controls={open ? "voucher-sheet" : undefined}
         className="group flex w-full cursor-pointer items-center gap-3 rounded-[14px] border border-line bg-card p-4 text-left transition-colors hover:border-primary"
       >
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[#c14a05]">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[#00594f]">
           <Ticket className="h-5 w-5" aria-hidden="true" />
         </span>
         <span className="min-w-0 flex-1">
