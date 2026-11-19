@@ -26,6 +26,10 @@
 .werigo-app-root .ride-app[data-theme="dark"] .brand-logo-teal,.werigo-app-root .ride-app .wg-auth-story .brand-logo-teal { display:none; }
 .werigo-app-root .ride-app[data-theme="dark"] .brand-logo-white,.werigo-app-root .ride-app .wg-auth-story .brand-logo-white { display:block; }
 .werigo-app-root .ride-app :is(.wg-hero,.wg-auth-story) { background:linear-gradient(130deg,#00594f,#061e20); color:#faf6ee; }
+/* These panels stay dark in both appearances; small labels need a light foreground. */
+.werigo-app-root .ride-app .wg-ride-hero > .wg-overline,
+.werigo-app-root .ride-app .wg-auth-story .wg-overline,
+.werigo-app-root .ride-app .ra-points > span { color:#faf6ee; }
 .werigo-app-root .ride-app :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install) { background:#00594f; border-color:#00594f; color:#fff; }
 .werigo-app-root .ride-app :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install):hover { background:#043e38; border-color:#043e38; color:#fff; }
 .werigo-app-root .ride-app[data-theme="dark"] :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install) { background:#faf6ee; border-color:#faf6ee; color:#061e20; }
