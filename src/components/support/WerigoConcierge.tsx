@@ -18,11 +18,19 @@ export function WerigoConcierge() {
   const [view,setView] = useState<"faq"|"message">("faq");
   const [kind,setKind] = useState<EnquiryKind>("question");
   const [search,setSearch] = useState("");
+  const [bookingViewport,setBookingViewport] = useState<{path:string;visible:boolean}|null>(null);
   const launcher = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLElement>(null);
   const close = useRef<HTMLButtonElement>(null);
   const scroll = useRef<HTMLDivElement>(null);
   function changeView(next: "faq"|"message") { setView(next); scroll.current?.scrollTo({top:0}); }
+  useEffect(()=>{
+    const target=document.getElementById("hero-booking");
+    if(!target||typeof IntersectionObserver==="undefined") return;
+    const observer=new IntersectionObserver(([entry])=>setBookingViewport({path:pathname,visible:entry.isIntersecting}));
+    observer.observe(target);
+    return ()=>observer.disconnect();
+  },[pathname]);
   useEffect(()=>{
     if(!open) return;
     const oldOverflow=document.body.style.overflow; const returnTo=launcher.current; document.body.style.overflow="hidden"; close.current?.focus();
@@ -38,7 +46,7 @@ export function WerigoConcierge() {
     return ()=>{document.body.style.overflow=oldOverflow; document.removeEventListener("keydown",keys);returnTo?.focus();};
   },[open]);
   const matches = supportFaqs.filter(item=>`${t(item.question)} ${t(item.answer)}`.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase()));
-  return <div className={styles.widget} data-checkout={pathname.startsWith("/book/checkout")}>
+  return <div className={styles.widget} data-checkout={pathname.startsWith("/book/checkout")} data-booking-visible={bookingViewport?.path===pathname&&bookingViewport.visible}>
     <button type="button" ref={launcher} className={styles.launcher} onClick={()=>setOpen(value=>!value)} aria-expanded={open} aria-controls="werigo-concierge" aria-label={t("Open Werigo support")} hidden={open}>
       <span className={styles.avatarBase} aria-hidden="true"/><Image src={AVATAR} alt="" width={300} height={400} sizes="90px"/><span className={styles.chatBadge}><MessageCircle size={16} aria-hidden="true"/></span>
     </button>

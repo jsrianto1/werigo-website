@@ -29,3 +29,8 @@ html:has(.brand-site-logo-header) { scroll-padding-top:120px; }
   .brand-site-logo-header .brand-lockup > .brand-logo-art { width:128px; }
   .home-video-hero .hero-video-scrim { background:linear-gradient(0deg,#061e20ed 0%,#061e2090 65%,#061e2038 100%); }
 }
+@media(max-width:479px) {
+  .voucher-picker-trigger { display:grid; grid-template-columns:40px minmax(0,1fr); gap:12px; }
+  .voucher-picker-copy { min-width:0; }
+  .voucher-picker-action { grid-column:2; white-space:normal; }
+}

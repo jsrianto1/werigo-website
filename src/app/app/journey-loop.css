@@ -37,3 +37,5 @@
 .werigo-app-root .ride-app .ra-nav a.is-active { background:#e9efeb; color:#00594f; }
 .werigo-app-root .ride-app[data-theme="dark"] .ra-nav a.is-active { background:#faf6ee; color:#061e20; }
 .werigo-app-root .ride-app :is(input,select,textarea) { font-family:inherit; }
+/* Windows native option popups can otherwise keep a white surface in dark mode. */
+.werigo-app-root .ride-app select option { background:var(--app-card); color:var(--ink); }
