@@ -34,7 +34,7 @@ export function SagaSeries() {
       <div className={styles.heroShade} />
       <div className={styles.heroBody}>
         <div className={styles.eyebrow}><span /> WERIGO ORIGINAL WEBTOON <LangToggle /></div>
-        <h1 id="saga-title" className={styles.wordmark}>WERIGO<br /><span>SAGA</span></h1>
+        <h1 id="saga-title" className={styles.wordmark}><Image src="/brand/journey-loop-v20261119/wordmark-white.svg" alt="WERIGO" width={921} height={264} unoptimized /><span>SAGA</span></h1>
         <p className={styles.heroLine}>{id ? <>Di Bali, setiap jalan<br />punya cerita.</> : <>In Bali, every road<br />has another story.</>}</p>
         <p className={styles.heroCopy}>{id ? "Dari pesanan pertama Arya sampai rahasia di balik pintu yang salah. Persahabatan, hidup di Bali, dan keberanian membangun sesuatu yang nyata." : "From Arya’s first delivery to the secrets behind the wrong door. Friendship, island life, and the courage to build something real."}</p>
         <div className={styles.actions}><ContinueButton episodes={episodes} /><Link className={styles.ghost} href={`/saga/${latest.slug}?lang=${lang}`}>{id ? "Baca chapter terbaru" : "Read the latest"}<ArrowRight size={17} /></Link></div>

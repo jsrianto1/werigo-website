@@ -15,7 +15,7 @@ export function localBusinessSchema() {
     url: site.baseUrl,
     email: site.contactEmail,
     telephone: `+${site.whatsappNumber}`,
-    logo: `${site.baseUrl}/brand/werigo-logo-full.png`,
+    logo: `${site.baseUrl}/brand/journey-loop-v20261119/wordmark-teal.png`,
     sameAs: [site.social.instagram, site.social.tiktok],
     areaServed: {
       "@type": "AdministrativeArea",
@@ -31,7 +31,7 @@ export function localBusinessSchema() {
     },
     geo: { "@type": "GeoCoordinates", ...site.geo },
     hasMap: site.mapsUrl,
-    image: `${site.baseUrl}/brand/werigo-logo-full.png`,
+    image: `${site.baseUrl}/brand/journey-loop-v20261119/wordmark-teal.png`,
     priceRange: `IDR ${Math.min(...Object.values(ratesIdrPerDay).map(rate => rate.daily)).toLocaleString("en-US")}–${Math.max(...Object.values(ratesIdrPerDay).map(rate => rate.daily)).toLocaleString("en-US")} per day (2–6 days)`,
     openingHoursSpecification: [{
       "@type": "OpeningHoursSpecification",

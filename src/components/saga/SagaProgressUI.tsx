@@ -35,7 +35,7 @@ export function ContinueButton({ episodes }: { episodes: EpisodeLite[] }) {
   return (
     <Link
       href={`/saga/${target.slug}`}
-      className="inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-[#2ee0b0] px-7 text-base font-semibold text-[#06201a] transition-colors hover:bg-[#5ff0c8]"
+      className="inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-[#89afa7] px-7 text-base font-semibold text-[#061e20] transition-colors hover:bg-[#faf6ee]"
     >
       <BookOpen className="h-5 w-5" aria-hidden="true" />
       {label}
@@ -50,7 +50,7 @@ export function EpisodeStatus({ slug }: { slug: string }) {
   if (!progress) return null;
   if (progress.done.includes(slug)) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-[#2ee0b0]/15 px-2.5 py-1 text-xs font-semibold text-[#2ee0b0]">
+      <span className="inline-flex items-center gap-1 rounded-full bg-[#89afa7]/15 px-2.5 py-1 text-xs font-semibold text-[#89afa7]">
         <Check className="h-3.5 w-3.5" aria-hidden="true" />
         {t.read}
       </span>
@@ -61,7 +61,7 @@ export function EpisodeStatus({ slug }: { slug: string }) {
     return (
       <span className="inline-flex items-center gap-2 text-xs font-semibold text-white/70">
         <span className="relative h-1.5 w-16 overflow-hidden rounded-full bg-white/15" aria-hidden="true">
-          <span className="absolute inset-y-0 left-0 bg-[#2ee0b0]" style={{ width: `${Math.round(pos * 100)}%` }} />
+          <span className="absolute inset-y-0 left-0 bg-[#89afa7]" style={{ width: `${Math.round(pos * 100)}%` }} />
         </span>
         {t.pctRead(Math.round(pos * 100))}
       </span>

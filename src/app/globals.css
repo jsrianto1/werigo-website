@@ -3,35 +3,32 @@
 /* ============================================================
    WERIGO DESIGN TOKENS
    ------------------------------------------------------------
-   Central source of truth for the brand. When the official
-   Werigo logo + palette arrive, update ONLY the :root values
-   below — every component reads from these tokens.
+   Approved Journey Loop identity. Brand-specific contexts and
+   dark mode extend these roles in the journey-loop stylesheets.
    ============================================================ */
 
 :root {
-  /* Brand core — PLACEHOLDER palette (laguna teal + sunset orange).
-     Swap these when official brand colors are provided. */
-  --brand-primary: #0a5c55;        /* Laguna — deep reef teal */
-  --brand-primary-strong: #07443f; /* Laguna dark — hover / emphasis */
-  --brand-primary-soft: #e3f1ee;   /* Laguna wash — tinted section bg */
-  --brand-primary-faint: #f2f8f6;  /* Laguna mist — subtle tint */
-  --brand-accent: #c14a05;         /* Sunset — burnt CTA orange (AA with white text) */
-  --brand-accent-strong: #a83f04;  /* Sunset dark — CTA hover */
-  --brand-accent-soft: #fdeee2;    /* Sunset wash */
+  --brand-primary: #00594f;
+  --brand-primary-strong: #043e38;
+  --brand-primary-soft: #e9efeb;
+  --brand-primary-faint: #f2f4ee;
+  --brand-accent: #00594f;
+  --brand-accent-strong: #043e38;
+  --brand-accent-soft: #e9efeb;
 
   /* Neutrals — warm sand-based, never blue-gray */
-  --surface-page: #fbfaf7;         /* Sand white — page background */
+  --surface-page: #faf6ee;         /* Warm Ivory */
   --surface-card: #ffffff;         /* Card surface */
-  --surface-sunken: #f4f2ec;       /* Sunken wells / input bg */
-  --surface-deep: #0e2b27;         /* Deep laguna ink — footer / contrast band */
+  --surface-sunken: #eeeae2;
+  --surface-deep: #061e20;         /* Deep Petrol */
 
-  --ink: #182320;                  /* Primary text — green-black ink */
-  --ink-soft: #47554f;             /* Secondary text */
-  --ink-faint: #66736d;            /* Tertiary / captions */
-  --ink-inverse: #f5f8f6;          /* Text on deep surfaces */
+  --ink: #061e20;
+  --ink-soft: #47665f;
+  --ink-faint: #47665f;
+  --ink-inverse: #ffffff;
 
-  --line: #e6e3d9;                 /* Hairline borders */
-  --line-strong: #cfcaba;          /* Input borders */
+  --line: #ccdad4;
+  --line-strong: #65867d;
 
   /* Semantic */
   --ok: #177a4c;                   /* Available / success */
@@ -42,7 +39,7 @@
   --danger-soft: #fbeae8;
 
   /* Focus ring */
-  --ring: #0a5c55;
+  --ring: #00594f;
 
   /* Shape */
   --radius-card: 14px;
@@ -84,8 +81,8 @@
   --radius-card: 14px;
   --radius-control: 10px;
 
-  --font-display: var(--font-manrope);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-geist), var(--font-manrope);
+  --font-sans: var(--font-geist), var(--font-inter);
 
   --breakpoint-xs: 23.4375rem; /* 375px */
 }

@@ -82,7 +82,7 @@ export default async function ChapterPage({ params }: Props) {
 
   return (
     <>
-      <div className="bg-[#0b100f]"><Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "WERIGO SAGA", path: "/saga" }, { name: `Chapter ${ep.number}: ${ep.title}`, path: `/saga/${ep.slug}` }]} dark /></div>
+      <div className="bg-[#061e20]"><Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "WERIGO SAGA", path: "/saga" }, { name: `Chapter ${ep.number}: ${ep.title}`, path: `/saga/${ep.slug}` }]} dark /></div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
       <h1 className="sr-only">
         {saga.title} Chapter {ep.number}: {ep.title}

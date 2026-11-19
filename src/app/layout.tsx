@@ -18,7 +18,14 @@ import { consentBootstrapScript } from "@/lib/consent";
 import "./globals.css";
 import "./marketing.css";
 import "./brand.css";
+import "./journey-loop.css";
 import { WelcomeOffer } from "@/components/marketing/WelcomeOffer";
+
+const geist = localFont({ src: [
+  { path: "./fonts/Geist/Geist-400.ttf", weight: "400", style: "normal" },
+  { path: "./fonts/Geist/Geist-500.ttf", weight: "500", style: "normal" },
+  { path: "./fonts/Geist/Geist-700.ttf", weight: "700", style: "normal" },
+], variable: "--font-geist", display: "swap" });
 
 const brandDisplay = localFont({ src: "./fonts/BricolageGrotesque.ttf", variable: "--font-brand-display", weight: "200 800", display: "swap" });
 
@@ -49,10 +56,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/brand/og-image.png",
+        url: "/brand/journey-loop-v20261119/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Werigo. Move the Future.",
+        alt: "Werigo electric motorcycle rental in Bali, powered by WEDISON",
       },
     ],
   },
@@ -60,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} Electric Motorcycle Rental in Bali`,
     description: site.description,
-    images: ["/brand/og-image.png"],
+    images: ["/brand/journey-loop-v20261119/og-image.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -78,7 +85,7 @@ export default function RootLayout({
         <script id="werigo-consent" dangerouslySetInnerHTML={{ __html: consentBootstrapScript() }} />
       </head>
       <body
-        className={`${manrope.variable} ${inter.variable} ${brandDisplay.variable} flex min-h-dvh flex-col antialiased`}
+        className={`${manrope.variable} ${inter.variable} ${brandDisplay.variable} ${geist.variable} flex min-h-dvh flex-col antialiased`}
       >
         <Suspense fallback={null}>
           <HideOnOps><MetaPageViews /><MarketingEvents /></HideOnOps>
