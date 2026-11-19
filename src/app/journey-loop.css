@@ -4,7 +4,7 @@
   --brand-primary:var(--journey-teal); --brand-primary-strong:#043e38; --brand-primary-soft:#e9efeb; --brand-primary-faint:#f2f4ee;
   --brand-accent:var(--journey-teal); --brand-accent-strong:#043e38; --brand-accent-soft:#e9efeb;
   --surface-page:var(--journey-ivory); --surface-card:#fff; --surface-sunken:#eeeae2; --surface-deep:var(--journey-petrol);
-  --ink:var(--journey-petrol); --ink-soft:#47665f; --ink-faint:#47665f; --ink-inverse:#fff;
+  --ink:var(--journey-petrol); --ink-soft:#47665f; --ink-faint:#47665f; --ink-inverse:#fff; --ink-on-brand:var(--journey-ivory);
   --line:#ccdad4; --line-strong:#65867d; --ring:var(--journey-teal); --electric-mint:var(--journey-mist);
   --electric-gradient:linear-gradient(130deg,#00594f 0%,#061e20 100%);
   --font-brand-heading:var(--font-geist),var(--font-manrope),sans-serif;
@@ -20,6 +20,7 @@ body { font-family:var(--font-geist),var(--font-inter),sans-serif; --font-brand-
 .brand-site-logo-footer .brand-logo-white { display:block; }
 .brand-endorsement > span { font-family:var(--font-geist),sans-serif; }
 .home-video-hero .hero-video-scrim { background:linear-gradient(90deg,#061e20e6 0%,#061e208f 48%,#061e2020 100%); }
+.home-video-hero .eyebrow { color:var(--ink-on-brand); }
 .home-video-hero .hero-actions > a:first-child,.closing-cta > a { background:#faf6ee; color:#061e20; }
 .home-video-hero .hero-actions > a:first-child:hover,.closing-cta > a:hover { background:#fff; color:#00594f; }
 .closing-cta p { color:#faf6ee; }

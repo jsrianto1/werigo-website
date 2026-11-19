@@ -29,7 +29,7 @@
 /* These panels stay dark in both appearances; small labels need a light foreground. */
 .werigo-app-root .ride-app .wg-ride-hero > .wg-overline,
 .werigo-app-root .ride-app .wg-auth-story .wg-overline,
-.werigo-app-root .ride-app .ra-points > span { color:#faf6ee; }
+.werigo-app-root .ride-app .ra-points > span { color:var(--ink-on-brand); }
 .werigo-app-root .ride-app :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install) { background:#00594f; border-color:#00594f; color:#fff; }
 .werigo-app-root .ride-app :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install):hover { background:#043e38; border-color:#043e38; color:#fff; }
 .werigo-app-root .ride-app[data-theme="dark"] :is(.wr-primary,.wr-done,.wr-confirm-pin,.ra-button,.ra-install) { background:#faf6ee; border-color:#faf6ee; color:#061e20; }
