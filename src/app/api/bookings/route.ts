@@ -160,6 +160,9 @@ export async function POST(req: NextRequest) {
         code: submission.promoCode || null,
       });
       discount = pickDiscount(resolution, submission.discountKey || null);
+      if (!replay && submission.discountKey.startsWith("promotion:") && !resolution.options.some(o => o.key === submission.discountKey)) {
+        return NextResponse.json({ ok: false, error: "discount_changed", message: "This promotion is no longer available for this booking. Refresh your discounts and try again." }, { status: 409 });
+      }
       if (!replay && submission.discountKey.startsWith("points:") && !resolution.options.some(o=>o.key===submission.discountKey)) {
         return NextResponse.json({ok:false,error:"points_changed",message:"Your points balance changed. Refresh your discounts and try again."},{status:409});
       }
@@ -202,6 +205,9 @@ export async function POST(req: NextRequest) {
     }));
   } catch (err) {
     const membershipError = storageErrorFromThrown("create_booking", err);
+    if (membershipError.detail.code === "P0002") {
+      return NextResponse.json({ ok: false, error: "discount_changed", message: "This promotion is no longer available for this booking. Refresh your discounts and try again." }, { status: 409 });
+    }
     if (membershipError.detail.code === "P0001") {
       return NextResponse.json({ ok: false, error: "points_changed", message: "Your points balance changed. Refresh your discounts and try again." }, { status: 409 });
     }

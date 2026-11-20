@@ -8,6 +8,7 @@ import { buildSupportWhatsAppUrl } from "@/lib/whatsapp";
 import { ExploreGuideNav } from "./ExploreGuideNav";
 import { ElectricRoute } from "@/components/brand/ElectricRoute";
 import { ChargeFeature } from "./ChargeFeature";
+import { ChristmasOffer } from "@/components/marketing/ChristmasOffer";
 
 export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?: string }) {
   return <section className="wg-home">
@@ -28,6 +29,7 @@ export function AppHome({ onRent, firstName }: { onRent: () => void; firstName?:
         <ExploreGuideNav visual/>
       </div>
     </div>
+    <ChristmasOffer onRent={onRent}/>
     <Link className="wg-club-ticket" href="/app/rewards"><span className="wg-ticket-icon"><Gift size={26}/></span><span><small>WERIGO RIDE CLUB</small><strong>Every ride takes you further.</strong><p>Earn points. Unlock your next level.</p></span><ArrowUpRight size={23}/><WerigoWing className="wg-ticket-wing"/></Link>
     <div className="wg-home-footnote"><span>Electric rides. Island freedom.</span><button type="button" onClick={onRent}>Choose your motorcycle<ArrowRight size={14}/></button></div>
   </section>;

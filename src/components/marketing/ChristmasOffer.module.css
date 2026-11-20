@@ -1,0 +1,18 @@
+.offer { margin:16px auto; width:calc(100% - 32px); max-width:1200px; padding:24px; border:1px solid #89afa7; border-radius:24px; background:#061e20; color:#faf6ee; font-family:var(--font-geist),sans-serif; }
+.app { width:100%; margin:24px 0; }
+.heading { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.eyebrow { display:flex; align-items:center; gap:8px; margin:0 0 8px; color:#faf6ee; font-size:11px; font-weight:700; letter-spacing:.09em; }
+.offer h2 { margin:0; color:#faf6ee; font-family:inherit; font-size:clamp(20px,2.5vw,28px); line-height:1.2; font-weight:700; letter-spacing:-.03em; }
+.ride { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:44px; padding:8px 16px; border:1px solid #89afa7; border-radius:99px; background:transparent; color:#faf6ee; font:inherit; font-size:13px; font-weight:500; cursor:pointer; text-decoration:none; }
+.codes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:20px; }
+.card { display:flex; align-items:center; justify-content:space-between; gap:16px; min-width:0; padding:18px; background:#faf6ee; color:#061e20; border-radius:16px; }
+.card strong { display:block; font-size:26px; font-weight:700; line-height:1.1; letter-spacing:-.03em; }
+.card span { display:block; margin-top:5px; font-size:13px; line-height:1.4; }
+.code { display:flex; align-items:center; justify-content:center; gap:10px; min-height:44px; padding:8px 12px; border:1px solid #00594f; border-radius:10px; background:transparent; color:#00594f; font:inherit; cursor:pointer; flex-shrink:0; }
+.code span { margin:0; font-size:12px; font-weight:700; letter-spacing:.02em; }
+.terms { margin:14px 0 0; color:#c1d5ce; font-size:12px; line-height:1.6; max-width:100%; overflow-wrap:anywhere; }
+.feedback { display:block; color:#faf6ee; font-size:12px; line-height:1.5; }
+.feedback:empty { display:none; }
+.offer button:focus-visible,.offer a:focus-visible { outline:3px solid #89afa7; outline-offset:4px; }
+@media(max-width:767px) { .offer { padding:20px; } .codes { grid-template-columns:1fr; } }
+@media(max-width:379px) { .offer { padding:16px; } .card { padding:14px; flex-wrap:wrap; gap:12px; } .code { width:100%; justify-content:space-between; } }

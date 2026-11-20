@@ -20,6 +20,7 @@ export interface PromotionRow {
   max_discount_idr: number | null;
   min_rental_idr: number | null;
   first_booking_only: boolean;
+  returning_booking_only: boolean;
   models: string[] | null;
   starts_at: string | null;
   ends_at: string | null;
@@ -103,6 +104,7 @@ function inputParams(p: PromotionInput) {
     p.usageLimitPerUser,
     p.featured,
     p.active,
+    p.returningBookingOnly,
   ];
 }
 
@@ -111,9 +113,9 @@ export async function createPromotion(p: PromotionInput, actorEmail: string): Pr
     const res = await getPool().query(
       `insert into promotions (code, title, description, audience, discount_type, discount_value,
          max_discount_idr, min_rental_idr, first_booking_only, models, starts_at, ends_at,
-         usage_limit_total, usage_limit_per_user, featured, active, created_by)
+         usage_limit_total, usage_limit_per_user, featured, active, returning_booking_only, created_by)
        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::vehicle_model[], $11::timestamptz, $12::timestamptz,
-               $13, $14, $15, $16, $17)
+               $13, $14, $15, $16, $17, $18)
        returning *`,
       [...inputParams(p), actorEmail]
     );
@@ -131,8 +133,9 @@ export async function updatePromotion(id: string, p: PromotionInput): Promise<Pr
       `update promotions set code = $1, title = $2, description = $3, audience = $4, discount_type = $5,
          discount_value = $6, max_discount_idr = $7, min_rental_idr = $8, first_booking_only = $9,
          models = $10::vehicle_model[], starts_at = $11::timestamptz, ends_at = $12::timestamptz,
-         usage_limit_total = $13, usage_limit_per_user = $14, featured = $15, active = $16
-       where id = $17::uuid returning *`,
+         usage_limit_total = $13, usage_limit_per_user = $14, featured = $15, active = $16,
+         returning_booking_only = $17
+       where id = $18::uuid returning *`,
       [...inputParams(p), id]
     );
     return res.rows[0] ? toRow(res.rows[0]) : null;
@@ -165,15 +168,25 @@ export interface CustomerContext {
   userId: string;
   /** Customer already has a paid (or refunded) booking. */
   hasPaidBooking: boolean;
+  /** Confirmed or paid website/Ops booking, with verified email matching for Ops. */
+  hasPreviousBooking: boolean;
 }
 
 export async function customerContext(userId: string): Promise<CustomerContext> {
   try {
     const res = await getPool().query(
-      "select 1 from bookings where user_id = $1 and payment_status in ('paid', 'refunded') limit 1",
+      `select exists(select 1 from bookings where user_id = $1 and payment_status in ('paid', 'refunded')) as paid,
+        public.promotion_has_previous_booking($1, null) as previous`,
       [userId]
-    );
-    return { userId, hasPaidBooking: (res.rowCount ?? 0) > 0 };
+    ).catch(async err => {
+      // Keep checkout working during the short deploy/activation gap.
+      if (err?.code !== "42883") throw err;
+      return getPool().query(`select exists(select 1 from bookings where user_id=$1
+        and payment_status in ('paid','refunded')) as paid,
+        exists(select 1 from bookings where user_id=$1 and
+          (payment_status in ('paid','refunded') or status in ('confirmed','active','completed'))) as previous`, [userId]);
+    });
+    return { userId, hasPaidBooking: res.rows[0].paid, hasPreviousBooking: res.rows[0].previous };
   } catch (err) {
     throw storageErrorFromThrown("customer_context", err);
   }
@@ -214,7 +227,8 @@ export async function promotionsForCustomer(
       const row = toRow(r);
       let blockedReason: string | null = null;
       if (row.audience === "assigned" && !r.granted) blockedReason = "This voucher belongs to another account.";
-      else if (row.first_booking_only && ctx.hasPaidBooking) blockedReason = "Only for your first booking.";
+      else if (row.first_booking_only && ctx.hasPreviousBooking) blockedReason = "Only for your first booking.";
+      else if (row.returning_booking_only && !ctx.hasPreviousBooking) blockedReason = "For returning customers with a previous confirmed or paid Werigo booking.";
       else if (row.usage_limit_total !== null && r.used_total >= row.usage_limit_total) blockedReason = "This voucher has run out.";
       else if (row.usage_limit_per_user !== null && r.used_by_user >= row.usage_limit_per_user) {
         blockedReason = "You have already used this voucher. It frees up again if an unpaid booking expires.";
