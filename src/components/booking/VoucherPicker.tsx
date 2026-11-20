@@ -29,7 +29,7 @@ export interface UnavailableVoucherView {
 }
 
 const fmtDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-GB", { timeZone: "Asia/Makassar", day: "numeric", month: "short", year: "numeric" });
+  new Date(new Date(iso).getTime() - 1).toLocaleDateString("en-GB", { timeZone: "Asia/Makassar", day: "numeric", month: "short", year: "numeric" });
 
 /**
  * Voucher selection in the style customers know from marketplaces:

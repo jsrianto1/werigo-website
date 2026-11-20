@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 const fmtDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-GB", { timeZone: "Asia/Makassar", day: "numeric", month: "long", year: "numeric" });
+  new Date(new Date(iso).getTime() - 1).toLocaleDateString("en-GB", { timeZone: "Asia/Makassar", day: "numeric", month: "long", year: "numeric" });
 
 export default async function VouchersPage() {
   const user = await requireCustomer("/account/vouchers");
@@ -60,6 +60,7 @@ export default async function VouchersPage() {
                 <ul className="mt-3 space-y-1 text-xs text-ink-soft">
                   <li>{discountLabel(p)} the rental (delivery fee not included)</li>
                   {p.first_booking_only ? <li>For your first booking</li> : null}
+                  {p.returning_booking_only ? <li>For returning customers with a previous confirmed or paid booking</li> : null}
                   {p.min_rental_idr ? <li>Rental of at least {formatIdr(p.min_rental_idr)}</li> : null}
                   {p.models ? <li>Valid for {p.models.map((m) => getModel(m)?.displayName ?? m).join(", ")}</li> : null}
                   {p.ends_at ? <li>Valid until {fmtDate(p.ends_at)}</li> : null}

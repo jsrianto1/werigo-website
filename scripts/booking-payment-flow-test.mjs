@@ -84,6 +84,9 @@ function status(orderId,state='settlement',amount='570000'){return {order_id:ord
 try{
  const signedIn=globalThis.__paymentTestUser;globalThis.__paymentTestUser=null;
  check((await post(createBooking,payload())).http===401,'Unauthenticated calls cannot reserve stock');globalThis.__paymentTestUser=signedIn;
+ const stalePromotion=await post(createBooking,{...payload(),discountKey:'promotion:'+randomUUID(),promoCode:'NEWCHRISTMAS'});
+ check(stalePromotion.http===409&&stalePromotion.data.error==='discount_changed','A stale selected promotion cannot silently charge the full rental');
+ check(await available()===1&&gateway.calls.length===0,'Rejected promotion creates no inventory hold or payment session');
  gateway.onCreate=async input=>check((await globalThis.__paymentTestDb.query('SELECT count(*)::int n FROM public.payments WHERE order_id=$1',[input.orderId])).rows[0].n===1,'Payment intent is durable before the provider request');
  const first=await post(createBooking,payload());check(first.http===201,'Real booking handler returns a payment session');
  const b=await bookingRow(first.data.booking.bookingCode);

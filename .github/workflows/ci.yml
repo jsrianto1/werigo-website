@@ -51,5 +51,8 @@ jobs:
       - name: Booking payment and Ops integration checks
         run: npm run test:booking-payment
 
+      - name: Christmas promotion eligibility and charging guards
+        run: npm run test:promotions
+
       - name: Production build
         run: npm run build

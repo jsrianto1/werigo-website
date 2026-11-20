@@ -74,6 +74,7 @@ export const promotionInputSchema = z
     maxDiscountIdr: optionalInt(1, 100_000_000),
     minRentalIdr: optionalInt(0, 1_000_000_000),
     firstBookingOnly: z.boolean().default(false),
+    returningBookingOnly: z.boolean().default(false),
     models: z
       .array(z.enum(MODEL_SLUGS))
       .optional()
@@ -86,6 +87,9 @@ export const promotionInputSchema = z
     active: z.boolean().default(true),
   })
   .superRefine((d, ctx) => {
+    if (d.firstBookingOnly && d.returningBookingOnly) {
+      ctx.addIssue({ code: "custom", path: ["returningBookingOnly"], message: "Choose first-time or returning customers, not both." });
+    }
     if (d.discountType === "percent" && d.discountValue > 100) {
       ctx.addIssue({ code: "custom", path: ["discountValue"], message: "A percentage cannot be more than 100." });
     }

@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "eslint",
     "postbuild": "node scripts/sitemap-dates.mjs",
+    "test:promotions": "node --experimental-transform-types scripts/christmas-promotions-test.mjs",
     "test:sitemap": "node scripts/sitemap-test.mjs && node scripts/sitemap-dates-test.mjs",
     "test:membership": "node scripts/ride-club-test.mjs",
     "test:cms": "node scripts/cms-test.mjs",

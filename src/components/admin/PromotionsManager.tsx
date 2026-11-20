@@ -18,6 +18,7 @@ interface Promotion {
   max_discount_idr: number | null;
   min_rental_idr: number | null;
   first_booking_only: boolean;
+  returning_booking_only: boolean;
   models: string[] | null;
   starts_at: string | null;
   ends_at: string | null;
@@ -39,6 +40,7 @@ interface FormState {
   maxDiscountIdr: string;
   minRentalIdr: string;
   firstBookingOnly: boolean;
+  returningBookingOnly: boolean;
   models: string[];
   startsAt: string;
   endsAt: string;
@@ -58,6 +60,7 @@ const EMPTY: FormState = {
   maxDiscountIdr: "",
   minRentalIdr: "",
   firstBookingOnly: false,
+  returningBookingOnly: false,
   models: [],
   startsAt: "",
   endsAt: "",
@@ -125,6 +128,17 @@ export function PromotionsManager() {
     void load();
   }, [load]);
 
+  async function activateChristmas() {
+    setBusy(true); setError(null);
+    try {
+      const res = await fetch("/api/admin/promotions/christmas", { method: "POST" });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.message || "Could not activate Christmas offers.");
+      await load();
+    } catch (err) { setError(err instanceof Error ? err.message : "Could not activate Christmas offers."); }
+    finally { setBusy(false); }
+  }
+
   function openNew() {
     setFieldErrors({});
     setEditing({ id: null, form: { ...EMPTY } });
@@ -144,6 +158,7 @@ export function PromotionsManager() {
         maxDiscountIdr: p.max_discount_idr === null ? "" : String(p.max_discount_idr),
         minRentalIdr: p.min_rental_idr === null ? "" : String(p.min_rental_idr),
         firstBookingOnly: p.first_booking_only,
+        returningBookingOnly: p.returning_booking_only ?? false,
         models: p.models ?? [],
         startsAt: toLocalInput(p.starts_at),
         endsAt: toLocalInput(p.ends_at),
@@ -166,6 +181,7 @@ export function PromotionsManager() {
       maxDiscountIdr: f.discountType === "percent" ? num(f.maxDiscountIdr) : null,
       minRentalIdr: num(f.minRentalIdr),
       firstBookingOnly: f.firstBookingOnly,
+      returningBookingOnly: f.returningBookingOnly,
       models: f.models,
       startsAt: fromLocalInput(f.startsAt),
       endsAt: fromLocalInput(f.endsAt),
@@ -210,6 +226,7 @@ export function PromotionsManager() {
       maxDiscountIdr: p.max_discount_idr === null ? "" : String(p.max_discount_idr),
       minRentalIdr: p.min_rental_idr === null ? "" : String(p.min_rental_idr),
       firstBookingOnly: p.first_booking_only,
+      returningBookingOnly: p.returning_booking_only ?? false,
       models: p.models ?? [],
       startsAt: toLocalInput(p.starts_at),
       endsAt: toLocalInput(p.ends_at),
@@ -281,6 +298,14 @@ export function PromotionsManager() {
         </Button>
       </div>
 
+      {rows && !["NEWCHRISTMAS", "CHRISTMAS26"].every(code => rows.some(p => p.code === code)) ? (
+        <div className="mt-5 rounded-xl border border-line bg-card p-4 text-ink">
+          <p className="font-semibold">Christmas 2026 · 20 Nov–31 Dec (Bali time)</p>
+          <p className="mt-1 text-sm text-ink-soft">NEWCHRISTMAS: 25% first booking. CHRISTMAS26: 20% returning customers. Rental only, no discount cap; one discount per booking.</p>
+          <Button className="mt-3" disabled={busy} onClick={() => void activateChristmas()}>Activate Christmas offers</Button>
+        </div>
+      ) : null}
+
       {error ? <p role="alert" className="mt-4 rounded-[10px] bg-danger-soft px-3 py-2 text-sm text-danger">{error}</p> : null}
 
       <div className="mt-6 overflow-x-auto rounded-[14px] border border-line bg-card">
@@ -314,6 +339,7 @@ export function PromotionsManager() {
                   <td className="px-4 py-3 text-xs text-ink-soft">
                     {p.audience === "public" ? "Promo code" : p.audience === "auto" ? "Automatic" : "Voucher"}
                     {p.first_booking_only ? <span className="block">First booking only</span> : null}
+                    {p.returning_booking_only ? <span className="block">Returning customers only</span> : null}
                   </td>
                   <td className="px-4 py-3 text-ink">
                     {discountLabel(p)}
@@ -419,8 +445,12 @@ export function PromotionsManager() {
                   <input id="p-min" type="number" min={0} value={f.minRentalIdr} onChange={(e) => set({ minRentalIdr: e.target.value })} className={inputClass()} />
                 </div>
                 <label className="flex items-center gap-2 self-end pb-3 text-ink">
-                  <input type="checkbox" checked={f.firstBookingOnly} onChange={(e) => set({ firstBookingOnly: e.target.checked })} className="h-4 w-4 accent-[var(--brand-primary)]" />
+                  <input type="checkbox" checked={f.firstBookingOnly} onChange={(e) => set({ firstBookingOnly: e.target.checked, returningBookingOnly: false })} className="h-4 w-4 accent-[var(--brand-primary)]" />
                   First booking only
+                </label>
+                <label className="flex items-center gap-2 text-ink">
+                  <input type="checkbox" checked={f.returningBookingOnly} onChange={(e) => set({ returningBookingOnly: e.target.checked, firstBookingOnly: false })} className="h-4 w-4 accent-[var(--brand-primary)]" />
+                  Returning customers only
                 </label>
               </div>
               <fieldset>

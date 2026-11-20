@@ -19,6 +19,7 @@ import "./globals.css";
 import "./marketing.css";
 import "./brand.css";
 import "./journey-loop.css";
+import { ChristmasOffer } from "@/components/marketing/ChristmasOffer";
 import { WelcomeOffer } from "@/components/marketing/WelcomeOffer";
 
 const geist = localFont({ src: [
@@ -102,6 +103,7 @@ export default function RootLayout({
         <HideOnAdmin>
           <Header />
         </HideOnAdmin>
+        <HideOnAdmin><ChristmasOffer /></HideOnAdmin>
         <main id="main" className="flex-1">
           {children}
         </main>
