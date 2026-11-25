@@ -26,6 +26,7 @@ export default async function Page() {
   if (admin.role !== "super_admin") redirect("/admin");
   return (
     <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>
+      <a className="mb-4 inline-block font-semibold text-primary underline" href="/ops/team-access">Undang akun tanpa email untuk Ops dan website</a>
       <StaffManager />
     </AdminShell>
   );
