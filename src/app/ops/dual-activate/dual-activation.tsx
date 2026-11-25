@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useRef, useState, type FormEvent} from 'react';
-import {dualPasswordMin, dualPasswordMax} from '@/ops/lib/dual-identity';
+import {dualPasswordMin, dualPasswordMax, dualPasswordRange} from '@/ops/lib/dual-identity';
 
 type Invite = {username: string; role: string; website_role: string};
 
@@ -57,7 +57,7 @@ export function DualActivation() {
     {done?<p>Masuk dengan username <strong>{done}</strong> dan password baru untuk mengakses Ops dan admin website.</p>
     :invite?<><p>Username: <strong>{invite.username}</strong> · {invite.website_role==='super_admin'?'Owner Ops + Super Admin website':'Ops + Admin website'}</p>
       <form onSubmit={submit}>
-        <label className="field"><span>Password baru · minimal {dualPasswordMin} karakter</span><input type="password" name="password" autoComplete="new-password" required minLength={dualPasswordMin} maxLength={dualPasswordMax}/></label>
+        <label className="field"><span>Password baru · {dualPasswordRange} karakter</span><input type="password" name="password" autoComplete="new-password" required minLength={dualPasswordMin} maxLength={dualPasswordMax}/></label>
         <label className="field"><span>Ulangi password</span><input type="password" name="confirm_password" autoComplete="new-password" required minLength={dualPasswordMin} maxLength={dualPasswordMax}/></label>
         <button className="btn primary" disabled={busy}>{busy?'Mengaktifkan…':'Aktifkan akun'}</button>
       </form>

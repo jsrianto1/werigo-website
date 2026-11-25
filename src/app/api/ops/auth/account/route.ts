@@ -1,9 +1,9 @@
 import {db,currentStaff,sameOrigin,json,fail,AppError,uid} from '@/ops/lib/server';
 import {usernameValue,passwordValue,passwordHash,passwordMatches} from '@/ops/lib/password';
-import {isDualId,validDualPassword} from '@/ops/lib/dual-identity';
+import {dualPasswordRange,isDualId,validDualPassword} from '@/ops/lib/dual-identity';
 import {IDLE_AGE} from '@/ops/lib/auth';
 export async function POST(req:Request){try{sameOrigin(req);const m=await currentStaff(),d=await req.json() as any;let username,password;try{username=usernameValue(d.username);password=passwordValue(d.password);}catch(e){throw new AppError((e as Error).message);}
- if(isDualId(m.id)&&!validDualPassword(password))throw new AppError('Use a password between 16 and 128 characters.');
+ if(isDualId(m.id)&&!validDualPassword(password))throw new AppError(`Use a password of ${dualPasswordRange} characters.`);
  const old=await db().prepare('SELECT * FROM auth_accounts WHERE staff_id=?').bind(m.id).first<any>();
  if(!old||!await passwordMatches(String(d.current_password||''),old.password_hash))throw new AppError('Current password is incorrect.',401);
  const hash=await passwordHash(password),now=Date.now();

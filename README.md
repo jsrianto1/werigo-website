@@ -24,7 +24,8 @@ The first invitation requires the existing Ops Owner password and a fresh,
 non-impersonated website Super Admin sign-in (connect it from Ops). Afterward
 an active dual Owner can issue more invitations using their own Ops password.
 The flow creates a single-use, one-hour link for the recipient to choose a
-password. Do not share the link, password, or account with an automation.
+password (4–20 characters). Use a unique password toward the upper end for
+privileged accounts. Do not share the link, password, or account with an automation.
 
 Explicitly choose Ops Staff, Finance, or Admin paired with website Admin,
 or choose Ops Owner paired with website Super Admin. Website Admin can see
