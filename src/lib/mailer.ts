@@ -109,3 +109,16 @@ export async function sendPasswordResetEmail(to: string, name: string, url: stri
     ),
   });
 }
+
+export async function sendOpsRecoveryEmail(to: string, url: string): Promise<void> {
+  if (!isMailConfigured()) throw new Error('Ops recovery email not configured');
+  await sendMail({
+    to,
+    subject: 'Reset your Werigo Ops Owner password',
+    text: `Set a new password for your Werigo Ops Owner account:\n${url}\n\nThe link works once and expires after 30 minutes. If you did not request this, ignore this email. It will not change your website admin password.`,
+    html: layout(
+      'Reset your Ops Owner password',
+      `<p>Use this link to set a new password for your Werigo Ops Owner account.</p>${button(url, 'Reset Ops password')}<p>The link works once and expires after 30 minutes. If you did not request this, ignore this email. It will not change your website admin password.</p>`,
+    ),
+  });
+}
