@@ -1,5 +1,5 @@
 import { AppError, db, fail, json, sameOrigin } from '@/ops/lib/server';
-import { validDualPassword, websiteRoleForDualMember } from '@/ops/lib/dual-identity';
+import { dualPasswordRange, validDualPassword, websiteRoleForDualMember } from '@/ops/lib/dual-identity';
 import { dualInviteError, dualInviteHash } from '@/ops/lib/dual-invites';
 import { passwordHash } from '@/ops/lib/password';
 
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     if (!row || !websiteRole) throw new AppError(dualInviteError, 410);
     if (body.action === 'inspect') return json({username: row.username, role: row.role, website_role: websiteRole, expires_at: row.expires_at});
     if (body.action !== 'activate') throw new AppError('Isian aktivasi tidak valid.');
-    if (!validDualPassword(body.password)) throw new AppError('Buat password antara 16 dan 128 karakter.');
+    if (!validDualPassword(body.password)) throw new AppError(`Buat password ${dualPasswordRange} karakter.`);
     if (body.password !== body.confirm_password) throw new AppError('Kedua password tidak sama.');
     const hash = await passwordHash(body.password);
     const now = Date.now(), claim = crypto.randomUUID();

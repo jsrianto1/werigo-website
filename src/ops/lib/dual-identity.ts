@@ -3,8 +3,9 @@
 const dualIdPattern = /^dual:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
 export const isDualId = (id: unknown): id is string => typeof id === 'string' && dualIdPattern.test(id);
 export const newDualId = () => 'dual:' + crypto.randomUUID();
-export const dualPasswordMin = 16;
-export const dualPasswordMax = 128;
+export const dualPasswordMin = 4;
+export const dualPasswordMax = 20;
+export const dualPasswordRange = `${dualPasswordMin}–${dualPasswordMax}`;
 export const validDualPassword = (value: unknown): value is string =>
   typeof value === 'string' && value.length <= dualPasswordMax && Array.from(value.trim()).length >= dualPasswordMin;
 
