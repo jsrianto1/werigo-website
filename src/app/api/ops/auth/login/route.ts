@@ -14,6 +14,14 @@ export async function POST(req:Request){try{
  const matches=await passwordMatches(password,account?.password_hash?.startsWith('pbkdf2-sha256$')?account.password_hash:DUMMY_HASH);
  if(!account||!account.enabled||!matches){await db().batch([auditStatement('auth.login_failed',username,{username},account?.email||'Unknown user')]);return json({error:'Username or password is incorrect.'},401);}
  const token=sessionToken(),hash=await sha256(token);
- await db().batch([db().prepare('DELETE FROM auth_sessions WHERE expires_at<?').bind(now),db().prepare('INSERT INTO auth_sessions(id,staff_id,created_at,last_seen_at,expires_at) VALUES(?,?,?,?,?)').bind(hash,account.id,now,now,now+SESSION_AGE),db().prepare('DELETE FROM auth_limits WHERE id=?').bind(keys[0]),auditStatement('auth.login',account.id,{username},account.email)]);
+ // Recheck under the write lock: a password reset or disabling this account
+ // between verification and the insert must not mint a fresh session.
+ const results=await db().batch([
+  db().prepare('INSERT INTO auth_sessions(id,staff_id,created_at,last_seen_at,expires_at) SELECT ?,s.id,?,?,? FROM staff s JOIN auth_accounts a ON a.staff_id=s.id WHERE s.id=? AND s.enabled=1 AND a.username=? AND a.password_hash=?').bind(hash,now,now,now+SESSION_AGE,account.id,username,account.password_hash),
+  db().prepare("INSERT INTO audit(id,action,entity_id,detail,actor,created_at) SELECT ?,'auth.login',?,?,?,? WHERE changes()>0").bind(uid(),account.id,JSON.stringify({username}),account.email,now),
+  db().prepare('DELETE FROM auth_sessions WHERE expires_at<?').bind(now),
+  db().prepare('DELETE FROM auth_limits WHERE id=? AND EXISTS (SELECT 1 FROM auth_sessions WHERE id=?)').bind(keys[0],hash),
+ ]);
+ if(!results[0].meta.changes)return json({error:'Username or password is incorrect.'},401);
  const response=json({ok:true});response.headers.append('Set-Cookie',authCookie(SESSION_COOKIE,token,req,SESSION_AGE/1000));response.headers.append('Set-Cookie',authCookie(SIGNED_OUT_COOKIE,'',req,0));return response;
  }catch(e){return fail(e);}}

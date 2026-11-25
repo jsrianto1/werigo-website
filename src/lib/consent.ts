@@ -198,7 +198,10 @@ export function saveConsent(choice: ConsentChoice, action: ConsentAction, locale
  * is requested from Google or Meta.
  */
 export function consentBootstrapScript() {
-  return `(function(w,d){w.dataLayer=w.dataLayer||[];function gtag(){w.dataLayer.push(arguments);}w.gtag=gtag;
+  // Ops links carry authentication material. Stop before loading any
+  // third-party tag, even if this browser opted in on the customer website.
+  return `(function(w,d){if(w.location.pathname==='/ops'||w.location.pathname.indexOf('/ops/')===0)return;
+w.dataLayer=w.dataLayer||[];function gtag(){w.dataLayer.push(arguments);}w.gtag=gtag;
 var c=null;try{var m=d.cookie.match(/(?:^|; )${CONSENT_COOKIE}=([^;]*)/);if(m){var p=JSON.parse(decodeURIComponent(m[1]));if(p&&p.v===${CONSENT_VERSION})c=p;}}catch(e){}
 var a=!!(c&&c.analytics===true),k=!!(c&&c.marketing===true),g=function(on){return on?'granted':'denied';};
 gtag('consent','default',{analytics_storage:g(a),ad_storage:g(k),ad_user_data:g(k),ad_personalization:g(k),wait_for_update:500});

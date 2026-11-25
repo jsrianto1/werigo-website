@@ -51,10 +51,10 @@ delete globalThis.window;
 delete globalThis.document;
 
 // Bootstrap: with no choice, no tag script is requested and Consent Mode defaults to denied.
-function bootstrap(cookie){
+function bootstrap(cookie,pathname='/'){
   const added=[];
   const el=()=>({});
-  const w={};
+  const w={location:{pathname}};
   const d={cookie,createElement:el,head:{appendChild:(n)=>added.push(n.src)},getElementsByTagName:()=>[{parentNode:{insertBefore:(n)=>added.push(n.src)}}]};
   new Function('window','document',consentBootstrapScript())(w,d);
   return {w,added};
@@ -76,4 +76,10 @@ b.w.__werigoLoadGtm();b.w.__werigoLoadPixel();
 assert.equal(b.added.length,2);
 b=bootstrap(consentCookie(true,true).replace('%22v%22%3A1','%22v%22%3A0'));
 assert.deepEqual(b.added,[]);
+for (const path of ['/ops','/ops/recover','/ops/activate']) {
+  b=bootstrap(consentCookie(true,true),path);
+  assert.deepEqual(b.added,[]);
+  assert.equal(b.w.__werigoLoadGtm,undefined);
+  assert.equal(b.w.__werigoLoadPixel,undefined);
+}
 console.log('PASS: monthly calendar defaults, leap year, month end, event semantics, cookie consent gating, SSR and blocked-tag resilience.');

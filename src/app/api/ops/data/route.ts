@@ -2,6 +2,7 @@ import type {OpsPreparedStatement,OpsDatabase} from '@/ops/lib/database';
 import { db,currentStaff,permitted,txt,num,choice,timestamp,one,uid,saveRow,auditStatement,auditedMutation,json,fail,AppError,sameOrigin,checkFiles } from "@/ops/lib/server";
 import { MODELS,quote,totalBooking,type Row } from "@/ops/lib/domain";
 import {usernameValue,sha256,sessionToken} from '@/ops/lib/password';
+import {canAddOpsStaff} from '@/ops/lib/workspace-access';
 import {teamProjection} from '@/ops/lib/privacy';
 import {extensionPaymentInput} from '@/ops/lib/extension-payments';
 import {extensionChargeInsert,nativeExtensionReceipt} from '@/ops/lib/extension-server';
@@ -101,7 +102,13 @@ export async function POST(req:Request){try{
   const state=choice(d.state,['open','returned']),note=txt(d.note,2000,true);
   await db().batch([db().prepare('UPDATE sales_records SET followup_state=?,followup_note=?,updated_at=? WHERE id=?').bind(state,note,now,r.id),auditStatement('sales.followup',r.id,{state,note},actor)]);
  }else if(action==="saveStaff"||action==="staffInvite"){
-  permitted(member,['owner']);const existing=d.id?await one('staff',entityId):null;if(existing?.role==='owner')throw new AppError('Use My login to manage your own credentials.');
+  const owner=member.role==='owner';
+  // Ops Admin can onboard ordinary Staff, but cannot enumerate, edit, reset
+  // or elevate existing accounts. Website-only admins are not Ops members.
+  if(!canAddOpsStaff(member.role)||(!owner&&(action!=='saveStaff'||d.id||d.role!=='ops'||d.enabled===false))){
+   throw new AppError('Only the Ops Owner can manage existing accounts or assign elevated roles.',403);
+  }
+  const existing=d.id?await one('staff',entityId):null;if(existing?.role==='owner')throw new AppError('Use My login to manage your own credentials.');
   const account=existing?await db().prepare('SELECT * FROM auth_accounts WHERE staff_id=?').bind(entityId).first<Row>():null;
   if(action==='staffInvite'&&!existing)throw new AppError('User not found.');
   let username;try{username=usernameValue(action==='staffInvite'?account?.username:d.username);}catch(e){throw new AppError((e as Error).message);}
@@ -110,7 +117,7 @@ export async function POST(req:Request){try{
   if(action==='staffInvite'&&!enabled)throw new AppError('Enable this user before issuing an activation link.');
   const issue=enabled&&(!account||account.password_hash==='!pending'||action==='staffInvite');const statements:OpsPreparedStatement[]=[existing?db().prepare('UPDATE staff SET name=?,role=?,enabled=? WHERE id=?').bind(name,role,enabled,entityId):db().prepare('INSERT INTO staff(id,email,name,role,enabled,created_at) VALUES(?,?,?,?,?,?)').bind(entityId,'user:'+entityId,name,role,enabled,now)];
   statements.push(db().prepare('INSERT INTO auth_accounts(staff_id,username,password_hash,updated_at) VALUES(?,?,?,?) ON CONFLICT(staff_id) DO UPDATE SET username=excluded.username,password_hash=excluded.password_hash,updated_at=excluded.updated_at').bind(entityId,username,issue?'!pending':account?.password_hash||'!pending',now),db().prepare('DELETE FROM auth_sessions WHERE staff_id=?').bind(entityId),db().prepare('UPDATE auth_invites SET used_at=? WHERE staff_id=? AND used_at IS NULL').bind(now,entityId));
-  if(issue){const token=sessionToken(),hash=await sha256(token),expires=now+72*3600000;statements.push(db().prepare('INSERT INTO auth_invites(id,staff_id,created_at,expires_at) VALUES(?,?,?,?)').bind(hash,entityId,now,expires));invitation={activation_url:new URL('/ops/activate?token='+token,req.url).toString(),expires_at:expires,name,username};}
+  if(issue){const token=sessionToken(),hash=await sha256(token),expires=now+72*3600000;statements.push(db().prepare('INSERT INTO auth_invites(id,staff_id,created_at,expires_at) VALUES(?,?,?,?)').bind(hash,entityId,now,expires));const base=process.env.NEXT_PUBLIC_SITE_URL||(process.env.NODE_ENV==='production'?'https://werigo.co':req.url);invitation={activation_url:new URL('/ops/activate?token='+token,base).toString(),expires_at:expires,name,username};}
   statements.push(auditStatement(action==='staffInvite'?'staff.invited':existing?'staff.updated':'staff.created',entityId,{username,name,role,enabled,activation_issued:!!invitation},actor));await db().batch(statements);
  }else throw new AppError("Aksi tidak dikenal.");
  return json({ok:true,id:entityId,...(invitation?{invitation}:{})});

@@ -1,4 +1,5 @@
 const pages=['dashboard','settings','activity','reminders','sales','rentals','bookings','fleet','handovers','customers','payments','reports','notes','feedback','pricing'];
+export const canAddOpsStaff = (role: unknown) => role === 'owner' || role === 'manager';
 /** Navigation only. Every action still uses its existing server-side guard. */
 export function opsPageIds(role?:string){
  if(!['owner','manager','finance','ops'].includes(role||''))return [];
