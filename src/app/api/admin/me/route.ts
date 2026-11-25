@@ -19,6 +19,9 @@ export async function GET() {
   const admin = await requireAdmin();
   if (isResponse(admin)) return admin;
   try {
+    if (admin.provider === "workspace") {
+      return NextResponse.json({ok: true, me: admin, sessions: []}, {headers: {"Cache-Control": "private, no-store"}});
+    }
     return NextResponse.json({ ok: true, me: admin, sessions: await listOwnSessions(admin.id, await currentToken()) });
   } catch (err) {
     return storageFailed("admin_me", err);
@@ -34,6 +37,7 @@ const patchSchema = z.object({
 export async function PATCH(req: NextRequest) {
   const admin = await requireAdmin();
   if (isResponse(admin)) return admin;
+  if (admin.provider === "workspace") return NextResponse.json({ok: false, error: "manage_in_ops"}, {status: 409});
   const parsed = patchSchema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   try {
@@ -52,6 +56,7 @@ export async function PATCH(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   const admin = await requireAdmin();
   if (isResponse(admin)) return admin;
+  if (admin.provider === "workspace") return NextResponse.json({ok: false, error: "manage_in_ops"}, {status: 409});
   try {
     const revoked = await revokeOtherSessions(admin.id, await currentToken());
     await logAudit({ actor: admin, action: "admin.sessions_revoked", entityType: "staff", entityId: admin.email, meta: { revoked }, ip: requestIp(req) });

@@ -3,6 +3,7 @@ import { db,currentStaff,permitted,txt,num,choice,timestamp,one,uid,saveRow,audi
 import { MODELS,quote,totalBooking,type Row } from "@/ops/lib/domain";
 import {usernameValue,sha256,sessionToken} from '@/ops/lib/password';
 import {canAddOpsStaff} from '@/ops/lib/workspace-access';
+import {isDualId} from '@/ops/lib/dual-identity';
 import {teamProjection} from '@/ops/lib/privacy';
 import {extensionPaymentInput} from '@/ops/lib/extension-payments';
 import {extensionChargeInsert,nativeExtensionReceipt} from '@/ops/lib/extension-server';
@@ -18,7 +19,7 @@ export async function GET(){try{
  else {const owners=(await db().prepare("SELECT s.id,s.email,s.name,a.username FROM staff s LEFT JOIN auth_accounts a ON a.staff_id=s.id WHERE s.role='owner'").all()).results as Row[];data=teamProjection(data,owners);}
  // Ops needs per-booking balances for handover, but not finance receipts/references.
  if(member.role==="ops")data.payments=(data.payments as Row[]).map(p=>({id:p.id,booking_id:p.booking_id,kind:p.kind,amount:p.amount,paid_at:p.paid_at}));
- return json({...data,member:{id:member.id,name:member.name,role:member.role,username:member.username||'',auth_type:member.auth_type,has_password:!!member.username,reminder_reads:JSON.parse(member.reminder_reads||'[]')},server_time:Date.now()});
+ return json({...data,member:{id:member.id,name:member.name,role:member.role,username:member.username||'',auth_type:member.auth_type,dual_access:isDualId(member.id),has_password:!!member.username,reminder_reads:JSON.parse(member.reminder_reads||'[]')},server_time:Date.now()});
  }catch(e){return fail(e);}}
 
 export async function POST(req:Request){try{
@@ -108,6 +109,7 @@ export async function POST(req:Request){try{
   if(!canAddOpsStaff(member.role)||(!owner&&(action!=='saveStaff'||d.id||d.role!=='ops'||d.enabled===false))){
    throw new AppError('Only the Ops Owner can manage existing accounts or assign elevated roles.',403);
   }
+  if(d.id&&isDualId(entityId))throw new AppError('Manage dual-access accounts in the dual-access panel.',403);
   const existing=d.id?await one('staff',entityId):null;if(existing?.role==='owner')throw new AppError('Use My login to manage your own credentials.');
   const account=existing?await db().prepare('SELECT * FROM auth_accounts WHERE staff_id=?').bind(entityId).first<Row>():null;
   if(action==='staffInvite'&&!existing)throw new AppError('User not found.');

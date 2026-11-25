@@ -41,6 +41,17 @@ const mail=[], jobs=[], require=createRequire(import.meta.url), modules=new Map(
 const stubs={
   'next/headers':{headers:async()=>ctx.getStore()},
   'next/server':{after:fn=>jobs.push(fn)},
+  'server-only':{},
+  '@/lib/auth':{
+    STAFF_ROLES:['admin','super_admin'],
+    auth:{api:{getSession:async()=>{
+      const mode=ctx.getStore()?.get('x-test-email-admin');
+      if(!mode)return null;
+      return {user:{id:'legacy-admin',email:'legacy-admin@example.invalid',name:'Legacy Admin',
+        role:mode==='regular'?'admin':'super_admin',mustChangePassword:mode==='forced',banned:mode==='banned'},
+        session:{createdAt:new Date(Date.now()-(mode==='stale'?30*60_000:0)),impersonatedBy:mode==='impersonated'?'another-admin':null}};
+    }}},
+  },
   '@/ops/lib/database':{opsDatabase:()=>({prepare,batch})},
   '@/lib/mailer':{isMailConfigured:()=>true,sendOpsRecoveryEmail:async(to,link)=>mail.push({to,link})},
 };
@@ -81,9 +92,9 @@ for(const [id,username,role,email,enabled] of [
 const route=name=>load(`src/app/api/ops/${name}/route.ts`);
 const origin=new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').origin;
 let checks=0;
-async function request(name, body, cookie='', requestOrigin=origin) {
+async function request(name, body, cookie='', requestOrigin=origin, emailAdmin='') {
   const req=new Request(origin+'/api/ops/'+name,{
-    method:body===undefined?'GET':'POST',headers:{Origin:requestOrigin,Cookie:cookie,'Content-Type':'application/json'},
+    method:body===undefined?'GET':'POST',headers:{Origin:requestOrigin,Cookie:cookie,'Content-Type':'application/json','x-test-email-admin':emailAdmin},
     body:body===undefined?undefined:JSON.stringify(body),
   });
   return ctx.run(req.headers,()=>body===undefined?route(name).GET(req):route(name).POST(req));
@@ -163,5 +174,70 @@ status(await request('data',undefined,oldStaff),200);
 status(await request('data',undefined,manager),200);
 await login('fixture-staff');
 assert.equal((await pg.query("SELECT count(*)::int AS n FROM audit WHERE action='auth.owner_recovered'")).rows[0].n,1);checks++;
+
+// Paired identity is issued only with both privileges plus password step-up.
+// A browser supplies no website entitlement; the server derives it from the
+// immutable workspace principal and active Ops session.
+const inviteDual=(body,cookie,emailAdmin='',from=origin)=>request('auth/dual-invite',body,cookie,from,emailAdmin);
+const resolveAdmin=(cookie='',emailAdmin='')=>ctx.run(new Headers({Cookie:cookie,'x-test-email-admin':emailAdmin}),load('src/lib/adminAuth.ts').getAdmin);
+const newDual={action:'create',name:'Fixture workspace Owner',username:'fixture-dual-owner',role:'owner',current_password:changed};
+status(await inviteDual(newDual,'','fresh'),401);
+status(await inviteDual(newDual,newOwner),403);
+status(await inviteDual(newDual,manager,'fresh'),403);
+for(const mode of ['regular','impersonated','forced','stale','banned'])status(await inviteDual(newDual,newOwner,mode),403);
+status(await inviteDual(newDual,newOwner,'fresh','https://other.example.invalid'),403);
+status(await inviteDual({...newDual,current_password:'wrong-fixture-password'},newOwner,'fresh'),401);
+const issued=await inviteDual(newDual,newOwner,'fresh');
+status(issued,200);
+const dualLink=(await issued.json()).invitation.activation_url;
+const tokenOf=link=>new URLSearchParams(new URL(link).hash.slice(1)).get('token');
+assert.equal(new URL(dualLink).pathname,'/ops/dual-activate');assert.equal(new URL(dualLink).search,'');checks++;
+const dualToken=tokenOf(dualLink);
+const dualActivate=(body)=>request('auth/dual-activate',body);
+const peek=await dualActivate({action:'inspect',token:dualToken});status(peek,200);
+assert.equal((await peek.json()).website_role,'super_admin');checks++;
+await login(newDual.username,changed,401);
+status(await request('auth/activate',{...activation,token:dualToken}),410);
+await recover({...reset,token:dualToken},410);
+const safePassword='Workspace-Test-Passphrase';
+const useDual={action:'activate',token:dualToken,password:safePassword,confirm_password:safePassword};
+status(await dualActivate({...useDual,password:'too-short',confirm_password:'too-short'}),400);
+status(await dualActivate(useDual),200);
+status(await dualActivate(useDual),410);
+const pairedOwner=await login(newDual.username,safePassword);
+const websiteOwner=await resolveAdmin(pairedOwner);
+assert.equal(websiteOwner.role,'super_admin');assert.equal(websiteOwner.provider,'workspace');checks++;
+assert.equal((await (await request('data',undefined,pairedOwner)).json()).member.role,'owner');checks++;
+assert.equal(await resolveAdmin(oldStaff),null);checks++;
+assert.equal((await resolveAdmin('', 'fresh')).provider,'email');checks++;
+assert.equal((await resolveAdmin(pairedOwner,'regular')).id,websiteOwner.id);checks++;
+status(await request('auth/account',{username:newDual.username,current_password:safePassword,password:'too-short'},pairedOwner),400);
+status(await inviteDual({action:'disable',id:websiteOwner.id,current_password:safePassword},pairedOwner),403);
+const pairedInvite=await inviteDual({...newDual,username:'fixture-dual-staff',role:'ops',current_password:safePassword},pairedOwner);
+status(pairedInvite,200);
+const staffDualToken=tokenOf((await pairedInvite.json()).invitation.activation_url);
+status(await dualActivate({...useDual,token:staffDualToken}),200);
+const pairedStaff=await login('fixture-dual-staff',safePassword);
+const websiteStaff=await resolveAdmin(pairedStaff);
+assert.equal(websiteStaff.role,'admin');checks++;
+assert.equal((await (await request('data',undefined,pairedStaff)).json()).member.role,'ops');checks++;
+status(await inviteDual({...newDual,current_password:safePassword},pairedStaff,'fresh'),403);
+await staff(pairedOwner,{...add,id:websiteStaff.id},403);
+const rotated='Workspace-Test-Rotated-Passphrase';
+status(await request('auth/account',{username:'fixture-dual-staff',current_password:safePassword,password:rotated},pairedStaff),200);
+assert.equal(await resolveAdmin(pairedStaff),null);checks++;
+await login('fixture-dual-staff',safePassword,401);
+const rotatedStaff=await login('fixture-dual-staff',rotated);
+assert.equal((await resolveAdmin(rotatedStaff)).role,'admin');checks++;
+const resetPaired=await inviteDual({action:'reissue',id:websiteStaff.id,current_password:safePassword},pairedOwner);
+status(resetPaired,200);
+assert.equal(await resolveAdmin(rotatedStaff),null);checks++;
+const newActivation=tokenOf((await resetPaired.json()).invitation.activation_url);
+const revoked=await inviteDual({action:'disable',id:websiteStaff.id,current_password:safePassword},pairedOwner);
+status(revoked,200);
+status(await dualActivate({...useDual,token:newActivation}),410);
+assert.equal(await resolveAdmin(pairedStaff),null);checks++;
+assert.equal(Number((await pg.query("select count(*) n from public.audit_log where action like 'workspace.staff.%'")).rows[0].n),4);checks++;
+
 await pg.close();
-console.log(`${checks} Ops recovery, email-free onboarding, legacy sign-in and authorization checks passed (local PostgreSQL and test mailbox).`);
+console.log(`${checks} Ops recovery, dual-access onboarding, session revocation and legacy sign-in checks passed (local PostgreSQL and test mailbox).`);

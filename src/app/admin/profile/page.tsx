@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
 import { WHATSAPP_FIRST_BOOKING } from "@/lib/bookingMode";
 import { getAdmin } from "@/lib/adminAuth";
 import { AdminLogin } from "@/components/admin/AdminLogin";
@@ -23,6 +24,7 @@ export default async function Page() {
   }
   const admin = await getAdmin();
   if (!admin) return <AdminLogin />;
+  if (admin.provider === "workspace") redirect("/ops?view=account");
   
   return (
     <AdminShell adminEmail={admin.email} adminName={admin.name} adminRole={admin.role} mustChangePassword={admin.mustChangePassword}>

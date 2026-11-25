@@ -17,6 +17,24 @@ The whole application — pages, API routes, admin dashboard — runs on
 Hostinger. The VPS hosts only the database (plus its backups and the
 cron that retries notifications). There is no separate backend.
 
+### No-email accounts for Ops and website admin
+
+Open **Ops → User & access → Invite for Ops + website** (`/ops/team-access`).
+The first invitation requires the existing Ops Owner password and a fresh,
+non-impersonated website Super Admin sign-in (connect it from Ops). Afterward
+an active dual Owner can issue more invitations using their own Ops password.
+The flow creates a single-use, one-hour link for the recipient to choose a
+password. Do not share the link, password, or account with an automation.
+
+Explicitly choose Ops Staff, Finance, or Admin paired with website Admin,
+or choose Ops Owner paired with website Super Admin. Website Admin can see
+customer and booking data. Use the original invite flow when a person only
+needs Ops. Existing website email and Ops-only accounts do not change.
+Dual accounts change their password in **Ops → My login**; another authorized
+dual-access administrator may reissue a link or revoke both sides at once.
+Keep the original Ops Owner and email-based website Super Admin available for
+recovery. No environment changes or schema migration are required.
+
 ## Getting started
 
 ```bash
