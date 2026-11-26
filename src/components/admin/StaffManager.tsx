@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { KeyRound, LogOut, Plus, ShieldCheck, UserX } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { ActionRow } from "@/components/ui/ActionRow";
 
 interface Staff {
   id: string;
@@ -203,24 +204,26 @@ export function StaffManager() {
                     <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${s.active ? "bg-ok-soft text-ok" : "bg-danger-soft text-danger"}`}>{s.active ? "Active" : "Deactivated"}</span>
                     {s.mustChangePassword ? <span className="ml-1 rounded-full bg-warn-soft px-2 py-0.5 text-xs font-medium text-warn">temporary password</span> : null}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right">
-                    <Button size="sm" variant="ghost" disabled={busy} onClick={() => resetPassword(s)} title="Set a temporary password">
-                      <KeyRound className="h-4 w-4" aria-hidden="true" />
-                    </Button>
-                    <Button size="sm" variant="ghost" disabled={busy || s.sessions === 0} onClick={() => patch(s, { revokeSessions: true }, "Signed out everywhere.")} title="Sign out everywhere">
-                      <LogOut className="h-4 w-4" aria-hidden="true" />
-                    </Button>
-                    {s.id !== me ? (
-                      s.active ? (
-                        <Button size="sm" variant="outline" disabled={busy} onClick={() => { if (window.confirm(`Deactivate ${s.email}? They cannot sign in until reactivated.`)) void patch(s, { active: false }, "Account deactivated."); }}>
-                          <UserX className="h-4 w-4" aria-hidden="true" /> Deactivate
-                        </Button>
-                      ) : (
-                        <Button size="sm" variant="outline" disabled={busy} onClick={() => patch(s, { active: true }, "Account reactivated.")}>
-                          <ShieldCheck className="h-4 w-4" aria-hidden="true" /> Activate
-                        </Button>
-                      )
-                    ) : null}
+                  <td className="px-4 py-3 text-right">
+                    <ActionRow align="end">
+                      <Button size="sm" variant="ghost" disabled={busy} onClick={() => resetPassword(s)} aria-label="Set a temporary password" title="Set a temporary password">
+                        <KeyRound className="h-4 w-4" aria-hidden="true" />
+                      </Button>
+                      <Button size="sm" variant="ghost" disabled={busy || s.sessions === 0} onClick={() => patch(s, { revokeSessions: true }, "Signed out everywhere.")} aria-label="Sign out everywhere" title="Sign out everywhere">
+                        <LogOut className="h-4 w-4" aria-hidden="true" />
+                      </Button>
+                      {s.id !== me ? (
+                        s.active ? (
+                          <Button size="sm" variant="outline" disabled={busy} onClick={() => { if (window.confirm(`Deactivate ${s.email}? They cannot sign in until reactivated.`)) void patch(s, { active: false }, "Account deactivated."); }}>
+                            <UserX className="h-4 w-4" aria-hidden="true" /> Deactivate
+                          </Button>
+                        ) : (
+                          <Button size="sm" variant="outline" disabled={busy} onClick={() => patch(s, { active: true }, "Account reactivated.")}>
+                            <ShieldCheck className="h-4 w-4" aria-hidden="true" /> Activate
+                          </Button>
+                        )
+                      ) : null}
+                    </ActionRow>
                   </td>
                 </tr>
               ))}

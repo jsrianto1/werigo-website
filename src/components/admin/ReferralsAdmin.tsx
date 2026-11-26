@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { ActionRow } from "@/components/ui/ActionRow";
 import { formatIdr } from "@/lib/pricing";
 
 interface Settings {
@@ -210,12 +211,12 @@ export function ReferralsAdmin() {
                   <td className="px-4 py-3">
                     <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${TONES[p.status] ?? ""}`}>{p.status}</span>
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right">
+                  <td className="px-4 py-3 text-right">
                     {p.status === "requested" && canManage ? (
-                      <>
-                        <Button size="sm" variant="primary" disabled={busy} onClick={() => void process(p, "paid")}>Mark transferred</Button>{" "}
+                      <ActionRow align="end">
+                        <Button size="sm" variant="primary" disabled={busy} onClick={() => void process(p, "paid")}>Mark transferred</Button>
                         <Button size="sm" variant="ghost" disabled={busy} onClick={() => void process(p, "rejected")}>Reject</Button>
-                      </>
+                      </ActionRow>
                     ) : null}
                   </td>
                 </tr>
