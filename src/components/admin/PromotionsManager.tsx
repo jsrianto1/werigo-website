@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Star, X, Gift, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { ActionRow } from "@/components/ui/ActionRow";
 import { getPrimaryCards } from "@/data/vehicles";
 import { AUDIENCE_LABELS, AUDIENCES, discountLabel, type Audience } from "@/lib/promotionRules";
 import { formatIdr } from "@/lib/pricing";
@@ -363,17 +364,19 @@ export function PromotionsManager() {
                       {p.active ? "Active" : "Paused"}
                     </button>
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right">
-                    {p.audience === "assigned" ? (
-                      <Button size="sm" variant="ghost" onClick={() => { setGrantResult(null); setGranting(p); }}>
-                        <Gift className="h-4 w-4" aria-hidden="true" />
-                        Give
+                  <td className="px-4 py-3 text-right">
+                    <ActionRow align="end">
+                      {p.audience === "assigned" ? (
+                        <Button size="sm" variant="ghost" onClick={() => { setGrantResult(null); setGranting(p); }}>
+                          <Gift className="h-4 w-4" aria-hidden="true" />
+                          Give
+                        </Button>
+                      ) : null}
+                      <Button size="sm" variant="outline" onClick={() => openEdit(p)}>
+                        <Pencil className="h-4 w-4" aria-hidden="true" />
+                        Edit
                       </Button>
-                    ) : null}
-                    <Button size="sm" variant="outline" onClick={() => openEdit(p)}>
-                      <Pencil className="h-4 w-4" aria-hidden="true" />
-                      Edit
-                    </Button>
+                    </ActionRow>
                   </td>
                 </tr>
               ))}

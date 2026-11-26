@@ -4,6 +4,7 @@ import {optionalOpsMember} from '@/ops/lib/workspace-context';
 import {opsDatabase} from '@/ops/lib/database';
 import {websiteRoleForDualMember} from '@/ops/lib/dual-identity';
 import {DualAccounts, type DualAccount} from './dual-accounts';
+import {ActionRow} from '@/components/ui/ActionRow';
 
 export const metadata: Metadata = {title: 'Undangan Ops dan website', robots: {index: false, follow: false}};
 export const dynamic = 'force-dynamic';
@@ -14,9 +15,11 @@ export default async function Page() {
     return <div className="werigo-ops"><main className="login-screen"><section className="login-card">
       <span className="eyebrow">WERIGO WORKSPACE</span><h1>Akses Owner dibutuhkan</h1>
       <p>Untuk mengundang akun dua akses, masuk sebagai Owner Ops dan sambungkan sesi Super Admin website yang aktif.</p>
-      <a className="btn primary" href="/ops">Ke Werigo Ops</a>
-      {ops?.role === 'owner' && !admin && <a className="text-btn" href="/ops?connect=website">Sambungkan Super Admin website</a>}
-      {admin?.role === 'super_admin' && !ops && <a className="text-btn" href="/ops?connect=ops">Sambungkan Owner Ops</a>}
+      <ActionRow>
+        <a className="btn primary" href="/ops">Ke Werigo Ops</a>
+        {ops?.role === 'owner' && !admin && <a className="text-btn" href="/ops?connect=website">Sambungkan Super Admin website</a>}
+        {admin?.role === 'super_admin' && !ops && <a className="text-btn" href="/ops?connect=ops">Sambungkan Owner Ops</a>}
+      </ActionRow>
     </section></main></div>;
   }
   const rows = await opsDatabase().prepare(

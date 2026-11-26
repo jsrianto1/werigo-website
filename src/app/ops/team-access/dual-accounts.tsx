@@ -2,6 +2,7 @@
 
 import {useState, type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
+import {ActionRow} from '@/components/ui/ActionRow';
 
 export type DualAccount = {
   id: string; name: string; username: string; role: string; enabled: number; pending: number; websiteRole?: string;
@@ -45,12 +46,14 @@ export function DualAccounts({accounts, ownId, usesWebsiteEmail}: {accounts: Dua
     <p>Satu username untuk Ops dan admin website. Tidak perlu email. Pilih peran dengan sengaja: Admin website bisa mengakses data pelanggan dan operasional website.</p>
     {usesWebsiteEmail&&<p>Kalau sesi admin website lebih dari 15 menit, <a className="text-btn" href="/ops?connect=website">masuk ulang sebagai Super Admin website</a> sebelum membuat link.</p>}
     <p>Untuk undangan Ops saja, pakai <a className="text-btn" href="/ops?view=settings">User &amp; akses</a>.</p>
-    {invite && <div className="panel detail-content">
+    {invite && <div className="panel dual-access-panel dual-invite-panel">
       <h2>Link aktivasi untuk {invite.username}</h2>
       <p>Berlaku sekali selama satu jam. Kirim hanya lewat jalur pribadi ke pemilik akun. Jangan tempel link di chat publik.</p>
       <label className="field"><span>Link aktivasi</span><input value={invite.activation_url} readOnly onFocus={e=>e.currentTarget.select()}/></label>
-      <button type="button" className="btn secondary" onClick={async()=>{try{await navigator.clipboard.writeText(invite.activation_url);setMessage('Link disalin.');}catch{setMessage('Pilih dan salin link di atas.');}}}>Salin link</button>
-      <button type="button" className="text-btn" onClick={()=>setInvite(null)}>Tutup link</button>
+      <ActionRow>
+        <button type="button" className="btn secondary" onClick={async()=>{try{await navigator.clipboard.writeText(invite.activation_url);setMessage('Link disalin.');}catch{setMessage('Pilih dan salin link di atas.');}}}>Salin link</button>
+        <button type="button" className="text-btn" onClick={()=>setInvite(null)}>Tutup link</button>
+      </ActionRow>
     </div>}
     <form onSubmit={save} key={command.action === 'create' ? 'create' : command.action+command.id}>
       {command.action === 'create' ? <>
@@ -64,21 +67,25 @@ export function DualAccounts({accounts, ownId, usesWebsiteEmail}: {accounts: Dua
         </select></label>
       </> : <p>{command.action === 'disable' ? 'Cabut akses kedua sisi untuk ' : 'Akhiri sesi lama dan buat link aktivasi baru untuk '}<strong>{command.username}</strong>.</p>}
       <label className="field"><span>Konfirmasi password Ops lo</span><input type="password" name="current_password" autoComplete="current-password" required maxLength={1024}/></label>
-      <button className="btn primary" disabled={busy}>{busy ? 'Menyimpan…' : command.action === 'disable' ? 'Cabut akses' : 'Buat link aktivasi'}</button>
-      {command.action !== 'create' && <button type="button" className="text-btn" onClick={()=>setCommand({action:'create'})}>Batal</button>}
+      <ActionRow>
+        <button className="btn primary" disabled={busy}>{busy ? 'Menyimpan…' : command.action === 'disable' ? 'Cabut akses' : 'Buat link aktivasi'}</button>
+        {command.action !== 'create' && <button type="button" className="text-btn" onClick={()=>setCommand({action:'create'})}>Batal</button>}
+      </ActionRow>
     </form>
     {error && <p role="alert" className="form-error">{error}</p>}
     {message && <p role="status">{message}</p>}
-    <h2>Akun dua akses</h2>
+    <h2 className="dual-directory-title">Akun dua akses</h2>
     {!accounts.length && <p>Belum ada akun dua akses.</p>}
-    {accounts.map(account=><div className="panel detail-content" key={account.id}>
-      <strong>{account.name} · {account.username}</strong>
-      <p>{roleName[account.role]} + {account.websiteRole === 'super_admin' ? 'Super Admin' : 'Admin'} website · {account.enabled ? account.pending ? 'Menunggu aktivasi' : 'Aktif' : 'Nonaktif'}</p>
-      {ownId!==account.id && <>
-        <button type="button" className="text-btn" disabled={busy} onClick={()=>setCommand({action:'reissue',id:account.id,username:account.username})}>{account.enabled ? 'Buat ulang link' : 'Aktifkan ulang dengan link'}</button>
-        {!!account.enabled && <button type="button" className="text-btn" disabled={busy} onClick={()=>setCommand({action:'disable',id:account.id,username:account.username})}>Cabut akses</button>}
-      </>}
-    </div>)}
+    {accounts.length > 0 && <div className="dual-account-list">
+      {accounts.map(account=><article className="panel dual-access-panel" key={account.id}>
+        <div className="dual-account-title"><strong>{account.name}</strong><span className="dual-account-username">@{account.username}</span></div>
+        <p>{roleName[account.role]} + {account.websiteRole === 'super_admin' ? 'Super Admin' : 'Admin'} website <small className="dual-account-status">{account.enabled ? account.pending ? 'Menunggu aktivasi' : 'Aktif' : 'Nonaktif'}</small></p>
+        {ownId!==account.id && <ActionRow>
+          <button type="button" className="btn secondary" disabled={busy} onClick={()=>setCommand({action:'reissue',id:account.id,username:account.username})}>{account.enabled ? 'Buat ulang link' : 'Aktifkan ulang dengan link'}</button>
+          {!!account.enabled && <button type="button" className="btn secondary danger-text" disabled={busy} onClick={()=>setCommand({action:'disable',id:account.id,username:account.username})}>Cabut akses</button>}
+        </ActionRow>}
+      </article>)}
+    </div>}
     <a className="text-btn" href="/ops?view=settings">Kembali ke User &amp; akses</a>
   </section></main></div>;
 }

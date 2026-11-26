@@ -1,0 +1,29 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  min-inline-size: 0;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.row > :where(a, button) {
+  min-block-size: 2.75rem;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  text-align: start;
+}
+
+:global(.werigo-ops) .row > :global(.btn) {
+  white-space: normal;
+}
+
+.row.row > :global(.text-btn) {
+  padding-inline: 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
