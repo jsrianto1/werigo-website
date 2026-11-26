@@ -13,10 +13,10 @@ export async function codexAccessOwner():Promise<AdminIdentity|null> {
       !admin || admin.role!=='super_admin' || admin.impersonated || admin.mustChangePassword) return null;
   return admin;
 }
-export type ReadDevice = {id:string;label:string;expires_at:Date;revoked_at:Date|null};
+export type ReadDevice = {id:string;label:string;expires_at:Date;revoked_at:Date|null;active:boolean};
 export async function listCodexReadDevices() {
   try {
-    const {rows}=await getPool().query<ReadDevice>('SELECT id,label,expires_at,revoked_at FROM ops.codex_read_devices ORDER BY (revoked_at IS NULL AND expires_at>now()) DESC,created_at DESC LIMIT 25');
+    const {rows}=await getPool().query<ReadDevice>('SELECT id,label,expires_at,revoked_at,(revoked_at IS NULL AND expires_at>now()) AS active FROM ops.codex_read_devices ORDER BY active DESC,created_at DESC LIMIT 25');
     return rows;
   } catch (e) {
     if ((e as {code?:string})?.code==='42P01') return [];

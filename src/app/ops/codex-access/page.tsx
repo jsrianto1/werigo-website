@@ -19,7 +19,7 @@ export default async function Page() {
     </> : <>
       <p>Perangkat yang disetujui bisa membaca booking, ketersediaan stok, dan status rental Werigo. Akses ini tidak bisa login ke dashboard, membaca kontak pelanggan, atau mengubah data.</p>
       <p>Jika sesi Super Admin sudah lewat 15 menit, <a className="text-btn" href="/ops?connect=website">masuk ulang sebagai Super Admin website</a> sebelum menyetujui perangkat.</p>
-      <CodexDevices devices={(await listCodexReadDevices()).map(d=>({...d,expires_at:new Date(d.expires_at).toISOString(),revoked_at:d.revoked_at?new Date(d.revoked_at).toISOString():null,active:!d.revoked_at&&new Date(d.expires_at).getTime()>Date.now()}))}/>
+      <CodexDevices devices={(await listCodexReadDevices()).map(d=>({...d,expires_at:new Date(d.expires_at).toISOString(),revoked_at:d.revoked_at?new Date(d.revoked_at).toISOString():null}))}/>
       <p><a className="text-btn" href="/ops?view=settings">Kembali ke User &amp; akses</a></p>
     </>}
   </section></main></div>;
